@@ -12,11 +12,13 @@
 		682F2944133B93860058E1D7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682F2943133B93860058E1D7 /* CoreGraphics.framework */; };
 		682F294A133B93860058E1D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 682F2948133B93860058E1D7 /* InfoPlist.strings */; };
 		682F294D133B93860058E1D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F294C133B93860058E1D7 /* main.m */; };
-		682F2950133B93860058E1D7 /* PhotoWheelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F294F133B93860058E1D7 /* PhotoWheelAppDelegate.m */; };
 		682F2953133B93860058E1D7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F2951133B93860058E1D7 /* MainWindow.xib */; };
-		682F2956133B93860058E1D7 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F2955133B93860058E1D7 /* DetailViewController.m */; };
 		682F2959133B93860058E1D7 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F2957133B93860058E1D7 /* DetailView.xib */; };
-		682F295C133B93860058E1D7 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F295B133B93860058E1D7 /* RootViewController.m */; };
+		682F2964133B93D60058E1D7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 682F2962133B93D60058E1D7 /* LICENSE */; };
+		682F2965133B93D60058E1D7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 682F2963133B93D60058E1D7 /* README.md */; };
+		682F299B133C0B870058E1D7 /* PhotoWheelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */; };
+		682F299C133C0B870058E1D7 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F2998133C0B870058E1D7 /* DetailViewController.m */; };
+		682F299D133C0B870058E1D7 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F299A133C0B870058E1D7 /* RootViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,18 +26,20 @@
 		682F293F133B93860058E1D7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		682F2941133B93860058E1D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		682F2943133B93860058E1D7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		682F2947133B93860058E1D7 /* PhotoWheel-Info.plist */ = {isa = PBXFileReference; path = "PhotoWheel-Info.plist"; sourceTree = "<group>"; };
+		682F2947133B93860058E1D7 /* PhotoWheel-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PhotoWheel-Info.plist"; sourceTree = "<group>"; };
 		682F2949133B93860058E1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		682F294B133B93860058E1D7 /* PhotoWheel-Prefix.pch */ = {isa = PBXFileReference; path = "PhotoWheel-Prefix.pch"; sourceTree = "<group>"; };
+		682F294B133B93860058E1D7 /* PhotoWheel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoWheel-Prefix.pch"; sourceTree = "<group>"; };
 		682F294C133B93860058E1D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		682F294E133B93860058E1D7 /* PhotoWheelAppDelegate.h */ = {isa = PBXFileReference; path = PhotoWheelAppDelegate.h; sourceTree = "<group>"; };
-		682F294F133B93860058E1D7 /* PhotoWheelAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelAppDelegate.m; sourceTree = "<group>"; };
 		682F2952133B93860058E1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		682F2954133B93860058E1D7 /* DetailViewController.h */ = {isa = PBXFileReference; path = DetailViewController.h; sourceTree = "<group>"; };
-		682F2955133B93860058E1D7 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		682F2958133B93860058E1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailView.xib; sourceTree = "<group>"; };
-		682F295A133B93860058E1D7 /* RootViewController.h */ = {isa = PBXFileReference; path = RootViewController.h; sourceTree = "<group>"; };
-		682F295B133B93860058E1D7 /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		682F2962133B93D60058E1D7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		682F2963133B93D60058E1D7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelAppDelegate.h; sourceTree = "<group>"; };
+		682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelAppDelegate.m; sourceTree = "<group>"; };
+		682F2997133C0B870058E1D7 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		682F2998133C0B870058E1D7 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		682F2999133C0B870058E1D7 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		682F299A133C0B870058E1D7 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 		682F2930133B93850058E1D7 = {
 			isa = PBXGroup;
 			children = (
+				682F2962133B93D60058E1D7 /* LICENSE */,
+				682F2963133B93D60058E1D7 /* README.md */,
 				682F2945133B93860058E1D7 /* PhotoWheel */,
 				682F293E133B93860058E1D7 /* Frameworks */,
 				682F293C133B93860058E1D7 /* Products */,
@@ -82,14 +88,8 @@
 		682F2945133B93860058E1D7 /* PhotoWheel */ = {
 			isa = PBXGroup;
 			children = (
-				682F294E133B93860058E1D7 /* PhotoWheelAppDelegate.h */,
-				682F294F133B93860058E1D7 /* PhotoWheelAppDelegate.m */,
-				682F2951133B93860058E1D7 /* MainWindow.xib */,
-				682F2954133B93860058E1D7 /* DetailViewController.h */,
-				682F2955133B93860058E1D7 /* DetailViewController.m */,
-				682F2957133B93860058E1D7 /* DetailView.xib */,
-				682F295A133B93860058E1D7 /* RootViewController.h */,
-				682F295B133B93860058E1D7 /* RootViewController.m */,
+				682F2993133C0B870058E1D7 /* Classes */,
+				682F2992133C0B170058E1D7 /* xibs */,
 				682F2946133B93860058E1D7 /* Supporting Files */,
 			);
 			path = PhotoWheel;
@@ -104,6 +104,36 @@
 				682F294C133B93860058E1D7 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		682F2992133C0B170058E1D7 /* xibs */ = {
+			isa = PBXGroup;
+			children = (
+				682F2951133B93860058E1D7 /* MainWindow.xib */,
+				682F2957133B93860058E1D7 /* DetailView.xib */,
+			);
+			name = xibs;
+			sourceTree = "<group>";
+		};
+		682F2993133C0B870058E1D7 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */,
+				682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */,
+				682F2996133C0B870058E1D7 /* ViewControllers */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		682F2996133C0B870058E1D7 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				682F2997133C0B870058E1D7 /* DetailViewController.h */,
+				682F2998133C0B870058E1D7 /* DetailViewController.m */,
+				682F2999133C0B870058E1D7 /* RootViewController.h */,
+				682F299A133C0B870058E1D7 /* RootViewController.m */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +189,8 @@
 				682F294A133B93860058E1D7 /* InfoPlist.strings in Resources */,
 				682F2953133B93860058E1D7 /* MainWindow.xib in Resources */,
 				682F2959133B93860058E1D7 /* DetailView.xib in Resources */,
+				682F2964133B93D60058E1D7 /* LICENSE in Resources */,
+				682F2965133B93D60058E1D7 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -170,9 +202,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				682F294D133B93860058E1D7 /* main.m in Sources */,
-				682F2950133B93860058E1D7 /* PhotoWheelAppDelegate.m in Sources */,
-				682F2956133B93860058E1D7 /* DetailViewController.m in Sources */,
-				682F295C133B93860058E1D7 /* RootViewController.m in Sources */,
+				682F299B133C0B870058E1D7 /* PhotoWheelAppDelegate.m in Sources */,
+				682F299C133C0B870058E1D7 /* DetailViewController.m in Sources */,
+				682F299D133C0B870058E1D7 /* RootViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

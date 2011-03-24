@@ -10,6 +10,7 @@
 
 @interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
 
+   UIButton *_button;
 }
 
 
@@ -18,5 +19,9 @@
 @property (nonatomic, retain) id detailItem;
 
 @property (nonatomic, retain) IBOutlet UILabel *detailDescriptionLabel;
+
+@property (nonatomic, retain) IBOutlet UIButton *button;
+
+- (IBAction)buttonTouched:(id)sender;
 
 @end

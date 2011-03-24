@@ -22,6 +22,7 @@
 @synthesize detailItem=_detailItem;
 
 @synthesize detailDescriptionLabel=_detailDescriptionLabel;
+@synthesize button = _button;
 
 @synthesize popoverController=_myPopoverController;
 
@@ -108,6 +109,7 @@
 
 - (void)viewDidUnload
 {
+    [self setButton:nil];
 	[super viewDidUnload];
 
 	// Release any retained subviews of the main view.
@@ -131,7 +133,12 @@
    [_toolbar release];
    [_detailItem release];
    [_detailDescriptionLabel release];
+    [_button release];
     [super dealloc];
+}
+
+- (IBAction)buttonTouched:(id)sender 
+{
 }
 
 @end

@@ -19,6 +19,8 @@
    [super viewDidLoad];
    self.clearsSelectionOnViewWillAppear = NO;
    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
+   
+   [self setTitle:@"Kilroy"];
 }
 
 		
