@@ -7,64 +7,134 @@
 //
 
 #import "RootViewController.h"
-
 #import "DetailViewController.h"
+#import "NameEditorViewController.h"
+
+
+@interface RootViewController ()
+@property (nonatomic, retain) NSMutableArray *data;
+@property (nonatomic, retain) NameEditorViewController *nameEditorViewController;
+@property (nonatomic, retain) UIPopoverController *nameEditorPopoverController;
+@end
 
 @implementation RootViewController
 		
-@synthesize detailViewController;
+@synthesize detailViewController = detailViewController_;
+@synthesize nameEditorViewController = nameEditorViewController_;
+@synthesize nameEditorPopoverController = nameEditorPopoverController_;
+@synthesize data = data_;
+
+- (void)dealloc
+{
+   [data_ release];
+   [detailViewController_ release];
+   [nameEditorPopoverController_ release];
+   [nameEditorPopoverController_ release];
+   [super dealloc];
+}
 
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-   self.clearsSelectionOnViewWillAppear = NO;
-   self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
    
-   [self setTitle:@"Kilroy"];
+   [self setClearsSelectionOnViewWillAppear:NO];
+   [self setContentSizeForViewInPopover:CGSizeMake(320.0, 600.0)];
+   
+   [self setTitle:@"Photo Wheels"];
+   
+   NSMutableArray *newData = [[NSMutableArray alloc] init];
+   [newData addObject:@"First photo wheel"];
+   [newData addObject:@"Second photo wheel"];
+   [self setData:newData];
+   [newData release];
 }
 
-		
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewDidUnload
 {
-    [super viewWillAppear:animated];
+   // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
+   // For example: self.myOutlet = nil;
+   
+   [self setDetailViewController:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)didReceiveMemoryWarning
 {
-    [super viewDidAppear:animated];
+   // Releases the view if it doesn't have a superview.
+   [super didReceiveMemoryWarning];
+   
+   // Relinquish ownership any cached data, images, etc that aren't in use.
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-	[super viewWillDisappear:animated];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-	[super viewDidDisappear:animated];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
 }
+
+
+#pragma -
+#pragma Actions
+
+- (IBAction)addPhotoWheel:(id)sender
+{
+   NameEditorViewController *newViewController = [[NameEditorViewController alloc] init];
+   [newViewController setDelegate:self];
+   [self setNameEditorViewController:newViewController];
+   [newViewController release];
+   
+   UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:[self nameEditorViewController]];
+   [newPopover setDelegate:self];
+   [self setNameEditorPopoverController:newPopover];
+   [newPopover release];
+   
+   [[self nameEditorPopoverController] presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+
+#pragma -
+#pragma UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+   [self setNameEditorPopoverController:nil];
+   [self setNameEditorViewController:nil];
+}
+
+
+#pragma -
+#pragma NameEditorViewControllerDelegate
+
+- (void)nameEditorDidSaveWithName:(NSString *)name
+{
+   [[self data] addObject:name];
+   [[self tableView] reloadData];
+   [[self nameEditorPopoverController] dismissPopoverAnimated:YES];
+}
+
+- (void)nameEditorDidCancel
+{
+   [[self nameEditorPopoverController] dismissPopoverAnimated:YES];
+}
+
+
+
+#pragma -
+#pragma UITableViewDataSource and UITableViewDelegate Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
    return 1;
-   		
 }
-
 		
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   return 0;
-   		
+   NSInteger count = [[self data] count];
+   return count;
 }
-
 		
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"PhotoWheelCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
@@ -72,8 +142,9 @@
     }
 
    // Configure the cell.
+   [[cell textLabel] setText:[[self data] objectAtIndex:[indexPath row]]];
    		
-    return cell;
+   return cell;
 }
 
 /*
@@ -120,24 +191,5 @@
      */
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-
-    // Relinquish ownership any cached data, images, etc that aren't in use.
-}
-
-- (void)viewDidUnload
-{
-    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
-    // For example: self.myOutlet = nil;
-}
-
-- (void)dealloc
-{
-   [detailViewController release];
-    [super dealloc];
-}
 
 @end

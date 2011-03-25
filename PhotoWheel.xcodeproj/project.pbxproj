@@ -12,13 +12,15 @@
 		682F2944133B93860058E1D7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682F2943133B93860058E1D7 /* CoreGraphics.framework */; };
 		682F294A133B93860058E1D7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 682F2948133B93860058E1D7 /* InfoPlist.strings */; };
 		682F294D133B93860058E1D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F294C133B93860058E1D7 /* main.m */; };
-		682F2953133B93860058E1D7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F2951133B93860058E1D7 /* MainWindow.xib */; };
-		682F2959133B93860058E1D7 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F2957133B93860058E1D7 /* DetailView.xib */; };
 		682F2964133B93D60058E1D7 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 682F2962133B93D60058E1D7 /* LICENSE */; };
 		682F2965133B93D60058E1D7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 682F2963133B93D60058E1D7 /* README.md */; };
 		682F299B133C0B870058E1D7 /* PhotoWheelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */; };
 		682F299C133C0B870058E1D7 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F2998133C0B870058E1D7 /* DetailViewController.m */; };
 		682F299D133C0B870058E1D7 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F299A133C0B870058E1D7 /* RootViewController.m */; };
+		682F29A8133C1B480058E1D7 /* NameEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F29A7133C1B480058E1D7 /* NameEditorViewController.m */; };
+		682F29B3133C1C680058E1D7 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B1133C1C680058E1D7 /* DetailView.xib */; };
+		682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B2133C1C680058E1D7 /* MainWindow.xib */; };
+		682F29B6133C1C880058E1D7 /* NameEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B5133C1C880058E1D7 /* NameEditorView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +32,6 @@
 		682F2949133B93860058E1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		682F294B133B93860058E1D7 /* PhotoWheel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoWheel-Prefix.pch"; sourceTree = "<group>"; };
 		682F294C133B93860058E1D7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		682F2952133B93860058E1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		682F2958133B93860058E1D7 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailView.xib; sourceTree = "<group>"; };
 		682F2962133B93D60058E1D7 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		682F2963133B93D60058E1D7 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelAppDelegate.h; sourceTree = "<group>"; };
@@ -40,6 +40,11 @@
 		682F2998133C0B870058E1D7 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		682F2999133C0B870058E1D7 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		682F299A133C0B870058E1D7 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		682F29A6133C1B480058E1D7 /* NameEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEditorViewController.h; sourceTree = "<group>"; };
+		682F29A7133C1B480058E1D7 /* NameEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEditorViewController.m; sourceTree = "<group>"; };
+		682F29B1133C1C680058E1D7 /* DetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
+		682F29B2133C1C680058E1D7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		682F29B5133C1C880058E1D7 /* NameEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditorView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				682F2993133C0B870058E1D7 /* Classes */,
-				682F2992133C0B170058E1D7 /* xibs */,
+				682F29B0133C1C680058E1D7 /* xibs */,
 				682F2946133B93860058E1D7 /* Supporting Files */,
 			);
 			path = PhotoWheel;
@@ -104,15 +109,6 @@
 				682F294C133B93860058E1D7 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		682F2992133C0B170058E1D7 /* xibs */ = {
-			isa = PBXGroup;
-			children = (
-				682F2951133B93860058E1D7 /* MainWindow.xib */,
-				682F2957133B93860058E1D7 /* DetailView.xib */,
-			);
-			name = xibs;
 			sourceTree = "<group>";
 		};
 		682F2993133C0B870058E1D7 /* Classes */ = {
@@ -132,8 +128,20 @@
 				682F2998133C0B870058E1D7 /* DetailViewController.m */,
 				682F2999133C0B870058E1D7 /* RootViewController.h */,
 				682F299A133C0B870058E1D7 /* RootViewController.m */,
+				682F29A6133C1B480058E1D7 /* NameEditorViewController.h */,
+				682F29A7133C1B480058E1D7 /* NameEditorViewController.m */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		682F29B0133C1C680058E1D7 /* xibs */ = {
+			isa = PBXGroup;
+			children = (
+				682F29B1133C1C680058E1D7 /* DetailView.xib */,
+				682F29B2133C1C680058E1D7 /* MainWindow.xib */,
+				682F29B5133C1C880058E1D7 /* NameEditorView.xib */,
+			);
+			path = xibs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,10 +195,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				682F294A133B93860058E1D7 /* InfoPlist.strings in Resources */,
-				682F2953133B93860058E1D7 /* MainWindow.xib in Resources */,
-				682F2959133B93860058E1D7 /* DetailView.xib in Resources */,
 				682F2964133B93D60058E1D7 /* LICENSE in Resources */,
 				682F2965133B93D60058E1D7 /* README.md in Resources */,
+				682F29B3133C1C680058E1D7 /* DetailView.xib in Resources */,
+				682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */,
+				682F29B6133C1C880058E1D7 /* NameEditorView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +214,7 @@
 				682F299B133C0B870058E1D7 /* PhotoWheelAppDelegate.m in Sources */,
 				682F299C133C0B870058E1D7 /* DetailViewController.m in Sources */,
 				682F299D133C0B870058E1D7 /* RootViewController.m in Sources */,
+				682F29A8133C1B480058E1D7 /* NameEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,22 +227,6 @@
 				682F2949133B93860058E1D7 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		682F2951133B93860058E1D7 /* MainWindow.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				682F2952133B93860058E1D7 /* en */,
-			);
-			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		682F2957133B93860058E1D7 /* DetailView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				682F2958133B93860058E1D7 /* en */,
-			);
-			name = DetailView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -319,6 +313,7 @@
 				682F2961133B93860058E1D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

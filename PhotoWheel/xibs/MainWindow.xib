@@ -89,14 +89,7 @@
 					<array class="NSMutableArray" key="IBUIViewControllers">
 						<object class="IBUITableViewController" id="720143809">
 							<object class="IBUINavigationItem" key="IBUINavigationItem" id="441316548">
-								<reference key="IBUINavigationBar"/>
 								<string key="IBUITitle">Root View Controller</string>
-								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="357019908">
-									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-									<int key="IBUIStyle">1</int>
-									<reference key="IBUINavigationItem" ref="441316548"/>
-									<int key="IBUISystemItemIdentifier">2</int>
-								</object>
 								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="445180000">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<int key="IBUIStyle">1</int>
@@ -189,6 +182,14 @@
 					</object>
 					<int key="connectionID">49</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">addPhotoWheel:</string>
+						<reference key="source" ref="445180000"/>
+						<reference key="destination" ref="720143809"/>
+					</object>
+					<int key="connectionID">52</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -260,18 +261,12 @@
 						<reference key="object" ref="441316548"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="445180000"/>
-							<reference ref="357019908"/>
 						</array>
 						<reference key="parent" ref="720143809"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">50</int>
 						<reference key="object" ref="445180000"/>
-						<reference key="parent" ref="441316548"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">51</int>
-						<reference key="object" ref="357019908"/>
 						<reference key="parent" ref="441316548"/>
 					</object>
 				</array>
@@ -293,24 +288,39 @@
 				<string key="41.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="42.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="50.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="51.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">51</int>
+			<int key="maxID">52</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">DetailViewController</string>
 					<string key="superclassName">UIViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">buttonTouched:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">buttonTouched:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">buttonTouched:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="button">UIButton</string>
 						<string key="detailDescriptionLabel">UILabel</string>
 						<string key="toolbar">UIToolbar</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="button">
+							<string key="name">button</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="detailDescriptionLabel">
 							<string key="name">detailDescriptionLabel</string>
 							<string key="candidateClassName">UILabel</string>
@@ -360,6 +370,17 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">RootViewController</string>
 					<string key="superclassName">UITableViewController</string>
+					<object class="NSMutableDictionary" key="actions">
+						<string key="NS.key.0">addPhotoWheel:</string>
+						<string key="NS.object.0">id</string>
+					</object>
+					<object class="NSMutableDictionary" key="actionInfosByName">
+						<string key="NS.key.0">addPhotoWheel:</string>
+						<object class="IBActionInfo" key="NS.object.0">
+							<string key="name">addPhotoWheel:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</object>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">detailViewController</string>
 						<string key="NS.object.0">DetailViewController</string>

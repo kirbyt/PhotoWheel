@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NameEditorViewController.h"
 
 @class DetailViewController;
 
-@interface RootViewController : UITableViewController {
+
+@interface RootViewController : UITableViewController <UIPopoverControllerDelegate, NameEditorViewControllerDelegate>
+{
 
 }
-
 		
 @property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
+
+- (IBAction)addPhotoWheel:(id)sender;
 
 @end
