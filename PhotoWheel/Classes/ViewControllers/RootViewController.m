@@ -47,6 +47,8 @@
    [newData addObject:@"Second photo wheel"];
    [self setData:newData];
    [newData release];
+   
+   [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
 }
 
 - (void)viewDidUnload
@@ -71,6 +73,11 @@
     return YES;
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+   [super setEditing:editing animated:animated];
+   [[[self navigationItem] rightBarButtonItem] setEnabled:!editing];
+}
 
 #pragma -
 #pragma Actions
@@ -139,6 +146,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+       [cell setShowsReorderControl:YES];
     }
 
    // Configure the cell.
@@ -147,36 +155,45 @@
    return cell;
 }
 
-/*
-// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
-/*
-// Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source.
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-    }   
+   if (editingStyle == UITableViewCellEditingStyleDelete) {
+      // Delete the row from the data source.
+      [[self data] removeObjectAtIndex:[indexPath row]];
+      [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+   }   
+   else if (editingStyle == UITableViewCellEditingStyleInsert) {
+      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+   }   
 }
-*/
 
-/*
-// Override to support rearranging the table view.
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+   return YES;
+}
+
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+   // We must retain the string because it is released by NSArray when removed.
+   NSString *stringToMove = [[[self data] objectAtIndex:[fromIndexPath row]] retain];
+
+   // This releases the string owned by the array. If we had not retained 
+   // in the previous line then stringToMove would be pointing to an
+   // invalid object.
+   [[self data] removeObjectAtIndex:[fromIndexPath row]];
+   
+   // Add the string back to the array but at a new location.
+   [[self data] insertObject:stringToMove atIndex:[toIndexPath row]];
+
+   // Release the string retained at the beginning.
+   [stringToMove release];
 }
-*/
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
