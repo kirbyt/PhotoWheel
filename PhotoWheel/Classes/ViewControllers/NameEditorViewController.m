@@ -11,12 +11,14 @@
 
 @implementation NameEditorViewController
 
-@synthesize textField = textField_;
 @synthesize delegate = delegate_;
+@synthesize textField = textField_;
+@synthesize photoWheelName = photoWheelName_;
 
 - (void)dealloc
 {
    [textField_ release];
+   [photoWheelName_ release];
    [super dealloc];
 }
 
@@ -32,9 +34,17 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
+
+   if ([self photoWheelName]) {
+      [self setTitle:@"Edit"];
+      [[self textField] setText:[self photoWheelName]];
+   } else {
+      [self setTitle:@"New"];
+   }
    
-   [self setContentSizeForViewInPopover:CGSizeMake(320, 108)];
-   [self setModalInPopover:YES];
+   UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(save)];
+   [[self navigationItem] setRightBarButtonItem:saveButton];
+   [saveButton release];
 }
 
 - (void)viewDidUnload 
@@ -43,18 +53,12 @@
    [super viewDidUnload];
 }
 
-- (IBAction)save:(id)sender 
+- (void)save
 {
-   if ([self delegate] && [[self delegate] respondsToSelector:@selector(nameEditorDidSaveWithName:)]) {
-      NSString *name = [[self textField] text];
-      [[self delegate] nameEditorDidSaveWithName:name];
-   }
-}
-
-- (IBAction)cancel:(id)sender 
-{
-   if ([self delegate] && [[self delegate] respondsToSelector:@selector(nameEditorDidCancel)]) {
-      [[self delegate] nameEditorDidCancel];
+   [self setPhotoWheelName:[[self textField] text]];
+   
+   if ([self delegate] && [[self delegate] respondsToSelector:@selector(nameEditorDidSave:)]) {
+      [[self delegate] nameEditorDidSave:self];
    }
 }
 

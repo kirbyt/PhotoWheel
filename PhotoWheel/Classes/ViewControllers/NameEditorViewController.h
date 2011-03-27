@@ -16,15 +16,14 @@
 
 @property (nonatomic, assign) id<NameEditorViewControllerDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UITextField *textField;
+@property (nonatomic, copy) NSString *photoWheelName;
 
-- (IBAction)save:(id)sender;
-
-- (IBAction)cancel:(id)sender;
+- (void)save;
 
 @end
 
+
 @protocol NameEditorViewControllerDelegate <NSObject>
 @optional
-- (void)nameEditorDidSaveWithName:(NSString *)name;
-- (void)nameEditorDidCancel;
+- (void)nameEditorDidSave:(NameEditorViewController *)nameEditorViewController;
 @end

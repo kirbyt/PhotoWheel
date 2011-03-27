@@ -13,23 +13,17 @@
 
 @interface RootViewController ()
 @property (nonatomic, retain) NSMutableArray *data;
-@property (nonatomic, retain) NameEditorViewController *nameEditorViewController;
-@property (nonatomic, retain) UIPopoverController *nameEditorPopoverController;
 @end
 
 @implementation RootViewController
 		
 @synthesize detailViewController = detailViewController_;
-@synthesize nameEditorViewController = nameEditorViewController_;
-@synthesize nameEditorPopoverController = nameEditorPopoverController_;
 @synthesize data = data_;
 
 - (void)dealloc
 {
    [data_ release];
    [detailViewController_ release];
-   [nameEditorPopoverController_ release];
-   [nameEditorPopoverController_ release];
    [super dealloc];
 }
 
@@ -39,6 +33,10 @@
    
    [self setClearsSelectionOnViewWillAppear:NO];
    [self setContentSizeForViewInPopover:CGSizeMake(320.0, 600.0)];
+   
+   UIColor *aColor = [UIColor colorWithRed:0.824 green:0.841 blue:0.876 alpha:1.000];
+   [[self tableView] setBackgroundColor:aColor];
+   [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
    
    [self setTitle:@"Photo Wheels"];
    
@@ -86,43 +84,20 @@
 {
    NameEditorViewController *newViewController = [[NameEditorViewController alloc] init];
    [newViewController setDelegate:self];
-   [self setNameEditorViewController:newViewController];
+   [[self navigationController] pushViewController:newViewController animated:YES];
    [newViewController release];
-   
-   UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:[self nameEditorViewController]];
-   [newPopover setDelegate:self];
-   [self setNameEditorPopoverController:newPopover];
-   [newPopover release];
-   
-   [[self nameEditorPopoverController] presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
-
-#pragma -
-#pragma UIPopoverControllerDelegate
-
-- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
-{
-   [self setNameEditorPopoverController:nil];
-   [self setNameEditorViewController:nil];
 }
 
 
 #pragma -
 #pragma NameEditorViewControllerDelegate
 
-- (void)nameEditorDidSaveWithName:(NSString *)name
+- (void)nameEditorDidSave:(NameEditorViewController *)nameEditorViewController
 {
-   [[self data] addObject:name];
+   [[self data] addObject:[nameEditorViewController photoWheelName]];
    [[self tableView] reloadData];
-   [[self nameEditorPopoverController] dismissPopoverAnimated:YES];
+   [[self navigationController] popViewControllerAnimated:YES];
 }
-
-- (void)nameEditorDidCancel
-{
-   [[self nameEditorPopoverController] dismissPopoverAnimated:YES];
-}
-
 
 
 #pragma -
@@ -147,6 +122,7 @@
     if (cell == nil) {
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
        [cell setShowsReorderControl:YES];
+       [cell setEditingAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
     }
 
    // Configure the cell.
@@ -208,5 +184,9 @@
      */
 }
 
+- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+   
+}
 
 @end
