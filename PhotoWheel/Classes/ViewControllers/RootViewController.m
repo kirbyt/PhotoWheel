@@ -94,7 +94,17 @@
 
 - (void)nameEditorDidSave:(NameEditorViewController *)nameEditorViewController
 {
-   [[self data] addObject:[nameEditorViewController photoWheelName]];
+   NSString *name = [nameEditorViewController name];
+   if ([name isEqualToString:@""]) return;   // Ignore blank names.
+   
+   if ([nameEditorViewController isEditing]) {
+      NSIndexPath *indexPath = [nameEditorViewController editingAtIndexPath];
+      [[self data] replaceObjectAtIndex:[indexPath row] withObject:name];
+   
+   } else {
+      [[self data] addObject:name];
+   }
+
    [[self tableView] reloadData];
    [[self navigationController] popViewControllerAnimated:YES];
 }
@@ -186,7 +196,15 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+   NSString *nameToEdit = [[self data] objectAtIndex:[indexPath row]];
    
+   NameEditorViewController *newViewController = [[NameEditorViewController alloc] init];
+   [newViewController setDelegate:self];
+   [newViewController setEditing:YES];
+   [newViewController setEditingAtIndexPath:indexPath];
+   [newViewController setName:nameToEdit];
+   [[self navigationController] pushViewController:newViewController animated:YES];
+   [newViewController release];
 }
 
 @end

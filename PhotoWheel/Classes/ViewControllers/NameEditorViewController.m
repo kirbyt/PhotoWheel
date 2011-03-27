@@ -8,17 +8,19 @@
 
 #import "NameEditorViewController.h"
 
-
 @implementation NameEditorViewController
 
 @synthesize delegate = delegate_;
 @synthesize textField = textField_;
-@synthesize photoWheelName = photoWheelName_;
+@synthesize name = name_;
+@synthesize editingAtIndexPath = editingAtIndexPath_;
+@synthesize editing = editing_;
 
 - (void)dealloc
 {
    [textField_ release];
-   [photoWheelName_ release];
+   [name_ release];
+   [editingAtIndexPath_ release];
    [super dealloc];
 }
 
@@ -35,9 +37,9 @@
 {
    [super viewDidLoad];
 
-   if ([self photoWheelName]) {
+   if ([self isEditing]) {
       [self setTitle:@"Edit"];
-      [[self textField] setText:[self photoWheelName]];
+      [[self textField] setText:[self name]];
    } else {
       [self setTitle:@"New"];
    }
@@ -55,7 +57,7 @@
 
 - (void)save
 {
-   [self setPhotoWheelName:[[self textField] text]];
+   [self setName:[[self textField] text]];
    
    if ([self delegate] && [[self delegate] respondsToSelector:@selector(nameEditorDidSave:)]) {
       [[self delegate] nameEditorDidSave:self];

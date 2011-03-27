@@ -16,7 +16,9 @@
 
 @property (nonatomic, assign) id<NameEditorViewControllerDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UITextField *textField;
-@property (nonatomic, copy) NSString *photoWheelName;
+@property (nonatomic, copy) NSString *name;
+@property (nonatomic, retain) NSIndexPath *editingAtIndexPath;
+@property (nonatomic, assign, getter = isEditing) BOOL editing;
 
 - (void)save;
 
