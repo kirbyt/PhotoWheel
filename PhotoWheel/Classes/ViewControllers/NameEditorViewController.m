@@ -36,6 +36,8 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
+   
+   [self setContentSizeForViewInPopover:CGSizeMake(320, 105)];
 
    if ([self isEditing]) {
       [self setTitle:@"Edit"];
