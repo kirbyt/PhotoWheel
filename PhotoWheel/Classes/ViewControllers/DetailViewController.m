@@ -7,137 +7,115 @@
 //
 
 #import "DetailViewController.h"
-
 #import "RootViewController.h"
+#import "PhotoWheelViewController.h"
+#import "UIViewController+KTCompositeView.h"
+
 
 @interface DetailViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
-- (void)configureView;
+@property (nonatomic, retain) PhotoWheelViewController *photoWheelViewController;
 @end
+
 
 @implementation DetailViewController
 
-@synthesize toolbar=_toolbar;
+@synthesize toolbar=toolbar_;
+@synthesize popoverController=popoverController_;
+@synthesize photoWheelViewController = photoWheelViewController_;
+@synthesize photoWheelPlaceholderView = photoWheelPlaceholderView_;
 
-@synthesize detailItem=_detailItem;
-
-@synthesize detailDescriptionLabel=_detailDescriptionLabel;
-@synthesize button = _button;
-
-@synthesize popoverController=_myPopoverController;
-
-#pragma mark - Managing the detail item
-
-/*
- When setting the detail item, update the view and dismiss the popover controller if it's showing.
- */
-- (void)setDetailItem:(id)newDetailItem
+- (void)dealloc
 {
-    if (_detailItem != newDetailItem) {
-        [_detailItem release];
-        _detailItem = [newDetailItem retain];
-        
-        // Update the view.
-        [self configureView];
-    }
-
-    if (self.popoverController != nil) {
-        [self.popoverController dismissPopoverAnimated:YES];
-    }        
+   [popoverController_ release];
+   [toolbar_ release];
+   [photoWheelViewController_ release];
+   [photoWheelPlaceholderView_ release];
+   
+   [super dealloc];
 }
 
-- (void)configureView
+- (void)viewDidLoad
 {
-    // Update the user interface for the detail item.
+   [super viewDidLoad];
+   
+   PhotoWheelViewController *newController = [[PhotoWheelViewController alloc] init];
+   [self setPhotoWheelViewController:newController];
+   [newController release];
 
-   self.detailDescriptionLabel.text = [self.detailItem description];
+   [self addSubview:[[self photoWheelViewController] view] toPlaceholder:[self photoWheelPlaceholderView]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+   [super viewWillAppear:animated];
+
+   // Forward the message to our "sub" view controller.
+   [[self photoWheelViewController] viewWillAppear:animated];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
 {
-    [super viewDidAppear:animated];
+   return YES;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-	[super viewWillDisappear:animated];
+   [[self photoWheelViewController] willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-	[super viewDidDisappear:animated];
+   [[self photoWheelViewController] didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-    return YES;
+- (void)viewDidUnload
+{
+	[super viewDidUnload];
+   
+	// Release any retained subviews of the main view.
+	// e.g. self.myOutlet = nil;
+   [self setToolbar:nil];
+   [self setPopoverController:nil];
 }
 
-#pragma mark - Split view support
+- (void)didReceiveMemoryWarning
+{
+	// Releases the view if it doesn't have a superview.
+   [super didReceiveMemoryWarning];
+	
+	// Release any cached data, images, etc that aren't in use.
+}
+
+
+#pragma -
+#pragma mark Split view support
 
 - (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
 {
-    barButtonItem.title = @"Events";
-    NSMutableArray *items = [[self.toolbar items] mutableCopy];
-    [items insertObject:barButtonItem atIndex:0];
-    [self.toolbar setItems:items animated:YES];
-    [items release];
-    self.popoverController = pc;
+   barButtonItem.title = @"Photo Wheels";
+   NSMutableArray *items = [[[self toolbar] items] mutableCopy];
+   [items insertObject:barButtonItem atIndex:0];
+   [[self toolbar] setItems:items animated:YES];
+   [items release];
+   [self setPopoverController:pc];
 }
 
 // Called when the view is shown again in the split view, invalidating the button and popover controller.
 - (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
-    NSMutableArray *items = [[self.toolbar items] mutableCopy];
-    [items removeObjectAtIndex:0];
-    [self.toolbar setItems:items animated:YES];
-    [items release];
-    self.popoverController = nil;
+   NSMutableArray *items = [[[self toolbar] items] mutableCopy];
+   [items removeObjectAtIndex:0];
+   [[self toolbar] setItems:items animated:YES];
+   [items release];
+   [self setPopoverController:nil];
 }
 
-/*
- // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
- */
 
-- (void)viewDidUnload
-{
-    [self setButton:nil];
-	[super viewDidUnload];
+#pragma -
+#pragma Actions
 
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-	self.popoverController = nil;
-}
-
-#pragma mark - Memory management
-
-- (void)didReceiveMemoryWarning
-{
-	// Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-	
-	// Release any cached data, images, etc that aren't in use.
-}
-
-- (void)dealloc
-{
-   [_myPopoverController release];
-   [_toolbar release];
-   [_detailItem release];
-   [_detailDescriptionLabel release];
-    [_button release];
-    [super dealloc];
-}
-
-- (IBAction)buttonTouched:(id)sender 
+- (IBAction)pickImage:(id)sender 
 {
 }
 

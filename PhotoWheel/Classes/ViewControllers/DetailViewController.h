@@ -8,20 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> {
-
-   UIButton *_button;
+@interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> 
+{
 }
 
 
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) IBOutlet UIView *photoWheelPlaceholderView;
 
-@property (nonatomic, retain) id detailItem;
-
-@property (nonatomic, retain) IBOutlet UILabel *detailDescriptionLabel;
-
-@property (nonatomic, retain) IBOutlet UIButton *button;
-
-- (IBAction)buttonTouched:(id)sender;
+- (IBAction)pickImage:(id)sender;
 
 @end

@@ -21,6 +21,8 @@
 		682F29B3133C1C680058E1D7 /* DetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B1133C1C680058E1D7 /* DetailView.xib */; };
 		682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B2133C1C680058E1D7 /* MainWindow.xib */; };
 		682F29B6133C1C880058E1D7 /* NameEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B5133C1C880058E1D7 /* NameEditorView.xib */; };
+		6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D13E1344C53E0005271D /* PhotoWheelViewController.m */; };
+		6865D1501344CDD40005271D /* UIViewController+KTCompositeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +47,10 @@
 		682F29B1133C1C680058E1D7 /* DetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailView.xib; sourceTree = "<group>"; };
 		682F29B2133C1C680058E1D7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
 		682F29B5133C1C880058E1D7 /* NameEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditorView.xib; sourceTree = "<group>"; };
+		6865D13D1344C53E0005271D /* PhotoWheelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewController.h; sourceTree = "<group>"; };
+		6865D13E1344C53E0005271D /* PhotoWheelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewController.m; sourceTree = "<group>"; };
+		6865D14E1344CDD40005271D /* UIViewController+KTCompositeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KTCompositeView.h"; sourceTree = "<group>"; };
+		6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KTCompositeView.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +122,7 @@
 			children = (
 				682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */,
 				682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */,
+				6865D14D1344CDD40005271D /* Categories */,
 				682F2996133C0B870058E1D7 /* ViewControllers */,
 			);
 			path = Classes;
@@ -130,6 +137,8 @@
 				682F299A133C0B870058E1D7 /* RootViewController.m */,
 				682F29A6133C1B480058E1D7 /* NameEditorViewController.h */,
 				682F29A7133C1B480058E1D7 /* NameEditorViewController.m */,
+				6865D13D1344C53E0005271D /* PhotoWheelViewController.h */,
+				6865D13E1344C53E0005271D /* PhotoWheelViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -142,6 +151,15 @@
 				682F29B5133C1C880058E1D7 /* NameEditorView.xib */,
 			);
 			path = xibs;
+			sourceTree = "<group>";
+		};
+		6865D14D1344CDD40005271D /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				6865D14E1344CDD40005271D /* UIViewController+KTCompositeView.h */,
+				6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +233,8 @@
 				682F299C133C0B870058E1D7 /* DetailViewController.m in Sources */,
 				682F299D133C0B870058E1D7 /* RootViewController.m in Sources */,
 				682F29A8133C1B480058E1D7 /* NameEditorViewController.m in Sources */,
+				6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */,
+				6865D1501344CDD40005271D /* UIViewController+KTCompositeView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
