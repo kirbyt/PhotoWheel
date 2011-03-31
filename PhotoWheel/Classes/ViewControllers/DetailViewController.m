@@ -24,6 +24,7 @@
 @synthesize popoverController=popoverController_;
 @synthesize photoWheelViewController = photoWheelViewController_;
 @synthesize photoWheelPlaceholderView = photoWheelPlaceholderView_;
+@synthesize segmentedControl = segmentedControl_;
 
 - (void)dealloc
 {
@@ -31,6 +32,7 @@
    [toolbar_ release];
    [photoWheelViewController_ release];
    [photoWheelPlaceholderView_ release];
+   [segmentedControl_ release];
    
    [super dealloc];
 }
@@ -40,10 +42,13 @@
    [super viewDidLoad];
    
    PhotoWheelViewController *newController = [[PhotoWheelViewController alloc] init];
+   [newController setStyle:PhotoWheelStyleWheel];
    [self setPhotoWheelViewController:newController];
    [newController release];
 
    [self addSubview:[[self photoWheelViewController] view] toPlaceholder:[self photoWheelPlaceholderView]];
+   
+   [[self segmentedControl] addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -77,6 +82,7 @@
 	// e.g. self.myOutlet = nil;
    [self setToolbar:nil];
    [self setPopoverController:nil];
+   [self setSegmentedControl:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,6 +123,16 @@
 
 - (IBAction)pickImage:(id)sender 
 {
+}
+
+- (void)segmentedControlChanged:(id)sender
+{
+   NSInteger index = [[self segmentedControl] selectedSegmentIndex];
+   if (index == 0) {
+      [[self photoWheelViewController] setStyle:PhotoWheelStyleWheel];
+   } else {
+      [[self photoWheelViewController] setStyle:PhotoWheelStyleCarousel];
+   }
 }
 
 @end

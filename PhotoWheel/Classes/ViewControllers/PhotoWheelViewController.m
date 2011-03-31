@@ -104,7 +104,6 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 {
    [super viewDidLoad];
    
-   [self setStyle:PhotoWheelStyleWheel];
    [self setCurrentAngle:0.0];
    [self setLastAngle:0.0];
 }
@@ -124,6 +123,16 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
    [self setAngle:[self currentAngle]];
+}
+
+- (void)setStyle:(PhotoWheelStyle)style
+{
+   if (style_ != style) {
+      style_ = style;
+      [UIView beginAnimations:@"ChangeStyle" context:nil];
+      [self setAngle:[self currentAngle]];
+      [UIView commitAnimations];
+   }
 }
 
 // The follow code is inprised from the carousel example at:
@@ -171,7 +180,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 
       } else {
          [view setTransform:CGAffineTransformMakeTranslation(xPosition, yPosition)];
-         
+         [view setAlpha:1.0];
       }
       
       // setting the z position on the layer has the effect of setting the

@@ -15,6 +15,7 @@
 
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UIView *photoWheelPlaceholderView;
+@property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
 
 - (IBAction)pickImage:(id)sender;
 
