@@ -7,6 +7,7 @@
 //
 
 #import "PhotoWheelViewController.h"
+#import "PhotoWheelImageView.h"
 #import <QuartzCore/QuartzCore.h>
 
 // From: http://iphonedevelopment.blogspot.com/2009/12/better-two-finger-rotate-gesture.html
@@ -25,6 +26,9 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    
 	return (line2Slope > line1Slope) ? degs : -degs;	
 }
+
+#define degreesToRadians(x) (M_PI * x / 180.0)
+#define radiansToDegrees(x) (180.0 * x / M_PI)
 
 
 #define WHEEL_SPOKE_COUNT 12
@@ -83,9 +87,10 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    // Position the views to center on (0, 0).
    CGRect wheelSubviewFrame = CGRectMake(-(WHEEL_IMAGE_SIZE_WIDTH * 0.5), -(WHEEL_IMAGE_SIZE_HEIGHT * 0.5), WHEEL_IMAGE_SIZE_WIDTH, WHEEL_IMAGE_SIZE_HEIGHT);
    
+   UIImage *defaultImage = [UIImage imageNamed:@"photoDefault.png"];
    for (NSInteger index=0; index < WHEEL_SPOKE_COUNT; index++) {
-      UIView *newView = [[UIView alloc] initWithFrame:wheelSubviewFrame];
-      [newView setBackgroundColor:[UIColor redColor]];
+      PhotoWheelImageView *newView = [[PhotoWheelImageView alloc] initWithFrame:wheelSubviewFrame];
+      [newView setImage:defaultImage];
       [[self wheelView] addSubview:newView];
       [[self wheelSubviews] addObject:newView];
       [newView release];
@@ -99,8 +104,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 {
    [super viewDidLoad];
    
-   [self setStyle:PhotoWheelStyleCarousel];
-   
+   [self setStyle:PhotoWheelStyleWheel];
    [self setCurrentAngle:0.0];
    [self setLastAngle:0.0];
 }
@@ -179,11 +183,6 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    }
 }
 
-CGFloat RadiansToDegrees(CGFloat radians)
-{
-   return radians * 180 / M_PI;
-};
-
 
 #pragma -
 #pragma Touch Event Handlers
@@ -220,7 +219,7 @@ CGFloat RadiansToDegrees(CGFloat radians)
       
       CGFloat angleInRadians = angleBetweenLinesInRadians(locationNow, oppositeNow, locationThen, oppositeThen);
       [self setLastAngle:[self currentAngle]];
-      [self setCurrentAngle:[self currentAngle] + RadiansToDegrees(angleInRadians)];
+      [self setCurrentAngle:[self currentAngle] + radiansToDegrees(angleInRadians)];
 
       [self setAngle:[self currentAngle]];
       

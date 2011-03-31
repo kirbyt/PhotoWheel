@@ -23,6 +23,9 @@
 		682F29B6133C1C880058E1D7 /* NameEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B5133C1C880058E1D7 /* NameEditorView.xib */; };
 		6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D13E1344C53E0005271D /* PhotoWheelViewController.m */; };
 		6865D1501344CDD40005271D /* UIViewController+KTCompositeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */; };
+		6865D15C1345204F0005271D /* PhotoWheelImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D15B1345204F0005271D /* PhotoWheelImageView.m */; };
+		6865D1651345234B0005271D /* UIBezierPath+ShadowPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */; };
+		6865D1681345242D0005271D /* photoDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D1671345242D0005271D /* photoDefault.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +54,11 @@
 		6865D13E1344C53E0005271D /* PhotoWheelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewController.m; sourceTree = "<group>"; };
 		6865D14E1344CDD40005271D /* UIViewController+KTCompositeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KTCompositeView.h"; sourceTree = "<group>"; };
 		6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KTCompositeView.m"; sourceTree = "<group>"; };
+		6865D15A1345204F0005271D /* PhotoWheelImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelImageView.h; sourceTree = "<group>"; };
+		6865D15B1345204F0005271D /* PhotoWheelImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelImageView.m; sourceTree = "<group>"; };
+		6865D1631345234A0005271D /* UIBezierPath+ShadowPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+ShadowPath.h"; sourceTree = "<group>"; };
+		6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+ShadowPath.m"; sourceTree = "<group>"; };
+		6865D1671345242D0005271D /* photoDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoDefault.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +109,7 @@
 			children = (
 				682F2993133C0B870058E1D7 /* Classes */,
 				682F29B0133C1C680058E1D7 /* xibs */,
+				6865D1661345242D0005271D /* images */,
 				682F2946133B93860058E1D7 /* Supporting Files */,
 			);
 			path = PhotoWheel;
@@ -123,6 +132,7 @@
 				682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */,
 				682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */,
 				6865D14D1344CDD40005271D /* Categories */,
+				6865D159134520350005271D /* Views */,
 				682F2996133C0B870058E1D7 /* ViewControllers */,
 			);
 			path = Classes;
@@ -156,10 +166,29 @@
 		6865D14D1344CDD40005271D /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				6865D1631345234A0005271D /* UIBezierPath+ShadowPath.h */,
+				6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */,
 				6865D14E1344CDD40005271D /* UIViewController+KTCompositeView.h */,
 				6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */,
 			);
 			path = Categories;
+			sourceTree = "<group>";
+		};
+		6865D159134520350005271D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				6865D15A1345204F0005271D /* PhotoWheelImageView.h */,
+				6865D15B1345204F0005271D /* PhotoWheelImageView.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		6865D1661345242D0005271D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				6865D1671345242D0005271D /* photoDefault.png */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -218,6 +247,7 @@
 				682F29B3133C1C680058E1D7 /* DetailView.xib in Resources */,
 				682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */,
 				682F29B6133C1C880058E1D7 /* NameEditorView.xib in Resources */,
+				6865D1681345242D0005271D /* photoDefault.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +265,8 @@
 				682F29A8133C1B480058E1D7 /* NameEditorViewController.m in Sources */,
 				6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */,
 				6865D1501344CDD40005271D /* UIViewController+KTCompositeView.m in Sources */,
+				6865D15C1345204F0005271D /* PhotoWheelImageView.m in Sources */,
+				6865D1651345234B0005271D /* UIBezierPath+ShadowPath.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
