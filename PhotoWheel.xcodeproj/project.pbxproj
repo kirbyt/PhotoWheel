@@ -26,6 +26,11 @@
 		6865D15C1345204F0005271D /* PhotoWheelImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D15B1345204F0005271D /* PhotoWheelImageView.m */; };
 		6865D1651345234B0005271D /* UIBezierPath+ShadowPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */; };
 		6865D1681345242D0005271D /* photoDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D1671345242D0005271D /* photoDefault.png */; };
+		6865D16E13454DB20005271D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6865D16D13454DB10005271D /* Entitlements.plist */; };
+		6865D173134552D20005271D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D16F134552D20005271D /* Icon.png */; };
+		6865D174134552D20005271D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D170134552D20005271D /* Icon@2x.png */; };
+		6865D175134552D20005271D /* Icon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D171134552D20005271D /* Icon72x72.png */; };
+		6865D176134552D20005271D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6865D172134552D20005271D /* iTunesArtwork */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +64,11 @@
 		6865D1631345234A0005271D /* UIBezierPath+ShadowPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+ShadowPath.h"; sourceTree = "<group>"; };
 		6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+ShadowPath.m"; sourceTree = "<group>"; };
 		6865D1671345242D0005271D /* photoDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoDefault.png; sourceTree = "<group>"; };
+		6865D16D13454DB10005271D /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
+		6865D16F134552D20005271D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		6865D170134552D20005271D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		6865D171134552D20005271D /* Icon72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72x72.png; sourceTree = "<group>"; };
+		6865D172134552D20005271D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +132,7 @@
 				682F2948133B93860058E1D7 /* InfoPlist.strings */,
 				682F294B133B93860058E1D7 /* PhotoWheel-Prefix.pch */,
 				682F294C133B93860058E1D7 /* main.m */,
+				6865D16D13454DB10005271D /* Entitlements.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -187,6 +198,10 @@
 			isa = PBXGroup;
 			children = (
 				6865D1671345242D0005271D /* photoDefault.png */,
+				6865D16F134552D20005271D /* Icon.png */,
+				6865D170134552D20005271D /* Icon@2x.png */,
+				6865D171134552D20005271D /* Icon72x72.png */,
+				6865D172134552D20005271D /* iTunesArtwork */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -198,6 +213,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 682F295F133B93860058E1D7 /* Build configuration list for PBXNativeTarget "PhotoWheel" */;
 			buildPhases = (
+				68BC199F1345615E00098356 /* ShellScript */,
 				682F2937133B93860058E1D7 /* Sources */,
 				682F2938133B93860058E1D7 /* Frameworks */,
 				682F2939133B93860058E1D7 /* Resources */,
@@ -248,10 +264,31 @@
 				682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */,
 				682F29B6133C1C880058E1D7 /* NameEditorView.xib in Resources */,
 				6865D1681345242D0005271D /* photoDefault.png in Resources */,
+				6865D16E13454DB20005271D /* Entitlements.plist in Resources */,
+				6865D173134552D20005271D /* Icon.png in Resources */,
+				6865D174134552D20005271D /* Icon@2x.png in Resources */,
+				6865D175134552D20005271D /* Icon72x72.png in Resources */,
+				6865D176134552D20005271D /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68BC199F1345615E00098356 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n# Auto Increment Version Script\nif [ \"${CONFIGURATION}\" != \"Debug\" ]; then\n\nplist=\"./${PRODUCT_NAME}/${PRODUCT_NAME}-Info.plist\"\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$plist\")\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$plist\"\n\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		682F2937133B93860058E1D7 /* Sources */ = {
@@ -346,6 +383,69 @@
 			};
 			name = Release;
 		};
+		6865D16913454CEE0005271D /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = "App Store";
+		};
+		6865D16A13454CEE0005271D /* App Store */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
+				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "App Store";
+		};
+		6865D16B13454D6F0005271D /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_UNIVERSAL_IPHONE_OS)";
+				CODE_SIGN_ENTITLEMENTS = ./PhotoWheel/Entitlements.plist;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = "Ad Hoc";
+		};
+		6865D16C13454D6F0005271D /* Ad Hoc */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
+				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = "Ad Hoc";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -354,6 +454,8 @@
 			buildConfigurations = (
 				682F295D133B93860058E1D7 /* Debug */,
 				682F295E133B93860058E1D7 /* Release */,
+				6865D16913454CEE0005271D /* App Store */,
+				6865D16B13454D6F0005271D /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -363,6 +465,8 @@
 			buildConfigurations = (
 				682F2960133B93860058E1D7 /* Debug */,
 				682F2961133B93860058E1D7 /* Release */,
+				6865D16A13454CEE0005271D /* App Store */,
+				6865D16C13454D6F0005271D /* Ad Hoc */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
