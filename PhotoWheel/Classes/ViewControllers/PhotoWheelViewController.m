@@ -8,6 +8,7 @@
 
 #import "PhotoWheelViewController.h"
 #import "PhotoWheelImageView.h"
+#import "PhotoWheelImageViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 // From: http://iphonedevelopment.blogspot.com/2009/12/better-two-finger-rotate-gesture.html
@@ -31,16 +32,12 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 #define radiansToDegrees(x) (180.0 * x / M_PI)
 
 
-#define WHEEL_SPOKE_COUNT 12
-#define WHEEL_SIZE_WIDTH 300
-#define WHEEL_SIZE_HEIGHT 300
-#define WHEEL_IMAGE_SIZE_WIDTH 80
-#define WHEEL_IMAGE_SIZE_HEIGHT 80
+#define WHEEL_NUB_COUNT 12
 
 
 @interface PhotoWheelViewController ()
 @property (nonatomic, retain) UIView *wheelView;
-@property (nonatomic, retain) NSMutableArray *wheelSubviews;
+@property (nonatomic, retain) NSMutableArray *wheelSubviewControllers;
 @property (nonatomic, assign) CGFloat currentAngle;
 @property (nonatomic, assign) CGFloat lastAngle;
 @property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
@@ -51,7 +48,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 
 @synthesize style = style_;
 @synthesize wheelView = wheelView_;
-@synthesize wheelSubviews = wheelSubviews_;
+@synthesize wheelSubviewControllers = wheelSubviewControllers_;
 @synthesize currentAngle = currentAngle_;
 @synthesize lastAngle = lastAngle_;
 @synthesize interfaceOrientation = interfaceOrientation_;
@@ -59,41 +56,34 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 - (void)dealloc
 {
    [wheelView_ release];
-   [wheelSubviews_ release];
+   [wheelSubviewControllers_ release];
    [super dealloc];
 }
 
 - (void)loadView
 {
-   CGRect idealFrame = CGRectZero; //CGRectMake(0, 0, WHEEL_SIZE_WIDTH, WHEEL_SIZE_HEIGHT);
+   // Create the array that holds each view on a wheel spoke.
+   NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:WHEEL_NUB_COUNT];
+   [self setWheelSubviewControllers:newArray];
+   [newArray release];
    
-   UIView *contentView = [[UIView alloc] initWithFrame:idealFrame];
+   UIView *contentView = [[UIView alloc] initWithFrame:CGRectZero];
    [contentView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
    [self setView:contentView];
    [contentView release];
    
-   // Create the array that holds each view on a wheel spoke.
-   NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:WHEEL_SPOKE_COUNT];
-   [self setWheelSubviews:newArray];
-   [newArray release];
-
    // Create the wheel view.
-   UIView *newWheelView = [[UIView alloc] initWithFrame:idealFrame]; //CGRectMake(0, 0, WHEEL_SIZE_WIDTH, WHEEL_SIZE_HEIGHT)];
+   UIView *newWheelView = [[UIView alloc] initWithFrame:CGRectZero];
    [newWheelView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
    [newWheelView setBackgroundColor:[UIColor yellowColor]];
    [self setWheelView:newWheelView];
    [newWheelView release];
 
-   // Position the views to center on (0, 0).
-   CGRect wheelSubviewFrame = CGRectMake(-(WHEEL_IMAGE_SIZE_WIDTH * 0.5), -(WHEEL_IMAGE_SIZE_HEIGHT * 0.5), WHEEL_IMAGE_SIZE_WIDTH, WHEEL_IMAGE_SIZE_HEIGHT);
-   
-   UIImage *defaultImage = [UIImage imageNamed:@"photoDefault.png"];
-   for (NSInteger index=0; index < WHEEL_SPOKE_COUNT; index++) {
-      PhotoWheelImageView *newView = [[PhotoWheelImageView alloc] initWithFrame:wheelSubviewFrame];
-      [newView setImage:defaultImage];
-      [[self wheelView] addSubview:newView];
-      [[self wheelSubviews] addObject:newView];
-      [newView release];
+   for (NSInteger index=0; index < WHEEL_NUB_COUNT; index++) {
+      PhotoWheelImageViewController *newController = [[PhotoWheelImageViewController alloc] init];
+      [[self wheelView] addSubview:[newController view]];
+      [[self wheelSubviewControllers] addObject:newController];
+      [newController release];
    }
 
    // Add the wheel view to the main view and position it.
@@ -152,11 +142,13 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
       radiusY = radiusX * 0.30;
    }
 
-   NSInteger spokeCount = [[self wheelSubviews] count];
+   NSInteger spokeCount = [[self wheelSubviewControllers] count];
    float angleToAdd = 360.0f / spokeCount;
    
-   for(UIView *view in [self wheelSubviews])
+   for(UIViewController *controller in [self wheelSubviewControllers])
    {
+      UIView *view = [controller view];
+      
       float angleInRadians = angle * M_PI / 180.0f;
 
       // get a location based on the angle
@@ -196,54 +188,25 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 #pragma -
 #pragma Touch Event Handlers
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-   // We only support single touches, so anyObject retrieves just that touch from touches
-   UITouch *touch = [touches anyObject];
-   
-   // Only move the placard view if the touch was in the placard view
-   if ([touch view] == [self view]) { 
-      
-//      CGPoint touchPoint = [touch locationInView:[self view]];
-//      [self animateFirstTouchAtPoint:touchPoint];
-   }
-}
-
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
    // We only support single touches, so anyObject retrieves just that touch from touches
    UITouch *touch = [touches anyObject];
    
-   // Only move the placard view if the touch was in the placard view
-//   if ([touch view] == [self view]) { 
-   {
-      CGPoint wheelCenter = [[self wheelView] center];
-      
-      // use the movement of the touch to decide
-      // how much to rotate the carousel
-      CGPoint locationNow = [touch locationInView:[self view]];
-      CGPoint locationThen = [touch previousLocationInView:[self view]];
-      CGPoint oppositeNow = CGPointMake(wheelCenter.x + (wheelCenter.x - locationNow.x), wheelCenter.y + (wheelCenter.y - locationNow.y));
-      CGPoint oppositeThen = CGPointMake(wheelCenter.x + (wheelCenter.x - locationThen.x), wheelCenter.y + (wheelCenter.y - locationThen.y));
-      
-      CGFloat angleInRadians = angleBetweenLinesInRadians(locationNow, oppositeNow, locationThen, oppositeThen);
-      [self setLastAngle:[self currentAngle]];
-      [self setCurrentAngle:[self currentAngle] + radiansToDegrees(angleInRadians)];
-
-      [self setAngle:[self currentAngle]];
-      
-//      [[self imageView] setTransform:CGAffineTransformRotate([[self imageView] transform], angleInRadians)];
-   }
-}
-
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
-{
-   //   // if our touch ended then...
-   //   if([touches containsObject:trackingTouch_])
-   //   {
-   //      // make sure we're no longer tracking it
-   //      trackingTouch_ = nil;
-   //   }
+   CGPoint wheelCenter = [[self wheelView] center];
+   
+   // use the movement of the touch to decide
+   // how much to rotate the carousel
+   CGPoint locationNow = [touch locationInView:[self view]];
+   CGPoint locationThen = [touch previousLocationInView:[self view]];
+   CGPoint oppositeNow = CGPointMake(wheelCenter.x + (wheelCenter.x - locationNow.x), wheelCenter.y + (wheelCenter.y - locationNow.y));
+   CGPoint oppositeThen = CGPointMake(wheelCenter.x + (wheelCenter.x - locationThen.x), wheelCenter.y + (wheelCenter.y - locationThen.y));
+   
+   CGFloat angleInRadians = angleBetweenLinesInRadians(locationNow, oppositeNow, locationThen, oppositeThen);
+   [self setLastAngle:[self currentAngle]];
+   [self setCurrentAngle:[self currentAngle] + radiansToDegrees(angleInRadians)];
+   
+   [self setAngle:[self currentAngle]];
 }
 
 
