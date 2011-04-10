@@ -65,7 +65,6 @@
    CGRect bounds = [[self view] bounds];
    CGPoint point = CGPointMake(bounds.size.width/2, bounds.size.height/2);
    point = [[self view] convertPoint:point toView:[[self view] superview]];
-   NSLog(@"point=%@ bounds=%@", NSStringFromCGPoint(point), NSStringFromCGRect(bounds));
    
    [[self photoWheelViewController] showImageBrowserFromPoint:point];
 }

@@ -40,7 +40,6 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 @property (nonatomic, retain) NSMutableArray *wheelSubviewControllers;
 @property (nonatomic, assign) CGFloat currentAngle;
 @property (nonatomic, assign) CGFloat lastAngle;
-@property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
 @property (nonatomic, retain) UIViewController *controllerToPush;
 @property (nonatomic, assign) CGPoint imageBrowserAnimationPoint;
 - (void)setAngle:(CGFloat)angle;
@@ -53,7 +52,6 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 @synthesize wheelSubviewControllers = wheelSubviewControllers_;
 @synthesize currentAngle = currentAngle_;
 @synthesize lastAngle = lastAngle_;
-@synthesize interfaceOrientation = interfaceOrientation_;
 @synthesize controllerToPush = controllerToPush_;
 @synthesize imageBrowserAnimationPoint = imageBrowserAnimationPoint_;
 
@@ -111,11 +109,6 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    [self setAngle:[self currentAngle]];
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-   [self setInterfaceOrientation:toInterfaceOrientation];
-}
-
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
    [self setAngle:[self currentAngle]];
@@ -136,13 +129,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 // http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad
 - (void)setAngle:(CGFloat)angle
 {
-   CGPoint wheelCenter = [[self wheelView] center];
-   // Swap the points if interface oritentation is landscape.
-   if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
-      wheelCenter = CGPointMake(wheelCenter.y, wheelCenter.x);
-   }
-
-   CGPoint center = CGPointMake(wheelCenter.x , wheelCenter.y );
+   CGPoint center = [[self wheelView] center];
    CGFloat radiusX = [[self wheelView] bounds].size.width * 0.35;
    CGFloat radiusY = radiusX;
    if ([self style] == PhotoWheelStyleCarousel) {
