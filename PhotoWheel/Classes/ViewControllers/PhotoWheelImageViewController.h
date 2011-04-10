@@ -10,7 +10,7 @@
 
 @class PhotoWheelViewController;
 
-@interface PhotoWheelImageViewController : UIViewController <UIActionSheetDelegate>
+@interface PhotoWheelImageViewController : UIViewController <UIPopoverControllerDelegate>
 {
     
 }

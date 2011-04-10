@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		682BB9E413510639006747AB /* PhotoWheelImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BB9E313510639006747AB /* PhotoWheelImageViewController.m */; };
+		682BBA151351F449006747AB /* PhotoNubMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BBA141351F444006747AB /* PhotoNubMenuViewController.m */; };
+		682BBA181351F6A3006747AB /* UIDevice+KTDeviceExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BBA171351F6A3006747AB /* UIDevice+KTDeviceExtensions.m */; };
 		682F2940133B93860058E1D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682F293F133B93860058E1D7 /* UIKit.framework */; };
 		682F2942133B93860058E1D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682F2941133B93860058E1D7 /* Foundation.framework */; };
 		682F2944133B93860058E1D7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682F2943133B93860058E1D7 /* CoreGraphics.framework */; };
@@ -37,6 +39,10 @@
 /* Begin PBXFileReference section */
 		682BB9E213510639006747AB /* PhotoWheelImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelImageViewController.h; sourceTree = "<group>"; };
 		682BB9E313510639006747AB /* PhotoWheelImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelImageViewController.m; sourceTree = "<group>"; };
+		682BBA131351F443006747AB /* PhotoNubMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoNubMenuViewController.h; sourceTree = "<group>"; };
+		682BBA141351F444006747AB /* PhotoNubMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoNubMenuViewController.m; sourceTree = "<group>"; };
+		682BBA161351F6A3006747AB /* UIDevice+KTDeviceExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+KTDeviceExtensions.h"; sourceTree = "<group>"; };
+		682BBA171351F6A3006747AB /* UIDevice+KTDeviceExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+KTDeviceExtensions.m"; sourceTree = "<group>"; };
 		682F293B133B93860058E1D7 /* PhotoWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		682F293F133B93860058E1D7 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		682F2941133B93860058E1D7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -165,6 +171,8 @@
 				6865D13E1344C53E0005271D /* PhotoWheelViewController.m */,
 				682BB9E213510639006747AB /* PhotoWheelImageViewController.h */,
 				682BB9E313510639006747AB /* PhotoWheelImageViewController.m */,
+				682BBA131351F443006747AB /* PhotoNubMenuViewController.h */,
+				682BBA141351F444006747AB /* PhotoNubMenuViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -186,6 +194,8 @@
 				6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */,
 				6865D14E1344CDD40005271D /* UIViewController+KTCompositeView.h */,
 				6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */,
+				682BBA161351F6A3006747AB /* UIDevice+KTDeviceExtensions.h */,
+				682BBA171351F6A3006747AB /* UIDevice+KTDeviceExtensions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -310,6 +320,8 @@
 				6865D15C1345204F0005271D /* PhotoWheelImageView.m in Sources */,
 				6865D1651345234B0005271D /* UIBezierPath+ShadowPath.m in Sources */,
 				682BB9E413510639006747AB /* PhotoWheelImageViewController.m in Sources */,
+				682BBA151351F449006747AB /* PhotoNubMenuViewController.m in Sources */,
+				682BBA181351F6A3006747AB /* UIDevice+KTDeviceExtensions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

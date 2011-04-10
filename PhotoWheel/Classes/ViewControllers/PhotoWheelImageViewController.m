@@ -9,15 +9,27 @@
 #import "PhotoWheelImageViewController.h"
 #import "PhotoWheelImageView.h"
 #import "PhotoWheelViewController.h"
+#import "PhotoNubMenuViewController.h"
 
 
 #define WHEEL_IMAGE_SIZE_WIDTH 80
 #define WHEEL_IMAGE_SIZE_HEIGHT 80
 
+@interface PhotoWheelImageViewController ()
+@property (nonatomic, retain) UIPopoverController *popoverController;
+@end
+
 
 @implementation PhotoWheelImageViewController
 
 @synthesize photoWheelViewController = photoWheelViewController_;
+@synthesize popoverController = popoverController_;
+
+- (void)dealloc
+{
+   [popoverController_ release], popoverController_ = nil;
+   [super dealloc];
+}
 
 - (void)loadView
 {
@@ -51,13 +63,33 @@
 
 
 #pragma mark -
+#pragma mark UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+   if (popoverController == [self popoverController]) {
+      [self setPopoverController:nil];
+   }
+}
+
+#pragma mark -
 #pragma mark UIGestureRecognizer Handlers
 
 - (void)tapped:(UITapGestureRecognizer *)recognizer
 {
-   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Pick Image" otherButtonTitles:nil];
+   PhotoNubMenuViewController *menuViewController = [[PhotoNubMenuViewController alloc] init];
+   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+   UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:navController];
+   [newPopover setDelegate:self];
+   [newPopover setPopoverContentSize:CGSizeMake(320, 200)];
+   [self setPopoverController:newPopover];
+
+   [newPopover release];
+   [menuViewController release];
+   [navController release];
+   
    CGRect rect = [[self view] bounds];
-   [actionSheet showFromRect:rect inView:[self view] animated:YES];
+   [[self popoverController] presentPopoverFromRect:rect inView:[self view] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 - (void)doubleTapped:(UITapGestureRecognizer *)recognizer
@@ -72,20 +104,6 @@
 - (void)pinch:(UIPinchGestureRecognizer *)recognizer
 {
    NSLog(@"pinch/zoom");
-}
-
-
-#pragma mark -
-#pragma mark UIActionSheetDelegate Methods
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-   [actionSheet release];
-}
-
-- (void)actionSheetCancel:(UIActionSheet *)actionSheet
-{
-   [actionSheet release];
 }
 
 

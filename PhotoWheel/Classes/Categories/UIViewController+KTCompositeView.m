@@ -11,7 +11,7 @@
 
 @implementation UIViewController (KTCompositeView)
 
-- (void)addSubview:(UIView *)subview toPlaceholder:(UIView *)placeholder
+- (void)kt_addSubview:(UIView *)subview toPlaceholder:(UIView *)placeholder
 {
    if (subview) {
       // Size the subview to fill the placeholder.

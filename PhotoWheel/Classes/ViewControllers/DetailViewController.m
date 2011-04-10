@@ -54,7 +54,7 @@
    [self setPhotoNavigationController:newNavController];
    [newNavController release];
    
-   [self addSubview:[[self photoNavigationController] view] toPlaceholder:[self photoWheelPlaceholderView]];
+   [self kt_addSubview:[[self photoNavigationController] view] toPlaceholder:[self photoWheelPlaceholderView]];
    
    [[self segmentedControl] addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
 }
@@ -106,7 +106,7 @@
 }
 
 
-#pragma -
+#pragma mark -
 #pragma mark Split view support
 
 - (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
@@ -130,8 +130,8 @@
 }
 
 
-#pragma -
-#pragma Actions
+#pragma mark -
+#pragma mark Actions
 
 - (IBAction)pickImage:(id)sender 
 {
