@@ -9,14 +9,13 @@
 #import "DetailViewController.h"
 #import "RootViewController.h"
 #import "PhotoWheelViewController.h"
-#import "PhotoNavigationController.h"
 #import "UIViewController+KTCompositeView.h"
 
 
 @interface DetailViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
 @property (nonatomic, retain) PhotoWheelViewController *photoWheelViewController;
-@property (nonatomic, retain) UINavigationController *navController;
+@property (nonatomic, retain) UINavigationController *photoNavigationController;
 @end
 
 
@@ -27,7 +26,7 @@
 @synthesize photoWheelViewController = photoWheelViewController_;
 @synthesize photoWheelPlaceholderView = photoWheelPlaceholderView_;
 @synthesize segmentedControl = segmentedControl_;
-@synthesize navController = navController_;
+@synthesize photoNavigationController = photoNavigationController_;
 
 - (void)dealloc
 {
@@ -36,7 +35,7 @@
    [photoWheelViewController_ release];
    [photoWheelPlaceholderView_ release];
    [segmentedControl_ release];
-   [navController_ release];
+   [photoNavigationController_ release];
    
    [super dealloc];
 }
@@ -50,12 +49,12 @@
    [self setPhotoWheelViewController:newController];
    [newController release];
    
-   PhotoNavigationController *newNavController = [[PhotoNavigationController alloc] initWithRootViewController:[self photoWheelViewController]];
+   UINavigationController *newNavController = [[UINavigationController alloc] initWithRootViewController:[self photoWheelViewController]];
    [newNavController setNavigationBarHidden:YES];
-   [self setNavController:newNavController];
+   [self setPhotoNavigationController:newNavController];
    [newNavController release];
    
-   [self addSubview:[[self navController] view] toPlaceholder:[self photoWheelPlaceholderView]];
+   [self addSubview:[[self photoNavigationController] view] toPlaceholder:[self photoWheelPlaceholderView]];
    
    [[self segmentedControl] addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
 }
@@ -63,9 +62,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
    [super viewWillAppear:animated];
+   [[self photoNavigationController] viewWillAppear:animated];
+}
 
-   // Forward the message to our "sub" view controller.
-   [[self photoWheelViewController] viewWillAppear:animated];
+- (void)viewDidAppear:(BOOL)animated
+{
+   [super viewDidAppear:animated];
+   [[self photoNavigationController] viewDidAppear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation 
@@ -75,12 +78,12 @@
 
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-   [[self photoWheelViewController] willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+   [[self photoNavigationController] willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
 }
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-   [[self photoWheelViewController] didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+   [[self photoNavigationController] didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
 - (void)viewDidUnload

@@ -55,7 +55,6 @@
 
 - (void)tapped:(UITapGestureRecognizer *)recognizer
 {
-   NSLog(@"tap");
    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Pick Image" otherButtonTitles:nil];
    CGRect rect = [[self view] bounds];
    [actionSheet showFromRect:rect inView:[self view] animated:YES];
@@ -63,8 +62,6 @@
 
 - (void)doubleTapped:(UITapGestureRecognizer *)recognizer
 {
-   NSLog(@"tap tap");
-
    CGRect bounds = [[self view] bounds];
    CGPoint point = CGPointMake(bounds.size.width/2, bounds.size.height/2);
    point = [[self view] convertPoint:point toView:[[self view] superview]];
