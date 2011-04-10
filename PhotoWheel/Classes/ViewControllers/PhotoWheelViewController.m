@@ -41,6 +41,8 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 @property (nonatomic, assign) CGFloat currentAngle;
 @property (nonatomic, assign) CGFloat lastAngle;
 @property (nonatomic, assign) UIInterfaceOrientation interfaceOrientation;
+@property (nonatomic, retain) UIViewController *controllerToPush;
+@property (nonatomic, assign) CGPoint imageBrowserAnimationPoint;
 - (void)setAngle:(CGFloat)angle;
 @end
 
@@ -52,11 +54,14 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 @synthesize currentAngle = currentAngle_;
 @synthesize lastAngle = lastAngle_;
 @synthesize interfaceOrientation = interfaceOrientation_;
+@synthesize controllerToPush = controllerToPush_;
+@synthesize imageBrowserAnimationPoint = imageBrowserAnimationPoint_;
 
 - (void)dealloc
 {
    [wheelView_ release];
    [wheelSubviewControllers_ release];
+   [controllerToPush_ release];
    [super dealloc];
 }
 
@@ -81,6 +86,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 
    for (NSInteger index=0; index < WHEEL_NUB_COUNT; index++) {
       PhotoWheelImageViewController *newController = [[PhotoWheelImageViewController alloc] init];
+      [newController setPhotoWheelViewController:self];
       [[self wheelView] addSubview:[newController view]];
       [[self wheelSubviewControllers] addObject:newController];
       [newController release];
@@ -124,6 +130,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
       [UIView commitAnimations];
    }
 }
+
 
 // The follow code is inprised from the carousel example at:
 // http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad
@@ -185,8 +192,8 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 }
 
 
-#pragma -
-#pragma Touch Event Handlers
+#pragma mark -
+#pragma mark Touch Event Handlers
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -207,6 +214,86 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    [self setCurrentAngle:[self currentAngle] + radiansToDegrees(angleInRadians)];
    
    [self setAngle:[self currentAngle]];
+}
+
+
+#pragma mark -
+#pragma mark Public Methods
+
+- (void)showImageBrowserFromPoint:(CGPoint)point
+{
+   [self setImageBrowserAnimationPoint:point];
+   
+   CGRect frame = CGRectMake(point.x, point.y, 0, 0);
+   UIViewController *newViewController = [[UIViewController alloc] init];
+   [self setControllerToPush:newViewController];
+   [newViewController release];
+
+   
+   UIView *newView = [[self controllerToPush] view];
+   [newView setFrame:frame];
+   [newView setBackgroundColor:[UIColor magentaColor]];
+   [newView setAlpha:0.4];
+   
+   [[self view] addSubview:newView];
+   
+   [UIView beginAnimations:@"showImageBrowser" context:nil];
+   [UIView setAnimationDuration:0.6];
+   
+   CGRect bounds = [[self view] bounds];
+   [newView setFrame:bounds];
+   [newView setAlpha:1.0];
+   
+   [UIView setAnimationDelegate:self];
+   [UIView setAnimationDidStopSelector:@selector(animationComplete:finished:target:)];
+   
+   [UIView commitAnimations];
+   
+}
+
+- (void)hideImageBrowser
+{
+   [[self navigationController] popViewControllerAnimated:NO];
+   
+   UIView *view = [[self controllerToPush] view];
+   [[self view] addSubview:view];
+   
+   [UIView beginAnimations:@"hideImageBrowser" context:nil];
+   [UIView setAnimationDuration:0.6];
+   
+   CGPoint animateToPoint = [self imageBrowserAnimationPoint];
+   CGRect frame = CGRectMake(animateToPoint.x, animateToPoint.y, 0, 0);
+   [view setFrame:frame];
+   [view setAlpha:0.0];
+   
+   [UIView setAnimationDelegate:self];
+   [UIView setAnimationDidStopSelector:@selector(hideImageBrowserAnimationComplete:finished:target:)];
+   
+   [UIView commitAnimations];
+}
+
+- (void)hideImageBrowserAnimationComplete:(NSString *)animationId finished:(BOOL)finished target:(UIView *)target
+{
+   UIView *view = [[self controllerToPush] view];
+   [view removeFromSuperview];
+   [self setControllerToPush:nil];
+}
+
+- (void)animationComplete:(NSString *)animationId finished:(BOOL)finished target:(UIView *)target
+{
+   if (finished) {
+      [[self navigationController] pushViewController:[self controllerToPush] animated:NO];
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+      [[[self controllerToPush] view] addGestureRecognizer:tap];
+      [tap release];
+      
+      //[self setControllerToPush:nil];
+   }
+}
+
+- (void)tap:(UITapGestureRecognizer *)recognizer
+{
+   [self hideImageBrowser];
 }
 
 

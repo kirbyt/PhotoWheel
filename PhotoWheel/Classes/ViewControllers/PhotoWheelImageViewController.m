@@ -8,6 +8,7 @@
 
 #import "PhotoWheelImageViewController.h"
 #import "PhotoWheelImageView.h"
+#import "PhotoWheelViewController.h"
 
 
 #define WHEEL_IMAGE_SIZE_WIDTH 80
@@ -15,6 +16,8 @@
 
 
 @implementation PhotoWheelImageViewController
+
+@synthesize photoWheelViewController = photoWheelViewController_;
 
 - (void)loadView
 {
@@ -53,16 +56,41 @@
 - (void)tapped:(UITapGestureRecognizer *)recognizer
 {
    NSLog(@"tap");
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:@"Pick Image" otherButtonTitles:nil];
+   CGRect rect = [[self view] bounds];
+   [actionSheet showFromRect:rect inView:[self view] animated:YES];
 }
 
 - (void)doubleTapped:(UITapGestureRecognizer *)recognizer
 {
    NSLog(@"tap tap");
+
+   CGRect bounds = [[self view] bounds];
+   CGPoint point = CGPointMake(bounds.size.width/2, bounds.size.height/2);
+   point = [[self view] convertPoint:point toView:[[self view] superview]];
+   NSLog(@"point=%@ bounds=%@", NSStringFromCGPoint(point), NSStringFromCGRect(bounds));
+   
+   [[self photoWheelViewController] showImageBrowserFromPoint:point];
 }
 
 - (void)pinch:(UIPinchGestureRecognizer *)recognizer
 {
    NSLog(@"pinch/zoom");
 }
+
+
+#pragma mark -
+#pragma mark UIActionSheetDelegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   [actionSheet release];
+}
+
+- (void)actionSheetCancel:(UIActionSheet *)actionSheet
+{
+   [actionSheet release];
+}
+
 
 @end

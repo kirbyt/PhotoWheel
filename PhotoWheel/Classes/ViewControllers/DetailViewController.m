@@ -9,12 +9,14 @@
 #import "DetailViewController.h"
 #import "RootViewController.h"
 #import "PhotoWheelViewController.h"
+#import "PhotoNavigationController.h"
 #import "UIViewController+KTCompositeView.h"
 
 
 @interface DetailViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
 @property (nonatomic, retain) PhotoWheelViewController *photoWheelViewController;
+@property (nonatomic, retain) UINavigationController *navController;
 @end
 
 
@@ -25,6 +27,7 @@
 @synthesize photoWheelViewController = photoWheelViewController_;
 @synthesize photoWheelPlaceholderView = photoWheelPlaceholderView_;
 @synthesize segmentedControl = segmentedControl_;
+@synthesize navController = navController_;
 
 - (void)dealloc
 {
@@ -33,6 +36,7 @@
    [photoWheelViewController_ release];
    [photoWheelPlaceholderView_ release];
    [segmentedControl_ release];
+   [navController_ release];
    
    [super dealloc];
 }
@@ -45,8 +49,13 @@
    [newController setStyle:PhotoWheelStyleWheel];
    [self setPhotoWheelViewController:newController];
    [newController release];
-
-   [self addSubview:[[self photoWheelViewController] view] toPlaceholder:[self photoWheelPlaceholderView]];
+   
+   PhotoNavigationController *newNavController = [[PhotoNavigationController alloc] initWithRootViewController:[self photoWheelViewController]];
+   [newNavController setNavigationBarHidden:YES];
+   [self setNavController:newNavController];
+   [newNavController release];
+   
+   [self addSubview:[[self navController] view] toPlaceholder:[self photoWheelPlaceholderView]];
    
    [[self segmentedControl] addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
 }

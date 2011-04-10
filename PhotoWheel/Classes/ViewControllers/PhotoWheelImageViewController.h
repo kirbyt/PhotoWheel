@@ -8,10 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class PhotoWheelViewController;
 
-@interface PhotoWheelImageViewController : UIViewController
+@interface PhotoWheelImageViewController : UIViewController <UIActionSheetDelegate>
 {
     
 }
+
+@property (nonatomic, assign) PhotoWheelViewController *photoWheelViewController;
+
 
 @end

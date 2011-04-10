@@ -21,4 +21,6 @@ typedef enum  {
 
 @property (nonatomic, assign) PhotoWheelStyle style;
 
+- (void)showImageBrowserFromPoint:(CGPoint)point;
+
 @end
