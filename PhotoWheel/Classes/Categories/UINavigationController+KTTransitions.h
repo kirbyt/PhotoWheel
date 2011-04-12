@@ -11,5 +11,7 @@
 
 @interface UINavigationController (UINavigationController_KTTransitions)
 
-//- (void)explodeFromPoint:(CGPoint)fromPoint toPoint:(CGPoint)toPoint;
+- (void)kt_pushViewController:(UIViewController *)viewController explodeFromPoint:(CGPoint)fromPoint;
+- (void)kt_popViewControllerImplodeToPoint:(CGPoint)toPoint;
+
 @end

@@ -9,6 +9,7 @@
 #import "PhotoWheelViewController.h"
 #import "PhotoWheelImageView.h"
 #import "PhotoWheelImageViewController.h"
+#import "UINavigationController+KTTransitions.h"
 #import <QuartzCore/QuartzCore.h>
 
 // From: http://iphonedevelopment.blogspot.com/2009/12/better-two-finger-rotate-gesture.html
@@ -210,77 +211,22 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 - (void)showImageBrowserFromPoint:(CGPoint)point
 {
    [self setImageBrowserAnimationPoint:point];
-   
-   CGRect frame = CGRectMake(point.x, point.y, 0, 0);
+
    UIViewController *newViewController = [[UIViewController alloc] init];
-   [self setControllerToPush:newViewController];
+   [[newViewController view] setBackgroundColor:[UIColor redColor]];
+   
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideImageBrowser:)];
+   [[newViewController view] addGestureRecognizer:tap];
+   [tap release];
+   
+   [[self navigationController] kt_pushViewController:newViewController explodeFromPoint:point];
    [newViewController release];
-
-   
-   UIView *newView = [[self controllerToPush] view];
-   [newView setFrame:frame];
-   [newView setBackgroundColor:[UIColor magentaColor]];
-   [newView setAlpha:0.4];
-   
-   [[self view] addSubview:newView];
-   
-   [UIView beginAnimations:@"showImageBrowser" context:nil];
-   [UIView setAnimationDuration:0.6];
-   
-   CGRect bounds = [[self view] bounds];
-   [newView setFrame:bounds];
-   [newView setAlpha:1.0];
-   
-   [UIView setAnimationDelegate:self];
-   [UIView setAnimationDidStopSelector:@selector(animationComplete:finished:target:)];
-   
-   [UIView commitAnimations];
-   
 }
 
-- (void)hideImageBrowser
+- (void)hideImageBrowser:(UITapGestureRecognizer *)recognizer
 {
-   [[self navigationController] popViewControllerAnimated:NO];
-   
-   UIView *view = [[self controllerToPush] view];
-   [[self view] addSubview:view];
-   
-   [UIView beginAnimations:@"hideImageBrowser" context:nil];
-   [UIView setAnimationDuration:0.6];
-   
    CGPoint animateToPoint = [self imageBrowserAnimationPoint];
-   CGRect frame = CGRectMake(animateToPoint.x, animateToPoint.y, 0, 0);
-   [view setFrame:frame];
-   [view setAlpha:0.0];
-   
-   [UIView setAnimationDelegate:self];
-   [UIView setAnimationDidStopSelector:@selector(hideImageBrowserAnimationComplete:finished:target:)];
-   
-   [UIView commitAnimations];
-}
-
-- (void)hideImageBrowserAnimationComplete:(NSString *)animationId finished:(BOOL)finished target:(UIView *)target
-{
-   UIView *view = [[self controllerToPush] view];
-   [view removeFromSuperview];
-   [self setControllerToPush:nil];
-}
-
-- (void)animationComplete:(NSString *)animationId finished:(BOOL)finished target:(UIView *)target
-{
-   if (finished) {
-      [[self navigationController] pushViewController:[self controllerToPush] animated:NO];
-      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-      [[[self controllerToPush] view] addGestureRecognizer:tap];
-      [tap release];
-      
-      //[self setControllerToPush:nil];
-   }
-}
-
-- (void)tap:(UITapGestureRecognizer *)recognizer
-{
-   [self hideImageBrowser];
+   [[self navigationController] kt_popViewControllerImplodeToPoint:animateToPoint];
 }
 
 
