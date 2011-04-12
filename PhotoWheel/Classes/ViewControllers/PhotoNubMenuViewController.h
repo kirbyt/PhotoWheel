@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 
 
-@interface PhotoNubMenuViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
+@interface PhotoNubMenuViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 {
     
 }
+
+@property (nonatomic, retain) UIPopoverController *popoverController;
+
+- (void)popoverControllerDidDismiss;
 
 @end

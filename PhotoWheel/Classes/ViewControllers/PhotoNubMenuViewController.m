@@ -11,18 +11,24 @@
 
 @interface PhotoNubMenuViewController ()
 @property (nonatomic, retain) NSArray *data;
+@property (nonatomic, retain) UIImagePickerController *imagePicker;
 - (void)pickFromCamera;
 - (void)pickFromLibrary;
 - (void)pickFromFlickr;
 @end
 
+
 @implementation PhotoNubMenuViewController
 
+@synthesize popoverController = popoverController_;
 @synthesize data = data_;
+@synthesize imagePicker = imagePicker_;
 
 - (void)dealloc
 {
    [data_ release], data_ = nil;
+   [imagePicker_ release], imagePicker_ = nil;
+   [popoverController_ release], popoverController_ = nil;
    [super dealloc];
 }
 
@@ -40,6 +46,13 @@
    [newData release];
 }
 
+- (void)popoverControllerDidDismiss
+{
+//   if ([self imagePicker]) {
+////      [[self imagePicker] 
+//   }
+}
+
 
 #pragma mark -
 #pragma mark Actions
@@ -51,7 +64,12 @@
 
 - (void)pickFromLibrary
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+   [imagePicker setDelegate:self];
+   [imagePicker setAllowsEditing:NO];
+   [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+   [[self popoverController] setContentViewController:imagePicker];
+   [imagePicker release];
 }
 
 - (void)pickFromFlickr
@@ -91,6 +109,20 @@
    NSDictionary *dict = [[self data] objectAtIndex:[indexPath row]];
    SEL selector = NSSelectorFromString([dict objectForKey:@"selector"]);
    [self performSelector:selector];
+}
+
+
+#pragma mark -
+#pragma mark UIImagePickerControllerDelegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+   NSLog(@"hey %s", __PRETTY_FUNCTION__);
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 

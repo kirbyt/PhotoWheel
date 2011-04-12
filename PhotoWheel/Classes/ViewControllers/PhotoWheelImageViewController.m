@@ -17,6 +17,7 @@
 
 @interface PhotoWheelImageViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, retain) PhotoNubMenuViewController *menuViewController;
 @end
 
 
@@ -24,6 +25,7 @@
 
 @synthesize photoWheelViewController = photoWheelViewController_;
 @synthesize popoverController = popoverController_;
+@synthesize menuViewController = menuViewController_;
 
 - (void)dealloc
 {
@@ -67,10 +69,10 @@
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-   if (popoverController == [self popoverController]) {
-      [self setPopoverController:nil];
-   }
+   [[self menuViewController] popoverControllerDidDismiss];
+   [self setPopoverController:nil];
 }
+
 
 #pragma mark -
 #pragma mark UIGestureRecognizer Handlers
@@ -78,15 +80,18 @@
 - (void)tapped:(UITapGestureRecognizer *)recognizer
 {
    PhotoNubMenuViewController *menuViewController = [[PhotoNubMenuViewController alloc] init];
-   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:menuViewController];
+   [self setMenuViewController:menuViewController];
+   [menuViewController release];
+   
+   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[self menuViewController]];
    UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:navController];
+   [navController release];
+
    [newPopover setDelegate:self];
    [newPopover setPopoverContentSize:CGSizeMake(320, 200)];
+   [menuViewController setPopoverController:newPopover];
    [self setPopoverController:newPopover];
-
    [newPopover release];
-   [menuViewController release];
-   [navController release];
    
    CGRect rect = [[self view] bounds];
    [[self popoverController] presentPopoverFromRect:rect inView:[self view] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
