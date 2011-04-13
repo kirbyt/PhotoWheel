@@ -69,7 +69,6 @@
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-   [[self menuViewController] popoverControllerDidDismiss];
    [self setPopoverController:nil];
 }
 

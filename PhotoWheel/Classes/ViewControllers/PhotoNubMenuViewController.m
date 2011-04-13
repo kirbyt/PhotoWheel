@@ -46,13 +46,6 @@
    [newData release];
 }
 
-- (void)popoverControllerDidDismiss
-{
-//   if ([self imagePicker]) {
-////      [[self imagePicker] 
-//   }
-}
-
 
 #pragma mark -
 #pragma mark Actions
@@ -117,12 +110,19 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-   NSLog(@"hey %s", __PRETTY_FUNCTION__);
+   [[self popoverController] dismissPopoverAnimated:YES];
+   
+   NSDictionary *dict = [info objectForKey:UIImagePickerControllerMediaMetadata];
+   NSLog(@"dict: %@", dict);
+   
+   UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+   
+   
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [[self popoverController] dismissPopoverAnimated:YES];
 }
 
 

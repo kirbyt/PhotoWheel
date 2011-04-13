@@ -16,6 +16,4 @@
 
 @property (nonatomic, retain) UIPopoverController *popoverController;
 
-- (void)popoverControllerDidDismiss;
-
 @end
