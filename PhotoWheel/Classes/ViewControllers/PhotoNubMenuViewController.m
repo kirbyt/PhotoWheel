@@ -7,6 +7,7 @@
 //
 
 #import "PhotoNubMenuViewController.h"
+#import "PhotoNubViewController.h"
 #import "UIDevice+KTDeviceExtensions.h"
 
 @interface PhotoNubMenuViewController ()
@@ -20,7 +21,7 @@
 
 @implementation PhotoNubMenuViewController
 
-@synthesize popoverController = popoverController_;
+@synthesize viewController = viewController_;
 @synthesize data = data_;
 @synthesize imagePicker = imagePicker_;
 
@@ -28,7 +29,6 @@
 {
    [data_ release], data_ = nil;
    [imagePicker_ release], imagePicker_ = nil;
-   [popoverController_ release], popoverController_ = nil;
    [super dealloc];
 }
 
@@ -61,7 +61,7 @@
    [imagePicker setDelegate:self];
    [imagePicker setAllowsEditing:NO];
    [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-   [[self popoverController] setContentViewController:imagePicker];
+   [[[self viewController] popoverController] setContentViewController:imagePicker];
    [imagePicker release];
 }
 
@@ -110,19 +110,19 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-   [[self popoverController] dismissPopoverAnimated:YES];
+   [[[self viewController] popoverController] dismissPopoverAnimated:YES];
    
    NSDictionary *dict = [info objectForKey:UIImagePickerControllerMediaMetadata];
    NSLog(@"dict: %@", dict);
    
-   UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//   UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
    
    
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-   [[self popoverController] dismissPopoverAnimated:YES];
+   [[[self viewController] popoverController] dismissPopoverAnimated:YES];
 }
 
 

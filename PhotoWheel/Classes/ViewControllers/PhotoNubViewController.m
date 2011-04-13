@@ -16,7 +16,6 @@
 #define WHEEL_IMAGE_SIZE_HEIGHT 80
 
 @interface PhotoNubViewController ()
-@property (nonatomic, retain) UIPopoverController *popoverController;
 @property (nonatomic, retain) PhotoNubMenuViewController *menuViewController;
 @end
 
@@ -80,6 +79,7 @@
 {
    PhotoNubMenuViewController *menuViewController = [[PhotoNubMenuViewController alloc] init];
    [self setMenuViewController:menuViewController];
+   [menuViewController setViewController:self];
    [menuViewController release];
    
    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[self menuViewController]];
@@ -88,7 +88,6 @@
 
    [newPopover setDelegate:self];
    [newPopover setPopoverContentSize:CGSizeMake(320, 200)];
-   [menuViewController setPopoverController:newPopover];
    [self setPopoverController:newPopover];
    [newPopover release];
    
