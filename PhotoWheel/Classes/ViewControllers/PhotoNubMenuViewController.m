@@ -110,19 +110,13 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-   [[[self viewController] popoverController] dismissPopoverAnimated:YES];
-   
-   NSDictionary *dict = [info objectForKey:UIImagePickerControllerMediaMetadata];
-   NSLog(@"dict: %@", dict);
-   
-//   UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-   
-   
+   UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+   [[self viewController] menuDidSelectImage:image];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-   [[[self viewController] popoverController] dismissPopoverAnimated:YES];
+   [[self viewController] menuDidCancel];
 }
 
 

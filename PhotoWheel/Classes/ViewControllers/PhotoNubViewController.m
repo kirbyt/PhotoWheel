@@ -10,12 +10,14 @@
 #import "PhotoNubView.h"
 #import "PhotoWheelViewController.h"
 #import "PhotoNubMenuViewController.h"
+#import "UIImage+KTCategory.h"
 
 
 #define WHEEL_IMAGE_SIZE_WIDTH 80
 #define WHEEL_IMAGE_SIZE_HEIGHT 80
 
 @interface PhotoNubViewController ()
+@property (nonatomic, retain, readwrite) UIPopoverController *popoverController;
 @property (nonatomic, retain) PhotoNubMenuViewController *menuViewController;
 @end
 
@@ -62,10 +64,33 @@
    [pinchGesture release];
 }
 
+#pragma mark -
+#pragma mark Menu Handlers
+
+- (void)menuDidSelectImage:(UIImage *)image
+{
+   [[self popoverController] dismissPopoverAnimated:YES];
+   [self setPopoverController:nil];
+   
+   CGSize size = CGSizeMake(WHEEL_IMAGE_SIZE_WIDTH, WHEEL_IMAGE_SIZE_HEIGHT);
+   UIImage *thumb = [image kt_imageScaleAndCropToMaxSize:size];
+   PhotoNubView *view = (PhotoNubView *)[self view];
+   [view setImage:thumb];
+}
+
+- (void)menuDidCancel
+{
+   [[self popoverController] dismissPopoverAnimated:YES];
+   [self setPopoverController:nil];
+}
+
 
 #pragma mark -
 #pragma mark UIPopoverControllerDelegate
 
+// This is called when the popover is by the user touching outside
+// of the popover. It is not called when the popover is dismissed
+// programatically.
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
    [self setPopoverController:nil];

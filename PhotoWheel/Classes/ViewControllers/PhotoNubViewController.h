@@ -16,7 +16,9 @@
 }
 
 @property (nonatomic, assign) PhotoWheelViewController *photoWheelViewController;
-@property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, retain, readonly) UIPopoverController *popoverController;
 
+- (void)menuDidSelectImage:(UIImage *)image;
+- (void)menuDidCancel;
 
 @end
