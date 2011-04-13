@@ -6,8 +6,8 @@
 //  Copyright 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "PhotoWheelImageViewController.h"
-#import "PhotoWheelImageView.h"
+#import "PhotoNubViewController.h"
+#import "PhotoNubView.h"
 #import "PhotoWheelViewController.h"
 #import "PhotoNubMenuViewController.h"
 
@@ -15,13 +15,13 @@
 #define WHEEL_IMAGE_SIZE_WIDTH 80
 #define WHEEL_IMAGE_SIZE_HEIGHT 80
 
-@interface PhotoWheelImageViewController ()
+@interface PhotoNubViewController ()
 @property (nonatomic, retain) UIPopoverController *popoverController;
 @property (nonatomic, retain) PhotoNubMenuViewController *menuViewController;
 @end
 
 
-@implementation PhotoWheelImageViewController
+@implementation PhotoNubViewController
 
 @synthesize photoWheelViewController = photoWheelViewController_;
 @synthesize popoverController = popoverController_;
@@ -38,7 +38,7 @@
    CGRect wheelSubviewFrame = CGRectMake(-(WHEEL_IMAGE_SIZE_WIDTH * 0.5), -(WHEEL_IMAGE_SIZE_HEIGHT * 0.5), WHEEL_IMAGE_SIZE_WIDTH, WHEEL_IMAGE_SIZE_HEIGHT);
 
    UIImage *defaultImage = [UIImage imageNamed:@"photoDefault.png"];
-   PhotoWheelImageView *newView = [[PhotoWheelImageView alloc] initWithFrame:wheelSubviewFrame];
+   PhotoNubView *newView = [[PhotoNubView alloc] initWithFrame:wheelSubviewFrame];
    [newView setImage:defaultImage];
    [self setView:newView];
    [newView release];

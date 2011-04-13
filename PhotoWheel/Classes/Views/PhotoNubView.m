@@ -6,12 +6,12 @@
 //  Copyright 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "PhotoWheelImageView.h"
+#import "PhotoNubView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "UIBezierPath+ShadowPath.h"
 
 
-@implementation PhotoWheelImageView
+@implementation PhotoNubView
 
 - (id)init 
 {

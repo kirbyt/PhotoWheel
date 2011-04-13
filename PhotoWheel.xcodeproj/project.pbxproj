@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		682BB9E413510639006747AB /* PhotoWheelImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BB9E313510639006747AB /* PhotoWheelImageViewController.m */; };
+		682BB9E413510639006747AB /* PhotoNubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BB9E313510639006747AB /* PhotoNubViewController.m */; };
 		682BBA151351F449006747AB /* PhotoNubMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BBA141351F444006747AB /* PhotoNubMenuViewController.m */; };
 		682BBA181351F6A3006747AB /* UIDevice+KTDeviceExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BBA171351F6A3006747AB /* UIDevice+KTDeviceExtensions.m */; };
 		682F2940133B93860058E1D7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 682F293F133B93860058E1D7 /* UIKit.framework */; };
@@ -27,7 +27,7 @@
 		684E75931353E9960072B7DD /* UINavigationController+KTTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */; };
 		6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D13E1344C53E0005271D /* PhotoWheelViewController.m */; };
 		6865D1501344CDD40005271D /* UIViewController+KTCompositeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */; };
-		6865D15C1345204F0005271D /* PhotoWheelImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D15B1345204F0005271D /* PhotoWheelImageView.m */; };
+		6865D15C1345204F0005271D /* PhotoNubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D15B1345204F0005271D /* PhotoNubView.m */; };
 		6865D1651345234B0005271D /* UIBezierPath+ShadowPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */; };
 		6865D1681345242D0005271D /* photoDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D1671345242D0005271D /* photoDefault.png */; };
 		6865D16E13454DB20005271D /* Entitlements.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6865D16D13454DB10005271D /* Entitlements.plist */; };
@@ -39,8 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		682BB9E213510639006747AB /* PhotoWheelImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelImageViewController.h; sourceTree = "<group>"; };
-		682BB9E313510639006747AB /* PhotoWheelImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelImageViewController.m; sourceTree = "<group>"; };
+		682BB9E213510639006747AB /* PhotoNubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PhotoNubViewController.h; sourceTree = "<group>"; };
+		682BB9E313510639006747AB /* PhotoNubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoNubViewController.m; sourceTree = "<group>"; };
 		682BBA131351F443006747AB /* PhotoNubMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoNubMenuViewController.h; sourceTree = "<group>"; };
 		682BBA141351F444006747AB /* PhotoNubMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoNubMenuViewController.m; sourceTree = "<group>"; };
 		682BBA161351F6A3006747AB /* UIDevice+KTDeviceExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+KTDeviceExtensions.h"; sourceTree = "<group>"; };
@@ -72,8 +72,8 @@
 		6865D13E1344C53E0005271D /* PhotoWheelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewController.m; sourceTree = "<group>"; };
 		6865D14E1344CDD40005271D /* UIViewController+KTCompositeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KTCompositeView.h"; sourceTree = "<group>"; };
 		6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KTCompositeView.m"; sourceTree = "<group>"; };
-		6865D15A1345204F0005271D /* PhotoWheelImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelImageView.h; sourceTree = "<group>"; };
-		6865D15B1345204F0005271D /* PhotoWheelImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelImageView.m; sourceTree = "<group>"; };
+		6865D15A1345204F0005271D /* PhotoNubView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PhotoNubView.h; sourceTree = "<group>"; };
+		6865D15B1345204F0005271D /* PhotoNubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoNubView.m; sourceTree = "<group>"; };
 		6865D1631345234A0005271D /* UIBezierPath+ShadowPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+ShadowPath.h"; sourceTree = "<group>"; };
 		6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBezierPath+ShadowPath.m"; sourceTree = "<group>"; };
 		6865D1671345242D0005271D /* photoDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoDefault.png; sourceTree = "<group>"; };
@@ -175,8 +175,8 @@
 				682F29A7133C1B480058E1D7 /* NameEditorViewController.m */,
 				6865D13D1344C53E0005271D /* PhotoWheelViewController.h */,
 				6865D13E1344C53E0005271D /* PhotoWheelViewController.m */,
-				682BB9E213510639006747AB /* PhotoWheelImageViewController.h */,
-				682BB9E313510639006747AB /* PhotoWheelImageViewController.m */,
+				682BB9E213510639006747AB /* PhotoNubViewController.h */,
+				682BB9E313510639006747AB /* PhotoNubViewController.m */,
 				682BBA131351F443006747AB /* PhotoNubMenuViewController.h */,
 				682BBA141351F444006747AB /* PhotoNubMenuViewController.m */,
 			);
@@ -213,8 +213,8 @@
 		6865D159134520350005271D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				6865D15A1345204F0005271D /* PhotoWheelImageView.h */,
-				6865D15B1345204F0005271D /* PhotoWheelImageView.m */,
+				6865D15A1345204F0005271D /* PhotoNubView.h */,
+				6865D15B1345204F0005271D /* PhotoNubView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -327,9 +327,9 @@
 				682F29A8133C1B480058E1D7 /* NameEditorViewController.m in Sources */,
 				6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */,
 				6865D1501344CDD40005271D /* UIViewController+KTCompositeView.m in Sources */,
-				6865D15C1345204F0005271D /* PhotoWheelImageView.m in Sources */,
+				6865D15C1345204F0005271D /* PhotoNubView.m in Sources */,
 				6865D1651345234B0005271D /* UIBezierPath+ShadowPath.m in Sources */,
-				682BB9E413510639006747AB /* PhotoWheelImageViewController.m in Sources */,
+				682BB9E413510639006747AB /* PhotoNubViewController.m in Sources */,
 				682BBA151351F449006747AB /* PhotoNubMenuViewController.m in Sources */,
 				682BBA181351F6A3006747AB /* UIDevice+KTDeviceExtensions.m in Sources */,
 				684E75931353E9960072B7DD /* UINavigationController+KTTransitions.m in Sources */,

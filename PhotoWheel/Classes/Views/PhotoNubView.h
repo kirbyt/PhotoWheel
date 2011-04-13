@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-@interface PhotoWheelImageView : UIView 
+@interface PhotoNubView : UIView 
 {
     
 }

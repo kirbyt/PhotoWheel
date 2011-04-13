@@ -7,8 +7,7 @@
 //
 
 #import "PhotoWheelViewController.h"
-#import "PhotoWheelImageView.h"
-#import "PhotoWheelImageViewController.h"
+#import "PhotoNubViewController.h"
 #import "UINavigationController+KTTransitions.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -84,7 +83,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    [newWheelView release];
 
    for (NSInteger index=0; index < WHEEL_NUB_COUNT; index++) {
-      PhotoWheelImageViewController *newController = [[PhotoWheelImageViewController alloc] init];
+      PhotoNubViewController *newController = [[PhotoNubViewController alloc] init];
       [newController setPhotoWheelViewController:self];
       [[self wheelView] addSubview:[newController view]];
       [[self wheelSubviewControllers] addObject:newController];
