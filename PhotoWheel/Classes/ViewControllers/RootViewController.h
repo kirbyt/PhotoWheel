@@ -18,6 +18,7 @@
 }
 		
 @property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
+@property (nonatomic, retain) NSMutableArray *data;
 
 - (IBAction)addPhotoWheel:(id)sender;
 

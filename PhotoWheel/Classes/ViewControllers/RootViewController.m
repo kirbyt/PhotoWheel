@@ -11,10 +11,6 @@
 #import "NameEditorViewController.h"
 
 
-@interface RootViewController ()
-@property (nonatomic, retain) NSMutableArray *data;
-@end
-
 @implementation RootViewController
 		
 @synthesize detailViewController = detailViewController_;
@@ -39,12 +35,6 @@
    [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
    
    [self setTitle:@"Photo Wheels"];
-   
-   NSMutableArray *newData = [[NSMutableArray alloc] init];
-   [newData addObject:@"First photo wheel"];
-   [newData addObject:@"Second photo wheel"];
-   [self setData:newData];
-   [newData release];
    
    [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
 }
