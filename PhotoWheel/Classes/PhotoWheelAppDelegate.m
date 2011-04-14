@@ -115,8 +115,6 @@
       
    } else {
       NSMutableArray *newData = [[NSMutableArray alloc] init];
-      [newData addObject:@"First photo wheel"];
-      [newData addObject:@"Second photo wheel"];
       [self setData:newData];
       [newData release];
       

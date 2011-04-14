@@ -89,10 +89,16 @@
    
    if ([nameEditorViewController isEditing]) {
       NSIndexPath *indexPath = [nameEditorViewController editingAtIndexPath];
-      [[self data] replaceObjectAtIndex:[indexPath row] withObject:name];
+      NSDictionary *previousItem = [[self data] objectAtIndex:[indexPath row]];
+      NSMutableDictionary *newItem = [NSMutableDictionary dictionaryWithDictionary:previousItem];
+      [newItem setObject:name forKey:kPhotoWheelKeyTitle];
+      [[self data] replaceObjectAtIndex:[indexPath row] withObject:newItem];
    
    } else {
-      [[self data] addObject:name];
+      NSMutableDictionary *newItem = [NSMutableDictionary dictionary];
+      [newItem setObject:name forKey:kPhotoWheelKeyTitle];
+      [newItem setObject:[NSArray array] forKey:kPhotoWheelKeyNubs];
+      [[self data] addObject:newItem];
    }
 
    [[self tableView] reloadData];
@@ -126,7 +132,8 @@
     }
 
    // Configure the cell.
-   [[cell textLabel] setText:[[self data] objectAtIndex:[indexPath row]]];
+   NSDictionary *photoWheel = [[self data] objectAtIndex:[indexPath row]];
+   [[cell textLabel] setText:[photoWheel objectForKey:kPhotoWheelKeyTitle]];
    		
    return cell;
 }
@@ -186,13 +193,13 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-   NSString *nameToEdit = [[self data] objectAtIndex:[indexPath row]];
+   NSDictionary *photoWheel = [[self data] objectAtIndex:[indexPath row]];
    
    NameEditorViewController *newViewController = [[NameEditorViewController alloc] init];
    [newViewController setDelegate:self];
    [newViewController setEditing:YES];
    [newViewController setEditingAtIndexPath:indexPath];
-   [newViewController setName:nameToEdit];
+   [newViewController setName:[photoWheel objectForKey:kPhotoWheelKeyTitle]];
    [[self navigationController] pushViewController:newViewController animated:YES];
    [newViewController release];
 }
