@@ -106,8 +106,8 @@
 }
 
 
-#pragma -
-#pragma UITableViewDataSource and UITableViewDelegate Methods
+#pragma mark -
+#pragma mark UITableViewDataSource and UITableViewDelegate Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
