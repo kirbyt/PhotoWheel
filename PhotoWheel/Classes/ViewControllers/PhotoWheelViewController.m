@@ -148,13 +148,15 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    for (NSInteger index=0; index < [[self wheelSubviewControllers] count]; index++) {
       PhotoNubViewController *nubController = [[self wheelSubviewControllers] objectAtIndex:index];
 
-      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sortOrder == %@", index];
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sortOrder == %i", index];
       NSSet *nubSet = [[[self photoWheel] nubs] filteredSetUsingPredicate:predicate];
       if (nubSet && [nubSet count] > 0) {
          [nubController setNub:[nubSet anyObject]];
       } else {
          // Insert a new nub.
          Nub *newNub = [Nub insertNewInManagedObjectContext:context];
+         [newNub setSortOrder:[NSNumber numberWithInt:index]];
+         [newNub setPhotoWheel:[self photoWheel]];
 
          // Save the context.
          NSError *error = nil;

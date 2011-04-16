@@ -11,7 +11,6 @@
 
 
 @implementation _Nub
-@dynamic fileExtension;
 @dynamic baseFileName;
 @dynamic sortOrder;
 @dynamic photoWheel;

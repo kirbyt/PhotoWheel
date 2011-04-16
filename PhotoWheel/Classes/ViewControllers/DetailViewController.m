@@ -109,6 +109,16 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
+- (void)setPhotoWheel:(PhotoWheel *)photoWheel
+{
+   if (photoWheel_ != photoWheel) {
+      [photoWheel retain];
+      [photoWheel_ release];
+      photoWheel_ = photoWheel;
+      
+      [[self photoWheelViewController] setPhotoWheel:photoWheel];
+   }
+}
 
 #pragma mark - Split view support
 

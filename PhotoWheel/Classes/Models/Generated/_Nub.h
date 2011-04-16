@@ -14,7 +14,6 @@
 @interface _Nub : NSManagedObject {
 @private
 }
-@property (nonatomic, retain) NSString * fileExtension;
 @property (nonatomic, retain) NSString * baseFileName;
 @property (nonatomic, retain) NSNumber * sortOrder;
 @property (nonatomic, retain) _PhotoWheel * photoWheel;
