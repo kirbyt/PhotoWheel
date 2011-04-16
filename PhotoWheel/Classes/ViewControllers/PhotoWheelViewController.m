@@ -143,6 +143,8 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 
 - (void)updateNubs
 {
+   NSManagedObjectContext *context = [[self photoWheel] managedObjectContext];
+   
    for (NSInteger index=0; index < [[self wheelSubviewControllers] count]; index++) {
       PhotoNubViewController *nubController = [[self wheelSubviewControllers] objectAtIndex:index];
 
@@ -152,10 +154,23 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
          [nubController setNub:[nubSet anyObject]];
       } else {
          // Insert a new nub.
-         
-         [nubController setNub:nil];
+         Nub *newNub = [Nub insertNewInManagedObjectContext:context];
+
+         // Save the context.
+         NSError *error = nil;
+         if (![context save:&error])
+         {
+            /*
+             Replace this implementation with code to handle the error appropriately.
+             
+             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+             */
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+         }
+
+         [nubController setNub:newNub];
       }
-      [[self photoWheel] nubs];
    }
 }
 
