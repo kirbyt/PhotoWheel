@@ -12,6 +12,14 @@
 #import "UIImage+KTCategory.h"
 #import "UIApplication+KTApplication.h"
 
+
+NSString * const kNubKeyImage = @"image";
+NSString * const kNubKeyImageType = @"type";
+NSString * const kNubImageTypeOriginal = @"original";
+NSString * const kNubImageTypeLarge = @"large";
+NSString * const kNubImageTypeSmall = @"small";
+
+
 @interface Nub ()
 - (NSString *)rootPath;
 - (NSString *)imagePathWithFormat:(NSString *)format;
@@ -19,9 +27,10 @@
 - (NSString *)largeImagePath;
 - (NSString *)originalImagePath;
 - (void)saveImage:(UIImage *)image withPath:(NSString *)path;
-- (void)threaded_saveAsSmallImage:(id)data;
-- (void)threaded_saveAsLargeImage:(id)data;
-- (void)threaded_saveAsOriginalImage:(id)data;
+- (void)saveAsSmallImage:(UIImage *)image;
+- (void)saveAsLargeImage:(UIImage *)image;
+- (void)saveAsOriginalImage:(UIImage *)image;
+- (void)threaded_saveImageWithData:(id)data;
 @end
 
 @implementation Nub
@@ -61,9 +70,15 @@
 
 - (void)saveImage:(UIImage *)image
 {
-   [self performSelectorInBackground:@selector(threaded_saveAsOriginalImage:) withObject:image];
-   [self performSelectorInBackground:@selector(threaded_saveAsLargeImage:) withObject:image];
-   [self performSelectorInBackground:@selector(threaded_saveAsSmallImage:) withObject:image];
+   NSDictionary *data;
+   data = [NSDictionary dictionaryWithObjectsAndKeys:image, kNubKeyImage, kNubImageTypeOriginal, kNubKeyImageType, nil];
+   [self performSelectorInBackground:@selector(threaded_saveImageWithData:) withObject:data];
+   
+   data = [NSDictionary dictionaryWithObjectsAndKeys:image, kNubKeyImage, kNubImageTypeLarge, kNubKeyImageType, nil];
+   [self performSelectorInBackground:@selector(threaded_saveImageWithData:) withObject:data];
+
+   data = [NSDictionary dictionaryWithObjectsAndKeys:image, kNubKeyImage, kNubImageTypeSmall, kNubKeyImageType, nil];
+   [self performSelectorInBackground:@selector(threaded_saveImageWithData:) withObject:data];
 }
 
 #pragma mark - Helper Methods
@@ -125,19 +140,16 @@
    [jpg writeToFile:path atomically:YES];
 }
 
-- (void)threaded_saveAsSmallImage:(id)data
+- (void)saveAsSmallImage:(UIImage *)image
 {
-   UIImage *image = data;
    CGSize size = CGSizeMake(NUB_IMAGE_SIZE_WIDTH, NUB_IMAGE_SIZE_HEIGHT);
    UIImage *newImage = [image kt_imageScaleAndCropToMaxSize:size];
    
    [self saveImage:newImage withPath:[self smallImagePath]];
 }
 
-- (void)threaded_saveAsLargeImage:(id)data
+- (void)saveAsLargeImage:(UIImage *)image
 {
-   UIImage *image = data;
-
    CGRect screenBounds = [[UIScreen mainScreen] bounds];
    CGFloat scale = [[UIScreen mainScreen] scale];  // Needed to calculate size for retina displays.
    CGFloat maxScreenSize = MAX(screenBounds.size.width, screenBounds.size.height) * scale;
@@ -152,10 +164,28 @@
    [self saveImage:newImage withPath:[self largeImagePath]];
 }
 
-- (void)threaded_saveAsOriginalImage:(id)data
+- (void)saveAsOriginalImage:(UIImage *)image
 {
-   UIImage *image = data;
    [self saveImage:image withPath:[self originalImagePath]];
+}
+
+- (void)threaded_saveImageWithData:(id)data
+{
+   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+   
+   NSDictionary *dict = data;
+   UIImage *image = [dict objectForKey:kNubKeyImage];
+   NSString *type = [dict objectForKey:kNubKeyImageType];
+   
+   if ([type isEqualToString:kNubImageTypeOriginal]) {
+      [self saveAsOriginalImage:image];
+   } else if ([type isEqualToString:kNubImageTypeLarge]) {
+      [self saveAsLargeImage:image];
+   } else if ([type isEqualToString:kNubImageTypeSmall]) {
+      [self saveAsSmallImage:image];
+   } 
+   
+   [pool drain];
 }
 
 @end
