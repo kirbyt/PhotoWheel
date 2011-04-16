@@ -75,7 +75,7 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
 {
    if ([keyPath isEqualToString:@"smallImage"]) {
-      [self updateNubDisplay];
+      [self performSelectorOnMainThread:@selector(updateNubDisplay) withObject:nil waitUntilDone:NO];
    }
 }
 
@@ -102,7 +102,6 @@
    [self setPopoverController:nil];
    
    [[self nub] saveImage:image];
-   [self updateNubDisplay];
 }
 
 - (void)menuDidCancel

@@ -53,6 +53,9 @@ NSString * const kNubImageTypeSmall = @"small";
 - (UIImage *)smallImage
 {
    UIImage *image = [UIImage imageWithContentsOfFile:[self smallImagePath]];
+   if (!image) {
+      image = [UIImage imageNamed:@"photoDefault.png"];
+   }
    return image;
 }
 
