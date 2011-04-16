@@ -10,11 +10,8 @@
 #import "PhotoNubView.h"
 #import "PhotoWheelViewController.h"
 #import "PhotoNubMenuViewController.h"
-#import "UIImage+KTCategory.h"
+#import "Nub.h"
 
-
-#define WHEEL_IMAGE_SIZE_WIDTH 80
-#define WHEEL_IMAGE_SIZE_HEIGHT 80
 
 @interface PhotoNubViewController ()
 @property (nonatomic, retain, readwrite) UIPopoverController *popoverController;
@@ -38,7 +35,7 @@
 
 - (void)loadView
 {
-   CGRect wheelSubviewFrame = CGRectMake(-(WHEEL_IMAGE_SIZE_WIDTH * 0.5), -(WHEEL_IMAGE_SIZE_HEIGHT * 0.5), WHEEL_IMAGE_SIZE_WIDTH, WHEEL_IMAGE_SIZE_HEIGHT);
+   CGRect wheelSubviewFrame = CGRectMake(-(NUB_IMAGE_SIZE_WIDTH * 0.5), -(NUB_IMAGE_SIZE_HEIGHT * 0.5), NUB_IMAGE_SIZE_WIDTH, NUB_IMAGE_SIZE_HEIGHT);
 
    UIImage *defaultImage = [UIImage imageNamed:@"photoDefault.png"];
    PhotoNubView *newView = [[PhotoNubView alloc] initWithFrame:wheelSubviewFrame];
@@ -68,7 +65,9 @@
 
 - (void)updateNubDisplay
 {
-   
+   UIImage *image = [[self nub] smallImage];
+   PhotoNubView *view = (PhotoNubView *)[self view];
+   [view setImage:image];
 }
 
 - (void)setNub:(Nub *)nub
@@ -90,10 +89,8 @@
    [[self popoverController] dismissPopoverAnimated:YES];
    [self setPopoverController:nil];
    
-   CGSize size = CGSizeMake(WHEEL_IMAGE_SIZE_WIDTH, WHEEL_IMAGE_SIZE_HEIGHT);
-   UIImage *thumb = [image kt_imageScaleAndCropToMaxSize:size];
-   PhotoNubView *view = (PhotoNubView *)[self view];
-   [view setImage:thumb];
+   [[self nub] saveImage:image];
+   [self updateNubDisplay];
 }
 
 - (void)menuDidCancel

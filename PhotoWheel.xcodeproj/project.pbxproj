@@ -27,6 +27,7 @@
 		682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B2133C1C680058E1D7 /* MainWindow.xib */; };
 		682F29B6133C1C880058E1D7 /* NameEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B5133C1C880058E1D7 /* NameEditorView.xib */; };
 		684E75931353E9960072B7DD /* UINavigationController+KTTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */; };
+		6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6860CCD61359F2480070445B /* UIApplication+KTApplication.m */; };
 		6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D13E1344C53E0005271D /* PhotoWheelViewController.m */; };
 		6865D1501344CDD40005271D /* UIViewController+KTCompositeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */; };
 		6865D15C1345204F0005271D /* PhotoNubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D15B1345204F0005271D /* PhotoNubView.m */; };
@@ -79,6 +80,8 @@
 		682F29B5133C1C880058E1D7 /* NameEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditorView.xib; sourceTree = "<group>"; };
 		684E75911353E9960072B7DD /* UINavigationController+KTTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KTTransitions.h"; sourceTree = "<group>"; };
 		684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+KTTransitions.m"; sourceTree = "<group>"; };
+		6860CCD51359F2480070445B /* UIApplication+KTApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+KTApplication.h"; sourceTree = "<group>"; };
+		6860CCD61359F2480070445B /* UIApplication+KTApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+KTApplication.m"; sourceTree = "<group>"; };
 		6865D13D1344C53E0005271D /* PhotoWheelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewController.h; sourceTree = "<group>"; };
 		6865D13E1344C53E0005271D /* PhotoWheelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewController.m; sourceTree = "<group>"; };
 		6865D14E1344CDD40005271D /* UIViewController+KTCompositeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KTCompositeView.h"; sourceTree = "<group>"; };
@@ -244,6 +247,8 @@
 				684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */,
 				6810373D1358DC7600BD7C82 /* NSString+KTString.h */,
 				6810373E1358DC7700BD7C82 /* NSString+KTString.m */,
+				6860CCD51359F2480070445B /* UIApplication+KTApplication.h */,
+				6860CCD61359F2480070445B /* UIApplication+KTApplication.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 				68997B7C13594412006F8BCC /* PhotoWheel.m in Sources */,
 				68997B8C1359453A006F8BCC /* _PhotoWheel.m in Sources */,
 				68997B8F1359453A006F8BCC /* _Nub.m in Sources */,
+				6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

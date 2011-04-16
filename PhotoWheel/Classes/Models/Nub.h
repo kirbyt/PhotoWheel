@@ -8,6 +8,9 @@
 
 #import "_Nub.h"
 
+#define NUB_IMAGE_SIZE_WIDTH 80
+#define NUB_IMAGE_SIZE_HEIGHT 80
+
 @interface Nub : _Nub 
 {
 
@@ -15,5 +18,10 @@
 
 + (NSString *)entityName;
 + (Nub *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context;
+
+- (UIImage *)smallImage;
+- (UIImage *)deviceSpecificImage;
+- (UIImage *)originalImage;
+- (void)saveImage:(UIImage *)image;
 
 @end
