@@ -11,10 +11,6 @@
 #import "RootViewController.h"
 
 @interface PhotoWheelAppDelegate ()
-@property (nonatomic, retain) NSMutableArray *data;
-- (NSString *)dataPath;
-- (BOOL)loadData;
-- (BOOL)saveData;
 @end
 
 @implementation PhotoWheelAppDelegate
@@ -23,7 +19,6 @@
 @synthesize splitViewController = splitViewController_;
 @synthesize rootViewController = rootViewController_;
 @synthesize detailViewController = detailViewController_;
-@synthesize data = data_;
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize managedObjectModel = managedObjectModel_;
 @synthesize persistentStoreCoordinator = persistentStoreCoordinator_;
@@ -34,7 +29,6 @@
    [splitViewController_ release];
    [rootViewController_ release];
    [detailViewController_ release];
-   [data_ release];
 
    [managedObjectContext_ release], managedObjectContext_ = nil;
    [managedObjectModel_ release], managedObjectModel_ = nil;
@@ -66,7 +60,6 @@
     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     */
-   [self saveData];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -81,8 +74,6 @@
    /*
     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     */
-   [self loadData];
-   [[self rootViewController] setData:[self data]];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -92,63 +83,20 @@
     Save data if appropriate.
     See also applicationDidEnterBackground:.
     */
-   [self saveData];
 }
 
 - (void)awakeFromNib
 {
    /*
     Typically you should set up the Core Data stack here, usually by passing the managed object context to the first view controller.
-    self.<#View controller#>.managedObjectContext = self.managedObjectContext;
+    self.View controller.managedObjectContext = self.managedObjectContext;
     */
+   
+   [[self rootViewController] setManagedObjectContext:[self managedObjectContext]];
 }
 
 
 #pragma mark - Data Management
-
-- (NSString *)dataPath
-{
-   NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-   NSString *documentsDirectoryPath = [paths objectAtIndex:0];
-   NSString *path = [documentsDirectoryPath stringByAppendingPathComponent:@"photowheel.dat"];
-   return path;
-}
-
-- (BOOL)loadData
-{
-   BOOL success = YES;
-   
-   NSString *path = [self dataPath];
-   NSFileManager *fileManager = [[NSFileManager alloc] init];
-   BOOL fileExists = [fileManager fileExistsAtPath:path];
-   [fileManager release];
-   
-   if (fileExists) {
-      NSMutableArray *newData = [[NSMutableArray alloc] initWithContentsOfFile:[self dataPath]];
-      [self setData:newData];
-      [newData release];
-      
-   } else {
-      NSMutableArray *newData = [[NSMutableArray alloc] init];
-      [self setData:newData];
-      [newData release];
-      
-   }
-   
-   return success;
-}
-
-- (BOOL)saveData
-{
-   NSString *path = [self dataPath];
-   NSError *error = nil;
-   BOOL success = [[self data] writeToFile:path atomically:YES];
-   if (!success) {
-      // Handle error.
-      NSLog(@"Error saving data: %@ %@", [error localizedDescription], [error userInfo]);
-   }
-   return success;
-}
 
 - (void)saveContext
 {

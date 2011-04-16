@@ -8,3 +8,5 @@
 
 NSString * const kPhotoWheelKeyTitle = @"title";
 NSString * const kPhotoWheelKeyNubs = @"nubs";
+
+NSString * const kPhotoWheelTablePhotoWheel = @"PhotoWheel";

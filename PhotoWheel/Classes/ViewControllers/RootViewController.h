@@ -12,13 +12,13 @@
 @class DetailViewController;
 
 
-@interface RootViewController : UITableViewController <UIPopoverControllerDelegate, NameEditorViewControllerDelegate>
+@interface RootViewController : UITableViewController <UIPopoverControllerDelegate, NSFetchedResultsControllerDelegate,NameEditorViewControllerDelegate>
 {
 
 }
 		
 @property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
-@property (nonatomic, retain) NSMutableArray *data;
+@property (nonatomic, assign) NSManagedObjectContext *managedObjectContext;
 
 - (IBAction)addPhotoWheel:(id)sender;
 

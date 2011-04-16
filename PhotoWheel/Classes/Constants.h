@@ -8,3 +8,5 @@
 
 extern NSString * const kPhotoWheelKeyTitle;
 extern NSString * const kPhotoWheelKeyNubs;
+
+extern NSString * const kPhotoWheelTablePhotoWheel;

@@ -9,17 +9,24 @@
 #import "RootViewController.h"
 #import "DetailViewController.h"
 #import "NameEditorViewController.h"
+#import "PhotoWheel.h"
+
+
+@interface RootViewController ()
+@property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@end
 
 
 @implementation RootViewController
 		
 @synthesize detailViewController = detailViewController_;
-@synthesize data = data_;
+@synthesize managedObjectContext = managedObjectContext_;
+@synthesize fetchedResultsController = fetchedResultsController_;
 
 - (void)dealloc
 {
-   [data_ release];
-   [detailViewController_ release];
+   [detailViewController_ release], detailViewController_ = nil;
+   [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [super dealloc];
 }
 
@@ -67,8 +74,13 @@
    [[[self navigationItem] rightBarButtonItem] setEnabled:!editing];
 }
 
-#pragma -
-#pragma Actions
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   [[cell textLabel] setText:[photoWheel name]];
+}
+
+#pragma mark - Actions
 
 - (IBAction)addPhotoWheel:(id)sender
 {
@@ -79,44 +91,128 @@
 }
 
 
-#pragma -
-#pragma NameEditorViewControllerDelegate
+#pragma mark - NameEditorViewControllerDelegate
 
 - (void)nameEditorDidSave:(NameEditorViewController *)nameEditorViewController
 {
    NSString *name = [nameEditorViewController name];
    if ([name isEqualToString:@""]) return;   // Ignore blank names.
+
+   NSFetchedResultsController *fetchedRequestController = [self fetchedResultsController];
+   NSManagedObjectContext *context = [fetchedRequestController managedObjectContext];
    
    if ([nameEditorViewController isEditing]) {
       NSIndexPath *indexPath = [nameEditorViewController editingAtIndexPath];
-      NSDictionary *previousItem = [[self data] objectAtIndex:[indexPath row]];
-      NSMutableDictionary *newItem = [NSMutableDictionary dictionaryWithDictionary:previousItem];
-      [newItem setObject:name forKey:kPhotoWheelKeyTitle];
-      [[self data] replaceObjectAtIndex:[indexPath row] withObject:newItem];
-   
+      PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+      [photoWheel setName:name];
+
    } else {
-      NSMutableDictionary *newItem = [NSMutableDictionary dictionary];
-      [newItem setObject:name forKey:kPhotoWheelKeyTitle];
-      [newItem setObject:[NSArray array] forKey:kPhotoWheelKeyNubs];
-      [[self data] addObject:newItem];
+      NSEntityDescription *entity = [[fetchedRequestController fetchRequest] entity];
+      PhotoWheel *newPhotoWheel = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+      [newPhotoWheel setName:name];
+      
    }
 
-   [[self tableView] reloadData];
+   // Save the context.
+   NSError *error = nil;
+   if (![context save:&error])
+   {
+      /*
+       Replace this implementation with code to handle the error appropriately.
+       
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+       */
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }
+
    [[self navigationController] popViewControllerAnimated:YES];
 }
 
+#pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate Methods
 
-#pragma mark -
-#pragma mark UITableViewDataSource and UITableViewDelegate Methods
+- (NSFetchedResultsController *)fetchedResultsController
+{
+   if (fetchedResultsController_) {
+      return fetchedResultsController_;
+   }
+   
+   NSString *cacheName = NSStringFromClass([self class]);
+   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:kPhotoWheelTablePhotoWheel inManagedObjectContext:[self managedObjectContext]];
+   [fetchRequest setEntity:entityDescription];
+   
+   NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+   [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+   
+   NSFetchedResultsController *newFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:cacheName];
+   [newFetchedResultsController setDelegate:self];
+   [self setFetchedResultsController:newFetchedResultsController];
+   [newFetchedResultsController release];
+   [fetchRequest release];
+   
+	NSError *error = nil;
+	if (![[self fetchedResultsController] performFetch:&error])
+   {
+      /*
+       Replace this implementation with code to handle the error appropriately.
+       
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+       */
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+	}
+   
+   return fetchedResultsController_;
+}
+
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+   [[self tableView] beginUpdates];
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+{
+   UITableView *tableView = [self tableView];
+   
+   switch(type) 
+   {
+      case NSFetchedResultsChangeInsert:
+         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+         break;
+         
+      case NSFetchedResultsChangeDelete:
+         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         break;
+         
+      case NSFetchedResultsChangeUpdate:
+         [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+         break;
+         
+      case NSFetchedResultsChangeMove:
+         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]withRowAnimation:UITableViewRowAnimationFade];
+         break;
+   }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+   [[self tableView] endUpdates];
+}
+
+
+#pragma mark - UITableViewDataSource and UITableViewDelegate Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-   return 1;
+   NSInteger count = [[[self fetchedResultsController] sections] count];
+   return count;
 }
 		
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   NSInteger count = [[self data] count];
+   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:section] numberOfObjects];
    return count;
 }
 		
@@ -131,10 +227,7 @@
        [cell setEditingAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
     }
 
-   // Configure the cell.
-   NSDictionary *photoWheel = [[self data] objectAtIndex:[indexPath row]];
-   [[cell textLabel] setText:[photoWheel objectForKey:kPhotoWheelKeyTitle]];
-   		
+   [self configureCell:cell atIndexPath:indexPath];
    return cell;
 }
 
@@ -144,38 +237,9 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-   if (editingStyle == UITableViewCellEditingStyleDelete) {
-      // Delete the row from the data source.
-      [[self data] removeObjectAtIndex:[indexPath row]];
-      [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-   }   
-   else if (editingStyle == UITableViewCellEditingStyleInsert) {
-      // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
-   }   
-}
-
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   return YES;
-}
-
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-   // We must retain the string because it is released by NSArray when removed.
-   NSString *stringToMove = [[[self data] objectAtIndex:[fromIndexPath row]] retain];
-
-   // This releases the string owned by the array. If we had not retained 
-   // in the previous line then stringToMove would be pointing to an
-   // invalid object.
-   [[self data] removeObjectAtIndex:[fromIndexPath row]];
-   
-   // Add the string back to the array but at a new location.
-   [[self data] insertObject:stringToMove atIndex:[toIndexPath row]];
-
-   // Release the string retained at the beginning.
-   [stringToMove release];
+   return NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -193,13 +257,13 @@
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-   NSDictionary *photoWheel = [[self data] objectAtIndex:[indexPath row]];
+   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    
    NameEditorViewController *newViewController = [[NameEditorViewController alloc] init];
    [newViewController setDelegate:self];
    [newViewController setEditing:YES];
    [newViewController setEditingAtIndexPath:indexPath];
-   [newViewController setName:[photoWheel objectForKey:kPhotoWheelKeyTitle]];
+   [newViewController setName:[photoWheel name]];
    [[self navigationController] pushViewController:newViewController animated:YES];
    [newViewController release];
 }
