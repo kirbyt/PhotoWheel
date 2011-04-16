@@ -80,6 +80,7 @@
    [[cell textLabel] setText:[photoWheel name]];
 }
 
+
 #pragma mark - Actions
 
 - (IBAction)addPhotoWheel:(id)sender
@@ -128,6 +129,7 @@
 
    [[self navigationController] popViewControllerAnimated:YES];
 }
+
 
 #pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate Methods
 
@@ -237,9 +239,28 @@
     return YES;
 }
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   return NO;
+   if (editingStyle == UITableViewCellEditingStyleDelete)
+   {
+      // Delete the managed object for the given index path
+      NSFetchedResultsController *fetchedResultsController = [self fetchedResultsController];
+      NSManagedObjectContext *context = [fetchedResultsController managedObjectContext];
+      [context deleteObject:[fetchedResultsController objectAtIndexPath:indexPath]];
+      
+      // Save the context.
+      NSError *error = nil;
+      if (![context save:&error])
+      {
+         /*
+          Replace this implementation with code to handle the error appropriately.
+          
+          abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+          */
+         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+         abort();
+      }
+   }   
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
