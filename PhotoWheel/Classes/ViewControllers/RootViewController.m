@@ -142,7 +142,7 @@
    
    NSString *cacheName = NSStringFromClass([self class]);
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:kPhotoWheelTablePhotoWheel inManagedObjectContext:[self managedObjectContext]];
+   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[PhotoWheel entityName] inManagedObjectContext:[self managedObjectContext]];
    [fetchRequest setEntity:entityDescription];
    
    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
