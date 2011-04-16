@@ -20,7 +20,7 @@
 + (Nub *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context
 {
    Nub *newNub = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
-   [newNub setBaseFileName:[NSString stringWithUUID]];
+   [newNub setBaseFileName:[NSString kt_stringWithUUID]];
    return newNub;
 }
 

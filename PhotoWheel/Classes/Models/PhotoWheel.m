@@ -20,7 +20,7 @@
 + (PhotoWheel *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context
 {
    PhotoWheel *newPhotoWheel = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
-   [newPhotoWheel setUuid:[NSString stringWithUUID]];
+   [newPhotoWheel setUuid:[NSString kt_stringWithUUID]];
    return newPhotoWheel;
 }
 

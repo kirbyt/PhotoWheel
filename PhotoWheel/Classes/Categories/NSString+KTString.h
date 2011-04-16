@@ -11,6 +11,6 @@
 
 @interface NSString (NSString_KTString)
 
-+ (NSString *)stringWithUUID;
++ (NSString *)kt_stringWithUUID;
 
 @end

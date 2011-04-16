@@ -11,7 +11,7 @@
 
 @implementation NSString (NSString_KTString)
 
-+ (NSString *)stringWithUUID
++ (NSString *)kt_stringWithUUID
 {
    CFUUIDRef uuidRef = CFUUIDCreate(kCFAllocatorDefault);
    CFStringRef	uuidString = CFUUIDCreateString(kCFAllocatorDefault, uuidRef);
