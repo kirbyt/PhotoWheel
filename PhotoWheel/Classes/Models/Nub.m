@@ -134,14 +134,17 @@ NSString * const kNubImageTypeSmall = @"small";
 
 - (void)saveAsSmallImage:(UIImage *)image
 {
+   [self willChangeValueForKey:@"smallImage"];
    CGSize size = CGSizeMake(NUB_IMAGE_SIZE_WIDTH, NUB_IMAGE_SIZE_HEIGHT);
    UIImage *newImage = [image kt_imageScaleAndCropToMaxSize:size];
    
    [self saveImage:newImage withPath:[self smallImagePath]];
+   [self didChangeValueForKey:@"smallImage"];
 }
 
 - (void)saveAsLargeImage:(UIImage *)image
 {
+   [self willChangeValueForKey:@"largeImage"];
    CGRect screenBounds = [[UIScreen mainScreen] bounds];
    CGFloat scale = [[UIScreen mainScreen] scale];  // Needed to calculate size for retina displays.
    CGFloat maxScreenSize = MAX(screenBounds.size.width, screenBounds.size.height) * scale;
@@ -154,11 +157,14 @@ NSString * const kNubImageTypeSmall = @"small";
    UIImage *newImage = [image kt_imageScaleAspectToMaxSize:maxSize];
    
    [self saveImage:newImage withPath:[self largeImagePath]];
+   [self didChangeValueForKey:@"largeImage"];
 }
 
 - (void)saveAsOriginalImage:(UIImage *)image
 {
+   [self willChangeValueForKey:@"originalImage"];
    [self saveImage:image withPath:[self originalImagePath]];
+   [self didChangeValueForKey:@"originalImage"];
 }
 
 - (void)threaded_saveImage:(id)data
