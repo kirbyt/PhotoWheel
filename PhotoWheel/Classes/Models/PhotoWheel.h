@@ -6,16 +6,13 @@
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreData/CoreData.h>
+#import "_PhotoWheel.h"
 
-@class Nub;
+@interface PhotoWheel : _PhotoWheel 
+{
 
-@interface PhotoWheel : NSManagedObject {
-@private
 }
-@property (nonatomic, retain) NSString * uuid;
-@property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSSet* nubs;
+
++ (NSString *)entityName;
 
 @end

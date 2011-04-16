@@ -11,10 +11,10 @@
 
 
 @implementation Nub
-@dynamic fileExtension;
-@dynamic baseFileName;
-@dynamic sortOrder;
-@dynamic photoWheel;
 
++ (NSString *)entityName
+{
+   return NSStringFromClass([self class]);
+}
 
 @end

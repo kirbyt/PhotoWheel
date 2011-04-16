@@ -10,6 +10,7 @@
 #import "PhotoNubViewController.h"
 #import "UINavigationController+KTTransitions.h"
 #import "PhotoWheel.h"
+#import "Nub.h"
 #import <QuartzCore/QuartzCore.h>
 
 // From: http://iphonedevelopment.blogspot.com/2009/12/better-two-finger-rotate-gesture.html
@@ -43,6 +44,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 @property (nonatomic, assign) CGFloat lastAngle;
 @property (nonatomic, retain) UIViewController *controllerToPush;
 @property (nonatomic, assign) CGPoint imageBrowserAnimationPoint;
+- (void)updateNubs;
 - (void)setAngle:(CGFloat)angle;
 @end
 
@@ -128,6 +130,32 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    }
 }
 
+- (void)setPhotoWheel:(PhotoWheel *)photoWheel
+{
+   if (photoWheel_ != photoWheel) {
+      [photoWheel retain];
+      [photoWheel_ release];
+      photoWheel_ = photoWheel;
+      
+      [self updateNubs];
+   }
+}
+
+- (void)updateNubs
+{
+   for (NSInteger index=0; index < [[self wheelSubviewControllers] count]; index++) {
+      PhotoNubViewController *nubController = [[self wheelSubviewControllers] objectAtIndex:index];
+
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sortOrder == %@", index];
+      NSSet *nubSet = [[[self photoWheel] nubs] filteredSetUsingPredicate:predicate];
+      if (nubSet && [nubSet count] > 0) {
+         [nubController setNub:[nubSet anyObject]];
+      } else {
+         [nubController setNub:nil];
+      }
+      [[self photoWheel] nubs];
+   }
+}
 
 // The follow code is inprised from the carousel example at:
 // http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad

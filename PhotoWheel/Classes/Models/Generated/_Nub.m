@@ -1,5 +1,5 @@
 //
-//  Nub.h
+//  _Nub.m
 //  PhotoWheel
 //
 //  Created by Kirby Turner on 4/15/11.
@@ -7,12 +7,14 @@
 //
 
 #import "_Nub.h"
+#import "_PhotoWheel.h"
 
-@interface Nub : _Nub 
-{
 
-}
+@implementation _Nub
+@dynamic fileExtension;
+@dynamic baseFileName;
+@dynamic sortOrder;
+@dynamic photoWheel;
 
-+ (NSString *)entityName;
 
 @end

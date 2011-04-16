@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @class PhotoWheelViewController;
+@class Nub;
 
 @interface PhotoNubViewController : UIViewController <UIPopoverControllerDelegate>
 {
@@ -17,6 +18,7 @@
 
 @property (nonatomic, assign) PhotoWheelViewController *photoWheelViewController;
 @property (nonatomic, retain, readonly) UIPopoverController *popoverController;
+@property (nonatomic, retain) Nub *nub;
 
 - (void)menuDidSelectImage:(UIImage *)image;
 - (void)menuDidCancel;

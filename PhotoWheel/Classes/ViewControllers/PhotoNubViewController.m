@@ -27,10 +27,12 @@
 @synthesize photoWheelViewController = photoWheelViewController_;
 @synthesize popoverController = popoverController_;
 @synthesize menuViewController = menuViewController_;
+@synthesize nub = nub_;
 
 - (void)dealloc
 {
    [popoverController_ release], popoverController_ = nil;
+   [nub_ release], nub_ = nil;
    [super dealloc];
 }
 
@@ -64,8 +66,24 @@
    [pinchGesture release];
 }
 
-#pragma mark -
-#pragma mark Menu Handlers
+- (void)updateNubDisplay
+{
+   
+}
+
+- (void)setNub:(Nub *)nub
+{
+   if (nub_ != nub) {
+      [nub retain];
+      [nub_ release];
+      nub_ = nub;
+      
+      [self updateNubDisplay];
+   }
+}
+
+
+#pragma mark - Menu Handlers
 
 - (void)menuDidSelectImage:(UIImage *)image
 {
@@ -85,8 +103,7 @@
 }
 
 
-#pragma mark -
-#pragma mark UIPopoverControllerDelegate
+#pragma mark - UIPopoverControllerDelegate
 
 // This is called when the popover is by the user touching outside
 // of the popover. It is not called when the popover is dismissed
@@ -97,8 +114,7 @@
 }
 
 
-#pragma mark -
-#pragma mark UIGestureRecognizer Handlers
+#pragma mark - UIGestureRecognizer Handlers
 
 - (void)tapped:(UITapGestureRecognizer *)recognizer
 {
