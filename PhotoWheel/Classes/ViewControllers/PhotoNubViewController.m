@@ -28,8 +28,10 @@
 
 - (void)dealloc
 {
-   [popoverController_ release], popoverController_ = nil;
+   [nub_ removeObserver:self forKeyPath:@"smallImage"];
    [nub_ release], nub_ = nil;
+   
+   [popoverController_ release], popoverController_ = nil;
    [super dealloc];
 }
 
@@ -70,14 +72,24 @@
    [view setImage:image];
 }
 
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
+{
+   if ([keyPath isEqualToString:@"smallImage"]) {
+      [self updateNubDisplay];
+   }
+}
+
 - (void)setNub:(Nub *)nub
 {
    if (nub_ != nub) {
+      [nub_ removeObserver:self forKeyPath:@"smallImage"];
+      
       [nub retain];
       [nub_ release];
       nub_ = nub;
       
       [self updateNubDisplay];
+      [nub_ addObserver:self forKeyPath:@"smallImage" options:0 context:nil];
    }
 }
 
