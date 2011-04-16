@@ -18,7 +18,7 @@
 }
 		
 @property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
-@property (nonatomic, assign) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 - (IBAction)addPhotoWheel:(id)sender;
 

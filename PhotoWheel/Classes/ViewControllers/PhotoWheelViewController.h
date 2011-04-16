@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class PhotoWheel;
+
 typedef enum  {
    PhotoWheelStyleWheel,
    PhotoWheelStyleCarousel,
@@ -16,9 +18,9 @@ typedef enum  {
 
 @interface PhotoWheelViewController : UIViewController
 {
-   UILabel *x_;
 }
 
+@property (nonatomic, retain) PhotoWheel *photoWheel;
 @property (nonatomic, assign) PhotoWheelStyle style;
 
 - (void)showImageBrowserFromPoint:(CGPoint)point;

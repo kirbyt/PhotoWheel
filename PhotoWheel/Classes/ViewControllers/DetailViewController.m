@@ -10,6 +10,8 @@
 #import "RootViewController.h"
 #import "PhotoWheelViewController.h"
 #import "UIViewController+KTCompositeView.h"
+#import "PhotoWheel.h"
+#import "Nub.h"
 
 
 @interface DetailViewController ()
@@ -27,15 +29,17 @@
 @synthesize photoWheelPlaceholderView = photoWheelPlaceholderView_;
 @synthesize segmentedControl = segmentedControl_;
 @synthesize photoNavigationController = photoNavigationController_;
+@synthesize photoWheel = photoWheel_;
 
 - (void)dealloc
 {
-   [popoverController_ release];
-   [toolbar_ release];
-   [photoWheelViewController_ release];
-   [photoWheelPlaceholderView_ release];
-   [segmentedControl_ release];
-   [photoNavigationController_ release];
+   [popoverController_ release], popoverController_ = nil;
+   [toolbar_ release], toolbar_ = nil;
+   [photoWheelViewController_ release], photoWheelViewController_ = nil;
+   [photoWheelPlaceholderView_ release], photoWheelPlaceholderView_ = nil;
+   [segmentedControl_ release], segmentedControl_ = nil;
+   [photoNavigationController_ release], photoNavigationController_ = nil;
+   [photoWheel_ release], photoWheel_ = nil;
    
    [super dealloc];
 }
@@ -106,8 +110,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Split view support
+#pragma mark - Split view support
 
 - (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
 {
@@ -130,8 +133,7 @@
 }
 
 
-#pragma mark -
-#pragma mark Actions
+#pragma mark - Actions
 
 - (IBAction)pickImage:(id)sender 
 {

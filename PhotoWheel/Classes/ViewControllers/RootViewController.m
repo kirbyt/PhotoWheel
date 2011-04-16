@@ -27,6 +27,7 @@
 {
    [detailViewController_ release], detailViewController_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
+   [managedObjectContext_ release], managedObjectContext_ = nil;
    [super dealloc];
 }
 

@@ -9,6 +9,7 @@
 #import "PhotoWheelViewController.h"
 #import "PhotoNubViewController.h"
 #import "UINavigationController+KTTransitions.h"
+#import "PhotoWheel.h"
 #import <QuartzCore/QuartzCore.h>
 
 // From: http://iphonedevelopment.blogspot.com/2009/12/better-two-finger-rotate-gesture.html
@@ -54,12 +55,15 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 @synthesize lastAngle = lastAngle_;
 @synthesize controllerToPush = controllerToPush_;
 @synthesize imageBrowserAnimationPoint = imageBrowserAnimationPoint_;
+@synthesize photoWheel = photoWheel_;
 
 - (void)dealloc
 {
-   [wheelView_ release];
-   [wheelSubviewControllers_ release];
-   [controllerToPush_ release];
+   [wheelView_ release], wheelView_ = nil;
+   [wheelSubviewControllers_ release], wheelSubviewControllers_ = nil;
+   [controllerToPush_ release], controllerToPush_ = nil;
+   [photoWheel_ release], photoWheel_ = nil;
+   
    [super dealloc];
 }
 
@@ -179,8 +183,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 }
 
 
-#pragma mark -
-#pragma mark Touch Event Handlers
+#pragma mark - Touch Event Handlers
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -204,8 +207,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 }
 
 
-#pragma mark -
-#pragma mark Public Methods
+#pragma mark - Public Methods
 
 - (void)showImageBrowserFromPoint:(CGPoint)point
 {
