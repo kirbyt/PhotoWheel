@@ -85,7 +85,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    // Create the wheel view.
    UIView *newWheelView = [[UIView alloc] initWithFrame:CGRectZero];
    [newWheelView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
-   [newWheelView setBackgroundColor:[UIColor yellowColor]];
+   [newWheelView setAlpha:0.0];
    [self setWheelView:newWheelView];
    [newWheelView release];
 
@@ -175,6 +175,12 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
          [nubController setNub:newNub];
       }
    }
+   
+   CGFloat alpha = [self photoWheel] ? 1.0 : 0.0;
+   
+   [UIView beginAnimations:@"showWheelView" context:nil];
+   [[self wheelView] setAlpha:alpha];
+   [UIView commitAnimations];
 }
 
 // The follow code is inprised from the carousel example at:
