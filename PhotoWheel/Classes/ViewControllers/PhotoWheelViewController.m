@@ -274,7 +274,6 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 
    UIViewController *newViewController = [[UIViewController alloc] init];
    UIView *view = [newViewController view];
-   [view setBackgroundColor:[UIColor redColor]];
    [[view layer] setContents:(id)[image CGImage]];
    [[view layer] setContentsGravity:kCAGravityResizeAspectFill];
    
