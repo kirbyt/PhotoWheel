@@ -30,7 +30,7 @@ NSString * const kNubImageTypeSmall = @"small";
 - (void)saveAsSmallImage:(UIImage *)image;
 - (void)saveAsLargeImage:(UIImage *)image;
 - (void)saveAsOriginalImage:(UIImage *)image;
-- (void)threaded_saveImageWithData:(id)data;
+- (void)threaded_saveImage:(id)data;
 @end
 
 @implementation Nub
@@ -70,15 +70,7 @@ NSString * const kNubImageTypeSmall = @"small";
 
 - (void)saveImage:(UIImage *)image
 {
-   NSDictionary *data;
-   data = [NSDictionary dictionaryWithObjectsAndKeys:image, kNubKeyImage, kNubImageTypeOriginal, kNubKeyImageType, nil];
-   [self performSelectorInBackground:@selector(threaded_saveImageWithData:) withObject:data];
-   
-   data = [NSDictionary dictionaryWithObjectsAndKeys:image, kNubKeyImage, kNubImageTypeLarge, kNubKeyImageType, nil];
-   [self performSelectorInBackground:@selector(threaded_saveImageWithData:) withObject:data];
-
-   data = [NSDictionary dictionaryWithObjectsAndKeys:image, kNubKeyImage, kNubImageTypeSmall, kNubKeyImageType, nil];
-   [self performSelectorInBackground:@selector(threaded_saveImageWithData:) withObject:data];
+   [self performSelectorInBackground:@selector(threaded_saveImage:) withObject:image];
 }
 
 #pragma mark - Helper Methods
@@ -169,21 +161,15 @@ NSString * const kNubImageTypeSmall = @"small";
    [self saveImage:image withPath:[self originalImagePath]];
 }
 
-- (void)threaded_saveImageWithData:(id)data
+- (void)threaded_saveImage:(id)data
 {
    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
    
-   NSDictionary *dict = data;
-   UIImage *image = [dict objectForKey:kNubKeyImage];
-   NSString *type = [dict objectForKey:kNubKeyImageType];
+   UIImage *image = data;
    
-   if ([type isEqualToString:kNubImageTypeOriginal]) {
-      [self saveAsOriginalImage:image];
-   } else if ([type isEqualToString:kNubImageTypeLarge]) {
-      [self saveAsLargeImage:image];
-   } else if ([type isEqualToString:kNubImageTypeSmall]) {
-      [self saveAsSmallImage:image];
-   } 
+   [self saveAsSmallImage:image];
+   [self saveAsLargeImage:image];
+   [self saveAsOriginalImage:image];
    
    [pool drain];
 }
