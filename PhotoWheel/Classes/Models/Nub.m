@@ -7,11 +7,13 @@
 //
 
 #import "Nub.h"
+#import "PhotoWheel.h"
 
 
 @implementation Nub
 @dynamic fileExtension;
 @dynamic baseFileName;
+@dynamic sortOrder;
 @dynamic photoWheel;
 
 

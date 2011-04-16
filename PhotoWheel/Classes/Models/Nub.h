@@ -9,12 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class PhotoWheel;
 
 @interface Nub : NSManagedObject {
 @private
 }
 @property (nonatomic, retain) NSString * fileExtension;
 @property (nonatomic, retain) NSString * baseFileName;
-@property (nonatomic, retain) NSManagedObject * photoWheel;
+@property (nonatomic, retain) NSNumber * sortOrder;
+@property (nonatomic, retain) PhotoWheel * photoWheel;
 
 @end

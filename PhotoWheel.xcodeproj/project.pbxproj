@@ -40,8 +40,8 @@
 		68834C3113578BD700EC091E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 68834C3013578BD600EC091E /* Constants.m */; };
 		68983BF51355F3AC00390B00 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68983BF41355F3AC00390B00 /* UIImage+KTCategory.m */; };
 		68997B261358E9D4006F8BCC /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68997B241358E9D4006F8BCC /* PhotoWheel.xcdatamodeld */; };
-		68997B2D13590CDB006F8BCC /* Nub.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B2C13590CDB006F8BCC /* Nub.m */; };
 		68997B6A1359253A006F8BCC /* PhotoWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B691359253A006F8BCC /* PhotoWheel.m */; };
+		68997B6D135936A0006F8BCC /* Nub.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B6C1359369F006F8BCC /* Nub.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,10 +96,10 @@
 		68983BF31355F3AC00390B00 /* UIImage+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KTCategory.h"; sourceTree = "<group>"; };
 		68983BF41355F3AC00390B00 /* UIImage+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KTCategory.m"; sourceTree = "<group>"; };
 		68997B251358E9D4006F8BCC /* PhotoWheel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoWheel.xcdatamodel; sourceTree = "<group>"; };
-		68997B2B13590CDB006F8BCC /* Nub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nub.h; sourceTree = "<group>"; };
-		68997B2C13590CDB006F8BCC /* Nub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Nub.m; sourceTree = "<group>"; };
 		68997B6813592539006F8BCC /* PhotoWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheel.h; sourceTree = "<group>"; };
 		68997B691359253A006F8BCC /* PhotoWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheel.m; sourceTree = "<group>"; };
+		68997B6B1359369F006F8BCC /* Nub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nub.h; sourceTree = "<group>"; };
+		68997B6C1359369F006F8BCC /* Nub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Nub.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,8 +266,8 @@
 		68997B2713590C25006F8BCC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				68997B2B13590CDB006F8BCC /* Nub.h */,
-				68997B2C13590CDB006F8BCC /* Nub.m */,
+				68997B6B1359369F006F8BCC /* Nub.h */,
+				68997B6C1359369F006F8BCC /* Nub.m */,
 				68997B6813592539006F8BCC /* PhotoWheel.h */,
 				68997B691359253A006F8BCC /* PhotoWheel.m */,
 			);
@@ -380,8 +380,8 @@
 				68834C3113578BD700EC091E /* Constants.m in Sources */,
 				6810373F1358DC7700BD7C82 /* NSString+KTString.m in Sources */,
 				68997B261358E9D4006F8BCC /* PhotoWheel.xcdatamodeld in Sources */,
-				68997B2D13590CDB006F8BCC /* Nub.m in Sources */,
 				68997B6A1359253A006F8BCC /* PhotoWheel.m in Sources */,
+				68997B6D135936A0006F8BCC /* Nub.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
