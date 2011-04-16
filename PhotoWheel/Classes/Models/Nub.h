@@ -20,7 +20,7 @@
 + (Nub *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context;
 
 - (UIImage *)smallImage;
-- (UIImage *)deviceSpecificImage;
+- (UIImage *)largeImage;
 - (UIImage *)originalImage;
 - (void)saveImage:(UIImage *)image;
 

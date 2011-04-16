@@ -13,6 +13,7 @@
 #import "Nub.h"
 #import <QuartzCore/QuartzCore.h>
 
+
 // From: http://iphonedevelopment.blogspot.com/2009/12/better-two-finger-rotate-gesture.html
 static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint line1End, CGPoint line2Start, CGPoint line2End) {
 	
@@ -256,12 +257,21 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 
 #pragma mark - Public Methods
 
-- (void)showImageBrowserFromPoint:(CGPoint)point
+- (void)showImageBrowserFromPoint:(CGPoint)point startAtIndex:(NSInteger)index
 {
+   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sortOrder == %i", index];
+   NSSet *nubs = [[[self photoWheel] nubs] filteredSetUsingPredicate:predicate];
+   Nub *nub = [nubs anyObject];
+   UIImage *image = [nub largeImage];
+   
    [self setImageBrowserAnimationPoint:point];
 
    UIViewController *newViewController = [[UIViewController alloc] init];
-   [[newViewController view] setBackgroundColor:[UIColor redColor]];
+   UIView *view = [newViewController view];
+   [view setBackgroundColor:[UIColor redColor]];
+   [[view layer] setContents:(id)[image CGImage]];
+   [[view layer] setContentsGravity:kCAGravityResizeAspectFill];
+   
    
    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideImageBrowser:)];
    [[newViewController view] addGestureRecognizer:tap];

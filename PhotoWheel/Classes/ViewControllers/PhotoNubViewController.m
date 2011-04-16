@@ -139,7 +139,8 @@
    CGPoint point = CGPointMake(bounds.size.width/2, bounds.size.height/2);
    point = [[self view] convertPoint:point toView:[[self view] superview]];
    
-   [[self photoWheelViewController] showImageBrowserFromPoint:point];
+   NSInteger index = [[[self nub] sortOrder] intValue];
+   [[self photoWheelViewController] showImageBrowserFromPoint:point startAtIndex:index];
 }
 
 - (void)pinch:(UIPinchGestureRecognizer *)recognizer

@@ -56,7 +56,7 @@ NSString * const kNubImageTypeSmall = @"small";
    return image;
 }
 
-- (UIImage *)deviceSpecificImage
+- (UIImage *)largeImage
 {
    UIImage *image = [UIImage imageWithContentsOfFile:[self largeImagePath]];
    return image;
