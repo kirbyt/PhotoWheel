@@ -7,6 +7,7 @@
 //
 
 #import "PhotoWheel.h"
+#import "NSString+KTString.h"
 
 
 @implementation PhotoWheel
@@ -14,6 +15,13 @@
 + (NSString *)entityName
 {
    return NSStringFromClass([self class]);
+}
+
++ (PhotoWheel *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context
+{
+   PhotoWheel *newPhotoWheel = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+   [newPhotoWheel setUuid:[NSString stringWithUUID]];
+   return newPhotoWheel;
 }
 
 @end

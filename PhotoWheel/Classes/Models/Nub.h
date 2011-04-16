@@ -14,5 +14,6 @@
 }
 
 + (NSString *)entityName;
++ (Nub *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context;
 
 @end

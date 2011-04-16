@@ -7,7 +7,7 @@
 //
 
 #import "Nub.h"
-#import "PhotoWheel.h"
+#import "NSString+KTString.h"
 
 
 @implementation Nub
@@ -15,6 +15,13 @@
 + (NSString *)entityName
 {
    return NSStringFromClass([self class]);
+}
+
++ (Nub *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context
+{
+   Nub *newNub = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+   [newNub setBaseFileName:[NSString stringWithUUID]];
+   return newNub;
 }
 
 @end

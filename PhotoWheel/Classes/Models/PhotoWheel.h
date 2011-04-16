@@ -14,5 +14,7 @@
 }
 
 + (NSString *)entityName;
++ (PhotoWheel *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context;
+
 
 @end

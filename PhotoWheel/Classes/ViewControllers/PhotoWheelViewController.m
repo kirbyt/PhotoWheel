@@ -151,6 +151,8 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
       if (nubSet && [nubSet count] > 0) {
          [nubController setNub:[nubSet anyObject]];
       } else {
+         // Insert a new nub.
+         
          [nubController setNub:nil];
       }
       [[self photoWheel] nubs];

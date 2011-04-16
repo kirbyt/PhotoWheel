@@ -284,10 +284,10 @@
 		68997B8313594498006F8BCC /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				68997B8A13594539006F8BCC /* _PhotoWheel.h */,
-				68997B8B13594539006F8BCC /* _PhotoWheel.m */,
 				68997B8D1359453A006F8BCC /* _Nub.h */,
 				68997B8E1359453A006F8BCC /* _Nub.m */,
+				68997B8A13594539006F8BCC /* _PhotoWheel.h */,
+				68997B8B13594539006F8BCC /* _PhotoWheel.m */,
 			);
 			path = Generated;
 			sourceTree = "<group>";

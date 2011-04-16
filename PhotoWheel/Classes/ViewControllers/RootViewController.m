@@ -109,8 +109,7 @@
       [photoWheel setName:name];
 
    } else {
-      NSEntityDescription *entity = [[fetchedRequestController fetchRequest] entity];
-      PhotoWheel *newPhotoWheel = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
+      PhotoWheel * newPhotoWheel = [PhotoWheel insertNewInManagedObjectContext:context];
       [newPhotoWheel setName:name];
       
    }
