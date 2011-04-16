@@ -140,8 +140,13 @@
 
    CGRect screenBounds = [[UIScreen mainScreen] bounds];
    CGFloat scale = [[UIScreen mainScreen] scale];  // Needed to calculate size for retina displays.
-   CGFloat maxSize = MAX(screenBounds.size.width, screenBounds.size.height) * scale;
+   CGFloat maxScreenSize = MAX(screenBounds.size.width, screenBounds.size.height) * scale;
+
+   CGSize imageSize = [image size];
+   CGFloat maxImageSize = MAX(imageSize.width, imageSize.height) * scale;
    
+   CGFloat maxSize = MIN(maxScreenSize, maxImageSize);
+
    UIImage *newImage = [image kt_imageScaleAspectToMaxSize:maxSize];
    
    [self saveImage:newImage withPath:[self largeImagePath]];
