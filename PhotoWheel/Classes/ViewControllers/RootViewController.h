@@ -7,20 +7,20 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NameEditorViewController.h"
 
 @class DetailViewController;
 
 
-@interface RootViewController : UITableViewController <UIPopoverControllerDelegate, NSFetchedResultsControllerDelegate,NameEditorViewControllerDelegate>
+@interface RootViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate>
 {
 
 }
-		
-@property (nonatomic, retain) IBOutlet DetailViewController *detailViewController;
+
+@property (nonatomic, retain) IBOutlet UITableView * tableView;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 - (IBAction)addPhotoWheel:(id)sender;
+- (IBAction)showInfoScreen:(id)sender;
 
 
 @end

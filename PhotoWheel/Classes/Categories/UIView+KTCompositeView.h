@@ -1,5 +1,5 @@
 //
-//  UIViewController+KTCompositeView.h
+//  UIViews+KTCompositeView.h
 //  CompositeViewsSample
 //
 //  Created by Kirby Turner on 11/1/10.
@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 
-@interface UIViewController (KTCompositeView)
+@interface UIView (KTCompositeView)
 
-- (void)kt_addSubview:(UIView *)subview toPlaceholder:(UIView *)placeholder;
+- (void)kt_addSubview:(UIView *)subview;
 
 @end

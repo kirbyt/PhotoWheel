@@ -7,18 +7,13 @@
 //
 
 #import "PhotoWheelAppDelegate.h"
-
 #import "RootViewController.h"
 
-@interface PhotoWheelAppDelegate ()
-@end
 
 @implementation PhotoWheelAppDelegate
 
 @synthesize window = window_;
-@synthesize splitViewController = splitViewController_;
 @synthesize rootViewController = rootViewController_;
-@synthesize detailViewController = detailViewController_;
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize managedObjectModel = managedObjectModel_;
 @synthesize persistentStoreCoordinator = persistentStoreCoordinator_;
@@ -26,9 +21,7 @@
 - (void)dealloc
 {
    [window_ release];
-   [splitViewController_ release];
    [rootViewController_ release];
-   [detailViewController_ release];
 
    [managedObjectContext_ release], managedObjectContext_ = nil;
    [managedObjectModel_ release], managedObjectModel_ = nil;
@@ -40,8 +33,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
    // Override point for customization after application launch.
-   // Add the split view controller's view to the window and display.
-   self.window.rootViewController = self.splitViewController;
+   RootViewController *newController = [[RootViewController alloc] init];
+   [self setRootViewController:newController];
+   [newController release];
+   
+   // Add the root view controller to the window.
+   self.window.rootViewController = [self rootViewController];
    [self.window makeKeyAndVisible];
    return YES;
 }

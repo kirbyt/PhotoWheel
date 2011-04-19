@@ -7,9 +7,8 @@
 //
 
 #import "RootViewController.h"
-#import "DetailViewController.h"
-#import "NameEditorViewController.h"
 #import "PhotoWheel.h"
+#import "PhotoWheelTableViewCell.h"
 
 
 @interface RootViewController ()
@@ -18,41 +17,41 @@
 
 
 @implementation RootViewController
-		
-@synthesize detailViewController = detailViewController_;
+
+@synthesize tableView = tableView_;
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize fetchedResultsController = fetchedResultsController_;
 
 - (void)dealloc
 {
-   [detailViewController_ release], detailViewController_ = nil;
+   [tableView_ release], tableView_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [managedObjectContext_ release], managedObjectContext_ = nil;
    [super dealloc];
+}
+
+- (id)init 
+{
+   self = [super initWithNibName:@"RootView" bundle:nil];
+   if (self) {
+      
+   }
+   return self;
 }
 
 - (void)viewDidLoad
 {
    [super viewDidLoad];
    
-   [self setClearsSelectionOnViewWillAppear:NO];
-   [self setContentSizeForViewInPopover:CGSizeMake(320.0, 600.0)];
-   
-   UIColor *aColor = [UIColor colorWithRed:0.824 green:0.841 blue:0.876 alpha:1.000];
-   [[self tableView] setBackgroundColor:aColor];
-   [[self tableView] setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-   
    [self setTitle:@"Photo Wheels"];
-   
-   [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
 }
 
 - (void)viewDidUnload
 {
    // Relinquish ownership of anything that can be recreated in viewDidLoad or on demand.
    // For example: self.myOutlet = nil;
-   
-   [self setDetailViewController:nil];
+
+   [self setTableView:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -69,16 +68,9 @@
     return YES;
 }
 
-- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath 
 {
-   [super setEditing:editing animated:animated];
-   [[[self navigationItem] rightBarButtonItem] setEnabled:!editing];
-}
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-   [[cell textLabel] setText:[photoWheel name]];
+   
 }
 
 
@@ -86,48 +78,12 @@
 
 - (IBAction)addPhotoWheel:(id)sender
 {
-   NameEditorViewController *newViewController = [[NameEditorViewController alloc] init];
-   [newViewController setDelegate:self];
-   [[self navigationController] pushViewController:newViewController animated:YES];
-   [newViewController release];
+
 }
 
-
-#pragma mark - NameEditorViewControllerDelegate
-
-- (void)nameEditorDidSave:(NameEditorViewController *)nameEditorViewController
+- (IBAction)showInfoScreen:(id)sender
 {
-   NSString *name = [nameEditorViewController name];
-   if ([name isEqualToString:@""]) return;   // Ignore blank names.
-
-   NSFetchedResultsController *fetchedRequestController = [self fetchedResultsController];
-   NSManagedObjectContext *context = [fetchedRequestController managedObjectContext];
    
-   if ([nameEditorViewController isEditing]) {
-      NSIndexPath *indexPath = [nameEditorViewController editingAtIndexPath];
-      PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-      [photoWheel setName:name];
-
-   } else {
-      PhotoWheel * newPhotoWheel = [PhotoWheel insertNewInManagedObjectContext:context];
-      [newPhotoWheel setName:name];
-      
-   }
-
-   // Save the context.
-   NSError *error = nil;
-   if (![context save:&error])
-   {
-      /*
-       Replace this implementation with code to handle the error appropriately.
-       
-       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-       */
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-      abort();
-   }
-
-   [[self navigationController] popViewControllerAnimated:YES];
 }
 
 
@@ -220,16 +176,8 @@
 		
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"PhotoWheelCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-       [cell setShowsReorderControl:YES];
-       [cell setEditingAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
-    }
-
-   [self configureCell:cell atIndexPath:indexPath];
+   PhotoWheelTableViewCell *cell = [PhotoWheelTableViewCell cellForTableView:tableView];
+   
    return cell;
 }
 
@@ -265,21 +213,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-   [[self detailViewController] setPhotoWheel:photoWheel];
+//   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+//   [[self detailViewController] setPhotoWheel:photoWheel];
 }
 
-- (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-   
-   NameEditorViewController *newViewController = [[NameEditorViewController alloc] init];
-   [newViewController setDelegate:self];
-   [newViewController setEditing:YES];
-   [newViewController setEditingAtIndexPath:indexPath];
-   [newViewController setName:[photoWheel name]];
-   [[self navigationController] pushViewController:newViewController animated:YES];
-   [newViewController release];
-}
 
 @end

@@ -30,7 +30,7 @@
 		6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6860CCD61359F2480070445B /* UIApplication+KTApplication.m */; };
 		6860CCDA135A0A2B0070445B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6860CCD9135A0A2A0070445B /* QuartzCore.framework */; };
 		6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D13E1344C53E0005271D /* PhotoWheelViewController.m */; };
-		6865D1501344CDD40005271D /* UIViewController+KTCompositeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */; };
+		6865D1501344CDD40005271D /* UIView+KTCompositeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D14F1344CDD40005271D /* UIView+KTCompositeView.m */; };
 		6865D15C1345204F0005271D /* PhotoNubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D15B1345204F0005271D /* PhotoNubView.m */; };
 		6865D1651345234B0005271D /* UIBezierPath+ShadowPath.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */; };
 		6865D1681345242D0005271D /* photoDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D1671345242D0005271D /* photoDefault.png */; };
@@ -46,6 +46,13 @@
 		68997B7C13594412006F8BCC /* PhotoWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B7B13594412006F8BCC /* PhotoWheel.m */; };
 		68997B8C1359453A006F8BCC /* _PhotoWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B8B13594539006F8BCC /* _PhotoWheel.m */; };
 		68997B8F1359453A006F8BCC /* _Nub.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B8E1359453A006F8BCC /* _Nub.m */; };
+		68BE084C135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BE084B135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m */; };
+		68BE084F135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE084E135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib */; };
+		68BE0851135DF420001FFEA0 /* RootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0850135DF420001FFEA0 /* RootView.xib */; };
+		68BE0856135DF51A001FFEA0 /* 33-circle-plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0852135DF51A001FFEA0 /* 33-circle-plus.png */; };
+		68BE0857135DF51A001FFEA0 /* 33-circle-plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0853135DF51A001FFEA0 /* 33-circle-plus@2x.png */; };
+		68BE0858135DF51A001FFEA0 /* 59-info.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0854135DF51A001FFEA0 /* 59-info.png */; };
+		68BE0859135DF51A001FFEA0 /* 59-info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0855135DF51A001FFEA0 /* 59-info@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -86,8 +93,8 @@
 		6860CCD9135A0A2A0070445B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6865D13D1344C53E0005271D /* PhotoWheelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewController.h; sourceTree = "<group>"; };
 		6865D13E1344C53E0005271D /* PhotoWheelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewController.m; sourceTree = "<group>"; };
-		6865D14E1344CDD40005271D /* UIViewController+KTCompositeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+KTCompositeView.h"; sourceTree = "<group>"; };
-		6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+KTCompositeView.m"; sourceTree = "<group>"; };
+		6865D14E1344CDD40005271D /* UIView+KTCompositeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+KTCompositeView.h"; sourceTree = "<group>"; };
+		6865D14F1344CDD40005271D /* UIView+KTCompositeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+KTCompositeView.m"; sourceTree = "<group>"; };
 		6865D15A1345204F0005271D /* PhotoNubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoNubView.h; sourceTree = "<group>"; };
 		6865D15B1345204F0005271D /* PhotoNubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoNubView.m; sourceTree = "<group>"; };
 		6865D1631345234A0005271D /* UIBezierPath+ShadowPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBezierPath+ShadowPath.h"; sourceTree = "<group>"; };
@@ -111,6 +118,14 @@
 		68997B8B13594539006F8BCC /* _PhotoWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _PhotoWheel.m; sourceTree = "<group>"; };
 		68997B8D1359453A006F8BCC /* _Nub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Nub.h; sourceTree = "<group>"; };
 		68997B8E1359453A006F8BCC /* _Nub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Nub.m; sourceTree = "<group>"; };
+		68BE084A135DEE1F001FFEA0 /* PhotoWheelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelTableViewCell.h; sourceTree = "<group>"; };
+		68BE084B135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelTableViewCell.m; sourceTree = "<group>"; };
+		68BE084E135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWheelTableViewCell.xib; sourceTree = "<group>"; };
+		68BE0850135DF420001FFEA0 /* RootView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootView.xib; sourceTree = "<group>"; };
+		68BE0852135DF51A001FFEA0 /* 33-circle-plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "33-circle-plus.png"; sourceTree = "<group>"; };
+		68BE0853135DF51A001FFEA0 /* 33-circle-plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "33-circle-plus@2x.png"; sourceTree = "<group>"; };
+		68BE0854135DF51A001FFEA0 /* 59-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "59-info.png"; sourceTree = "<group>"; };
+		68BE0855135DF51A001FFEA0 /* 59-info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "59-info@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +247,8 @@
 				682F29B1133C1C680058E1D7 /* DetailView.xib */,
 				682F29B2133C1C680058E1D7 /* MainWindow.xib */,
 				682F29B5133C1C880058E1D7 /* NameEditorView.xib */,
+				68BE084E135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib */,
+				68BE0850135DF420001FFEA0 /* RootView.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -241,8 +258,8 @@
 			children = (
 				6865D1631345234A0005271D /* UIBezierPath+ShadowPath.h */,
 				6865D1641345234A0005271D /* UIBezierPath+ShadowPath.m */,
-				6865D14E1344CDD40005271D /* UIViewController+KTCompositeView.h */,
-				6865D14F1344CDD40005271D /* UIViewController+KTCompositeView.m */,
+				6865D14E1344CDD40005271D /* UIView+KTCompositeView.h */,
+				6865D14F1344CDD40005271D /* UIView+KTCompositeView.m */,
 				682BBA161351F6A3006747AB /* UIDevice+KTDeviceExtensions.h */,
 				682BBA171351F6A3006747AB /* UIDevice+KTDeviceExtensions.m */,
 				68983BF31355F3AC00390B00 /* UIImage+KTCategory.h */,
@@ -262,6 +279,8 @@
 			children = (
 				6865D15A1345204F0005271D /* PhotoNubView.h */,
 				6865D15B1345204F0005271D /* PhotoNubView.m */,
+				68BE084A135DEE1F001FFEA0 /* PhotoWheelTableViewCell.h */,
+				68BE084B135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -269,6 +288,10 @@
 		6865D1661345242D0005271D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				68BE0852135DF51A001FFEA0 /* 33-circle-plus.png */,
+				68BE0853135DF51A001FFEA0 /* 33-circle-plus@2x.png */,
+				68BE0854135DF51A001FFEA0 /* 59-info.png */,
+				68BE0855135DF51A001FFEA0 /* 59-info@2x.png */,
 				6865D1671345242D0005271D /* photoDefault.png */,
 				6865D16F134552D20005271D /* Icon.png */,
 				6865D170134552D20005271D /* Icon@2x.png */,
@@ -364,6 +387,12 @@
 				6865D174134552D20005271D /* Icon@2x.png in Resources */,
 				6865D175134552D20005271D /* Icon72x72.png in Resources */,
 				6865D176134552D20005271D /* iTunesArtwork in Resources */,
+				68BE084F135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib in Resources */,
+				68BE0851135DF420001FFEA0 /* RootView.xib in Resources */,
+				68BE0856135DF51A001FFEA0 /* 33-circle-plus.png in Resources */,
+				68BE0857135DF51A001FFEA0 /* 33-circle-plus@2x.png in Resources */,
+				68BE0858135DF51A001FFEA0 /* 59-info.png in Resources */,
+				68BE0859135DF51A001FFEA0 /* 59-info@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -396,7 +425,7 @@
 				682F299D133C0B870058E1D7 /* RootViewController.m in Sources */,
 				682F29A8133C1B480058E1D7 /* NameEditorViewController.m in Sources */,
 				6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */,
-				6865D1501344CDD40005271D /* UIViewController+KTCompositeView.m in Sources */,
+				6865D1501344CDD40005271D /* UIView+KTCompositeView.m in Sources */,
 				6865D15C1345204F0005271D /* PhotoNubView.m in Sources */,
 				6865D1651345234B0005271D /* UIBezierPath+ShadowPath.m in Sources */,
 				682BB9E413510639006747AB /* PhotoNubViewController.m in Sources */,
@@ -412,6 +441,7 @@
 				68997B8C1359453A006F8BCC /* _PhotoWheel.m in Sources */,
 				68997B8F1359453A006F8BCC /* _Nub.m in Sources */,
 				6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */,
+				68BE084C135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

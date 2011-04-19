@@ -9,7 +9,7 @@
 #import "DetailViewController.h"
 #import "RootViewController.h"
 #import "PhotoWheelViewController.h"
-#import "UIViewController+KTCompositeView.h"
+#import "UIView+KTCompositeView.h"
 #import "PhotoWheel.h"
 #import "Nub.h"
 
@@ -57,8 +57,8 @@
    [newNavController setNavigationBarHidden:YES];
    [self setPhotoNavigationController:newNavController];
    [newNavController release];
-   
-   [self kt_addSubview:[[self photoNavigationController] view] toPlaceholder:[self photoWheelPlaceholderView]];
+ 
+   [[self photoWheelPlaceholderView] kt_addSubview:[[self photoNavigationController] view]];
    
    [[self segmentedControl] addTarget:self action:@selector(segmentedControlChanged:) forControlEvents:UIControlEventValueChanged];
 }
