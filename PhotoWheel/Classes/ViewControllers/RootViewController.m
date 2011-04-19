@@ -12,6 +12,8 @@
 #import "PhotoWheel.h"
 
 
+#define CAROUSELS_PER_ROW 2
+
 @interface RootViewController ()
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @end
@@ -71,9 +73,22 @@
 
 - (void)configureCell:(PhotoWheelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath 
 {
-   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   NSInteger row = [indexPath row] * CAROUSELS_PER_ROW;
+   NSIndexPath *adjustedIndexPath = [NSIndexPath indexPathForRow:row inSection:[indexPath section]];
+
+   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:adjustedIndexPath];
    [[cell label1] setText:[photoWheel name]];
    [[cell photoWheelViewController1] setPhotoWheel:photoWheel];
+
+   NSInteger numberOfObjects = [[[[self fetchedResultsController] sections] objectAtIndex:[indexPath section]] numberOfObjects];
+   if (row + 1 < numberOfObjects) {
+      adjustedIndexPath = [NSIndexPath indexPathForRow:row+1 inSection:[indexPath section]];
+      
+      photoWheel = [[self fetchedResultsController] objectAtIndexPath:adjustedIndexPath];
+      [[cell label2] setText:[photoWheel name]];
+      [[cell photoWheelViewController2] setPhotoWheel:photoWheel];
+      
+   }
 }
 
 
@@ -173,7 +188,8 @@
 		
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:section] numberOfObjects];
+   NSInteger numberOfObjects = [[[[self fetchedResultsController] sections] objectAtIndex:section] numberOfObjects];
+   NSInteger count = floor(numberOfObjects / CAROUSELS_PER_ROW);
    return count;
 }
 		
