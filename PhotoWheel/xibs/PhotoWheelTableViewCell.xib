@@ -71,7 +71,7 @@
 								<string key="NSFrame">{{426, 5}, {300, 300}}</string>
 								<reference key="NSSuperview" ref="220346763"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="294720152"/>
+								<reference key="NSNextKeyView" ref="934314321"/>
 								<object class="NSColor" key="IBUIBackgroundColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
@@ -79,20 +79,20 @@
 								</object>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 							</object>
-							<object class="IBUILabel" id="294720152">
+							<object class="IBUILabel" id="934314321">
 								<reference key="NSNextResponder" ref="220346763"/>
 								<int key="NSvFlags">266</int>
 								<string key="NSFrame">{{42, 313}, {300, 21}}</string>
 								<reference key="NSSuperview" ref="220346763"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="127522302"/>
+								<reference key="NSNextKeyView" ref="542083139"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<string key="IBUIText">Label</string>
-								<object class="NSColor" key="IBUITextColor" id="803716854">
+								<object class="NSColor" key="IBUITextColor" id="253432544">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
 								</object>
@@ -101,7 +101,7 @@
 								<float key="IBUIMinimumFontSize">10</float>
 								<int key="IBUITextAlignment">1</int>
 							</object>
-							<object class="IBUILabel" id="127522302">
+							<object class="IBUILabel" id="542083139">
 								<reference key="NSNextResponder" ref="220346763"/>
 								<int key="NSvFlags">266</int>
 								<string key="NSFrame">{{426, 313}, {300, 21}}</string>
@@ -114,7 +114,7 @@
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<string key="IBUIText">Label</string>
-								<reference key="IBUITextColor" ref="803716854"/>
+								<reference key="IBUITextColor" ref="253432544"/>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
@@ -146,6 +146,7 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<int key="IBUISeparatorStyle">1</int>
+				<int key="IBUISelectionStyle">0</int>
 				<reference key="IBUIContentView" ref="220346763"/>
 				<string key="IBUIReuseIdentifier">PhotoWheelTableViewCell</string>
 			</object>
@@ -177,19 +178,51 @@
 				<bool key="EncodedWithXMLCoder">YES</bool>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">photoWheelView2</string>
-						<reference key="source" ref="224953845"/>
-						<reference key="destination" ref="705587006"/>
-					</object>
-					<int key="connectionID">7</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">placeholderView1</string>
 						<reference key="source" ref="224953845"/>
 						<reference key="destination" ref="1020958860"/>
 					</object>
-					<int key="connectionID">9</int>
+					<int key="connectionID">12</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">placeholderView2</string>
+						<reference key="source" ref="224953845"/>
+						<reference key="destination" ref="705587006"/>
+					</object>
+					<int key="connectionID">13</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">photoWheelViewController1</string>
+						<reference key="source" ref="224953845"/>
+						<reference key="destination" ref="380540688"/>
+					</object>
+					<int key="connectionID">14</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">photoWheelViewController2</string>
+						<reference key="source" ref="224953845"/>
+						<reference key="destination" ref="247477808"/>
+					</object>
+					<int key="connectionID">15</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">label1</string>
+						<reference key="source" ref="224953845"/>
+						<reference key="destination" ref="934314321"/>
+					</object>
+					<int key="connectionID">16</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">label2</string>
+						<reference key="source" ref="224953845"/>
+						<reference key="destination" ref="542083139"/>
+					</object>
+					<int key="connectionID">17</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -219,8 +252,8 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<reference ref="1020958860"/>
 							<reference ref="705587006"/>
-							<reference ref="294720152"/>
-							<reference ref="127522302"/>
+							<reference ref="934314321"/>
+							<reference ref="542083139"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -250,12 +283,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">10</int>
-						<reference key="object" ref="294720152"/>
+						<reference key="object" ref="934314321"/>
 						<reference key="parent" ref="224953845"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">11</int>
-						<reference key="object" ref="127522302"/>
+						<reference key="object" ref="542083139"/>
 						<reference key="parent" ref="224953845"/>
 					</object>
 				</object>
@@ -303,7 +336,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">11</int>
+			<int key="maxID">17</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -317,19 +350,19 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>label1</string>
 							<string>label2</string>
+							<string>photoWheelViewController1</string>
+							<string>photoWheelViewController2</string>
 							<string>placeholderView1</string>
 							<string>placeholderView2</string>
-							<string>viewController1</string>
-							<string>viewController2</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>UILabel</string>
 							<string>UILabel</string>
-							<string>UIView</string>
-							<string>UIView</string>
 							<string>PhotoWheelViewController</string>
 							<string>PhotoWheelViewController</string>
+							<string>UIView</string>
+							<string>UIView</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -338,10 +371,10 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>label1</string>
 							<string>label2</string>
+							<string>photoWheelViewController1</string>
+							<string>photoWheelViewController2</string>
 							<string>placeholderView1</string>
 							<string>placeholderView2</string>
-							<string>viewController1</string>
-							<string>viewController2</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -354,20 +387,20 @@
 								<string key="candidateClassName">UILabel</string>
 							</object>
 							<object class="IBToOneOutletInfo">
+								<string key="name">photoWheelViewController1</string>
+								<string key="candidateClassName">PhotoWheelViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">photoWheelViewController2</string>
+								<string key="candidateClassName">PhotoWheelViewController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
 								<string key="name">placeholderView1</string>
 								<string key="candidateClassName">UIView</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">placeholderView2</string>
 								<string key="candidateClassName">UIView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">viewController1</string>
-								<string key="candidateClassName">PhotoWheelViewController</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">viewController2</string>
-								<string key="candidateClassName">PhotoWheelViewController</string>
 							</object>
 						</object>
 					</object>

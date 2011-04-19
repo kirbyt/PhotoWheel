@@ -7,8 +7,9 @@
 //
 
 #import "RootViewController.h"
-#import "PhotoWheel.h"
 #import "PhotoWheelTableViewCell.h"
+#import "PhotoWheelViewController.h"
+#import "PhotoWheel.h"
 
 
 @interface RootViewController ()
@@ -68,9 +69,11 @@
     return YES;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath 
+- (void)configureCell:(PhotoWheelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath 
 {
-   
+   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   [[cell label1] setText:[photoWheel name]];
+   [[cell photoWheelViewController1] setPhotoWheel:photoWheel];
 }
 
 
@@ -144,7 +147,7 @@
          break;
          
       case NSFetchedResultsChangeUpdate:
-         [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+         [self configureCell:(PhotoWheelTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
          break;
          
       case NSFetchedResultsChangeMove:
@@ -177,14 +180,14 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    PhotoWheelTableViewCell *cell = [PhotoWheelTableViewCell cellForTableView:tableView];
-   
+   [self configureCell:cell atIndexPath:indexPath];
    return cell;
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

@@ -17,10 +17,8 @@
 @synthesize placeholderView2 = placeholderView2_;
 @synthesize label1 = label1_;
 @synthesize label2 = label2_;
-@synthesize viewController1 = viewController1_;
-@synthesize viewController2 = viewController2_;
-@synthesize photoWheel1 = photoWheel1_;
-@synthesize photoWheel2 = photoWheel2_;
+@synthesize photoWheelViewController1 = photoWheelViewController1_;
+@synthesize photoWheelViewController2 = photoWheelViewController2_;
 
 - (void)dealloc
 {
@@ -28,43 +26,19 @@
    [placeholderView2_ release], placeholderView2_ = nil;
    [label1_ release], label1_ = nil;
    [label2_ release], label2_ = nil;
-   [viewController1_ release], viewController1_ = nil;
-   [viewController2_ release], viewController2_ = nil;
-   [photoWheel1_ release], photoWheel1_ = nil;
-   [photoWheel2_ release], photoWheel2_ = nil;   
+   [photoWheelViewController1_ release], photoWheelViewController1_ = nil;
+   [photoWheelViewController2_ release], photoWheelViewController2_ = nil;
    
    [super dealloc];
 }
 
 - (void)awakeFromNib
 {
-   [[self viewController1] setStyle:PhotoWheelStyleCarousel];
-   [[self viewController2] setStyle:PhotoWheelStyleCarousel];
+   [[self photoWheelViewController1] setStyle:PhotoWheelStyleCarousel];
+   [[self photoWheelViewController2] setStyle:PhotoWheelStyleCarousel];
    
-   [[self placeholderView1] kt_addSubview:[[self viewController1] view]];
-   [[self placeholderView2] kt_addSubview:[[self viewController2] view]];
-}
-
-- (void)setPhotoWheel1:(PhotoWheel *)photoWheel1
-{
-   if (photoWheel1_ != photoWheel1) {
-      [photoWheel1 retain];
-      [photoWheel1_ release];
-      photoWheel1_ = photoWheel1;
-      
-      [[self viewController1] setPhotoWheel:photoWheel1];
-   }
-}
-
-- (void)setPhotoWheel2:(PhotoWheel *)photoWheel2
-{
-   if (photoWheel2_ != photoWheel2) {
-      [photoWheel2 retain];
-      [photoWheel2_ release];
-      photoWheel2_ = photoWheel2;
-   }
-
-   [[self viewController2] setPhotoWheel:photoWheel2];
+   [[self placeholderView1] kt_addSubview:[[self photoWheelViewController1] view]];
+   [[self placeholderView2] kt_addSubview:[[self photoWheelViewController2] view]];
 }
 
 #pragma mark - Class Methods
