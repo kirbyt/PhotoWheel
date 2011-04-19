@@ -125,6 +125,7 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
 {
    if (style_ != style) {
       style_ = style;
+      
       [UIView beginAnimations:@"ChangeStyle" context:nil];
       [self setAngle:[self currentAngle]];
       [UIView commitAnimations];
