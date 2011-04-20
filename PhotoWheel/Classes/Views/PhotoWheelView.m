@@ -114,7 +114,7 @@
    // The follow code is inprised from the carousel example at:
    // http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad
 
-   CGPoint center = [self center];
+   CGPoint center = CGPointMake(CGRectGetMidX([self bounds]), CGRectGetMidY([self bounds]));
    CGFloat radiusX = [self bounds].size.width * 0.35;
    CGFloat radiusY = radiusX;
    if ([self style] == PhotoWheelStyleCarousel) {
@@ -163,6 +163,10 @@
    }
 }
 
+- (void)layoutSubviews
+{
+   [self setAngle:[self currentAngle]];
+}
 
 #pragma mark - Touch Event Handlers
 
