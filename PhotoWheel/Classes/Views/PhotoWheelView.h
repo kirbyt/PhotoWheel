@@ -13,6 +13,7 @@ typedef enum  {
    PhotoWheelStyleCarousel,
 } PhotoWheelStyle;
 
+@class PhotoWheel;
 
 @interface PhotoWheelView : UIView 
 {
@@ -21,6 +22,7 @@ typedef enum  {
 
 @property (nonatomic, assign, readonly) NSInteger nubCount;
 @property (nonatomic, assign) PhotoWheelStyle style;
+@property (nonatomic, retain) PhotoWheel *photoWheel;
 
 - (id)initWithNubCount:(NSInteger)nubCount;
 

@@ -8,6 +8,8 @@
 
 #import "PhotoWheelView.h"
 #import "PhotoNubViewController.h"
+#import "PhotoWheel.h"
+#import "Nub.h"
 #import "KTGeometry.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -19,8 +21,11 @@
 @property (nonatomic, assign) CGFloat lastAngle;
 
 - (void)commonInit;
+- (CGPoint)wheelCenter;
 - (void)setStyle:(PhotoWheelStyle)style;
 - (void)setAngle:(CGFloat)angle;
+- (void)setPhotoWheel:(PhotoWheel *)photoWheel;
+- (void)reloadNubs;
 @end
 
 
@@ -28,6 +33,7 @@
 
 @synthesize nubCount = nubCount_;
 @synthesize style = style_;
+@synthesize photoWheel = photoWheel_;
 @synthesize nubControllers = nubControllers_;
 @synthesize currentAngle = currentAngle_;
 @synthesize lastAngle = lastAngle_;
@@ -35,6 +41,7 @@
 - (void)dealloc
 {
    [nubControllers_ release], nubControllers_ = nil;
+   [photoWheel_ release], photoWheel_ = nil;
    [super dealloc];
 }
 
@@ -78,6 +85,11 @@
    return self;
 }
 
+- (void)layoutSubviews
+{
+   [self setAngle:[self currentAngle]];
+}
+
 - (void)commonInit
 {
    // Create the array that holds each view on a wheel spoke.
@@ -98,6 +110,13 @@
    [self setLastAngle:0.0];
 }
 
+- (CGPoint)wheelCenter
+{
+   CGPoint center = CGPointMake(CGRectGetMidX([self bounds]), CGRectGetMidY([self bounds]));
+   return center;
+}
+
+
 - (void)setStyle:(PhotoWheelStyle)style
 {
    if (style_ != style) {
@@ -114,7 +133,7 @@
    // The follow code is inprised from the carousel example at:
    // http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad
 
-   CGPoint center = CGPointMake(CGRectGetMidX([self bounds]), CGRectGetMidY([self bounds]));
+   CGPoint center = [self wheelCenter];
    CGFloat radiusX = [self bounds].size.width * 0.35;
    CGFloat radiusY = radiusX;
    if ([self style] == PhotoWheelStyleCarousel) {
@@ -163,10 +182,52 @@
    }
 }
 
-- (void)layoutSubviews
+- (void)setPhotoWheel:(PhotoWheel *)photoWheel
 {
-   [self setAngle:[self currentAngle]];
+   if (photoWheel_ != photoWheel) {
+      [photoWheel retain];
+      [photoWheel_ release];
+      photoWheel_ = photoWheel;
+      
+      [self reloadNubs];
+   }
 }
+
+- (void)reloadNubs
+{
+   NSManagedObjectContext *context = [[self photoWheel] managedObjectContext];
+   
+   for (NSInteger index=0; index < [[self nubControllers] count]; index++) {
+      PhotoNubViewController *nubController = [[self nubControllers] objectAtIndex:index];
+      
+      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sortOrder == %i", index];
+      NSSet *nubSet = [[[self photoWheel] nubs] filteredSetUsingPredicate:predicate];
+      if (nubSet && [nubSet count] > 0) {
+         [nubController setNub:[nubSet anyObject]];
+      } else {
+         // Insert a new nub.
+         Nub *newNub = [Nub insertNewInManagedObjectContext:context];
+         [newNub setSortOrder:[NSNumber numberWithInt:index]];
+         [newNub setPhotoWheel:[self photoWheel]];
+         
+         // Save the context.
+         NSError *error = nil;
+         if (![context save:&error])
+         {
+            /*
+             Replace this implementation with code to handle the error appropriately.
+             
+             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+             */
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            abort();
+         }
+         
+         [nubController setNub:newNub];
+      }
+   }
+}
+
 
 #pragma mark - Touch Event Handlers
 
@@ -175,7 +236,7 @@
    // We only support single touches, so anyObject retrieves just that touch from touches
    UITouch *touch = [touches anyObject];
    
-   CGPoint wheelCenter = [self center];
+   CGPoint wheelCenter = CGPointMake(CGRectGetMidX([self bounds]), CGRectGetMidY([self bounds]));
    
    // use the movement of the touch to decide
    // how much to rotate the carousel
