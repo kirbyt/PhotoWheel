@@ -78,7 +78,7 @@
 
    PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:adjustedIndexPath];
    [[cell label1] setText:[photoWheel name]];
-   [[cell photoWheelViewController1] setPhotoWheel:photoWheel];
+//   [[cell photoWheelViewController1] setPhotoWheel:photoWheel];
 
    NSInteger numberOfObjects = [[[[self fetchedResultsController] sections] objectAtIndex:[indexPath section]] numberOfObjects];
    if (row + 1 < numberOfObjects) {
@@ -86,7 +86,7 @@
       
       photoWheel = [[self fetchedResultsController] objectAtIndexPath:adjustedIndexPath];
       [[cell label2] setText:[photoWheel name]];
-      [[cell photoWheelViewController2] setPhotoWheel:photoWheel];
+//      [[cell photoWheelViewController2] setPhotoWheel:photoWheel];
       
    }
 }

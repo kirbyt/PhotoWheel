@@ -7,38 +7,31 @@
 //
 
 #import "PhotoWheelTableViewCell.h"
-#import "UIView+KTCompositeView.h"
-#import "PhotoWheelViewController.h"
+#import "PhotoWheelView.h"
 
 
 @implementation PhotoWheelTableViewCell
 
-@synthesize placeholderView1 = placeholderView1_;
-@synthesize placeholderView2 = placeholderView2_;
+@synthesize photoWheel1 = photoWheel1_;
+@synthesize photoWheel2 = photoWheel2_;
 @synthesize label1 = label1_;
 @synthesize label2 = label2_;
-@synthesize photoWheelViewController1 = photoWheelViewController1_;
-@synthesize photoWheelViewController2 = photoWheelViewController2_;
 
 - (void)dealloc
 {
-   [placeholderView1_ release], placeholderView1_ = nil;
-   [placeholderView2_ release], placeholderView2_ = nil;
+   
+   [photoWheel1_ release], photoWheel1_ = nil;
+   [photoWheel2_ release], photoWheel2_ = nil;
    [label1_ release], label1_ = nil;
    [label2_ release], label2_ = nil;
-   [photoWheelViewController1_ release], photoWheelViewController1_ = nil;
-   [photoWheelViewController2_ release], photoWheelViewController2_ = nil;
    
    [super dealloc];
 }
 
 - (void)awakeFromNib
 {
-   [[self photoWheelViewController1] setStyle:PhotoWheelStyleCarousel];
-   [[self photoWheelViewController2] setStyle:PhotoWheelStyleCarousel];
-   
-   [[self placeholderView1] kt_addSubview:[[self photoWheelViewController1] view]];
-   [[self placeholderView2] kt_addSubview:[[self photoWheelViewController2] view]];
+   [[self photoWheel1] setStyle:PhotoWheelStyleCarousel];
+   [[self photoWheel2] setStyle:PhotoWheelStyleCarousel];
 }
 
 #pragma mark - Class Methods

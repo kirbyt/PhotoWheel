@@ -53,6 +53,7 @@
 		68BE0857135DF51A001FFEA0 /* 33-circle-plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0853135DF51A001FFEA0 /* 33-circle-plus@2x.png */; };
 		68BE0858135DF51A001FFEA0 /* 59-info.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0854135DF51A001FFEA0 /* 59-info.png */; };
 		68BE0859135DF51A001FFEA0 /* 59-info@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0855135DF51A001FFEA0 /* 59-info@2x.png */; };
+		68F9E100135F4F0F00052C9B /* PhotoWheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F9E0FF135F4F0F00052C9B /* PhotoWheelView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -126,6 +127,9 @@
 		68BE0853135DF51A001FFEA0 /* 33-circle-plus@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "33-circle-plus@2x.png"; sourceTree = "<group>"; };
 		68BE0854135DF51A001FFEA0 /* 59-info.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "59-info.png"; sourceTree = "<group>"; };
 		68BE0855135DF51A001FFEA0 /* 59-info@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "59-info@2x.png"; sourceTree = "<group>"; };
+		68F9E0FE135F4F0F00052C9B /* PhotoWheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelView.h; sourceTree = "<group>"; };
+		68F9E0FF135F4F0F00052C9B /* PhotoWheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelView.m; sourceTree = "<group>"; };
+		68F9E102135F515100052C9B /* KTGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTGeometry.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +218,7 @@
 				68834C3013578BD600EC091E /* Constants.m */,
 				682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */,
 				682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */,
+				68F9E102135F515100052C9B /* KTGeometry.h */,
 				6865D14D1344CDD40005271D /* Categories */,
 				68997B2713590C25006F8BCC /* Models */,
 				6865D159134520350005271D /* Views */,
@@ -281,6 +286,8 @@
 				6865D15B1345204F0005271D /* PhotoNubView.m */,
 				68BE084A135DEE1F001FFEA0 /* PhotoWheelTableViewCell.h */,
 				68BE084B135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m */,
+				68F9E0FE135F4F0F00052C9B /* PhotoWheelView.h */,
+				68F9E0FF135F4F0F00052C9B /* PhotoWheelView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -442,6 +449,7 @@
 				68997B8F1359453A006F8BCC /* _Nub.m in Sources */,
 				6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */,
 				68BE084C135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m in Sources */,
+				68F9E100135F4F0F00052C9B /* PhotoWheelView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

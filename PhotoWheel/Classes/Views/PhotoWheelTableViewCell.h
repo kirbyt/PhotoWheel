@@ -9,21 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @class PhotoWheel;
-@class PhotoWheelViewController;
+@class PhotoWheelView;
 
 @interface PhotoWheelTableViewCell : UITableViewCell
 {
     
 }
 
-@property (nonatomic, retain) IBOutlet UIView *placeholderView1;
-@property (nonatomic, retain) IBOutlet UIView *placeholderView2;
-
+@property (nonatomic, retain) IBOutlet PhotoWheelView *photoWheel1;
+@property (nonatomic, retain) IBOutlet PhotoWheelView *photoWheel2;
 @property (nonatomic, retain) IBOutlet UILabel *label1;
 @property (nonatomic, retain) IBOutlet UILabel *label2;
-
-@property (nonatomic, retain) IBOutlet PhotoWheelViewController *photoWheelViewController1;
-@property (nonatomic, retain) IBOutlet PhotoWheelViewController *photoWheelViewController2;
 
 + (NSString *)cellIdentifier;
 + (NSString *)nibName;

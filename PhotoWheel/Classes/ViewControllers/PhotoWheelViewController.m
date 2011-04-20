@@ -14,27 +14,6 @@
 #import <QuartzCore/QuartzCore.h>
 
 
-// From: http://iphonedevelopment.blogspot.com/2009/12/better-two-finger-rotate-gesture.html
-static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint line1End, CGPoint line2Start, CGPoint line2End) {
-	
-	CGFloat a = line1End.x - line1Start.x;
-	CGFloat b = line1End.y - line1Start.y;
-	CGFloat c = line2End.x - line2Start.x;
-	CGFloat d = line2End.y - line2Start.y;
-   
-   CGFloat line1Slope = (line1End.y - line1Start.y) / (line1End.x - line1Start.x);
-   CGFloat line2Slope = (line2End.y - line2Start.y) / (line2End.x - line2Start.x);
-	
-	CGFloat degs = acosf(((a*c) + (b*d)) / ((sqrt(a*a + b*b)) * (sqrt(c*c + d*d))));
-	
-   
-	return (line2Slope > line1Slope) ? degs : -degs;	
-}
-
-#define degreesToRadians(x) (M_PI * x / 180.0)
-#define radiansToDegrees(x) (180.0 * x / M_PI)
-
-
 #define WHEEL_NUB_COUNT 12
 
 
@@ -121,17 +100,6 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    [self setAngle:[self currentAngle]];
 }
 
-- (void)setStyle:(PhotoWheelStyle)style
-{
-   if (style_ != style) {
-      style_ = style;
-      
-      [UIView beginAnimations:@"ChangeStyle" context:nil];
-      [self setAngle:[self currentAngle]];
-      [UIView commitAnimations];
-   }
-}
-
 - (void)setPhotoWheel:(PhotoWheel *)photoWheel
 {
    if (photoWheel_ != photoWheel) {
@@ -182,83 +150,6 @@ static inline CGFloat angleBetweenLinesInRadians(CGPoint line1Start, CGPoint lin
    [UIView beginAnimations:@"showWheelView" context:nil];
    [[self wheelView] setAlpha:alpha];
    [UIView commitAnimations];
-}
-
-// The follow code is inprised from the carousel example at:
-// http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad
-- (void)setAngle:(CGFloat)angle
-{
-   CGPoint center = [[self wheelView] center];
-   CGFloat radiusX = [[self wheelView] bounds].size.width * 0.35;
-   CGFloat radiusY = radiusX;
-   if ([self style] == PhotoWheelStyleCarousel) {
-      radiusY = radiusX * 0.30;
-   }
-
-   NSInteger spokeCount = [[self wheelSubviewControllers] count];
-   float angleToAdd = 360.0f / spokeCount;
-   
-   for(UIViewController *controller in [self wheelSubviewControllers])
-   {
-      UIView *view = [controller view];
-      
-      float angleInRadians = angle * M_PI / 180.0f;
-
-      // get a location based on the angle
-      float xPosition = center.x + (radiusX * sinf(angleInRadians));
-      float yPosition = center.y + (radiusY * cosf(angleInRadians));
-
-      // get a scale too; effectively we have:
-      //
-      //  0.75f   the minimum scale
-      //  0.25f   the amount by which the scale varies over half a circle
-      //
-      // so this will give scales between 0.75 and 1.0. Adjust to suit!
-      float scale = 0.75f + 0.25f * (cosf(angleInRadians) + 1.0);
-      
-      // apply location and scale
-      if ([self style] == PhotoWheelStyleCarousel) {
-         [view setTransform:CGAffineTransformScale(CGAffineTransformMakeTranslation(xPosition, yPosition), scale, scale)];
-         // tweak alpha using the same system as applied for scale, this time
-         // with 0.3 the minimum and a semicircle range of 0.5
-         [view setAlpha:(0.3f + 0.5f * (cosf(angleInRadians) + 1.0))];
-
-      } else {
-         [view setTransform:CGAffineTransformMakeTranslation(xPosition, yPosition)];
-         [view setAlpha:1.0];
-      }
-      
-      // setting the z position on the layer has the effect of setting the
-      // draw order, without having to reorder our list of subviews
-      [[view layer] setZPosition:scale];
-      
-      // work out what the next angle is going to be
-      angle += angleToAdd;
-   }
-}
-
-
-#pragma mark - Touch Event Handlers
-
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-   // We only support single touches, so anyObject retrieves just that touch from touches
-   UITouch *touch = [touches anyObject];
-   
-   CGPoint wheelCenter = [[self wheelView] center];
-   
-   // use the movement of the touch to decide
-   // how much to rotate the carousel
-   CGPoint locationNow = [touch locationInView:[self view]];
-   CGPoint locationThen = [touch previousLocationInView:[self view]];
-   CGPoint oppositeNow = CGPointMake(wheelCenter.x + (wheelCenter.x - locationNow.x), wheelCenter.y + (wheelCenter.y - locationNow.y));
-   CGPoint oppositeThen = CGPointMake(wheelCenter.x + (wheelCenter.x - locationThen.x), wheelCenter.y + (wheelCenter.y - locationThen.y));
-   
-   CGFloat angleInRadians = angleBetweenLinesInRadians(locationNow, oppositeNow, locationThen, oppositeThen);
-   [self setLastAngle:[self currentAngle]];
-   [self setCurrentAngle:[self currentAngle] + radiansToDegrees(angleInRadians)];
-   
-   [self setAngle:[self currentAngle]];
 }
 
 
