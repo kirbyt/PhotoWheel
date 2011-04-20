@@ -50,7 +50,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<object class="IBUIView" id="1020958860">
 								<reference key="NSNextResponder" ref="220346763"/>
-								<int key="NSvFlags">292</int>
+								<int key="NSvFlags">274</int>
 								<string key="NSFrame">{{42, 5}, {300, 300}}</string>
 								<reference key="NSSuperview" ref="220346763"/>
 								<reference key="NSWindow"/>
@@ -63,7 +63,7 @@
 							</object>
 							<object class="IBUIView" id="705587006">
 								<reference key="NSNextResponder" ref="220346763"/>
-								<int key="NSvFlags">289</int>
+								<int key="NSvFlags">256</int>
 								<string key="NSFrame">{{426, 5}, {300, 300}}</string>
 								<reference key="NSSuperview" ref="220346763"/>
 								<reference key="NSWindow"/>
@@ -81,6 +81,10 @@
 								<reference key="NSSuperview" ref="220346763"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="641359292"/>
+								<object class="NSColor" key="IBUIBackgroundColor" id="477704787">
+									<int key="NSColorSpace">1</int>
+									<bytes key="NSRGB">MCAxIDAAA</bytes>
+								</object>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -103,6 +107,7 @@
 								<reference key="NSSuperview" ref="220346763"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
+								<reference key="IBUIBackgroundColor" ref="477704787"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
