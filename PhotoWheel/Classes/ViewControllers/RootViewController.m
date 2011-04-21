@@ -10,6 +10,7 @@
 #import "PhotoWheelTableViewCell.h"
 #import "PhotoWheelViewController.h"
 #import "PhotoWheel.h"
+#import "DetailViewController.h"
 
 
 #define CAROUSELS_PER_ROW 2
@@ -241,8 +242,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-//   [[self detailViewController] setPhotoWheel:photoWheel];
+   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   
+   DetailViewController *newController = [[DetailViewController alloc] init];
+   [newController setPhotoWheel:photoWheel];
+   [[self navigationController] pushViewController:newController animated:YES];
+   [newController release];
 }
 
 

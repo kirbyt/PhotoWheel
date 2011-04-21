@@ -250,6 +250,8 @@
    [self setCurrentAngle:[self currentAngle] + radiansToDegrees(angleInRadians)];
    
    [self setAngle:[self currentAngle]];
+   
+   [super touchesMoved:touches withEvent:event];
 }
 
 @end

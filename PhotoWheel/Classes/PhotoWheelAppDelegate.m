@@ -14,6 +14,7 @@
 
 @synthesize window = window_;
 @synthesize rootViewController = rootViewController_;
+@synthesize navigationController = navigationController_;
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize managedObjectModel = managedObjectModel_;
 @synthesize persistentStoreCoordinator = persistentStoreCoordinator_;
@@ -22,6 +23,7 @@
 {
    [window_ release];
    [rootViewController_ release];
+   [navigationController_ release];
 
    [managedObjectContext_ release], managedObjectContext_ = nil;
    [managedObjectModel_ release], managedObjectModel_ = nil;
@@ -38,8 +40,12 @@
    [self setRootViewController:newController];
    [newController release];
    
+   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[self rootViewController]];
+   [self setNavigationController:navController];
+   [navController release];
+   
    // Add the root view controller to the window.
-   self.window.rootViewController = [self rootViewController];
+   self.window.rootViewController = [self navigationController];
    [self.window makeKeyAndVisible];
    return YES;
 }

@@ -27,6 +27,15 @@
    [super dealloc];
 }
 
+- (id)init
+{
+   self = [super initWithNibName:@"DetailView" bundle:nil];
+   if (self) {
+      
+   }
+   return self;
+}
+
 - (void)viewDidLoad
 {
    [super viewDidLoad];
