@@ -11,11 +11,15 @@
 #import "PhotoWheelViewController.h"
 #import "PhotoNubMenuViewController.h"
 #import "Nub.h"
+#import "UINavigationController+KTTransitions.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface PhotoNubViewController ()
 @property (nonatomic, retain, readwrite) UIPopoverController *popoverController;
 @property (nonatomic, retain) PhotoNubMenuViewController *menuViewController;
+@property (nonatomic, assign) CGPoint imageBrowserAnimationPoint;
+- (void)showImageBrowserFromPoint:(CGPoint)point;
 @end
 
 
@@ -25,6 +29,7 @@
 @synthesize popoverController = popoverController_;
 @synthesize menuViewController = menuViewController_;
 @synthesize nub = nub_;
+@synthesize imageBrowserAnimationPoint = imageBrowserAnimationPoint_;
 
 - (void)dealloc
 {
@@ -150,8 +155,7 @@
    CGPoint point = CGPointMake(bounds.size.width/2, bounds.size.height/2);
    point = [[self view] convertPoint:point toView:[[self view] superview]];
    
-   NSInteger index = [[[self nub] sortOrder] intValue];
-   [[self photoWheelViewController] showImageBrowserFromPoint:point startAtIndex:index];
+   [self showImageBrowserFromPoint:point];
 }
 
 - (void)pinch:(UIPinchGestureRecognizer *)recognizer
@@ -159,5 +163,33 @@
    NSLog(@"pinch/zoom");
 }
 
+
+#pragma mark - Photo Browser Methods
+
+
+- (void)showImageBrowserFromPoint:(CGPoint)point
+{
+   [self setImageBrowserAnimationPoint:point];
+   
+   UIViewController *newViewController = [[UIViewController alloc] init];
+   UIView *view = [newViewController view];
+   UIImage *image = [[self nub] largeImage];
+   [[view layer] setContents:(id)[image CGImage]];
+   [[view layer] setContentsGravity:kCAGravityResizeAspectFill];
+   
+   // Temporarily add a tap gesture to close the full screen image.
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideImageBrowser:)];
+   [[newViewController view] addGestureRecognizer:tap];
+   [tap release];
+   
+   [[self navigationController] kt_pushViewController:newViewController explodeFromPoint:point];
+   [newViewController release];
+}
+
+- (void)hideImageBrowser:(UITapGestureRecognizer *)recognizer
+{
+   CGPoint animateToPoint = [self imageBrowserAnimationPoint];
+   [[self navigationController] kt_popViewControllerImplodeToPoint:animateToPoint];
+}
 
 @end
