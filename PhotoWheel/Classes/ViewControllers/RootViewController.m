@@ -73,22 +73,12 @@
 
 - (void)configureCell:(PhotoWheelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath 
 {
-   NSInteger row = [indexPath row] * CAROUSELS_PER_ROW;
-   NSIndexPath *adjustedIndexPath = [NSIndexPath indexPathForRow:row inSection:[indexPath section]];
+//   NSInteger row = [indexPath row] * CAROUSELS_PER_ROW;
+//   NSIndexPath *adjustedIndexPath = [NSIndexPath indexPathForRow:row inSection:[indexPath section]];
 
-   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:adjustedIndexPath];
-   [[cell label1] setText:[photoWheel name]];
-   [[cell photoWheel1] setPhotoWheel:photoWheel];
-
-   NSInteger numberOfObjects = [[[[self fetchedResultsController] sections] objectAtIndex:[indexPath section]] numberOfObjects];
-   if (row + 1 < numberOfObjects) {
-      adjustedIndexPath = [NSIndexPath indexPathForRow:row+1 inSection:[indexPath section]];
-      
-      photoWheel = [[self fetchedResultsController] objectAtIndexPath:adjustedIndexPath];
-      [[cell label2] setText:[photoWheel name]];
-      [[cell photoWheel2] setPhotoWheel:photoWheel];
-      
-   }
+   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   [[cell label] setText:[photoWheel name]];
+   [[cell photoWheelView] setPhotoWheel:photoWheel];
 }
 
 
@@ -99,7 +89,8 @@
    NSFetchedResultsController *fetchedRequestController = [self fetchedResultsController];
    NSManagedObjectContext *context = [fetchedRequestController managedObjectContext];
  
-   [PhotoWheel insertNewInManagedObjectContext:context];
+   PhotoWheel *newPhotoWheel = [PhotoWheel insertNewInManagedObjectContext:context];
+   [newPhotoWheel setName:@"New Photo Wheel"];
    
    // Save the context.
    NSError *error = nil;
@@ -113,8 +104,6 @@
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
    }
-   
-   [[self tableView] reloadData];
 }
 
 - (IBAction)showInfoScreen:(id)sender
@@ -140,6 +129,7 @@
    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
    
    NSFetchedResultsController *newFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:cacheName];
+   [newFetchedResultsController setDelegate:self];
    [self setFetchedResultsController:newFetchedResultsController];
    [newFetchedResultsController release];
    [fetchRequest release];
@@ -166,6 +156,9 @@
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
+   NSLog(@"%s",__PRETTY_FUNCTION__);
+   NSLog(@"indexPath.row=%i newIndexPath.row=%i", [indexPath row], [newIndexPath row]);
+
    UITableView *tableView = [self tableView];
    
    switch(type) 
@@ -206,8 +199,9 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
    NSInteger numberOfObjects = [[[[self fetchedResultsController] sections] objectAtIndex:section] numberOfObjects];
-   NSInteger count = floor(numberOfObjects / CAROUSELS_PER_ROW);
-   return count;
+//   NSInteger count = floor(numberOfObjects / CAROUSELS_PER_ROW);
+//   NSLog(@"count=%i", count);
+   return numberOfObjects;
 }
 		
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

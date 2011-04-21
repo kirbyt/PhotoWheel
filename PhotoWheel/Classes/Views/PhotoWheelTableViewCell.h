@@ -16,10 +16,8 @@
     
 }
 
-@property (nonatomic, retain) IBOutlet PhotoWheelView *photoWheel1;
-@property (nonatomic, retain) IBOutlet PhotoWheelView *photoWheel2;
-@property (nonatomic, retain) IBOutlet UILabel *label1;
-@property (nonatomic, retain) IBOutlet UILabel *label2;
+@property (nonatomic, retain) IBOutlet PhotoWheelView *photoWheelView;
+@property (nonatomic, retain) IBOutlet UILabel *label;
 
 + (NSString *)cellIdentifier;
 + (NSString *)nibName;

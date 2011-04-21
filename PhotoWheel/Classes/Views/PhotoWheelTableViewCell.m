@@ -12,26 +12,21 @@
 
 @implementation PhotoWheelTableViewCell
 
-@synthesize photoWheel1 = photoWheel1_;
-@synthesize photoWheel2 = photoWheel2_;
-@synthesize label1 = label1_;
-@synthesize label2 = label2_;
+@synthesize photoWheelView = photoWheelView_;
+@synthesize label = label_;
 
 - (void)dealloc
 {
    
-   [photoWheel1_ release], photoWheel1_ = nil;
-   [photoWheel2_ release], photoWheel2_ = nil;
-   [label1_ release], label1_ = nil;
-   [label2_ release], label2_ = nil;
+   [photoWheelView_ release], photoWheelView_ = nil;
+   [label_ release], label_ = nil;
    
    [super dealloc];
 }
 
 - (void)awakeFromNib
 {
-   [[self photoWheel1] setStyle:PhotoWheelStyleCarousel];
-   [[self photoWheel2] setStyle:PhotoWheelStyleCarousel];
+   [[self photoWheelView] setStyle:PhotoWheelStyleCarousel];
 }
 
 #pragma mark - Class Methods
