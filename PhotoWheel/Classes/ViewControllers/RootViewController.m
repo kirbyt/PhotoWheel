@@ -199,8 +199,6 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
    NSInteger numberOfObjects = [[[[self fetchedResultsController] sections] objectAtIndex:section] numberOfObjects];
-//   NSInteger count = floor(numberOfObjects / CAROUSELS_PER_ROW);
-//   NSLog(@"count=%i", count);
    return numberOfObjects;
 }
 		

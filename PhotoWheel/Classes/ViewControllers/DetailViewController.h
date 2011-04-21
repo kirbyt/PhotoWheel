@@ -9,18 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @class PhotoWheel;
+@class PhotoWheelView;
 
 @interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> 
 {
 }
 
 
-@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, retain) IBOutlet UIView *photoWheelPlaceholderView;
-@property (nonatomic, retain) IBOutlet UISegmentedControl *segmentedControl;
-
+@property (nonatomic, retain) IBOutlet PhotoWheelView *photoWheelView;
 @property (nonatomic, retain) PhotoWheel *photoWheel;
-
-- (IBAction)pickImage:(id)sender;
 
 @end
