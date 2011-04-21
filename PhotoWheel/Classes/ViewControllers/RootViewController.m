@@ -75,11 +75,7 @@
 
 - (void)configureCell:(PhotoWheelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath 
 {
-//   NSInteger row = [indexPath row] * CAROUSELS_PER_ROW;
-//   NSIndexPath *adjustedIndexPath = [NSIndexPath indexPathForRow:row inSection:[indexPath section]];
-
    PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-   [[cell label] setText:[photoWheel name]];
    [[cell photoWheelView] setPhotoWheel:photoWheel];
 }
 

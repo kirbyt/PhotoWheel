@@ -24,7 +24,6 @@
          if ([view isKindOfClass:[PhotoWheelView class]]) {
             CGPoint convertedPoint = [view convertPoint:point fromView:self];
             if ([view pointInside:convertedPoint withEvent:event]) {
-               NSLog(@"photowheel");
                return view;
             }
          }
