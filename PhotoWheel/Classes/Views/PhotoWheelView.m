@@ -188,6 +188,7 @@
       photoWheel_ = photoWheel;
       
       [self reloadNubs];
+      [self setNeedsLayout];
    }
 }
 

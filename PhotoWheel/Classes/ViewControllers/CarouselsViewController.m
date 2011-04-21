@@ -159,4 +159,34 @@
    [[self gridView] reloadData];
 }
 
+
+#pragma mark - Actions
+
+- (IBAction)showInfoScreen
+{
+   
+}
+
+- (IBAction)addPhotoWheel
+{
+   NSFetchedResultsController *fetchedRequestController = [self fetchedResultsController];
+   NSManagedObjectContext *context = [fetchedRequestController managedObjectContext];
+   
+   PhotoWheel *newPhotoWheel = [PhotoWheel insertNewInManagedObjectContext:context];
+   [newPhotoWheel setName:@"New Photo Wheel"];
+   
+   // Save the context.
+   NSError *error = nil;
+   if (![context save:&error])
+   {
+      /*
+       Replace this implementation with code to handle the error appropriately.
+       
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+       */
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }
+}
+
 @end

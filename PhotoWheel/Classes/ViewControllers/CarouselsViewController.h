@@ -10,12 +10,15 @@
 #import "KTGridView.h"
 
 
-@interface CarouselsViewController : UIViewController <KTGridViewDataSource>
+@interface CarouselsViewController : UIViewController <NSFetchedResultsControllerDelegate, KTGridViewDataSource>
 {
     
 }
 
 @property (nonatomic, retain) IBOutlet KTGridView *gridView;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
+
+- (IBAction)showInfoScreen;
+- (IBAction)addPhotoWheel;
 
 @end
