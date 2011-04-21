@@ -59,7 +59,6 @@
 										<string key="NSFrameSize">{650, 21}</string>
 										<reference key="NSSuperview" ref="1020958860"/>
 										<reference key="NSWindow"/>
-										<reference key="NSNextKeyView"/>
 										<object class="NSColor" key="IBUIBackgroundColor" id="393420072">
 											<int key="NSColorSpace">3</int>
 											<bytes key="NSWhite">MQA</bytes>

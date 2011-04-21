@@ -29,6 +29,7 @@
    [[self photoWheelView] setStyle:PhotoWheelStyleCarousel];
 }
 
+
 #pragma mark - Class Methods
 
 + (NSString *)cellIdentifier 
