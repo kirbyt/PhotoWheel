@@ -8,6 +8,7 @@
 
 #import "PhotoWheelAppDelegate.h"
 #import "RootViewController.h"
+#import "CarouselsViewController.h"
 
 
 @implementation PhotoWheelAppDelegate
@@ -35,7 +36,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
    // Override point for customization after application launch.
-   RootViewController *newController = [[RootViewController alloc] init];
+//   RootViewController *newController = [[RootViewController alloc] init];
+//   [newController setManagedObjectContext:[self managedObjectContext]];
+//   [self setRootViewController:newController];
+//   [newController release];
+   
+   CarouselsViewController *newController = [[CarouselsViewController alloc] init];
    [newController setManagedObjectContext:[self managedObjectContext]];
    [self setRootViewController:newController];
    [newController release];

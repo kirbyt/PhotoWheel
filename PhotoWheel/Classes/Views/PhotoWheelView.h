@@ -6,7 +6,8 @@
 //  Copyright 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "KTGridView.h"
 
 typedef enum  {
    PhotoWheelStyleWheel,
@@ -15,7 +16,7 @@ typedef enum  {
 
 @class PhotoWheel;
 
-@interface PhotoWheelView : UIView 
+@interface PhotoWheelView : KTGridViewCell
 {
     
 }

@@ -27,6 +27,9 @@
 		682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B2133C1C680058E1D7 /* MainWindow.xib */; };
 		682F29B6133C1C880058E1D7 /* NameEditorView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B5133C1C880058E1D7 /* NameEditorView.xib */; };
 		684E75931353E9960072B7DD /* UINavigationController+KTTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */; };
+		68540537136081170073F787 /* KTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68540536136081170073F787 /* KTGridView.m */; };
+		6854053B1360A7D80073F787 /* CarouselsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6854053A1360A7D80073F787 /* CarouselsViewController.m */; };
+		6854053D1360A80D0073F787 /* CarouselsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6854053C1360A80D0073F787 /* CarouselsView.xib */; };
 		6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6860CCD61359F2480070445B /* UIApplication+KTApplication.m */; };
 		6860CCDA135A0A2B0070445B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6860CCD9135A0A2A0070445B /* QuartzCore.framework */; };
 		6865D13F1344C53E0005271D /* PhotoWheelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D13E1344C53E0005271D /* PhotoWheelViewController.m */; };
@@ -90,6 +93,11 @@
 		682F29B5133C1C880058E1D7 /* NameEditorView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditorView.xib; sourceTree = "<group>"; };
 		684E75911353E9960072B7DD /* UINavigationController+KTTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KTTransitions.h"; sourceTree = "<group>"; };
 		684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+KTTransitions.m"; sourceTree = "<group>"; };
+		68540535136081170073F787 /* KTGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTGridView.h; sourceTree = "<group>"; };
+		68540536136081170073F787 /* KTGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTGridView.m; sourceTree = "<group>"; };
+		685405391360A7D80073F787 /* CarouselsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CarouselsViewController.h; sourceTree = "<group>"; };
+		6854053A1360A7D80073F787 /* CarouselsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CarouselsViewController.m; sourceTree = "<group>"; };
+		6854053C1360A80D0073F787 /* CarouselsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CarouselsView.xib; sourceTree = "<group>"; };
 		6860CCD51359F2480070445B /* UIApplication+KTApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+KTApplication.h"; sourceTree = "<group>"; };
 		6860CCD61359F2480070445B /* UIApplication+KTApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+KTApplication.m"; sourceTree = "<group>"; };
 		6860CCD9135A0A2A0070445B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -245,6 +253,8 @@
 				682BB9E313510639006747AB /* PhotoNubViewController.m */,
 				682BBA131351F443006747AB /* PhotoNubMenuViewController.h */,
 				682BBA141351F444006747AB /* PhotoNubMenuViewController.m */,
+				685405391360A7D80073F787 /* CarouselsViewController.h */,
+				6854053A1360A7D80073F787 /* CarouselsViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -257,6 +267,7 @@
 				682F29B5133C1C880058E1D7 /* NameEditorView.xib */,
 				68BE084E135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib */,
 				68BE0850135DF420001FFEA0 /* RootView.xib */,
+				6854053C1360A80D0073F787 /* CarouselsView.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -293,6 +304,8 @@
 				68F9E0FF135F4F0F00052C9B /* PhotoWheelView.m */,
 				68739179135FD56300F320E2 /* PhotoWheelTableView.h */,
 				6873917A135FD56400F320E2 /* PhotoWheelTableView.m */,
+				68540535136081170073F787 /* KTGridView.h */,
+				68540536136081170073F787 /* KTGridView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -405,6 +418,7 @@
 				68BE0857135DF51A001FFEA0 /* 33-circle-plus@2x.png in Resources */,
 				68BE0858135DF51A001FFEA0 /* 59-info.png in Resources */,
 				68BE0859135DF51A001FFEA0 /* 59-info@2x.png in Resources */,
+				6854053D1360A80D0073F787 /* CarouselsView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,6 +470,8 @@
 				68BE084C135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m in Sources */,
 				68F9E100135F4F0F00052C9B /* PhotoWheelView.m in Sources */,
 				6873917B135FD56400F320E2 /* PhotoWheelTableView.m in Sources */,
+				68540537136081170073F787 /* KTGridView.m in Sources */,
+				6854053B1360A7D80073F787 /* CarouselsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
