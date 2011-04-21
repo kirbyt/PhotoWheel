@@ -97,8 +97,6 @@
    [self setNubControllers:newArray];
    [newArray release];
 
-//   [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight|UIViewAutoresizingFlexibleTopMargin|UIViewAutoresizingFlexibleLeftMargin|UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleBottomMargin];
-   
    for (NSInteger index=0; index < [self nubCount]; index++) {
       PhotoNubViewController *newController = [[PhotoNubViewController alloc] init];
       [self addSubview:[newController view]];
