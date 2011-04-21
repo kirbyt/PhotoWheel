@@ -15,13 +15,11 @@
 
 @synthesize photoWheelView = photoWheelView_;
 @synthesize label = label_;
-@synthesize photoWheel = photoWheel_;
 
 - (void)dealloc
 {
    [photoWheelView_ release], photoWheelView_ = nil;
    [label_ release], label_ = nil;
-   [photoWheel_ release], photoWheel_ = nil;   
    
    [super dealloc];
 }
@@ -30,24 +28,6 @@
 {
    [[self photoWheelView] setStyle:PhotoWheelStyleCarousel];
 }
-
-- (void)reload
-{
-   [[self label] setText:[[self photoWheel] name]];
-   [[self photoWheelView] setPhotoWheel:[self photoWheel]];
-}
-
-- (void)setPhotoWheel:(PhotoWheel *)photoWheel
-{
-   if (photoWheel_ != photoWheel) {
-      [photoWheel retain];
-      [photoWheel_ release];
-      photoWheel_ = photoWheel;
-      
-      [self reload];
-   }
-}
-
 
 
 #pragma mark - Class Methods

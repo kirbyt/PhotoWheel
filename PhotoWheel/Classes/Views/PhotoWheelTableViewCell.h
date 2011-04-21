@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class PhotoWheel;
 @class PhotoWheelView;
 
 @interface PhotoWheelTableViewCell : UITableViewCell
@@ -18,8 +17,6 @@
 
 @property (nonatomic, retain) IBOutlet PhotoWheelView *photoWheelView;
 @property (nonatomic, retain) IBOutlet UILabel *label;
-
-@property (nonatomic, retain) PhotoWheel *photoWheel;
 
 + (NSString *)cellIdentifier;
 + (NSString *)nibName;

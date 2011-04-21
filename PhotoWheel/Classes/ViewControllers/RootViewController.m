@@ -76,6 +76,7 @@
 - (void)configureCell:(PhotoWheelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath 
 {
    PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   [[cell label] setText:[photoWheel name]];
    [[cell photoWheelView] setPhotoWheel:photoWheel];
 }
 
@@ -147,42 +148,46 @@
    return fetchedResultsController_;
 }
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-   [[self tableView] beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
-{
-   NSLog(@"%s",__PRETTY_FUNCTION__);
-   NSLog(@"indexPath.row=%i newIndexPath.row=%i", [indexPath row], [newIndexPath row]);
-
-   UITableView *tableView = [self tableView];
-   
-   switch(type) 
-   {
-      case NSFetchedResultsChangeInsert:
-         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-         break;
-         
-      case NSFetchedResultsChangeDelete:
-         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-         break;
-         
-      case NSFetchedResultsChangeUpdate:
-         [self configureCell:(PhotoWheelTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-         break;
-         
-      case NSFetchedResultsChangeMove:
-         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]withRowAnimation:UITableViewRowAnimationFade];
-         break;
-   }
-}
-
+//- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+//{
+//   [[self tableView] beginUpdates];
+//}
+//
+//- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+//{
+//   NSLog(@"%s",__PRETTY_FUNCTION__);
+//   NSLog(@"indexPath.row=%i newIndexPath.row=%i", [indexPath row], [newIndexPath row]);
+//
+//   UITableView *tableView = [self tableView];
+//   
+//   switch(type) 
+//   {
+//      case NSFetchedResultsChangeInsert:
+//         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+//         break;
+//         
+//      case NSFetchedResultsChangeDelete:
+//         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//         break;
+//         
+//      case NSFetchedResultsChangeUpdate:
+//         [self configureCell:(PhotoWheelTableViewCell *)[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+//         break;
+//         
+//      case NSFetchedResultsChangeMove:
+//         [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+//         [tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:newIndexPath]withRowAnimation:UITableViewRowAnimationFade];
+//         break;
+//   }
+//}
+//
+//- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+//{
+//   [[self tableView] endUpdates];
+//}
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-   [[self tableView] endUpdates];
+   [[self tableView] reloadData];
 }
 
 

@@ -182,7 +182,8 @@
    [[newViewController view] addGestureRecognizer:tap];
    [tap release];
    
-   [[self navigationController] kt_pushViewController:newViewController explodeFromPoint:point];
+//   [[self navigationController] kt_pushViewController:newViewController explodeFromPoint:point];
+   [self presentModalViewController:newViewController animated:YES];
    [newViewController release];
 }
 
