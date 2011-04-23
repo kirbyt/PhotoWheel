@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		6810373F1358DC7700BD7C82 /* NSString+KTString.m in Sources */ = {isa = PBXBuildFile; fileRef = 6810373E1358DC7700BD7C82 /* NSString+KTString.m */; };
 		681037821358E28E00BD7C82 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681037811358E28E00BD7C82 /* CoreData.framework */; };
+		68253AD713626920000A8018 /* photoStack.png in Resources */ = {isa = PBXBuildFile; fileRef = 68253AD513626920000A8018 /* photoStack.png */; };
+		68253AF313626C9E000A8018 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68253AF113626C9E000A8018 /* Default-Landscape~ipad.png */; };
+		68253AF413626C9E000A8018 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 68253AF213626C9E000A8018 /* Default-Portrait~ipad.png */; };
+		68253AF713626DA6000A8018 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68253AF613626DA6000A8018 /* MainViewController.m */; };
+		68253AF913626E32000A8018 /* MainView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68253AF813626E32000A8018 /* MainView.xib */; };
 		682BB9E413510639006747AB /* PhotoNubViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BB9E313510639006747AB /* PhotoNubViewController.m */; };
 		682BBA151351F449006747AB /* PhotoNubMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BBA141351F444006747AB /* PhotoNubMenuViewController.m */; };
 		682BBA181351F6A3006747AB /* UIDevice+KTDeviceExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BBA171351F6A3006747AB /* UIDevice+KTDeviceExtensions.m */; };
@@ -64,6 +69,12 @@
 		6810373D1358DC7600BD7C82 /* NSString+KTString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+KTString.h"; sourceTree = "<group>"; };
 		6810373E1358DC7700BD7C82 /* NSString+KTString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+KTString.m"; sourceTree = "<group>"; };
 		681037811358E28E00BD7C82 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		68253AD513626920000A8018 /* photoStack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoStack.png; sourceTree = "<group>"; };
+		68253AF113626C9E000A8018 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		68253AF213626C9E000A8018 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		68253AF513626DA6000A8018 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		68253AF613626DA6000A8018 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		68253AF813626E32000A8018 /* MainView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainView.xib; sourceTree = "<group>"; };
 		682BB9E213510639006747AB /* PhotoNubViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoNubViewController.h; sourceTree = "<group>"; };
 		682BB9E313510639006747AB /* PhotoNubViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoNubViewController.m; sourceTree = "<group>"; };
 		682BBA131351F443006747AB /* PhotoNubMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoNubMenuViewController.h; sourceTree = "<group>"; };
@@ -255,6 +266,8 @@
 				682BBA141351F444006747AB /* PhotoNubMenuViewController.m */,
 				685405391360A7D80073F787 /* CarouselsViewController.h */,
 				6854053A1360A7D80073F787 /* CarouselsViewController.m */,
+				68253AF513626DA6000A8018 /* MainViewController.h */,
+				68253AF613626DA6000A8018 /* MainViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -268,6 +281,7 @@
 				68BE084E135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib */,
 				68BE0850135DF420001FFEA0 /* RootView.xib */,
 				6854053C1360A80D0073F787 /* CarouselsView.xib */,
+				68253AF813626E32000A8018 /* MainView.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -313,6 +327,9 @@
 		6865D1661345242D0005271D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				68253AF113626C9E000A8018 /* Default-Landscape~ipad.png */,
+				68253AF213626C9E000A8018 /* Default-Portrait~ipad.png */,
+				68253AD513626920000A8018 /* photoStack.png */,
 				68BE0852135DF51A001FFEA0 /* 33-circle-plus.png */,
 				68BE0853135DF51A001FFEA0 /* 33-circle-plus@2x.png */,
 				68BE0854135DF51A001FFEA0 /* 59-info.png */,
@@ -419,6 +436,10 @@
 				68BE0858135DF51A001FFEA0 /* 59-info.png in Resources */,
 				68BE0859135DF51A001FFEA0 /* 59-info@2x.png in Resources */,
 				6854053D1360A80D0073F787 /* CarouselsView.xib in Resources */,
+				68253AD713626920000A8018 /* photoStack.png in Resources */,
+				68253AF313626C9E000A8018 /* Default-Landscape~ipad.png in Resources */,
+				68253AF413626C9E000A8018 /* Default-Portrait~ipad.png in Resources */,
+				68253AF913626E32000A8018 /* MainView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +493,7 @@
 				6873917B135FD56400F320E2 /* PhotoWheelTableView.m in Sources */,
 				68540537136081170073F787 /* KTGridView.m in Sources */,
 				6854053B1360A7D80073F787 /* CarouselsViewController.m in Sources */,
+				68253AF713626DA6000A8018 /* MainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

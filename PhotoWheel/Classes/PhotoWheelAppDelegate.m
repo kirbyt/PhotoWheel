@@ -9,6 +9,7 @@
 #import "PhotoWheelAppDelegate.h"
 #import "RootViewController.h"
 #import "CarouselsViewController.h"
+#import "MainViewController.h"
 
 
 @implementation PhotoWheelAppDelegate
@@ -41,17 +42,22 @@
 //   [self setRootViewController:newController];
 //   [newController release];
    
-   CarouselsViewController *newController = [[CarouselsViewController alloc] init];
+//   CarouselsViewController *newController = [[CarouselsViewController alloc] init];
+//   [newController setManagedObjectContext:[self managedObjectContext]];
+//   [self setRootViewController:newController];
+//   [newController release];
+   
+   MainViewController *newController = [[MainViewController alloc] init];
    [newController setManagedObjectContext:[self managedObjectContext]];
    [self setRootViewController:newController];
    [newController release];
    
-   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[self rootViewController]];
-   [self setNavigationController:navController];
-   [navController release];
+//   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[self rootViewController]];
+//   [self setNavigationController:navController];
+//   [navController release];
    
    // Add the root view controller to the window.
-   self.window.rootViewController = [self navigationController];
+   self.window.rootViewController = [self rootViewController];
    [self.window makeKeyAndVisible];
    return YES;
 }
