@@ -211,6 +211,7 @@
 
 @end
 
+#pragma mark - KTGridViewCell
 
 @implementation KTGridViewCell
 

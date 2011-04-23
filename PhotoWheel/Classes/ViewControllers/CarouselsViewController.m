@@ -10,6 +10,7 @@
 #import "KTGridView.h"
 #import "PhotoWheel.h"
 #import "PhotoWheelView.h"
+#import "DetailViewController.h"
 
 
 @interface CarouselsViewController ()
@@ -70,6 +71,10 @@
    if (!cell) {
       cell = [[[PhotoWheelView alloc] initWithFrame:CGRectMake(0, 0, 300, 200)] autorelease];
       [cell setStyle:PhotoWheelStyleCarousel];
+      
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
+      [cell addGestureRecognizer:tap];
+      [tap release];
    }
    
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -77,6 +82,17 @@
    [cell setPhotoWheel:photoWheel];
    
    return cell;
+}
+
+- (void)cellTapped:(UITapGestureRecognizer *)recognizer
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+   PhotoWheel *photoWheel = [[recognizer view] photoWheel];
+   
+   DetailViewController *newController = [[DetailViewController alloc] init];
+   [newController setPhotoWheel:photoWheel];
+   [[self navigationController] pushViewController:newController animated:YES];
+   [newController release];
 }
 
 
