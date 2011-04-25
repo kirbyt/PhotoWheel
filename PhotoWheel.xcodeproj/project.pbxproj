@@ -47,6 +47,7 @@
 		6865D174134552D20005271D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D170134552D20005271D /* Icon@2x.png */; };
 		6865D175134552D20005271D /* Icon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D171134552D20005271D /* Icon72x72.png */; };
 		6865D176134552D20005271D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6865D172134552D20005271D /* iTunesArtwork */; };
+		686D537D1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */; };
 		6873917B135FD56400F320E2 /* PhotoWheelTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6873917A135FD56400F320E2 /* PhotoWheelTableView.m */; };
 		68834C3113578BD700EC091E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 68834C3013578BD600EC091E /* Constants.m */; };
 		68983BF51355F3AC00390B00 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68983BF41355F3AC00390B00 /* UIImage+KTCategory.m */; };
@@ -126,6 +127,8 @@
 		6865D170134552D20005271D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6865D171134552D20005271D /* Icon72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72x72.png; sourceTree = "<group>"; };
 		6865D172134552D20005271D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
+		686D537B1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTOneFingerRotationGestureRecognizer.h; sourceTree = "<group>"; };
+		686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTOneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
 		68739179135FD56300F320E2 /* PhotoWheelTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelTableView.h; sourceTree = "<group>"; };
 		6873917A135FD56400F320E2 /* PhotoWheelTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelTableView.m; sourceTree = "<group>"; };
 		68834C2F13578BD600EC091E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -241,6 +244,8 @@
 				682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */,
 				682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */,
 				68F9E102135F515100052C9B /* KTGeometry.h */,
+				686D537B1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.h */,
+				686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */,
 				6865D14D1344CDD40005271D /* Categories */,
 				68997B2713590C25006F8BCC /* Models */,
 				6865D159134520350005271D /* Views */,
@@ -494,6 +499,7 @@
 				68540537136081170073F787 /* KTGridView.m in Sources */,
 				6854053B1360A7D80073F787 /* CarouselsViewController.m in Sources */,
 				68253AF713626DA6000A8018 /* MainViewController.m in Sources */,
+				686D537D1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

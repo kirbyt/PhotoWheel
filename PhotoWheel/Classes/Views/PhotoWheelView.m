@@ -11,6 +11,7 @@
 #import "PhotoWheel.h"
 #import "Nub.h"
 #import "KTGeometry.h"
+#import "KTOneFingerRotationGestureRecognizer.h"
 #import <QuartzCore/QuartzCore.h>
 
 
@@ -106,6 +107,10 @@
    
    [self setCurrentAngle:0.0];
    [self setLastAngle:0.0];
+   
+   KTOneFingerRotationGestureRecognizer *rotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotate:)];
+   [self addGestureRecognizer:rotation];
+   [rotation release];
 }
 
 - (CGPoint)wheelCenter
@@ -230,24 +235,11 @@
 
 #pragma mark - Touch Event Handlers
 
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+- (void)rotate:(KTOneFingerRotationGestureRecognizer *)recognizer
 {
-   // We only support single touches, so anyObject retrieves just that touch from touches
-   UITouch *touch = [touches anyObject];
-   
-   CGPoint wheelCenter = CGPointMake(CGRectGetMidX([self bounds]), CGRectGetMidY([self bounds]));
-   
-   // use the movement of the touch to decide
-   // how much to rotate the carousel
-   CGPoint locationNow = [touch locationInView:self];
-   CGPoint locationThen = [touch previousLocationInView:self];
-   CGPoint oppositeNow = CGPointMake(wheelCenter.x + (wheelCenter.x - locationNow.x), wheelCenter.y + (wheelCenter.y - locationNow.y));
-   CGPoint oppositeThen = CGPointMake(wheelCenter.x + (wheelCenter.x - locationThen.x), wheelCenter.y + (wheelCenter.y - locationThen.y));
-   
-   CGFloat angleInRadians = angleBetweenLinesInRadians(locationNow, oppositeNow, locationThen, oppositeThen);
+   CGFloat angleInRadians = -[recognizer rotation];
    [self setLastAngle:[self currentAngle]];
    [self setCurrentAngle:[self currentAngle] + radiansToDegrees(angleInRadians)];
-   
    [self setAngle:[self currentAngle]];
 }
 
