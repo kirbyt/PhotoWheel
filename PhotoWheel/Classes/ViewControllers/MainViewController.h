@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+@class PhotoWheelView;
 
 @interface MainViewController : UIViewController
 {
@@ -15,6 +16,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, retain) IBOutlet PhotoWheelView *photoWheelView;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
 @end
