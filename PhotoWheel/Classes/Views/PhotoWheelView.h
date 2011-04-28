@@ -14,7 +14,7 @@ typedef enum  {
    PhotoWheelStyleCarousel,
 } PhotoWheelStyle;
 
-@class PhotoWheel;
+@class PhotoAlbum;
 
 @interface PhotoWheelView : KTGridViewCell
 {
@@ -23,7 +23,7 @@ typedef enum  {
 
 @property (nonatomic, assign, readonly) NSInteger nubCount;
 @property (nonatomic, assign) PhotoWheelStyle style;
-@property (nonatomic, retain) PhotoWheel *photoWheel;
+@property (nonatomic, retain) PhotoAlbum *photoWheel;
 
 - (id)initWithNubCount:(NSInteger)nubCount;
 

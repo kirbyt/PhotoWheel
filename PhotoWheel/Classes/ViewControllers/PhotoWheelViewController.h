@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class PhotoWheel;
+@class PhotoAlbum;
 
 typedef enum  {
    PhotoWheelStyleWheel,
@@ -20,7 +20,7 @@ typedef enum  {
 {
 }
 
-@property (nonatomic, retain) PhotoWheel *photoWheel;
+@property (nonatomic, retain) PhotoAlbum *photoWheel;
 @property (nonatomic, assign) PhotoWheelStyle style;
 
 - (void)showImageBrowserFromPoint:(CGPoint)point startAtIndex:(NSInteger)index;

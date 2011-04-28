@@ -1,20 +1,20 @@
 //
-//  PhotoWheel.h
+//  PhotoAlbum.h
 //  PhotoWheel
 //
 //  Created by Kirby Turner on 4/15/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "_PhotoWheel.h"
+#import "_PhotoAlbum.h"
 
-@interface PhotoWheel : _PhotoWheel 
+@interface PhotoAlbum : _PhotoAlbum
 {
 
 }
 
 + (NSString *)entityName;
-+ (PhotoWheel *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context;
++ (PhotoAlbum *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context;
 
 
 @end

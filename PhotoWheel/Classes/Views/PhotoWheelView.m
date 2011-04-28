@@ -8,8 +8,8 @@
 
 #import "PhotoWheelView.h"
 #import "PhotoNubViewController.h"
-#import "PhotoWheel.h"
-#import "Nub.h"
+#import "PhotoAlbum.h"
+#import "Photo.h"
 #import "KTGeometry.h"
 #import "KTOneFingerRotationGestureRecognizer.h"
 #import <QuartzCore/QuartzCore.h>
@@ -25,7 +25,7 @@
 - (CGPoint)wheelCenter;
 - (void)setStyle:(PhotoWheelStyle)style;
 - (void)setAngle:(CGFloat)angle;
-- (void)setPhotoWheel:(PhotoWheel *)photoWheel;
+- (void)setPhotoWheel:(PhotoAlbum *)photoWheel;
 - (void)reloadNubs;
 @end
 
@@ -185,7 +185,7 @@
    }
 }
 
-- (void)setPhotoWheel:(PhotoWheel *)photoWheel
+- (void)setPhotoWheel:(PhotoAlbum *)photoWheel
 {
    if (photoWheel_ != photoWheel) {
       [photoWheel retain];
@@ -210,7 +210,7 @@
          [nubController setNub:[nubSet anyObject]];
       } else {
          // Insert a new nub.
-         Nub *newNub = [Nub insertNewInManagedObjectContext:context];
+         Photo *newNub = [Photo insertNewInManagedObjectContext:context];
          [newNub setSortOrder:[NSNumber numberWithInt:index]];
          [newNub setPhotoWheel:[self photoWheel]];
          

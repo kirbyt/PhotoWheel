@@ -8,7 +8,6 @@
 
 #import "PhotoWheelTableViewCell.h"
 #import "PhotoWheelView.h"
-#import "PhotoWheel.h"
 
 
 @implementation PhotoWheelTableViewCell

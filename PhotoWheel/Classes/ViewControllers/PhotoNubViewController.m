@@ -10,7 +10,7 @@
 #import "PhotoNubView.h"
 #import "PhotoWheelViewController.h"
 #import "PhotoNubMenuViewController.h"
-#import "Nub.h"
+#import "Photo.h"
 #import "UINavigationController+KTTransitions.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -84,7 +84,7 @@
    }
 }
 
-- (void)setNub:(Nub *)nub
+- (void)setNub:(Photo *)nub
 {
    if (nub_ != nub) {
       [nub_ removeObserver:self forKeyPath:@"smallImage"];

@@ -8,7 +8,7 @@
 
 #import "CarouselsViewController.h"
 #import "KTGridView.h"
-#import "PhotoWheel.h"
+#import "PhotoAlbum.h"
 #import "PhotoWheelView.h"
 #import "DetailViewController.h"
 
@@ -78,7 +78,7 @@
    }
    
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   PhotoAlbum *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    [cell setPhotoWheel:photoWheel];
    
    return cell;
@@ -87,7 +87,7 @@
 - (void)cellTapped:(UITapGestureRecognizer *)recognizer
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
-   PhotoWheel *photoWheel = [[recognizer view] photoWheel];
+   PhotoAlbum *photoWheel = [[recognizer view] photoWheel];
    
    DetailViewController *newController = [[DetailViewController alloc] init];
    [newController setPhotoWheel:photoWheel];
@@ -106,7 +106,7 @@
    
    NSString *cacheName = NSStringFromClass([self class]);
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[PhotoWheel entityName] inManagedObjectContext:[self managedObjectContext]];
+   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[PhotoAlbum entityName] inManagedObjectContext:[self managedObjectContext]];
    [fetchRequest setEntity:entityDescription];
    
    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
@@ -188,7 +188,7 @@
    NSFetchedResultsController *fetchedRequestController = [self fetchedResultsController];
    NSManagedObjectContext *context = [fetchedRequestController managedObjectContext];
    
-   PhotoWheel *newPhotoWheel = [PhotoWheel insertNewInManagedObjectContext:context];
+   PhotoAlbum *newPhotoWheel = [PhotoAlbum insertNewInManagedObjectContext:context];
    [newPhotoWheel setName:@"New Photo Wheel"];
    
    // Save the context.

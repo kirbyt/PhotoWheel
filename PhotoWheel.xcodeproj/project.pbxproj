@@ -52,10 +52,10 @@
 		68834C3113578BD700EC091E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 68834C3013578BD600EC091E /* Constants.m */; };
 		68983BF51355F3AC00390B00 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68983BF41355F3AC00390B00 /* UIImage+KTCategory.m */; };
 		68997B261358E9D4006F8BCC /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68997B241358E9D4006F8BCC /* PhotoWheel.xcdatamodeld */; };
-		68997B7913594412006F8BCC /* Nub.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B7813594411006F8BCC /* Nub.m */; };
-		68997B7C13594412006F8BCC /* PhotoWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B7B13594412006F8BCC /* PhotoWheel.m */; };
-		68997B8C1359453A006F8BCC /* _PhotoWheel.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B8B13594539006F8BCC /* _PhotoWheel.m */; };
-		68997B8F1359453A006F8BCC /* _Nub.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B8E1359453A006F8BCC /* _Nub.m */; };
+		68997B7913594412006F8BCC /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B7813594411006F8BCC /* Photo.m */; };
+		68997B7C13594412006F8BCC /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B7B13594412006F8BCC /* PhotoAlbum.m */; };
+		689B7A061369A0DC00E8163A /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 689B7A051369A0DC00E8163A /* _PhotoAlbum.m */; };
+		689B7A091369A0DD00E8163A /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 689B7A081369A0DD00E8163A /* _Photo.m */; };
 		68BE084C135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BE084B135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m */; };
 		68BE084F135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE084E135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib */; };
 		68BE0851135DF420001FFEA0 /* RootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0850135DF420001FFEA0 /* RootView.xib */; };
@@ -136,14 +136,14 @@
 		68983BF31355F3AC00390B00 /* UIImage+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KTCategory.h"; sourceTree = "<group>"; };
 		68983BF41355F3AC00390B00 /* UIImage+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KTCategory.m"; sourceTree = "<group>"; };
 		68997B251358E9D4006F8BCC /* PhotoWheel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoWheel.xcdatamodel; sourceTree = "<group>"; };
-		68997B7713594411006F8BCC /* Nub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Nub.h; sourceTree = "<group>"; };
-		68997B7813594411006F8BCC /* Nub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Nub.m; sourceTree = "<group>"; };
-		68997B7A13594412006F8BCC /* PhotoWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheel.h; sourceTree = "<group>"; };
-		68997B7B13594412006F8BCC /* PhotoWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheel.m; sourceTree = "<group>"; };
-		68997B8A13594539006F8BCC /* _PhotoWheel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _PhotoWheel.h; sourceTree = "<group>"; };
-		68997B8B13594539006F8BCC /* _PhotoWheel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _PhotoWheel.m; sourceTree = "<group>"; };
-		68997B8D1359453A006F8BCC /* _Nub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Nub.h; sourceTree = "<group>"; };
-		68997B8E1359453A006F8BCC /* _Nub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Nub.m; sourceTree = "<group>"; };
+		68997B7713594411006F8BCC /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Photo.h; sourceTree = "<group>"; };
+		68997B7813594411006F8BCC /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
+		68997B7A13594412006F8BCC /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PhotoAlbum.h; sourceTree = "<group>"; };
+		68997B7B13594412006F8BCC /* PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbum.m; sourceTree = "<group>"; };
+		689B7A041369A0DC00E8163A /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _PhotoAlbum.h; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_PhotoAlbum.h; sourceTree = "<group>"; };
+		689B7A051369A0DC00E8163A /* _PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _PhotoAlbum.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_PhotoAlbum.m; sourceTree = "<group>"; };
+		689B7A071369A0DD00E8163A /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Photo.h; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.h; sourceTree = "<group>"; };
+		689B7A081369A0DD00E8163A /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Photo.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.m; sourceTree = "<group>"; };
 		68BE084A135DEE1F001FFEA0 /* PhotoWheelTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelTableViewCell.h; sourceTree = "<group>"; };
 		68BE084B135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelTableViewCell.m; sourceTree = "<group>"; };
 		68BE084E135DEED7001FFEA0 /* PhotoWheelTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWheelTableViewCell.xib; sourceTree = "<group>"; };
@@ -351,10 +351,10 @@
 		68997B2713590C25006F8BCC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				68997B7713594411006F8BCC /* Nub.h */,
-				68997B7813594411006F8BCC /* Nub.m */,
-				68997B7A13594412006F8BCC /* PhotoWheel.h */,
-				68997B7B13594412006F8BCC /* PhotoWheel.m */,
+				68997B7713594411006F8BCC /* Photo.h */,
+				68997B7813594411006F8BCC /* Photo.m */,
+				68997B7A13594412006F8BCC /* PhotoAlbum.h */,
+				68997B7B13594412006F8BCC /* PhotoAlbum.m */,
 				68997B8313594498006F8BCC /* Generated */,
 			);
 			path = Models;
@@ -363,10 +363,10 @@
 		68997B8313594498006F8BCC /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				68997B8D1359453A006F8BCC /* _Nub.h */,
-				68997B8E1359453A006F8BCC /* _Nub.m */,
-				68997B8A13594539006F8BCC /* _PhotoWheel.h */,
-				68997B8B13594539006F8BCC /* _PhotoWheel.m */,
+				689B7A071369A0DD00E8163A /* _Photo.h */,
+				689B7A081369A0DD00E8163A /* _Photo.m */,
+				689B7A041369A0DC00E8163A /* _PhotoAlbum.h */,
+				689B7A051369A0DC00E8163A /* _PhotoAlbum.m */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -488,10 +488,8 @@
 				68834C3113578BD700EC091E /* Constants.m in Sources */,
 				6810373F1358DC7700BD7C82 /* NSString+KTString.m in Sources */,
 				68997B261358E9D4006F8BCC /* PhotoWheel.xcdatamodeld in Sources */,
-				68997B7913594412006F8BCC /* Nub.m in Sources */,
-				68997B7C13594412006F8BCC /* PhotoWheel.m in Sources */,
-				68997B8C1359453A006F8BCC /* _PhotoWheel.m in Sources */,
-				68997B8F1359453A006F8BCC /* _Nub.m in Sources */,
+				68997B7913594412006F8BCC /* Photo.m in Sources */,
+				68997B7C13594412006F8BCC /* PhotoAlbum.m in Sources */,
 				6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */,
 				68BE084C135DEE1F001FFEA0 /* PhotoWheelTableViewCell.m in Sources */,
 				68F9E100135F4F0F00052C9B /* PhotoWheelView.m in Sources */,
@@ -500,6 +498,8 @@
 				6854053B1360A7D80073F787 /* CarouselsViewController.m in Sources */,
 				68253AF713626DA6000A8018 /* MainViewController.m in Sources */,
 				686D537D1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m in Sources */,
+				689B7A061369A0DC00E8163A /* _PhotoAlbum.m in Sources */,
+				689B7A091369A0DD00E8163A /* _Photo.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

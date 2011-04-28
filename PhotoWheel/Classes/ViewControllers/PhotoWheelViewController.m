@@ -9,12 +9,12 @@
 #import "PhotoWheelViewController.h"
 #import "PhotoNubViewController.h"
 #import "UINavigationController+KTTransitions.h"
-#import "PhotoWheel.h"
-#import "Nub.h"
+#import "PhotoAlbum.h"
+#import "Photo.h"
 #import <QuartzCore/QuartzCore.h>
 
 
-#define WHEEL_NUB_COUNT 12
+#define WHEEL_NUB_COUNT 8
 
 
 @interface PhotoWheelViewController ()
@@ -100,7 +100,7 @@
    [self setAngle:[self currentAngle]];
 }
 
-- (void)setPhotoWheel:(PhotoWheel *)photoWheel
+- (void)setPhotoWheel:(PhotoAlbum *)photoWheel
 {
    if (photoWheel_ != photoWheel) {
       [photoWheel retain];
@@ -124,7 +124,7 @@
          [nubController setNub:[nubSet anyObject]];
       } else {
          // Insert a new nub.
-         Nub *newNub = [Nub insertNewInManagedObjectContext:context];
+         Photo *newNub = [Photo insertNewInManagedObjectContext:context];
          [newNub setSortOrder:[NSNumber numberWithInt:index]];
          [newNub setPhotoWheel:[self photoWheel]];
 
@@ -159,7 +159,7 @@
 {
    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sortOrder == %i", index];
    NSSet *nubs = [[[self photoWheel] nubs] filteredSetUsingPredicate:predicate];
-   Nub *nub = [nubs anyObject];
+   Photo *nub = [nubs anyObject];
    UIImage *image = [nub largeImage];
    
    [self setImageBrowserAnimationPoint:point];

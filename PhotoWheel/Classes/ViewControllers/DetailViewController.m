@@ -65,7 +65,7 @@
 	// Release any cached data, images, etc that aren't in use.
 }
 
-- (void)setPhotoWheel:(PhotoWheel *)photoWheel
+- (void)setPhotoWheel:(PhotoAlbum *)photoWheel
 {
    if (photoWheel_ != photoWheel) {
       [photoWheel retain];

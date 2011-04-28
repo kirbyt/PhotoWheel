@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class PhotoWheel;
+@class PhotoAlbum;
 @class PhotoWheelView;
 
 @interface DetailViewController : UIViewController <UIPopoverControllerDelegate, UISplitViewControllerDelegate> 
@@ -17,6 +17,6 @@
 
 
 @property (nonatomic, retain) IBOutlet PhotoWheelView *photoWheelView;
-@property (nonatomic, retain) PhotoWheel *photoWheel;
+@property (nonatomic, retain) PhotoAlbum *photoWheel;
 
 @end

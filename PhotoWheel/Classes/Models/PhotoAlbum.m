@@ -1,25 +1,25 @@
 //
-//  PhotoWheel.m
+//  PhotoAlbum.m
 //  PhotoWheel
 //
 //  Created by Kirby Turner on 4/15/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "PhotoWheel.h"
+#import "PhotoAlbum.h"
 #import "NSString+KTString.h"
 
 
-@implementation PhotoWheel
+@implementation PhotoAlbum
 
 + (NSString *)entityName
 {
    return NSStringFromClass([self class]);
 }
 
-+ (PhotoWheel *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context
++ (PhotoAlbum *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context
 {
-   PhotoWheel *newPhotoWheel = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+   PhotoAlbum *newPhotoWheel = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
    [newPhotoWheel setUuid:[NSString kt_stringWithUUID]];
    return newPhotoWheel;
 }

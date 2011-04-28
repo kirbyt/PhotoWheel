@@ -1,39 +1,42 @@
 //
-//  Nub.m
+//  Photo.m
 //  PhotoWheel
 //
 //  Created by Kirby Turner on 4/15/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "Nub.h"
-#import "_PhotoWheel.h"
+#import "Photo.h"
+#import "_PhotoAlbum.h"
 #import "NSString+KTString.h"
 #import "UIImage+KTCategory.h"
 #import "UIApplication+KTApplication.h"
 
 
-NSString * const kNubKeyImage = @"image";
-NSString * const kNubKeyImageType = @"type";
-NSString * const kNubImageTypeOriginal = @"original";
-NSString * const kNubImageTypeLarge = @"large";
-NSString * const kNubImageTypeSmall = @"small";
+//NSString * const kPhotoKeyImage = @"image";
+//NSString * const kPhotoKeyImageType = @"type";
+//NSString * const kPhotoImageTypeOriginal = @"original";
+//NSString * const kPhotoImageTypeLarge = @"large";
+//NSString * const kPhotoImageTypeSmall = @"small";
+//NSString * const kPhotoImageTypeThumbnail = @"thumbnail";
 
 
-@interface Nub ()
+@interface Photo ()
 - (NSString *)rootPath;
 - (NSString *)imagePathWithFormat:(NSString *)format;
+- (NSString *)thumbnailImagePath;
 - (NSString *)smallImagePath;
 - (NSString *)largeImagePath;
 - (NSString *)originalImagePath;
 - (void)saveImage:(UIImage *)image withPath:(NSString *)path;
+- (void)saveAsThumbnailImage:(UIImage *)image;
 - (void)saveAsSmallImage:(UIImage *)image;
 - (void)saveAsLargeImage:(UIImage *)image;
 - (void)saveAsOriginalImage:(UIImage *)image;
 - (void)threaded_saveImage:(id)data;
 @end
 
-@implementation Nub
+@implementation Photo
 
 #pragma mark - Convenience Methods
 + (NSString *)entityName
@@ -41,21 +44,27 @@ NSString * const kNubImageTypeSmall = @"small";
    return NSStringFromClass([self class]);
 }
 
-+ (Nub *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context
++ (Photo *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context
 {
-   Nub *newNub = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
-   [newNub setBaseFileName:[NSString kt_stringWithUUID]];
-   return newNub;
+   Photo *newPhoto = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+   [newPhoto setFileName:[NSString kt_stringWithUUID]];
+   return newPhoto;
 }
 
 #pragma mark - Instance Methods
 
-- (UIImage *)smallImage
+- (UIImage *)thumbnailImage
 {
-   UIImage *image = [UIImage imageWithContentsOfFile:[self smallImagePath]];
+   UIImage *image = [UIImage imageWithContentsOfFile:[self thumbnailImagePath]];
    if (!image) {
       image = [UIImage imageNamed:@"photoDefault.png"];
    }
+   return image;
+}
+
+- (UIImage *)smallImage
+{
+   UIImage *image = [UIImage imageWithContentsOfFile:[self smallImagePath]];
    return image;
 }
 
@@ -80,8 +89,8 @@ NSString * const kNubImageTypeSmall = @"small";
 
 - (NSString *)rootPath
 {
-   NSString *photoWheelUUID = [[self photoWheel] uuid];
-   NSString *packgeName = [photoWheelUUID stringByAppendingPathExtension:@"photowheel"];
+   NSString *photoAlbumUUID = [[self photoAlbum] uuid];
+   NSString *packgeName = [photoAlbumUUID stringByAppendingPathExtension:@"photowheel"];
    NSString *path = [[UIApplication kt_documentPath] stringByAppendingPathComponent:packgeName];
    
    // Create the package if it does not already exists.
@@ -109,9 +118,14 @@ NSString * const kNubImageTypeSmall = @"small";
 
 - (NSString *)imagePathWithFormat:(NSString *)format
 {
-   NSString *imageName = [NSString stringWithFormat:format, [self baseFileName]];
+   NSString *imageName = [NSString stringWithFormat:format, [self fileName]];
    NSString *path = [[self rootPath] stringByAppendingPathComponent:imageName];
    return path;
+}
+
+- (NSString *)thumbnailImagePath
+{
+   return [self imagePathWithFormat:@"%@-t.jpg"];
 }
 
 - (NSString *)smallImagePath
@@ -135,10 +149,20 @@ NSString * const kNubImageTypeSmall = @"small";
    [jpg writeToFile:path atomically:YES];
 }
 
+- (void)saveAsThumbnailImage:(UIImage *)image
+{
+   [self willChangeValueForKey:@"thumbnailImage"];
+   CGSize size = CGSizeMake(75, 75);
+   UIImage *newImage = [image kt_imageScaleAndCropToMaxSize:size];
+   
+   [self saveImage:newImage withPath:[self thumbnailImagePath]];
+   [self didChangeValueForKey:@"thumbnailImage"];
+}
+
 - (void)saveAsSmallImage:(UIImage *)image
 {
    [self willChangeValueForKey:@"smallImage"];
-   CGSize size = CGSizeMake(NUB_IMAGE_SIZE_WIDTH, NUB_IMAGE_SIZE_HEIGHT);
+   CGSize size = CGSizeMake(100, 100);
    UIImage *newImage = [image kt_imageScaleAndCropToMaxSize:size];
    
    [self saveImage:newImage withPath:[self smallImagePath]];
@@ -176,6 +200,7 @@ NSString * const kNubImageTypeSmall = @"small";
    
    UIImage *image = data;
    
+   [self saveAsThumbnailImage:image];
    [self saveAsSmallImage:image];
    [self saveAsLargeImage:image];
    [self saveAsOriginalImage:image];

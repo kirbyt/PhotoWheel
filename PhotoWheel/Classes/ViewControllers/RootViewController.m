@@ -9,7 +9,7 @@
 #import "RootViewController.h"
 #import "PhotoWheelTableViewCell.h"
 #import "PhotoWheelViewController.h"
-#import "PhotoWheel.h"
+#import "PhotoAlbum.h"
 #import "DetailViewController.h"
 
 
@@ -75,7 +75,7 @@
 
 - (void)configureCell:(PhotoWheelTableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath 
 {
-   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   PhotoAlbum *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    [[cell label] setText:[photoWheel name]];
    [[cell photoWheelView] setPhotoWheel:photoWheel];
 }
@@ -88,7 +88,7 @@
    NSFetchedResultsController *fetchedRequestController = [self fetchedResultsController];
    NSManagedObjectContext *context = [fetchedRequestController managedObjectContext];
  
-   PhotoWheel *newPhotoWheel = [PhotoWheel insertNewInManagedObjectContext:context];
+   PhotoAlbum *newPhotoWheel = [PhotoAlbum insertNewInManagedObjectContext:context];
    [newPhotoWheel setName:@"New Photo Wheel"];
    
    // Save the context.
@@ -121,7 +121,7 @@
    
    NSString *cacheName = NSStringFromClass([self class]);
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[PhotoWheel entityName] inManagedObjectContext:[self managedObjectContext]];
+   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[PhotoAlbum entityName] inManagedObjectContext:[self managedObjectContext]];
    [fetchRequest setEntity:entityDescription];
    
    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
@@ -244,7 +244,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   PhotoWheel *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   PhotoAlbum *photoWheel = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    
    DetailViewController *newController = [[DetailViewController alloc] init];
    [newController setPhotoWheel:photoWheel];
