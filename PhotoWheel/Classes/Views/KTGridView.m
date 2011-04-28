@@ -7,7 +7,7 @@
 //
 
 #import "KTGridView.h"
-#import "PhotoWheelView.h"
+#import "WheelView.h"
 
 
 @interface KTGridView ()
@@ -85,7 +85,7 @@
 - (void)queueReusableViews
 {
    for (UIView *view in [self subviews]) {
-      if ([view isKindOfClass:[PhotoWheelView class]]) {
+      if ([view isKindOfClass:[WheelView class]]) {
          [[self reusableViews] addObject:view];
          [view removeFromSuperview];
       }

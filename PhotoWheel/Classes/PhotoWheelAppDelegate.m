@@ -7,8 +7,6 @@
 //
 
 #import "PhotoWheelAppDelegate.h"
-#import "RootViewController.h"
-#import "CarouselsViewController.h"
 #import "MainViewController.h"
 
 

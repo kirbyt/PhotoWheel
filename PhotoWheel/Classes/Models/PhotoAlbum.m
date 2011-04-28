@@ -24,4 +24,9 @@
    return newPhotoWheel;
 }
 
+- (Photo *)keyPhoto
+{
+   return nil;
+}
+
 @end

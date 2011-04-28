@@ -19,6 +19,7 @@
 + (NSString *)entityName;
 + (Photo *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context;
 
+- (UIImage *)thumbnailImage;
 - (UIImage *)smallImage;
 - (UIImage *)largeImage;
 - (UIImage *)originalImage;

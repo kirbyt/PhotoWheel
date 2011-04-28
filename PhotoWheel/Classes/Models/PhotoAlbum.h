@@ -8,6 +8,8 @@
 
 #import "_PhotoAlbum.h"
 
+@class Photo;
+
 @interface PhotoAlbum : _PhotoAlbum
 {
 
@@ -16,5 +18,6 @@
 + (NSString *)entityName;
 + (PhotoAlbum *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context;
 
+- (Photo *)keyPhoto;
 
 @end
