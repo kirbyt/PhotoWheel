@@ -26,6 +26,7 @@ typedef enum  {
 @property (nonatomic, assign) WheelStyle style;
 
 - (id)initWithStyle:(WheelStyle)style;
+- (WheelViewNub *)dequeueReusableNub;
 - (void)reloadData;
 
 @end

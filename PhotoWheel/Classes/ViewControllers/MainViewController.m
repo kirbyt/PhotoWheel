@@ -14,6 +14,7 @@
 
 @interface MainViewController ()
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, retain) NSMutableArray *photoAlbumNubs;
 - (void)layoutForLandscape;
 - (void)layoutForPortrait;
 @end
@@ -24,6 +25,7 @@
 @synthesize backgroundImageView = backgroundImageView_;
 @synthesize photoWheelView = photoWheelView_;
 @synthesize managedObjectContext = managedObjectContext_;
+@synthesize photoAlbumNubs = photoAlbumNubs_;
 
 - (void)dealloc
 {
@@ -31,6 +33,7 @@
    [photoWheelView_ release], photoWheelView_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [managedObjectContext_ release], managedObjectContext_ = nil;
+   [photoAlbumNubs_ release], photoAlbumNubs_ = nil;
    
    [super dealloc];
 }
@@ -39,7 +42,12 @@
 {
    self = [super initWithNibName:@"MainView" bundle:nil];
    if (self) {
-      
+      NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:12];
+      for (NSInteger index = 0; index < 12; index++) {
+         [newArray addObject:[NSNull null]];
+      }
+      [self setPhotoAlbumNubs:newArray];
+      [newArray release];
    }
    return self;
 }
@@ -126,13 +134,23 @@
 
 - (WheelViewNub *)wheelView:(WheelView *)wheelView nubAtIndex:(NSInteger)index
 {
-   PhotoAlbumNub *nub = [PhotoAlbumNub photoAlbumNub];
+//   PhotoAlbumNub *nub = (PhotoAlbumNub *)[wheelView dequeueReusableNub];
+//   if (nub == nil) {
+//      NSLog(@"create new");
+//      nub = [PhotoAlbumNub photoAlbumNub];
+//   }
+   
+   id nub = [[self photoAlbumNubs] objectAtIndex:index];
+   if (nub == [NSNull null]) {
+      nub = [PhotoAlbumNub photoAlbumNub];
+      [[self photoAlbumNubs] replaceObjectAtIndex:index withObject:nub];
+   }
    
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    PhotoAlbum *photoAlbum = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 
    [nub setImage:[[photoAlbum keyPhoto] thumbnailImage]];
-   [nub setTitle:[photoAlbum name]];
+   [nub setTitle:[NSString stringWithFormat:@"%@-%i", [photoAlbum name], index]];
    
    return nub;
 }
