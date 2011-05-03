@@ -22,6 +22,7 @@
 - (CGPoint)wheelCenter;
 - (void)setStyle:(WheelStyle)style;
 - (void)setAngle:(CGFloat)angle;
+- (BOOL)isSelectedItemForAngle:(CGFloat)angle;
 - (void)queueReusableNubs;
 - (CGFloat)angleOffset;
 @end
@@ -36,7 +37,8 @@
 @synthesize reusableViews = reusableViews_;
 @synthesize firstVisibleIndex = firstVisibleIndex_;
 @synthesize lastVisibleIndex = lastVisibleIndex_;
-@synthesize selectionAngleInDegrees = selectionAngleInDegrees_;
+@synthesize topAtDegrees = topAtDegrees_;
+@synthesize selectedIndex = selectedIndex_;
 
 - (void)dealloc
 {
@@ -58,6 +60,8 @@
 
    [self setCurrentAngle:0.0];
    [self setLastAngle:0.0];
+   
+   [self setSelectedIndex:-1];
    
    KTOneFingerRotationGestureRecognizer *rotation = [[KTOneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotate:)];
    [self addGestureRecognizer:rotation];
@@ -123,6 +127,25 @@
    }
 }
 
+- (BOOL)isSelectedItemForAngle:(CGFloat)angle
+{
+   // The selected item is one whose angle is
+   // at or near 0 degrees.
+   //
+   // To calculate the selected item based on the 
+   // angle, we must convert the angle to the 
+   // relative angle between 0 and 360 degrees.
+   
+   CGFloat relativeAngle = fabsf(fmodf(angle, 360.0));
+   
+   // Pad the selection point so it does not
+   // have to be exact.
+   CGFloat padding = 10.0;   // Allow 10 degrees on either side.
+   
+   BOOL isSelectedItem = relativeAngle >= (360.0 - padding) || relativeAngle <= padding;
+   return isSelectedItem;
+}
+
 - (void)setAngle:(CGFloat)angle
 {
    // The follow code is inprised from the carousel example at:
@@ -150,8 +173,13 @@
             [self addSubview:view];
          }
 
-         // Note we add 180.0 to the angle to force the first nub
-         // to appear at the top of the circle.
+         // Set the selected index if it has changed.
+         if (index != [self selectedIndex] && [self isSelectedItemForAngle:angle]) {
+            [self setSelectedIndex:index];
+         }
+
+         // Note we add an angle offset to force the first nub
+         // to appear at the "top" of the circle.
          float angleInRadians = (angle + [self angleOffset]) * M_PI / 180.0f;
          
          // get a location based on the angle
@@ -220,6 +248,7 @@
 
 - (void)reloadData
 {
+   [self setSelectedIndex:-1];
    [self queueReusableNubs];
    [self layoutSubviews];
 }
@@ -227,15 +256,17 @@
 - (CGFloat)angleOffset
 {
    // The angle offset is specific to PhotoWheel. Without the
-   // offset the wheel of photo stacks will place the first 
-   // album at the bottom. We want it at the top (portrait)
-   // or far right (landscape).
+   // offset the wheel of photo albums will place the first 
+   // album at the bottom.
    //
    // The offset is calculated based on the angle used as the
-   // selection point. The selection point is the needle displayed
-   // in the app to indicate the selected photo album.
+   // virtual top of the wheel. 
+   //
+   // Note we get the negative of the topAtDegrees because our
+   // wheel math is based on degree 0 being at the bottom and
+   // is adjusted to make degree 0 at the top.
    
-   return [self selectionAngleInDegrees] + 180.0;
+   return -[self topAtDegrees] + 180.0;
 }
 
 

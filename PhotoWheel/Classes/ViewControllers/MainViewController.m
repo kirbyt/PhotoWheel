@@ -55,13 +55,25 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
+
+   [[self photoWheelView] addObserver:self forKeyPath:@"selectedIndex" options:0 context:nil];
 }
 
 - (void)viewDidUnload
 {
    [super viewDidUnload];
+   
+   [[self photoWheelView] removeObserver:self forKeyPath:@"selectedIndex"];
+   
    [self setBackgroundImageView:nil];
    [self setPhotoWheelView:nil];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
+{
+   if ([keyPath isEqualToString:@"selectedIndex"]) {
+      NSLog(@"selectedIndex: %i", [[self photoWheelView] selectedIndex]);
+   }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -83,7 +95,7 @@
    UIImage *backgroundImage = [UIImage imageNamed:@"Default-Landscape~ipad.png"];
    [[self backgroundImageView] setImage:backgroundImage];
    
-   [[self photoWheelView] setSelectionAngleInDegrees:-90.0];
+   [[self photoWheelView] setTopAtDegrees:90.0];
 
    CGPoint newOrigin = CGPointMake(-250, 180);
    CGRect frame = [[self photoWheelView] frame];
@@ -97,7 +109,7 @@
    UIImage *backgroundImage = [UIImage imageNamed:@"Default-Portrait~ipad.png"];
    [[self backgroundImageView] setImage:backgroundImage];
 
-   [[self photoWheelView] setSelectionAngleInDegrees:0.0];
+   [[self photoWheelView] setTopAtDegrees:0.0];
 
    CGPoint newOrigin = CGPointMake(84, 756);
    CGRect frame = [[self photoWheelView] frame];
