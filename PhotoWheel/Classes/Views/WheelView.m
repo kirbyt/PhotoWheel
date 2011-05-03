@@ -23,6 +23,7 @@
 - (void)setStyle:(WheelStyle)style;
 - (void)setAngle:(CGFloat)angle;
 - (void)queueReusableNubs;
+- (CGFloat)angleOffset;
 @end
 
 
@@ -35,6 +36,7 @@
 @synthesize reusableViews = reusableViews_;
 @synthesize firstVisibleIndex = firstVisibleIndex_;
 @synthesize lastVisibleIndex = lastVisibleIndex_;
+@synthesize selectionAngleInDegrees = selectionAngleInDegrees_;
 
 - (void)dealloc
 {
@@ -150,7 +152,7 @@
 
          // Note we add 180.0 to the angle to force the first nub
          // to appear at the top of the circle.
-         float angleInRadians = (angle + 180.0) * M_PI / 180.0f;
+         float angleInRadians = (angle + [self angleOffset]) * M_PI / 180.0f;
          
          // get a location based on the angle
          float xPosition = center.x + (radiusX * sinf(angleInRadians));
@@ -221,6 +223,21 @@
    [self queueReusableNubs];
    [self layoutSubviews];
 }
+
+- (CGFloat)angleOffset
+{
+   // The angle offset is specific to PhotoWheel. Without the
+   // offset the wheel of photo stacks will place the first 
+   // album at the bottom. We want it at the top (portrait)
+   // or far right (landscape).
+   //
+   // The offset is calculated based on the angle used as the
+   // selection point. The selection point is the needle displayed
+   // in the app to indicate the selected photo album.
+   
+   return [self selectionAngleInDegrees] + 180.0;
+}
+
 
 //- (void)reloadNubs
 //{

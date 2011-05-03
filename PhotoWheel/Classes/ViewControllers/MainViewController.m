@@ -83,21 +83,27 @@
    UIImage *backgroundImage = [UIImage imageNamed:@"Default-Landscape~ipad.png"];
    [[self backgroundImageView] setImage:backgroundImage];
    
+   [[self photoWheelView] setSelectionAngleInDegrees:-90.0];
+
    CGPoint newOrigin = CGPointMake(-250, 180);
    CGRect frame = [[self photoWheelView] frame];
    frame.origin = newOrigin;
    [[self photoWheelView] setFrame:frame];
+   [[self photoWheelView] setNeedsLayout];
 }
 
 - (void)layoutForPortrait
 {
    UIImage *backgroundImage = [UIImage imageNamed:@"Default-Portrait~ipad.png"];
    [[self backgroundImageView] setImage:backgroundImage];
-   
+
+   [[self photoWheelView] setSelectionAngleInDegrees:0.0];
+
    CGPoint newOrigin = CGPointMake(84, 756);
    CGRect frame = [[self photoWheelView] frame];
    frame.origin = newOrigin;
    [[self photoWheelView] setFrame:frame];
+   [[self photoWheelView] setNeedsLayout];
 }
 
 #pragma mark - Actions

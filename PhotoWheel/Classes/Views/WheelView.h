@@ -24,6 +24,7 @@ typedef enum  {
 
 @property (nonatomic, assign) IBOutlet id<WheelViewDataSource> dataSource;
 @property (nonatomic, assign) WheelStyle style;
+@property (nonatomic, assign) CGFloat selectionAngleInDegrees;
 
 - (id)initWithStyle:(WheelStyle)style;
 - (WheelViewNub *)dequeueReusableNub;
