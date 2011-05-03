@@ -26,7 +26,8 @@
 
 - (Photo *)keyPhoto
 {
-   return nil;
+   Photo *keyPhoto = [[self photos] anyObject];
+   return keyPhoto;
 }
 
 @end

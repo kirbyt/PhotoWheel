@@ -24,6 +24,8 @@
 		682F2965133B93D60058E1D7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 682F2963133B93D60058E1D7 /* README.md */; };
 		682F299B133C0B870058E1D7 /* PhotoWheelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */; };
 		682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B2133C1C680058E1D7 /* MainWindow.xib */; };
+		684A2FF0136F41DC0017967E /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 684A2FEF136F41DC0017967E /* _Photo.m */; };
+		684A2FF3136F41DD0017967E /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 684A2FF2136F41DD0017967E /* _PhotoAlbum.m */; };
 		684E75931353E9960072B7DD /* UINavigationController+KTTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */; };
 		68540537136081170073F787 /* KTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68540536136081170073F787 /* KTGridView.m */; };
 		6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6860CCD61359F2480070445B /* UIApplication+KTApplication.m */; };
@@ -43,8 +45,6 @@
 		68997B261358E9D4006F8BCC /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68997B241358E9D4006F8BCC /* PhotoWheel.xcdatamodeld */; };
 		68997B7913594412006F8BCC /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B7813594411006F8BCC /* Photo.m */; };
 		68997B7C13594412006F8BCC /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 68997B7B13594412006F8BCC /* PhotoAlbum.m */; };
-		689B7A061369A0DC00E8163A /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 689B7A051369A0DC00E8163A /* _PhotoAlbum.m */; };
-		689B7A091369A0DD00E8163A /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 689B7A081369A0DD00E8163A /* _Photo.m */; };
 		689B7A101369BEEA00E8163A /* PhotoAlbumNub.m in Sources */ = {isa = PBXBuildFile; fileRef = 689B7A0F1369BEE400E8163A /* PhotoAlbumNub.m */; };
 		689B7A131369C4D500E8163A /* PhotoAlbumNub.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689B7A121369C4D500E8163A /* PhotoAlbumNub.xib */; };
 		68BE0856135DF51A001FFEA0 /* 33-circle-plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 68BE0852135DF51A001FFEA0 /* 33-circle-plus.png */; };
@@ -79,6 +79,10 @@
 		682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelAppDelegate.h; sourceTree = "<group>"; };
 		682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelAppDelegate.m; sourceTree = "<group>"; };
 		682F29B2133C1C680058E1D7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		684A2FEE136F41DC0017967E /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Photo.h; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.h; sourceTree = "<group>"; };
+		684A2FEF136F41DC0017967E /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Photo.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.m; sourceTree = "<group>"; };
+		684A2FF1136F41DD0017967E /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _PhotoAlbum.h; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_PhotoAlbum.h; sourceTree = "<group>"; };
+		684A2FF2136F41DD0017967E /* _PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _PhotoAlbum.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_PhotoAlbum.m; sourceTree = "<group>"; };
 		684E75911353E9960072B7DD /* UINavigationController+KTTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KTTransitions.h"; sourceTree = "<group>"; };
 		684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+KTTransitions.m"; sourceTree = "<group>"; };
 		68540535136081170073F787 /* KTGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTGridView.h; sourceTree = "<group>"; };
@@ -109,10 +113,6 @@
 		68997B7813594411006F8BCC /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		68997B7A13594412006F8BCC /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbum.h; sourceTree = "<group>"; };
 		68997B7B13594412006F8BCC /* PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbum.m; sourceTree = "<group>"; };
-		689B7A041369A0DC00E8163A /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _PhotoAlbum.h; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_PhotoAlbum.h; sourceTree = "<group>"; };
-		689B7A051369A0DC00E8163A /* _PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _PhotoAlbum.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_PhotoAlbum.m; sourceTree = "<group>"; };
-		689B7A071369A0DD00E8163A /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Photo.h; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.h; sourceTree = "<group>"; };
-		689B7A081369A0DD00E8163A /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Photo.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.m; sourceTree = "<group>"; };
 		689B7A0E1369BEE200E8163A /* PhotoAlbumNub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhotoAlbumNub.h; path = ../../../../PhotoWheel/PhotoWheel/Classes/Views/PhotoAlbumNub.h; sourceTree = "<group>"; };
 		689B7A0F1369BEE400E8163A /* PhotoAlbumNub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhotoAlbumNub.m; path = ../../../../PhotoWheel/PhotoWheel/Classes/Views/PhotoAlbumNub.m; sourceTree = "<group>"; };
 		689B7A111369C42600E8163A /* Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Models.h; path = ../../../../PhotoWheel/PhotoWheel/Classes/Models/Models.h; sourceTree = "<group>"; };
@@ -313,10 +313,10 @@
 		68997B8313594498006F8BCC /* Generated */ = {
 			isa = PBXGroup;
 			children = (
-				689B7A071369A0DD00E8163A /* _Photo.h */,
-				689B7A081369A0DD00E8163A /* _Photo.m */,
-				689B7A041369A0DC00E8163A /* _PhotoAlbum.h */,
-				689B7A051369A0DC00E8163A /* _PhotoAlbum.m */,
+				684A2FEE136F41DC0017967E /* _Photo.h */,
+				684A2FEF136F41DC0017967E /* _Photo.m */,
+				684A2FF1136F41DD0017967E /* _PhotoAlbum.h */,
+				684A2FF2136F41DD0017967E /* _PhotoAlbum.m */,
 			);
 			path = Generated;
 			sourceTree = "<group>";
@@ -435,9 +435,9 @@
 				68540537136081170073F787 /* KTGridView.m in Sources */,
 				68253AF713626DA6000A8018 /* MainViewController.m in Sources */,
 				686D537D1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m in Sources */,
-				689B7A061369A0DC00E8163A /* _PhotoAlbum.m in Sources */,
-				689B7A091369A0DD00E8163A /* _Photo.m in Sources */,
 				689B7A101369BEEA00E8163A /* PhotoAlbumNub.m in Sources */,
+				684A2FF0136F41DC0017967E /* _Photo.m in Sources */,
+				684A2FF3136F41DD0017967E /* _PhotoAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

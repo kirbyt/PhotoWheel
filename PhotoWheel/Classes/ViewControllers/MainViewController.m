@@ -149,7 +149,15 @@
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    PhotoAlbum *photoAlbum = [[self fetchedResultsController] objectAtIndexPath:indexPath];
 
-   [nub setImage:[[photoAlbum keyPhoto] thumbnailImage]];
+   UIImage *image = nil;
+   Photo *keyPhoto = [photoAlbum keyPhoto];
+   if (keyPhoto) {
+      image = [keyPhoto thumbnailImage];
+   } else {
+      image = [UIImage imageNamed:@"photoDefault.png"];
+
+   }
+   [nub setImage:image];
    [nub setTitle:[NSString stringWithFormat:@"%@-%i", [photoAlbum name], index]];
    
    return nub;

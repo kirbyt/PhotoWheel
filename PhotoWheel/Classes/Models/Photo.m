@@ -13,14 +13,6 @@
 #import "UIApplication+KTApplication.h"
 
 
-//NSString * const kPhotoKeyImage = @"image";
-//NSString * const kPhotoKeyImageType = @"type";
-//NSString * const kPhotoImageTypeOriginal = @"original";
-//NSString * const kPhotoImageTypeLarge = @"large";
-//NSString * const kPhotoImageTypeSmall = @"small";
-//NSString * const kPhotoImageTypeThumbnail = @"thumbnail";
-
-
 @interface Photo ()
 - (NSString *)rootPath;
 - (NSString *)imagePathWithFormat:(NSString *)format;
@@ -56,9 +48,6 @@
 - (UIImage *)thumbnailImage
 {
    UIImage *image = [UIImage imageWithContentsOfFile:[self thumbnailImagePath]];
-   if (!image) {
-      image = [UIImage imageNamed:@"photoDefault.png"];
-   }
    return image;
 }
 
