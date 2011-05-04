@@ -1,23 +1,23 @@
 //
-//  PhotoWheelScrollView.m
+//  GridView.m
 //  PhotoWheel
 //
 //  Created by Kirby Turner on 4/21/11.
 //  Copyright 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "KTGridView.h"
+#import "GridView.h"
 #import "WheelView.h"
 
 
-@interface KTGridView ()
+@interface GridView ()
 @property (nonatomic, retain) NSMutableSet *reusableViews;
 @property (nonatomic, assign) NSInteger firstVisibleIndex;
 @property (nonatomic, assign) NSInteger lastVisibleIndex;
 @property (nonatomic, assign) NSInteger previousItemsPerRow;
 @end
 
-@implementation KTGridView
+@implementation GridView
 
 @synthesize dataSource = dataSource_;
 @synthesize reusableViews = reusableViews_;
@@ -68,9 +68,9 @@
    return self;
 }
 
-- (KTGridViewCell *)dequeueReusableView
+- (GridViewCell *)dequeueReusableView
 {
-   KTGridViewCell *view = [[self reusableViews] anyObject];
+   GridViewCell *view = [[self reusableViews] anyObject];
    if (view != nil) {
       // The only object retaining the view is the reusableView
       // set, so we retain/autorelease it before returning it.
@@ -109,13 +109,13 @@
    NSInteger visibleWidth = visibleBounds.size.width;
    NSInteger visibleHeight = visibleBounds.size.height;
    
-   CGSize viewSize = [[self dataSource] ktGridViewCellSize:self];
+   CGSize viewSize = [[self dataSource] gridViewCellSize:self];
    
    // Do some math to determine which rows and columns
    // are visible.
    NSInteger itemsPerRow = NSIntegerMin;
-   if ([[self dataSource] respondsToSelector:@selector(ktGridViewCellsPerRow:)]) {
-      itemsPerRow = [[self dataSource] ktGridViewCellsPerRow:self];
+   if ([[self dataSource] respondsToSelector:@selector(gridViewCellsPerRow:)]) {
+      itemsPerRow = [[self dataSource] gridViewCellsPerRow:self];
    }
    if (itemsPerRow == NSIntegerMin) {
       // Calculate the number of items per row.
@@ -142,7 +142,7 @@
    NSInteger spaceHeight = spaceWidth;
    
    // Calculate the content size for the scroll view.
-   NSInteger viewCount = [[self dataSource] ktGridViewNumberOfViews:self];
+   NSInteger viewCount = [[self dataSource] gridViewNumberOfViews:self];
    NSInteger rowCount = ceil(viewCount / (float)itemsPerRow);
    NSInteger rowHeight = viewSize.height + spaceHeight;
    CGSize contentSize = CGSizeMake(visibleWidth, (rowHeight * rowCount + spaceHeight));
@@ -156,7 +156,7 @@
    
    // Recycle all views that are no longer visible.
    for (UIView *view in [self subviews]) {
-      if ([view isKindOfClass:[KTGridViewCell class]]) {
+      if ([view isKindOfClass:[GridViewCell class]]) {
          CGRect viewFrame = [view frame];
          
          // If the view doesn't intersect, it's not visible, so recycle it.
@@ -184,7 +184,7 @@
       BOOL isViewMissing = !(index >= [self firstVisibleIndex] && index < [self lastVisibleIndex]);
       
       if (isViewMissing) {
-         KTGridViewCell *view = [[self dataSource] ktGridView:self viewAtIndex:index];
+         GridViewCell *view = [[self dataSource] gridView:self viewAtIndex:index];
          
          // Set the frame so the view is inserted into the correct position.
          CGRect newFrame = CGRectMake(x, y, viewSize.width, viewSize.height);
@@ -211,8 +211,8 @@
 
 @end
 
-#pragma mark - KTGridViewCell
+#pragma mark - GridViewCell
 
-@implementation KTGridViewCell
+@implementation GridViewCell
 
 @end

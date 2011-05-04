@@ -11,7 +11,7 @@
 
 @class WheelView;
 
-@interface MainViewController : UIViewController <NSFetchedResultsControllerDelegate, WheelViewDataSource>
+@interface MainViewController : UIViewController <NSFetchedResultsControllerDelegate, UIAlertViewDelegate, WheelViewDataSource>
 {
     
 }

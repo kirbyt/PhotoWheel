@@ -27,7 +27,7 @@
 		684A2FF0136F41DC0017967E /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 684A2FEF136F41DC0017967E /* _Photo.m */; };
 		684A2FF3136F41DD0017967E /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 684A2FF2136F41DD0017967E /* _PhotoAlbum.m */; };
 		684E75931353E9960072B7DD /* UINavigationController+KTTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */; };
-		68540537136081170073F787 /* KTGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68540536136081170073F787 /* KTGridView.m */; };
+		68540537136081170073F787 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68540536136081170073F787 /* GridView.m */; };
 		6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 6860CCD61359F2480070445B /* UIApplication+KTApplication.m */; };
 		6860CCDA135A0A2B0070445B /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6860CCD9135A0A2A0070445B /* QuartzCore.framework */; };
 		6865D1501344CDD40005271D /* UIView+KTCompositeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6865D14F1344CDD40005271D /* UIView+KTCompositeView.m */; };
@@ -85,8 +85,8 @@
 		684A2FF2136F41DD0017967E /* _PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _PhotoAlbum.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_PhotoAlbum.m; sourceTree = "<group>"; };
 		684E75911353E9960072B7DD /* UINavigationController+KTTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KTTransitions.h"; sourceTree = "<group>"; };
 		684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+KTTransitions.m"; sourceTree = "<group>"; };
-		68540535136081170073F787 /* KTGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTGridView.h; sourceTree = "<group>"; };
-		68540536136081170073F787 /* KTGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTGridView.m; sourceTree = "<group>"; };
+		68540535136081170073F787 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GridView.h; sourceTree = "<group>"; };
+		68540536136081170073F787 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 		6860CCD51359F2480070445B /* UIApplication+KTApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+KTApplication.h"; sourceTree = "<group>"; };
 		6860CCD61359F2480070445B /* UIApplication+KTApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+KTApplication.m"; sourceTree = "<group>"; };
 		6860CCD9135A0A2A0070445B /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -270,8 +270,8 @@
 				6865D15B1345204F0005271D /* PhotoNubView.m */,
 				68F9E0FE135F4F0F00052C9B /* WheelView.h */,
 				68F9E0FF135F4F0F00052C9B /* WheelView.m */,
-				68540535136081170073F787 /* KTGridView.h */,
-				68540536136081170073F787 /* KTGridView.m */,
+				68540535136081170073F787 /* GridView.h */,
+				68540536136081170073F787 /* GridView.m */,
 				689B7A0E1369BEE200E8163A /* PhotoAlbumNub.h */,
 				689B7A0F1369BEE400E8163A /* PhotoAlbumNub.m */,
 			);
@@ -432,7 +432,7 @@
 				68997B7C13594412006F8BCC /* PhotoAlbum.m in Sources */,
 				6860CCD71359F2480070445B /* UIApplication+KTApplication.m in Sources */,
 				68F9E100135F4F0F00052C9B /* WheelView.m in Sources */,
-				68540537136081170073F787 /* KTGridView.m in Sources */,
+				68540537136081170073F787 /* GridView.m in Sources */,
 				68253AF713626DA6000A8018 /* MainViewController.m in Sources */,
 				686D537D1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m in Sources */,
 				689B7A101369BEEA00E8163A /* PhotoAlbumNub.m in Sources */,
