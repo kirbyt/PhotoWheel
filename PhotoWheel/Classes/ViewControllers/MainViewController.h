@@ -18,6 +18,7 @@
 
 @property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, retain) IBOutlet WheelView *photoWheelView;
+@property (nonatomic, retain) IBOutlet UIButton *infoButton;
 @property (nonatomic, retain) IBOutlet UIButton *emailButton;
 @property (nonatomic, retain) IBOutlet UIButton *slideshowButton;
 @property (nonatomic, retain) IBOutlet UIButton *printButton;
@@ -29,5 +30,6 @@
 - (IBAction)printPhotoAlbum:(id)sender;
 - (IBAction)emailPhotoAlbum:(id)sender;
 - (IBAction)slideshow:(id)sender;
+- (IBAction)showAbout:(id)sender;
 
 @end

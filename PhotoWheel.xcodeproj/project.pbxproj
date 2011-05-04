@@ -24,6 +24,8 @@
 		682F2965133B93D60058E1D7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 682F2963133B93D60058E1D7 /* README.md */; };
 		682F299B133C0B870058E1D7 /* PhotoWheelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */; };
 		682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B2133C1C680058E1D7 /* MainWindow.xib */; };
+		683F274313719FFD00006122 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683F274213719FFD00006122 /* AboutView.xib */; };
+		683F27461371A07700006122 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683F27451371A07700006122 /* AboutViewController.m */; };
 		684A2FF0136F41DC0017967E /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 684A2FEF136F41DC0017967E /* _Photo.m */; };
 		684A2FF3136F41DD0017967E /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 684A2FF2136F41DD0017967E /* _PhotoAlbum.m */; };
 		684E75931353E9960072B7DD /* UINavigationController+KTTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */; };
@@ -79,13 +81,16 @@
 		682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelAppDelegate.h; sourceTree = "<group>"; };
 		682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelAppDelegate.m; sourceTree = "<group>"; };
 		682F29B2133C1C680058E1D7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		683F274213719FFD00006122 /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
+		683F27441371A07700006122 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		683F27451371A07700006122 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		684A2FEE136F41DC0017967E /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Photo.h; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.h; sourceTree = "<group>"; };
 		684A2FEF136F41DC0017967E /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Photo.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.m; sourceTree = "<group>"; };
 		684A2FF1136F41DD0017967E /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _PhotoAlbum.h; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_PhotoAlbum.h; sourceTree = "<group>"; };
 		684A2FF2136F41DD0017967E /* _PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _PhotoAlbum.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_PhotoAlbum.m; sourceTree = "<group>"; };
 		684E75911353E9960072B7DD /* UINavigationController+KTTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KTTransitions.h"; sourceTree = "<group>"; };
 		684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+KTTransitions.m"; sourceTree = "<group>"; };
-		68540535136081170073F787 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = GridView.h; sourceTree = "<group>"; };
+		68540535136081170073F787 /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
 		68540536136081170073F787 /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 		6860CCD51359F2480070445B /* UIApplication+KTApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIApplication+KTApplication.h"; sourceTree = "<group>"; };
 		6860CCD61359F2480070445B /* UIApplication+KTApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIApplication+KTApplication.m"; sourceTree = "<group>"; };
@@ -228,6 +233,8 @@
 			children = (
 				68253AF513626DA6000A8018 /* MainViewController.h */,
 				68253AF613626DA6000A8018 /* MainViewController.m */,
+				683F27441371A07700006122 /* AboutViewController.h */,
+				683F27451371A07700006122 /* AboutViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -238,6 +245,7 @@
 				682F29B2133C1C680058E1D7 /* MainWindow.xib */,
 				68253AF813626E32000A8018 /* MainView.xib */,
 				689B7A121369C4D500E8163A /* PhotoAlbumNub.xib */,
+				683F274213719FFD00006122 /* AboutView.xib */,
 			);
 			path = xibs;
 			sourceTree = "<group>";
@@ -391,6 +399,7 @@
 				68253AF413626C9E000A8018 /* Default-Portrait~ipad.png in Resources */,
 				68253AF913626E32000A8018 /* MainView.xib in Resources */,
 				689B7A131369C4D500E8163A /* PhotoAlbumNub.xib in Resources */,
+				683F274313719FFD00006122 /* AboutView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -438,6 +447,7 @@
 				689B7A101369BEEA00E8163A /* PhotoAlbumNub.m in Sources */,
 				684A2FF0136F41DC0017967E /* _Photo.m in Sources */,
 				684A2FF3136F41DD0017967E /* _PhotoAlbum.m in Sources */,
+				683F27461371A07700006122 /* AboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

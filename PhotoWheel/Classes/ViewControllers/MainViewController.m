@@ -10,6 +10,7 @@
 #import "WheelView.h"
 #import "PhotoAlbumNub.h"
 #import "Models.h"
+#import "AboutViewController.h"
 
 #define ALERT_BUTTON_CANCEL 0
 #define ALERT_BUTTON_REMOVEPHOTOALBUM 1
@@ -27,6 +28,7 @@
 @synthesize fetchedResultsController = fetchedResultsController_;
 @synthesize backgroundImageView = backgroundImageView_;
 @synthesize photoWheelView = photoWheelView_;
+@synthesize infoButton = infoButton_;
 @synthesize emailButton = emailButton_;
 @synthesize slideshowButton = slideshowButton_;
 @synthesize printButton = printButton_;
@@ -36,6 +38,7 @@
 
 - (void)dealloc
 {
+   [infoButton_ release], infoButton_ = nil;
    [backgroundImageView_ release], backgroundImageView_ = nil;
    [photoWheelView_ release], photoWheelView_ = nil;
    [emailButton_ release], emailButton_ = nil;
@@ -66,14 +69,11 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-
-   [[self photoWheelView] addObserver:self forKeyPath:@"selectedIndex" options:0 context:nil];
 }
 
 - (void)viewDidUnload
 {
-   [[self photoWheelView] removeObserver:self forKeyPath:@"selectedIndex"];
-   
+   [self setInfoButton:nil];
    [self setBackgroundImageView:nil];
    [self setPhotoWheelView:nil];
    [self setEmailButton:nil];
@@ -82,13 +82,6 @@
    [self setRemoveAlbumButton:nil];
 
    [super viewDidUnload];
-}
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context 
-{
-   if ([keyPath isEqualToString:@"selectedIndex"]) {
-      NSLog(@"selectedIndex: %i", [[self photoWheelView] selectedIndex]);
-   }
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -179,6 +172,13 @@
    }
 }
 
+- (IBAction)showAbout:(id)sender
+{
+   AboutViewController *newController = [[AboutViewController alloc] init];
+   [self presentModalViewController:newController animated:YES];
+   [newController release];
+}
+
 - (IBAction)removePhotoAlbum:(id)sender
 {
    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Photo Album" message:@"Remove the selected photo album and its photos?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Remove", nil];
@@ -238,6 +238,12 @@
    
    return nub;
 }
+
+- (void)wheelView:(WheelView *)wheelView didSelectNubAtIndex:(NSInteger)index
+{
+   NSLog(@"selectedIndex: %i", index);
+}
+
 
 #pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate Methods
 

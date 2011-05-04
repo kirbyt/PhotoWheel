@@ -176,6 +176,9 @@
          // Set the selected index if it has changed.
          if (index != [self selectedIndex] && [self isSelectedItemForAngle:angle]) {
             [self setSelectedIndex:index];
+            if ([[self dataSource] respondsToSelector:@selector(wheelView:didSelectNubAtIndex:)]) {
+               [[self dataSource] wheelView:self didSelectNubAtIndex:index];
+            }
          }
 
          // Note we add an angle offset to force the first nub

@@ -38,7 +38,8 @@ typedef enum  {
 @required
 - (NSInteger)wheelViewNumberOfNubs:(WheelView *)wheelView;
 - (WheelViewNub *)wheelView:(WheelView *)wheelView nubAtIndex:(NSInteger)index;
-
+@optional
+- (void)wheelView:(WheelView *)wheelView didSelectNubAtIndex:(NSInteger)index;
 @end
 
 
