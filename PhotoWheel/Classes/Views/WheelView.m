@@ -158,7 +158,7 @@
       radiusY = radiusX * 0.30;
    }
    
-   NSInteger nubDisplayCount = 12;  
+   NSInteger nubDisplayCount = 8;  
    NSInteger nubCount = [[self dataSource] wheelViewNumberOfNubs:self];
    float angleToAdd = 360.0f / nubDisplayCount;
    
@@ -183,7 +183,7 @@
          float angleInRadians = (angle + [self angleOffset]) * M_PI / 180.0f;
          
          // get a location based on the angle
-         float xPosition = center.x + (radiusX * sinf(angleInRadians));
+         float xPosition = center.x + (radiusX * sinf(angleInRadians)) - ([view frame].size.width / 2);
          float yPosition = center.y + (radiusY * cosf(angleInRadians));
          
          // get a scale too; effectively we have:

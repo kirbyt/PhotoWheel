@@ -97,10 +97,8 @@
    
    [[self photoWheelView] setTopAtDegrees:90.0];
 
-   CGPoint newOrigin = CGPointMake(-250, 180);
-   CGRect frame = [[self photoWheelView] frame];
-   frame.origin = newOrigin;
-   [[self photoWheelView] setFrame:frame];
+   CGRect newFrame = CGRectMake(-250, 35, 650, 650);
+   [[self photoWheelView] setFrame:newFrame];
    [[self photoWheelView] setNeedsLayout];
 }
 
@@ -111,10 +109,8 @@
 
    [[self photoWheelView] setTopAtDegrees:0.0];
 
-   CGPoint newOrigin = CGPointMake(84, 756);
-   CGRect frame = [[self photoWheelView] frame];
-   frame.origin = newOrigin;
-   [[self photoWheelView] setFrame:frame];
+   CGRect newFrame = CGRectMake(84, 677, 600, 400);
+   [[self photoWheelView] setFrame:newFrame];
    [[self photoWheelView] setNeedsLayout];
 }
 
@@ -140,6 +136,26 @@
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
    }
+}
+
+- (IBAction)removePhotoAlbum:(id)sender
+{
+   
+}
+
+- (IBAction)printPhotoAlbum:(id)sender
+{
+   
+}
+
+- (IBAction)emailPhotoAlbum:(id)sender
+{
+   
+}
+
+- (IBAction)slideshow:(id)sender
+{
+   
 }
 
 #pragma mark - PhotoWheelViewDataSource Methods
