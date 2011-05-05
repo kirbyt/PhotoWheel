@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "WheelView.h"
 
-@class WheelView;
+@class PhotoAlbum;
 
-@interface MainViewController : UIViewController <NSFetchedResultsControllerDelegate, UIAlertViewDelegate, WheelViewDataSource>
+@interface MainViewController : UIViewController <NSFetchedResultsControllerDelegate, WheelViewDataSource>
 {
     
 }
@@ -19,17 +19,11 @@
 @property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, retain) IBOutlet WheelView *photoWheelView;
 @property (nonatomic, retain) IBOutlet UIButton *infoButton;
-@property (nonatomic, retain) IBOutlet UIButton *emailButton;
-@property (nonatomic, retain) IBOutlet UIButton *slideshowButton;
-@property (nonatomic, retain) IBOutlet UIButton *printButton;
-@property (nonatomic, retain) IBOutlet UIButton *removeAlbumButton;
+@property (nonatomic, retain) IBOutlet UIView *photoAlbumViewPlaceholder;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
+- (BOOL)deletePhotoAlbum:(PhotoAlbum *)photoAlbum;
 - (IBAction)addPhotoAlbum:(id)sender;
-- (IBAction)removePhotoAlbum:(id)sender;
-- (IBAction)printPhotoAlbum:(id)sender;
-- (IBAction)emailPhotoAlbum:(id)sender;
-- (IBAction)slideshow:(id)sender;
 - (IBAction)showAbout:(id)sender;
 
 @end

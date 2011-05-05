@@ -7,20 +7,20 @@
 //
 
 #import "MainViewController.h"
+#import "AboutViewController.h"
+#import "PhotoAlbumViewController.h"
 #import "WheelView.h"
 #import "PhotoAlbumNub.h"
 #import "Models.h"
-#import "AboutViewController.h"
+#import "UIView+KTCompositeView.h"
 
-#define ALERT_BUTTON_CANCEL 0
-#define ALERT_BUTTON_REMOVEPHOTOALBUM 1
 
 @interface MainViewController ()
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSMutableArray *photoAlbumNubs;
+@property (nonatomic, retain) PhotoAlbumViewController *photoAlbumViewController;
 - (void)layoutForLandscape;
 - (void)layoutForPortrait;
-- (void)deletePhotoAlbum;
 @end
 
 @implementation MainViewController
@@ -29,25 +29,21 @@
 @synthesize backgroundImageView = backgroundImageView_;
 @synthesize photoWheelView = photoWheelView_;
 @synthesize infoButton = infoButton_;
-@synthesize emailButton = emailButton_;
-@synthesize slideshowButton = slideshowButton_;
-@synthesize printButton = printButton_;
-@synthesize removeAlbumButton = removeAlbumButton_;
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize photoAlbumNubs = photoAlbumNubs_;
+@synthesize photoAlbumViewController = photoAlbumViewController_;
+@synthesize photoAlbumViewPlaceholder = photoAlbumViewPlaceholder_;
 
 - (void)dealloc
 {
    [infoButton_ release], infoButton_ = nil;
    [backgroundImageView_ release], backgroundImageView_ = nil;
    [photoWheelView_ release], photoWheelView_ = nil;
-   [emailButton_ release], emailButton_ = nil;
-   [slideshowButton_ release], slideshowButton_ = nil;
-   [printButton_ release], printButton_ = nil;
-   [removeAlbumButton_ release], removeAlbumButton_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [managedObjectContext_ release], managedObjectContext_ = nil;
    [photoAlbumNubs_ release], photoAlbumNubs_ = nil;
+   [photoAlbumViewController_ release], photoAlbumViewController_ = nil;
+   [photoAlbumViewPlaceholder_ release], photoAlbumViewPlaceholder_ = nil;
    
    [super dealloc];
 }
@@ -69,6 +65,11 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
+   
+   PhotoAlbumViewController *newController = [[PhotoAlbumViewController alloc] init];
+   [[self photoAlbumViewPlaceholder] kt_addSubview:[newController view]];
+   [self setPhotoAlbumViewController:newController];
+   [newController release];
 }
 
 - (void)viewDidUnload
@@ -76,10 +77,8 @@
    [self setInfoButton:nil];
    [self setBackgroundImageView:nil];
    [self setPhotoWheelView:nil];
-   [self setEmailButton:nil];
-   [self setSlideshowButton:nil];
-   [self setPrintButton:nil];
-   [self setRemoveAlbumButton:nil];
+   [self setPhotoAlbumViewPlaceholder:nil];
+   [self setPhotoAlbumViewController:nil];
 
    [super viewDidUnload];
 }
@@ -91,6 +90,9 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+   // Forward the message to the photo album view controller.
+   [[self photoAlbumViewController] willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
+   
    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
       [self layoutForLandscape];
    } else {
@@ -122,32 +124,6 @@
    [[self photoWheelView] setNeedsLayout];
 }
 
-- (void)deletePhotoAlbum
-{
-   NSFetchedResultsController *fetchedRequestController = [self fetchedResultsController];
-   NSManagedObjectContext *context = [fetchedRequestController managedObjectContext];
-
-   NSInteger selectedIndex = [[self photoWheelView] selectedIndex];
-   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
-   PhotoAlbum *photoAlbum = [fetchedRequestController objectAtIndexPath:indexPath];
-   [context deleteObject:photoAlbum];
-   
-   // Save the context.
-   NSError *error = nil;
-   if (![context save:&error])
-   {
-      /*
-       Replace this implementation with code to handle the error appropriately.
-       
-       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-       */
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-      abort();
-   }
-   
-   [[self photoWheelView] reloadData];
-}
-
 #pragma mark - Actions
 
 - (IBAction)addPhotoAlbum:(id)sender
@@ -172,32 +148,35 @@
    }
 }
 
+- (BOOL)deletePhotoAlbum:(PhotoAlbum *)photoAlbum
+{
+   BOOL success = YES;
+   NSManagedObjectContext *context = [photoAlbum managedObjectContext];
+   [context deleteObject:photoAlbum];
+   
+   // Save the context.
+   NSError *error = nil;
+   if (![context save:&error])
+   {
+      success = NO;
+      /*
+       Replace this implementation with code to handle the error appropriately.
+       
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+       */
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }
+   
+   [[self photoWheelView] reloadData];
+   return success;
+}
+
 - (IBAction)showAbout:(id)sender
 {
    AboutViewController *newController = [[AboutViewController alloc] init];
    [self presentModalViewController:newController animated:YES];
    [newController release];
-}
-
-- (IBAction)removePhotoAlbum:(id)sender
-{
-   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Photo Album" message:@"Remove the selected photo album and its photos?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Remove", nil];
-   [alertView show];
-}
-
-- (IBAction)printPhotoAlbum:(id)sender
-{
-   
-}
-
-- (IBAction)emailPhotoAlbum:(id)sender
-{
-   
-}
-
-- (IBAction)slideshow:(id)sender
-{
-   
 }
 
 #pragma mark - PhotoWheelViewDataSource Methods
@@ -285,21 +264,6 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
    [[self photoWheelView] reloadData];
-}
-
-#pragma mark - UIAlertViewDelegate Methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-   if (buttonIndex == ALERT_BUTTON_REMOVEPHOTOALBUM) {
-      [self deletePhotoAlbum];
-   }
-   [alertView release];
-}
-
-- (void)alertViewCancel:(UIAlertView *)alertView
-{
-   [alertView release];
 }
 
 @end
