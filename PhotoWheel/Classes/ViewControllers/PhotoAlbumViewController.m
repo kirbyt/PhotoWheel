@@ -19,6 +19,7 @@
 @interface PhotoAlbumViewController ()
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) UIPopoverController *popoverController;
+@property (nonatomic, retain) NSTimer *refreshDisplayTimer;
 - (NSInteger)numberOfObjects;
 - (id)objectAtIndex:(NSInteger)index;
 - (void)addPhotoAtIndex:(NSInteger)index;
@@ -36,9 +37,11 @@
 @synthesize gridView = gridView_;
 @synthesize fetchedResultsController = fetchedResultsController_;
 @synthesize popoverController = popoverController_;
+@synthesize refreshDisplayTimer = refreshDisplayTimer_;
 
 - (void)dealloc
 {
+   [refreshDisplayTimer_ release], refreshDisplayTimer_ = nil;
    [popoverController_ release], popoverController_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [gridView_ release], gridView_ = nil;
@@ -54,6 +57,9 @@
 
 - (void)viewDidUnload
 {
+   [[self refreshDisplayTimer] invalidate];
+   [self setRefreshDisplayTimer:nil];
+   
    [self setGridView:nil];
    [self setTitleTextField:nil];
    [self setEmailButton:nil];
@@ -64,11 +70,33 @@
    [super viewDidUnload];
 }
 
-- (void)updateDisplay
+- (void)doRefreshDisplay
 {
-   [[self titleTextField] setText:[[self photoAlbum] name]];
-   [self setFetchedResultsController:nil];
-   [[self gridView] reloadData];
+   void (^animations)(void) = ^ {
+      [[self gridView] setAlpha:0.0];
+      [[self titleTextField] setText:[[self photoAlbum] name]];
+      [self setFetchedResultsController:nil];
+   };
+   
+   void (^completion)(BOOL) = ^(BOOL finished) {
+      [[self gridView] reloadData];
+      void (^animations)(void) = ^ {
+         [[self gridView] setAlpha:1.0];
+      };
+      [UIView animateWithDuration:0.6 animations:animations];
+   };
+   
+   [UIView animateWithDuration:0.6 animations:animations completion:completion];
+}
+
+- (void)refreshDisplay
+{
+   if ([self refreshDisplayTimer]) {
+      [[self refreshDisplayTimer] invalidate];
+   }
+   
+   NSTimer *newTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(doRefreshDisplay) userInfo:nil repeats:NO];
+   [self setRefreshDisplayTimer:newTimer];
 }
 
 - (void)setPhotoAlbum:(PhotoAlbum *)photoAlbum
@@ -78,7 +106,7 @@
       [photoAlbum_ release];
       photoAlbum_ = photoAlbum;
       
-      [self updateDisplay];
+      [self refreshDisplay];
    }
 }
 
@@ -134,7 +162,11 @@
 
 - (NSInteger)gridViewNumberOfCells:(GridView *)gridView
 {
-   NSInteger count = [self numberOfObjects] + 1;   // Add 1 for the "add cell"
+   NSInteger count = 0;
+   // Set the count only when we have a photo album.
+   if ([self photoAlbum]) {
+      count = [self numberOfObjects] + 1;   // Add 1 for the "add cell"
+   }
    return count;
 }
 
