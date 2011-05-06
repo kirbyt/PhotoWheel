@@ -214,7 +214,7 @@
 
    }
    [nub setImage:image];
-   [nub setTitle:[NSString stringWithFormat:@"%@-%i", [photoAlbum name], index]];
+   [nub setTitle:[photoAlbum name]];
    
    return nub;
 }
