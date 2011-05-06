@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "ImageGridViewCell.h"
 #import "AddPhotoViewController.h"
+#import "SlideshowSettingsViewController.h"
 #import "NSManagedObject+KTCategory.h"
 
 #define BUTTON_CANCEL 0
@@ -136,7 +137,16 @@
 
 - (IBAction)slideshow:(id)sender
 {
+   SlideshowSettingsViewController *newController = [[SlideshowSettingsViewController alloc] init];
+   UINavigationController *newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
+   UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:newNavController];
+   [self setPopoverController:newPopover];
    
+   [newPopover release];
+   [newNavController release];
+   [newController release];
+   
+   [[self popoverController] presentPopoverFromRect:[sender frame] inView:[self view] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 #pragma mark - UIAlertViewDelegate Methods
