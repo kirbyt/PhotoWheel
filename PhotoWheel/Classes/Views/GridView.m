@@ -62,6 +62,7 @@
    [self setPreviousItemsPerRow:NSIntegerMin];
    
    [self setDelaysContentTouches:YES];
+   [self setClipsToBounds:YES];
    
    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
    [self addGestureRecognizer:tap];
