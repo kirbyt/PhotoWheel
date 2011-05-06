@@ -8,7 +8,41 @@
 
 #import "ImageGridViewCell.h"
 
+@interface ImageGridViewCell ()
+@property (nonatomic, retain) UIImageView *imageView;
+@end
+
 @implementation ImageGridViewCell
+
+@synthesize imageView = imageView_;
+
+- (void)dealloc
+{
+   [imageView_ release], imageView_ = nil;
+   [super dealloc];
+}
+
+- (id)init
+{
+   CGSize size = [[self class] size];
+   CGRect frame = CGRectMake(0, 0, size.width, size.height);
+   self = [super initWithFrame:frame];
+   if (self) {
+      [self setBackgroundColor:[UIColor clearColor]];
+      
+      UIImageView *newImageView = [[UIImageView alloc] initWithFrame:frame];
+      [self setImageView:newImageView];
+      [newImageView release];
+      
+      [self addSubview:[self imageView]];
+   }
+   return self;
+}
+
+- (void)setImage:(UIImage *)image
+{
+   [[self imageView] setImage:image];
+}
 
 + (ImageGridViewCell *)imageGridViewCell
 {
@@ -22,20 +56,5 @@
 }
 
 
-- (id)init
-{
-   CGSize size = [[self class] size];
-   CGRect frame = CGRectMake(0, 0, size.width, size.height);
-   self = [super initWithFrame:frame];
-   if (self) {
-      [self setBackgroundColor:[UIColor yellowColor]];
-   }
-   return self;
-}
-
-- (void)setImage:(UIImage *)image
-{
-   
-}
 
 @end

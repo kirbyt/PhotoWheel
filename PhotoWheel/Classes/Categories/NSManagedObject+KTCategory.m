@@ -11,7 +11,7 @@
 
 @implementation NSManagedObject (NSManagedObject_KTCategory)
 
-- (BOOL)save
+- (BOOL)kt_save
 {
    BOOL success = YES;
    NSManagedObjectContext *context = [self managedObjectContext];

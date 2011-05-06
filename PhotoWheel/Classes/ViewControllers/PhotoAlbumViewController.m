@@ -11,6 +11,7 @@
 #import "MainViewController.h"
 #import "ImageGridViewCell.h"
 #import "AddPhotoViewController.h"
+#import "NSManagedObject+KTCategory.h"
 
 #define ALERT_BUTTON_CANCEL 0
 #define ALERT_BUTTON_REMOVEPHOTOALBUM 1
@@ -126,7 +127,7 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
    [[self photoAlbum] setName:[textField text]];
-   [[self photoAlbum] save];
+   [[self photoAlbum] kt_save];
 }
 
 #pragma mark - GridViewDataSource Methods
@@ -197,7 +198,7 @@
    
    NSManagedObjectContext *context = [[self photoAlbum] managedObjectContext];
    
-   NSString *cacheName = NSStringFromClass([self class]);
+   NSString *cacheName = [[self photoAlbum] uuid];
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:[Photo entityName] inManagedObjectContext:context];
    [fetchRequest setEntity:entityDescription];
@@ -238,6 +239,7 @@
 - (void)addPhotoAtIndex:(NSInteger)index
 {
    AddPhotoViewController *addPhotoViewController = [[AddPhotoViewController alloc] init];
+   [addPhotoViewController setPhotoAlbumViewController:self];
    UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:addPhotoViewController];
    [self setPopoverController:newPopover];
    
@@ -246,6 +248,40 @@
    
    GridViewCell *cell = [[self gridView] cellAtIndex:index];
    [[self popoverController] presentPopoverFromRect:[cell frame] inView:[self gridView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)addFromCamera
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)addFromLibrary
+{
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
+   UIViewController *newRootController = [[UIViewController alloc] init];
+   [newRootController setContentSizeForViewInPopover:CGSizeMake(320, 480)];
+   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] initWithRootViewController:newRootController];
+   [newImagePicker setDelegate:self];
+   
+   UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:newImagePicker];
+   [self setPopoverController:newPopover];
+   
+   [newPopover release];
+   [newImagePicker release];
+   [newRootController release];
+   
+   NSInteger selectedIndex = [[self gridView] indexForSelectedCell];
+   GridViewCell *cell = [[self gridView] cellAtIndex:selectedIndex];
+   [[self popoverController] presentPopoverFromRect:[cell frame] inView:[self gridView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)addFromFlickr
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - UIPopoverControllerDelegate Methods
@@ -257,5 +293,27 @@
    }
 }
 
+#pragma mark - UIImagePickerControllerDelegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+   [[self popoverController] dismissPopoverAnimated:YES];
+   [self setPopoverController:nil];
+   
+   NSManagedObjectContext *context = [[self photoAlbum] managedObjectContext];
+   
+   UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+   Photo *newPhoto = [Photo insertNewInManagedObjectContext:context];
+   [newPhoto setPhotoAlbum:[self photoAlbum]];
+   [newPhoto setDateAdded:[NSDate date]];
+   [newPhoto saveImage:image];
+   [newPhoto kt_save];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+   [[self popoverController] dismissPopoverAnimated:YES];
+   [self setPopoverController:nil];
+}
 
 @end

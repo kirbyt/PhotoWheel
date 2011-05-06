@@ -12,7 +12,7 @@
 @class PhotoAlbum;
 @class MainViewController;
 
-@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, UIPopoverControllerDelegate, GridViewDataSource>
+@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GridViewDataSource>
 {
     
 }
@@ -30,5 +30,9 @@
 - (IBAction)printPhotoAlbum:(id)sender;
 - (IBAction)emailPhotoAlbum:(id)sender;
 - (IBAction)slideshow:(id)sender;
+
+- (void)addFromCamera;
+- (void)addFromLibrary;
+- (void)addFromFlickr;
 
 @end

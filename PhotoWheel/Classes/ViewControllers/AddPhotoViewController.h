@@ -8,10 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+@class PhotoAlbumViewController;
 
 @interface AddPhotoViewController : UIViewController
 {
     
 }
+
+@property (nonatomic, assign) PhotoAlbumViewController *photoAlbumViewController;
+
+- (IBAction)addFromCamera:(id)sender;
+- (IBAction)addFromLibrary:(id)sender;
+- (IBAction)addFromFlickr:(id)sender;
 
 @end

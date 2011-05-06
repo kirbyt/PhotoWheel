@@ -28,6 +28,7 @@
 @property (nonatomic, assign) NSInteger firstVisibleIndex;
 @property (nonatomic, assign) NSInteger lastVisibleIndex;
 @property (nonatomic, assign) NSInteger previousItemsPerRow;
+@property (nonatomic, assign) NSInteger selectedIndex;
 @end
 
 @implementation GridView
@@ -37,6 +38,7 @@
 @synthesize firstVisibleIndex = firstVisibleIndex_;
 @synthesize lastVisibleIndex = lastVisibleIndex_;
 @synthesize previousItemsPerRow = previousItemsPerRow_;
+@synthesize selectedIndex = selectedIndex_;
 
 - (void)dealloc
 {
@@ -237,19 +239,26 @@
    // Need to figure out if the user tapped a cell or not.
    // If a cell was tapped then let the data source know
    // which cell was tapped.
-   
+ 
+   [self setSelectedIndex:-1];
    CGPoint touchPoint = [recognizer locationInView:self];
    
    for (id view in [self subviews]) {
       if ([view isKindOfClass:[GridViewCell class]]) {
          if (CGRectContainsPoint([view frame], touchPoint)) {
+            [self setSelectedIndex:[view indexInGrid]];
             if ([[self dataSource] respondsToSelector:@selector(gridView:didSelectCellAtIndex:)]) {
-               [[self dataSource] gridView:self didSelectCellAtIndex:[view indexInGrid]];
+               [[self dataSource] gridView:self didSelectCellAtIndex:[self selectedIndex]];
             }
             break;
          }
       }
    }
+}
+
+- (NSInteger)indexForSelectedCell
+{
+   return [self selectedIndex];
 }
 
 @end

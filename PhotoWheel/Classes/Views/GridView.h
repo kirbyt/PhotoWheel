@@ -24,6 +24,7 @@
 - (id)dequeueReusableCell;
 - (void)reloadData;
 - (GridViewCell *)cellAtIndex:(NSInteger)index;
+- (NSInteger)indexForSelectedCell;
 
 @end
 

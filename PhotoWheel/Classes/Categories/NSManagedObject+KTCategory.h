@@ -11,6 +11,6 @@
 
 @interface NSManagedObject (NSManagedObject_KTCategory)
 
-- (BOOL)save;
+- (BOOL)kt_save;
 
 @end

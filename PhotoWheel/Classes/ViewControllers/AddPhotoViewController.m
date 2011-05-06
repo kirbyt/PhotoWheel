@@ -7,9 +7,12 @@
 //
 
 #import "AddPhotoViewController.h"
+#import "PhotoAlbumViewController.h"
 
 
 @implementation AddPhotoViewController
+
+@synthesize photoAlbumViewController = photoAlbumViewController_;
 
 - (void)dealloc
 {
@@ -23,6 +26,23 @@
       [self setContentSizeForViewInPopover:CGSizeMake(320, 100)];
    }
    return self;
+}
+
+#pragma mark - Actions
+
+- (IBAction)addFromCamera:(id)sender
+{
+   [[self photoAlbumViewController] addFromCamera];
+}
+
+- (IBAction)addFromLibrary:(id)sender
+{
+   [[self photoAlbumViewController] addFromLibrary];
+}
+
+- (IBAction)addFromFlickr:(id)sender
+{
+   [[self photoAlbumViewController] addFromFlickr];
 }
 
 @end
