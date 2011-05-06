@@ -155,6 +155,11 @@
    return [ImageGridViewCell size];
 }
 
+- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
+{
+   NSLog(@"cell selected at index: %i", index);
+}
+
 #pragma mark - NSFetchedResultsController Helper Methods
 
 - (NSInteger)numberOfObjects

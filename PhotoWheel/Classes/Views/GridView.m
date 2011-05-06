@@ -10,6 +10,19 @@
 #import "WheelView.h"
 
 
+#pragma mark - GridViewCell
+
+@interface GridViewCell ()
+@property (nonatomic, assign) NSInteger indexInGrid;
+@end
+
+@implementation GridViewCell
+@synthesize indexInGrid = indexInGrid_;
+@end
+
+
+#pragma mark - GridView
+
 @interface GridView ()
 @property (nonatomic, retain) NSMutableSet *reusableViews;
 @property (nonatomic, assign) NSInteger firstVisibleIndex;
@@ -48,6 +61,10 @@
    [self setPreviousItemsPerRow:NSIntegerMin];
    
    [self setDelaysContentTouches:YES];
+   
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
+   [self addGestureRecognizer:tap];
+   [tap release];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder
@@ -189,6 +206,7 @@
          // Set the frame so the view is inserted into the correct position.
          CGRect newFrame = CGRectMake(x, y, viewSize.width, viewSize.height);
          [view setFrame:newFrame];
+         [view setIndexInGrid:index];
          
          [self addSubview:view];
       }
@@ -208,11 +226,25 @@
    [self setLastVisibleIndex:stopAtIndex];
 }
 
+- (void)didTap:(UITapGestureRecognizer *)recognizer
+{
+   // Need to figure out if the user tapped a cell or not.
+   // If a cell was tapped then let the data source know
+   // which cell was tapped.
+   
+   CGPoint touchPoint = [recognizer locationInView:self];
+   
+   for (id view in [self subviews]) {
+      if ([view isKindOfClass:[GridViewCell class]]) {
+         if (CGRectContainsPoint([view frame], touchPoint)) {
+            if ([[self dataSource] respondsToSelector:@selector(gridView:didSelectCellAtIndex:)]) {
+               [[self dataSource] gridView:self didSelectCellAtIndex:[view indexInGrid]];
+            }
+            break;
+         }
+      }
+   }
+}
 
 @end
 
-#pragma mark - GridViewCell
-
-@implementation GridViewCell
-
-@end
