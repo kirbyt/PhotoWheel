@@ -111,6 +111,7 @@
    
    [self setFirstVisibleIndex:NSIntegerMax];
    [self setLastVisibleIndex:NSIntegerMin];
+   [self setSelectedIndex:-1];
 }
 
 - (void)reloadData
