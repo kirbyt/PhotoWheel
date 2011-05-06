@@ -46,6 +46,7 @@
 		6865D175134552D20005271D /* Icon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6865D171134552D20005271D /* Icon72x72.png */; };
 		6865D176134552D20005271D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6865D172134552D20005271D /* iTunesArtwork */; };
 		686D537D1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */; };
+		687335BB13734499008FD623 /* NSManagedObject+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335BA13734499008FD623 /* NSManagedObject+KTCategory.m */; };
 		68834C3113578BD700EC091E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 68834C3013578BD600EC091E /* Constants.m */; };
 		68983BF51355F3AC00390B00 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68983BF41355F3AC00390B00 /* UIImage+KTCategory.m */; };
 		68997B261358E9D4006F8BCC /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68997B241358E9D4006F8BCC /* PhotoWheel.xcdatamodeld */; };
@@ -118,6 +119,8 @@
 		6865D172134552D20005271D /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		686D537B1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTOneFingerRotationGestureRecognizer.h; sourceTree = "<group>"; };
 		686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTOneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
+		687335B913734499008FD623 /* NSManagedObject+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+KTCategory.h"; sourceTree = "<group>"; };
+		687335BA13734499008FD623 /* NSManagedObject+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+KTCategory.m"; sourceTree = "<group>"; };
 		68834C2F13578BD600EC091E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		68834C3013578BD600EC091E /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		68983BF31355F3AC00390B00 /* UIImage+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KTCategory.h"; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 				6810373E1358DC7700BD7C82 /* NSString+KTString.m */,
 				6860CCD51359F2480070445B /* UIApplication+KTApplication.h */,
 				6860CCD61359F2480070445B /* UIApplication+KTApplication.m */,
+				687335B913734499008FD623 /* NSManagedObject+KTCategory.h */,
+				687335BA13734499008FD623 /* NSManagedObject+KTCategory.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -466,6 +471,7 @@
 				684A2FF3136F41DD0017967E /* _PhotoAlbum.m in Sources */,
 				683F27461371A07700006122 /* AboutViewController.m in Sources */,
 				683F27491371A67400006122 /* PhotoAlbumViewController.m in Sources */,
+				687335BB13734499008FD623 /* NSManagedObject+KTCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,7 +11,7 @@
 @class PhotoAlbum;
 @class MainViewController;
 
-@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate>
+@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate>
 {
     
 }
@@ -20,6 +20,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *slideshowButton;
 @property (nonatomic, retain) IBOutlet UIButton *printButton;
 @property (nonatomic, retain) IBOutlet UIButton *removeAlbumButton;
+@property (nonatomic, retain) IBOutlet UITextField *titleTextField;
 @property (nonatomic, retain) PhotoAlbum *photoAlbum;
 @property (nonatomic, assign) MainViewController *mainViewController;
 

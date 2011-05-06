@@ -8,3 +8,4 @@
 
 #import "Photo.h"
 #import "PhotoAlbum.h"
+#import "NSManagedObject+KTCategory.h"

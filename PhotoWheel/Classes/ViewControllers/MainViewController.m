@@ -67,6 +67,7 @@
    [super viewDidLoad];
    
    PhotoAlbumViewController *newController = [[PhotoAlbumViewController alloc] init];
+   [newController setMainViewController:self];
    [[self photoAlbumViewPlaceholder] kt_addSubview:[newController view]];
    [self setPhotoAlbumViewController:newController];
    [newController release];
@@ -220,7 +221,10 @@
 
 - (void)wheelView:(WheelView *)wheelView didSelectNubAtIndex:(NSInteger)index
 {
-   NSLog(@"selectedIndex: %i", index);
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   PhotoAlbum *photoAlbum = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+
+   [[self photoAlbumViewController] setPhotoAlbum:photoAlbum];
 }
 
 

@@ -19,11 +19,13 @@
 @synthesize slideshowButton = slideshowButton_;
 @synthesize printButton = printButton_;
 @synthesize removeAlbumButton = removeAlbumButton_;
+@synthesize titleTextField = titleTextField_;
 @synthesize photoAlbum = photoAlbum_;
 @synthesize mainViewController = mainViewController_;
 
 - (void)dealloc
 {
+   [titleTextField_ release], titleTextField_ = nil;
    [emailButton_ release], emailButton_ = nil;
    [slideshowButton_ release], slideshowButton_ = nil;
    [printButton_ release], printButton_ = nil;
@@ -35,12 +37,29 @@
 
 - (void)viewDidUnload
 {
+   [self setTitleTextField:nil];
    [self setEmailButton:nil];
    [self setSlideshowButton:nil];
    [self setPrintButton:nil];
    [self setRemoveAlbumButton:nil];
 
    [super viewDidUnload];
+}
+
+- (void)updateDisplay
+{
+   [[self titleTextField] setText:[[self photoAlbum] name]];
+}
+
+- (void)setPhotoAlbum:(PhotoAlbum *)photoAlbum
+{
+   if (photoAlbum_ != photoAlbum) {
+      [photoAlbum retain];
+      [photoAlbum_ release];
+      photoAlbum_ = photoAlbum;
+      
+      [self updateDisplay];
+   }
 }
 
 #pragma mark - Actions
@@ -83,5 +102,12 @@
    [alertView release];
 }
 
+#pragma mark - UITextFieldDelegate Methods
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+   [[self photoAlbum] setName:[textField text]];
+   [[self photoAlbum] save];
+}
 
 @end
