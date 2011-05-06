@@ -7,7 +7,6 @@
 //
 
 #import "GridView.h"
-#import "WheelView.h"
 
 
 #pragma mark - GridViewCell
@@ -104,7 +103,7 @@
 - (void)queueReusableCells
 {
    for (UIView *view in [self subviews]) {
-      if ([view isKindOfClass:[WheelView class]]) {
+      if ([view isKindOfClass:[GridViewCell class]]) {
          [[self reusableViews] addObject:view];
          [view removeFromSuperview];
       }
