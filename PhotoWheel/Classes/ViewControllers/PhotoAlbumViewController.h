@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GridView.h"
 
 @class PhotoAlbum;
 @class MainViewController;
 
-@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate>
+@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, GridViewDataSource>
 {
     
 }
@@ -21,6 +22,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *printButton;
 @property (nonatomic, retain) IBOutlet UIButton *removeAlbumButton;
 @property (nonatomic, retain) IBOutlet UITextField *titleTextField;
+@property (nonatomic, retain) IBOutlet GridView *gridView;
 @property (nonatomic, retain) PhotoAlbum *photoAlbum;
 @property (nonatomic, assign) MainViewController *mainViewController;
 
