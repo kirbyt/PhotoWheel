@@ -40,6 +40,11 @@
    [super viewDidUnload];
 }
 
+- (void)startSlideshow
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 #pragma mark - UITableViewDataSource and UITableViewDelegate Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -49,7 +54,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-   return 2;
+   return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -60,7 +65,26 @@
       cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SlideshowCell"] autorelease];
    }
    
+   if ([indexPath row] == 0) {
+      [[cell textLabel] setText:@"Transitions"];
+   } else {
+      [[cell textLabel] setText:@"Play Music"];
+   }
+   
    return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+   UIView *newView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)] autorelease];
+
+   UIButton *newButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+   [newButton setFrame:CGRectMake(10, 2, 300, 44)];
+   [newButton setTitle:@"Start Slideshow" forState:UIControlStateNormal];
+   [newButton addTarget:self action:@selector(startSlideshow) forControlEvents:UIControlEventTouchUpInside];
+   [newView addSubview:newButton];
+   
+   return newView;
 }
 
 @end
