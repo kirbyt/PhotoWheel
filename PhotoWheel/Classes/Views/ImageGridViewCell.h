@@ -1,5 +1,5 @@
 //
-//  PhotoGridViewCell.h
+//  ImageGridViewCell.h
 //  PhotoWheel
 //
 //  Created by Kirby Turner on 5/6/11.
@@ -10,12 +10,12 @@
 #import "GridView.h"
 
 
-@interface PhotoGridViewCell : GridViewCell
+@interface ImageGridViewCell : GridViewCell
 {
     
 }
 
-+ (PhotoGridViewCell *)imageGridViewCell;
++ (ImageGridViewCell *)imageGridViewCell;
 + (CGSize)size;
 
 - (void)setImage:(UIImage *)image;

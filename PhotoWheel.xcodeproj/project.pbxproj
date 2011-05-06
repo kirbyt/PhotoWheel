@@ -46,7 +46,7 @@
 		6865D176134552D20005271D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6865D172134552D20005271D /* iTunesArtwork */; };
 		686D537D1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */; };
 		687335BB13734499008FD623 /* NSManagedObject+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335BA13734499008FD623 /* NSManagedObject+KTCategory.m */; };
-		687335CC13741E06008FD623 /* PhotoGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335CB13741E00008FD623 /* PhotoGridViewCell.m */; };
+		687335CC13741E06008FD623 /* ImageGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335CB13741E00008FD623 /* ImageGridViewCell.m */; };
 		687335CE13742602008FD623 /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 687335CD13742602008FD623 /* addphoto.png */; };
 		687335D113743034008FD623 /* AddPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335D013743032008FD623 /* AddPhotoViewController.m */; };
 		687335D313743157008FD623 /* AddPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 687335D213743157008FD623 /* AddPhotoView.xib */; };
@@ -125,8 +125,8 @@
 		686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTOneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
 		687335B913734499008FD623 /* NSManagedObject+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+KTCategory.h"; sourceTree = "<group>"; };
 		687335BA13734499008FD623 /* NSManagedObject+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+KTCategory.m"; sourceTree = "<group>"; };
-		687335CA13741DFC008FD623 /* PhotoGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PhotoGridViewCell.h; sourceTree = "<group>"; };
-		687335CB13741E00008FD623 /* PhotoGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoGridViewCell.m; sourceTree = "<group>"; };
+		687335CA13741DFC008FD623 /* ImageGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ImageGridViewCell.h; sourceTree = "<group>"; };
+		687335CB13741E00008FD623 /* ImageGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGridViewCell.m; sourceTree = "<group>"; };
 		687335CD13742602008FD623 /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
 		687335CF13743030008FD623 /* AddPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPhotoViewController.h; sourceTree = "<group>"; };
 		687335D013743032008FD623 /* AddPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPhotoViewController.m; sourceTree = "<group>"; };
@@ -320,8 +320,8 @@
 				689B7A0F1369BEE400E8163A /* PhotoAlbumNub.m */,
 				68540535136081170073F787 /* GridView.h */,
 				68540536136081170073F787 /* GridView.m */,
-				687335CA13741DFC008FD623 /* PhotoGridViewCell.h */,
-				687335CB13741E00008FD623 /* PhotoGridViewCell.m */,
+				687335CA13741DFC008FD623 /* ImageGridViewCell.h */,
+				687335CB13741E00008FD623 /* ImageGridViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -498,7 +498,7 @@
 				683F27461371A07700006122 /* AboutViewController.m in Sources */,
 				683F27491371A67400006122 /* PhotoAlbumViewController.m in Sources */,
 				687335BB13734499008FD623 /* NSManagedObject+KTCategory.m in Sources */,
-				687335CC13741E06008FD623 /* PhotoGridViewCell.m in Sources */,
+				687335CC13741E06008FD623 /* ImageGridViewCell.m in Sources */,
 				687335D113743034008FD623 /* AddPhotoViewController.m in Sources */,
 				687335D613746D68008FD623 /* SlideshowSettingsViewController.m in Sources */,
 				687335DB13748110008FD623 /* _PhotoAlbum.m in Sources */,

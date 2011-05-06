@@ -1,18 +1,18 @@
 //
-//  PhotoGridViewCell.m
+//  ImageGridViewCell.m
 //  PhotoWheel
 //
 //  Created by Kirby Turner on 5/6/11.
 //  Copyright 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "PhotoGridViewCell.h"
+#import "ImageGridViewCell.h"
 
-@interface PhotoGridViewCell ()
+@interface ImageGridViewCell ()
 @property (nonatomic, retain) UIImageView *imageView;
 @end
 
-@implementation PhotoGridViewCell
+@implementation ImageGridViewCell
 
 @synthesize imageView = imageView_;
 
@@ -44,9 +44,9 @@
    [[self imageView] setImage:image];
 }
 
-+ (PhotoGridViewCell *)imageGridViewCell
++ (ImageGridViewCell *)imageGridViewCell
 {
-   PhotoGridViewCell *newCell = [[PhotoGridViewCell alloc] init];
+   ImageGridViewCell *newCell = [[ImageGridViewCell alloc] init];
    return [newCell autorelease];
 }
 
