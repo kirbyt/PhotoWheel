@@ -114,7 +114,8 @@
 
 - (IBAction)removePhotoAlbum:(id)sender
 {
-   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Photo Album" message:@"Remove the selected photo album and its photos?" delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Remove", nil];
+   NSString *message = [NSString stringWithFormat:@"Remove %@ and its photos?", [[self photoAlbum] name]];
+   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Remove Photo Album" message:message delegate:self cancelButtonTitle:@"No" otherButtonTitles:@"Remove", nil];
    [alertView show];
 }
 
