@@ -389,7 +389,6 @@
    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
    Photo *newPhoto = [Photo insertNewInManagedObjectContext:context];
    [newPhoto setPhotoAlbum:[self photoAlbum]];
-   [newPhoto setDateAdded:[NSDate date]];
    [newPhoto saveImage:image];
    [newPhoto kt_save];
 }

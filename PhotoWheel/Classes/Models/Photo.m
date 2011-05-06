@@ -40,6 +40,7 @@
 {
    Photo *newPhoto = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
    [newPhoto setFileName:[NSString kt_stringWithUUID]];
+   [newPhoto setDateAdded:[NSDate date]];
    return newPhoto;
 }
 

@@ -2,20 +2,21 @@
 //  _PhotoAlbum.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 5/2/11.
+//  Created by Kirby Turner on 5/6/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import "_PhotoAlbum.h"
-#import "_Photo.h"
+#import "Photo.h"
 
 
 @implementation _PhotoAlbum
 @dynamic name;
 @dynamic uuid;
+@dynamic dateAdded;
 @dynamic photos;
 
-- (void)addPhotosObject:(_Photo *)value {    
+- (void)addPhotosObject:(Photo *)value {    
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
     [self willChangeValueForKey:@"photos" withSetMutation:NSKeyValueUnionSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"photos"] addObject:value];
@@ -23,7 +24,7 @@
     [changedObjects release];
 }
 
-- (void)removePhotosObject:(_Photo *)value {
+- (void)removePhotosObject:(Photo *)value {
     NSSet *changedObjects = [[NSSet alloc] initWithObjects:&value count:1];
     [self willChangeValueForKey:@"photos" withSetMutation:NSKeyValueMinusSetMutation usingObjects:changedObjects];
     [[self primitiveValueForKey:@"photos"] removeObject:value];

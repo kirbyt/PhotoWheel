@@ -19,9 +19,10 @@
 
 + (PhotoAlbum *)insertNewInManagedObjectContext:(NSManagedObjectContext *)context
 {
-   PhotoAlbum *newPhotoWheel = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
-   [newPhotoWheel setUuid:[NSString kt_stringWithUUID]];
-   return newPhotoWheel;
+   PhotoAlbum *newPhotoAlbum = [NSEntityDescription insertNewObjectForEntityForName:[self entityName] inManagedObjectContext:context];
+   [newPhotoAlbum setUuid:[NSString kt_stringWithUUID]];
+   [newPhotoAlbum setDateAdded:[NSDate date]];
+   return newPhotoAlbum;
 }
 
 - (Photo *)keyPhoto
