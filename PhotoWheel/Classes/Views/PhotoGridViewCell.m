@@ -6,13 +6,13 @@
 //  Copyright 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "ImageGridViewCell.h"
+#import "PhotoGridViewCell.h"
 
-@interface ImageGridViewCell ()
+@interface PhotoGridViewCell ()
 @property (nonatomic, retain) UIImageView *imageView;
 @end
 
-@implementation ImageGridViewCell
+@implementation PhotoGridViewCell
 
 @synthesize imageView = imageView_;
 
@@ -44,9 +44,9 @@
    [[self imageView] setImage:image];
 }
 
-+ (ImageGridViewCell *)imageGridViewCell
++ (PhotoGridViewCell *)imageGridViewCell
 {
-   ImageGridViewCell *newCell = [[ImageGridViewCell alloc] init];
+   PhotoGridViewCell *newCell = [[PhotoGridViewCell alloc] init];
    return [newCell autorelease];
 }
 

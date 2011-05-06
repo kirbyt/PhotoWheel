@@ -9,7 +9,7 @@
 #import "PhotoAlbumViewController.h"
 #import "Models.h"
 #import "MainViewController.h"
-#import "ImageGridViewCell.h"
+#import "PhotoGridViewCell.h"
 #import "AddPhotoViewController.h"
 #import "SlideshowSettingsViewController.h"
 #import "NSManagedObject+KTCategory.h"
@@ -209,9 +209,9 @@
 
 - (GridViewCell *)gridView:(GridView *)gridView cellAtIndex:(NSInteger)index
 {
-   ImageGridViewCell *cell = [gridView dequeueReusableCell];
+   PhotoGridViewCell *cell = [gridView dequeueReusableCell];
    if (cell == nil) {
-      cell = [ImageGridViewCell imageGridViewCell];
+      cell = [PhotoGridViewCell imageGridViewCell];
    }
    
    if (index < [self numberOfObjects]) {
@@ -226,7 +226,7 @@
 
 - (CGSize)gridViewCellSize:(GridView *)gridView
 {
-   return [ImageGridViewCell size];
+   return [PhotoGridViewCell size];
 }
 
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index

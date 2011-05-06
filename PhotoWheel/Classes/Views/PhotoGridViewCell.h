@@ -10,12 +10,12 @@
 #import "GridView.h"
 
 
-@interface ImageGridViewCell : GridViewCell
+@interface PhotoGridViewCell : GridViewCell
 {
     
 }
 
-+ (ImageGridViewCell *)imageGridViewCell;
++ (PhotoGridViewCell *)imageGridViewCell;
 + (CGSize)size;
 
 - (void)setImage:(UIImage *)image;
