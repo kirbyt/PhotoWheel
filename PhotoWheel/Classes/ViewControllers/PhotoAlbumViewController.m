@@ -13,8 +13,10 @@
 #import "AddPhotoViewController.h"
 #import "NSManagedObject+KTCategory.h"
 
-#define ALERT_BUTTON_CANCEL 0
-#define ALERT_BUTTON_REMOVEPHOTOALBUM 1
+#define BUTTON_CANCEL 0
+#define BUTTON_REMOVE_PHOTO_ALBUM 1
+#define BUTTON_SEND_AS_PHOTOS 1
+#define BUTTON_SEND_AS_PHOTOWHEEL 2
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
@@ -23,6 +25,8 @@
 - (NSInteger)numberOfObjects;
 - (id)objectAtIndex:(NSInteger)index;
 - (void)addPhotoAtIndex:(NSInteger)index;
+- (void)emailAsPhotos;
+- (void)emailAsPhotoWheel;
 @end
 
 @implementation PhotoAlbumViewController
@@ -126,7 +130,8 @@
 
 - (IBAction)emailPhotoAlbum:(id)sender
 {
-   
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send as Photos", @"Send as a Photo Wheel", nil];
+   [actionSheet showFromRect:[sender frame] inView:[self view] animated:YES];
 }
 
 - (IBAction)slideshow:(id)sender
@@ -138,7 +143,7 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-   if (buttonIndex == ALERT_BUTTON_REMOVEPHOTOALBUM) {
+   if (buttonIndex == BUTTON_REMOVE_PHOTO_ALBUM) {
       if ([[self mainViewController] deletePhotoAlbum:[self photoAlbum]]) {
          [self setPhotoAlbum:nil];
       }
@@ -149,6 +154,23 @@
 - (void)alertViewCancel:(UIAlertView *)alertView
 {
    [alertView release];
+}
+
+#pragma mark - UIActionSheetDelegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   [actionSheet release];
+   switch (buttonIndex) {
+      case BUTTON_SEND_AS_PHOTOS:
+         [self emailAsPhotos];
+         break;
+      case BUTTON_SEND_AS_PHOTOWHEEL:
+         [self emailAsPhotoWheel];
+         break;
+      default:
+         break;
+   }
 }
 
 #pragma mark - UITextFieldDelegate Methods
@@ -347,6 +369,18 @@
 {
    [[self popoverController] dismissPopoverAnimated:YES];
    [self setPopoverController:nil];
+}
+
+#pragma mark - Email Management
+
+- (void)emailAsPhotos
+{
+   
+}
+
+- (void)emailAsPhotoWheel
+{
+   
 }
 
 @end
