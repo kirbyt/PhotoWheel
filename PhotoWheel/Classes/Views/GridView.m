@@ -85,7 +85,7 @@
    return self;
 }
 
-- (id)dequeueReusableView
+- (id)dequeueReusableCell
 {
    id view = [[self reusableViews] anyObject];
    if (view != nil) {
@@ -99,7 +99,7 @@
    return view;
 }
 
-- (void)queueReusableViews
+- (void)queueReusableCells
 {
    for (UIView *view in [self subviews]) {
       if ([view isKindOfClass:[WheelView class]]) {
@@ -114,8 +114,14 @@
 
 - (void)reloadData
 {
-   [self queueReusableViews];
+   [self queueReusableCells];
    [self setNeedsLayout];
+}
+
+- (GridViewCell *)cellAtIndex:(NSInteger)index
+{
+   GridViewCell *cell = [[self dataSource] gridView:self cellAtIndex:index];
+   return cell;
 }
 
 - (void)layoutSubviews
@@ -143,7 +149,7 @@
       // visible views will reload, which can hurt performance
       // when the view isn't cached. Need to find a better 
       // approach some day.
-      [self queueReusableViews];
+      [self queueReusableCells];
    }
    [self setPreviousItemsPerRow:itemsPerRow];
    
@@ -159,7 +165,7 @@
    NSInteger spaceHeight = spaceWidth;
    
    // Calculate the content size for the scroll view.
-   NSInteger viewCount = [[self dataSource] gridViewNumberOfViews:self];
+   NSInteger viewCount = [[self dataSource] gridViewNumberOfCells:self];
    NSInteger rowCount = ceil(viewCount / (float)itemsPerRow);
    NSInteger rowHeight = viewSize.height + spaceHeight;
    CGSize contentSize = CGSizeMake(visibleWidth, (rowHeight * rowCount + spaceHeight));
@@ -201,7 +207,7 @@
       BOOL isViewMissing = !(index >= [self firstVisibleIndex] && index < [self lastVisibleIndex]);
       
       if (isViewMissing) {
-         GridViewCell *view = [[self dataSource] gridView:self viewAtIndex:index];
+         GridViewCell *view = [self cellAtIndex:index];
          
          // Set the frame so the view is inserted into the correct position.
          CGRect newFrame = CGRectMake(x, y, viewSize.width, viewSize.height);

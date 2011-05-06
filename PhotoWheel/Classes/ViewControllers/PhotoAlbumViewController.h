@@ -12,7 +12,7 @@
 @class PhotoAlbum;
 @class MainViewController;
 
-@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, GridViewDataSource>
+@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, UIPopoverControllerDelegate, GridViewDataSource>
 {
     
 }

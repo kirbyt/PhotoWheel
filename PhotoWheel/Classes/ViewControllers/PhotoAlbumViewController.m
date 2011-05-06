@@ -10,14 +10,17 @@
 #import "Models.h"
 #import "MainViewController.h"
 #import "ImageGridViewCell.h"
+#import "AddPhotoViewController.h"
 
 #define ALERT_BUTTON_CANCEL 0
 #define ALERT_BUTTON_REMOVEPHOTOALBUM 1
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, retain) UIPopoverController *popoverController;
 - (NSInteger)numberOfObjects;
 - (id)objectAtIndex:(NSInteger)index;
+- (void)addPhotoAtIndex:(NSInteger)index;
 @end
 
 @implementation PhotoAlbumViewController
@@ -31,10 +34,11 @@
 @synthesize mainViewController = mainViewController_;
 @synthesize gridView = gridView_;
 @synthesize fetchedResultsController = fetchedResultsController_;
-
+@synthesize popoverController = popoverController_;
 
 - (void)dealloc
 {
+   [popoverController_ release], popoverController_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [gridView_ release], gridView_ = nil;
    [titleTextField_ release], titleTextField_ = nil;
@@ -127,15 +131,15 @@
 
 #pragma mark - GridViewDataSource Methods
 
-- (NSInteger)gridViewNumberOfViews:(GridView *)gridView
+- (NSInteger)gridViewNumberOfCells:(GridView *)gridView
 {
    NSInteger count = [self numberOfObjects] + 1;   // Add 1 for the "add cell"
    return count;
 }
 
-- (GridViewCell *)gridView:(GridView *)gridView viewAtIndex:(NSInteger)index
+- (GridViewCell *)gridView:(GridView *)gridView cellAtIndex:(NSInteger)index
 {
-   ImageGridViewCell *cell = [gridView dequeueReusableView];
+   ImageGridViewCell *cell = [gridView dequeueReusableCell];
    if (cell == nil) {
       cell = [ImageGridViewCell imageGridViewCell];
    }
@@ -157,7 +161,11 @@
 
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
 {
-   NSLog(@"cell selected at index: %i", index);
+   if (index < [self numberOfObjects]) {
+      
+   } else {
+      [self addPhotoAtIndex:index];
+   }
 }
 
 #pragma mark - NSFetchedResultsController Helper Methods
@@ -224,5 +232,30 @@
 {
    [[self gridView] reloadData];
 }
+
+#pragma mark - Photo Management
+
+- (void)addPhotoAtIndex:(NSInteger)index
+{
+   AddPhotoViewController *addPhotoViewController = [[AddPhotoViewController alloc] init];
+   UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:addPhotoViewController];
+   [self setPopoverController:newPopover];
+   
+   [newPopover release];
+   [addPhotoViewController release];
+   
+   GridViewCell *cell = [[self gridView] cellAtIndex:index];
+   [[self popoverController] presentPopoverFromRect:[cell frame] inView:[self gridView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+#pragma mark - UIPopoverControllerDelegate Methods
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+   if ([self popoverController] == popoverController) {
+      [self setPopoverController:nil];
+   }
+}
+
 
 @end

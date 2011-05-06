@@ -21,16 +21,17 @@
 @property (nonatomic, assign) IBOutlet id<GridViewDataSource> dataSource;
 
 
-- (id)dequeueReusableView;
+- (id)dequeueReusableCell;
 - (void)reloadData;
+- (GridViewCell *)cellAtIndex:(NSInteger)index;
 
 @end
 
 
 @protocol GridViewDataSource <NSObject>
 @required
-- (NSInteger)gridViewNumberOfViews:(GridView *)gridView;
-- (GridViewCell *)gridView:(GridView *)gridView viewAtIndex:(NSInteger)index;
+- (NSInteger)gridViewNumberOfCells:(GridView *)gridView;
+- (GridViewCell *)gridView:(GridView *)gridView cellAtIndex:(NSInteger)index;
 - (CGSize)gridViewCellSize:(GridView *)gridView;
 
 @optional
