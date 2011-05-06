@@ -122,7 +122,22 @@
 
 - (GridViewCell *)cellAtIndex:(NSInteger)index
 {
-   GridViewCell *cell = [[self dataSource] gridView:self cellAtIndex:index];
+   GridViewCell *cell = nil;
+   if (index >= [self firstVisibleIndex] && index <= [self lastVisibleIndex]) {
+      for (id view in [self subviews]) {
+         if ([view isKindOfClass:[GridViewCell class]]) {
+            if ([view indexInGrid] == index) {
+               cell = view;
+               break;
+            }
+         }
+      }
+   }
+   
+   if (cell == nil) {
+      cell = [[self dataSource] gridView:self cellAtIndex:index];
+   }
+   
    return cell;
 }
 
