@@ -21,7 +21,7 @@
 @property (nonatomic, assign) IBOutlet id<GridViewDataSource> dataSource;
 
 
-- (GridViewCell *)dequeueReusableView;
+- (id)dequeueReusableView;
 - (void)reloadData;
 
 @end

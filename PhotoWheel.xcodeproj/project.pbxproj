@@ -47,6 +47,8 @@
 		6865D176134552D20005271D /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 6865D172134552D20005271D /* iTunesArtwork */; };
 		686D537D1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */; };
 		687335BB13734499008FD623 /* NSManagedObject+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335BA13734499008FD623 /* NSManagedObject+KTCategory.m */; };
+		687335CC13741E06008FD623 /* ImageGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335CB13741E00008FD623 /* ImageGridViewCell.m */; };
+		687335CE13742602008FD623 /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 687335CD13742602008FD623 /* addphoto.png */; };
 		68834C3113578BD700EC091E /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 68834C3013578BD600EC091E /* Constants.m */; };
 		68983BF51355F3AC00390B00 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68983BF41355F3AC00390B00 /* UIImage+KTCategory.m */; };
 		68997B261358E9D4006F8BCC /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68997B241358E9D4006F8BCC /* PhotoWheel.xcdatamodeld */; };
@@ -121,6 +123,9 @@
 		686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTOneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
 		687335B913734499008FD623 /* NSManagedObject+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+KTCategory.h"; sourceTree = "<group>"; };
 		687335BA13734499008FD623 /* NSManagedObject+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+KTCategory.m"; sourceTree = "<group>"; };
+		687335CA13741DFC008FD623 /* ImageGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageGridViewCell.h; sourceTree = "<group>"; };
+		687335CB13741E00008FD623 /* ImageGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGridViewCell.m; sourceTree = "<group>"; };
+		687335CD13742602008FD623 /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
 		68834C2F13578BD600EC091E /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		68834C3013578BD600EC091E /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		68983BF31355F3AC00390B00 /* UIImage+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KTCategory.h"; sourceTree = "<group>"; };
@@ -295,10 +300,12 @@
 				6865D15B1345204F0005271D /* PhotoNubView.m */,
 				68F9E0FE135F4F0F00052C9B /* WheelView.h */,
 				68F9E0FF135F4F0F00052C9B /* WheelView.m */,
-				68540535136081170073F787 /* GridView.h */,
-				68540536136081170073F787 /* GridView.m */,
 				689B7A0E1369BEE200E8163A /* PhotoAlbumNub.h */,
 				689B7A0F1369BEE400E8163A /* PhotoAlbumNub.m */,
+				68540535136081170073F787 /* GridView.h */,
+				68540536136081170073F787 /* GridView.m */,
+				687335CA13741DFC008FD623 /* ImageGridViewCell.h */,
+				687335CB13741E00008FD623 /* ImageGridViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -306,6 +313,7 @@
 		6865D1661345242D0005271D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				687335CD13742602008FD623 /* addphoto.png */,
 				68253AF113626C9E000A8018 /* Default-Landscape~ipad.png */,
 				68253AF213626C9E000A8018 /* Default-Portrait~ipad.png */,
 				683F274C1371ACFE00006122 /* Background-Portrait-Bottom~ipad.png */,
@@ -422,6 +430,7 @@
 				683F274B1371AB4B00006122 /* PhotoAlbumView.xib in Resources */,
 				683F274E1371ACFE00006122 /* Background-Portrait-Bottom~ipad.png in Resources */,
 				683F274F1371ACFE00006122 /* Background-Portrait-Top~ipad.png in Resources */,
+				687335CE13742602008FD623 /* addphoto.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -472,6 +481,7 @@
 				683F27461371A07700006122 /* AboutViewController.m in Sources */,
 				683F27491371A67400006122 /* PhotoAlbumViewController.m in Sources */,
 				687335BB13734499008FD623 /* NSManagedObject+KTCategory.m in Sources */,
+				687335CC13741E06008FD623 /* ImageGridViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

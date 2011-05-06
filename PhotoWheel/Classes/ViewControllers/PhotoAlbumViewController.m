@@ -9,12 +9,15 @@
 #import "PhotoAlbumViewController.h"
 #import "Models.h"
 #import "MainViewController.h"
+#import "ImageGridViewCell.h"
 
 #define ALERT_BUTTON_CANCEL 0
 #define ALERT_BUTTON_REMOVEPHOTOALBUM 1
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
+- (NSInteger)numberOfObjects;
+- (id)objectAtIndex:(NSInteger)index;
 @end
 
 @implementation PhotoAlbumViewController
@@ -126,18 +129,45 @@
 
 - (NSInteger)gridViewNumberOfViews:(GridView *)gridView
 {
-   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects] + 1;
+   NSInteger count = [self numberOfObjects] + 1;   // Add 1 for the "add cell"
    return count;
 }
 
 - (GridViewCell *)gridView:(GridView *)gridView viewAtIndex:(NSInteger)index
 {
-   return nil;
+   ImageGridViewCell *cell = [gridView dequeueReusableView];
+   if (cell == nil) {
+      cell = [ImageGridViewCell imageGridViewCell];
+   }
+   
+   if (index < [self numberOfObjects]) {
+      Photo *photo = [self objectAtIndex:index];
+      [cell setImage:[photo smallImage]];
+   } else {
+      [cell setImage:[UIImage imageNamed:@"addphoto.png"]];
+   }
+   
+   return cell;
 }
 
 - (CGSize)gridViewCellSize:(GridView *)gridView
 {
-   return CGSizeMake(100, 100);
+   return [ImageGridViewCell size];
+}
+
+#pragma mark - NSFetchedResultsController Helper Methods
+
+- (NSInteger)numberOfObjects
+{
+   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
+   return count;
+}
+
+- (id)objectAtIndex:(NSInteger)index
+{
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   id object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   return object;
 }
 
 #pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate Methods

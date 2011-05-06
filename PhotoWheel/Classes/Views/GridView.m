@@ -68,9 +68,9 @@
    return self;
 }
 
-- (GridViewCell *)dequeueReusableView
+- (id)dequeueReusableView
 {
-   GridViewCell *view = [[self reusableViews] anyObject];
+   id view = [[self reusableViews] anyObject];
    if (view != nil) {
       // The only object retaining the view is the reusableView
       // set, so we retain/autorelease it before returning it.
