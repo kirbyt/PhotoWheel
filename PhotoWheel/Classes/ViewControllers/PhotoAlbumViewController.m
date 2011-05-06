@@ -317,7 +317,22 @@
 
 - (void)addFromCamera
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+
+   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] init];
+   [newImagePicker setDelegate:self];
+   // Note the following line of code will fail in the simulator 
+   // because the simulator does not have a camera.
+   [newImagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+   
+   // We present from the main view controller because we want to 
+   // use the full screen.
+   [[self mainViewController] presentModalViewController:newImagePicker animated:YES];
+   
+   [newImagePicker release];
 }
 
 - (void)addFromLibrary
@@ -327,17 +342,15 @@
       [self setPopoverController:nil];
    }
    
-   UIViewController *newRootController = [[UIViewController alloc] init];
-   [newRootController setContentSizeForViewInPopover:CGSizeMake(320, 480)];
-   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] initWithRootViewController:newRootController];
+   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] init];
    [newImagePicker setDelegate:self];
+   [newImagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
    
    UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:newImagePicker];
    [self setPopoverController:newPopover];
    
    [newPopover release];
    [newImagePicker release];
-   [newRootController release];
    
    NSInteger selectedIndex = [[self gridView] indexForSelectedCell];
    GridViewCell *cell = [[self gridView] cellAtIndex:selectedIndex];
@@ -362,6 +375,8 @@
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
+   [picker dismissModalViewControllerAnimated:YES];
+   
    [[self popoverController] dismissPopoverAnimated:YES];
    [self setPopoverController:nil];
    
