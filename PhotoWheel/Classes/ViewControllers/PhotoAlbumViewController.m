@@ -77,6 +77,9 @@
 
 - (void)doRefreshDisplay
 {
+   [[self refreshDisplayTimer] invalidate];
+   [self setRefreshDisplayTimer:nil];
+   
    void (^animations)(void) = ^ {
       [[self gridView] setAlpha:0.0];
       [[self titleTextField] setText:[[self photoAlbum] name]];
@@ -88,20 +91,21 @@
       void (^animations)(void) = ^ {
          [[self gridView] setAlpha:1.0];
       };
-      [UIView animateWithDuration:0.6 animations:animations];
+      [UIView animateWithDuration:0.45 animations:animations];
    };
    
-   [UIView animateWithDuration:0.6 animations:animations completion:completion];
+   [UIView animateWithDuration:0.45 animations:animations completion:completion];
 }
 
 - (void)refreshDisplay
 {
+#define REFRESH_DELAY 0.5
    if ([self refreshDisplayTimer]) {
-      [[self refreshDisplayTimer] invalidate];
+      [[self refreshDisplayTimer] setFireDate:[NSDate dateWithTimeIntervalSinceNow:REFRESH_DELAY]];
+   } else {
+      NSTimer *newTimer = [NSTimer scheduledTimerWithTimeInterval:REFRESH_DELAY target:self selector:@selector(doRefreshDisplay) userInfo:nil repeats:NO];
+      [self setRefreshDisplayTimer:newTimer];
    }
-   
-   NSTimer *newTimer = [NSTimer scheduledTimerWithTimeInterval:0.3 target:self selector:@selector(doRefreshDisplay) userInfo:nil repeats:NO];
-   [self setRefreshDisplayTimer:newTimer];
 }
 
 - (void)setPhotoAlbum:(PhotoAlbum *)photoAlbum
