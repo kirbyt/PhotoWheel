@@ -13,6 +13,7 @@
 #import "AddPhotoViewController.h"
 #import "SlideshowSettingsViewController.h"
 #import "NSManagedObject+KTCategory.h"
+#import "PhotoBrowserViewController.h"
 
 #define BUTTON_CANCEL 0
 #define BUTTON_REMOVE_PHOTO_ALBUM 1
@@ -232,7 +233,9 @@
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
 {
    if (index < [self numberOfObjects]) {
-      
+      PhotoBrowserViewController *newController = [[PhotoBrowserViewController alloc] init];
+      [[[self mainViewController] navigationController] pushViewController:newController animated:YES];
+      [newController release];
    } else {
       [self addPhotoAtIndex:index];
    }

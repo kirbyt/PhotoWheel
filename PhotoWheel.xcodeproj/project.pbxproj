@@ -24,6 +24,8 @@
 		682F2965133B93D60058E1D7 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 682F2963133B93D60058E1D7 /* README.md */; };
 		682F299B133C0B870058E1D7 /* PhotoWheelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */; };
 		682F29B4133C1C680058E1D7 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682F29B2133C1C680058E1D7 /* MainWindow.xib */; };
+		6835B3E01375B985006DE35C /* PhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6835B3DF1375B985006DE35C /* PhotoBrowserViewController.m */; };
+		6835B3EC1375D462006DE35C /* CustomToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 6835B3EB1375D462006DE35C /* CustomToolbar.m */; };
 		683F274313719FFD00006122 /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683F274213719FFD00006122 /* AboutView.xib */; };
 		683F27461371A07700006122 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683F27451371A07700006122 /* AboutViewController.m */; };
 		683F27491371A67400006122 /* PhotoAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683F27481371A67300006122 /* PhotoAlbumViewController.m */; };
@@ -92,6 +94,10 @@
 		682F2994133C0B870058E1D7 /* PhotoWheelAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelAppDelegate.h; sourceTree = "<group>"; };
 		682F2995133C0B870058E1D7 /* PhotoWheelAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelAppDelegate.m; sourceTree = "<group>"; };
 		682F29B2133C1C680058E1D7 /* MainWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainWindow.xib; sourceTree = "<group>"; };
+		6835B3DE1375B985006DE35C /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
+		6835B3DF1375B985006DE35C /* PhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserViewController.m; sourceTree = "<group>"; };
+		6835B3EA1375D462006DE35C /* CustomToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomToolbar.h; sourceTree = "<group>"; };
+		6835B3EB1375D462006DE35C /* CustomToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomToolbar.m; sourceTree = "<group>"; };
 		683F274213719FFD00006122 /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		683F27441371A07700006122 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		683F27451371A07700006122 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
@@ -125,7 +131,7 @@
 		686D537C1365AB8C00FFF635 /* KTOneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KTOneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
 		687335B913734499008FD623 /* NSManagedObject+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObject+KTCategory.h"; sourceTree = "<group>"; };
 		687335BA13734499008FD623 /* NSManagedObject+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObject+KTCategory.m"; sourceTree = "<group>"; };
-		687335CA13741DFC008FD623 /* ImageGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; path = ImageGridViewCell.h; sourceTree = "<group>"; };
+		687335CA13741DFC008FD623 /* ImageGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageGridViewCell.h; sourceTree = "<group>"; };
 		687335CB13741E00008FD623 /* ImageGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGridViewCell.m; sourceTree = "<group>"; };
 		687335CD13742602008FD623 /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
 		687335CF13743030008FD623 /* AddPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPhotoViewController.h; sourceTree = "<group>"; };
@@ -268,6 +274,8 @@
 				687335D013743032008FD623 /* AddPhotoViewController.m */,
 				687335D413746D5B008FD623 /* SlideshowSettingsViewController.h */,
 				687335D513746D60008FD623 /* SlideshowSettingsViewController.m */,
+				6835B3DE1375B985006DE35C /* PhotoBrowserViewController.h */,
+				6835B3DF1375B985006DE35C /* PhotoBrowserViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -322,6 +330,8 @@
 				68540536136081170073F787 /* GridView.m */,
 				687335CA13741DFC008FD623 /* ImageGridViewCell.h */,
 				687335CB13741E00008FD623 /* ImageGridViewCell.m */,
+				6835B3EA1375D462006DE35C /* CustomToolbar.h */,
+				6835B3EB1375D462006DE35C /* CustomToolbar.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -502,6 +512,8 @@
 				687335D113743034008FD623 /* AddPhotoViewController.m in Sources */,
 				687335D613746D68008FD623 /* SlideshowSettingsViewController.m in Sources */,
 				687335DB13748110008FD623 /* _PhotoAlbum.m in Sources */,
+				6835B3E01375B985006DE35C /* PhotoBrowserViewController.m in Sources */,
+				6835B3EC1375D462006DE35C /* CustomToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
