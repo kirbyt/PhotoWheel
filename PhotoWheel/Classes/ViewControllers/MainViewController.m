@@ -29,6 +29,7 @@
 @synthesize backgroundImageView = backgroundImageView_;
 @synthesize discImageView = discImageView_;
 @synthesize photoWheelView = photoWheelView_;
+@synthesize addPhotoAlbumButton = addPhotoAlbumButton_;
 @synthesize infoButton = infoButton_;
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize photoAlbumNubs = photoAlbumNubs_;
@@ -38,6 +39,7 @@
 - (void)dealloc
 {
    [infoButton_ release], infoButton_ = nil;
+   [addPhotoAlbumButton_ release], addPhotoAlbumButton_ = nil;
    [backgroundImageView_ release], backgroundImageView_ = nil;
    [discImageView_ release], discImageView_ = nil;
    [photoWheelView_ release], photoWheelView_ = nil;
@@ -80,6 +82,7 @@
 - (void)viewDidUnload
 {
    [self setInfoButton:nil];
+   [self setAddPhotoAlbumButton:nil];
    [self setBackgroundImageView:nil];
    [self setDiscImageView:nil];
    [self setPhotoWheelView:nil];
@@ -106,7 +109,7 @@
    }
 }
 
-#define WHEELVIEW_OFFSET 65
+#define WHEELVIEW_INSET 50
 - (void)layoutForLandscape
 {
    UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-right-grooved.png"];
@@ -115,14 +118,15 @@
    [[self discImageView] setFrame:CGRectMake(702, 100, 547, 548)];
    
    [[self photoWheelView] setTopAtDegrees:-90.0];
-   [[self photoWheelView] setFrame:CGRectMake(702 + WHEELVIEW_OFFSET/2, 100 + WHEELVIEW_OFFSET/2, 547 - WHEELVIEW_OFFSET, 548 - WHEELVIEW_OFFSET)];
+   [[self photoWheelView] setFrame:CGRectInset([[self discImageView] frame], WHEELVIEW_INSET, WHEELVIEW_INSET)];
    [[self photoWheelView] setNeedsLayout];
 
    [[self photoAlbumViewPlaceholder] setFrame:CGRectMake(18, 20, 738, 719)];
-   
+
+   [[self addPhotoAlbumButton] setCenter:[[self discImageView] center]];
+
    CGRect frame = [[self infoButton] frame];
-   frame.origin.x = 980;
-   frame.origin.y = 711;
+   frame.origin = CGPointMake(980, 711);
    [[self infoButton] setFrame:frame];
 }
 
@@ -132,16 +136,17 @@
    [[self backgroundImageView] setImage:backgroundImage];
 
    [[self discImageView] setFrame:CGRectMake(111, 680, 547, 548)];
-   
+
    [[self photoWheelView] setTopAtDegrees:0.0];
-   [[self photoWheelView] setFrame:CGRectMake(111 + WHEELVIEW_OFFSET/2, 680 + WHEELVIEW_OFFSET/2, 547 - WHEELVIEW_OFFSET, 548 - WHEELVIEW_OFFSET)];
+   [[self photoWheelView] setFrame:CGRectInset([[self discImageView] frame], WHEELVIEW_INSET, WHEELVIEW_INSET)];
    [[self photoWheelView] setNeedsLayout];
 
    [[self photoAlbumViewPlaceholder] setFrame:CGRectMake(26, 18, 716, 717)];
    
+   [[self addPhotoAlbumButton] setCenter:[[self discImageView] center]];
+   
    CGRect frame = [[self infoButton] frame];
-   frame.origin.x = 722;
-   frame.origin.y = 959;
+   frame.origin = CGPointMake(722, 959);
    [[self infoButton] setFrame:frame];
 }
 
