@@ -103,7 +103,7 @@
 
 - (void)layoutForLandscape
 {
-   UIImage *backgroundImage = [UIImage imageNamed:@"Default-Landscape~ipad.png"];
+   UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-left-grooved.png"];
    [[self backgroundImageView] setImage:backgroundImage];
    
    [[self photoWheelView] setTopAtDegrees:90.0];
@@ -115,7 +115,7 @@
 
 - (void)layoutForPortrait
 {
-   UIImage *backgroundImage = [UIImage imageNamed:@"Default-Portrait~ipad.png"];
+   UIImage *backgroundImage = [UIImage imageNamed:@"background-portrait-grooved.png"]; 
    [[self backgroundImageView] setImage:backgroundImage];
 
    [[self photoWheelView] setTopAtDegrees:0.0];

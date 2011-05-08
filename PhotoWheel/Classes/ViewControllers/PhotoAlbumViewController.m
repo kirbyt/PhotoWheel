@@ -219,7 +219,7 @@
       Photo *photo = [self objectAtIndex:index];
       [cell setImage:[photo smallImage]];
    } else {
-      [cell setImage:[UIImage imageNamed:@"addphoto.png"]];
+      [cell setImage:[UIImage imageNamed:@"photo-add.png"]];
    }
    
    return cell;
