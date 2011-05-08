@@ -29,10 +29,13 @@
 - (void)addPhotoAtIndex:(NSInteger)index;
 - (void)emailAsPhotos;
 - (void)emailAsPhotoWheel;
+- (void)layoutForLandscape;
+- (void)layoutForPortrait;
 @end
 
 @implementation PhotoAlbumViewController
 
+@synthesize backgroundImageView = backgroundImageView_;
 @synthesize emailButton = emailButton_;
 @synthesize slideshowButton = slideshowButton_;
 @synthesize printButton = printButton_;
@@ -47,6 +50,7 @@
 
 - (void)dealloc
 {
+   [backgroundImageView_ release], backgroundImageView_ = nil;
    [refreshDisplayTimer_ release], refreshDisplayTimer_ = nil;
    [popoverController_ release], popoverController_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
@@ -66,6 +70,7 @@
    [[self refreshDisplayTimer] invalidate];
    [self setRefreshDisplayTimer:nil];
    
+   [self setBackgroundImageView:nil];
    [self setGridView:nil];
    [self setTitleTextField:nil];
    [self setEmailButton:nil];
@@ -74,6 +79,32 @@
    [self setRemoveAlbumButton:nil];
 
    [super viewDidUnload];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+   return YES;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+      [self layoutForLandscape];
+   } else {
+      [self layoutForPortrait];
+   }
+}
+
+- (void)layoutForLandscape
+{
+   [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
+   [[self gridView] setFrame:CGRectMake(20, 74, 651, 481)];
+}
+
+- (void)layoutForPortrait
+{
+   [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
+   [[self gridView] setFrame:CGRectMake(20, 78, 676, 438)];
 }
 
 - (void)doRefreshDisplay

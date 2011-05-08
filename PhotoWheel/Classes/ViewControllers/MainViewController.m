@@ -27,6 +27,7 @@
 
 @synthesize fetchedResultsController = fetchedResultsController_;
 @synthesize backgroundImageView = backgroundImageView_;
+@synthesize discImageView = discImageView_;
 @synthesize photoWheelView = photoWheelView_;
 @synthesize infoButton = infoButton_;
 @synthesize managedObjectContext = managedObjectContext_;
@@ -38,6 +39,7 @@
 {
    [infoButton_ release], infoButton_ = nil;
    [backgroundImageView_ release], backgroundImageView_ = nil;
+   [discImageView_ release], discImageView_ = nil;
    [photoWheelView_ release], photoWheelView_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [managedObjectContext_ release], managedObjectContext_ = nil;
@@ -77,6 +79,7 @@
 {
    [self setInfoButton:nil];
    [self setBackgroundImageView:nil];
+   [self setDiscImageView:nil];
    [self setPhotoWheelView:nil];
    [self setPhotoAlbumViewPlaceholder:nil];
    [self setPhotoAlbumViewController:nil];
@@ -103,14 +106,16 @@
 
 - (void)layoutForLandscape
 {
-   UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-left-grooved.png"];
+   UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-right-grooved.png"];
    [[self backgroundImageView] setImage:backgroundImage];
-   
-   [[self photoWheelView] setTopAtDegrees:90.0];
 
-   CGRect newFrame = CGRectMake(-250, 35, 650, 650);
-   [[self photoWheelView] setFrame:newFrame];
+   [[self discImageView] setFrame:CGRectMake(702, 100, 547, 548)];
+   
+   [[self photoWheelView] setTopAtDegrees:-90.0];
+   [[self photoWheelView] setFrame:CGRectMake(702, 100-14, 547, 548+14)];
    [[self photoWheelView] setNeedsLayout];
+
+   [[self photoAlbumViewPlaceholder] setFrame:CGRectMake(18, 20, 738, 719)];
 }
 
 - (void)layoutForPortrait
@@ -118,11 +123,13 @@
    UIImage *backgroundImage = [UIImage imageNamed:@"background-portrait-grooved.png"]; 
    [[self backgroundImageView] setImage:backgroundImage];
 
+   [[self discImageView] setFrame:CGRectMake(111, 680, 547, 548)];
+   
    [[self photoWheelView] setTopAtDegrees:0.0];
-
-   CGRect newFrame = CGRectMake(84, 677, 600, 400);
-   [[self photoWheelView] setFrame:newFrame];
+   [[self photoWheelView] setFrame:CGRectMake(104, 756, 561, 321)];
    [[self photoWheelView] setNeedsLayout];
+
+   [[self photoAlbumViewPlaceholder] setFrame:CGRectMake(26, 18, 716, 717)];
 }
 
 #pragma mark - Actions

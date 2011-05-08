@@ -17,6 +17,7 @@
     
 }
 
+@property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, retain) IBOutlet UIButton *emailButton;
 @property (nonatomic, retain) IBOutlet UIButton *slideshowButton;
 @property (nonatomic, retain) IBOutlet UIButton *printButton;
