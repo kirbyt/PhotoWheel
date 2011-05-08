@@ -50,7 +50,6 @@
 		687335BB13734499008FD623 /* NSManagedObject+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335BA13734499008FD623 /* NSManagedObject+KTCategory.m */; };
 		687335CC13741E06008FD623 /* ImageGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335CB13741E00008FD623 /* ImageGridViewCell.m */; };
 		687335D113743034008FD623 /* AddPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335D013743032008FD623 /* AddPhotoViewController.m */; };
-		687335D313743157008FD623 /* AddPhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 687335D213743157008FD623 /* AddPhotoView.xib */; };
 		687335D613746D68008FD623 /* SlideshowSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335D513746D60008FD623 /* SlideshowSettingsViewController.m */; };
 		687335D813746F27008FD623 /* SlideshowSettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 687335D713746F26008FD623 /* SlideshowSettingsView.xib */; };
 		687335DB13748110008FD623 /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 687335DA1374810D008FD623 /* _PhotoAlbum.m */; };
@@ -76,6 +75,7 @@
 		68D599C2137627B7007F08E1 /* stack-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D599B6137627B6007F08E1 /* stack-add.png */; };
 		68D599C3137627B7007F08E1 /* stack-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D599B7137627B6007F08E1 /* stack-bg.png */; };
 		68D599C4137627B7007F08E1 /* stack-overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D599B8137627B6007F08E1 /* stack-overlay.png */; };
+		68E21057137704C80084760C /* IconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21056137704C80084760C /* IconButton.m */; };
 		68F9E100135F4F0F00052C9B /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F9E0FF135F4F0F00052C9B /* WheelView.m */; };
 /* End PBXBuildFile section */
 
@@ -145,7 +145,6 @@
 		687335CB13741E00008FD623 /* ImageGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGridViewCell.m; sourceTree = "<group>"; };
 		687335CF13743030008FD623 /* AddPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPhotoViewController.h; sourceTree = "<group>"; };
 		687335D013743032008FD623 /* AddPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPhotoViewController.m; sourceTree = "<group>"; };
-		687335D213743157008FD623 /* AddPhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddPhotoView.xib; sourceTree = "<group>"; };
 		687335D413746D5B008FD623 /* SlideshowSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideshowSettingsViewController.h; sourceTree = "<group>"; };
 		687335D513746D60008FD623 /* SlideshowSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideshowSettingsViewController.m; sourceTree = "<group>"; };
 		687335D713746F26008FD623 /* SlideshowSettingsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlideshowSettingsView.xib; sourceTree = "<group>"; };
@@ -179,6 +178,8 @@
 		68D599B6137627B6007F08E1 /* stack-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-add.png"; sourceTree = "<group>"; };
 		68D599B7137627B6007F08E1 /* stack-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-bg.png"; sourceTree = "<group>"; };
 		68D599B8137627B6007F08E1 /* stack-overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-overlay.png"; sourceTree = "<group>"; };
+		68E21055137704C80084760C /* IconButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconButton.h; sourceTree = "<group>"; };
+		68E21056137704C80084760C /* IconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconButton.m; sourceTree = "<group>"; };
 		68F9E0FE135F4F0F00052C9B /* WheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelView.h; sourceTree = "<group>"; };
 		68F9E0FF135F4F0F00052C9B /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
 		68F9E102135F515100052C9B /* KTGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTGeometry.h; sourceTree = "<group>"; };
@@ -308,7 +309,6 @@
 				683F274A1371AB4B00006122 /* PhotoAlbumView.xib */,
 				689B7A121369C4D500E8163A /* PhotoAlbumNub.xib */,
 				683F274213719FFD00006122 /* AboutView.xib */,
-				687335D213743157008FD623 /* AddPhotoView.xib */,
 				687335D713746F26008FD623 /* SlideshowSettingsView.xib */,
 			);
 			path = xibs;
@@ -352,6 +352,8 @@
 				687335CB13741E00008FD623 /* ImageGridViewCell.m */,
 				6835B3EA1375D462006DE35C /* CustomToolbar.h */,
 				6835B3EB1375D462006DE35C /* CustomToolbar.m */,
+				68E21055137704C80084760C /* IconButton.h */,
+				68E21056137704C80084760C /* IconButton.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -477,7 +479,6 @@
 				689B7A131369C4D500E8163A /* PhotoAlbumNub.xib in Resources */,
 				683F274313719FFD00006122 /* AboutView.xib in Resources */,
 				683F274B1371AB4B00006122 /* PhotoAlbumView.xib in Resources */,
-				687335D313743157008FD623 /* AddPhotoView.xib in Resources */,
 				687335D813746F27008FD623 /* SlideshowSettingsView.xib in Resources */,
 				681CBB27137620A900DFF1DA /* Default-Landscape.png in Resources */,
 				681CBB28137620A900DFF1DA /* Default-Portrait.png in Resources */,
@@ -554,6 +555,7 @@
 				687335DB13748110008FD623 /* _PhotoAlbum.m in Sources */,
 				6835B3E01375B985006DE35C /* PhotoBrowserViewController.m in Sources */,
 				6835B3EC1375D462006DE35C /* CustomToolbar.m in Sources */,
+				68E21057137704C80084760C /* IconButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
