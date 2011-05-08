@@ -198,6 +198,11 @@
 
 #pragma mark - GridViewDataSource Methods
 
+- (NSInteger)gridViewCellsPerRow:(GridView *)gridView
+{
+   return 4;
+}
+
 - (NSInteger)gridViewNumberOfCells:(GridView *)gridView
 {
    NSInteger count = 0;
