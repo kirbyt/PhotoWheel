@@ -73,6 +73,8 @@
    [[self photoAlbumViewPlaceholder] kt_addSubview:[newController view]];
    [self setPhotoAlbumViewController:newController];
    [newController release];
+   
+   [self layoutForPortrait];
 }
 
 - (void)viewDidUnload
@@ -104,6 +106,7 @@
    }
 }
 
+#define WHEELVIEW_OFFSET 65
 - (void)layoutForLandscape
 {
    UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-right-grooved.png"];
@@ -112,7 +115,7 @@
    [[self discImageView] setFrame:CGRectMake(702, 100, 547, 548)];
    
    [[self photoWheelView] setTopAtDegrees:-90.0];
-   [[self photoWheelView] setFrame:CGRectMake(702, 100-14, 547, 548+14)];
+   [[self photoWheelView] setFrame:CGRectMake(702 + WHEELVIEW_OFFSET/2, 100 + WHEELVIEW_OFFSET/2, 547 - WHEELVIEW_OFFSET, 548 - WHEELVIEW_OFFSET)];
    [[self photoWheelView] setNeedsLayout];
 
    [[self photoAlbumViewPlaceholder] setFrame:CGRectMake(18, 20, 738, 719)];
@@ -126,7 +129,7 @@
    [[self discImageView] setFrame:CGRectMake(111, 680, 547, 548)];
    
    [[self photoWheelView] setTopAtDegrees:0.0];
-   [[self photoWheelView] setFrame:CGRectMake(104, 756, 561, 321)];
+   [[self photoWheelView] setFrame:CGRectMake(111 + WHEELVIEW_OFFSET/2, 680 + WHEELVIEW_OFFSET/2, 547 - WHEELVIEW_OFFSET, 548 - WHEELVIEW_OFFSET)];
    [[self photoWheelView] setNeedsLayout];
 
    [[self photoAlbumViewPlaceholder] setFrame:CGRectMake(26, 18, 716, 717)];

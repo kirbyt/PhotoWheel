@@ -64,10 +64,10 @@
 						<string key="NSFrame">{{111, 680}, {547, 548}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="601207420"/>
+						<reference key="NSNextKeyView" ref="1040616889"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<object class="NSCustomResource" key="IBUIImage" id="823186847">
+						<object class="NSCustomResource" key="IBUIImage" id="441884667">
 							<string key="NSClassName">NSImage</string>
 							<string key="NSResourceName">stack-bg.png</string>
 						</object>
@@ -75,10 +75,10 @@
 					<object class="IBUIView" id="1040616889">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{104, 756}, {561, 321}}</string>
+						<string key="NSFrame">{{111, 680}, {547, 548}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="682617600"/>
+						<reference key="NSNextKeyView" ref="601207420"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -91,7 +91,7 @@
 						<string key="NSFrame">{{26, 18}, {716, 717}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="1040616889"/>
+						<reference key="NSNextKeyView" ref="682617600"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -174,18 +174,18 @@
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
-			<object class="IBUIView" id="595771769">
+			<object class="IBUIView" id="634371829">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIImageView" id="583021270">
-						<reference key="NSNextResponder" ref="595771769"/>
+					<object class="IBUIImageView" id="343528442">
+						<reference key="NSNextResponder" ref="634371829"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{1024, 748}</string>
-						<reference key="NSSuperview" ref="595771769"/>
+						<reference key="NSSuperview" ref="634371829"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="46563048"/>
+						<reference key="NSNextKeyView" ref="196576549"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -193,24 +193,24 @@
 							<string key="NSResourceName">background-landscape-right-grooved.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="270949166">
-						<reference key="NSNextResponder" ref="595771769"/>
+					<object class="IBUIImageView" id="76004263">
+						<reference key="NSNextResponder" ref="634371829"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{702, 100}, {547, 548}}</string>
-						<reference key="NSSuperview" ref="595771769"/>
+						<reference key="NSSuperview" ref="634371829"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<reference key="IBUIImage" ref="823186847"/>
+						<reference key="IBUIImage" ref="441884667"/>
 					</object>
-					<object class="IBUIView" id="46563048">
-						<reference key="NSNextResponder" ref="595771769"/>
+					<object class="IBUIView" id="196576549">
+						<reference key="NSNextResponder" ref="634371829"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{702, 93}, {321, 561}}</string>
-						<reference key="NSSuperview" ref="595771769"/>
+						<reference key="NSSuperview" ref="634371829"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="270949166"/>
+						<reference key="NSNextKeyView" ref="76004263"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -222,7 +222,7 @@
 				<string key="NSFrameSize">{1024, 748}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="583021270"/>
+				<reference key="NSNextKeyView" ref="343528442"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MQA</bytes>
@@ -375,32 +375,33 @@
 						<int key="objectID">29</int>
 						<reference key="object" ref="682617600"/>
 						<reference key="parent" ref="191373211"/>
+						<string key="objectName">Image View - stack-bg.png</string>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">30</int>
-						<reference key="object" ref="595771769"/>
+						<reference key="object" ref="634371829"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="583021270"/>
-							<reference ref="270949166"/>
-							<reference ref="46563048"/>
+							<reference ref="343528442"/>
+							<reference ref="76004263"/>
+							<reference ref="196576549"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">31</int>
-						<reference key="object" ref="583021270"/>
-						<reference key="parent" ref="595771769"/>
+						<reference key="object" ref="343528442"/>
+						<reference key="parent" ref="634371829"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">32</int>
-						<reference key="object" ref="270949166"/>
-						<reference key="parent" ref="595771769"/>
+						<reference key="object" ref="76004263"/>
+						<reference key="parent" ref="634371829"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">34</int>
-						<reference key="object" ref="46563048"/>
-						<reference key="parent" ref="595771769"/>
+						<reference key="object" ref="196576549"/>
+						<reference key="parent" ref="634371829"/>
 					</object>
 				</object>
 			</object>

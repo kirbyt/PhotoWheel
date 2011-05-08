@@ -152,7 +152,7 @@
    // http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad
 
    CGPoint center = [self wheelCenter];
-   CGFloat radiusX = [self bounds].size.width * 0.35;
+   CGFloat radiusX = MIN([self bounds].size.width, [self bounds].size.height) * 0.35;
    CGFloat radiusY = radiusX;
    if ([self style] == WheelStyleCarousel) {
       radiusY = radiusX * 0.30;
@@ -187,7 +187,7 @@
          
          // get a location based on the angle
          float xPosition = center.x + (radiusX * sinf(angleInRadians)) - ([view frame].size.width / 2);
-         float yPosition = center.y + (radiusY * cosf(angleInRadians));
+         float yPosition = center.y + (radiusY * cosf(angleInRadians)) - ([view frame].size.height / 2);
          
          // get a scale too; effectively we have:
          //
