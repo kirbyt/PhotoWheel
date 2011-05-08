@@ -119,6 +119,11 @@
    [[self photoWheelView] setNeedsLayout];
 
    [[self photoAlbumViewPlaceholder] setFrame:CGRectMake(18, 20, 738, 719)];
+   
+   CGRect frame = [[self infoButton] frame];
+   frame.origin.x = 980;
+   frame.origin.y = 711;
+   [[self infoButton] setFrame:frame];
 }
 
 - (void)layoutForPortrait
@@ -133,6 +138,11 @@
    [[self photoWheelView] setNeedsLayout];
 
    [[self photoAlbumViewPlaceholder] setFrame:CGRectMake(26, 18, 716, 717)];
+   
+   CGRect frame = [[self infoButton] frame];
+   frame.origin.x = 722;
+   frame.origin.y = 959;
+   [[self infoButton] setFrame:frame];
 }
 
 #pragma mark - Actions
