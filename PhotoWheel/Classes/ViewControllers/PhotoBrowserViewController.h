@@ -14,4 +14,6 @@
     
 }
 
+@property (nonatomic, retain) NSArray *photos;
+
 @end

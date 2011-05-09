@@ -37,6 +37,7 @@
    [newImageView release];
    
    UILabel *newLabel = [[UILabel alloc] init];
+   [newLabel setTextColor:[UIColor colorWithWhite:0.375 alpha:1.000]];
    [newLabel setTextAlignment:UITextAlignmentCenter];
    [newLabel setText:NSStringFromClass([self class])];
    [self setLabel:newLabel];

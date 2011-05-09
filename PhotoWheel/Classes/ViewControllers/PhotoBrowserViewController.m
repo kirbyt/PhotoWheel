@@ -82,10 +82,6 @@
    UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
    [[self navigationItem] setRightBarButtonItem:customBarButtonItem animated:YES];
    [customBarButtonItem release];
-   
-   UINavigationBar *navBar = [[self navigationController] navigationBar];
-   [navBar setBarStyle:UIBarStyleBlack];
-   [navBar setTranslucent:YES];
 }
 
 - (void)viewWillAppear:(BOOL)animated

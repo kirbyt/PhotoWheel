@@ -49,9 +49,11 @@
 @synthesize fetchedResultsController = fetchedResultsController_;
 @synthesize popoverController = popoverController_;
 @synthesize refreshDisplayTimer = refreshDisplayTimer_;
+@synthesize toolbarView = toolbarView_;
 
 - (void)dealloc
 {
+   [toolbarView_ release], toolbarView_ = nil;
    [backgroundImageView_ release], backgroundImageView_ = nil;
    [refreshDisplayTimer_ release], refreshDisplayTimer_ = nil;
    [popoverController_ release], popoverController_ = nil;
@@ -78,7 +80,8 @@
 {
    [[self refreshDisplayTimer] invalidate];
    [self setRefreshDisplayTimer:nil];
-   
+
+   [self setToolbarView:nil];
    [self setBackgroundImageView:nil];
    [self setGridView:nil];
    [self setTitleTextField:nil];
@@ -108,12 +111,20 @@
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
    [[self gridView] setFrame:CGRectMake(20, 74, 651, 481)];
+   CGRect frame = [[self toolbarView] frame];
+   frame.origin.y = 569;
+   frame.size.width = 651;
+   [[self toolbarView] setFrame:frame];
 }
 
 - (void)layoutForPortrait
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
    [[self gridView] setFrame:CGRectMake(20, 78, 676, 438)];
+   CGRect frame = [[self toolbarView] frame];
+   frame.origin.y = 535;
+   frame.size.width = 676;
+   [[self toolbarView] setFrame:frame];
 }
 
 - (void)doRefreshDisplay
@@ -282,7 +293,7 @@
       CGRect cellFrame = [cell frame];
       CGPoint point = CGPointMake(CGRectGetMidX(cellFrame), CGRectGetMidY(cellFrame));
       point = [gridView convertPoint:point toView:[[self view] superview]];
-      NSLog(@"center: %@", NSStringFromCGPoint(point));
+      NSLog(@"frame: %@", NSStringFromCGRect(cellFrame));
       
       PhotoBrowserViewController *newController = [[PhotoBrowserViewController alloc] init];
       CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
