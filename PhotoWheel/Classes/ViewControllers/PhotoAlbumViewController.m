@@ -110,20 +110,38 @@
 - (void)layoutForLandscape
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
-   [[self gridView] setFrame:CGRectMake(20, 74, 651, 481)];
-   CGRect frame = [[self toolbarView] frame];
+   
+   CGRect frame;
+   CGFloat commonWidth = 651;
+   
+   [[self gridView] setFrame:CGRectMake(20, 74, commonWidth, 481)];
+
+   frame = [[self titleTextField] frame];
+   frame = CGRectMake(20, frame.origin.y, commonWidth, frame.size.height);
+   [[self titleTextField] setFrame:frame];
+   
+   frame = [[self toolbarView] frame];
    frame.origin.y = 569;
-   frame.size.width = 651;
+   frame.size.width = commonWidth;
    [[self toolbarView] setFrame:frame];
 }
 
 - (void)layoutForPortrait
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
-   [[self gridView] setFrame:CGRectMake(20, 78, 676, 438)];
-   CGRect frame = [[self toolbarView] frame];
+
+   CGRect frame;
+   CGFloat commonWidth = 676;
+
+   [[self gridView] setFrame:CGRectMake(20, 78, commonWidth, 438)];
+   
+   frame = [[self titleTextField] frame];
+   frame = CGRectMake(20, frame.origin.y, commonWidth, frame.size.height);
+   [[self titleTextField] setFrame:frame];
+
+   frame = [[self toolbarView] frame];
    frame.origin.y = 535;
-   frame.size.width = 676;
+   frame.size.width = commonWidth;
    [[self toolbarView] setFrame:frame];
 }
 
@@ -245,6 +263,12 @@
 {
    [[self photoAlbum] setName:[textField text]];
    [[self photoAlbum] kt_save];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+   [textField resignFirstResponder];
+   return NO;
 }
 
 #pragma mark - GridViewDataSource Methods
