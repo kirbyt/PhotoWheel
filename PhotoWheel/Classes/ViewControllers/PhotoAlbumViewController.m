@@ -13,6 +13,8 @@
 #import "AddPhotoViewController.h"
 #import "SlideshowSettingsViewController.h"
 #import "NSManagedObject+KTCategory.h"
+#import "UINavigationController+KTTransitions.h"
+#import "CustomNavigationController.h"
 #import "PhotoBrowserViewController.h"
 
 #define BUTTON_CANCEL 0
@@ -269,8 +271,15 @@
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
 {
    if (index < [self numberOfObjects]) {
+      GridViewCell *cell = [gridView cellAtIndex:index];
+      CGRect cellFrame = [cell frame];
+      CGPoint point = CGPointMake(CGRectGetMidX(cellFrame), CGRectGetMidY(cellFrame));
+      point = [gridView convertPoint:point toView:[[self view] superview]];
+      NSLog(@"center: %@", NSStringFromCGPoint(point));
+      
       PhotoBrowserViewController *newController = [[PhotoBrowserViewController alloc] init];
-      [[[self mainViewController] navigationController] pushViewController:newController animated:YES];
+      CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
+      [navController pushViewController:newController explodeFromPoint:point];
       [newController release];
    } else {
       [self addPhotoAtIndex:index];

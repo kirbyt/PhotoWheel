@@ -35,7 +35,7 @@
       }
    };
    
-   [UIView animateWithDuration:0.6 animations:animations completion:completion];
+   [UIView animateWithDuration:10.3 animations:animations completion:completion];
 }
 
 - (void)kt_popViewControllerImplodeToPoint:(CGPoint)toPoint
@@ -59,7 +59,7 @@
       [transitionFromView removeFromSuperview];
    };
 
-   [UIView animateWithDuration:0.6 animations:animations completion:completion];
+   [UIView animateWithDuration:0.3 animations:animations completion:completion];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "PhotoWheelAppDelegate.h"
 #import "MainViewController.h"
+#import "CustomNavigationController.h"
 
 
 @implementation PhotoWheelAppDelegate
@@ -39,7 +40,7 @@
    [self setRootViewController:newController];
    [newController release];
    
-   UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[self rootViewController]];
+   CustomNavigationController *navController = [[CustomNavigationController alloc] initWithRootViewController:[self rootViewController]];
    [[navController navigationBar] setHidden:YES];
    [self setNavigationController:navController];
    [navController release];

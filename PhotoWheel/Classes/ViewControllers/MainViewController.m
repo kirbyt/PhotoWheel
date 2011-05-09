@@ -92,6 +92,11 @@
    [super viewDidUnload];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+   [[[self navigationController] navigationBar] setHidden:YES];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
    return YES;

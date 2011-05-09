@@ -86,7 +86,19 @@
    UINavigationBar *navBar = [[self navigationController] navigationBar];
    [navBar setBarStyle:UIBarStyleBlack];
    [navBar setTranslucent:YES];
-   [navBar setHidden:NO];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+   UINavigationBar *navBar = [[self navigationController] navigationBar];
+   [navBar setBarStyle:UIBarStyleBlack];
+   [navBar setTranslucent:YES];
+   [[[self navigationController] navigationBar] setHidden:NO];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+   [[[self navigationController] navigationBar] setHidden:YES];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
