@@ -67,6 +67,13 @@
    [super dealloc];
 }
 
+- (void)viewDidLoad
+{
+   [super viewDidLoad];
+   
+   [[self gridView] setAlwaysBounceVertical:YES];
+}
+
 - (void)viewDidUnload
 {
    [[self refreshDisplayTimer] invalidate];
