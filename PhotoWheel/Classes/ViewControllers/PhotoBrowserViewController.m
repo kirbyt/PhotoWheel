@@ -7,6 +7,7 @@
 //
 
 #import "PhotoBrowserViewController.h"
+#import "PhotoView.h"
 #import "CustomToolbar.h"
 
 
@@ -15,10 +16,11 @@
 @property (nonatomic, retain) NSMutableArray *photoViewCache;
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, assign) NSTimer *chromeTimer;
+@property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden;
 - (CGRect)frameForPagingScrollView;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
 - (NSInteger)numberOfPhotos;
-- (void)addButtonsToNavigatioBar;
+- (void)addButtonsToNavigationBar;
 - (void)setTitleWithCurrentPhotoIndex;
 - (void)scrollToIndex:(NSInteger)index; 
 - (void)setScrollViewContentSize;
@@ -27,6 +29,8 @@
 - (void)cancelChromeDisplayTimer; 
 - (void)hideChrome;
 - (void)chromeShouldHide:(BOOL)hide;
+- (void)loadPhoto:(NSInteger)index;
+- (void)unloadPhoto:(NSInteger)index;
 @end
 
 @implementation PhotoBrowserViewController
@@ -37,6 +41,7 @@
 @synthesize currentIndex = currentIndex_;
 @synthesize startAtIndex = startAtIndex_;
 @synthesize chromeTimer = chromeTimer_;
+@synthesize chromeHidden = chromeHidden_;
 
 - (void)dealloc
 {
@@ -69,8 +74,7 @@
 {
    [super viewDidLoad];
 
-   [self addButtonsToNavigatioBar];
-   [self setScrollViewContentSize];
+   [self addButtonsToNavigationBar];
    [self initPhotoViewCache];
    
 }
@@ -92,6 +96,7 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+   [self cancelChromeDisplayTimer];
    [[[self navigationController] navigationBar] setHidden:YES];
 }
 
@@ -107,7 +112,7 @@
    return [[self dataSource] photoBrowserViewControllerNumberOfPhotos:self];
 }
 
-- (void)addButtonsToNavigatioBar
+- (void)addButtonsToNavigationBar
 {
    // Add buttons to the navigation bar. The nav bar allows
    // one button on the left and one on the right. Optionally
@@ -234,8 +239,14 @@
    if ( ! hide ) {
       [self startChromeDisplayTimer];
    }
+   
+   [self setChromeHidden:hide];
 }
 
+- (void)toggleChromeDisplay
+{
+   [self chromeShouldHide:![self isChromeHidden]];
+}
 
 #pragma mark - Frame Size Calculations
 
@@ -260,6 +271,62 @@
    pageFrame.size.width -= (2 * PADDING);
    pageFrame.origin.x = (bounds.size.width * index) + PADDING;
    return pageFrame;
+}
+
+#pragma mark - Scrolling Page Management
+
+- (void)setCurrentIndex:(NSInteger)newIndex
+{
+   currentIndex_ = newIndex;
+   
+   [self loadPhoto:currentIndex_];
+   [self loadPhoto:currentIndex_ + 1];
+   [self loadPhoto:currentIndex_ - 1];
+   [self unloadPhoto:currentIndex_ + 2];
+   [self unloadPhoto:currentIndex_ - 2];
+   
+   [self setTitleWithCurrentPhotoIndex];
+}
+
+- (void)loadPhoto:(NSInteger)index
+{
+   if (index < 0 || index >= [self numberOfPhotos]) {
+      return;
+   }
+   
+   id currentPhotoView = [[self photoViewCache] objectAtIndex:index];
+   if (NO == [currentPhotoView isKindOfClass:[PhotoView class]]) {
+      // Load the photo view.
+      CGRect frame = [self frameForPageAtIndex:index];
+      PhotoView *photoView = [[PhotoView alloc] initWithFrame:frame];
+      [photoView setPhotoBrowserViewController:self];
+      [photoView setIndex:index];
+      [photoView setBackgroundColor:[UIColor clearColor]];
+      
+      // Set the photo image.
+      UIImage *image = [[self dataSource] photoBrowserViewController:self photoAtIndex:index];
+      [photoView setImage:image];
+      
+      [[self scrollView] addSubview:photoView];
+      [[self photoViewCache] replaceObjectAtIndex:index withObject:photoView];
+      [photoView release];
+   } else {
+      // Turn off zooming.
+      [currentPhotoView turnOffZoom];
+   }
+}
+
+- (void)unloadPhoto:(NSInteger)index
+{
+   if (index < 0 || index >= [self numberOfPhotos]) {
+      return;
+   }
+   
+   id currentPhotoView = [[self photoViewCache] objectAtIndex:index];
+   if ([currentPhotoView isKindOfClass:[PhotoView class]]) {
+      [currentPhotoView removeFromSuperview];
+      [[self photoViewCache] replaceObjectAtIndex:index withObject:[NSNull null]];
+   }
 }
 
 #pragma mark - Actions

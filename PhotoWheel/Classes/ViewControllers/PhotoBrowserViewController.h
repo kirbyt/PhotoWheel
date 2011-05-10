@@ -18,6 +18,8 @@
 @property (nonatomic, assign) id<PhotoBrowserViewControllerDataSource> dataSource;
 @property (nonatomic, assign) NSInteger startAtIndex;
 
+- (void)toggleChromeDisplay;
+
 @end
 
 
