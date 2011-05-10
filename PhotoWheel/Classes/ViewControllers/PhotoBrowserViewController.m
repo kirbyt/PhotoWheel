@@ -17,6 +17,8 @@
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, assign) NSTimer *chromeTimer;
 @property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden;
+@property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
+@property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
 - (CGRect)frameForPagingScrollView;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
 - (NSInteger)numberOfPhotos;
@@ -42,6 +44,8 @@
 @synthesize startAtIndex = startAtIndex_;
 @synthesize chromeTimer = chromeTimer_;
 @synthesize chromeHidden = chromeHidden_;
+@synthesize firstVisiblePageIndexBeforeRotation = firstVisiblePageIndexBeforeRotation_;
+@synthesize percentScrolledIntoFirstVisiblePage = percentScrolledIntoFirstVisiblePage_;
 
 - (void)dealloc
 {
@@ -99,9 +103,68 @@
    [[[self navigationController] navigationBar] setHidden:YES];
 }
 
+#pragma mark - Rotation Methods
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
    return YES;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
+                                duration:(NSTimeInterval)duration 
+{
+   // Here, our pagingScrollView bounds have not yet been updated for the new interface orientation. So this is a good
+   // place to calculate the content offset that we will need in the new orientation
+   CGFloat offset = [self scrollView].contentOffset.x;
+   CGFloat pageWidth = [self scrollView].bounds.size.width;
+   
+   if (offset >= 0) {
+      [self setFirstVisiblePageIndexBeforeRotation:floorf(offset / pageWidth)];
+      [self setPercentScrolledIntoFirstVisiblePage:(offset - ([self firstVisiblePageIndexBeforeRotation] * pageWidth)) / pageWidth];
+   } else {
+      [self setFirstVisiblePageIndexBeforeRotation:0];
+      [self setPercentScrolledIntoFirstVisiblePage:offset / pageWidth];
+   }    
+   
+}
+
+- (void)layoutScrollViewSubviews
+{
+   [self setScrollViewContentSize];
+   
+   NSArray *subviews = [[self scrollView] subviews];
+   
+   for (PhotoView *photoView in subviews) {
+      CGPoint restorePoint = [photoView pointToCenterAfterRotation];
+      CGFloat restoreScale = [photoView scaleToRestoreAfterRotation];
+      [photoView setFrame:[self frameForPageAtIndex:[photoView index]]];
+      [photoView setMaxMinZoomScalesForCurrentBounds];
+      [photoView restoreCenterPoint:restorePoint scale:restoreScale];
+   }
+   
+   // adjust contentOffset to preserve page location based on values collected prior to location
+   CGFloat pageWidth = [self scrollView].bounds.size.width;
+   CGFloat newOffset = ([self firstVisiblePageIndexBeforeRotation] * pageWidth) + ([self percentScrolledIntoFirstVisiblePage] * pageWidth);
+   [[self scrollView] setContentOffset:CGPointMake(newOffset, 0)];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+                                         duration:(NSTimeInterval)duration 
+{
+   [self layoutScrollViewSubviews];
+   
+   // Adjust navigation bar if needed.
+   if ([self isChromeHidden]) {
+      UINavigationBar *navbar = [[self navigationController] navigationBar];
+      CGRect frame = [navbar frame];
+      frame.origin.y = 20;
+      [navbar setFrame:frame];
+   }
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation 
+{
+   [self startChromeDisplayTimer];
 }
 
 #pragma mark - Helper Methods

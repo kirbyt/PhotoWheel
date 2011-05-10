@@ -21,4 +21,10 @@
 - (void)setImage:(UIImage *)image;
 - (void)turnOffZoom;
 
+
+- (CGPoint)pointToCenterAfterRotation;
+- (CGFloat)scaleToRestoreAfterRotation;
+- (void)setMaxMinZoomScalesForCurrentBounds;
+- (void)restoreCenterPoint:(CGPoint)oldCenter scale:(CGFloat)oldScale;
+
 @end

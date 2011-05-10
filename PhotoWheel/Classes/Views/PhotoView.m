@@ -71,8 +71,8 @@
 
 - (void)doubleTapped:(UITapGestureRecognizer *)recognizer
 {
-   CGPoint touchPoint = [recognizer locationInView:self];
-   [self zoomToPoint:touchPoint];
+//   CGPoint touchPoint = [recognizer locationInView:self];
+//   [self zoomToPoint:touchPoint];
 }
 
 - (void)singleTapped:(UITapGestureRecognizer *)recognizer
