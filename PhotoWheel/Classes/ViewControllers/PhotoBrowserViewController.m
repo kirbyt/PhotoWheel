@@ -76,7 +76,13 @@
 
    [self addButtonsToNavigationBar];
    [self initPhotoViewCache];
+
+   [self setScrollViewContentSize];
+   [self setCurrentIndex:[self startAtIndex]];
+   [self scrollToIndex:[self startAtIndex]];
    
+   [self setTitleWithCurrentPhotoIndex];
+   [self startChromeDisplayTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -85,13 +91,6 @@
    [navBar setBarStyle:UIBarStyleBlack];
    [navBar setTranslucent:YES];
    [[[self navigationController] navigationBar] setHidden:NO];
-   
-   [self setScrollViewContentSize];
-   [self setCurrentIndex:[self startAtIndex]];
-   [self scrollToIndex:[self startAtIndex]];
-   
-   [self setTitleWithCurrentPhotoIndex];
-   [self startChromeDisplayTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -361,6 +360,23 @@
 //      [self deleteCurrentPhoto];
 //   }
 //   [self startChromeDisplayTimer];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView 
+{
+   CGFloat pageWidth = scrollView.frame.size.width;
+   float fractionalPage = scrollView.contentOffset.x / pageWidth;
+   NSInteger page = floor(fractionalPage);
+	if (page != [self currentIndex]) {
+		[self setCurrentIndex:page];
+	}
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView 
+{
+   [self hideChrome];
 }
 
 @end
