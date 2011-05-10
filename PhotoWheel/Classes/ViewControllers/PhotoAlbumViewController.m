@@ -320,6 +320,8 @@
       NSLog(@"frame: %@", NSStringFromCGRect(cellFrame));
       
       PhotoBrowserViewController *newController = [[PhotoBrowserViewController alloc] init];
+      [newController setDataSource:self];
+      [newController setStartAtIndex:index];
       CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
       [navController pushViewController:newController explodeFromPoint:point];
       [newController release];
@@ -501,4 +503,43 @@
    
 }
 
+#pragma mark - PhotoBrowserViewControllerDataSource Methods
+
+- (NSInteger)photoBrowserViewControllerNumberOfPhotos:(PhotoBrowserViewController *)controller
+{
+   return [self numberOfObjects];
+}
+
+- (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)controller photoAtIndex:(NSInteger)index
+{
+   Photo *photo = [self objectAtIndex:index];
+   return [photo largeImage];
+}
+
+- (BOOL)photoBrowserViewController:(PhotoBrowserViewController *)controller deletePhotoAtIndex:(NSInteger)index
+{
+   BOOL success = YES;
+   Photo *photo = [self objectAtIndex:index];
+   NSManagedObjectContext *context = [photo managedObjectContext];
+   [context deleteObject:photo];
+   
+   // Save the context.
+   NSError *error = nil;
+   if (![context save:&error])
+   {
+      success = NO;
+      /*
+       Replace this implementation with code to handle the error appropriately.
+       
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+       */
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }
+
+   [[self gridView] reloadData];
+   return success;
+}
+
+                                
 @end
