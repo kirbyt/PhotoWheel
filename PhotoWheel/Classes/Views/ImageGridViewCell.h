@@ -18,6 +18,6 @@
 + (ImageGridViewCell *)imageGridViewCell;
 + (CGSize)size;
 
-- (void)setImage:(UIImage *)image;
+- (void)setImage:(UIImage *)image withShadow:(BOOL)shadow;
 
 @end

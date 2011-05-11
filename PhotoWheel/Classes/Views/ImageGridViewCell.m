@@ -7,6 +7,7 @@
 //
 
 #import "ImageGridViewCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface ImageGridViewCell ()
 @property (nonatomic, retain) UIImageView *imageView;
@@ -39,9 +40,18 @@
    return self;
 }
 
-- (void)setImage:(UIImage *)image
+- (void)setImage:(UIImage *)image withShadow:(BOOL)shadow
 {
-   [[self imageView] setImage:image];
+   CALayer *layer = [self layer];
+   [layer setContents:(id)[image CGImage]];
+   [layer setShouldRasterize:YES];
+   [layer setShadowOffset:CGSizeMake(0, 3)];
+
+   if (shadow) {
+      [layer setShadowOpacity:0.7];
+   } else {
+      [layer setShadowOpacity:0.0];
+   }
 }
 
 + (ImageGridViewCell *)imageGridViewCell

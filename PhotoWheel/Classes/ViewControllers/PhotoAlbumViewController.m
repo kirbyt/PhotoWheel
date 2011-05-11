@@ -297,9 +297,9 @@
    
    if (index < [self numberOfObjects]) {
       Photo *photo = [self objectAtIndex:index];
-      [cell setImage:[photo smallImage]];
+      [cell setImage:[photo smallImage] withShadow:YES];
    } else {
-      [cell setImage:[UIImage imageNamed:@"photo-add.png"]];
+      [cell setImage:[UIImage imageNamed:@"photo-add.png"] withShadow:NO];
    }
    
    return cell;
