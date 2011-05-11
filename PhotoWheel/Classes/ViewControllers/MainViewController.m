@@ -131,7 +131,7 @@
    [[self addPhotoAlbumButton] setCenter:[[self discImageView] center]];
 
    CGRect frame = [[self infoButton] frame];
-   frame.origin = CGPointMake(980, 711);
+   frame.origin = CGPointMake(981, 712);
    [[self infoButton] setFrame:frame];
 }
 
@@ -151,7 +151,7 @@
    [[self addPhotoAlbumButton] setCenter:[[self discImageView] center]];
    
    CGRect frame = [[self infoButton] frame];
-   frame.origin = CGPointMake(722, 959);
+   frame.origin = CGPointMake(723, 960);
    [[self infoButton] setFrame:frame];
 }
 
