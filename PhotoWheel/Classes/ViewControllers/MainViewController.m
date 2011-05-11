@@ -162,8 +162,7 @@
    NSFetchedResultsController *fetchedRequestController = [self fetchedResultsController];
    NSManagedObjectContext *context = [fetchedRequestController managedObjectContext];
 
-   PhotoAlbum *newPhotoAlbum = [PhotoAlbum insertNewInManagedObjectContext:context];
-   [newPhotoAlbum setName:@"Title"];
+   [PhotoAlbum insertNewInManagedObjectContext:context];
    
    // Save the context.
    NSError *error = nil;
