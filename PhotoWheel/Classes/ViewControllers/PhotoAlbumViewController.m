@@ -139,6 +139,7 @@
    void (^animations)(void) = ^ {
       [[self gridView] setAlpha:0.0];
       [[self titleTextField] setText:[[self photoAlbum] name]];
+      [[self toolbarView] setAlpha:0.0];
       [self setFetchedResultsController:nil];
    };
    
@@ -146,16 +147,17 @@
       [[self gridView] reloadData];
       void (^animations)(void) = ^ {
          [[self gridView] setAlpha:1.0];
+         [[self toolbarView] setAlpha:1.0];
       };
-      [UIView animateWithDuration:0.45 animations:animations];
+      [UIView animateWithDuration:0.25 animations:animations];
    };
    
-   [UIView animateWithDuration:0.45 animations:animations completion:completion];
+   [UIView animateWithDuration:0.25 animations:animations completion:completion];
 }
 
 - (void)refreshDisplay
 {
-#define REFRESH_DELAY 0.5
+#define REFRESH_DELAY 0.3
    if ([self refreshDisplayTimer]) {
       [[self refreshDisplayTimer] setFireDate:[NSDate dateWithTimeIntervalSinceNow:REFRESH_DELAY]];
    } else {
