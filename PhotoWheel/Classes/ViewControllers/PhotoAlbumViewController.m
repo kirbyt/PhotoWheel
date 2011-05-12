@@ -309,8 +309,7 @@
       [newController setDataSource:self];
       [newController setStartAtIndex:index];
       CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
-      [navController pushViewController:newController animated:YES];
-//      [navController pushViewController:newController explodeFromPoint:point];
+      [navController pushViewController:newController explodeFromPoint:point];
       [newController release];
    } else {
       [self addPhotoAtIndex:index];
