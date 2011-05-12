@@ -10,6 +10,8 @@
 #import "PhotoView.h"
 #import "CustomToolbar.h"
 
+#define ACTIONSHEET_DELETEMENU 1
+#define ACTIONSHEET_ACTIONMENU 2
 
 @interface PhotoBrowserViewController ()
 @property (nonatomic, retain) UIScrollView *scrollView;
@@ -395,19 +397,28 @@
 
 - (void)deletePhoto:(id)sender
 {
+   [self cancelChromeDisplayTimer];
    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                             delegate:self
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel button text.")
                                               destructiveButtonTitle:NSLocalizedString(@"Delete Photo", @"Delete Photo button text.")
                                                    otherButtonTitles:nil];
+   [actionSheet setTag:ACTIONSHEET_DELETEMENU];
    [actionSheet showFromBarButtonItem:sender animated:YES];
-//   [actionSheet showInView:[self view]];
    [actionSheet release];
 }
 
 - (void)showActionMenu:(id)sender
 {
-   
+   [self cancelChromeDisplayTimer];
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                            delegate:self
+                                                   cancelButtonTitle:nil
+                                              destructiveButtonTitle:nil
+                                                   otherButtonTitles:@"Email Photo", @"Print", nil];
+   [actionSheet setTag:ACTIONSHEET_ACTIONMENU];
+   [actionSheet showFromBarButtonItem:sender animated:YES];
+   [actionSheet release];
 }
 
 - (void)slideshow:(id)sender
@@ -415,15 +426,57 @@
    
 }
 
+- (void)deleteCurrentPhoto
+{
+   NSInteger indexToDelete = [self currentIndex];
+   [self unloadPhoto:indexToDelete];
+   [[self dataSource] photoBrowserViewController:self deletePhotoAtIndex:indexToDelete];
+   
+   if ([self numberOfPhotos] == 0) {
+      [[self navigationController] popViewControllerAnimated:YES];
+   } else {
+      NSInteger nextIndex = indexToDelete;
+      if (nextIndex == [self numberOfPhotos]) {
+         --nextIndex;
+      }
+      [self setCurrentIndex:nextIndex];
+      [self setScrollViewContentSize];
+   }
+}
+
+- (void)emailCurrentPhoto
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)printCurrentPhoto
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 #pragma mark - UIActionSheetDelegate
 
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex 
 {
-//   if (buttonIndex == 1) {
-//      [self deleteCurrentPhoto];
-//   }
-//   [self startChromeDisplayTimer];
+   if ([actionSheet tag] == ACTIONSHEET_ACTIONMENU) {
+      switch (buttonIndex) {
+         case 0:
+            [self emailCurrentPhoto];
+            break;
+         case 1:
+            [self printCurrentPhoto];
+            break;
+         default:
+            break;
+      }
+      
+   } else if ([actionSheet tag] == ACTIONSHEET_DELETEMENU) {
+      if (buttonIndex == 0) {
+         [self deleteCurrentPhoto];
+      }
+   }
+   [self startChromeDisplayTimer];
 }
 
 #pragma mark - UIScrollViewDelegate
