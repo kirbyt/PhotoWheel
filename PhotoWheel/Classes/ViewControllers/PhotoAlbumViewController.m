@@ -25,7 +25,6 @@
 @interface PhotoAlbumViewController ()
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) UIPopoverController *popoverController;
-@property (nonatomic, retain) NSTimer *refreshDisplayTimer;
 - (NSInteger)numberOfObjects;
 - (id)objectAtIndex:(NSInteger)index;
 - (void)addPhotoAtIndex:(NSInteger)index;
@@ -48,14 +47,12 @@
 @synthesize gridView = gridView_;
 @synthesize fetchedResultsController = fetchedResultsController_;
 @synthesize popoverController = popoverController_;
-@synthesize refreshDisplayTimer = refreshDisplayTimer_;
 @synthesize toolbarView = toolbarView_;
 
 - (void)dealloc
 {
    [toolbarView_ release], toolbarView_ = nil;
    [backgroundImageView_ release], backgroundImageView_ = nil;
-   [refreshDisplayTimer_ release], refreshDisplayTimer_ = nil;
    [popoverController_ release], popoverController_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [gridView_ release], gridView_ = nil;
@@ -74,13 +71,12 @@
    [super viewDidLoad];
    
    [[self gridView] setAlwaysBounceVertical:YES];
+   // Hide the toolbar until we have a photo album.
+   [[self toolbarView] setAlpha:0.0];
 }
 
 - (void)viewDidUnload
 {
-   [[self refreshDisplayTimer] invalidate];
-   [self setRefreshDisplayTimer:nil];
-
    [self setToolbarView:nil];
    [self setBackgroundImageView:nil];
    [self setGridView:nil];
@@ -133,21 +129,24 @@
 
 - (void)doRefreshDisplay
 {
-   [[self refreshDisplayTimer] invalidate];
-   [self setRefreshDisplayTimer:nil];
+   BOOL hideToolbar = ([self photoAlbum] == nil);
    
    void (^animations)(void) = ^ {
       [[self gridView] setAlpha:0.0];
       [[self titleTextField] setText:[[self photoAlbum] name]];
-      [[self toolbarView] setAlpha:0.0];
       [self setFetchedResultsController:nil];
+      if (hideToolbar) {
+         [[self toolbarView] setAlpha:0.0];
+      }
    };
    
    void (^completion)(BOOL) = ^(BOOL finished) {
       [[self gridView] reloadData];
       void (^animations)(void) = ^ {
          [[self gridView] setAlpha:1.0];
-         [[self toolbarView] setAlpha:1.0];
+         if (!hideToolbar) {
+            [[self toolbarView] setAlpha:1.0];
+         }
       };
       [UIView animateWithDuration:0.25 animations:animations];
    };
@@ -208,7 +207,7 @@
 
 - (IBAction)emailPhotoAlbum:(id)sender
 {
-   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send as Photos", @"Send as a Photo Wheel", nil];
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send Photos", @"Send Photo Album", nil];
    [actionSheet showFromRect:[sender frame] inView:[self toolbarView] animated:YES];
 }
 
