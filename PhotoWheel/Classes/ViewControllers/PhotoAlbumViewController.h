@@ -8,12 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "GridView.h"
-#import "PhotoBrowserViewController.h"
 
 @class PhotoAlbum;
 @class MainViewController;
 
-@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, GridViewDataSource, PhotoBrowserViewControllerDataSource>
+@interface PhotoAlbumViewController : UIViewController <UIAlertViewDelegate, UITextFieldDelegate, NSFetchedResultsControllerDelegate, UIPopoverControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, GridViewDataSource>
 {
     
 }

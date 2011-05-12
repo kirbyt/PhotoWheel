@@ -8,6 +8,7 @@
 
 #import "PhotoBrowserViewController.h"
 #import "PhotoView.h"
+#import "Models.h"
 #import "CustomToolbar.h"
 
 #define ACTIONSHEET_DELETEMENU 1
@@ -39,7 +40,7 @@
 
 @implementation PhotoBrowserViewController
 
-@synthesize dataSource = dataSource_;
+@synthesize fetchedResultsController = fetchedResultsController_;
 @synthesize scrollView = scrollView_;
 @synthesize photoViewCache = photoViewCache_;
 @synthesize currentIndex = currentIndex_;
@@ -52,6 +53,7 @@
 
 - (void)dealloc
 {
+   [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [scrollView_ release], scrollView_ = nil;
    [photoViewCache_ release], photoViewCache_ = nil;
    [actionButton_ release], actionButton_ = nil;
@@ -177,11 +179,27 @@
    [self startChromeDisplayTimer];
 }
 
+
+
 #pragma mark - Helper Methods
 
 - (NSInteger)numberOfPhotos
 {
-   return [[self dataSource] photoBrowserViewControllerNumberOfPhotos:self];
+   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
+   return count;
+}
+
+- (id)objectAtIndex:(NSInteger)index
+{
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   id object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   return object;
+}
+
+- (UIImage *)photoAtIndex:(NSInteger)index
+{
+   Photo *photo = [self objectAtIndex:index];
+   return [photo largeImage];
 }
 
 - (void)addButtonsToNavigationBar
@@ -239,7 +257,7 @@
 
 - (void)setScrollViewContentSize
 {
-   NSInteger pageCount = [[self dataSource] photoBrowserViewControllerNumberOfPhotos:self];
+   NSInteger pageCount = [self numberOfPhotos];
    if (pageCount == 0) {
       pageCount = 1;
    }
@@ -254,7 +272,7 @@
    // Setup our photo view cache. We only keep 3 views in
    // memory. NSNull is used as a placeholder for the other
    // elements in the view cache array.
-   NSInteger numberOfPhotos = [[self dataSource] photoBrowserViewControllerNumberOfPhotos:self];
+   NSInteger numberOfPhotos = [self numberOfPhotos];
    NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:numberOfPhotos];
    [self setPhotoViewCache:newArray];
    [newArray release];
@@ -377,7 +395,7 @@
       [photoView setBackgroundColor:[UIColor clearColor]];
       
       // Set the photo image.
-      UIImage *image = [[self dataSource] photoBrowserViewController:self photoAtIndex:index];
+      UIImage *image = [self photoAtIndex:index];
       [photoView setImage:image];
       
       [[self scrollView] addSubview:photoView];
@@ -439,7 +457,10 @@
 {
    NSInteger indexToDelete = [self currentIndex];
    [self unloadPhoto:indexToDelete];
-   [[self dataSource] photoBrowserViewController:self deletePhotoAtIndex:indexToDelete];
+   Photo *photoToDelete = [self objectAtIndex:indexToDelete];
+   NSManagedObjectContext *context = [photoToDelete managedObjectContext];
+   [context deleteObject:photoToDelete];
+   [photoToDelete kt_save];
    
    if ([self numberOfPhotos] == 0) {
       [[self navigationController] popViewControllerAnimated:YES];
@@ -460,7 +481,8 @@
 
 - (void)printCurrentPhoto
 {
-   NSURL *imageURL = [[self dataSource] photoBrowserViewController:self printPhotoURLAtIndex:[self currentIndex]];
+   Photo *photo = [self objectAtIndex:[self currentIndex]];
+   NSURL *imageURL = [photo largeImageURL];
    if (imageURL == nil) return;  // Nothing to print.
    
    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
@@ -477,11 +499,6 @@
    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
    [printInfo setOutputType:UIPrintInfoOutputPhoto];
    [printInfo setJobName:[[imageURL path] lastPathComponent]];
-   
-   // If we are performing drawing of our image for printing we will print
-   // landscape photos in a landscape orientation.
-//   if(![controller printingItem] && [image size].width > [image size].height)
-//      [printInfo setOrientation:UIPrintInfoOrientationLandscape];
    
    [controller setPrintInfo:printInfo];
    [controller setPrintingItem:imageURL];

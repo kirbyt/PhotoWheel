@@ -325,7 +325,7 @@
       NSLog(@"frame: %@", NSStringFromCGRect(cellFrame));
       
       PhotoBrowserViewController *newController = [[PhotoBrowserViewController alloc] init];
-      [newController setDataSource:self];
+      [newController setFetchedResultsController:[self fetchedResultsController]];
       [newController setStartAtIndex:index];
       CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
       [navController pushViewController:newController explodeFromPoint:point];
