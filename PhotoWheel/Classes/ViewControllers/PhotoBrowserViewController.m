@@ -400,7 +400,8 @@
                                                    cancelButtonTitle:NSLocalizedString(@"Cancel", @"Cancel button text.")
                                               destructiveButtonTitle:NSLocalizedString(@"Delete Photo", @"Delete Photo button text.")
                                                    otherButtonTitles:nil];
-   [actionSheet showInView:[self view]];
+   [actionSheet showFromBarButtonItem:sender animated:YES];
+//   [actionSheet showInView:[self view]];
    [actionSheet release];
 }
 
