@@ -207,7 +207,38 @@
 
 - (IBAction)printPhotoAlbum:(id)sender
 {
+   if ([self numberOfObjects] == 0) return;  // Nothing to print.
    
+   NSMutableArray *imageURLs = [[NSMutableArray alloc] initWithCapacity:[self numberOfObjects]];
+   for (Photo *photo in [[self fetchedResultsController] fetchedObjects]) {
+      [imageURLs addObject:[photo largeImageURL]];
+   }   
+   
+   UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+   if(!controller){
+      NSLog(@"Couldn't get shared UIPrintInteractionController!");
+      return;
+   }
+   
+   UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+      if(completed && error)
+         NSLog(@"FAILED! due to error in domain %@ with error code %u", error.domain, error.code);
+   };
+   
+   UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+   [printInfo setOutputType:UIPrintInfoOutputPhoto];
+   [printInfo setJobName:[[self photoAlbum] name]];
+   
+   [controller setPrintInfo:printInfo];
+   [controller setPrintingItems:imageURLs];
+   
+   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+      [controller presentFromRect:[sender frame] inView:[self toolbarView] animated:YES completionHandler:completionHandler];
+   } else {
+      [controller presentAnimated:YES completionHandler:completionHandler];  // iPhone
+   }
+   
+   [imageURLs release];
 }
 
 - (IBAction)emailPhotoAlbum:(id)sender
