@@ -177,6 +177,25 @@
 
 #pragma mark - Actions
 
+- (void)deletePhotoAlbum
+{
+   NSManagedObjectContext *context = [[self photoAlbum] managedObjectContext];
+   [context deleteObject:[self photoAlbum]];
+
+   // Save the context.
+   NSError *error = nil;
+   if (![context save:&error])
+   {
+      /*
+       Replace this implementation with code to handle the error appropriately.
+       
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+       */
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }
+}
+
 - (IBAction)removePhotoAlbum:(id)sender
 {
    NSString *message = [NSString stringWithFormat:@"Remove %@ and its photos?", [[self photoAlbum] name]];
@@ -213,12 +232,10 @@
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-   if (buttonIndex == BUTTON_REMOVE_PHOTO_ALBUM) {
-      if ([[self mainViewController] deletePhotoAlbum:[self photoAlbum]]) {
-         [self setPhotoAlbum:nil];
-      }
-   }
    [alertView release];
+   if (buttonIndex == BUTTON_REMOVE_PHOTO_ALBUM) {
+      [self deletePhotoAlbum];
+   }
 }
 
 - (void)alertViewCancel:(UIAlertView *)alertView

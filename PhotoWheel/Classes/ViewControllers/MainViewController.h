@@ -24,7 +24,6 @@
 @property (nonatomic, retain) IBOutlet UIView *photoAlbumViewPlaceholder;
 @property (nonatomic, retain) NSManagedObjectContext *managedObjectContext;
 
-- (BOOL)deletePhotoAlbum:(PhotoAlbum *)photoAlbum;
 - (IBAction)addPhotoAlbum:(id)sender;
 - (IBAction)showAbout:(id)sender;
 
