@@ -25,4 +25,9 @@
 - (UIImage *)originalImage;
 - (void)saveImage:(UIImage *)image;
 
+- (NSURL *)thumbnailImageURL;
+- (NSURL *)smallImageURL;
+- (NSURL *)largeImageURL;
+- (NSURL *)originalImageURL;
+
 @end

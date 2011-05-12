@@ -48,11 +48,13 @@
 @synthesize chromeHidden = chromeHidden_;
 @synthesize firstVisiblePageIndexBeforeRotation = firstVisiblePageIndexBeforeRotation_;
 @synthesize percentScrolledIntoFirstVisiblePage = percentScrolledIntoFirstVisiblePage_;
+@synthesize actionButton = actionButton_;
 
 - (void)dealloc
 {
    [scrollView_ release], scrollView_ = nil;
    [photoViewCache_ release], photoViewCache_ = nil;
+   [actionButton_ release], actionButton_ = nil;
    [super dealloc];
 }
 
@@ -103,6 +105,12 @@
 {
    [self cancelChromeDisplayTimer];
    [[[self navigationController] navigationBar] setHidden:YES];
+}
+
+- (void)viewDidUnload
+{
+   [self setActionButton:nil];
+   [super viewDidUnload];
 }
 
 #pragma mark - Rotation Methods
@@ -189,6 +197,7 @@
    
    UIBarButtonItem *actionButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionMenu:)] autorelease];
    [actionButton setStyle:UIBarButtonItemStyleBordered];
+   [self setActionButton:actionButton];
    
    UIBarButtonItem *slideshowButton = [[[UIBarButtonItem alloc] initWithTitle:@"Slideshow" style:UIBarButtonItemStyleBordered target:self action:@selector(slideshow:)] autorelease];
    
@@ -451,7 +460,36 @@
 
 - (void)printCurrentPhoto
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   NSURL *imageURL = [[self dataSource] photoBrowserViewController:self printPhotoURLAtIndex:[self currentIndex]];
+   if (imageURL == nil) return;  // Nothing to print.
+   
+   UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+   if(!controller){
+      NSLog(@"Couldn't get shared UIPrintInteractionController!");
+      return;
+   }
+   
+   UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+      if(completed && error)
+         NSLog(@"FAILED! due to error in domain %@ with error code %u", error.domain, error.code);
+   };
+   
+   UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+   [printInfo setOutputType:UIPrintInfoOutputPhoto];
+   [printInfo setJobName:[[imageURL path] lastPathComponent]];
+   
+   // If we are performing drawing of our image for printing we will print
+   // landscape photos in a landscape orientation.
+//   if(![controller printingItem] && [image size].width > [image size].height)
+//      [printInfo setOrientation:UIPrintInfoOrientationLandscape];
+   
+   [controller setPrintInfo:printInfo];
+   [controller setPrintingItem:imageURL];
+
+   if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+      [controller presentFromBarButtonItem:[self actionButton] animated:YES completionHandler:completionHandler];  // iPad
+   }else
+      [controller presentAnimated:YES completionHandler:completionHandler];  // iPhone
 }
 
 #pragma mark - UIActionSheetDelegate

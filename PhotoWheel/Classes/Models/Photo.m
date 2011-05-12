@@ -77,6 +77,30 @@
    [self performSelectorInBackground:@selector(threaded_saveImage:) withObject:image];
 }
 
+- (NSURL *)thumbnailImageURL
+{
+   NSURL *URL = [NSURL fileURLWithPath:[self thumbnailImagePath]];
+   return URL;
+}
+
+- (NSURL *)smallImageURL
+{
+   NSURL *URL = [NSURL fileURLWithPath:[self smallImagePath]];
+   return URL;
+}
+
+- (NSURL *)largeImageURL
+{
+   NSURL *URL = [NSURL fileURLWithPath:[self largeImagePath]];
+   return URL;
+}
+
+- (NSURL *)originalImageURL
+{
+   NSURL *URL = [NSURL fileURLWithPath:[self originalImagePath]];
+   return URL;
+}
+
 #pragma mark - Helper Methods
 
 - (NSString *)rootPath

@@ -521,6 +521,13 @@
    return [photo largeImage];
 }
 
+- (NSURL *)photoBrowserViewController:(PhotoBrowserViewController *)controller printPhotoURLAtIndex:(NSInteger)index
+{
+   Photo *photo = [self objectAtIndex:index];
+   return [photo largeImageURL];
+}
+
+
 - (BOOL)photoBrowserViewController:(PhotoBrowserViewController *)controller deletePhotoAtIndex:(NSInteger)index
 {
    BOOL success = YES;
