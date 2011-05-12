@@ -206,7 +206,7 @@
 - (IBAction)emailPhotoAlbum:(id)sender
 {
    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send as Photos", @"Send as a Photo Wheel", nil];
-   [actionSheet showFromRect:[sender frame] inView:[self view] animated:YES];
+   [actionSheet showFromRect:[sender frame] inView:[self toolbarView] animated:YES];
 }
 
 - (IBAction)slideshow:(id)sender
@@ -220,7 +220,7 @@
    [newNavController release];
    [newController release];
    
-   [[self popoverController] presentPopoverFromRect:[sender frame] inView:[self view] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   [[self popoverController] presentPopoverFromRect:[sender frame] inView:[self toolbarView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 #pragma mark - UIAlertViewDelegate Methods
