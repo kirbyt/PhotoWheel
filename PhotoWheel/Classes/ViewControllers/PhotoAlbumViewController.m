@@ -157,13 +157,9 @@
 
 - (void)refreshDisplay
 {
-#define REFRESH_DELAY 0.3
-   if ([self refreshDisplayTimer]) {
-      [[self refreshDisplayTimer] setFireDate:[NSDate dateWithTimeIntervalSinceNow:REFRESH_DELAY]];
-   } else {
-      NSTimer *newTimer = [NSTimer scheduledTimerWithTimeInterval:REFRESH_DELAY target:self selector:@selector(doRefreshDisplay) userInfo:nil repeats:NO];
-      [self setRefreshDisplayTimer:newTimer];
-   }
+#define REFRESH_DELAY 0.75
+   [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(doRefreshDisplay) object:nil];
+   [self performSelector:@selector(doRefreshDisplay) withObject:nil afterDelay:REFRESH_DELAY];
 }
 
 - (void)setPhotoAlbum:(PhotoAlbum *)photoAlbum
