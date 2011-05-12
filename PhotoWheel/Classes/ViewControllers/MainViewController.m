@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, retain) NSMutableArray *photoAlbumNubs;
 @property (nonatomic, retain) PhotoAlbumViewController *photoAlbumViewController;
+@property (nonatomic, assign) UIDeviceOrientation currentOrientation;
 - (void)layoutForLandscape;
 - (void)layoutForPortrait;
 @end
@@ -35,6 +36,7 @@
 @synthesize photoAlbumNubs = photoAlbumNubs_;
 @synthesize photoAlbumViewController = photoAlbumViewController_;
 @synthesize photoAlbumViewPlaceholder = photoAlbumViewPlaceholder_;
+@synthesize currentOrientation = currentOrientation_;
 
 - (void)dealloc
 {
@@ -77,10 +79,21 @@
    [newController release];
    
    [self layoutForPortrait];
+   [self setCurrentOrientation:UIDeviceOrientationPortrait];
+   
+   // Unfortunately this controlled cannot rely on autoresizing views
+   // because we provide a different look in landscape compared to
+   // portrait. Therefore, the controller must listen for changing in
+   // the device orientation and adjust the layout as needed.
+	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)viewDidUnload
 {
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+   [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+   
    [self setInfoButton:nil];
    [self setAddPhotoAlbumButton:nil];
    [self setBackgroundImageView:nil];
@@ -95,6 +108,19 @@
 - (void)viewWillAppear:(BOOL)animated
 {
    [[[self navigationController] navigationBar] setHidden:YES];
+   
+   if (UIInterfaceOrientationIsLandscape([self currentOrientation])) {
+      [self layoutForLandscape];
+   } else {
+      [self layoutForPortrait];
+   }
+   
+}
+
+- (void)orientationChanged:(NSNotification *)notification
+{
+   UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+   [self setCurrentOrientation:orientation];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
@@ -104,14 +130,12 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-   // Forward the message to the photo album view controller.
-   [[self photoAlbumViewController] willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
-   
    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
       [self layoutForLandscape];
    } else {
       [self layoutForPortrait];
    }
+   [self setCurrentOrientation:toInterfaceOrientation];
 }
 
 #define WHEELVIEW_INSET 50
@@ -133,6 +157,8 @@
    CGRect frame = [[self infoButton] frame];
    frame.origin = CGPointMake(981, 712);
    [[self infoButton] setFrame:frame];
+   
+   [[self photoAlbumViewController] layoutForLandscape];
 }
 
 - (void)layoutForPortrait
@@ -153,6 +179,8 @@
    CGRect frame = [[self infoButton] frame];
    frame.origin = CGPointMake(723, 960);
    [[self infoButton] setFrame:frame];
+   
+   [[self photoAlbumViewController] layoutForPortrait];
 }
 
 #pragma mark - Actions

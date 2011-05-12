@@ -38,4 +38,7 @@
 - (void)addFromLibrary;
 - (void)addFromFlickr;
 
+- (void)layoutForLandscape;
+- (void)layoutForPortrait;
+
 @end

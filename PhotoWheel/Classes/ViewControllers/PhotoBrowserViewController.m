@@ -80,13 +80,6 @@
 
    [self addButtonsToNavigationBar];
    [self initPhotoViewCache];
-
-   [self setScrollViewContentSize];
-   [self setCurrentIndex:[self startAtIndex]];
-   [self scrollToIndex:[self startAtIndex]];
-   
-   [self setTitleWithCurrentPhotoIndex];
-   [self startChromeDisplayTimer];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -95,6 +88,13 @@
    [navBar setBarStyle:UIBarStyleBlack];
    [navBar setTranslucent:YES];
    [[[self navigationController] navigationBar] setHidden:NO];
+   
+   [self setScrollViewContentSize];
+   [self setCurrentIndex:[self startAtIndex]];
+   [self scrollToIndex:[self startAtIndex]];
+   
+   [self setTitleWithCurrentPhotoIndex];
+   [self startChromeDisplayTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

@@ -93,20 +93,6 @@
    [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-   return YES;
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-      [self layoutForLandscape];
-   } else {
-      [self layoutForPortrait];
-   }
-}
-
 - (void)layoutForLandscape
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
@@ -323,7 +309,8 @@
       [newController setDataSource:self];
       [newController setStartAtIndex:index];
       CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
-      [navController pushViewController:newController explodeFromPoint:point];
+      [navController pushViewController:newController animated:YES];
+//      [navController pushViewController:newController explodeFromPoint:point];
       [newController release];
    } else {
       [self addPhotoAtIndex:index];
