@@ -30,6 +30,7 @@ typedef enum  {
 - (id)initWithStyle:(WheelStyle)style;
 - (WheelViewNub *)dequeueReusableNub;
 - (void)reloadData;
+- (void)selectNubAtIndex:(NSInteger)index;
 
 @end
 

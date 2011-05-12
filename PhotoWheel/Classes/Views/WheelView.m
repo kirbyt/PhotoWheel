@@ -272,42 +272,18 @@
    return -[self topAtDegrees] + 180.0;
 }
 
+- (void)selectNubAtIndex:(NSInteger)index
+{
+   NSInteger numberOfNubs = [[self dataSource] wheelViewNumberOfNubs:self];
+   if (index >+ numberOfNubs) return;
 
-//- (void)reloadNubs
-//{
-//   NSManagedObjectContext *context = [[self photoWheel] managedObjectContext];
-//   
-//   for (NSInteger index=0; index < [[self nubControllers] count]; index++) {
-//      PhotoNubViewController *nubController = [[self nubControllers] objectAtIndex:index];
-//      
-//      NSPredicate *predicate = [NSPredicate predicateWithFormat:@"sortOrder == %i", index];
-//      NSSet *nubSet = [[[self photoWheel] nubs] filteredSetUsingPredicate:predicate];
-//      if (nubSet && [nubSet count] > 0) {
-//         [nubController setNub:[nubSet anyObject]];
-//      } else {
-//         // Insert a new nub.
-//         Photo *newNub = [Photo insertNewInManagedObjectContext:context];
-//         [newNub setSortOrder:[NSNumber numberWithInt:index]];
-//         [newNub setPhotoWheel:[self photoWheel]];
-//         
-//         // Save the context.
-//         NSError *error = nil;
-//         if (![context save:&error])
-//         {
-//            /*
-//             Replace this implementation with code to handle the error appropriately.
-//             
-//             abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-//             */
-//            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-//            abort();
-//         }
-//         
-//         [nubController setNub:newNub];
-//      }
-//   }
-//}
-
+   NSInteger direction = (index - [self selectedIndex]) < 0 ? -1:1;
+   NSInteger rotateBy = 1 * direction;
+   while ([self selectedIndex] != index) {
+      [self setCurrentAngle:[self currentAngle] + rotateBy];
+      [self setAngle:[self currentAngle]];
+   }
+}
 
 #pragma mark - Touch Event Handlers
 

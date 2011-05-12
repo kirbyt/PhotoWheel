@@ -190,20 +190,8 @@
    NSFetchedResultsController *fetchedRequestController = [self fetchedResultsController];
    NSManagedObjectContext *context = [fetchedRequestController managedObjectContext];
 
-   [PhotoAlbum insertNewInManagedObjectContext:context];
-   
-   // Save the context.
-   NSError *error = nil;
-   if (![context save:&error])
-   {
-      /*
-       Replace this implementation with code to handle the error appropriately.
-       
-       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-       */
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-      abort();
-   }
+   PhotoAlbum *newPhotoAlbum = [PhotoAlbum insertNewInManagedObjectContext:context];
+   [newPhotoAlbum kt_save];
 }
 
 - (BOOL)deletePhotoAlbum:(PhotoAlbum *)photoAlbum
@@ -322,9 +310,19 @@
    return fetchedResultsController_;
 }
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
    [[self photoWheelView] reloadData];
+   if (type == NSFetchedResultsChangeInsert) {
+      [[self photoWheelView] selectNubAtIndex:[newIndexPath row]];
+   } else if (type == NSFetchedResultsChangeDelete) {
+      [[self photoWheelView] selectNubAtIndex:[indexPath row] - 1];
+   }
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+//   [[self photoWheelView] reloadData];
 }
 
 @end
