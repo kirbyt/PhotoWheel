@@ -72,6 +72,8 @@
 
 - (void)saveImage:(UIImage *)image
 {
+   [self saveAsSmallImage:image];
+   [self saveAsThumbnailImage:image];
    [self performSelectorInBackground:@selector(threaded_saveImage:) withObject:image];
 }
 
