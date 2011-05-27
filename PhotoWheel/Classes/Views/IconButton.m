@@ -8,7 +8,7 @@
 
 #import "IconButton.h"
 
-#define VIEW_WIDTH 75
+#define VIEW_WIDTH 85
 #define VIEW_HEIGHT 75
 
 @interface IconButton ()

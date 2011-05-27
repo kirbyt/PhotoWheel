@@ -62,6 +62,7 @@
 		689B7A131369C4D500E8163A /* PhotoAlbumNub.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689B7A121369C4D500E8163A /* PhotoAlbumNub.xib */; };
 		68CF4160138FCC9000E2A576 /* stack-viewer-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CF415F138FCC9000E2A576 /* stack-viewer-shadow.png */; };
 		68CF4164138FD64C00E2A576 /* IconMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF4163138FD64C00E2A576 /* IconMenuView.m */; };
+		68CF4167138FDEE700E2A576 /* PhotoAlbumMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF4166138FDEE600E2A576 /* PhotoAlbumMenuViewController.m */; };
 		68D599AA137626DA007F08E1 /* stack-viewer-bg-landscape-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D599A7137626DA007F08E1 /* stack-viewer-bg-landscape-left.png */; };
 		68D599AB137626DA007F08E1 /* stack-viewer-bg-landscape-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D599A8137626DA007F08E1 /* stack-viewer-bg-landscape-right.png */; };
 		68D599AC137626DA007F08E1 /* stack-viewer-bg-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D599A9137626DA007F08E1 /* stack-viewer-bg-portrait.png */; };
@@ -170,6 +171,8 @@
 		68CF415F138FCC9000E2A576 /* stack-viewer-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-shadow.png"; sourceTree = "<group>"; };
 		68CF4162138FD64C00E2A576 /* IconMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconMenuView.h; sourceTree = "<group>"; };
 		68CF4163138FD64C00E2A576 /* IconMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconMenuView.m; sourceTree = "<group>"; };
+		68CF4165138FDEE600E2A576 /* PhotoAlbumMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumMenuViewController.h; sourceTree = "<group>"; };
+		68CF4166138FDEE600E2A576 /* PhotoAlbumMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumMenuViewController.m; sourceTree = "<group>"; };
 		68D599A7137626DA007F08E1 /* stack-viewer-bg-landscape-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-landscape-left.png"; sourceTree = "<group>"; };
 		68D599A8137626DA007F08E1 /* stack-viewer-bg-landscape-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-landscape-right.png"; sourceTree = "<group>"; };
 		68D599A9137626DA007F08E1 /* stack-viewer-bg-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-portrait.png"; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 				683F27451371A07700006122 /* AboutViewController.m */,
 				683F27471371A67300006122 /* PhotoAlbumViewController.h */,
 				683F27481371A67300006122 /* PhotoAlbumViewController.m */,
+				68CF4165138FDEE600E2A576 /* PhotoAlbumMenuViewController.h */,
+				68CF4166138FDEE600E2A576 /* PhotoAlbumMenuViewController.m */,
 				687335CF13743030008FD623 /* AddPhotoViewController.h */,
 				687335D013743032008FD623 /* AddPhotoViewController.m */,
 				687335D413746D5B008FD623 /* SlideshowSettingsViewController.h */,
@@ -578,6 +583,7 @@
 				68E2106613777DB70084760C /* CustomNavigationController.m in Sources */,
 				68DDEBB5137976D100B6297E /* PhotoView.m in Sources */,
 				68CF4164138FD64C00E2A576 /* IconMenuView.m in Sources */,
+				68CF4167138FDEE700E2A576 /* PhotoAlbumMenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

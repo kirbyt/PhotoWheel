@@ -16,6 +16,7 @@
 #import "UINavigationController+KTTransitions.h"
 #import "CustomNavigationController.h"
 #import "PhotoBrowserViewController.h"
+#import "PhotoAlbumMenuViewController.h"
 
 #define BUTTON_CANCEL 0
 #define BUTTON_REMOVE_PHOTO_ALBUM 1
@@ -37,10 +38,7 @@
 @implementation PhotoAlbumViewController
 
 @synthesize backgroundImageView = backgroundImageView_;
-@synthesize emailButton = emailButton_;
-@synthesize slideshowButton = slideshowButton_;
-@synthesize printButton = printButton_;
-@synthesize removeAlbumButton = removeAlbumButton_;
+@synthesize topShadowImageView = topShadowImageView_;
 @synthesize toolbar = toolbar_;
 @synthesize titleTextField = titleTextField_;
 @synthesize addPhotoButton = addPhotoButton_;
@@ -49,22 +47,17 @@
 @synthesize gridView = gridView_;
 @synthesize fetchedResultsController = fetchedResultsController_;
 @synthesize popoverController = popoverController_;
-@synthesize toolbarView = toolbarView_;
 
 - (void)dealloc
 {
-   [toolbarView_ release], toolbarView_ = nil;
    [backgroundImageView_ release], backgroundImageView_ = nil;
+   [topShadowImageView_ release], topShadowImageView_ = nil;
    [popoverController_ release], popoverController_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [gridView_ release], gridView_ = nil;
    [toolbar_ release], toolbar_ = nil;
    [titleTextField_ release], titleTextField_ = nil;
    [addPhotoButton_ release], addPhotoButton_ = nil;
-   [emailButton_ release], emailButton_ = nil;
-   [slideshowButton_ release], slideshowButton_ = nil;
-   [printButton_ release], printButton_ = nil;
-   [removeAlbumButton_ release], removeAlbumButton_ = nil;
    [photoAlbum_ release], photoAlbum_ = nil;
    
    [super dealloc];
@@ -76,21 +69,17 @@
    
    [[self gridView] setAlwaysBounceVertical:YES];
    // Hide the toolbar until we have a photo album.
-   [[self toolbarView] setAlpha:0.0];
+   [[self toolbar] setAlpha:0.0];
 }
 
 - (void)viewDidUnload
 {
-   [self setToolbarView:nil];
    [self setBackgroundImageView:nil];
+   [self setTopShadowImageView:nil];
    [self setGridView:nil];
    [self setToolbar:nil];
    [self setTitleTextField:nil];
    [self setAddPhotoButton:nil];
-   [self setEmailButton:nil];
-   [self setSlideshowButton:nil];
-   [self setPrintButton:nil];
-   [self setRemoveAlbumButton:nil];
 
    [super viewDidUnload];
 }
@@ -110,33 +99,14 @@
    
    frame = CGRectMake(20, 14, commonWidth, 40);
    [[self toolbar] setFrame:frame];
-   
-   frame = [[self toolbarView] frame];
-   frame.origin.y = 569;
-   frame.size.width = commonWidth;
-   [[self toolbarView] setFrame:frame];
 }
 
 - (void)layoutForPortrait
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
-
-   CGRect frame;
-   CGFloat commonWidth = 676;
-
-   [[self gridView] setFrame:CGRectMake(20, 65, commonWidth, 451)];
-   
-//   frame = [[self titleTextField] frame];
-//   frame = CGRectMake(20, frame.origin.y, commonWidth, frame.size.height);
-//   [[self titleTextField] setFrame:frame];
-
-   frame = CGRectMake(20, 14, commonWidth, 40);
-   [[self toolbar] setFrame:frame];
-
-   frame = [[self toolbarView] frame];
-   frame.origin.y = 535;
-   frame.size.width = commonWidth;
-   [[self toolbarView] setFrame:frame];
+   [[self gridView] setFrame:CGRectMake(20, 65, 676, 583)];
+   [[self toolbar] setFrame:CGRectMake(20, 14, 676, 40)];
+   [[self topShadowImageView] setFrame:CGRectMake(9, 65, 698, 8)];
 }
 
 - (void)doRefreshDisplay
@@ -148,7 +118,7 @@
       [[self titleTextField] setText:[[self photoAlbum] name]];
       [self setFetchedResultsController:nil];
       if (hideToolbar) {
-         [[self toolbarView] setAlpha:0.0];
+         [[self toolbar] setAlpha:0.0];
       }
    };
    
@@ -157,7 +127,7 @@
       void (^animations)(void) = ^ {
          [[self gridView] setAlpha:1.0];
          if (!hideToolbar) {
-            [[self toolbarView] setAlpha:1.0];
+            [[self toolbar] setAlpha:1.0];
          }
       };
       [UIView animateWithDuration:0.25 animations:animations];
@@ -186,6 +156,91 @@
 
 #pragma mark - Actions
 
+- (IBAction)showActionMenu:(id)sender
+{
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+      
+   } else {
+      PhotoAlbumMenuViewController *newController = [[PhotoAlbumMenuViewController alloc] init];
+      [newController setPhotoAlbumViewController:self];
+      UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:newController];
+      [newPopover setDelegate:self];
+      [self setPopoverController:newPopover];
+      
+      [newPopover release];
+      [newController release];
+      
+      [[self popoverController] presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   }
+}
+
+- (IBAction)addPhoto:(id)sender
+{
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+      
+   } else {
+      AddPhotoViewController *addPhotoViewController = [[AddPhotoViewController alloc] init];
+      [addPhotoViewController setPhotoAlbumViewController:self];
+      UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:addPhotoViewController];
+      [newPopover setDelegate:self];
+      [self setPopoverController:newPopover];
+      
+      [newPopover release];
+      [addPhotoViewController release];
+      
+      [[self popoverController] presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   }
+}
+
+- (void)addFromCamera:(id)sender
+{
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
+   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] init];
+   [newImagePicker setDelegate:self];
+   // Note the following line of code will fail in the simulator 
+   // because the simulator does not have a camera.
+   [newImagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+   
+   // We present from the main view controller because we want to 
+   // use the full screen.
+   [[self mainViewController] presentModalViewController:newImagePicker animated:YES];
+   
+   [newImagePicker release];
+}
+
+- (void)addFromLibrary:(id)sender
+{
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
+   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] init];
+   [newImagePicker setDelegate:self];
+   [newImagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+   
+   UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:newImagePicker];
+   [self setPopoverController:newPopover];
+   
+   [newPopover release];
+   [newImagePicker release];
+   
+   [[self popoverController] presentPopoverFromBarButtonItem:[self addPhotoButton] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)addFromFlickr:(id)sender
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 - (void)deletePhotoAlbum
 {
    NSManagedObjectContext *context = [[self photoAlbum] managedObjectContext];
@@ -205,7 +260,7 @@
    }
 }
 
-- (IBAction)removePhotoAlbum:(id)sender
+- (void)removePhotoAlbum:(id)sender
 {
    NSString *message;
    if ([[self photoAlbum] name]) {
@@ -217,7 +272,7 @@
    [alertView show];
 }
 
-- (IBAction)printPhotoAlbum:(id)sender
+- (void)printPhotoAlbum:(id)sender
 {
    if ([self numberOfObjects] == 0) return;  // Nothing to print.
    
@@ -245,7 +300,7 @@
    [controller setPrintingItems:imageURLs];
    
    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      [controller presentFromRect:[sender frame] inView:[self toolbarView] animated:YES completionHandler:completionHandler];
+      [controller presentFromRect:[sender frame] inView:sender animated:YES completionHandler:completionHandler];
    } else {
       [controller presentAnimated:YES completionHandler:completionHandler];  // iPhone
    }
@@ -253,13 +308,13 @@
    [imageURLs release];
 }
 
-- (IBAction)emailPhotoAlbum:(id)sender
+- (void)emailPhotoAlbum:(id)sender
 {
    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send Photos", @"Send Photo Album", nil];
-   [actionSheet showFromRect:[sender frame] inView:[self toolbarView] animated:YES];
+   [actionSheet showFromRect:[sender frame] inView:sender animated:YES];
 }
 
-- (IBAction)slideshow:(id)sender
+- (void)slideshow:(id)sender
 {
    SlideshowSettingsViewController *newController = [[SlideshowSettingsViewController alloc] init];
    UINavigationController *newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
@@ -270,7 +325,7 @@
    [newNavController release];
    [newController release];
    
-   [[self popoverController] presentPopoverFromRect:[sender frame] inView:[self toolbarView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   [[self popoverController] presentPopoverFromRect:[sender frame] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 #pragma mark - UIAlertViewDelegate Methods
@@ -445,25 +500,6 @@
 
 #pragma mark - Photo Management
 
-- (IBAction)addPhoto:(id)sender
-{
-   if ([self popoverController]) {
-      [[self popoverController] dismissPopoverAnimated:YES];
-      [self setPopoverController:nil];
-      
-   } else {
-      AddPhotoViewController *addPhotoViewController = [[AddPhotoViewController alloc] init];
-      [addPhotoViewController setPhotoAlbumViewController:self];
-      UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:addPhotoViewController];
-      [newPopover setDelegate:self];
-      [self setPopoverController:newPopover];
-      
-      [newPopover release];
-      [addPhotoViewController release];
-      
-      [[self popoverController] presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-   }
-}
 
 - (void)addPhotoAtIndex:(NSInteger)index
 {
@@ -477,51 +513,6 @@
    
    GridViewCell *cell = [[self gridView] cellAtIndex:index];
    [[self popoverController] presentPopoverFromRect:[cell frame] inView:[self gridView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
-- (void)addFromCamera:(id)sender
-{
-   if ([self popoverController]) {
-      [[self popoverController] dismissPopoverAnimated:YES];
-      [self setPopoverController:nil];
-   }
-
-   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] init];
-   [newImagePicker setDelegate:self];
-   // Note the following line of code will fail in the simulator 
-   // because the simulator does not have a camera.
-   [newImagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-   
-   // We present from the main view controller because we want to 
-   // use the full screen.
-   [[self mainViewController] presentModalViewController:newImagePicker animated:YES];
-   
-   [newImagePicker release];
-}
-
-- (void)addFromLibrary:(id)sender
-{
-   if ([self popoverController]) {
-      [[self popoverController] dismissPopoverAnimated:YES];
-      [self setPopoverController:nil];
-   }
-   
-   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] init];
-   [newImagePicker setDelegate:self];
-   [newImagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-   
-   UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:newImagePicker];
-   [self setPopoverController:newPopover];
-   
-   [newPopover release];
-   [newImagePicker release];
-
-   [[self popoverController] presentPopoverFromBarButtonItem:[self addPhotoButton] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-}
-
-- (void)addFromFlickr:(id)sender
-{
-   NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 #pragma mark - UIPopoverControllerDelegate Methods

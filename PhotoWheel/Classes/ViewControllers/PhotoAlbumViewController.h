@@ -18,23 +18,15 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIImageView *backgroundImageView;
-@property (nonatomic, retain) IBOutlet UIButton *emailButton;
-@property (nonatomic, retain) IBOutlet UIButton *slideshowButton;
-@property (nonatomic, retain) IBOutlet UIButton *printButton;
-@property (nonatomic, retain) IBOutlet UIButton *removeAlbumButton;
+@property (nonatomic, retain) IBOutlet UIImageView *topShadowImageView;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UITextField *titleTextField;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *addPhotoButton;
-@property (nonatomic, retain) IBOutlet UIView *toolbarView;
 @property (nonatomic, retain) IBOutlet GridView *gridView;
 @property (nonatomic, retain) PhotoAlbum *photoAlbum;
 @property (nonatomic, assign) MainViewController *mainViewController;
 
-- (IBAction)removePhotoAlbum:(id)sender;
-- (IBAction)printPhotoAlbum:(id)sender;
-- (IBAction)emailPhotoAlbum:(id)sender;
-- (IBAction)slideshow:(id)sender;
-
+- (IBAction)showActionMenu:(id)sender;
 - (IBAction)addPhoto:(id)sender;
 
 - (void)layoutForLandscape;
