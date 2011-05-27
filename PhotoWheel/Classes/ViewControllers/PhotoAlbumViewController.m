@@ -403,18 +403,9 @@
 
 #pragma mark - GridViewDataSource Methods
 
-- (NSInteger)gridViewCellsPerRow:(GridView *)gridView
-{
-   return 4;
-}
-
 - (NSInteger)gridViewNumberOfCells:(GridView *)gridView
 {
-   NSInteger count = 0;
-   // Set the count only when we have a photo album.
-   if ([self photoAlbum]) {
-      count = [self numberOfObjects] + 1;   // Add 1 for the "add cell"
-   }
+   NSInteger count = [self numberOfObjects];
    return count;
 }
 
@@ -425,12 +416,8 @@
       cell = [ImageGridViewCell imageGridViewCell];
    }
    
-   if (index < [self numberOfObjects]) {
-      Photo *photo = [self objectAtIndex:index];
-      [cell setImage:[photo smallImage] withShadow:YES];
-   } else {
-      [cell setImage:[UIImage imageNamed:@"photo-add.png"] withShadow:NO];
-   }
+   Photo *photo = [self objectAtIndex:index];
+   [cell setImage:[photo smallImage] withShadow:YES];
    
    return cell;
 }
@@ -442,22 +429,18 @@
 
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
 {
-   if (index < [self numberOfObjects]) {
-      GridViewCell *cell = [gridView cellAtIndex:index];
-      CGRect cellFrame = [cell frame];
-      CGPoint point = CGPointMake(CGRectGetMidX(cellFrame), CGRectGetMidY(cellFrame));
-      point = [gridView convertPoint:point toView:[[self view] superview]];
-      NSLog(@"frame: %@", NSStringFromCGRect(cellFrame));
-      
-      PhotoBrowserViewController *newController = [[PhotoBrowserViewController alloc] init];
-      [newController setFetchedResultsController:[self fetchedResultsController]];
-      [newController setStartAtIndex:index];
-      CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
-      [navController pushViewController:newController explodeFromPoint:point];
-      [newController release];
-   } else {
-      [self addPhotoAtIndex:index];
-   }
+   GridViewCell *cell = [gridView cellAtIndex:index];
+   CGRect cellFrame = [cell frame];
+   CGPoint point = CGPointMake(CGRectGetMidX(cellFrame), CGRectGetMidY(cellFrame));
+   point = [gridView convertPoint:point toView:[[self view] superview]];
+   NSLog(@"frame: %@", NSStringFromCGRect(cellFrame));
+   
+   PhotoBrowserViewController *newController = [[PhotoBrowserViewController alloc] init];
+   [newController setFetchedResultsController:[self fetchedResultsController]];
+   [newController setStartAtIndex:index];
+   CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
+   [navController pushViewController:newController explodeFromPoint:point];
+   [newController release];
 }
 
 #pragma mark - NSFetchedResultsController Helper Methods
