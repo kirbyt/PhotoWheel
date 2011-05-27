@@ -442,6 +442,26 @@
 
 #pragma mark - Photo Management
 
+- (IBAction)addPhoto:(id)sender
+{
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+      
+   } else {
+      AddPhotoViewController *addPhotoViewController = [[AddPhotoViewController alloc] init];
+      [addPhotoViewController setPhotoAlbumViewController:self];
+      UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:addPhotoViewController];
+      [newPopover setDelegate:self];
+      [self setPopoverController:newPopover];
+      
+      [newPopover release];
+      [addPhotoViewController release];
+      
+      [[self popoverController] presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   }
+}
+
 - (void)addPhotoAtIndex:(NSInteger)index
 {
    AddPhotoViewController *addPhotoViewController = [[AddPhotoViewController alloc] init];

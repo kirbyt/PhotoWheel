@@ -34,6 +34,7 @@
 - (IBAction)emailPhotoAlbum:(id)sender;
 - (IBAction)slideshow:(id)sender;
 
+- (IBAction)addPhoto:(id)sender;
 - (void)addFromCamera;
 - (void)addFromLibrary;
 - (void)addFromFlickr;
