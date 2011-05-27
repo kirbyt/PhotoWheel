@@ -28,7 +28,12 @@
 {
    [super viewDidLoad];
 
-   CGSize size = CGSizeMake(320, 100);
+   CGSize size;
+   if ([UIDevice kt_hasCamera]) {
+      size = CGSizeMake(320, 100);
+   } else {
+      size = CGSizeMake(220, 100);
+   }
    [[self view] setFrame:CGRectMake(0, 0, size.width, size.height)];
    [self setContentSizeForViewInPopover:size];
    [[self view] setBackgroundColor:[UIColor whiteColor]];
