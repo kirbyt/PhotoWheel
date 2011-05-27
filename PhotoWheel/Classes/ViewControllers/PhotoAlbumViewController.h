@@ -24,6 +24,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *removeAlbumButton;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UITextField *titleTextField;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *addPhotoButton;
 @property (nonatomic, retain) IBOutlet UIView *toolbarView;
 @property (nonatomic, retain) IBOutlet GridView *gridView;
 @property (nonatomic, retain) PhotoAlbum *photoAlbum;
@@ -35,9 +36,6 @@
 - (IBAction)slideshow:(id)sender;
 
 - (IBAction)addPhoto:(id)sender;
-- (void)addFromCamera;
-- (void)addFromLibrary;
-- (void)addFromFlickr;
 
 - (void)layoutForLandscape;
 - (void)layoutForPortrait;

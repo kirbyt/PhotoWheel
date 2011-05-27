@@ -74,7 +74,7 @@
 						</object>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
-					<object class="IBUIImageView" id="134164632">
+					<object class="IBUIImageView" id="362754990">
 						<reference key="NSNextResponder" ref="551281968"/>
 						<int key="NSvFlags">298</int>
 						<string key="NSFrame">{{9, 65}, {698, 8}}</string>
@@ -299,13 +299,13 @@
 						<int key="NSvFlags">266</int>
 						<object class="NSMutableArray" key="NSSubviews">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUITextField" id="557163095">
+							<object class="IBUITextField" id="148521512">
 								<reference key="NSNextResponder" ref="791370290"/>
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{141, 7}, {404, 31}}</string>
 								<reference key="NSSuperview" ref="791370290"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="134164632"/>
+								<reference key="NSNextKeyView" ref="362754990"/>
 								<reference key="IBUIBackgroundColor" ref="898958967"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -329,7 +329,7 @@
 						<string key="NSFrame">{{20, 14}, {676, 44}}</string>
 						<reference key="NSSuperview" ref="551281968"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="557163095"/>
+						<reference key="NSNextKeyView" ref="148521512"/>
 						<reference key="IBUIBackgroundColor" ref="898958967"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
@@ -337,24 +337,24 @@
 						<int key="IBUIBarStyle">1</int>
 						<object class="NSMutableArray" key="IBUIItems">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBUIBarButtonItem" id="330119178">
+							<object class="IBUIBarButtonItem" id="329615257">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIStyle">1</int>
 								<reference key="IBUIToolbar" ref="791370290"/>
 								<int key="IBUISystemItemIdentifier">9</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="662917096">
+							<object class="IBUIBarButtonItem" id="781071008">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="791370290"/>
 								<int key="IBUISystemItemIdentifier">5</int>
 							</object>
-							<object class="IBUIBarButtonItem" id="750607432">
+							<object class="IBUIBarButtonItem" id="692204139">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIStyle">1</int>
-								<reference key="IBUICustomView" ref="557163095"/>
+								<reference key="IBUICustomView" ref="148521512"/>
 								<reference key="IBUIToolbar" ref="791370290"/>
 							</object>
-							<object class="IBUIBarButtonItem" id="88654390">
+							<object class="IBUIBarButtonItem" id="688130472">
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<reference key="IBUIToolbar" ref="791370290"/>
 								<int key="IBUISystemItemIdentifier">5</int>
@@ -491,7 +491,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">titleTextField</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="557163095"/>
+						<reference key="destination" ref="148521512"/>
 					</object>
 					<int key="connectionID">56</int>
 				</object>
@@ -510,6 +510,14 @@
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">61</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">addPhotoButton</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="419457819"/>
+					</object>
+					<int key="connectionID">63</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -541,7 +549,7 @@
 							<reference ref="1025109185"/>
 							<reference ref="275188246"/>
 							<reference ref="791370290"/>
-							<reference ref="134164632"/>
+							<reference ref="362754990"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -619,11 +627,11 @@
 						<reference key="object" ref="791370290"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="750607432"/>
+							<reference ref="692204139"/>
 							<reference ref="419457819"/>
-							<reference ref="330119178"/>
-							<reference ref="88654390"/>
-							<reference ref="662917096"/>
+							<reference ref="329615257"/>
+							<reference ref="688130472"/>
+							<reference ref="781071008"/>
 						</object>
 						<reference key="parent" ref="551281968"/>
 					</object>
@@ -634,36 +642,36 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">55</int>
-						<reference key="object" ref="750607432"/>
+						<reference key="object" ref="692204139"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="557163095"/>
+							<reference ref="148521512"/>
 						</object>
 						<reference key="parent" ref="791370290"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">54</int>
-						<reference key="object" ref="557163095"/>
-						<reference key="parent" ref="750607432"/>
+						<reference key="object" ref="148521512"/>
+						<reference key="parent" ref="692204139"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">57</int>
-						<reference key="object" ref="330119178"/>
+						<reference key="object" ref="329615257"/>
 						<reference key="parent" ref="791370290"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">58</int>
-						<reference key="object" ref="88654390"/>
+						<reference key="object" ref="688130472"/>
 						<reference key="parent" ref="791370290"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">59</int>
-						<reference key="object" ref="662917096"/>
+						<reference key="object" ref="781071008"/>
 						<reference key="parent" ref="791370290"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">62</int>
-						<reference key="object" ref="134164632"/>
+						<reference key="object" ref="362754990"/>
 						<reference key="parent" ref="551281968"/>
 					</object>
 				</object>
@@ -733,7 +741,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">62</int>
+			<int key="maxID">63</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -825,6 +833,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addPhotoButton</string>
 							<string>backgroundImageView</string>
 							<string>emailButton</string>
 							<string>gridView</string>
@@ -837,6 +846,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>UIBarButtonItem</string>
 							<string>UIImageView</string>
 							<string>UIButton</string>
 							<string>GridView</string>
@@ -852,6 +862,7 @@
 						<bool key="EncodedWithXMLCoder">YES</bool>
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>addPhotoButton</string>
 							<string>backgroundImageView</string>
 							<string>emailButton</string>
 							<string>gridView</string>
@@ -864,6 +875,10 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<object class="IBToOneOutletInfo">
+								<string key="name">addPhotoButton</string>
+								<string key="candidateClassName">UIBarButtonItem</string>
+							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">backgroundImageView</string>
 								<string key="candidateClassName">UIImageView</string>

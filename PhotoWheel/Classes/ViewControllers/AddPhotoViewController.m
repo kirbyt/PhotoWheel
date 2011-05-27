@@ -13,20 +13,9 @@
 #import "UIDevice+KTDeviceExtensions.h"
 
 
-@interface AddPhotoViewController ()
-- (void)addFromCamera:(id)sender;
-- (void)addFromLibrary:(id)sender;
-- (void)addFromFlickr:(id)sender;
-@end
-
 @implementation AddPhotoViewController
 
 @synthesize photoAlbumViewController = photoAlbumViewController_;
-
-- (void)dealloc
-{
-   [super dealloc];
-}
 
 - (void)loadView
 {
@@ -48,37 +37,21 @@
    
    if ([UIDevice kt_hasCamera]) {
       IconButton *cameraButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-camera.png"] title:@"Camera"];
-      [cameraButton addTarget:self action:@selector(addFromCamera:) forControlEvents:UIControlEventTouchUpInside];
+      [cameraButton addTarget:[self photoAlbumViewController] action:@selector(addFromCamera:) forControlEvents:UIControlEventTouchUpInside];
       [buttons addObject:cameraButton];
    }
    
    IconButton *libraryButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-library.png"] title:@"Library"];
-   [libraryButton addTarget:self action:@selector(addFromLibrary:) forControlEvents:UIControlEventTouchUpInside];
+   [libraryButton addTarget:[self photoAlbumViewController] action:@selector(addFromLibrary:) forControlEvents:UIControlEventTouchUpInside];
    [buttons addObject:libraryButton];
    
    IconButton *flickrButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-flickr.png"] title:@"Flickr"];
-   [flickrButton addTarget:self action:@selector(addFromFlickr:) forControlEvents:UIControlEventTouchUpInside];
+   [flickrButton addTarget:[self photoAlbumViewController] action:@selector(addFromFlickr:) forControlEvents:UIControlEventTouchUpInside];
    [buttons addObject:flickrButton];
    
    [(IconMenuView *)[self view] setButtons:buttons];
    [buttons release];
 }
 
-#pragma mark - Actions
-
-- (IBAction)addFromCamera:(id)sender
-{
-   [[self photoAlbumViewController] addFromCamera];
-}
-
-- (IBAction)addFromLibrary:(id)sender
-{
-   [[self photoAlbumViewController] addFromLibrary];
-}
-
-- (IBAction)addFromFlickr:(id)sender
-{
-   [[self photoAlbumViewController] addFromFlickr];
-}
 
 @end

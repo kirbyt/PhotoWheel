@@ -43,6 +43,7 @@
 @synthesize removeAlbumButton = removeAlbumButton_;
 @synthesize toolbar = toolbar_;
 @synthesize titleTextField = titleTextField_;
+@synthesize addPhotoButton = addPhotoButton_;
 @synthesize photoAlbum = photoAlbum_;
 @synthesize mainViewController = mainViewController_;
 @synthesize gridView = gridView_;
@@ -59,6 +60,7 @@
    [gridView_ release], gridView_ = nil;
    [toolbar_ release], toolbar_ = nil;
    [titleTextField_ release], titleTextField_ = nil;
+   [addPhotoButton_ release], addPhotoButton_ = nil;
    [emailButton_ release], emailButton_ = nil;
    [slideshowButton_ release], slideshowButton_ = nil;
    [printButton_ release], printButton_ = nil;
@@ -84,6 +86,7 @@
    [self setGridView:nil];
    [self setToolbar:nil];
    [self setTitleTextField:nil];
+   [self setAddPhotoButton:nil];
    [self setEmailButton:nil];
    [self setSlideshowButton:nil];
    [self setPrintButton:nil];
@@ -476,7 +479,7 @@
    [[self popoverController] presentPopoverFromRect:[cell frame] inView:[self gridView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
-- (void)addFromCamera
+- (void)addFromCamera:(id)sender
 {
    if ([self popoverController]) {
       [[self popoverController] dismissPopoverAnimated:YES];
@@ -496,7 +499,7 @@
    [newImagePicker release];
 }
 
-- (void)addFromLibrary
+- (void)addFromLibrary:(id)sender
 {
    if ([self popoverController]) {
       [[self popoverController] dismissPopoverAnimated:YES];
@@ -512,13 +515,11 @@
    
    [newPopover release];
    [newImagePicker release];
-   
-   NSInteger selectedIndex = [[self gridView] indexForSelectedCell];
-   GridViewCell *cell = [[self gridView] cellAtIndex:selectedIndex];
-   [[self popoverController] presentPopoverFromRect:[cell frame] inView:[self gridView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+
+   [[self popoverController] presentPopoverFromBarButtonItem:[self addPhotoButton] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
-- (void)addFromFlickr
+- (void)addFromFlickr:(id)sender
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
