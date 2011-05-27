@@ -17,6 +17,7 @@
 #import "CustomNavigationController.h"
 #import "PhotoBrowserViewController.h"
 #import "PhotoAlbumMenuViewController.h"
+#import "PhotoAlbumEmailViewController.h"
 
 #define BUTTON_CANCEL 0
 #define BUTTON_REMOVE_PHOTO_ALBUM 1
@@ -329,8 +330,14 @@
 
 - (void)emailPhotoAlbum:(id)sender
 {
-   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Send Photos", @"Send Photo Album", nil];
-   [actionSheet showFromRect:[sender frame] inView:sender animated:YES];
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+
+   PhotoAlbumEmailViewController *newController = [[PhotoAlbumEmailViewController alloc] initWithDefaultNib];
+   [[self mainViewController] presentModalViewController:newController animated:YES];
+   [newController release];
 }
 
 - (void)slideshow:(id)sender
