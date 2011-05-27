@@ -144,7 +144,7 @@
    UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-right-grooved.png"];
    [[self backgroundImageView] setImage:backgroundImage];
 
-   [[self discImageView] setFrame:CGRectMake(702, 100, 547, 548)];
+   [[self discImageView] setFrame:CGRectMake(702, 100, 551, 550)];
    
    [[self photoWheelView] setTopAtDegrees:-90.0];
    [[self photoWheelView] setFrame:CGRectInset([[self discImageView] frame], WHEELVIEW_INSET, WHEELVIEW_INSET)];
@@ -166,7 +166,7 @@
    UIImage *backgroundImage = [UIImage imageNamed:@"background-portrait-grooved.png"]; 
    [[self backgroundImageView] setImage:backgroundImage];
 
-   [[self discImageView] setFrame:CGRectMake(111, 680, 547, 548)];
+   [[self discImageView] setFrame:CGRectMake(111, 680, 551, 550)];
 
    [[self photoWheelView] setTopAtDegrees:0.0];
    [[self photoWheelView] setFrame:CGRectInset([[self discImageView] frame], WHEELVIEW_INSET, WHEELVIEW_INSET)];
