@@ -61,6 +61,7 @@
 		689B7A101369BEEA00E8163A /* PhotoAlbumNub.m in Sources */ = {isa = PBXBuildFile; fileRef = 689B7A0F1369BEE400E8163A /* PhotoAlbumNub.m */; };
 		689B7A131369C4D500E8163A /* PhotoAlbumNub.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689B7A121369C4D500E8163A /* PhotoAlbumNub.xib */; };
 		68CF4160138FCC9000E2A576 /* stack-viewer-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 68CF415F138FCC9000E2A576 /* stack-viewer-shadow.png */; };
+		68CF4164138FD64C00E2A576 /* IconMenuView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68CF4163138FD64C00E2A576 /* IconMenuView.m */; };
 		68D599AA137626DA007F08E1 /* stack-viewer-bg-landscape-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D599A7137626DA007F08E1 /* stack-viewer-bg-landscape-left.png */; };
 		68D599AB137626DA007F08E1 /* stack-viewer-bg-landscape-right.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D599A8137626DA007F08E1 /* stack-viewer-bg-landscape-right.png */; };
 		68D599AC137626DA007F08E1 /* stack-viewer-bg-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D599A9137626DA007F08E1 /* stack-viewer-bg-portrait.png */; };
@@ -167,6 +168,8 @@
 		689B7A111369C42600E8163A /* Models.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Models.h; path = ../../../../PhotoWheel/PhotoWheel/Classes/Models/Models.h; sourceTree = "<group>"; };
 		689B7A121369C4D500E8163A /* PhotoAlbumNub.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PhotoAlbumNub.xib; path = ../../../PhotoWheel/PhotoWheel/xibs/PhotoAlbumNub.xib; sourceTree = "<group>"; };
 		68CF415F138FCC9000E2A576 /* stack-viewer-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-shadow.png"; sourceTree = "<group>"; };
+		68CF4162138FD64C00E2A576 /* IconMenuView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconMenuView.h; sourceTree = "<group>"; };
+		68CF4163138FD64C00E2A576 /* IconMenuView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconMenuView.m; sourceTree = "<group>"; };
 		68D599A7137626DA007F08E1 /* stack-viewer-bg-landscape-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-landscape-left.png"; sourceTree = "<group>"; };
 		68D599A8137626DA007F08E1 /* stack-viewer-bg-landscape-right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-landscape-right.png"; sourceTree = "<group>"; };
 		68D599A9137626DA007F08E1 /* stack-viewer-bg-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-portrait.png"; sourceTree = "<group>"; };
@@ -366,6 +369,8 @@
 				68E21056137704C80084760C /* IconButton.m */,
 				68DDEBB3137976D000B6297E /* PhotoView.h */,
 				68DDEBB4137976D000B6297E /* PhotoView.m */,
+				68CF4162138FD64C00E2A576 /* IconMenuView.h */,
+				68CF4163138FD64C00E2A576 /* IconMenuView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -572,6 +577,7 @@
 				68E21057137704C80084760C /* IconButton.m in Sources */,
 				68E2106613777DB70084760C /* CustomNavigationController.m in Sources */,
 				68DDEBB5137976D100B6297E /* PhotoView.m in Sources */,
+				68CF4164138FD64C00E2A576 /* IconMenuView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
