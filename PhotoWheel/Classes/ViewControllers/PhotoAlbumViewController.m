@@ -42,6 +42,7 @@
 @synthesize toolbar = toolbar_;
 @synthesize titleTextField = titleTextField_;
 @synthesize addPhotoButton = addPhotoButton_;
+@synthesize actionButton = actionButton_;
 @synthesize photoAlbum = photoAlbum_;
 @synthesize mainViewController = mainViewController_;
 @synthesize gridView = gridView_;
@@ -58,6 +59,7 @@
    [toolbar_ release], toolbar_ = nil;
    [titleTextField_ release], titleTextField_ = nil;
    [addPhotoButton_ release], addPhotoButton_ = nil;
+   [actionButton_ release], actionButton_ = nil;
    [photoAlbum_ release], photoAlbum_ = nil;
    
    [super dealloc];
@@ -80,6 +82,7 @@
    [self setToolbar:nil];
    [self setTitleTextField:nil];
    [self setAddPhotoButton:nil];
+   [self setActionButton:nil];
 
    [super viewDidUnload];
 }
@@ -228,6 +231,7 @@
    [newImagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
    
    UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:newImagePicker];
+   [newPopover setDelegate:self];
    [self setPopoverController:newPopover];
    
    [newPopover release];
@@ -239,6 +243,11 @@
 - (void)addFromFlickr:(id)sender
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
+
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
 }
 
 - (void)deletePhotoAlbum
@@ -262,8 +271,13 @@
 
 - (void)removePhotoAlbum:(id)sender
 {
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+
    NSString *message;
-   if ([[self photoAlbum] name]) {
+   if ([[self photoAlbum] name] && [[[self photoAlbum] name] length] > 0) {
       message = [NSString stringWithFormat:@"Remove %@ and its photos?", [[self photoAlbum] name]];
    } else {
       message = [NSString stringWithFormat:@"Remove photo album?"];
@@ -274,6 +288,11 @@
 
 - (void)printPhotoAlbum:(id)sender
 {
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+
    if ([self numberOfObjects] == 0) return;  // Nothing to print.
    
    NSMutableArray *imageURLs = [[NSMutableArray alloc] initWithCapacity:[self numberOfObjects]];
@@ -300,7 +319,7 @@
    [controller setPrintingItems:imageURLs];
    
    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-      [controller presentFromRect:[sender frame] inView:sender animated:YES completionHandler:completionHandler];
+      [controller presentFromBarButtonItem:[self actionButton] animated:YES completionHandler:completionHandler];
    } else {
       [controller presentAnimated:YES completionHandler:completionHandler];  // iPhone
    }
@@ -316,16 +335,22 @@
 
 - (void)slideshow:(id)sender
 {
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
    SlideshowSettingsViewController *newController = [[SlideshowSettingsViewController alloc] init];
    UINavigationController *newNavController = [[UINavigationController alloc] initWithRootViewController:newController];
    UIPopoverController *newPopover = [[UIPopoverController alloc] initWithContentViewController:newNavController];
+   [newPopover setDelegate:self];
    [self setPopoverController:newPopover];
    
    [newPopover release];
    [newNavController release];
    [newController release];
    
-   [[self popoverController] presentPopoverFromRect:[sender frame] inView:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   [[self popoverController] presentPopoverFromBarButtonItem:[self actionButton] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
 }
 
 #pragma mark - UIAlertViewDelegate Methods

@@ -39,7 +39,7 @@
    [buttons addObject:emailButton];
    
    IconButton *slideshowButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-slideshow.png"] title:@"Slideshow"];
-   [slideshowButton addTarget:[self photoAlbumViewController] action:@selector(slideshow::) forControlEvents:UIControlEventTouchUpInside];
+   [slideshowButton addTarget:[self photoAlbumViewController] action:@selector(slideshow:) forControlEvents:UIControlEventTouchUpInside];
    [buttons addObject:slideshowButton];
 
    IconButton *printButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-print.png"] title:@"Print"];

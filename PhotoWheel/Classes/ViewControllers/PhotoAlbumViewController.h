@@ -22,6 +22,7 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UITextField *titleTextField;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *addPhotoButton;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *actionButton;
 @property (nonatomic, retain) IBOutlet GridView *gridView;
 @property (nonatomic, retain) PhotoAlbum *photoAlbum;
 @property (nonatomic, assign) MainViewController *mainViewController;
