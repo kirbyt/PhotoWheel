@@ -162,6 +162,8 @@
 
 - (IBAction)showActionMenu:(id)sender
 {
+   [[UIPrintInteractionController sharedPrintController] dismissAnimated:YES];
+
    if ([self popoverController]) {
       [[self popoverController] dismissPopoverAnimated:YES];
       [self setPopoverController:nil];
@@ -182,10 +184,12 @@
 
 - (IBAction)addPhoto:(id)sender
 {
+   [[UIPrintInteractionController sharedPrintController] dismissAnimated:YES];
+
    if ([self popoverController]) {
       [[self popoverController] dismissPopoverAnimated:YES];
       [self setPopoverController:nil];
-      
+
    } else {
       AddPhotoViewController *addPhotoViewController = [[AddPhotoViewController alloc] init];
       [addPhotoViewController setPhotoAlbumViewController:self];
