@@ -91,25 +91,16 @@
 - (void)layoutForLandscape
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
-   
-   CGRect frame;
-   CGFloat commonWidth = 651;
-   
-   [[self gridView] setFrame:CGRectMake(20, 74, commonWidth, 481)];
-
-//   frame = [[self titleTextField] frame];
-//   frame = CGRectMake(20, frame.origin.y, commonWidth, frame.size.height);
-//   [[self titleTextField] setFrame:frame];
-   
-   frame = CGRectMake(20, 14, commonWidth, 40);
-   [[self toolbar] setFrame:frame];
+   [[self gridView] setFrame:CGRectMake(9, 65, 678, 620)];
+   [[self toolbar] setFrame:CGRectMake(9, 14, 678, 40)];
+   [[self topShadowImageView] setFrame:CGRectMake(9, 65, 678, 8)];
 }
 
 - (void)layoutForPortrait
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
-   [[self gridView] setFrame:CGRectMake(20, 65, 676, 583)];
-   [[self toolbar] setFrame:CGRectMake(20, 14, 676, 40)];
+   [[self gridView] setFrame:CGRectMake(9, 65, 698, 583)];
+   [[self toolbar] setFrame:CGRectMake(9, 14, 698, 40)];
    [[self topShadowImageView] setFrame:CGRectMake(9, 65, 698, 8)];
 }
 
