@@ -41,6 +41,7 @@
 @synthesize slideshowButton = slideshowButton_;
 @synthesize printButton = printButton_;
 @synthesize removeAlbumButton = removeAlbumButton_;
+@synthesize toolbar = toolbar_;
 @synthesize titleTextField = titleTextField_;
 @synthesize photoAlbum = photoAlbum_;
 @synthesize mainViewController = mainViewController_;
@@ -56,6 +57,7 @@
    [popoverController_ release], popoverController_ = nil;
    [fetchedResultsController_ release], fetchedResultsController_ = nil;
    [gridView_ release], gridView_ = nil;
+   [toolbar_ release], toolbar_ = nil;
    [titleTextField_ release], titleTextField_ = nil;
    [emailButton_ release], emailButton_ = nil;
    [slideshowButton_ release], slideshowButton_ = nil;
@@ -80,6 +82,7 @@
    [self setToolbarView:nil];
    [self setBackgroundImageView:nil];
    [self setGridView:nil];
+   [self setToolbar:nil];
    [self setTitleTextField:nil];
    [self setEmailButton:nil];
    [self setSlideshowButton:nil];
@@ -98,9 +101,12 @@
    
    [[self gridView] setFrame:CGRectMake(20, 74, commonWidth, 481)];
 
-   frame = [[self titleTextField] frame];
-   frame = CGRectMake(20, frame.origin.y, commonWidth, frame.size.height);
-   [[self titleTextField] setFrame:frame];
+//   frame = [[self titleTextField] frame];
+//   frame = CGRectMake(20, frame.origin.y, commonWidth, frame.size.height);
+//   [[self titleTextField] setFrame:frame];
+   
+   frame = CGRectMake(20, 14, commonWidth, 40);
+   [[self toolbar] setFrame:frame];
    
    frame = [[self toolbarView] frame];
    frame.origin.y = 569;
@@ -117,9 +123,12 @@
 
    [[self gridView] setFrame:CGRectMake(20, 78, commonWidth, 438)];
    
-   frame = [[self titleTextField] frame];
-   frame = CGRectMake(20, frame.origin.y, commonWidth, frame.size.height);
-   [[self titleTextField] setFrame:frame];
+//   frame = [[self titleTextField] frame];
+//   frame = CGRectMake(20, frame.origin.y, commonWidth, frame.size.height);
+//   [[self titleTextField] setFrame:frame];
+
+   frame = CGRectMake(20, 14, commonWidth, 40);
+   [[self toolbar] setFrame:frame];
 
    frame = [[self toolbarView] frame];
    frame.origin.y = 535;

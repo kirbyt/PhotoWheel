@@ -22,6 +22,7 @@
 @property (nonatomic, retain) IBOutlet UIButton *slideshowButton;
 @property (nonatomic, retain) IBOutlet UIButton *printButton;
 @property (nonatomic, retain) IBOutlet UIButton *removeAlbumButton;
+@property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UITextField *titleTextField;
 @property (nonatomic, retain) IBOutlet UIView *toolbarView;
 @property (nonatomic, retain) IBOutlet GridView *gridView;
