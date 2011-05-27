@@ -121,7 +121,7 @@
    CGRect frame;
    CGFloat commonWidth = 676;
 
-   [[self gridView] setFrame:CGRectMake(20, 78, commonWidth, 438)];
+   [[self gridView] setFrame:CGRectMake(20, 65, commonWidth, 451)];
    
 //   frame = [[self titleTextField] frame];
 //   frame = CGRectMake(20, frame.origin.y, commonWidth, frame.size.height);
