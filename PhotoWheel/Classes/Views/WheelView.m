@@ -158,7 +158,7 @@
       radiusY = radiusX * 0.30;
    }
    
-   NSInteger nubDisplayCount = 8;  
+   NSInteger nubDisplayCount = 7;  
    NSInteger nubCount = [[self dataSource] wheelViewNumberOfNubs:self];
    float angleToAdd = 360.0f / nubDisplayCount;
    
