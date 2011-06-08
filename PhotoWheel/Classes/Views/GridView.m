@@ -220,18 +220,17 @@
    
    // Iterate through the needed views adding any views that are missing.
    for (NSInteger index = startAtIndex; index < stopAtIndex; index++) {
+      
+      // Set the frame so the view is placed into the correct position.
+      GridViewCell *view = [self cellAtIndex:index];
+      CGRect newFrame = CGRectMake(x, y, viewSize.width, viewSize.height);
+      [view setFrame:newFrame];
+
       // If the index is between the first and last then the
       // view is not missing.
       BOOL isViewMissing = !(index >= [self firstVisibleIndex] && index < [self lastVisibleIndex]);
-      
       if (isViewMissing) {
-         GridViewCell *view = [self cellAtIndex:index];
-         
-         // Set the frame so the view is inserted into the correct position.
-         CGRect newFrame = CGRectMake(x, y, viewSize.width, viewSize.height);
-         [view setFrame:newFrame];
          [view setIndexInGrid:index];
-         
          [self addSubview:view];
       }
       
