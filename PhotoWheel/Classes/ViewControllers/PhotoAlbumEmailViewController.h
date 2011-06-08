@@ -7,12 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SendEmailController.h"
 
+@class PhotoAlbum;
 
-@interface PhotoAlbumEmailViewController : UIViewController 
+@interface PhotoAlbumEmailViewController : UIViewController <SendEmailControllerDelegate>
 {
     
 }
+
+@property (nonatomic, retain) PhotoAlbum *photoAlbum;
 
 - (id)initWithDefaultNib;
 

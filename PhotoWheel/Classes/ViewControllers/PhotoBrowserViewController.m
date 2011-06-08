@@ -10,6 +10,7 @@
 #import "PhotoView.h"
 #import "Models.h"
 #import "CustomToolbar.h"
+#import "SendEmailController.h"
 
 #define ACTIONSHEET_DELETEMENU 1
 #define ACTIONSHEET_ACTIONMENU 2
@@ -22,6 +23,7 @@
 @property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden;
 @property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
 @property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
+@property (nonatomic, retain) SendEmailController *sendEmailController;
 - (CGRect)frameForPagingScrollView;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
 - (NSInteger)numberOfPhotos;
@@ -50,6 +52,7 @@
 @synthesize firstVisiblePageIndexBeforeRotation = firstVisiblePageIndexBeforeRotation_;
 @synthesize percentScrolledIntoFirstVisiblePage = percentScrolledIntoFirstVisiblePage_;
 @synthesize actionButton = actionButton_;
+@synthesize sendEmailController = sendEmailController_;
 
 - (void)dealloc
 {
@@ -57,6 +60,7 @@
    [scrollView_ release], scrollView_ = nil;
    [photoViewCache_ release], photoViewCache_ = nil;
    [actionButton_ release], actionButton_ = nil;
+   [sendEmailController_ release], sendEmailController_ = nil;
    [super dealloc];
 }
 
@@ -476,7 +480,14 @@
 
 - (void)emailCurrentPhoto
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   Photo *photo = [self objectAtIndex:[self currentIndex]];
+   
+   SendEmailController *newController = [[SendEmailController alloc] initWithViewController:self];
+   [newController setPhotos:[NSSet setWithObject:photo]];
+   [self setSendEmailController:newController];
+   [newController release];
+   
+   [[self sendEmailController] sendEmail];
 }
 
 - (void)printCurrentPhoto
@@ -549,6 +560,15 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView 
 {
    [self hideChrome];
+}
+
+#pragma mark - SendEmailControllerDelegate
+
+- (void)sendEmailControllerDidFinish:(SendEmailController *)controller
+{
+   if (controller == [self sendEmailController]) {
+      [self setSendEmailController:nil];
+   }
 }
 
 @end

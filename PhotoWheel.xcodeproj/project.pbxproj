@@ -84,6 +84,8 @@
 		68DDEBB5137976D100B6297E /* PhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DDEBB4137976D000B6297E /* PhotoView.m */; };
 		68E21057137704C80084760C /* IconButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E21056137704C80084760C /* IconButton.m */; };
 		68E2106613777DB70084760C /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E2106513777DB60084760C /* CustomNavigationController.m */; };
+		68E25D27139FC4570052912E /* SendEmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68E25D26139FC4560052912E /* SendEmailController.m */; };
+		68E25D2A139FC5FA0052912E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68E25D29139FC5FA0052912E /* MessageUI.framework */; };
 		68F9E100135F4F0F00052C9B /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F9E0FF135F4F0F00052C9B /* WheelView.m */; };
 /* End PBXBuildFile section */
 
@@ -201,6 +203,9 @@
 		68E21056137704C80084760C /* IconButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconButton.m; sourceTree = "<group>"; };
 		68E2106413777DB50084760C /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		68E2106513777DB60084760C /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		68E25D25139FC4560052912E /* SendEmailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendEmailController.h; sourceTree = "<group>"; };
+		68E25D26139FC4560052912E /* SendEmailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendEmailController.m; sourceTree = "<group>"; };
+		68E25D29139FC5FA0052912E /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		68F9E0FE135F4F0F00052C9B /* WheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelView.h; sourceTree = "<group>"; };
 		68F9E0FF135F4F0F00052C9B /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
 		68F9E102135F515100052C9B /* KTGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KTGeometry.h; sourceTree = "<group>"; };
@@ -211,6 +216,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68E25D2A139FC5FA0052912E /* MessageUI.framework in Frameworks */,
 				6860CCDA135A0A2B0070445B /* QuartzCore.framework in Frameworks */,
 				681037821358E28E00BD7C82 /* CoreData.framework in Frameworks */,
 				682F2940133B93860058E1D7 /* UIKit.framework in Frameworks */,
@@ -252,6 +258,7 @@
 		682F293E133B93860058E1D7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68E25D29139FC5FA0052912E /* MessageUI.framework */,
 				682F293F133B93860058E1D7 /* UIKit.framework */,
 				682F2941133B93860058E1D7 /* Foundation.framework */,
 				682F2943133B93860058E1D7 /* CoreGraphics.framework */,
@@ -324,6 +331,8 @@
 				6835B3DF1375B985006DE35C /* PhotoBrowserViewController.m */,
 				68E2106413777DB50084760C /* CustomNavigationController.h */,
 				68E2106513777DB60084760C /* CustomNavigationController.m */,
+				68E25D25139FC4560052912E /* SendEmailController.h */,
+				68E25D26139FC4560052912E /* SendEmailController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -598,6 +607,7 @@
 				68CF4164138FD64C00E2A576 /* IconMenuView.m in Sources */,
 				68CF4167138FDEE700E2A576 /* PhotoAlbumMenuViewController.m in Sources */,
 				68CF4172138FEC1500E2A576 /* PhotoAlbumEmailViewController.m in Sources */,
+				68E25D27139FC4570052912E /* SendEmailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

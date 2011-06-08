@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SendEmailController.h"
 
-@interface PhotoBrowserViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
+@interface PhotoBrowserViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate, SendEmailControllerDelegate>
 {
     
 }

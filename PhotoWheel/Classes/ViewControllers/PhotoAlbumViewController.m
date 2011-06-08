@@ -331,6 +331,7 @@
    }
 
    PhotoAlbumEmailViewController *newController = [[PhotoAlbumEmailViewController alloc] initWithDefaultNib];
+   [newController setPhotoAlbum:[self photoAlbum]];
    [[self mainViewController] presentModalViewController:newController animated:YES];
    [newController release];
 }
