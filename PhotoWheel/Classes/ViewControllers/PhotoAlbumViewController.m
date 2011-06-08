@@ -390,10 +390,20 @@
 
 #pragma mark - UITextFieldDelegate Methods
 
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+   [textField setBorderStyle:UITextBorderStyleRoundedRect];
+   [textField setTextColor:[UIColor blackColor]];
+   return YES;
+}
+
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
    [[self photoAlbum] setName:[textField text]];
    [[self photoAlbum] kt_save];
+
+   [textField setTextColor:[UIColor whiteColor]];
+   [textField setBorderStyle:UITextBorderStyleNone];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
