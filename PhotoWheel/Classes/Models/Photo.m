@@ -25,7 +25,6 @@
 - (void)saveAsSmallImage:(UIImage *)image;
 - (void)saveAsLargeImage:(UIImage *)image;
 - (void)saveAsOriginalImage:(UIImage *)image;
-- (void)threaded_saveImage:(id)data;
 @end
 
 @implementation Photo
@@ -74,7 +73,8 @@
 {
    [self saveAsSmallImage:image];
    [self saveAsThumbnailImage:image];
-   [self performSelectorInBackground:@selector(threaded_saveImage:) withObject:image];
+   [self saveAsLargeImage:image];
+   [self saveAsOriginalImage:image];
 }
 
 - (NSURL *)thumbnailImageURL
@@ -208,20 +208,6 @@
    [self willChangeValueForKey:@"originalImage"];
    [self saveImage:image withPath:[self originalImagePath]];
    [self didChangeValueForKey:@"originalImage"];
-}
-
-- (void)threaded_saveImage:(id)data
-{
-   NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-   
-   UIImage *image = data;
-   
-   [self saveAsThumbnailImage:image];
-   [self saveAsSmallImage:image];
-   [self saveAsLargeImage:image];
-   [self saveAsOriginalImage:image];
-   
-   [pool drain];
 }
 
 @end

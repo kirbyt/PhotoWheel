@@ -510,7 +510,6 @@
 
 #pragma mark - Photo Management
 
-
 - (void)addPhotoAtIndex:(NSInteger)index
 {
    AddPhotoViewController *addPhotoViewController = [[AddPhotoViewController alloc] init];
@@ -523,6 +522,29 @@
    
    GridViewCell *cell = [[self gridView] cellAtIndex:index];
    [[self popoverController] presentPopoverFromRect:[cell frame] inView:[self gridView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
+- (void)threaded_saveImage:(id)data
+{
+   if ([data isKindOfClass:[NSDictionary class]]) {
+      NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+      NSDictionary *dict = data;
+      NSPersistentStoreCoordinator *storeCoordinator = [dict objectForKey:@"storeCoordinator"];
+      NSManagedObjectContext *context = [[NSManagedObjectContext alloc] init];
+      [context setPersistentStoreCoordinator:storeCoordinator];
+
+      NSManagedObjectID *photoAlbumObjectID = [dict objectForKey:@"photoAlbumObjectID"];
+      id photoAlbum = [context objectWithID:photoAlbumObjectID];
+      
+      UIImage *image = [dict objectForKey:@"image"];
+      Photo *newPhoto = [Photo insertNewInManagedObjectContext:context];
+      [newPhoto setPhotoAlbum:photoAlbum];
+      [newPhoto saveImage:image];
+      [newPhoto kt_save];
+      
+      [pool drain];
+   }
 }
 
 #pragma mark - UIPopoverControllerDelegate Methods
@@ -543,13 +565,12 @@
    [[self popoverController] dismissPopoverAnimated:YES];
    [self setPopoverController:nil];
    
-   NSManagedObjectContext *context = [[self photoAlbum] managedObjectContext];
-   
    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-   Photo *newPhoto = [Photo insertNewInManagedObjectContext:context];
-   [newPhoto setPhotoAlbum:[self photoAlbum]];
-   [newPhoto saveImage:image];
-   [newPhoto kt_save];
+   NSManagedObjectContext *context = [[self photoAlbum] managedObjectContext];
+   NSPersistentStoreCoordinator *storeCoordinator = [context persistentStoreCoordinator];
+   NSManagedObjectID *photoAlbumObjectID = [[self photoAlbum] objectID];
+   NSDictionary *data = [NSDictionary dictionaryWithObjectsAndKeys:storeCoordinator, @"storeCoordinator", image, @"image", photoAlbumObjectID, @"photoAlbumObjectID", nil];
+   [self performSelectorInBackground:@selector(threaded_saveImage:) withObject:data];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
