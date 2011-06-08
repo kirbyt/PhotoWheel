@@ -92,7 +92,7 @@
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
    [[self gridView] setFrame:CGRectMake(9, 65, 678, 620)];
-   [[self toolbar] setFrame:CGRectMake(9, 14, 678, 40)];
+   [[self toolbar] setFrame:CGRectMake(9, 14, 678, 44)];
    [[self topShadowImageView] setFrame:CGRectMake(9, 65, 678, 8)];
 }
 
@@ -100,7 +100,7 @@
 {
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
    [[self gridView] setFrame:CGRectMake(9, 65, 698, 583)];
-   [[self toolbar] setFrame:CGRectMake(9, 14, 678, 40)];
+   [[self toolbar] setFrame:CGRectMake(9, 14, 698, 44)];
    [[self topShadowImageView] setFrame:CGRectMake(9, 65, 698, 8)];
 }
 

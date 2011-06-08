@@ -50,7 +50,6 @@
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{716, 717}</string>
 						<reference key="NSSuperview" ref="551281968"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="791370290"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -69,7 +68,6 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{141, 7}, {404, 31}}</string>
 								<reference key="NSSuperview" ref="791370290"/>
-								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="396586706"/>
 								<object class="NSColor" key="IBUIBackgroundColor" id="898958967">
 									<int key="NSColorSpace">3</int>
@@ -99,7 +97,6 @@
 						</object>
 						<string key="NSFrame">{{20, 14}, {676, 44}}</string>
 						<reference key="NSSuperview" ref="551281968"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="796018343"/>
 						<reference key="IBUIBackgroundColor" ref="898958967"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -143,7 +140,7 @@
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 65}, {676, 583}}</string>
 						<reference key="NSSuperview" ref="551281968"/>
-						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<reference key="IBUIBackgroundColor" ref="898958967"/>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 					</object>
@@ -152,7 +149,6 @@
 						<int key="NSvFlags">298</int>
 						<string key="NSFrame">{{9, 65}, {698, 8}}</string>
 						<reference key="NSSuperview" ref="551281968"/>
-						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="1025109185"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -164,7 +160,6 @@
 				</object>
 				<string key="NSFrameSize">{716, 717}</string>
 				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="152551898"/>
 				<reference key="IBUIBackgroundColor" ref="898958967"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -295,10 +290,10 @@
 						<reference key="object" ref="551281968"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="1025109185"/>
 							<reference ref="396586706"/>
-							<reference ref="791370290"/>
 							<reference ref="152551898"/>
+							<reference ref="1025109185"/>
+							<reference ref="791370290"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -420,145 +415,7 @@
 			<nil key="sourceID"/>
 			<int key="maxID">67</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes">
-			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
-				<bool key="EncodedWithXMLCoder">YES</bool>
-				<object class="IBPartialClassDescription">
-					<string key="className">CustomToolbar</string>
-					<string key="superclassName">UIToolbar</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/CustomToolbar.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">GridView</string>
-					<string key="superclassName">UIScrollView</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">dataSource</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">dataSource</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">dataSource</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/GridView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">PhotoAlbumViewController</string>
-					<string key="superclassName">UIViewController</string>
-					<object class="NSMutableDictionary" key="actions">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addPhoto:</string>
-							<string>showActionMenu:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>id</string>
-							<string>id</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="actionInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>addPhoto:</string>
-							<string>showActionMenu:</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBActionInfo">
-								<string key="name">addPhoto:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-							<object class="IBActionInfo">
-								<string key="name">showActionMenu:</string>
-								<string key="candidateClassName">id</string>
-							</object>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="outlets">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>actionButton</string>
-							<string>addPhotoButton</string>
-							<string>backgroundImageView</string>
-							<string>gridView</string>
-							<string>titleTextField</string>
-							<string>toolbar</string>
-							<string>topShadowImageView</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>UIBarButtonItem</string>
-							<string>UIBarButtonItem</string>
-							<string>UIImageView</string>
-							<string>GridView</string>
-							<string>UITextField</string>
-							<string>UIToolbar</string>
-							<string>UIImageView</string>
-						</object>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<bool key="EncodedWithXMLCoder">YES</bool>
-						<object class="NSArray" key="dict.sortedKeys">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<string>actionButton</string>
-							<string>addPhotoButton</string>
-							<string>backgroundImageView</string>
-							<string>gridView</string>
-							<string>titleTextField</string>
-							<string>toolbar</string>
-							<string>topShadowImageView</string>
-						</object>
-						<object class="NSMutableArray" key="dict.values">
-							<bool key="EncodedWithXMLCoder">YES</bool>
-							<object class="IBToOneOutletInfo">
-								<string key="name">actionButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">addPhotoButton</string>
-								<string key="candidateClassName">UIBarButtonItem</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">backgroundImageView</string>
-								<string key="candidateClassName">UIImageView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">gridView</string>
-								<string key="candidateClassName">GridView</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">titleTextField</string>
-								<string key="candidateClassName">UITextField</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">toolbar</string>
-								<string key="candidateClassName">UIToolbar</string>
-							</object>
-							<object class="IBToOneOutletInfo">
-								<string key="name">topShadowImageView</string>
-								<string key="candidateClassName">UIImageView</string>
-							</object>
-						</object>
-					</object>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/PhotoAlbumViewController.h</string>
-					</object>
-				</object>
-			</object>
-		</object>
+		<object class="IBClassDescriber" key="IBDocument.Classes"/>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginDeclaredDevelopmentDependencies">
