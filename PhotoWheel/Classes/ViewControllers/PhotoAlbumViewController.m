@@ -444,14 +444,35 @@
    CGRect cellFrame = [cell frame];
    CGPoint point = CGPointMake(CGRectGetMidX(cellFrame), CGRectGetMidY(cellFrame));
    point = [gridView convertPoint:point toView:[[self view] superview]];
-   NSLog(@"frame: %@", NSStringFromCGRect(cellFrame));
    
-   PhotoBrowserViewController *newController = [[PhotoBrowserViewController alloc] init];
-   [newController setFetchedResultsController:[self fetchedResultsController]];
-   [newController setStartAtIndex:index];
-   CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
-   [navController pushViewController:newController explodeFromPoint:point];
-   [newController release];
+   CGRect imageViewFrame = [gridView convertRect:cellFrame toView:[[self mainViewController] view]];
+   
+   Photo *photo = [self objectAtIndex:index];
+   UIImage *image = [photo largeImage];
+   UIImageView *imageView = [[UIImageView alloc] initWithImage:image];
+   [imageView setFrame:imageViewFrame];
+   [imageView setAlpha:0.1];
+   [[[self mainViewController] view] addSubview:imageView];
+   
+   void (^animations)(void) = ^ {
+      [imageView setFrame:[[UIScreen mainScreen] bounds]];
+      [imageView setAlpha:1.0];
+   };
+   
+   void (^completion)(BOOL) = ^(BOOL finished) {
+      if (finished) {
+         [imageView removeFromSuperview];
+         PhotoBrowserViewController *newController = [[PhotoBrowserViewController alloc] init];
+         [newController setFetchedResultsController:[self fetchedResultsController]];
+         [newController setStartAtIndex:index];
+         CustomNavigationController *navController = (CustomNavigationController *)[[self mainViewController] navigationController];
+         [navController pushViewController:newController animated:NO];
+         [newController release];
+      }
+   };
+   
+   [UIView animateWithDuration:0.35 animations:animations completion:completion];
+   [imageView release];
 }
 
 #pragma mark - NSFetchedResultsController Helper Methods
