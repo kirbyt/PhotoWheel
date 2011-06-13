@@ -32,6 +32,9 @@
 		683F27461371A07700006122 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683F27451371A07700006122 /* AboutViewController.m */; };
 		683F27491371A67400006122 /* PhotoAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683F27481371A67300006122 /* PhotoAlbumViewController.m */; };
 		683F274B1371AB4B00006122 /* PhotoAlbumView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 683F274A1371AB4B00006122 /* PhotoAlbumView.xib */; };
+		6845B77C13A594F50064F5FF /* IconSmall-50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6845B77913A594F50064F5FF /* IconSmall-50x50.png */; };
+		6845B77D13A594F50064F5FF /* IconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 6845B77A13A594F50064F5FF /* IconSmall.png */; };
+		6845B77E13A594F50064F5FF /* IconSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6845B77B13A594F50064F5FF /* IconSmall@2x.png */; };
 		684A2FF0136F41DC0017967E /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 684A2FEF136F41DC0017967E /* _Photo.m */; };
 		684E75931353E9960072B7DD /* UINavigationController+KTTransitions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684E75921353E9960072B7DD /* UINavigationController+KTTransitions.m */; };
 		68540537136081170073F787 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68540536136081170073F787 /* GridView.m */; };
@@ -126,6 +129,9 @@
 		683F27471371A67300006122 /* PhotoAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumViewController.h; sourceTree = "<group>"; };
 		683F27481371A67300006122 /* PhotoAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumViewController.m; sourceTree = "<group>"; };
 		683F274A1371AB4B00006122 /* PhotoAlbumView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoAlbumView.xib; sourceTree = "<group>"; };
+		6845B77913A594F50064F5FF /* IconSmall-50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconSmall-50x50.png"; sourceTree = "<group>"; };
+		6845B77A13A594F50064F5FF /* IconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconSmall.png; sourceTree = "<group>"; };
+		6845B77B13A594F50064F5FF /* IconSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconSmall@2x.png"; sourceTree = "<group>"; };
 		684A2FEE136F41DC0017967E /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = _Photo.h; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.h; sourceTree = "<group>"; };
 		684A2FEF136F41DC0017967E /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _Photo.m; path = ../../../../../PhotoWheel/PhotoWheel/Classes/Models/Generated/_Photo.m; sourceTree = "<group>"; };
 		684E75911353E9960072B7DD /* UINavigationController+KTTransitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KTTransitions.h"; sourceTree = "<group>"; };
@@ -428,6 +434,9 @@
 				6865D16F134552D20005271D /* Icon.png */,
 				6865D170134552D20005271D /* Icon@2x.png */,
 				6865D171134552D20005271D /* Icon72x72.png */,
+				6845B77913A594F50064F5FF /* IconSmall-50x50.png */,
+				6845B77A13A594F50064F5FF /* IconSmall.png */,
+				6845B77B13A594F50064F5FF /* IconSmall@2x.png */,
 				6865D172134552D20005271D /* iTunesArtwork */,
 			);
 			path = images;
@@ -547,6 +556,9 @@
 				68CF4160138FCC9000E2A576 /* stack-viewer-shadow.png in Resources */,
 				68CF4175138FEC8900E2A576 /* PhotoAlbumEmailView.xib in Resources */,
 				68CF4177138FF02B00E2A576 /* icon-filetype-image.png in Resources */,
+				6845B77C13A594F50064F5FF /* IconSmall-50x50.png in Resources */,
+				6845B77D13A594F50064F5FF /* IconSmall.png in Resources */,
+				6845B77E13A594F50064F5FF /* IconSmall@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
