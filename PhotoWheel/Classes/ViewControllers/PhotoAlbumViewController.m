@@ -90,6 +90,11 @@
 
 - (void)layoutForLandscape
 {
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
    [[self topShadowImageView] setFrame:CGRectMake(9, 51, 678, 8)];
    [[self gridView] setFrame:CGRectMake(9, 51, 678, 634)];
@@ -98,6 +103,11 @@
 
 - (void)layoutForPortrait
 {
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
    [[self topShadowImageView] setFrame:CGRectMake(9, 51, 698, 8)];
    [[self gridView] setFrame:CGRectMake(9, 51, 698, 597)];
