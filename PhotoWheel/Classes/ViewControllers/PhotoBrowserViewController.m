@@ -228,7 +228,7 @@
    
    NSMutableArray *toolbarItems = [[[NSMutableArray alloc] initWithCapacity:3] autorelease];
    [toolbarItems addObject:flexibleSpace];
-   [toolbarItems addObject:slideshowButton];
+//   [toolbarItems addObject:slideshowButton];
    [toolbarItems addObject:actionButton];
    [toolbarItems addObject:trashButton];
    

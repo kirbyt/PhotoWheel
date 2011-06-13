@@ -38,9 +38,9 @@
    [emailButton addTarget:[self photoAlbumViewController] action:@selector(emailPhotoAlbum:) forControlEvents:UIControlEventTouchUpInside];
    [buttons addObject:emailButton];
    
-   IconButton *slideshowButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-slideshow.png"] title:@"Slideshow"];
-   [slideshowButton addTarget:[self photoAlbumViewController] action:@selector(slideshow:) forControlEvents:UIControlEventTouchUpInside];
-   [buttons addObject:slideshowButton];
+//   IconButton *slideshowButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-slideshow.png"] title:@"Slideshow"];
+//   [slideshowButton addTarget:[self photoAlbumViewController] action:@selector(slideshow:) forControlEvents:UIControlEventTouchUpInside];
+//   [buttons addObject:slideshowButton];
 
    IconButton *printButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-print.png"] title:@"Print"];
    [printButton addTarget:[self photoAlbumViewController] action:@selector(printPhotoAlbum:) forControlEvents:UIControlEventTouchUpInside];

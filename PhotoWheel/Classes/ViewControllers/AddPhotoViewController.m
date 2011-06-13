@@ -50,9 +50,9 @@
    [libraryButton addTarget:[self photoAlbumViewController] action:@selector(addFromLibrary:) forControlEvents:UIControlEventTouchUpInside];
    [buttons addObject:libraryButton];
    
-   IconButton *flickrButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-flickr.png"] title:@"Flickr"];
-   [flickrButton addTarget:[self photoAlbumViewController] action:@selector(addFromFlickr:) forControlEvents:UIControlEventTouchUpInside];
-   [buttons addObject:flickrButton];
+//   IconButton *flickrButton = [IconButton iconButtonWithImage:[UIImage imageNamed:@"icon-flickr.png"] title:@"Flickr"];
+//   [flickrButton addTarget:[self photoAlbumViewController] action:@selector(addFromFlickr:) forControlEvents:UIControlEventTouchUpInside];
+//   [buttons addObject:flickrButton];
    
    [(IconMenuView *)[self view] setButtons:buttons];
    [buttons release];
