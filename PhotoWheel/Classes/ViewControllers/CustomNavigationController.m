@@ -51,35 +51,48 @@
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
    UIViewController *poppedViewController = nil;
+
+   poppedViewController = [super popViewControllerAnimated:NO];
    
-   if (animated && [self implodeNextPop]) {
-      [self setImplodeNextPop:NO];
-      
-      UIViewController *transitionFromViewController = [self topViewController];
-      UIView *transitionFromView = [transitionFromViewController view];
-      
-      poppedViewController = [super popViewControllerAnimated:NO];
-      
-      UIViewController *transitionToViewController = [self topViewController];
-      UIView *transitionToView = [transitionToViewController view];
-      
-      [transitionToView addSubview:transitionFromView];
-      CGPoint toPoint = [self implodeToPoint];
-      
-      void (^animations)(void) = ^ {
-         [transitionFromView setFrame:CGRectMake(toPoint.x, toPoint.y, 0, 0)];
-         [transitionFromView setAlpha:0.0];
-      };
-      
-      void (^completion)(BOOL) = ^(BOOL finished) {
-         [transitionFromView removeFromSuperview];
-      };
-      
-      [UIView animateWithDuration:0.6 animations:animations completion:completion];
-      
-   } else {
-      poppedViewController = [super popViewControllerAnimated:animated];
-   }
+   void (^animations)(void) = ^ {
+      [transitionFromView setFrame:CGRectMake(toPoint.x, toPoint.y, 0, 0)];
+      [transitionFromView setAlpha:0.0];
+   };
+   
+   void (^completion)(BOOL) = ^(BOOL finished) {
+      [transitionFromView removeFromSuperview];
+   };
+   
+   [UIView animateWithDuration:0.6 animations:animations completion:completion];
+   
+//   if (animated && [self implodeNextPop]) {
+//      [self setImplodeNextPop:NO];
+//      
+//      UIViewController *transitionFromViewController = [self topViewController];
+//      UIView *transitionFromView = [transitionFromViewController view];
+//      
+//      poppedViewController = [super popViewControllerAnimated:NO];
+//      
+//      UIViewController *transitionToViewController = [self topViewController];
+//      UIView *transitionToView = [transitionToViewController view];
+//      
+//      [transitionToView addSubview:transitionFromView];
+//      CGPoint toPoint = [self implodeToPoint];
+//      
+//      void (^animations)(void) = ^ {
+//         [transitionFromView setFrame:CGRectMake(toPoint.x, toPoint.y, 0, 0)];
+//         [transitionFromView setAlpha:0.0];
+//      };
+//      
+//      void (^completion)(BOOL) = ^(BOOL finished) {
+//         [transitionFromView removeFromSuperview];
+//      };
+//      
+//      [UIView animateWithDuration:0.6 animations:animations completion:completion];
+//      
+//   } else {
+//      poppedViewController = [super popViewControllerAnimated:animated];
+//   }
    
    return poppedViewController;
 }
