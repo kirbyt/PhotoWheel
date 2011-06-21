@@ -10,7 +10,8 @@
 
 @implementation AboutViewController
 
-- (IBAction)done:(id)sender {
+- (IBAction)done:(id)sender 
+{
    [self dismissModalViewControllerAnimated:YES];
 }
 
