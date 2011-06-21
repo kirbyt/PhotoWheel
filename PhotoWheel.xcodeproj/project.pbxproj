@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68B804E313B0B2A500EB3B6C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E213B0B2A500EB3B6C /* AboutViewController.m */; };
 		68D2D62513B0359F000308BB /* background-portrait-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62413B0359F000308BB /* background-portrait-grooved.png */; };
 		68D2D62813B03638000308BB /* stack-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62713B03638000308BB /* stack-bg.png */; };
 		68D2D62A13B037EF000308BB /* stack-viewer-bg-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */; };
@@ -31,6 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68B804E113B0B2A500EB3B6C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		68B804E213B0B2A500EB3B6C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		68D2D62413B0359F000308BB /* background-portrait-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-portrait-grooved.png"; sourceTree = "<group>"; };
 		68D2D62713B03638000308BB /* stack-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-bg.png"; sourceTree = "<group>"; };
 		68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-portrait.png"; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 				68DA37F113B02F23003272F9 /* PhotoWheelAppDelegate.h */,
 				68DA37F213B02F23003272F9 /* PhotoWheelAppDelegate.m */,
 				68DA380013B030CC003272F9 /* MainStoryboard.storyboard */,
+				68B804E113B0B2A500EB3B6C /* AboutViewController.h */,
+				68B804E213B0B2A500EB3B6C /* AboutViewController.m */,
 				68DA37F413B02F23003272F9 /* PhotoWheel.xcdatamodeld */,
 				68D2D62313B0359F000308BB /* images */,
 				68DA37E913B02F23003272F9 /* Supporting Files */,
@@ -221,6 +226,7 @@
 				68DA37EF13B02F23003272F9 /* main.m in Sources */,
 				68DA37F313B02F23003272F9 /* PhotoWheelAppDelegate.m in Sources */,
 				68DA37F613B02F23003272F9 /* PhotoWheel.xcdatamodeld in Sources */,
+				68B804E313B0B2A500EB3B6C /* AboutViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
