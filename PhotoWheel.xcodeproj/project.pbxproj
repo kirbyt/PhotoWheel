@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68D2D62513B0359F000308BB /* background-portrait-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62413B0359F000308BB /* background-portrait-grooved.png */; };
+		68D2D62813B03638000308BB /* stack-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62713B03638000308BB /* stack-bg.png */; };
+		68D2D62A13B037EF000308BB /* stack-viewer-bg-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */; };
+		68D2D62D13B03920000308BB /* stack-add-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62B13B03920000308BB /* stack-add-down.png */; };
+		68D2D62E13B03920000308BB /* stack-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62C13B03920000308BB /* stack-add.png */; };
 		68DA37E113B02F23003272F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA37E013B02F23003272F9 /* UIKit.framework */; };
 		68DA37E313B02F23003272F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA37E213B02F23003272F9 /* Foundation.framework */; };
 		68DA37E513B02F23003272F9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA37E413B02F23003272F9 /* CoreGraphics.framework */; };
@@ -15,9 +20,15 @@
 		68DA37EF13B02F23003272F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DA37EE13B02F23003272F9 /* main.m */; };
 		68DA37F313B02F23003272F9 /* PhotoWheelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DA37F213B02F23003272F9 /* PhotoWheelAppDelegate.m */; };
 		68DA37F613B02F23003272F9 /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68DA37F413B02F23003272F9 /* PhotoWheel.xcdatamodeld */; };
+		68DA380113B030CC003272F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68DA380013B030CC003272F9 /* MainStoryboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68D2D62413B0359F000308BB /* background-portrait-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-portrait-grooved.png"; sourceTree = "<group>"; };
+		68D2D62713B03638000308BB /* stack-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-bg.png"; sourceTree = "<group>"; };
+		68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-portrait.png"; sourceTree = "<group>"; };
+		68D2D62B13B03920000308BB /* stack-add-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-add-down.png"; sourceTree = "<group>"; };
+		68D2D62C13B03920000308BB /* stack-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-add.png"; sourceTree = "<group>"; };
 		68DA37DC13B02F23003272F9 /* PhotoWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68DA37E013B02F23003272F9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68DA37E213B02F23003272F9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -30,6 +41,7 @@
 		68DA37F113B02F23003272F9 /* PhotoWheelAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoWheelAppDelegate.h; sourceTree = "<group>"; };
 		68DA37F213B02F23003272F9 /* PhotoWheelAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelAppDelegate.m; sourceTree = "<group>"; };
 		68DA37F513B02F23003272F9 /* PhotoWheel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoWheel.xcdatamodel; sourceTree = "<group>"; };
+		68DA380013B030CC003272F9 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +59,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68D2D62313B0359F000308BB /* images */ = {
+			isa = PBXGroup;
+			children = (
+				68D2D62413B0359F000308BB /* background-portrait-grooved.png */,
+				68D2D62B13B03920000308BB /* stack-add-down.png */,
+				68D2D62C13B03920000308BB /* stack-add.png */,
+				68D2D62713B03638000308BB /* stack-bg.png */,
+				68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */,
+			);
+			path = images;
+			sourceTree = "<group>";
+		};
 		68DA37D113B02F23003272F9 = {
 			isa = PBXGroup;
 			children = (
@@ -80,7 +104,9 @@
 			children = (
 				68DA37F113B02F23003272F9 /* PhotoWheelAppDelegate.h */,
 				68DA37F213B02F23003272F9 /* PhotoWheelAppDelegate.m */,
+				68DA380013B030CC003272F9 /* MainStoryboard.storyboard */,
 				68DA37F413B02F23003272F9 /* PhotoWheel.xcdatamodeld */,
+				68D2D62313B0359F000308BB /* images */,
 				68DA37E913B02F23003272F9 /* Supporting Files */,
 			);
 			path = PhotoWheel;
@@ -148,6 +174,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				68DA37ED13B02F23003272F9 /* InfoPlist.strings in Resources */,
+				68DA380113B030CC003272F9 /* MainStoryboard.storyboard in Resources */,
+				68D2D62513B0359F000308BB /* background-portrait-grooved.png in Resources */,
+				68D2D62813B03638000308BB /* stack-bg.png in Resources */,
+				68D2D62A13B037EF000308BB /* stack-viewer-bg-portrait.png in Resources */,
+				68D2D62D13B03920000308BB /* stack-add-down.png in Resources */,
+				68D2D62E13B03920000308BB /* stack-add.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,6 +298,7 @@
 				68DA37FB13B02F23003272F9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
