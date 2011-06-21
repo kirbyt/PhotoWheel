@@ -10,6 +10,8 @@
 
 @interface MainViewController : UIViewController
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 - (void)displayPhotoBrowser;
 
 @end

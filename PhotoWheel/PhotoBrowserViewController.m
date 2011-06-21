@@ -10,6 +10,8 @@
 
 @implementation PhotoBrowserViewController
 
+@synthesize managedObjectContext = managedObjectContext_;
+
 - (void)viewWillAppear:(BOOL)animated
 {
    [super viewWillAppear:animated];

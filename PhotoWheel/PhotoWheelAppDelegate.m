@@ -7,6 +7,7 @@
 //
 
 #import "PhotoWheelAppDelegate.h"
+#import "MainViewController.h"
 
 @implementation PhotoWheelAppDelegate
 
@@ -18,6 +19,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
    // Override point for customization after application launch.
+   UINavigationController *customNavigationController = (UINavigationController *)[[self window] rootViewController];
+   MainViewController *mainViewController = (MainViewController *)[customNavigationController topViewController];
+   [mainViewController setManagedObjectContext:[self managedObjectContext]];
+   
    [self.window makeKeyAndVisible];
    return YES;
 }

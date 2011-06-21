@@ -8,8 +8,11 @@
 
 #import "MainViewController.h"
 #import "PhotoAlbumViewController.h"
+#import "PhotoBrowserViewController.h"
 
 @implementation MainViewController
+
+@synthesize managedObjectContext = managedObjectContext_;
 
 - (void)viewDidLoad
 {
@@ -23,6 +26,14 @@
 - (void)displayPhotoBrowser
 {
    [self performSegueWithIdentifier:@"PhotoBrowserSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+   if ([[segue destinationViewController] isKindOfClass:[PhotoBrowserViewController class]]) {
+      PhotoBrowserViewController *photoBrowserViewController = [segue destinationViewController];
+      [photoBrowserViewController setManagedObjectContext:[self managedObjectContext]];
+   }
 }
 
 @end
