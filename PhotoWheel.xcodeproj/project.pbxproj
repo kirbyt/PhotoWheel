@@ -13,6 +13,8 @@
 		68B804F113B0B9BC00EB3B6C /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804F013B0B9BC00EB3B6C /* UIView+PWCategory.m */; };
 		68B804F313B0B9FF00EB3B6C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B804F213B0B9FF00EB3B6C /* QuartzCore.framework */; };
 		68B804F613B0BB3D00EB3B6C /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804F513B0BB3D00EB3B6C /* CustomNavigationController.m */; };
+		68B804F913B0C12600EB3B6C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804F813B0C12600EB3B6C /* MainViewController.m */; };
+		68B804FC13B0C15000EB3B6C /* PhotoAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804FB13B0C15000EB3B6C /* PhotoAlbumViewController.m */; };
 		68D2D62513B0359F000308BB /* background-portrait-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62413B0359F000308BB /* background-portrait-grooved.png */; };
 		68D2D62813B03638000308BB /* stack-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62713B03638000308BB /* stack-bg.png */; };
 		68D2D62A13B037EF000308BB /* stack-viewer-bg-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */; };
@@ -48,6 +50,10 @@
 		68B804F213B0B9FF00EB3B6C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		68B804F413B0BB3D00EB3B6C /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		68B804F513B0BB3D00EB3B6C /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		68B804F713B0C12600EB3B6C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		68B804F813B0C12600EB3B6C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		68B804FA13B0C15000EB3B6C /* PhotoAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumViewController.h; sourceTree = "<group>"; };
+		68B804FB13B0C15000EB3B6C /* PhotoAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumViewController.m; sourceTree = "<group>"; };
 		68D2D62413B0359F000308BB /* background-portrait-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-portrait-grooved.png"; sourceTree = "<group>"; };
 		68D2D62713B03638000308BB /* stack-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-bg.png"; sourceTree = "<group>"; };
 		68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-portrait.png"; sourceTree = "<group>"; };
@@ -145,6 +151,10 @@
 				68DA37F113B02F23003272F9 /* PhotoWheelAppDelegate.h */,
 				68DA37F213B02F23003272F9 /* PhotoWheelAppDelegate.m */,
 				68DA380013B030CC003272F9 /* MainStoryboard.storyboard */,
+				68B804F713B0C12600EB3B6C /* MainViewController.h */,
+				68B804F813B0C12600EB3B6C /* MainViewController.m */,
+				68B804FA13B0C15000EB3B6C /* PhotoAlbumViewController.h */,
+				68B804FB13B0C15000EB3B6C /* PhotoAlbumViewController.m */,
 				68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */,
 				68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */,
 				68B804EC13B0B93000EB3B6C /* CustomPushSegue.h */,
@@ -255,6 +265,8 @@
 				68B804EE13B0B93000EB3B6C /* CustomPushSegue.m in Sources */,
 				68B804F113B0B9BC00EB3B6C /* UIView+PWCategory.m in Sources */,
 				68B804F613B0BB3D00EB3B6C /* CustomNavigationController.m in Sources */,
+				68B804F913B0C12600EB3B6C /* MainViewController.m in Sources */,
+				68B804FC13B0C15000EB3B6C /* PhotoAlbumViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
