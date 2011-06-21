@@ -2,51 +2,22 @@
 //  PhotoWheelAppDelegate.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 3/24/11.
+//  Created by Kirby Turner on 6/20/11.
 //  Copyright 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import "PhotoWheelAppDelegate.h"
-#import "MainViewController.h"
-#import "CustomNavigationController.h"
-
 
 @implementation PhotoWheelAppDelegate
 
-@synthesize window = window_;
-@synthesize rootViewController = rootViewController_;
-@synthesize navigationController = navigationController_;
-@synthesize managedObjectContext = managedObjectContext_;
-@synthesize managedObjectModel = managedObjectModel_;
-@synthesize persistentStoreCoordinator = persistentStoreCoordinator_;
-
-- (void)dealloc
-{
-   [window_ release];
-   [rootViewController_ release];
-   [navigationController_ release];
-
-   [managedObjectContext_ release], managedObjectContext_ = nil;
-   [managedObjectModel_ release], managedObjectModel_ = nil;
-   [persistentStoreCoordinator_ release], persistentStoreCoordinator_ = nil;
-   
-   [super dealloc];
-}
+@synthesize window = _window;
+@synthesize managedObjectContext = __managedObjectContext;
+@synthesize managedObjectModel = __managedObjectModel;
+@synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   MainViewController *newController = [[MainViewController alloc] init];
-   [newController setManagedObjectContext:[self managedObjectContext]];
-   [self setRootViewController:newController];
-   [newController release];
-   
-   CustomNavigationController *navController = [[CustomNavigationController alloc] initWithRootViewController:[self rootViewController]];
-   [[navController navigationBar] setHidden:YES];
-   [self setNavigationController:navController];
-   [navController release];
-   
-   // Add the root view controller to the window.
-   self.window.rootViewController = [self navigationController];
+   // Override point for customization after application launch.
    [self.window makeKeyAndVisible];
    return YES;
 }
@@ -65,8 +36,6 @@
     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     */
-   
-   [[NSNotificationCenter defaultCenter] removeObserver:self name:NSManagedObjectContextDidSaveNotification object:nil];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -81,26 +50,18 @@
    /*
     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     */
-   
-   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(contextDidSave:) name:NSManagedObjectContextDidSaveNotification object:nil];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
-   /*
-    Called when the application is about to terminate.
-    Save data if appropriate.
-    See also applicationDidEnterBackground:.
-    */
+   // Saves changes in the application's managed object context before the application terminates.
+   [self saveContext];
 }
-
-
-#pragma mark - Data Management
 
 - (void)saveContext
 {
    NSError *error = nil;
-   NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+   NSManagedObjectContext *managedObjectContext = self.managedObjectContext;
    if (managedObjectContext != nil)
    {
       if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
@@ -116,14 +77,6 @@
    }
 }
 
-- (void)contextDidSave:(NSNotification*)notification
-{
-   SEL selector = @selector(mergeChangesFromContextDidSaveNotification:); 
-   [[self managedObjectContext] performSelectorOnMainThread:selector withObject:notification waitUntilDone:YES];
-}
-
-
-
 #pragma mark - Core Data stack
 
 /**
@@ -132,18 +85,18 @@
  */
 - (NSManagedObjectContext *)managedObjectContext
 {
-   if (managedObjectContext_ != nil)
+   if (__managedObjectContext != nil)
    {
-      return managedObjectContext_;
+      return __managedObjectContext;
    }
    
    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
    if (coordinator != nil)
    {
-      managedObjectContext_ = [[NSManagedObjectContext alloc] init];
-      [managedObjectContext_ setPersistentStoreCoordinator:coordinator];
+      __managedObjectContext = [[NSManagedObjectContext alloc] init];
+      [__managedObjectContext setPersistentStoreCoordinator:coordinator];
    }
-   return managedObjectContext_;
+   return __managedObjectContext;
 }
 
 /**
@@ -152,13 +105,13 @@
  */
 - (NSManagedObjectModel *)managedObjectModel
 {
-   if (managedObjectModel_ != nil)
+   if (__managedObjectModel != nil)
    {
-      return managedObjectModel_;
+      return __managedObjectModel;
    }
    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"PhotoWheel" withExtension:@"momd"];
-   managedObjectModel_ = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
-   return managedObjectModel_;
+   __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
+   return __managedObjectModel;
 }
 
 /**
@@ -167,16 +120,16 @@
  */
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-   if (persistentStoreCoordinator_ != nil)
+   if (__persistentStoreCoordinator != nil)
    {
-      return persistentStoreCoordinator_;
+      return __persistentStoreCoordinator;
    }
    
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
    
    NSError *error = nil;
-   persistentStoreCoordinator_ = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-   if (![persistentStoreCoordinator_ addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
+   __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+   if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
    {
       /*
        Replace this implementation with code to handle the error appropriately.
@@ -201,14 +154,12 @@
        Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
        
        */
-      [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
    }    
    
-   return persistentStoreCoordinator_;
+   return __persistentStoreCoordinator;
 }
-
 
 #pragma mark - Application's Documents directory
 
@@ -217,10 +168,7 @@
  */
 - (NSURL *)applicationDocumentsDirectory
 {
-   NSFileManager *fileManager = [[NSFileManager alloc] init];
-   NSURL *URL = [[fileManager URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-   [fileManager release];
-   return URL;
+   return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
 @end
