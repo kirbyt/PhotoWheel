@@ -12,6 +12,13 @@
 		68D2D62A13B037EF000308BB /* stack-viewer-bg-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */; };
 		68D2D62D13B03920000308BB /* stack-add-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62B13B03920000308BB /* stack-add-down.png */; };
 		68D2D62E13B03920000308BB /* stack-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62C13B03920000308BB /* stack-add.png */; };
+		68D2D63613B03AC4000308BB /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62F13B03AC4000308BB /* Icon.png */; };
+		68D2D63713B03AC4000308BB /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D63013B03AC4000308BB /* Icon@2x.png */; };
+		68D2D63813B03AC4000308BB /* Icon72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D63113B03AC4000308BB /* Icon72x72.png */; };
+		68D2D63913B03AC4000308BB /* IconSmall-50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D63213B03AC4000308BB /* IconSmall-50x50.png */; };
+		68D2D63A13B03AC4000308BB /* IconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D63313B03AC4000308BB /* IconSmall.png */; };
+		68D2D63B13B03AC4000308BB /* IconSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D63413B03AC4000308BB /* IconSmall@2x.png */; };
+		68D2D63C13B03AC4000308BB /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D63513B03AC4000308BB /* iTunesArtwork */; };
 		68DA37E113B02F23003272F9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA37E013B02F23003272F9 /* UIKit.framework */; };
 		68DA37E313B02F23003272F9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA37E213B02F23003272F9 /* Foundation.framework */; };
 		68DA37E513B02F23003272F9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA37E413B02F23003272F9 /* CoreGraphics.framework */; };
@@ -29,6 +36,13 @@
 		68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-portrait.png"; sourceTree = "<group>"; };
 		68D2D62B13B03920000308BB /* stack-add-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-add-down.png"; sourceTree = "<group>"; };
 		68D2D62C13B03920000308BB /* stack-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-add.png"; sourceTree = "<group>"; };
+		68D2D62F13B03AC4000308BB /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		68D2D63013B03AC4000308BB /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		68D2D63113B03AC4000308BB /* Icon72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon72x72.png; sourceTree = "<group>"; };
+		68D2D63213B03AC4000308BB /* IconSmall-50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconSmall-50x50.png"; sourceTree = "<group>"; };
+		68D2D63313B03AC4000308BB /* IconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconSmall.png; sourceTree = "<group>"; };
+		68D2D63413B03AC4000308BB /* IconSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconSmall@2x.png"; sourceTree = "<group>"; };
+		68D2D63513B03AC4000308BB /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
 		68DA37DC13B02F23003272F9 /* PhotoWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68DA37E013B02F23003272F9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68DA37E213B02F23003272F9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,6 +77,13 @@
 			isa = PBXGroup;
 			children = (
 				68D2D62413B0359F000308BB /* background-portrait-grooved.png */,
+				68D2D62F13B03AC4000308BB /* Icon.png */,
+				68D2D63013B03AC4000308BB /* Icon@2x.png */,
+				68D2D63113B03AC4000308BB /* Icon72x72.png */,
+				68D2D63213B03AC4000308BB /* IconSmall-50x50.png */,
+				68D2D63313B03AC4000308BB /* IconSmall.png */,
+				68D2D63413B03AC4000308BB /* IconSmall@2x.png */,
+				68D2D63513B03AC4000308BB /* iTunesArtwork */,
 				68D2D62B13B03920000308BB /* stack-add-down.png */,
 				68D2D62C13B03920000308BB /* stack-add.png */,
 				68D2D62713B03638000308BB /* stack-bg.png */,
@@ -180,6 +201,13 @@
 				68D2D62A13B037EF000308BB /* stack-viewer-bg-portrait.png in Resources */,
 				68D2D62D13B03920000308BB /* stack-add-down.png in Resources */,
 				68D2D62E13B03920000308BB /* stack-add.png in Resources */,
+				68D2D63613B03AC4000308BB /* Icon.png in Resources */,
+				68D2D63713B03AC4000308BB /* Icon@2x.png in Resources */,
+				68D2D63813B03AC4000308BB /* Icon72x72.png in Resources */,
+				68D2D63913B03AC4000308BB /* IconSmall-50x50.png in Resources */,
+				68D2D63A13B03AC4000308BB /* IconSmall.png in Resources */,
+				68D2D63B13B03AC4000308BB /* IconSmall@2x.png in Resources */,
+				68D2D63C13B03AC4000308BB /* iTunesArtwork in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
