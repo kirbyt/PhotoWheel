@@ -64,7 +64,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="27" kind="push" id="40"/>
+                                    <segue destination="27" kind="custom" customClass="CustomPushSegue" id="40"/>
                                 </connections>
                             </button>
                         </subviews>

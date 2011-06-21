@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		68B804E313B0B2A500EB3B6C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E213B0B2A500EB3B6C /* AboutViewController.m */; };
 		68B804E713B0B74200EB3B6C /* PhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */; };
+		68B804EE13B0B93000EB3B6C /* CustomPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */; };
+		68B804F113B0B9BC00EB3B6C /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804F013B0B9BC00EB3B6C /* UIView+PWCategory.m */; };
+		68B804F313B0B9FF00EB3B6C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68B804F213B0B9FF00EB3B6C /* QuartzCore.framework */; };
 		68D2D62513B0359F000308BB /* background-portrait-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62413B0359F000308BB /* background-portrait-grooved.png */; };
 		68D2D62813B03638000308BB /* stack-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62713B03638000308BB /* stack-bg.png */; };
 		68D2D62A13B037EF000308BB /* stack-viewer-bg-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */; };
@@ -37,6 +40,11 @@
 		68B804E213B0B2A500EB3B6C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
 		68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserViewController.m; sourceTree = "<group>"; };
+		68B804EC13B0B93000EB3B6C /* CustomPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPushSegue.h; sourceTree = "<group>"; };
+		68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPushSegue.m; sourceTree = "<group>"; };
+		68B804EF13B0B9BC00EB3B6C /* UIView+PWCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PWCategory.h"; sourceTree = "<group>"; };
+		68B804F013B0B9BC00EB3B6C /* UIView+PWCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PWCategory.m"; sourceTree = "<group>"; };
+		68B804F213B0B9FF00EB3B6C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		68D2D62413B0359F000308BB /* background-portrait-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-portrait-grooved.png"; sourceTree = "<group>"; };
 		68D2D62713B03638000308BB /* stack-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-bg.png"; sourceTree = "<group>"; };
 		68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-portrait.png"; sourceTree = "<group>"; };
@@ -69,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68B804F313B0B9FF00EB3B6C /* QuartzCore.framework in Frameworks */,
 				68DA37E113B02F23003272F9 /* UIKit.framework in Frameworks */,
 				68DA37E313B02F23003272F9 /* Foundation.framework in Frameworks */,
 				68DA37E513B02F23003272F9 /* CoreGraphics.framework in Frameworks */,
@@ -118,6 +127,7 @@
 		68DA37DF13B02F23003272F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68B804F213B0B9FF00EB3B6C /* QuartzCore.framework */,
 				68DA37E013B02F23003272F9 /* UIKit.framework */,
 				68DA37E213B02F23003272F9 /* Foundation.framework */,
 				68DA37E413B02F23003272F9 /* CoreGraphics.framework */,
@@ -134,6 +144,10 @@
 				68DA380013B030CC003272F9 /* MainStoryboard.storyboard */,
 				68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */,
 				68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */,
+				68B804EC13B0B93000EB3B6C /* CustomPushSegue.h */,
+				68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */,
+				68B804EF13B0B9BC00EB3B6C /* UIView+PWCategory.h */,
+				68B804F013B0B9BC00EB3B6C /* UIView+PWCategory.m */,
 				68B804E113B0B2A500EB3B6C /* AboutViewController.h */,
 				68B804E213B0B2A500EB3B6C /* AboutViewController.m */,
 				68DA37F413B02F23003272F9 /* PhotoWheel.xcdatamodeld */,
@@ -233,6 +247,8 @@
 				68DA37F613B02F23003272F9 /* PhotoWheel.xcdatamodeld in Sources */,
 				68B804E313B0B2A500EB3B6C /* AboutViewController.m in Sources */,
 				68B804E713B0B74200EB3B6C /* PhotoBrowserViewController.m in Sources */,
+				68B804EE13B0B93000EB3B6C /* CustomPushSegue.m in Sources */,
+				68B804F113B0B9BC00EB3B6C /* UIView+PWCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
