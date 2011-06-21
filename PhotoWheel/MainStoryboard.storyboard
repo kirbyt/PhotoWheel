@@ -153,7 +153,7 @@
         <scene sceneID="44">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="43" userLabel="First Responder" sceneMemberID="firstRespodner"/>
-                <navigationController navigationBarHidden="YES" id="41" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="41" customClass="CustomNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedMetricsInferredSentinel key="simulatedStatusBarMetrics"/>
                     <simulatedMetricsInferredSentinel key="simulatedTopBarMetrics"/>
@@ -187,6 +187,10 @@
             <relationships>
                 <relationship kind="action" name="done:"/>
             </relationships>
+        </class>
+        <class className="CustomNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomNavigationController.h"/>
+            <relationships/>
         </class>
         <class className="PhotoBrowserViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoBrowserViewController.h"/>
