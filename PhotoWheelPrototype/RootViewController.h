@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NameEditorViewController.h"
 
-@interface RootViewController : UITableViewController
+@class DetailViewController;
+
+@interface RootViewController : UITableViewController <NameEditorViewControllerDelegate>
+
+@property (strong, nonatomic) NSMutableOrderedSet *data;
+@property (strong, nonatomic) DetailViewController *detailViewController;
 
 @end

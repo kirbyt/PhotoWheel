@@ -24,68 +24,68 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
+   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+   if (self) {
       self.title = NSLocalizedString(@"Detail", @"Detail");
-    }
-    return self;
+   }
+   return self;
 }
 
 #pragma mark - Managing the detail item
 
 - (void)setDetailItem:(id)newDetailItem
 {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
-        
-        // Update the view.
-        [self configureView];
-    }
-
-    if (self.popoverController != nil) {
-        [self.popoverController dismissPopoverAnimated:YES];
-    }        
+   if (_detailItem != newDetailItem) {
+      _detailItem = newDetailItem;
+      
+      // Update the view.
+      [self configureView];
+   }
+   
+   if (self.popoverController != nil) {
+      [self.popoverController dismissPopoverAnimated:YES];
+   }        
 }
 
 - (void)configureView
 {
-    // Update the user interface for the detail item.
-
+   // Update the user interface for the detail item.
+   
    if (self.detailItem) {
-       self.detailDescriptionLabel.text = [self.detailItem description];
+      self.detailDescriptionLabel.text = [self.detailItem description];
    }
 }
 
 - (void)didReceiveMemoryWarning
 {
-    [super didReceiveMemoryWarning];
-    // Release any cached data, images, etc that aren't in use.
+   [super didReceiveMemoryWarning];
+   // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
+   [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
    [self configureView];
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+   [super viewDidUnload];
+   // Release any retained subviews of the main view.
+   // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+   [super viewWillAppear:animated];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+   [super viewDidAppear:animated];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -100,7 +100,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
+   // Return YES for supported orientations
    return YES;
 }
 
@@ -108,7 +108,7 @@
 
 - (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
 {
-   barButtonItem.title = @"Master";
+   barButtonItem.title = @"Photo Albums";
    NSMutableArray *items = [[self.toolbar items] mutableCopy];
    [items insertObject:barButtonItem atIndex:0];
    [self.toolbar setItems:items animated:YES];

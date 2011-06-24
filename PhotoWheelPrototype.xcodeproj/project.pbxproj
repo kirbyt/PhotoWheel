@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68A55D3E13AA555B0007FF8F /* NameEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */; };
+		68A55D3F13AA555B0007FF8F /* NameEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */; };
 		68DA2C4413A99DD800BC0B80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA2C4313A99DD800BC0B80 /* UIKit.framework */; };
 		68DA2C4613A99DD800BC0B80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA2C4513A99DD800BC0B80 /* Foundation.framework */; };
 		68DA2C4813A99DD800BC0B80 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA2C4713A99DD800BC0B80 /* CoreGraphics.framework */; };
@@ -21,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68A55D3B13AA555B0007FF8F /* NameEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEditorViewController.h; sourceTree = "<group>"; };
+		68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEditorViewController.m; sourceTree = "<group>"; };
+		68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditorViewController.xib; sourceTree = "<group>"; };
 		68DA2C3F13A99DD800BC0B80 /* PhotoWheelPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoWheelPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68DA2C4313A99DD800BC0B80 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68DA2C4513A99DD800BC0B80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -91,6 +96,9 @@
 				68DA2C5A13A99DD900BC0B80 /* DetailViewController.m */,
 				68DA2C5C13A99DD900BC0B80 /* RootViewController.xib */,
 				68DA2C5F13A99DD900BC0B80 /* DetailViewController.xib */,
+				68A55D3B13AA555B0007FF8F /* NameEditorViewController.h */,
+				68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */,
+				68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */,
 				68DA2C4A13A99DD800BC0B80 /* Supporting Files */,
 			);
 			path = PhotoWheelPrototype;
@@ -161,6 +169,7 @@
 				68DA2C5913A99DD900BC0B80 /* DetailViewController.h in Resources */,
 				68DA2C5E13A99DD900BC0B80 /* RootViewController.xib in Resources */,
 				68DA2C6113A99DD900BC0B80 /* DetailViewController.xib in Resources */,
+				68A55D3F13AA555B0007FF8F /* NameEditorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +184,7 @@
 				68DA2C5413A99DD900BC0B80 /* PhotoWheelPrototypeAppDelegate.m in Sources */,
 				68DA2C5713A99DD900BC0B80 /* RootViewController.m in Sources */,
 				68DA2C5B13A99DD900BC0B80 /* DetailViewController.m in Sources */,
+				68A55D3E13AA555B0007FF8F /* NameEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +306,7 @@
 				68DA2C6613A99DD900BC0B80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

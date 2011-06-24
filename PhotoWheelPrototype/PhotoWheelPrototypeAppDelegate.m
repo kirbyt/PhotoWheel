@@ -26,6 +26,7 @@
    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
    
    DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
+   [controller setDetailViewController:detailViewController];
    
    self.splitViewController = [[UISplitViewController alloc] init];
    self.splitViewController.delegate = detailViewController;
