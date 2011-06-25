@@ -53,6 +53,15 @@
    for (NSInteger index = 0; index < count; index++) {
       PhotoWheelViewNub *newNub = [[PhotoWheelViewNub alloc] initWithFrame:nubFrame];
       [newNub setImage:defaultPhoto];
+      
+      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nubDoubleTapped:)];
+      [doubleTap setNumberOfTapsRequired:2];
+      [newNub addGestureRecognizer:doubleTap];
+
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nubTapped:)];
+      [tap requireGestureRecognizerToFail:doubleTap];
+      [newNub addGestureRecognizer:tap];
+      
       [newArray addObject:newNub];
    }
    [self setData:[newArray copy]];
@@ -135,5 +144,14 @@
    }
 }
 
+- (void)nubTapped:(id)sender
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)nubDoubleTapped:(id)sender
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+}
 
 @end

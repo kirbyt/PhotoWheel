@@ -10,6 +10,7 @@
 		6839EFB713B52E0300BB83E9 /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839EFB613B52E0300BB83E9 /* WheelView.m */; };
 		6839EFBB13B5F7AB00BB83E9 /* PhotoWheelViewNub.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839EFBA13B5F7AB00BB83E9 /* PhotoWheelViewNub.m */; };
 		6839EFBD13B5F92100BB83E9 /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */; };
+		6839EFC413B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839EFC313B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m */; };
 		68A55D3E13AA555B0007FF8F /* NameEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */; };
 		68A55D3F13AA555B0007FF8F /* NameEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */; };
 		68DA2C4413A99DD800BC0B80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA2C4313A99DD800BC0B80 /* UIKit.framework */; };
@@ -31,6 +32,8 @@
 		6839EFB913B5F7AB00BB83E9 /* PhotoWheelViewNub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewNub.h; sourceTree = "<group>"; };
 		6839EFBA13B5F7AB00BB83E9 /* PhotoWheelViewNub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewNub.m; sourceTree = "<group>"; };
 		6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
+		6839EFC213B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; path = OneFingerRotationGestureRecognizer.h; sourceTree = "<group>"; };
+		6839EFC313B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
 		68A55D3B13AA555B0007FF8F /* NameEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEditorViewController.h; sourceTree = "<group>"; };
 		68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEditorViewController.m; sourceTree = "<group>"; };
 		68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditorViewController.xib; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 				6839EFB913B5F7AB00BB83E9 /* PhotoWheelViewNub.h */,
 				6839EFBA13B5F7AB00BB83E9 /* PhotoWheelViewNub.m */,
 				6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */,
+				6839EFC213B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.h */,
+				6839EFC313B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m */,
 				68DA2C4A13A99DD800BC0B80 /* Supporting Files */,
 			);
 			path = PhotoWheelPrototype;
@@ -201,6 +206,7 @@
 				68A55D3E13AA555B0007FF8F /* NameEditorViewController.m in Sources */,
 				6839EFB713B52E0300BB83E9 /* WheelView.m in Sources */,
 				6839EFBB13B5F7AB00BB83E9 /* PhotoWheelViewNub.m in Sources */,
+				6839EFC413B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

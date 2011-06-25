@@ -8,6 +8,7 @@
 
 #import "WheelView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "OneFingerRotationGestureRecognizer.h"
 
 
 @interface WheelView ()
@@ -29,6 +30,9 @@
    [self setLastAngle:0.0];
    
    [self setStyle:WheelViewStyleWheel];
+   
+   OneFingerRotationGestureRecognizer *rotation = [[OneFingerRotationGestureRecognizer alloc] initWithTarget:self action:@selector(rotate:)];
+   [self addGestureRecognizer:rotation];
 }
 
 - (id)init
@@ -139,6 +143,14 @@
    }
 }
 
+- (void)rotate:(OneFingerRotationGestureRecognizer *)recognizer
+{
+   CGFloat angleInRadians = -[recognizer rotation];
+   [self setLastAngle:[self currentAngle]];
+   CGFloat degrees = 180.0 * angleInRadians / M_PI;   // radians to degress
+   [self setCurrentAngle:[self currentAngle] + degrees];
+   [self setAngle:[self currentAngle]];
+}
 
 @end
 
