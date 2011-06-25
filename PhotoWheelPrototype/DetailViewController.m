@@ -7,20 +7,21 @@
 //
 
 #import "DetailViewController.h"
-
 #import "RootViewController.h"
+#import "WheelView.h"
+#import "PhotoWheelViewNub.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *popoverController;
-- (void)configureView;
+@property (strong, nonatomic) NSArray *data;
 @end
 
 @implementation DetailViewController
 
-@synthesize detailItem = _detailItem;
-@synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize toolbar = _toolbar;
 @synthesize popoverController = _myPopoverController;
+@synthesize data = data_;
+@synthesize wheelView = wheelView_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,29 +34,6 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(id)newDetailItem
-{
-   if (_detailItem != newDetailItem) {
-      _detailItem = newDetailItem;
-      
-      // Update the view.
-      [self configureView];
-   }
-   
-   if (self.popoverController != nil) {
-      [self.popoverController dismissPopoverAnimated:YES];
-   }        
-}
-
-- (void)configureView
-{
-   // Update the user interface for the detail item.
-   
-   if (self.detailItem) {
-      self.detailDescriptionLabel.text = [self.detailItem description];
-   }
-}
-
 - (void)didReceiveMemoryWarning
 {
    [super didReceiveMemoryWarning];
@@ -67,8 +45,17 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-   [self configureView];
+   
+   UIImage *defaultPhoto = [UIImage imageNamed:@"defaultPhoto.png"];
+   CGRect nubFrame = CGRectMake(0, 0, 75, 75);
+   NSInteger count = 10;
+   NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:count];
+   for (NSInteger index = 0; index < count; index++) {
+      PhotoWheelViewNub *newNub = [[PhotoWheelViewNub alloc] initWithFrame:nubFrame];
+      [newNub setImage:defaultPhoto];
+      [newArray addObject:newNub];
+   }
+   [self setData:[newArray copy]];
 }
 
 - (void)viewDidUnload
@@ -123,5 +110,30 @@
    [self.toolbar setItems:items animated:YES];
    self.popoverController = nil;
 }
+
+#pragma mark - WheelViewDataSource Methods
+
+- (NSInteger)wheelViewNumberOfNubs:(WheelView *)wheelView
+{
+   return [self.data count];
+}
+
+- (WheelViewNub *)wheelView:(WheelView *)wheelView nubAtIndex:(NSInteger)index
+{
+   WheelViewNub *nub = [self.data objectAtIndex:index];
+   return nub;
+}
+
+#pragma mark - Actions
+
+- (IBAction)styleValueChanged:(id)sender
+{
+   if ([sender selectedSegmentIndex] == 0) {
+      [self.wheelView setStyle:WheelViewStyleWheel];
+   } else {
+      [self.wheelView setStyle:WheelViewStyleCarousel];
+   }
+}
+
 
 @end

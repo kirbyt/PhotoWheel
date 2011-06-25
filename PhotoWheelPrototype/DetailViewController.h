@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WheelView.h"
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate>
-
-@property (strong, nonatomic) id detailItem;
-
-@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+@interface DetailViewController : UIViewController <UISplitViewControllerDelegate, WheelViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) IBOutlet WheelView *wheelView;
+
+- (IBAction)styleValueChanged:(id)sender;
 
 @end
