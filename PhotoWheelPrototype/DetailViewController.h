@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WheelView.h"
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate, WheelViewDataSource>
+@interface DetailViewController : UIViewController <UISplitViewControllerDelegate, WheelViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet WheelView *wheelView;

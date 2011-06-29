@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6838920713BA2C07007E51B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6838920613BA2C06007E51B7 /* QuartzCore.framework */; };
 		6839EFB713B52E0300BB83E9 /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839EFB613B52E0300BB83E9 /* WheelView.m */; };
 		6839EFBB13B5F7AB00BB83E9 /* PhotoWheelViewNub.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839EFBA13B5F7AB00BB83E9 /* PhotoWheelViewNub.m */; };
 		6839EFBD13B5F92100BB83E9 /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */; };
@@ -27,12 +28,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6838920613BA2C06007E51B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6839EFB513B52E0300BB83E9 /* WheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelView.h; sourceTree = "<group>"; };
 		6839EFB613B52E0300BB83E9 /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
 		6839EFB913B5F7AB00BB83E9 /* PhotoWheelViewNub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewNub.h; sourceTree = "<group>"; };
 		6839EFBA13B5F7AB00BB83E9 /* PhotoWheelViewNub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewNub.m; sourceTree = "<group>"; };
 		6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
-		6839EFC213B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; path = OneFingerRotationGestureRecognizer.h; sourceTree = "<group>"; };
+		6839EFC213B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneFingerRotationGestureRecognizer.h; sourceTree = "<group>"; };
 		6839EFC313B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
 		68A55D3B13AA555B0007FF8F /* NameEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEditorViewController.h; sourceTree = "<group>"; };
 		68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEditorViewController.m; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6838920713BA2C07007E51B7 /* QuartzCore.framework in Frameworks */,
 				68DA2C4413A99DD800BC0B80 /* UIKit.framework in Frameworks */,
 				68DA2C4613A99DD800BC0B80 /* Foundation.framework in Frameworks */,
 				68DA2C4813A99DD800BC0B80 /* CoreGraphics.framework in Frameworks */,
@@ -89,6 +92,7 @@
 		68DA2C4213A99DD800BC0B80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6838920613BA2C06007E51B7 /* QuartzCore.framework */,
 				68DA2C4313A99DD800BC0B80 /* UIKit.framework */,
 				68DA2C4513A99DD800BC0B80 /* Foundation.framework */,
 				68DA2C4713A99DD800BC0B80 /* CoreGraphics.framework */,

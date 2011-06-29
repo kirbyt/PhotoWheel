@@ -14,6 +14,8 @@
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *popoverController;
 @property (strong, nonatomic) NSArray *data;
+@property (strong, nonatomic) PhotoWheelViewNub *selectedNubView;
+@property (strong, nonatomic) UIImagePickerController *imagePickerController;
 @end
 
 @implementation DetailViewController
@@ -22,6 +24,8 @@
 @synthesize popoverController = _myPopoverController;
 @synthesize data = data_;
 @synthesize wheelView = wheelView_;
+@synthesize selectedNubView = selectedNubView_;
+@synthesize imagePickerController = imagePickerController_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -133,6 +137,79 @@
    return nub;
 }
 
+#pragma mark - Photo Management
+
+- (void)presentAddPhotoMenu
+{
+   if ([self popoverController]) {
+      [self.popoverController dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Take Photo", @"Choose From Library", nil];
+   [actionSheet showFromRect:[self.selectedNubView frame] inView:[self wheelView] animated:YES];
+}
+
+- (void)presentPhotoLibrary
+{
+   if ([self popoverController]) {
+      [self.popoverController dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+
+   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] init];
+   [newImagePicker setDelegate:self];
+   [newImagePicker setAllowsEditing:NO];
+   [newImagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+   [self setImagePickerController:newImagePicker];
+   
+   UIPopoverController *popover = [[UIPopoverController alloc] initWithContentViewController:[self imagePickerController]];
+   [popover presentPopoverFromRect:[self.selectedNubView frame] inView:[self wheelView] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   [self setPopoverController:popover];
+}
+
+- (void)presentCamera
+{
+   UIImagePickerController *newImagePicker = [[UIImagePickerController alloc] init];
+   [newImagePicker setDelegate:self];
+   [newImagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+   [self setImagePickerController:newImagePicker];
+
+   [self presentModalViewController:newImagePicker animated:YES];
+}
+
+#pragma mark - UIImagePickerControllerDelegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+   UIPopoverController *popover = [self popoverController];
+   if (popover) {
+      [popover dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
+   [self dismissModalViewControllerAnimated:YES];
+   
+   UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+   [self.selectedNubView setImage:image];
+}
+
+#pragma mark - UIActionSheetDelegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   switch (buttonIndex) {
+      case 0:
+         [self presentCamera];
+         break;
+      case 1:
+         [self presentPhotoLibrary];
+         break;
+      default:
+         break;
+   }
+}
+
 #pragma mark - Actions
 
 - (IBAction)styleValueChanged:(id)sender
@@ -146,7 +223,12 @@
 
 - (void)nubTapped:(id)sender
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [self setSelectedNubView:(PhotoWheelViewNub *)[sender view]];
+   if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+      [self presentAddPhotoMenu];
+   } else {
+      [self presentPhotoLibrary];
+   }
 }
 
 - (void)nubDoubleTapped:(id)sender
