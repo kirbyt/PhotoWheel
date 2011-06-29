@@ -16,6 +16,7 @@
 @property (strong, nonatomic) NSArray *data;
 @property (strong, nonatomic) PhotoWheelViewNub *selectedNubView;
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
+@property (assign, nonatomic) BOOL usingCamera;
 @end
 
 @implementation DetailViewController
@@ -26,6 +27,7 @@
 @synthesize wheelView = wheelView_;
 @synthesize selectedNubView = selectedNubView_;
 @synthesize imagePickerController = imagePickerController_;
+@synthesize usingCamera = usingCamera_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -175,6 +177,7 @@
    [newImagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
    [self setImagePickerController:newImagePicker];
 
+   [self setUsingCamera:YES];
    [self presentModalViewController:newImagePicker animated:YES];
 }
 
@@ -188,10 +191,14 @@
       [self setPopoverController:nil];
    }
    
-   [self dismissModalViewControllerAnimated:YES];
-   
    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
    [self.selectedNubView setImage:image];
+
+   if ([self usingCamera]) {
+      [self setUsingCamera:NO];
+      [self dismissModalViewControllerAnimated:YES];
+      UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+    }
 }
 
 #pragma mark - UIActionSheetDelegate Methods
