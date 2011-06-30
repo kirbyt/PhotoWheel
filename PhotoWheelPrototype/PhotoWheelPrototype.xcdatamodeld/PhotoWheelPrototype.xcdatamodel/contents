@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="PhotoWheelPrototype" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="844" systemVersion="10K540" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="844" systemVersion="10K540" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Photo" representedClassName="Photo">
+        <attribute name="dateAdded" optional="YES" attributeType="Date"/>
+        <attribute name="largeImage" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
+        <attribute name="originalImage" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
+        <attribute name="thumbnailImage" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
+        <relationship name="photoAlbum" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoAlbum" inverseName="photos" inverseEntity="PhotoAlbum"/>
+    </entity>
+    <entity name="PhotoAlbum" representedClassName="PhotoAlbum">
+        <attribute name="dateAdded" optional="YES" attributeType="Date"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="photoAlbum" inverseEntity="Photo"/>
+    </entity>
+    <elements>
+        <element name="Photo" positionX="160" positionY="192" width="128" height="120"/>
+        <element name="PhotoAlbum" positionX="-56" positionY="192" width="128" height="90"/>
+    </elements>
 </model>
