@@ -25,6 +25,8 @@
 		68DA2C5B13A99DD900BC0B80 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DA2C5A13A99DD900BC0B80 /* DetailViewController.m */; };
 		68DA2C5E13A99DD900BC0B80 /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68DA2C5C13A99DD900BC0B80 /* RootViewController.xib */; };
 		68DA2C6113A99DD900BC0B80 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68DA2C5F13A99DD900BC0B80 /* DetailViewController.xib */; };
+		EE6950C413BD38D200640B74 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6950C313BD38D200640B74 /* CoreData.framework */; };
+		EE6950C813BD390D00640B74 /* PhotoWheelPrototype.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE6950C613BD390D00640B74 /* PhotoWheelPrototype.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +57,8 @@
 		68DA2C5A13A99DD900BC0B80 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		68DA2C5D13A99DD900BC0B80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/RootViewController.xib; sourceTree = "<group>"; };
 		68DA2C6013A99DD900BC0B80 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
+		EE6950C313BD38D200640B74 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		EE6950C713BD390D00640B74 /* PhotoWheelPrototype.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoWheelPrototype.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE6950C413BD38D200640B74 /* CoreData.framework in Frameworks */,
 				6838920713BA2C07007E51B7 /* QuartzCore.framework in Frameworks */,
 				68DA2C4413A99DD800BC0B80 /* UIKit.framework in Frameworks */,
 				68DA2C4613A99DD800BC0B80 /* Foundation.framework in Frameworks */,
@@ -75,6 +80,7 @@
 		68DA2C3413A99DD800BC0B80 = {
 			isa = PBXGroup;
 			children = (
+				EE6950C313BD38D200640B74 /* CoreData.framework */,
 				68DA2C4913A99DD800BC0B80 /* PhotoWheelPrototype */,
 				68DA2C4213A99DD800BC0B80 /* Frameworks */,
 				68DA2C4013A99DD800BC0B80 /* Products */,
@@ -121,6 +127,7 @@
 				6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */,
 				6839EFC213B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.h */,
 				6839EFC313B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m */,
+				EE6950C613BD390D00640B74 /* PhotoWheelPrototype.xcdatamodeld */,
 				68DA2C4A13A99DD800BC0B80 /* Supporting Files */,
 			);
 			path = PhotoWheelPrototype;
@@ -211,6 +218,7 @@
 				6839EFB713B52E0300BB83E9 /* WheelView.m in Sources */,
 				6839EFBB13B5F7AB00BB83E9 /* PhotoWheelViewNub.m in Sources */,
 				6839EFC413B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m in Sources */,
+				EE6950C813BD390D00640B74 /* PhotoWheelPrototype.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -335,6 +343,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		EE6950C613BD390D00640B74 /* PhotoWheelPrototype.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				EE6950C713BD390D00640B74 /* PhotoWheelPrototype.xcdatamodel */,
+			);
+			currentVersion = EE6950C713BD390D00640B74 /* PhotoWheelPrototype.xcdatamodel */;
+			path = PhotoWheelPrototype.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 68DA2C3613A99DD800BC0B80 /* Project object */;
 }
