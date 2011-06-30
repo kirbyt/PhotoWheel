@@ -31,6 +31,7 @@
 		EE6950CF13BD3C4200640B74 /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950CE13BD3C4200640B74 /* _PhotoAlbum.m */; };
 		EE6950D213BD3CB200640B74 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950D113BD3CB200640B74 /* Photo.m */; };
 		EE6950D513BD3CBF00640B74 /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950D413BD3CBF00640B74 /* PhotoAlbum.m */; };
+		EE6950DB13BD426200640B74 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950DA13BD426100640B74 /* UIImage+KTCategory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,6 +72,8 @@
 		EE6950D113BD3CB200640B74 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		EE6950D313BD3CBF00640B74 /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbum.h; sourceTree = "<group>"; };
 		EE6950D413BD3CBF00640B74 /* PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbum.m; sourceTree = "<group>"; };
+		EE6950D913BD426100640B74 /* UIImage+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KTCategory.h"; sourceTree = "<group>"; };
+		EE6950DA13BD426100640B74 /* UIImage+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KTCategory.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +143,8 @@
 				6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */,
 				6839EFC213B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.h */,
 				6839EFC313B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m */,
+				EE6950D913BD426100640B74 /* UIImage+KTCategory.h */,
+				EE6950DA13BD426100640B74 /* UIImage+KTCategory.m */,
 				68DA2C4A13A99DD800BC0B80 /* Supporting Files */,
 			);
 			path = PhotoWheelPrototype;
@@ -251,6 +256,7 @@
 				EE6950CF13BD3C4200640B74 /* _PhotoAlbum.m in Sources */,
 				EE6950D213BD3CB200640B74 /* Photo.m in Sources */,
 				EE6950D513BD3CBF00640B74 /* PhotoAlbum.m in Sources */,
+				EE6950DB13BD426200640B74 /* UIImage+KTCategory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

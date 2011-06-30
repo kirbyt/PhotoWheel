@@ -12,9 +12,9 @@
 
 @implementation _Photo
 @dynamic dateAdded;
-@dynamic originalImage;
-@dynamic thumbnailImage;
-@dynamic largeImage;
+@dynamic originalImageData;
+@dynamic thumbnailImageData;
+@dynamic largeImageData;
 @dynamic photoAlbum;
 
 @end

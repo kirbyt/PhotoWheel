@@ -2,9 +2,9 @@
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="844" systemVersion="10K540" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Photo" representedClassName="Photo">
         <attribute name="dateAdded" optional="YES" attributeType="Date"/>
-        <attribute name="largeImage" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
-        <attribute name="originalImage" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
-        <attribute name="thumbnailImage" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
+        <attribute name="largeImageData" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
+        <attribute name="originalImageData" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
+        <attribute name="thumbnailImageData" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
         <relationship name="photoAlbum" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoAlbum" inverseName="photos" inverseEntity="PhotoAlbum"/>
     </entity>
     <entity name="PhotoAlbum" representedClassName="PhotoAlbum">

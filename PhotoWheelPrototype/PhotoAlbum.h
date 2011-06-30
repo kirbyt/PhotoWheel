@@ -8,6 +8,10 @@
 
 #import "_PhotoAlbum.h"
 
+@class Photo;
+
 @interface PhotoAlbum : _PhotoAlbum
+
+- (Photo *)keyPhoto;
 
 @end

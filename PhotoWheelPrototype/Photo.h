@@ -10,4 +10,10 @@
 
 @interface Photo : _Photo
 
+- (void)saveImage:(UIImage *)newImage;
+
+- (UIImage *)originalImage;
+- (UIImage *)largeImage;
+- (UIImage *)thumbnailImage;
+
 @end

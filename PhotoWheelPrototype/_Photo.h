@@ -15,9 +15,9 @@
 @private
 }
 @property (nonatomic, retain) NSDate * dateAdded;
-@property (nonatomic, retain) NSData * originalImage;
-@property (nonatomic, retain) NSData * thumbnailImage;
-@property (nonatomic, retain) NSData * largeImage;
+@property (nonatomic, retain) NSData * originalImageData;
+@property (nonatomic, retain) NSData * thumbnailImageData;
+@property (nonatomic, retain) NSData * largeImageData;
 @property (nonatomic, retain) _PhotoAlbum *photoAlbum;
 
 @end

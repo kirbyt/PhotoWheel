@@ -10,14 +10,10 @@
 
 @implementation PhotoAlbum
 
-- (id)init
+- (Photo *)keyPhoto;
 {
-    self = [super init];
-    if (self) {
-        // Initialization code here.
-    }
-    
-    return self;
+	Photo *keyPhoto = [[self photos] anyObject];
+	return keyPhoto;
 }
 
 @end
