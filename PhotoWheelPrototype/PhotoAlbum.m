@@ -10,12 +10,6 @@
 
 @implementation PhotoAlbum
 
-- (Photo *)keyPhoto;
-{
-	Photo *keyPhoto = [[self photos] anyObject];
-	return keyPhoto;
-}
-
 + (NSMutableArray *)allPhotoAlbumsInContext:(NSManagedObjectContext *)context;
 {
 	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"PhotoAlbum"];
@@ -31,6 +25,19 @@
 	} else {
 		return [NSMutableArray array];
 	}
+}
+
++ (PhotoAlbum *)newPhotoAlbumWithName:(NSString *)albumName inContext:(NSManagedObjectContext *)context;
+{
+	PhotoAlbum *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:context];
+	[newAlbum setName:albumName];
+	
+	NSMutableOrderedSet *photos = [newAlbum mutableOrderedSetValueForKey:@"photos"];
+	for (int index=0; index<10; index++) {
+		Photo *placeholderPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+		[photos addObject:placeholderPhoto];
+	}
+	return newAlbum;
 }
 
 - (void)awakeFromInsert

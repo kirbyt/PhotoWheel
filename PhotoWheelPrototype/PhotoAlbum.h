@@ -12,7 +12,6 @@
 
 @interface PhotoAlbum : _PhotoAlbum
 
-- (Photo *)keyPhoto;
-
 + (NSMutableArray *)allPhotoAlbumsInContext:(NSManagedObjectContext *)context;
++ (PhotoAlbum *)newPhotoAlbumWithName:(NSString *)albumName inContext:(NSManagedObjectContext *)context;
 @end

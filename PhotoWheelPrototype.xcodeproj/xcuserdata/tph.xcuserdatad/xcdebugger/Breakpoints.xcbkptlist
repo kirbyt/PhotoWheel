@@ -8,13 +8,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "PhotoWheelPrototype/RootViewController.m"
-         timestampString = "331227924.406566"
+         filePath = "PhotoWheelPrototype/DetailViewController.m"
+         timestampString = "331247928.167903"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "52"
-         endingLineNumber = "52"
-         landmarkName = "-viewDidLoad"
+         startingLineNumber = "197"
+         endingLineNumber = "197"
+         landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -22,27 +22,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          isPathRelative = "1"
-         filePath = "PhotoWheelPrototype/RootViewController.m"
-         timestampString = "331228977.348841"
+         filePath = "PhotoWheelPrototype/DetailViewController.m"
+         timestampString = "331247948.474436"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "188"
-         endingLineNumber = "188"
-         landmarkName = "-nameEditorViewControllerDidFinish:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "PhotoWheelPrototype/PhotoAlbum.m"
-         timestampString = "331228507.732253"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "21"
-         endingLineNumber = "21"
-         landmarkName = "+allPhotoAlbumsInContext:"
+         startingLineNumber = "267"
+         endingLineNumber = "267"
+         landmarkName = "-setPhotoAlbum:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

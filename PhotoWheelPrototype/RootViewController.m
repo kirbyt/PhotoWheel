@@ -52,11 +52,11 @@
    [self setData:[PhotoAlbum allPhotoAlbumsInContext:[self managedObjectContext]]];
    
    if ([[self data] count] == 0) {
-      PhotoAlbum *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:[self managedObjectContext]];
-      [newAlbum setName:@"First album"];
+      PhotoAlbum *newAlbum = [PhotoAlbum newPhotoAlbumWithName:@"First album" inContext:[self managedObjectContext]];
       [self setData:[NSMutableArray arrayWithObject:newAlbum]];
       [[self managedObjectContext] save:nil];
    }
+   [[self detailViewController] setPhotoAlbum:[[self data] objectAtIndex:0]];
 
    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
 
@@ -178,7 +178,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   // TODO: Pass the photo album to the detail view controller.
+   PhotoAlbum *selectedAlbum = [[self data] objectAtIndex:[indexPath row]];
+   [[self detailViewController] setPhotoAlbum:selectedAlbum];
 }
 
 #pragma mark - NameEditorViewControllerDelegate
@@ -191,8 +192,7 @@
         PhotoAlbum *album = [[self data] objectAtIndex:[[controller indexPath] row]];
         [album setName:newName];
       } else {
-        PhotoAlbum *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:[self managedObjectContext]];
-        [newAlbum setName:newName];
+        PhotoAlbum *newAlbum = [PhotoAlbum newPhotoAlbumWithName:newName inContext:[self managedObjectContext]];
          [[self data] addObject:newAlbum];
       }
       [[self managedObjectContext] save:nil];

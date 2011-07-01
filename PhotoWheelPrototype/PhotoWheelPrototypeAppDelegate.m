@@ -128,7 +128,7 @@
     }
     
 	NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"test.sqlite"];
+    NSURL *storeURL = [applicationDocumentsDirectory URLByAppendingPathComponent:@"PhotoWheelPrototype.sqlite"];
     
     NSError *error = nil;
     __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];

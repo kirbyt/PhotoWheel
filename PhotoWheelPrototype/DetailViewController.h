@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 #import "WheelView.h"
+#import "PhotoAlbum.h"
+#import "Photo.h"
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, WheelViewDataSource, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet WheelView *wheelView;
+
+@property (strong, nonatomic) PhotoAlbum *photoAlbum;
 
 - (IBAction)styleValueChanged:(id)sender;
 

@@ -51,10 +51,4 @@
 	return [UIImage imageWithData:[self thumbnailImageData]];
 }
 
-- (void)awakeFromInsert
-{
-	[super awakeFromInsert];
-	[self setDateAdded:[NSDate date]];
-}
-
 @end

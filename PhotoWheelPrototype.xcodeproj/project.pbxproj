@@ -28,10 +28,10 @@
 		EE6950C413BD38D200640B74 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6950C313BD38D200640B74 /* CoreData.framework */; };
 		EE6950C813BD390D00640B74 /* PhotoWheelPrototype.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = EE6950C613BD390D00640B74 /* PhotoWheelPrototype.xcdatamodeld */; };
 		EE6950CC13BD3C4200640B74 /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950CB13BD3C4200640B74 /* _Photo.m */; };
-		EE6950CF13BD3C4200640B74 /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950CE13BD3C4200640B74 /* _PhotoAlbum.m */; };
 		EE6950D213BD3CB200640B74 /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950D113BD3CB200640B74 /* Photo.m */; };
 		EE6950D513BD3CBF00640B74 /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950D413BD3CBF00640B74 /* PhotoAlbum.m */; };
 		EE6950DB13BD426200640B74 /* UIImage+KTCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950DA13BD426100640B74 /* UIImage+KTCategory.m */; };
+		EE6950E413BE48A000640B74 /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = EE6950E313BE48A000640B74 /* _PhotoAlbum.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,14 +66,14 @@
 		EE6950C713BD390D00640B74 /* PhotoWheelPrototype.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoWheelPrototype.xcdatamodel; sourceTree = "<group>"; };
 		EE6950CA13BD3C4200640B74 /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Photo.h; sourceTree = "<group>"; };
 		EE6950CB13BD3C4200640B74 /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Photo.m; sourceTree = "<group>"; };
-		EE6950CD13BD3C4200640B74 /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _PhotoAlbum.h; sourceTree = "<group>"; };
-		EE6950CE13BD3C4200640B74 /* _PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _PhotoAlbum.m; sourceTree = "<group>"; };
 		EE6950D013BD3CB200640B74 /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		EE6950D113BD3CB200640B74 /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		EE6950D313BD3CBF00640B74 /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbum.h; sourceTree = "<group>"; };
 		EE6950D413BD3CBF00640B74 /* PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbum.m; sourceTree = "<group>"; };
 		EE6950D913BD426100640B74 /* UIImage+KTCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+KTCategory.h"; sourceTree = "<group>"; };
 		EE6950DA13BD426100640B74 /* UIImage+KTCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+KTCategory.m"; sourceTree = "<group>"; };
+		EE6950E213BE48A000640B74 /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _PhotoAlbum.h; sourceTree = "<group>"; };
+		EE6950E313BE48A000640B74 /* _PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _PhotoAlbum.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,8 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				EE6950C613BD390D00640B74 /* PhotoWheelPrototype.xcdatamodeld */,
-				EE6950CD13BD3C4200640B74 /* _PhotoAlbum.h */,
-				EE6950CE13BD3C4200640B74 /* _PhotoAlbum.m */,
+				EE6950E213BE48A000640B74 /* _PhotoAlbum.h */,
+				EE6950E313BE48A000640B74 /* _PhotoAlbum.m */,
 				EE6950CA13BD3C4200640B74 /* _Photo.h */,
 				EE6950CB13BD3C4200640B74 /* _Photo.m */,
 				EE6950D013BD3CB200640B74 /* Photo.h */,
@@ -253,10 +253,10 @@
 				6839EFC413B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m in Sources */,
 				EE6950C813BD390D00640B74 /* PhotoWheelPrototype.xcdatamodeld in Sources */,
 				EE6950CC13BD3C4200640B74 /* _Photo.m in Sources */,
-				EE6950CF13BD3C4200640B74 /* _PhotoAlbum.m in Sources */,
 				EE6950D213BD3CB200640B74 /* Photo.m in Sources */,
 				EE6950D513BD3CBF00640B74 /* PhotoAlbum.m in Sources */,
 				EE6950DB13BD426200640B74 /* UIImage+KTCategory.m in Sources */,
+				EE6950E413BE48A000640B74 /* _PhotoAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,6 +15,7 @@
 @property (strong, nonatomic) UIPopoverController *popoverController;
 @property (strong, nonatomic) NSArray *data;
 @property (strong, nonatomic) PhotoWheelViewNub *selectedNubView;
+@property (assign, nonatomic) NSUInteger selectedNubViewIndex;
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
 @property (assign, nonatomic) BOOL usingCamera;
 @end
@@ -26,8 +27,10 @@
 @synthesize data = data_;
 @synthesize wheelView = wheelView_;
 @synthesize selectedNubView = selectedNubView_;
+@synthesize selectedNubViewIndex = selectedNubViewIndex_;
 @synthesize imagePickerController = imagePickerController_;
 @synthesize usingCamera = usingCamera_;
+@synthesize photoAlbum = photoAlbum_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -52,13 +55,11 @@
 {
    [super viewDidLoad];
    
-   UIImage *defaultPhoto = [UIImage imageNamed:@"defaultPhoto.png"];
    CGRect nubFrame = CGRectMake(0, 0, 75, 75);
    NSInteger count = 10;
    NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:count];
    for (NSInteger index = 0; index < count; index++) {
       PhotoWheelViewNub *newNub = [[PhotoWheelViewNub alloc] initWithFrame:nubFrame];
-      [newNub setImage:defaultPhoto];
       
       UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nubDoubleTapped:)];
       [doubleTap setNumberOfTapsRequired:2];
@@ -92,12 +93,12 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[super viewWillDisappear:animated];
+   [super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-	[super viewDidDisappear:animated];
+   [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -194,6 +195,13 @@
    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
    [self.selectedNubView setImage:image];
 
+   Photo *targetPhoto = [[[self photoAlbum] photos] objectAtIndex:[self selectedNubViewIndex]];
+   [targetPhoto saveImage:image];
+   [targetPhoto setDateAdded:[NSDate date]];
+   
+   [[self photoAlbum] setKeyPhoto:targetPhoto];
+   
+   [[[self photoAlbum] managedObjectContext] save:nil];
    if ([self usingCamera]) {
       [self setUsingCamera:NO];
       [self dismissModalViewControllerAnimated:YES];
@@ -231,6 +239,7 @@
 - (void)nubTapped:(id)sender
 {
    [self setSelectedNubView:(PhotoWheelViewNub *)[sender view]];
+   [self setSelectedNubViewIndex:[[self data] indexOfObject:[self selectedNubView]]];
    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
       [self presentAddPhotoMenu];
    } else {
@@ -241,6 +250,23 @@
 - (void)nubDoubleTapped:(id)sender
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+#pragma mark - Accessors
+
+- (void)setPhotoAlbum:(PhotoAlbum *)photoAlbum
+{
+   photoAlbum_ = photoAlbum;
+   UIImage *defaultPhoto = [UIImage imageNamed:@"defaultPhoto.png"];
+   for (NSUInteger index=0; index<10; index++) {
+      PhotoWheelViewNub *nub = [[self data] objectAtIndex:index];
+      Photo *photo = [[[self photoAlbum] photos] objectAtIndex:index];
+      if ([photo originalImageData] != nil) {
+         [nub setImage:[photo thumbnailImage]];
+      } else {
+         [nub setImage:defaultPhoto];
+      }
+   }
 }
 
 @end
