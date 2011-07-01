@@ -14,4 +14,5 @@
 
 - (Photo *)keyPhoto;
 
++ (NSMutableArray *)allPhotoAlbumsInContext:(NSManagedObjectContext *)context;
 @end

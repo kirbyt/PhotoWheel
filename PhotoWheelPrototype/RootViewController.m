@@ -9,11 +9,18 @@
 #import "RootViewController.h"
 
 #import "DetailViewController.h"
+#import "PhotoAlbum.h"
+
+@interface RootViewController ()
+@property (readwrite, assign) NSUInteger currentAlbumIndex;
+@end
 
 @implementation RootViewController
 
 @synthesize data = data_;
 @synthesize detailViewController = detailViewController_;
+@synthesize managedObjectContext = managedObjectContext_;
+@synthesize currentAlbumIndex = currentAlbumIndex_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,18 +38,25 @@
    // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - Photo album management
+
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+   // Do any additional setup after loading the view, typically from a nib.
    
    [self setTitle:NSLocalizedString(@"Photo Albums", @"Photo albums title")];
    
-   [self setData:[[NSMutableOrderedSet alloc] init]];
-   [[self data] addObject:@"A Sample Photo Album"];
-   [[self data] addObject:@"Another Photo Album"];
+   [self setData:[PhotoAlbum allPhotoAlbumsInContext:[self managedObjectContext]]];
+   
+   if ([[self data] count] == 0) {
+      PhotoAlbum *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:[self managedObjectContext]];
+      [newAlbum setName:@"First album"];
+      [self setData:[NSMutableArray arrayWithObject:newAlbum]];
+      [[self managedObjectContext] save:nil];
+   }
 
    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] animated:NO scrollPosition:UITableViewScrollPositionMiddle];
 
@@ -79,12 +93,12 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-	[super viewWillDisappear:animated];
+   [super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-	[super viewDidDisappear:animated];
+   [super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -122,8 +136,8 @@
    }
    
    // Configure the cell.
-   NSString *text = [[self data] objectAtIndex:[indexPath row]];
-   [[cell textLabel] setText:text];
+   PhotoAlbum *album = [[self data] objectAtIndex:[indexPath row]];;
+   [[cell textLabel] setText:[album name]];
    
    return cell;
 }
@@ -134,7 +148,8 @@
    [newController setDelegate:self];
    [newController setEditing:YES];
    [newController setIndexPath:indexPath];
-   NSString *name = [[self data] objectAtIndex:[indexPath row]];
+   PhotoAlbum *album = [[self data] objectAtIndex:[indexPath row]];;
+   NSString *name = [album name];
    [newController setDefaultNameText:name];
    [newController setModalPresentationStyle:UIModalPresentationFormSheet];
    [self presentModalViewController:newController animated:YES];
@@ -149,13 +164,16 @@
 {
    if (editingStyle == UITableViewCellEditingStyleDelete) {
       [[self data] removeObjectAtIndex:[indexPath row]];
+      [[self managedObjectContext] save:nil];
       [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
    }   
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
 {
+   // TODO: Update sort order
    [[self data] exchangeObjectAtIndex:[fromIndexPath row] withObjectAtIndex:[toIndexPath row]];
+   [[self managedObjectContext] save:nil];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -170,10 +188,14 @@
    NSString *newName = [[controller nameTextField] text];
    if (newName && [newName length] > 0) {
       if ([controller isEditing]) {
-         [[self data] replaceObjectAtIndex:[[controller indexPath] row] withObject:newName];
+        PhotoAlbum *album = [[self data] objectAtIndex:[[controller indexPath] row]];
+        [album setName:newName];
       } else {
-         [[self data] addObject:newName];
+        PhotoAlbum *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:[self managedObjectContext]];
+        [newAlbum setName:newName];
+         [[self data] addObject:newAlbum];
       }
+      [[self managedObjectContext] save:nil];
       [[self tableView] reloadData];
    }
    [self dismissModalViewControllerAnimated:YES];

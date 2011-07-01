@@ -16,4 +16,27 @@
 	return keyPhoto;
 }
 
++ (NSMutableArray *)allPhotoAlbumsInContext:(NSManagedObjectContext *)context;
+{
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"PhotoAlbum"];
+	
+	NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"userSortPosition" ascending:YES]];
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	
+	NSError *error = nil;
+	NSArray *photoAlbums = [context executeFetchRequest:fetchRequest error:&error];
+	
+	if (photoAlbums != nil) {
+		return [photoAlbums mutableCopy];
+	} else {
+		return [NSMutableArray array];
+	}
+}
+
+- (void)awakeFromInsert
+{
+	[super awakeFromInsert];
+	[self setDateAdded:[NSDate date]];
+}
+
 @end

@@ -14,5 +14,6 @@
 @dynamic name;
 @dynamic dateAdded;
 @dynamic photos;
+@dynamic userSortPosition;
 
 @end

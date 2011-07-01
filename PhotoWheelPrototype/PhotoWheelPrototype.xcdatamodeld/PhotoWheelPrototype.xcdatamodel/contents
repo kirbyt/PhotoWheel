@@ -10,10 +10,11 @@
     <entity name="PhotoAlbum" representedClassName="PhotoAlbum">
         <attribute name="dateAdded" optional="YES" attributeType="Date"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="userSortPosition" optional="YES" attributeType="Integer 16" defaultValueString="0"/>
         <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Photo" inverseName="photoAlbum" inverseEntity="Photo"/>
     </entity>
     <elements>
         <element name="Photo" positionX="160" positionY="192" width="128" height="120"/>
-        <element name="PhotoAlbum" positionX="-56" positionY="192" width="128" height="90"/>
+        <element name="PhotoAlbum" positionX="-56" positionY="192" width="128" height="105"/>
     </elements>
 </model>
