@@ -7,7 +7,7 @@
 //
 
 #import "Photo.h"
-#import "UIImage+KTCategory.h"
+#import "UIImage+PWCategory.h"
 
 @implementation Photo
 
@@ -18,7 +18,7 @@
 	
 	// Save thumbnail
 	CGSize thumbnailSize = CGSizeMake(75.0, 75.0);
-	UIImage *thumbnailImage = [newImage kt_imageScaleAndCropToMaxSize:thumbnailSize];
+	UIImage *thumbnailImage = [newImage pw_imageScaleAndCropToMaxSize:thumbnailSize];
 	NSData *thumbnailImageData = UIImageJPEGRepresentation(thumbnailImage, 0.8);
 	[self setThumbnailImageData:thumbnailImageData];
 	
@@ -31,7 +31,7 @@
 	CGFloat maxImageSize = MAX(imageSize.width, imageSize.height) * scale;
 	
 	CGFloat maxSize = MIN(maxScreenSize, maxImageSize);
-	UIImage *largeImage = [newImage kt_imageScaleAspectToMaxSize:maxSize];
+	UIImage *largeImage = [newImage pw_imageScaleAspectToMaxSize:maxSize];
 	NSData *largeImageData = UIImageJPEGRepresentation(largeImage, 0.8);
 	[self setLargeImageData:largeImageData];
 }

@@ -8,9 +8,9 @@
 #import <Foundation/Foundation.h>
 
 
-@interface UIImage (KTCategory)
+@interface UIImage (PWCategory)
 
-- (UIImage *)kt_imageScaleAspectToMaxSize:(CGFloat)newSize;
-- (UIImage *)kt_imageScaleAndCropToMaxSize:(CGSize)newSize;
+- (UIImage *)pw_imageScaleAspectToMaxSize:(CGFloat)newSize;
+- (UIImage *)pw_imageScaleAndCropToMaxSize:(CGSize)newSize;
 
 @end

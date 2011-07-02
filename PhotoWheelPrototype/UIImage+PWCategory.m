@@ -5,12 +5,12 @@
 //  Copyright 2010 White Peak Software Inc. All rights reserved.
 //
 
-#import "UIImage+KTCategory.h"
+#import "UIImage+PWCategory.h"
 
 
-@implementation UIImage (KTCategory)
+@implementation UIImage (PWCategory)
 
-- (UIImage *)kt_imageScaleAspectToMaxSize:(CGFloat)newSize {
+- (UIImage *)pw_imageScaleAspectToMaxSize:(CGFloat)newSize {
    CGSize size = [self size];
    CGFloat ratio;
    if (size.width > size.height) {
@@ -26,7 +26,7 @@
    return scaledImage;
 }
 
-- (UIImage *)kt_imageScaleAndCropToMaxSize:(CGSize)newSize {
+- (UIImage *)pw_imageScaleAndCropToMaxSize:(CGSize)newSize {
    CGFloat largestSize = (newSize.width > newSize.height) ? newSize.width : newSize.height;
    CGSize imageSize = [self size];
    
