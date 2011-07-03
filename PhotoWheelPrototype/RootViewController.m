@@ -160,7 +160,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   // TODO: Pass the photo album to the detail view controller.
+   NSString *name = [[self data] objectAtIndex:[indexPath row]];
+   [[self detailViewController] setDetailItem:name];
 }
 
 #pragma mark - NameEditorViewControllerDelegate
