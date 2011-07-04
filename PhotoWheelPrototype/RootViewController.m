@@ -136,9 +136,15 @@
    }
    
    // Configure the cell.
-   PhotoAlbum *album = [[self data] objectAtIndex:[indexPath row]];;
+   PhotoAlbum *album = [[self data] objectAtIndex:[indexPath row]];
    [[cell textLabel] setText:[album name]];
    
+   if ([indexPath row] == [self currentAlbumIndex]) {
+      [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+   } else {
+      [cell setAccessoryType:UITableViewCellAccessoryNone];
+   }
+
    return cell;
 }
 
