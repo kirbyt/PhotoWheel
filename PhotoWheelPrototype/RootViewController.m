@@ -184,6 +184,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+   NSIndexPath *oldCurrentAlbumIndexPath = [NSIndexPath indexPathForRow:[self currentAlbumIndex] inSection:0];
+   [self setCurrentAlbumIndex:[indexPath row]];
+   [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath, oldCurrentAlbumIndexPath, nil] withRowAnimation:UITableViewRowAnimationNone];
+
    PhotoAlbum *selectedAlbum = [[self data] objectAtIndex:[indexPath row]];
    [[self detailViewController] setPhotoAlbum:selectedAlbum];
 }
