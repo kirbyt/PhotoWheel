@@ -201,7 +201,8 @@
    
    [[self photoAlbum] setKeyPhoto:targetPhoto];
    
-   [[[self photoAlbum] managedObjectContext] save:nil];
+   NSError *error = nil;
+   [[[self photoAlbum] managedObjectContext] save:&error];
    if ([self usingCamera]) {
       [self setUsingCamera:NO];
       [self dismissModalViewControllerAnimated:YES];
@@ -261,8 +262,9 @@
    for (NSUInteger index=0; index<10; index++) {
       PhotoWheelViewNub *nub = [[self data] objectAtIndex:index];
       Photo *photo = [[[self photoAlbum] photos] objectAtIndex:index];
-      if ([photo originalImageData] != nil) {
-         [nub setImage:[photo thumbnailImage]];
+      UIImage *thumbnail = [photo thumbnailImage];
+      if (thumbnail != nil) {
+         [nub setImage:thumbnail];
       } else {
          [nub setImage:defaultPhoto];
       }
