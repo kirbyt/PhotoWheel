@@ -8,19 +8,21 @@
 
 #import "DetailViewController.h"
 #import "RootViewController.h"
-#import "WheelView.h"
-#import "PhotoWheelViewNub.h"
+#import "PhotoWheelViewCell.h"
 
 @interface DetailViewController ()
-@property (strong, nonatomic) UIPopoverController *popoverController;
 @property (strong, nonatomic) NSArray *data;
+@property (strong, nonatomic) UIPopoverController *popoverController;
+- (void)configureView;
 @end
 
 @implementation DetailViewController
 
+@synthesize data = data_;
+@synthesize detailItem = _detailItem;
+@synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize toolbar = _toolbar;
 @synthesize popoverController = _myPopoverController;
-@synthesize data = data_;
 @synthesize wheelView = wheelView_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -34,6 +36,29 @@
 
 #pragma mark - Managing the detail item
 
+- (void)setDetailItem:(id)newDetailItem
+{
+   if (_detailItem != newDetailItem) {
+      _detailItem = newDetailItem;
+      
+      // Update the view.
+      [self configureView];
+   }
+   
+   if (self.popoverController != nil) {
+      [self.popoverController dismissPopoverAnimated:YES];
+   }        
+}
+
+- (void)configureView
+{
+   // Update the user interface for the detail item.
+   
+   if (self.detailItem) {
+      self.detailDescriptionLabel.text = [self.detailItem description];
+   }
+}
+
 - (void)didReceiveMemoryWarning
 {
    [super didReceiveMemoryWarning];
@@ -45,24 +70,24 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-   
+
    UIImage *defaultPhoto = [UIImage imageNamed:@"defaultPhoto.png"];
-   CGRect nubFrame = CGRectMake(0, 0, 75, 75);
+   CGRect cellFrame = CGRectMake(0, 0, 75, 75);
    NSInteger count = 10;
    NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:count];
    for (NSInteger index = 0; index < count; index++) {
-      PhotoWheelViewNub *newNub = [[PhotoWheelViewNub alloc] initWithFrame:nubFrame];
-      [newNub setImage:defaultPhoto];
+      PhotoWheelViewCell *cell = [[PhotoWheelViewCell alloc] initWithFrame:cellFrame];
+      [cell setImage:defaultPhoto];
       
-      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nubDoubleTapped:)];
+      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellDoubleTapped:)];
       [doubleTap setNumberOfTapsRequired:2];
-      [newNub addGestureRecognizer:doubleTap];
-
-      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(nubTapped:)];
-      [tap requireGestureRecognizerToFail:doubleTap];
-      [newNub addGestureRecognizer:tap];
+      [cell addGestureRecognizer:doubleTap];
       
-      [newArray addObject:newNub];
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
+      [tap requireGestureRecognizerToFail:doubleTap];
+      [cell addGestureRecognizer:tap];
+      
+      [newArray addObject:cell];
    }
    [self setData:[newArray copy]];
 }
@@ -122,34 +147,36 @@
 
 #pragma mark - WheelViewDataSource Methods
 
-- (NSInteger)wheelViewNumberOfNubs:(WheelView *)wheelView
+- (NSInteger)wheelViewNumberOfCells:(WheelView *)wheelView
 {
-   return [self.data count];
+   NSInteger count = [self.data count];
+   return count;
 }
 
-- (WheelViewNub *)wheelView:(WheelView *)wheelView nubAtIndex:(NSInteger)index
+- (WheelViewCell *)wheelView:(WheelView *)wheelView cellAtIndex:(NSInteger)index
 {
-   WheelViewNub *nub = [self.data objectAtIndex:index];
-   return nub;
+   WheelViewCell *cell = [self.data objectAtIndex:index];
+   return cell;
 }
 
 #pragma mark - Actions
 
-- (IBAction)styleValueChanged:(id)sender
+- (IBAction)segmentedControlValueChanged:(id)sender
 {
-   if ([sender selectedSegmentIndex] == 0) {
+   NSInteger index = [sender selectedSegmentIndex];
+   if (index == 0) {
       [self.wheelView setStyle:WheelViewStyleWheel];
    } else {
       [self.wheelView setStyle:WheelViewStyleCarousel];
    }
 }
 
-- (void)nubTapped:(id)sender
+- (void)cellTapped:(UIGestureRecognizer *)recognizer
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void)nubDoubleTapped:(id)sender
+- (void)cellDoubleTapped:(UIGestureRecognizer *)recognizer
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
 }

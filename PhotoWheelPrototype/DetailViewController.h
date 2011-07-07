@@ -11,9 +11,14 @@
 
 @interface DetailViewController : UIViewController <UISplitViewControllerDelegate, WheelViewDataSource>
 
+@property (strong, nonatomic) id detailItem;
+
+@property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
+
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
+
 @property (strong, nonatomic) IBOutlet WheelView *wheelView;
 
-- (IBAction)styleValueChanged:(id)sender;
+- (IBAction)segmentedControlValueChanged:(id)sender;
 
 @end
