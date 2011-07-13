@@ -13,7 +13,7 @@
 @interface NameEditorViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) id<NameEditorViewControllerDelegate> delegate;
+@property (strong, nonatomic) id<NameEditorViewControllerDelegate> delegate;
 @property (strong, nonatomic) NSIndexPath *indexPath;
 @property (nonatomic, copy) NSString *defaultNameText;
 

@@ -50,6 +50,7 @@
    if (delegate && [delegate respondsToSelector:@selector(nameEditorViewControllerDidCancel:)]) {
       [delegate nameEditorViewControllerDidCancel:self];
    }
+   [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)done:(id)sender
@@ -58,6 +59,7 @@
    if (delegate && [delegate respondsToSelector:@selector(nameEditorViewControllerDidFinish:)]) {
       [delegate nameEditorViewControllerDidFinish:self]; 
    }
+   [self dismissModalViewControllerAnimated:YES];
 }
 
 @end
