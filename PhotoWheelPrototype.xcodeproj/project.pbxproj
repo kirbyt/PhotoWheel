@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6885BB4613C4AF1E004093F7 /* SpinGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885BB4513C4AF1E004093F7 /* SpinGestureRecognizer.m */; };
 		68A55D3E13AA555B0007FF8F /* NameEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */; };
 		68A55D3F13AA555B0007FF8F /* NameEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */; };
 		68AC0B1513BD868A0075C1E2 /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AC0B1413BD868A0075C1E2 /* WheelView.m */; };
@@ -26,6 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6885BB4413C4AF1E004093F7 /* SpinGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SpinGestureRecognizer.h; sourceTree = "<group>"; };
+		6885BB4513C4AF1E004093F7 /* SpinGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinGestureRecognizer.m; sourceTree = "<group>"; };
 		68A55D3B13AA555B0007FF8F /* NameEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEditorViewController.h; sourceTree = "<group>"; };
 		68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEditorViewController.m; sourceTree = "<group>"; };
 		68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditorViewController.xib; sourceTree = "<group>"; };
@@ -112,6 +115,8 @@
 				68B2DEE713BFA9DA00BA2A7C /* PhotoWheelViewCell.h */,
 				68B2DEE813BFA9DA00BA2A7C /* PhotoWheelViewCell.m */,
 				68B2DEEB13BFB6AC00BA2A7C /* defaultPhoto.png */,
+				6885BB4413C4AF1E004093F7 /* SpinGestureRecognizer.h */,
+				6885BB4513C4AF1E004093F7 /* SpinGestureRecognizer.m */,
 				68DA2C4A13A99DD800BC0B80 /* Supporting Files */,
 			);
 			path = PhotoWheelPrototype;
@@ -201,6 +206,7 @@
 				68A55D3E13AA555B0007FF8F /* NameEditorViewController.m in Sources */,
 				68AC0B1513BD868A0075C1E2 /* WheelView.m in Sources */,
 				68B2DEE913BFA9DA00BA2A7C /* PhotoWheelViewCell.m in Sources */,
+				6885BB4613C4AF1E004093F7 /* SpinGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
