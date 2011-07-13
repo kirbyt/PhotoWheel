@@ -9,26 +9,12 @@
          continueAfterRunningActions = "No"
          isPathRelative = "1"
          filePath = "PhotoWheelPrototype/DetailViewController.m"
-         timestampString = "331247928.167903"
+         timestampString = "332273193.363399"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "197"
-         endingLineNumber = "197"
-         landmarkName = "-presentPhotoLibrary"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         isPathRelative = "1"
-         filePath = "PhotoWheelPrototype/DetailViewController.m"
-         timestampString = "331247948.474436"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "267"
-         endingLineNumber = "267"
-         landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
+         startingLineNumber = "230"
+         endingLineNumber = "230"
+         landmarkName = "-cellTapped:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
