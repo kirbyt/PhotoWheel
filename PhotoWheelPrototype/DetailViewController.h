@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "WheelView.h"
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate, WheelViewDataSource>
+@interface DetailViewController : UIViewController <UISplitViewControllerDelegate, WheelViewDataSource, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (strong, nonatomic) id detailItem;
 
