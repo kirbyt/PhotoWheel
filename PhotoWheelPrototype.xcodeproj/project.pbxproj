@@ -7,13 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6838920713BA2C07007E51B7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6838920613BA2C06007E51B7 /* QuartzCore.framework */; };
-		6839EFB713B52E0300BB83E9 /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839EFB613B52E0300BB83E9 /* WheelView.m */; };
-		6839EFBB13B5F7AB00BB83E9 /* PhotoWheelViewNub.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839EFBA13B5F7AB00BB83E9 /* PhotoWheelViewNub.m */; };
-		6839EFBD13B5F92100BB83E9 /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */; };
-		6839EFC413B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6839EFC313B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m */; };
+		6885BB4613C4AF1E004093F7 /* SpinGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6885BB4513C4AF1E004093F7 /* SpinGestureRecognizer.m */; };
 		68A55D3E13AA555B0007FF8F /* NameEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */; };
 		68A55D3F13AA555B0007FF8F /* NameEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */; };
+		68AC0B1513BD868A0075C1E2 /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AC0B1413BD868A0075C1E2 /* WheelView.m */; };
+		68B2DEE913BFA9DA00BA2A7C /* PhotoWheelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B2DEE813BFA9DA00BA2A7C /* PhotoWheelViewCell.m */; };
+		68B2DEEC13BFB6AC00BA2A7C /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B2DEEB13BFB6AC00BA2A7C /* defaultPhoto.png */; };
 		68DA2C4413A99DD800BC0B80 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA2C4313A99DD800BC0B80 /* UIKit.framework */; };
 		68DA2C4613A99DD800BC0B80 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA2C4513A99DD800BC0B80 /* Foundation.framework */; };
 		68DA2C4813A99DD800BC0B80 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68DA2C4713A99DD800BC0B80 /* CoreGraphics.framework */; };
@@ -28,17 +27,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6838920613BA2C06007E51B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		6839EFB513B52E0300BB83E9 /* WheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelView.h; sourceTree = "<group>"; };
-		6839EFB613B52E0300BB83E9 /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
-		6839EFB913B5F7AB00BB83E9 /* PhotoWheelViewNub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewNub.h; sourceTree = "<group>"; };
-		6839EFBA13B5F7AB00BB83E9 /* PhotoWheelViewNub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewNub.m; sourceTree = "<group>"; };
-		6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
-		6839EFC213B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OneFingerRotationGestureRecognizer.h; sourceTree = "<group>"; };
-		6839EFC313B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OneFingerRotationGestureRecognizer.m; sourceTree = "<group>"; };
+		6885BB4413C4AF1E004093F7 /* SpinGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SpinGestureRecognizer.h; sourceTree = "<group>"; };
+		6885BB4513C4AF1E004093F7 /* SpinGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinGestureRecognizer.m; sourceTree = "<group>"; };
 		68A55D3B13AA555B0007FF8F /* NameEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEditorViewController.h; sourceTree = "<group>"; };
 		68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEditorViewController.m; sourceTree = "<group>"; };
 		68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditorViewController.xib; sourceTree = "<group>"; };
+		68AC0B1313BD868A0075C1E2 /* WheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelView.h; sourceTree = "<group>"; };
+		68AC0B1413BD868A0075C1E2 /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
+		68B2DEE713BFA9DA00BA2A7C /* PhotoWheelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewCell.h; sourceTree = "<group>"; };
+		68B2DEE813BFA9DA00BA2A7C /* PhotoWheelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewCell.m; sourceTree = "<group>"; };
+		68B2DEEB13BFB6AC00BA2A7C /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		68DA2C3F13A99DD800BC0B80 /* PhotoWheelPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoWheelPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68DA2C4313A99DD800BC0B80 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68DA2C4513A99DD800BC0B80 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -62,7 +60,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6838920713BA2C07007E51B7 /* QuartzCore.framework in Frameworks */,
 				68DA2C4413A99DD800BC0B80 /* UIKit.framework in Frameworks */,
 				68DA2C4613A99DD800BC0B80 /* Foundation.framework in Frameworks */,
 				68DA2C4813A99DD800BC0B80 /* CoreGraphics.framework in Frameworks */,
@@ -92,7 +89,6 @@
 		68DA2C4213A99DD800BC0B80 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6838920613BA2C06007E51B7 /* QuartzCore.framework */,
 				68DA2C4313A99DD800BC0B80 /* UIKit.framework */,
 				68DA2C4513A99DD800BC0B80 /* Foundation.framework */,
 				68DA2C4713A99DD800BC0B80 /* CoreGraphics.framework */,
@@ -114,13 +110,13 @@
 				68A55D3B13AA555B0007FF8F /* NameEditorViewController.h */,
 				68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */,
 				68A55D3D13AA555B0007FF8F /* NameEditorViewController.xib */,
-				6839EFB513B52E0300BB83E9 /* WheelView.h */,
-				6839EFB613B52E0300BB83E9 /* WheelView.m */,
-				6839EFB913B5F7AB00BB83E9 /* PhotoWheelViewNub.h */,
-				6839EFBA13B5F7AB00BB83E9 /* PhotoWheelViewNub.m */,
-				6839EFBC13B5F92100BB83E9 /* defaultPhoto.png */,
-				6839EFC213B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.h */,
-				6839EFC313B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m */,
+				68AC0B1313BD868A0075C1E2 /* WheelView.h */,
+				68AC0B1413BD868A0075C1E2 /* WheelView.m */,
+				68B2DEE713BFA9DA00BA2A7C /* PhotoWheelViewCell.h */,
+				68B2DEE813BFA9DA00BA2A7C /* PhotoWheelViewCell.m */,
+				68B2DEEB13BFB6AC00BA2A7C /* defaultPhoto.png */,
+				6885BB4413C4AF1E004093F7 /* SpinGestureRecognizer.h */,
+				6885BB4513C4AF1E004093F7 /* SpinGestureRecognizer.m */,
 				68DA2C4A13A99DD800BC0B80 /* Supporting Files */,
 			);
 			path = PhotoWheelPrototype;
@@ -192,7 +188,7 @@
 				68DA2C5E13A99DD900BC0B80 /* RootViewController.xib in Resources */,
 				68DA2C6113A99DD900BC0B80 /* DetailViewController.xib in Resources */,
 				68A55D3F13AA555B0007FF8F /* NameEditorViewController.xib in Resources */,
-				6839EFBD13B5F92100BB83E9 /* defaultPhoto.png in Resources */,
+				68B2DEEC13BFB6AC00BA2A7C /* defaultPhoto.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,9 +204,9 @@
 				68DA2C5713A99DD900BC0B80 /* RootViewController.m in Sources */,
 				68DA2C5B13A99DD900BC0B80 /* DetailViewController.m in Sources */,
 				68A55D3E13AA555B0007FF8F /* NameEditorViewController.m in Sources */,
-				6839EFB713B52E0300BB83E9 /* WheelView.m in Sources */,
-				6839EFBB13B5F7AB00BB83E9 /* PhotoWheelViewNub.m in Sources */,
-				6839EFC413B6034C00BB83E9 /* OneFingerRotationGestureRecognizer.m in Sources */,
+				68AC0B1513BD868A0075C1E2 /* WheelView.m in Sources */,
+				68B2DEE913BFA9DA00BA2A7C /* PhotoWheelViewCell.m in Sources */,
+				6885BB4613C4AF1E004093F7 /* SpinGestureRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
