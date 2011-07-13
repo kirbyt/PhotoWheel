@@ -1,27 +1,29 @@
 //
-//  PhotoWheelViewNub.m
+//  PhotoWheelViewCell.m
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 6/25/11.
+//  Created by Kirby Turner on 7/2/11.
 //  Copyright 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "PhotoWheelViewNub.h"
+#import "PhotoWheelViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation PhotoWheelViewNub
+@implementation PhotoWheelViewCell
 
-- (void)setImage:(UIImage *)image
+- (void)setImage:(UIImage *)newImage
 {
-   // Add border and shadow.
+   // Add the image to the layer's contents.
    CALayer *layer = [self layer];
-   id imageRef = objc_unretainedObject([image CGImage]);
+   id imageRef = (__bridge id)[newImage CGImage];
    [layer setContents:imageRef];
+
+   // Add border and shadow.
    [layer setBorderColor:[UIColor colorWithWhite:1.0 alpha:1.0].CGColor];
    [layer setBorderWidth:5.0];
    [layer setShadowOffset:CGSizeMake(0, 3)];
    [layer setShadowOpacity:0.7];
-   [layer setShouldRasterize:YES];
+   [layer setShouldRasterize:YES];   
 }
 
 @end
