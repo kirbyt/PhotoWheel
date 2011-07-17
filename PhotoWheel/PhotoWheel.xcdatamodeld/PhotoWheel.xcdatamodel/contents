@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="844" systemVersion="10K540" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="848" systemVersion="10K540" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Photo" representedClassName="Photo">
         <attribute name="dateAdded" optional="YES" attributeType="Date"/>
         <attribute name="largeImageData" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
@@ -17,6 +17,6 @@
     </entity>
     <elements>
         <element name="Photo" positionX="160" positionY="192" width="128" height="135"/>
-        <element name="PhotoAlbum" positionX="-56" positionY="192" width="128" height="120"/>
+        <element name="PhotoAlbum" positionX="160" positionY="192" width="128" height="120"/>
     </elements>
 </model>

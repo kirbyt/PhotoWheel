@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		685DA52613D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 685DA52413D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld */; };
 		68B804E313B0B2A500EB3B6C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E213B0B2A500EB3B6C /* AboutViewController.m */; };
 		68B804E713B0B74200EB3B6C /* PhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */; };
 		68B804EE13B0B93000EB3B6C /* CustomPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */; };
@@ -35,7 +36,6 @@
 		68DA37EF13B02F23003272F9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DA37EE13B02F23003272F9 /* main.m */; };
 		68DA37F313B02F23003272F9 /* PhotoWheelAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DA37F213B02F23003272F9 /* PhotoWheelAppDelegate.m */; };
 		68DA380113B030CC003272F9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68DA380013B030CC003272F9 /* MainStoryboard.storyboard */; };
-		68EE13DA13D35831009D2CC7 /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 68EE13D813D35831009D2CC7 /* PhotoWheel.xcdatamodeld */; };
 		68EE13E313D35883009D2CC7 /* PhotoWheelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EE13DC13D35883009D2CC7 /* PhotoWheelViewCell.m */; };
 		68EE13E413D35883009D2CC7 /* SpinGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EE13DE13D35883009D2CC7 /* SpinGestureRecognizer.m */; };
 		68EE13E513D35883009D2CC7 /* UIImage+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68EE13E013D35883009D2CC7 /* UIImage+PWCategory.m */; };
@@ -47,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		685DA52513D35BFE00FACBE9 /* PhotoWheel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoWheel.xcdatamodel; sourceTree = "<group>"; };
 		68B804E113B0B2A500EB3B6C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		68B804E213B0B2A500EB3B6C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
@@ -86,7 +87,6 @@
 		68DA37F113B02F23003272F9 /* PhotoWheelAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoWheelAppDelegate.h; sourceTree = "<group>"; };
 		68DA37F213B02F23003272F9 /* PhotoWheelAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelAppDelegate.m; sourceTree = "<group>"; };
 		68DA380013B030CC003272F9 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
-		68EE13D913D35831009D2CC7 /* PhotoWheel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoWheel.xcdatamodel; sourceTree = "<group>"; };
 		68EE13DB13D35883009D2CC7 /* PhotoWheelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewCell.h; sourceTree = "<group>"; };
 		68EE13DC13D35883009D2CC7 /* PhotoWheelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewCell.m; sourceTree = "<group>"; };
 		68EE13DD13D35883009D2CC7 /* SpinGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinGestureRecognizer.h; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 				68F3286413D35729006A9CEB /* Photo.m */,
 				68F3286513D35729006A9CEB /* PhotoAlbum.h */,
 				68F3286613D35729006A9CEB /* PhotoAlbum.m */,
-				68EE13D813D35831009D2CC7 /* PhotoWheel.xcdatamodeld */,
+				685DA52413D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld */,
 			);
 			name = "Data Model";
 			sourceTree = "<group>";
@@ -318,11 +318,11 @@
 				68F3286A13D35729006A9CEB /* _PhotoAlbum.m in Sources */,
 				68F3286B13D35729006A9CEB /* Photo.m in Sources */,
 				68F3286C13D35729006A9CEB /* PhotoAlbum.m in Sources */,
-				68EE13DA13D35831009D2CC7 /* PhotoWheel.xcdatamodeld in Sources */,
 				68EE13E313D35883009D2CC7 /* PhotoWheelViewCell.m in Sources */,
 				68EE13E413D35883009D2CC7 /* SpinGestureRecognizer.m in Sources */,
 				68EE13E513D35883009D2CC7 /* UIImage+PWCategory.m in Sources */,
 				68EE13E613D35883009D2CC7 /* WheelView.m in Sources */,
+				685DA52613D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,12 +433,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		68EE13D813D35831009D2CC7 /* PhotoWheel.xcdatamodeld */ = {
+		685DA52413D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				68EE13D913D35831009D2CC7 /* PhotoWheel.xcdatamodel */,
+				685DA52513D35BFE00FACBE9 /* PhotoWheel.xcdatamodel */,
 			);
-			currentVersion = 68EE13D913D35831009D2CC7 /* PhotoWheel.xcdatamodel */;
+			currentVersion = 685DA52513D35BFE00FACBE9 /* PhotoWheel.xcdatamodel */;
 			path = PhotoWheel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
