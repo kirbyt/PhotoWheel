@@ -33,7 +33,7 @@
    [self addChildViewController:childController];
    [childController didMoveToParentViewController:self];
    
-   NSInteger capacity = 12;
+   NSInteger capacity = 7;
    self.cachedWheelViewCells = [[NSMutableArray alloc] initWithCapacity:capacity];
    for (NSInteger index = 0; index < capacity; index++) {
       [self.cachedWheelViewCells addObject:[NSNull null]];
@@ -108,22 +108,16 @@
 {
    id cell = [self.cachedWheelViewCells objectAtIndex:index];
    if (cell == [NSNull null]) {
-      cell = [[PhotoWheelViewCell alloc] initWithFrame:CGRectMake(0, 0, 75, 75)];
+      cell = [PhotoWheelViewCell photoWheelViewCell];
       [self.cachedWheelViewCells replaceObjectAtIndex:index withObject:cell];
    }
    
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    PhotoAlbum *photoAlbum = [self.fetchedResultsController objectAtIndexPath:indexPath];
    Photo *photo = [photoAlbum keyPhoto];
-   
-   UIImage *image = nil;
    if (photo) {
-      image = [photo thumbnailImage];
-   } else {
-      image = [UIImage imageNamed:@"defaultPhoto.png"];
+      [[cell imageView] setImage:[photo thumbnailImage]];
    }
-   
-   [cell setImage:image];
    
    return cell;
 }

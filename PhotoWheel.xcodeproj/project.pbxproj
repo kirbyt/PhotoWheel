@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		685DA52613D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 685DA52413D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld */; };
 		685DA52C13D36E1200FACBE9 /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 685DA52B13D36E1200FACBE9 /* defaultPhoto.png */; };
+		685DA53113D37E2B00FACBE9 /* stack-overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 685DA53013D37E2B00FACBE9 /* stack-overlay.png */; };
+		685DA53313D37E5D00FACBE9 /* PhotoWheelViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685DA53213D37E5C00FACBE9 /* PhotoWheelViewCell.xib */; };
 		68B804E313B0B2A500EB3B6C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E213B0B2A500EB3B6C /* AboutViewController.m */; };
 		68B804E713B0B74200EB3B6C /* PhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */; };
 		68B804EE13B0B93000EB3B6C /* CustomPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */; };
@@ -50,6 +52,8 @@
 /* Begin PBXFileReference section */
 		685DA52513D35BFE00FACBE9 /* PhotoWheel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoWheel.xcdatamodel; sourceTree = "<group>"; };
 		685DA52B13D36E1200FACBE9 /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
+		685DA53013D37E2B00FACBE9 /* stack-overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-overlay.png"; sourceTree = "<group>"; };
+		685DA53213D37E5C00FACBE9 /* PhotoWheelViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWheelViewCell.xib; sourceTree = "<group>"; };
 		68B804E113B0B2A500EB3B6C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		68B804E213B0B2A500EB3B6C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
@@ -139,6 +143,7 @@
 				68D2D62C13B03920000308BB /* stack-add.png */,
 				68D2D62713B03638000308BB /* stack-bg.png */,
 				68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */,
+				685DA53013D37E2B00FACBE9 /* stack-overlay.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -195,6 +200,7 @@
 				68B804E213B0B2A500EB3B6C /* AboutViewController.m */,
 				68EE13DB13D35883009D2CC7 /* PhotoWheelViewCell.h */,
 				68EE13DC13D35883009D2CC7 /* PhotoWheelViewCell.m */,
+				685DA53213D37E5C00FACBE9 /* PhotoWheelViewCell.xib */,
 				68EE13DD13D35883009D2CC7 /* SpinGestureRecognizer.h */,
 				68EE13DE13D35883009D2CC7 /* SpinGestureRecognizer.m */,
 				68EE13DF13D35883009D2CC7 /* UIImage+PWCategory.h */,
@@ -299,6 +305,8 @@
 				68D2D63B13B03AC4000308BB /* IconSmall@2x.png in Resources */,
 				68D2D63C13B03AC4000308BB /* iTunesArtwork in Resources */,
 				685DA52C13D36E1200FACBE9 /* defaultPhoto.png in Resources */,
+				685DA53113D37E2B00FACBE9 /* stack-overlay.png in Resources */,
+				685DA53313D37E5D00FACBE9 /* PhotoWheelViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

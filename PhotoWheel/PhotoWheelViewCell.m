@@ -11,19 +11,17 @@
 
 @implementation PhotoWheelViewCell
 
-- (void)setImage:(UIImage *)newImage
-{
-   // Add the image to the layer's contents.
-   CALayer *layer = [self layer];
-   id imageRef = (__bridge id)[newImage CGImage];
-   [layer setContents:imageRef];
+@synthesize imageView = imageView_;
+@synthesize label = label_;
 
-   // Add border and shadow.
-   [layer setBorderColor:[UIColor colorWithWhite:1.0 alpha:1.0].CGColor];
-   [layer setBorderWidth:5.0];
-   [layer setShadowOffset:CGSizeMake(0, 3)];
-   [layer setShadowOpacity:0.7];
-   [layer setShouldRasterize:YES];   
++ (PhotoWheelViewCell *)photoWheelViewCell
+{
+   NSString *nibName = NSStringFromClass([self class]);
+   UINib *nib = [UINib nibWithNibName:nibName bundle:nil];
+   NSArray *nibObjects = [nib instantiateWithOwner:nil options:nil];
+   // Verify that the top level object is in fact of the correct type.
+   NSAssert2([nibObjects count] > 0 && [[nibObjects objectAtIndex:0] isKindOfClass:[self class]], @"Nib '%@' does not contain top level view of type %@.", nibName, nibName);
+   return [nibObjects objectAtIndex:0];   
 }
 
 @end
