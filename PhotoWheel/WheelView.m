@@ -128,6 +128,11 @@
    [self setAngle:[self currentAngle]];
 }
 
+- (void)reloadData
+{
+   [self layoutSubviews];
+}
+
 @end
 
 

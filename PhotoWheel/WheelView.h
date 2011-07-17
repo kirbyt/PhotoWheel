@@ -22,6 +22,8 @@ typedef enum  {
 @property (nonatomic, strong) IBOutlet id<WheelViewDataSource> dataSource;
 @property (nonatomic, assign) WheelViewStyle style;
 
+- (void)reloadData;
+
 @end
 
 
