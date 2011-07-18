@@ -123,16 +123,13 @@
    }
    float angleToAdd = 360.0f / numberOfVisibleCells;
 
-   NSInteger startIndex = 0;
-   NSInteger stopIndex = MIN(numberOfVisibleCells, cellCount);
+
+   CGFloat diff = MAX(abs(angle) - 180.0f, 0);
+   NSInteger offset = diff / angleToAdd;
+   NSInteger startIndex = 0; //offset;
+   NSInteger stopIndex = MIN(numberOfVisibleCells + offset, cellCount);
+//   NSLog(@"angle: %f offset: %i startIndex: %i stopIndex: %i", angle, offset, startIndex, stopIndex);
    
-//   NSInteger topIndex = (angle / 360.0f) * numberOfVisibleCells;
-//   if (topIndex > 
-//   
-//   ;
-//   NSInteger startIndex = abs(topIndex);
-//   NSInteger stopIndex = MIN(startIndex + numberOfVisibleCells, cellCount);
-   NSLog(@"angle: %f startIndex: %i stopIndex: %i", angle, startIndex, stopIndex);
    
    // Queue non-visible cells.
    for (id view in [self subviews]) {
