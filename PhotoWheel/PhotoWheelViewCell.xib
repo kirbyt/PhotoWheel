@@ -35,18 +35,18 @@
 				<string key="IBProxiedObjectIdentifier">IBFirstResponder</string>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
-			<object class="IBUIView" id="797386588">
+			<object class="IBUIView" id="239542384">
 				<reference key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<object class="NSMutableArray" key="NSSubviews">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<object class="IBUIImageView" id="562884207">
-						<reference key="NSNextResponder" ref="797386588"/>
+					<object class="IBUIImageView" id="749805175">
+						<reference key="NSNextResponder" ref="239542384"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{12, 10}, {75, 75}}</string>
-						<reference key="NSSuperview" ref="797386588"/>
+						<reference key="NSSuperview" ref="239542384"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="85086638"/>
+						<reference key="NSNextKeyView" ref="673571678"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -54,13 +54,13 @@
 							<string key="NSResourceName">defaultPhoto.png</string>
 						</object>
 					</object>
-					<object class="IBUIImageView" id="724344540">
-						<reference key="NSNextResponder" ref="797386588"/>
+					<object class="IBUIImageView" id="1002831342">
+						<reference key="NSNextResponder" ref="239542384"/>
 						<int key="NSvFlags">274</int>
 						<string key="NSFrameSize">{97, 97}</string>
-						<reference key="NSSuperview" ref="797386588"/>
+						<reference key="NSSuperview" ref="239542384"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="562884207"/>
+						<reference key="NSNextKeyView" ref="749805175"/>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
@@ -68,11 +68,11 @@
 							<string key="NSResourceName">stack-overlay.png</string>
 						</object>
 					</object>
-					<object class="IBUILabel" id="85086638">
-						<reference key="NSNextResponder" ref="797386588"/>
+					<object class="IBUILabel" id="673571678">
+						<reference key="NSNextResponder" ref="239542384"/>
 						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{0, 90}, {97, 21}}</string>
-						<reference key="NSSuperview" ref="797386588"/>
+						<reference key="NSSuperview" ref="239542384"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
@@ -87,6 +87,7 @@
 						</object>
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
+						<bool key="IBUIAdjustsFontSizeToFit">NO</bool>
 						<float key="IBUIMinimumFontSize">10</float>
 						<int key="IBUITextAlignment">1</int>
 						<int key="IBUILineBreakMode">5</int>
@@ -104,7 +105,7 @@
 				<string key="NSFrameSize">{97, 117}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
-				<reference key="NSNextKeyView" ref="724344540"/>
+				<reference key="NSNextKeyView" ref="1002831342"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
 					<bytes key="NSWhite">MCAwAA</bytes>
@@ -115,6 +116,22 @@
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<object class="NSMutableArray" key="connectionRecords">
 				<bool key="EncodedWithXMLCoder">YES</bool>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">imageView</string>
+						<reference key="source" ref="239542384"/>
+						<reference key="destination" ref="1002831342"/>
+					</object>
+					<int key="connectionID">6</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">label</string>
+						<reference key="source" ref="239542384"/>
+						<reference key="destination" ref="673571678"/>
+					</object>
+					<int key="connectionID">7</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -140,29 +157,29 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">2</int>
-						<reference key="object" ref="797386588"/>
+						<reference key="object" ref="239542384"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="724344540"/>
-							<reference ref="562884207"/>
-							<reference ref="85086638"/>
+							<reference ref="1002831342"/>
+							<reference ref="749805175"/>
+							<reference ref="673571678"/>
 						</object>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">3</int>
-						<reference key="object" ref="724344540"/>
-						<reference key="parent" ref="797386588"/>
+						<reference key="object" ref="1002831342"/>
+						<reference key="parent" ref="239542384"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">4</int>
-						<reference key="object" ref="562884207"/>
-						<reference key="parent" ref="797386588"/>
+						<reference key="object" ref="749805175"/>
+						<reference key="parent" ref="239542384"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">5</int>
-						<reference key="object" ref="85086638"/>
-						<reference key="parent" ref="797386588"/>
+						<reference key="object" ref="673571678"/>
+						<reference key="parent" ref="239542384"/>
 					</object>
 				</object>
 			</object>
@@ -203,7 +220,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">5</int>
+			<int key="maxID">7</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

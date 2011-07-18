@@ -113,6 +113,8 @@
    
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    PhotoAlbum *photoAlbum = [self.fetchedResultsController objectAtIndexPath:indexPath];
+   [[cell label] setText:[photoAlbum name]];
+
    Photo *photo = [photoAlbum keyPhoto];
    if (photo) {
       [[cell imageView] setImage:[photo thumbnailImage]];
