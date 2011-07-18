@@ -21,6 +21,8 @@ typedef enum  {
 
 @property (nonatomic, strong) IBOutlet id<WheelViewDataSource> dataSource;
 @property (nonatomic, assign) WheelViewStyle style;
+@property (nonatomic, assign) CGFloat selectAtDegrees;
+@property (nonatomic, assign) NSInteger selectedIndex;
 
 - (void)reloadData;
 
@@ -31,6 +33,8 @@ typedef enum  {
 @required
 - (NSInteger)wheelViewNumberOfCells:(WheelView *)wheelView;
 - (WheelViewCell *)wheelView:(WheelView *)wheelView cellAtIndex:(NSInteger)index;
+@optional
+- (void)wheelView:(WheelView *)wheelView didSelectCellAtIndex:(NSInteger)index;
 @end
 
 

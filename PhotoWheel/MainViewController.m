@@ -100,7 +100,6 @@
 {
    NSArray *sections = self.fetchedResultsController.sections;
    NSInteger count = [[sections objectAtIndex:0] numberOfObjects];
-   NSLog(@"cell count: %i", count);
    return count;
 }
 
@@ -120,6 +119,11 @@
    }
    
    return cell;
+}
+
+- (void)wheelView:(WheelView *)wheelView didSelectCellAtIndex:(NSInteger)index
+{
+   NSLog(@"index: %i", index);
 }
 
 #pragma mark - Actions

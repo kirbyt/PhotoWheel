@@ -19,9 +19,13 @@
 @synthesize dataSource = dataSource_;
 @synthesize style = style_;
 @synthesize currentAngle = currentAngle_;
+@synthesize selectAtDegrees = selectAtDegrees_;
+@synthesize selectedIndex = selectedIndex_;
 
 - (void)commonInit
 {
+   [self setSelectedIndex:-1];
+   [self setSelectAtDegrees:0.0];
    [self setCurrentAngle:0.0];
    
    SpinGestureRecognizer *spin = [[SpinGestureRecognizer alloc] initWithTarget:self action:@selector(spin:)];
@@ -55,6 +59,25 @@
    return self;
 }
 
+- (BOOL)isSelectedItemForAngle:(CGFloat)angle
+{
+   // The selected item is one whose angle is
+   // at or near 0 degrees.
+   //
+   // To calculate the selected item based on the 
+   // angle, we must convert the angle to the 
+   // relative angle between 0 and 360 degrees.
+   
+   CGFloat relativeAngle = fabsf(fmodf(angle, 360.0));
+   
+   // Pad the selection point so it does not
+   // have to be exact.
+   CGFloat padding = 15.0;   // Allow 15 degrees on either side.
+   
+   BOOL isSelectedItem = relativeAngle >= (360.0 - padding) || relativeAngle <= padding;
+   return isSelectedItem;
+}
+
 - (void)setAngle:(CGFloat)angle
 {
    // The follow code is inspired from the carousel example at:
@@ -75,6 +98,14 @@
       WheelViewCell *cell = [[self dataSource] wheelView:self cellAtIndex:index];
       if ([cell superview] == nil) {
          [self addSubview:cell];
+      }
+
+      // Set the selected index if it has changed.
+      if (index != [self selectedIndex] && [self isSelectedItemForAngle:angle]) {
+         [self setSelectedIndex:index];
+         if ([[self dataSource] respondsToSelector:@selector(wheelView:didSelectCellAtIndex:)]) {
+            [[self dataSource] wheelView:self didSelectCellAtIndex:index];
+         }
       }
       
       float angleInRadians = (angle + 180.0) * M_PI / 180.0f;
