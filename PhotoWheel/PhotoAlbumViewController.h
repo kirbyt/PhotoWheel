@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoAlbumViewController : UIViewController
+@interface PhotoAlbumViewController : UIViewController <UITextFieldDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;
+@property (nonatomic, strong) IBOutlet UITextField *textField;
 
+- (IBAction)action:(id)sender;
+- (IBAction)addPhoto:(id)sender;
 - (IBAction)displayPhotoBrowser:(id)sender;
 - (void)refresh;
 

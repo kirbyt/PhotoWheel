@@ -11,6 +11,7 @@
 		685DA52C13D36E1200FACBE9 /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 685DA52B13D36E1200FACBE9 /* defaultPhoto.png */; };
 		685DA53113D37E2B00FACBE9 /* stack-overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 685DA53013D37E2B00FACBE9 /* stack-overlay.png */; };
 		685DA53313D37E5D00FACBE9 /* PhotoWheelViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 685DA53213D37E5C00FACBE9 /* PhotoWheelViewCell.xib */; };
+		685DA53613D459B800FACBE9 /* ClearToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 685DA53513D459B600FACBE9 /* ClearToolbar.m */; };
 		68B804E313B0B2A500EB3B6C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E213B0B2A500EB3B6C /* AboutViewController.m */; };
 		68B804E713B0B74200EB3B6C /* PhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */; };
 		68B804EE13B0B93000EB3B6C /* CustomPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */; };
@@ -54,6 +55,8 @@
 		685DA52B13D36E1200FACBE9 /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		685DA53013D37E2B00FACBE9 /* stack-overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-overlay.png"; sourceTree = "<group>"; };
 		685DA53213D37E5C00FACBE9 /* PhotoWheelViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWheelViewCell.xib; sourceTree = "<group>"; };
+		685DA53413D459B500FACBE9 /* ClearToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearToolbar.h; sourceTree = "<group>"; };
+		685DA53513D459B600FACBE9 /* ClearToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearToolbar.m; sourceTree = "<group>"; };
 		68B804E113B0B2A500EB3B6C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		68B804E213B0B2A500EB3B6C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
@@ -207,6 +210,8 @@
 				68EE13E013D35883009D2CC7 /* UIImage+PWCategory.m */,
 				68EE13E113D35883009D2CC7 /* WheelView.h */,
 				68EE13E213D35883009D2CC7 /* WheelView.m */,
+				685DA53413D459B500FACBE9 /* ClearToolbar.h */,
+				685DA53513D459B600FACBE9 /* ClearToolbar.m */,
 				68D2D62313B0359F000308BB /* images */,
 				68DA37E913B02F23003272F9 /* Supporting Files */,
 			);
@@ -335,6 +340,7 @@
 				68EE13E513D35883009D2CC7 /* UIImage+PWCategory.m in Sources */,
 				68EE13E613D35883009D2CC7 /* WheelView.m in Sources */,
 				685DA52613D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld in Sources */,
+				685DA53613D459B800FACBE9 /* ClearToolbar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
