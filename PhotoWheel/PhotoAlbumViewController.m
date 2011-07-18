@@ -328,7 +328,7 @@
    }
    
    Photo *photo = [self objectAtIndex:index];
-   [cell setImage:[photo smallImage] withShadow:YES];
+   [cell setImage:[photo smallImage] withShadow:NO];
    
    return cell;
 }
