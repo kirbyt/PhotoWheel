@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoAlbumViewController : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, UIAlertViewDelegate>
+@interface PhotoAlbumViewController : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;
 @property (nonatomic, strong) IBOutlet UITextField *textField;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *addButton;
 
 - (IBAction)action:(id)sender;
 - (IBAction)addPhoto:(id)sender;

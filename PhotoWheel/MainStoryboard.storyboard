@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1891" systemVersion="10K540" targetRuntime="iOS.CocoaTouch.iPad" nextObjectID="76" propertyAccessControl="none" initialViewController="41">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1891" systemVersion="10K540" targetRuntime="iOS.CocoaTouch.iPad" nextObjectID="77" propertyAccessControl="none" initialViewController="41">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="884"/>
@@ -214,6 +214,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="68" id="76"/>
                         <outlet property="textField" destination="66" id="73"/>
                     </connections>
                 </viewController>
@@ -257,6 +258,7 @@
                 <relationship kind="action" name="action:"/>
                 <relationship kind="action" name="addPhoto:"/>
                 <relationship kind="action" name="displayPhotoBrowser:"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
             </relationships>
         </class>

@@ -9,9 +9,12 @@
 #import "PhotoAlbumViewController.h"
 #import "MainViewController.h"
 #import "PhotoAlbum.h"
+#import "Photo.h"
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
+@property (nonatomic, strong) UIImagePickerController *imagePickerController;
+@property (nonatomic, strong) UIPopoverController *popoverController;
 @end
 
 @implementation PhotoAlbumViewController
@@ -19,7 +22,10 @@
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize objectID = objectID_;
 @synthesize textField = textField_;
+@synthesize addButton = addButton_;
 @synthesize photoAlbum = photoAlbum_;
+@synthesize imagePickerController = imagePickerController_;
+@synthesize popoverController = popoverController_;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -33,6 +39,19 @@
 {
    [super viewDidUnload];
    [self setTextField:nil];
+   [self setAddButton:nil];
+}
+
+- (UIImagePickerController *)imagePickerController
+{
+   if (imagePickerController_) {
+      return imagePickerController_;
+   }
+   
+   self.imagePickerController = [[UIImagePickerController alloc] init];
+   [self.imagePickerController setDelegate:self];
+   
+   return imagePickerController_;
 }
 
 #pragma mark - Photo Album Management
@@ -82,6 +101,37 @@
    }
 }
 
+#pragma mark - Image Picker Helper Methods
+
+- (void)presentCamera
+{
+   // Display the camera.
+   UIImagePickerController *imagePicker = [self imagePickerController];
+   [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+   [self presentModalViewController:imagePicker animated:YES];
+}
+
+- (void)presentPhotoLibrary
+{
+   // Display assets from the photo library only.
+   UIImagePickerController *imagePicker = [self imagePickerController];
+   [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+   
+   UIPopoverController *newPopoverController = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+   [newPopoverController presentPopoverFromBarButtonItem:[self addButton] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   [self setPopoverController:newPopoverController];
+}
+
+- (void)presentPhotoPickerMenu
+{
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+   [actionSheet setDelegate:self];
+   [actionSheet addButtonWithTitle:@"Take Photo"];
+   [actionSheet addButtonWithTitle:@"Choose from Library"];
+   [actionSheet setTag:1];
+   [actionSheet showFromBarButtonItem:[self addButton] animated:YES];
+}
+
 #pragma mark - Actions
 
 - (IBAction)action:(id)sender
@@ -95,7 +145,12 @@
 
 - (IBAction)addPhoto:(id)sender
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+   if (hasCamera) {
+      [self presentPhotoPickerMenu];
+   } else {
+      [self presentPhotoLibrary];
+   }
 }
 
 - (IBAction)displayPhotoBrowser:(id)sender 
@@ -110,16 +165,22 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-   switch (buttonIndex) {
-      case 0:
-         [self confirmDeletePhotoAlbum];
-         break;
+   if ([actionSheet tag] == 0) {
+      switch (buttonIndex) {
+         case 0:
+            [self confirmDeletePhotoAlbum];
+            break;
+      }
+   } else {
+      switch (buttonIndex) {
+         case 0:
+            [self presentCamera];
+            break;
+         case 1:
+            [self presentPhotoLibrary];
+            break;
+      }
    }
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-//   [self setActionSheet:nil];
 }
 
 #pragma mark - UITextFieldDelegate Methods
@@ -146,6 +207,34 @@
 {
    [textField resignFirstResponder];
    return NO;
+}
+
+#pragma mark - UIImagePickerControllerDelegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+   // If the popover controller is available then
+   // assume the photo is selected from the library
+   // and not from the camera.
+   BOOL takenWithCamera = ([self popoverController] == nil);
+   
+   if (takenWithCamera) {
+      [self dismissModalViewControllerAnimated:YES];
+   } else {
+      [self.popoverController dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
+   // Retrieve and display the image.
+   UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+
+   NSManagedObjectContext *context = [self managedObjectContext];
+   Photo *newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+   [newPhoto setDateAdded:[NSDate date]];
+   [newPhoto saveImage:image];
+   [newPhoto setPhotoAlbum:[self photoAlbum]];
+   
+   [self saveChanges];
 }
 
 @end
