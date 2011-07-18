@@ -123,7 +123,15 @@
 
 - (void)wheelView:(WheelView *)wheelView didSelectCellAtIndex:(NSInteger)index
 {
-   NSLog(@"index: %i", index);
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   PhotoAlbum *photoAlbum = [self.fetchedResultsController objectAtIndexPath:indexPath];
+   
+   // There is only one view controller in childViewControllers so
+   // grabbing the last one is okay.
+   id childViewController = [[self childViewControllers] lastObject];
+   [childViewController setManagedObjectContext:[self managedObjectContext]];
+   [childViewController setObjectID:[photoAlbum objectID]];
+   [childViewController refresh];
 }
 
 #pragma mark - Actions

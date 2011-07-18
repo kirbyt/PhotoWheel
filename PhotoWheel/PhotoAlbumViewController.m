@@ -11,6 +11,9 @@
 
 @implementation PhotoAlbumViewController
 
+@synthesize managedObjectContext = managedObjectContext_;
+@synthesize objectID = objectID_;
+
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
    // Position the view within the new parent.
@@ -25,6 +28,11 @@
    if (parent && [parent respondsToSelector:@selector(displayPhotoBrowser)]) {
       [parent displayPhotoBrowser];
    }
+}
+
+- (void)refresh
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

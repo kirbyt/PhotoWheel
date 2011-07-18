@@ -10,6 +10,10 @@
 
 @interface PhotoAlbumViewController : UIViewController
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSManagedObjectID *objectID;
+
 - (IBAction)displayPhotoBrowser:(id)sender;
+- (void)refresh;
 
 @end
