@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GridView.h"
 
-@interface PhotoAlbumViewController : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface PhotoAlbumViewController : UIViewController <UITextFieldDelegate, UIActionSheetDelegate, UIAlertViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, NSFetchedResultsControllerDelegate, GridViewDataSource>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addButton;
+@property (nonatomic, strong) IBOutlet GridView *gridView;
 
 - (IBAction)action:(id)sender;
 - (IBAction)addPhoto:(id)sender;

@@ -15,5 +15,6 @@
 - (UIImage *)originalImage;
 - (UIImage *)largeImage;
 - (UIImage *)thumbnailImage;
+- (UIImage *)smallImage;
 
 @end

@@ -10,11 +10,13 @@
 #import "MainViewController.h"
 #import "PhotoAlbum.h"
 #import "Photo.h"
+#import "ImageGridViewCell.h"
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIPopoverController *popoverController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation PhotoAlbumViewController
@@ -23,9 +25,11 @@
 @synthesize objectID = objectID_;
 @synthesize textField = textField_;
 @synthesize addButton = addButton_;
+@synthesize gridView = gridView_;
 @synthesize photoAlbum = photoAlbum_;
 @synthesize imagePickerController = imagePickerController_;
 @synthesize popoverController = popoverController_;
+@synthesize fetchedResultsController = fetchedResultsController_;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -35,11 +39,18 @@
    [[self view] setFrame:newFrame];
 }
 
+- (void)viewDidLoad
+{
+   [super viewDidLoad];
+   [[self gridView] setAlwaysBounceVertical:YES];
+}
+
 - (void)viewDidUnload
 {
    [super viewDidUnload];
    [self setTextField:nil];
    [self setAddButton:nil];
+   [self setGridView:nil];
 }
 
 - (UIImagePickerController *)imagePickerController
@@ -60,6 +71,8 @@
 {
    self.photoAlbum = (PhotoAlbum *)[self.managedObjectContext objectWithID:[self objectID]];
    [self.textField setText:[self.photoAlbum name]];
+   [self setFetchedResultsController:nil];
+   [self.gridView reloadData];
 }
 
 - (void)saveChanges
@@ -235,6 +248,99 @@
    [newPhoto setPhotoAlbum:[self photoAlbum]];
    
    [self saveChanges];
+}
+
+#pragma mark - NSFetchedResultsController Helper Methods
+
+- (NSInteger)numberOfObjects
+{
+   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
+   return count;
+}
+
+- (id)objectAtIndex:(NSInteger)index
+{
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   id object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   return object;
+}
+
+#pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate Methods
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+   if (fetchedResultsController_) {
+      return fetchedResultsController_;
+   }
+   
+   NSManagedObjectContext *context = [self managedObjectContext];
+   if (!context) {
+      return nil;
+   }
+   
+   NSString *cacheName = [NSString stringWithFormat:@"%@-%@", [self.photoAlbum name], [self.photoAlbum dateAdded]];
+   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:context];
+   [fetchRequest setEntity:entityDescription];
+   
+   NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES];
+   [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+   
+   [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"photoAlbum = %@", [self photoAlbum]]];
+   
+   NSFetchedResultsController *newFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:cacheName];
+   [newFetchedResultsController setDelegate:self];
+   [self setFetchedResultsController:newFetchedResultsController];
+   
+	NSError *error = nil;
+	if (![[self fetchedResultsController] performFetch:&error])
+   {
+      /*
+       Replace this implementation with code to handle the error appropriately.
+       
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+       */
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+	}
+   
+   return fetchedResultsController_;
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+   [[self gridView] reloadData];
+}
+
+#pragma mark - GridViewDataSource Methods
+
+- (NSInteger)gridViewNumberOfCells:(GridView *)gridView
+{
+   NSInteger count = [self numberOfObjects];
+   return count;
+}
+
+- (GridViewCell *)gridView:(GridView *)gridView cellAtIndex:(NSInteger)index
+{
+   ImageGridViewCell *cell = [gridView dequeueReusableCell];
+   if (cell == nil) {
+      cell = [ImageGridViewCell imageGridViewCell];
+   }
+   
+   Photo *photo = [self objectAtIndex:index];
+   [cell setImage:[photo smallImage] withShadow:YES];
+   
+   return cell;
+}
+
+- (CGSize)gridViewCellSize:(GridView *)gridView
+{
+   return [ImageGridViewCell size];
+}
+
+- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
 @end

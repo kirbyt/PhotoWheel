@@ -15,6 +15,7 @@
 @dynamic originalImageData;
 @dynamic thumbnailImageData;
 @dynamic largeImageData;
+@dynamic smallImageData;
 @dynamic photoAlbum;
 
 @end

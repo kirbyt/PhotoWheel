@@ -34,6 +34,12 @@
 	UIImage *largeImage = [newImage pw_imageScaleAspectToMaxSize:maxSize];
 	NSData *largeImageData = UIImageJPEGRepresentation(largeImage, 0.8);
 	[self setLargeImageData:largeImageData];
+   
+	// Save small image
+	CGSize smallSize = CGSizeMake(100.0, 100.0);
+	UIImage *smallImage = [newImage pw_imageScaleAndCropToMaxSize:smallSize];
+	NSData *smallImageData = UIImageJPEGRepresentation(smallImage, 0.8);
+	[self setSmallImageData:smallImageData];
 }
 
 - (UIImage *)originalImage;
@@ -49,6 +55,11 @@
 - (UIImage *)thumbnailImage;
 {
 	return [UIImage imageWithData:[self thumbnailImageData]];
+}
+
+- (UIImage *)smallImage
+{
+   return [UIImage imageWithData:[self smallImageData]];
 }
 
 @end
