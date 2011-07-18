@@ -137,7 +137,8 @@
 - (IBAction)addPhotoAlbum:(id)sender
 {
    NSManagedObjectContext *context = [self managedObjectContext];
-   [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:context];
+   PhotoAlbum *photoAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:context];
+   [photoAlbum setDateAdded:[NSDate date]];
 
    // Save the context.
    NSError *error = nil;
