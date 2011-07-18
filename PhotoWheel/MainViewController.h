@@ -10,7 +10,7 @@
 #import "WheelView.h"
 
 
-@interface MainViewController : UIViewController <WheelViewDataSource, NSFetchedResultsControllerDelegate>
+@interface MainViewController : UIViewController <WheelViewDataSource, WheelViewDelegate, NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) IBOutlet WheelView *wheelView;

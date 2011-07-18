@@ -15,7 +15,6 @@
 
 @interface MainViewController ()
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic, strong) NSMutableArray *cachedWheelViewCells;
 @end
 
 @implementation MainViewController
@@ -23,7 +22,6 @@
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize wheelView = wheelView_;
 @synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize cachedWheelViewCells = cachedWheelViewCells_;
 
 - (void)viewDidLoad
 {
@@ -32,12 +30,6 @@
    PhotoAlbumViewController *childController = [[self storyboard] instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
    [self addChildViewController:childController];
    [childController didMoveToParentViewController:self];
-   
-   NSInteger capacity = 7;
-   self.cachedWheelViewCells = [[NSMutableArray alloc] initWithCapacity:capacity];
-   for (NSInteger index = 0; index < capacity; index++) {
-      [self.cachedWheelViewCells addObject:[NSNull null]];
-   }
 }
 
 - (void)displayPhotoBrowser
@@ -94,7 +86,12 @@
 }
 
 
-#pragma mark - WheelViewDataSource Methods
+#pragma mark - WheelViewDataSource and WheelViewDelegate Methods
+
+- (NSInteger)wheelViewNumberOfVisibleCells:(WheelView *)wheelView
+{
+   return 7;
+}
 
 - (NSInteger)wheelViewNumberOfCells:(WheelView *)wheelView
 {
@@ -105,10 +102,9 @@
 
 - (WheelViewCell *)wheelView:(WheelView *)wheelView cellAtIndex:(NSInteger)index
 {
-   id cell = [self.cachedWheelViewCells objectAtIndex:index];
-   if (cell == [NSNull null]) {
+   PhotoWheelViewCell *cell = [wheelView dequeueReusableCell];
+   if (!cell) {
       cell = [PhotoWheelViewCell photoWheelViewCell];
-      [self.cachedWheelViewCells replaceObjectAtIndex:index withObject:cell];
    }
    
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];

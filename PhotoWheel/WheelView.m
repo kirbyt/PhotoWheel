@@ -10,17 +10,37 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SpinGestureRecognizer.h"
 
+#pragma mark WheelViewCell
+
+@interface WheelViewCell ()
+@property (nonatomic, assign) NSInteger indexInWheelView;
+@end
+
+@implementation WheelViewCell
+@synthesize indexInWheelView = indexInWheelView_;
+@end
+
+
+#pragma mark WheelView
+
 @interface WheelView ()
 @property (nonatomic, assign) CGFloat currentAngle;
+@property (nonatomic, strong) NSMutableSet *reusableCells;
+@property (nonatomic, assign) NSInteger firstVisibleIndex;
+@property (nonatomic, assign) NSInteger lastVisibleIndex;
 @end
 
 @implementation WheelView
 
 @synthesize dataSource = dataSource_;
+@synthesize delegate = delegate_;
 @synthesize style = style_;
 @synthesize currentAngle = currentAngle_;
 @synthesize selectAtDegrees = selectAtDegrees_;
 @synthesize selectedIndex = selectedIndex_;
+@synthesize reusableCells = reusableCells_;
+@synthesize firstVisibleIndex = firstVisibleIndex_;
+@synthesize lastVisibleIndex = lastVisibleIndex_;
 
 - (void)commonInit
 {
@@ -28,8 +48,13 @@
    [self setSelectAtDegrees:0.0];
    [self setCurrentAngle:0.0];
    
+   [self setFirstVisibleIndex:NSIntegerMax];
+   [self setLastVisibleIndex:NSIntegerMin];
+   
    SpinGestureRecognizer *spin = [[SpinGestureRecognizer alloc] initWithTarget:self action:@selector(spin:)];
    [self addGestureRecognizer:spin];
+   
+   self.reusableCells = [[NSMutableSet alloc] init];
 }
 
 - (id)init
@@ -91,12 +116,45 @@
    }
    
    NSInteger cellCount = [[self dataSource] wheelViewNumberOfCells:self];
-   float angleToAdd = 360.0f / cellCount;
+   NSInteger numberOfVisibleCells = cellCount;
+   id<WheelViewDelegate> delegate = [self delegate];
+   if (delegate && [delegate respondsToSelector:@selector(wheelViewNumberOfVisibleCells:)]) {
+      numberOfVisibleCells = [delegate wheelViewNumberOfVisibleCells:self];
+   }
+   float angleToAdd = 360.0f / numberOfVisibleCells;
+
+   NSInteger startIndex = 0;
+   NSInteger stopIndex = MIN(numberOfVisibleCells, cellCount);
    
-   for (NSInteger index = 0; index < cellCount; index++)
+//   NSInteger topIndex = (angle / 360.0f) * numberOfVisibleCells;
+//   if (topIndex > 
+//   
+//   ;
+//   NSInteger startIndex = abs(topIndex);
+//   NSInteger stopIndex = MIN(startIndex + numberOfVisibleCells, cellCount);
+   NSLog(@"angle: %f startIndex: %i stopIndex: %i", angle, startIndex, stopIndex);
+   
+   // Queue non-visible cells.
+   for (id view in [self subviews]) {
+      if ([view isKindOfClass:[WheelViewCell class]]) {
+         NSInteger index = [(WheelViewCell *)view indexInWheelView];
+         if (index < [self firstVisibleIndex] || index > [self lastVisibleIndex]) {
+            [[self reusableCells] addObject:view];
+            [view removeFromSuperview];
+         }
+      }
+   }
+
+   // Layout visible cells.
+   for (NSInteger index = startIndex; index < stopIndex; index++)
    {
-      WheelViewCell *cell = [[self dataSource] wheelView:self cellAtIndex:index];
-      if ([cell superview] == nil) {
+      WheelViewCell *cell = [self cellAtIndex:index];
+
+      // If index is not within the first and last visible indexes then
+      // the cell is missing from the view, and it must be added.
+      BOOL isMissing = !(index >= [self firstVisibleIndex] && index <= [self lastVisibleIndex]);
+      if (isMissing) {
+         [cell setIndexInWheelView:index];
          [self addSubview:cell];
       }
 
@@ -133,6 +191,9 @@
       // work out what the next angle is going to be
       angle += angleToAdd;
    }
+   
+   [self setFirstVisibleIndex:startIndex];
+   [self setLastVisibleIndex:stopIndex];
 }
 
 - (void)layoutSubviews
@@ -159,14 +220,56 @@
    [self setAngle:[self currentAngle]];
 }
 
+- (id)dequeueReusableCell
+{
+   id view = [[self reusableCells] anyObject];
+   if (view != nil) {
+      [[self reusableCells] removeObject:view];
+   }
+   return view;
+}
+
+- (void)queueReusableCells
+{
+   for (UIView *view in [self subviews]) {
+      if ([view isKindOfClass:[WheelViewCell class]]) {
+         [[self reusableCells] addObject:view];
+         [view removeFromSuperview];
+      }
+   }
+
+   [self setFirstVisibleIndex:NSIntegerMax];
+   [self setLastVisibleIndex:NSIntegerMin];
+   [self setSelectedIndex:-1];
+}
+
 - (void)reloadData
 {
+   [self queueReusableCells];
    [self layoutSubviews];
 }
 
+- (WheelViewCell *)cellAtIndex:(NSInteger)index
+{
+   WheelViewCell *cell = nil;
+   if (index >= [self firstVisibleIndex] && index <= [self lastVisibleIndex]) {
+      for (id view in [self subviews]) {
+         if ([view isKindOfClass:[WheelViewCell class]]) {
+            if ([view indexInWheelView] == index) {
+               cell = view;
+               break;
+            }
+         }
+      }
+   }
+   
+   if (cell == nil) {
+      cell = [[self dataSource] wheelView:self cellAtIndex:index];
+   }
+   
+   return cell;
+}
+
+
 @end
 
-
-@implementation WheelViewCell
-
-@end

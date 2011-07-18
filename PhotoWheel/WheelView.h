@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @protocol WheelViewDataSource;
+@protocol WheelViewDelegate;
 @class WheelViewCell;
 
 typedef enum  {
@@ -20,11 +21,14 @@ typedef enum  {
 @interface WheelView : UIView
 
 @property (nonatomic, strong) IBOutlet id<WheelViewDataSource> dataSource;
+@property (nonatomic, strong) IBOutlet id<WheelViewDelegate> delegate;
 @property (nonatomic, assign) WheelViewStyle style;
 @property (nonatomic, assign) CGFloat selectAtDegrees;
 @property (nonatomic, assign) NSInteger selectedIndex;
 
+- (id)dequeueReusableCell;
 - (void)reloadData;
+- (WheelViewCell *)cellAtIndex:(NSInteger)index;
 
 @end
 
@@ -35,6 +39,11 @@ typedef enum  {
 - (WheelViewCell *)wheelView:(WheelView *)wheelView cellAtIndex:(NSInteger)index;
 @optional
 - (void)wheelView:(WheelView *)wheelView didSelectCellAtIndex:(NSInteger)index;
+@end
+
+@protocol WheelViewDelegate <NSObject>
+@optional
+- (NSInteger)wheelViewNumberOfVisibleCells:(WheelView *)wheelView;
 @end
 
 
