@@ -51,6 +51,8 @@
 		68F3286A13D35729006A9CEB /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F3286213D35729006A9CEB /* _PhotoAlbum.m */; };
 		68F3286B13D35729006A9CEB /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F3286413D35729006A9CEB /* Photo.m */; };
 		68F3286C13D35729006A9CEB /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F3286613D35729006A9CEB /* PhotoAlbum.m */; };
+		68FC1E8613D8944D00E9D18E /* buttonNext.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FC1E8413D8944D00E9D18E /* buttonNext.png */; };
+		68FC1E8713D8944D00E9D18E /* buttonPrevious.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FC1E8513D8944D00E9D18E /* buttonPrevious.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -120,6 +122,8 @@
 		68F3286413D35729006A9CEB /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		68F3286513D35729006A9CEB /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbum.h; sourceTree = "<group>"; };
 		68F3286613D35729006A9CEB /* PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbum.m; sourceTree = "<group>"; };
+		68FC1E8413D8944D00E9D18E /* buttonNext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonNext.png; sourceTree = "<group>"; };
+		68FC1E8513D8944D00E9D18E /* buttonPrevious.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonPrevious.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +145,8 @@
 		68D2D62313B0359F000308BB /* images */ = {
 			isa = PBXGroup;
 			children = (
+				68FC1E8413D8944D00E9D18E /* buttonNext.png */,
+				68FC1E8513D8944D00E9D18E /* buttonPrevious.png */,
 				68D2D62413B0359F000308BB /* background-portrait-grooved.png */,
 				685DA52B13D36E1200FACBE9 /* defaultPhoto.png */,
 				68D2D62F13B03AC4000308BB /* Icon.png */,
@@ -326,6 +332,8 @@
 				685DA53113D37E2B00FACBE9 /* stack-overlay.png in Resources */,
 				685DA53313D37E5D00FACBE9 /* PhotoWheelViewCell.xib in Resources */,
 				685DA53E13D4A6E700FACBE9 /* stack-viewer-shadow.png in Resources */,
+				68FC1E8613D8944D00E9D18E /* buttonNext.png in Resources */,
+				68FC1E8713D8944D00E9D18E /* buttonPrevious.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

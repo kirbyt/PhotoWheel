@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoBrowserViewController : UIViewController
+@protocol PhotoBrowserViewControllerDelegate;
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@interface PhotoBrowserViewController : UIViewController <UIScrollViewDelegate>
+
+@property (nonatomic, strong) id<PhotoBrowserViewControllerDelegate> delegate;
+@property (nonatomic, assign) NSInteger startAtIndex;
+
+@end
+
+@protocol PhotoBrowserViewControllerDelegate <NSObject>
+@required
+- (NSInteger)photoBrowserViewControllerNumberOfPhotos:(PhotoBrowserViewController *)photoBrowser;
+- (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser imageAtIndex:(NSInteger)index;
 
 @end

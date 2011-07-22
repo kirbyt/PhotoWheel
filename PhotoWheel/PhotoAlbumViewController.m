@@ -17,6 +17,8 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIPopoverController *popoverController;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, assign, readwrite) NSInteger selectedItemIndex;
+@property (nonatomic, assign, readwrite) CGRect selectedItemRect;
 @end
 
 @implementation PhotoAlbumViewController
@@ -30,6 +32,8 @@
 @synthesize imagePickerController = imagePickerController_;
 @synthesize popoverController = popoverController_;
 @synthesize fetchedResultsController = fetchedResultsController_;
+@synthesize selectedItemIndex = selectedItemIndex_;
+@synthesize selectedItemRect = selectedItemRect_;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -340,7 +344,27 @@
 
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   GridViewCell *cell = [self.gridView cellAtIndex:index];
+   
+   [self setSelectedItemIndex:index];
+   [self setSelectedItemRect:[cell frame]];
+
+   id parent = [self parentViewController];
+   if (parent && [parent respondsToSelector:@selector(displayPhotoBrowserWithSender)]) {
+      [parent displayPhotoBrowserWithSender:gridView];
+   }
+}
+
+#pragma mark - PhotoBrowserViewController
+
+- (NSInteger)photoBrowserViewControllerNumberOfPhotos:(PhotoBrowserViewController *)photoBrowser
+{
+   return 0;
+}
+
+- (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser imageAtIndex:(NSInteger)index
+{
+   return nil;
 }
 
 @end
