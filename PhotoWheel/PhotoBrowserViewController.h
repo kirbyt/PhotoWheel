@@ -14,7 +14,7 @@
 
 @property (nonatomic, strong) id<PhotoBrowserViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSInteger startAtIndex;
-@property (nonatomic, assign) CGRect pushFromFrame;
+@property (nonatomic, assign, getter = pushedFromFrame) CGRect pushFromFrame;
 
 @end
 

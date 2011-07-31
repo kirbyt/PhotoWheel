@@ -19,8 +19,8 @@
 
    UIView *destinationView = [[self destinationViewController] view];
    UIImageView *destinationImageView = [[UIImageView alloc] initWithImage:[destinationView pw_imageSnapshot]];
-   CGRect pushFromFrame = [[self destinationViewController] pushFromFrame];
-   [destinationImageView setFrame:pushFromFrame];
+   CGRect pushedFromFrame = [[self destinationViewController] pushedFromFrame];
+   [destinationImageView setFrame:pushedFromFrame];
    [destinationImageView setAlpha:0.3];
 
    [destinationView addSubview:sourceImageView];
