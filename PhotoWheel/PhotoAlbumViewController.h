@@ -17,6 +17,9 @@
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addButton;
 @property (nonatomic, strong) IBOutlet GridView *gridView;
+@property (nonatomic, strong) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *topShadowImageView;
+@property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 
 - (IBAction)action:(id)sender;
 - (IBAction)addPhoto:(id)sender;

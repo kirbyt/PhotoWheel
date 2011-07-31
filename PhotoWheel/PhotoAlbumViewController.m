@@ -26,6 +26,9 @@
 @synthesize textField = textField_;
 @synthesize addButton = addButton_;
 @synthesize gridView = gridView_;
+@synthesize backgroundImageView = backgroundImageView_;
+@synthesize topShadowImageView = topShadowImageView_;
+@synthesize toolbar = toolbar_;
 @synthesize photoAlbum = photoAlbum_;
 @synthesize imagePickerController = imagePickerController_;
 @synthesize popoverController = popoverController_;
@@ -377,6 +380,52 @@
          CGRect pushFromFrame = [[photoBrowserViewController view] convertRect:cellFrame fromView:gridView];
          [photoBrowserViewController setPushFromFrame:pushFromFrame];
       }
+   }
+}
+
+#pragma mark - Rotation Support
+
+- (void)layoutForLandscape
+{
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
+   [[self view] setFrame:CGRectMake(18, 20, 738, 719)];
+   [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
+   [[self backgroundImageView] setFrame:[[self view] bounds]];
+   [[self topShadowImageView] setFrame:CGRectMake(9, 51, 678, 8)];
+   [[self gridView] setFrame:CGRectMake(20, 52, 654, 632)];
+   [[self toolbar] setFrame:CGRectMake(9, 6, 678, 44)];
+}
+
+- (void)layoutForPortrait
+{
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+      [self setPopoverController:nil];
+   }
+   
+   [[self view] setFrame:CGRectMake(26, 18, 716, 717)];
+   [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
+   [[self backgroundImageView] setFrame:[[self view] bounds]];
+   [[self topShadowImageView] setFrame:CGRectMake(9, 51, 698, 8)];
+   [[self gridView] setFrame:CGRectMake(20, 51, 678, 597)];
+   [[self toolbar] setFrame:CGRectMake(9, 6, 698, 44)];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+   return YES;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+      [self layoutForLandscape];
+   } else {
+      [self layoutForPortrait];
    }
 }
 
