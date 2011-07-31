@@ -25,6 +25,7 @@
 - (void)setScrollViewContentSize;
 - (NSInteger)numberOfPhotos;
 - (UIImage*)imageAtIndex:(NSInteger)index;
+- (void)setTitleWithCurrentIndex;
 
 - (void)toggleChromeDisplay;
 - (void)toggleChrome:(BOOL)hide;
@@ -86,6 +87,7 @@
    [self setScrollViewContentSize];
    [self setCurrentIndex:[self startAtIndex]];
    [self scrollToIndex:[self startAtIndex]];
+   [self setTitleWithCurrentIndex];
    [self startChromeDisplayTimer];
 }
 
@@ -94,6 +96,19 @@
    [self cancelChromeDisplayTimer];
    [[self navigationController] setNavigationBarHidden:YES animated:YES];
    [super viewWillDisappear:animated];
+}
+
+- (void)setTitleWithCurrentIndex 
+{
+   NSInteger index = [self currentIndex] + 1;
+   if (index < 1) {
+      // Prevents the title from showing 0 of n when the user
+      // attempts to scroll the first page to the right.
+      index = 1;
+   }
+   NSInteger count = [self numberOfPhotos];
+   NSString *title = title = [NSString stringWithFormat:@"%1$i of %2$i", index, count, nil];
+   [self setTitle:title];
 }
 
 #pragma mark - Helper Methods
@@ -283,6 +298,8 @@
    [self loadPage:currentIndex_ - 1];
    [self unloadPage:currentIndex_ + 2];
    [self unloadPage:currentIndex_ - 2];
+   
+   [self setTitleWithCurrentIndex];
 }
 
 #pragma mark - UIScrollViewDelegate
