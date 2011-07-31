@@ -350,6 +350,15 @@
    return image;
 }
 
+- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser deleteImageAtIndex:(NSInteger)index
+{
+   Photo *photo = [self objectAtIndex:index];
+   NSManagedObjectContext *context = [self managedObjectContext];
+   [context deleteObject:photo];
+   [self saveChanges];   
+}
+
+
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender

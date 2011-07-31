@@ -27,6 +27,9 @@
 - (UIImage*)imageAtIndex:(NSInteger)index;
 - (void)setTitleWithCurrentIndex;
 
+- (void)loadPage:(NSInteger)index;
+- (void)unloadPage:(NSInteger)index;
+
 - (void)toggleChromeDisplay;
 - (void)toggleChrome:(BOOL)hide;
 - (void)hideChrome;
@@ -233,7 +236,26 @@
 
 - (void)deletePhoto:(id)sender
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   id<PhotoBrowserViewControllerDelegate> delegate = [self delegate];
+   if (delegate && [delegate respondsToSelector:@selector(photoBrowserViewController:deleteImageAtIndex:)]) {
+      NSInteger count = [self numberOfPhotos];
+      NSInteger indexToDelete = [self currentIndex];
+      [self unloadPage:indexToDelete];
+      [delegate photoBrowserViewController:self deleteImageAtIndex:indexToDelete];
+
+      if (count == 1) {
+         // The one and only photo was deleted. Pop back to
+         // the previous view controller.
+         [[self navigationController] popViewControllerAnimated:YES];
+      } else {
+         NSInteger nextIndex = indexToDelete;
+         if (indexToDelete == count) {
+            nextIndex -= 1;
+         }
+         [self setCurrentIndex:nextIndex];
+         [self setScrollViewContentSize];
+      }
+   }
 }
 
 - (void)showActionMenu:(id)sender
