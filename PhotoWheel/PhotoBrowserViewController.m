@@ -86,10 +86,12 @@
    [self setScrollViewContentSize];
    [self setCurrentIndex:[self startAtIndex]];
    [self scrollToIndex:[self startAtIndex]];
+   [self startChromeDisplayTimer];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+   [self cancelChromeDisplayTimer];
    [[self navigationController] setNavigationBarHidden:YES animated:YES];
    [super viewWillDisappear:animated];
 }
@@ -229,6 +231,11 @@
    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
+- (void)photoTapped:(id)sender
+{
+   [self toggleChromeDisplay];
+}
+
 #pragma mark - Page Management
 
 - (void)loadPage:(NSInteger)index
@@ -244,6 +251,10 @@
       UIImageView *newView = [[UIImageView alloc] initWithFrame:frame];
       [newView setBackgroundColor:[UIColor clearColor]];
       [newView setImage:[self imageAtIndex:index]];
+      
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
+      [newView addGestureRecognizer:tap];
+      [newView setUserInteractionEnabled:YES];
       
       [[self scrollView] addSubview:newView];
       [[self photoViewCache] replaceObjectAtIndex:index withObject:newView];
@@ -284,6 +295,11 @@
 	if (page != currentIndex_) {
 		[self setCurrentIndex:page];
 	}
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView 
+{
+   [self hideChrome];
 }
 
 #pragma mark - Chrome Helpers
