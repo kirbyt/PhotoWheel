@@ -17,9 +17,6 @@
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addButton;
 @property (nonatomic, strong) IBOutlet GridView *gridView;
-@property (nonatomic, assign, readonly) NSInteger selectedItemIndex;
-@property (nonatomic, assign, readonly) CGRect selectedItemRect;
-@property (nonatomic, strong, readonly) id pushFromView;
 
 - (IBAction)action:(id)sender;
 - (IBAction)addPhoto:(id)sender;

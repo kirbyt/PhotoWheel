@@ -38,8 +38,9 @@
    [super popViewControllerAnimated:NO];
    [destinationView addSubview:sourceImageView];
    
-   CGRect frame = [destinationView frame];
-   CGPoint shrinkToPoint = CGPointMake(frame.size.width / 2, frame.size.height / 2);
+   CGRect pushedFromFrame = [(PhotoBrowserViewController *)sourceViewController pushFromFrame];
+   CGRect frame = [sourceView convertRect:pushedFromFrame fromView:destinationView];
+   CGPoint shrinkToPoint = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
    
    void (^animations)(void) = ^ {
       [sourceImageView setFrame:CGRectMake(shrinkToPoint.x, shrinkToPoint.y, 0, 0)];

@@ -30,6 +30,7 @@
 
 @synthesize delegate = delegate_;
 @synthesize startAtIndex = startAtIndex_;
+@synthesize pushFromFrame = pushFromFrame;
 @synthesize scrollView = scrollView_;
 @synthesize actionButton = actionButton_;
 @synthesize photoViewCache = photoViewCache_;
