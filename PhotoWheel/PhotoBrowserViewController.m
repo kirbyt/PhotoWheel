@@ -217,4 +217,61 @@
    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
+#pragma mark - Page Management
+
+- (void)loadPage:(NSInteger)index
+{
+   if (index < 0 || index >= [self numberOfPhotos]) {
+      return;
+   }
+   
+   id currentView = [[self photoViewCache] objectAtIndex:index];
+   if ([currentView isKindOfClass:[UIImageView class]] == NO) {
+      // Load the photo view.
+      CGRect frame = [self frameForPageAtIndex:index];
+      UIImageView *newView = [[UIImageView alloc] initWithFrame:frame];
+      [newView setBackgroundColor:[UIColor clearColor]];
+      [newView setImage:[self imageAtIndex:index]];
+      
+      [[self scrollView] addSubview:newView];
+      [[self photoViewCache] replaceObjectAtIndex:index withObject:newView];
+   }
+}
+
+- (void)unloadPage:(NSInteger)index
+{
+   if (index < 0 || index >= [self numberOfPhotos]) {
+      return;
+   }
+   
+   id currentView = [[self photoViewCache] objectAtIndex:index];
+   if ([currentView isKindOfClass:[UIImageView class]]) {
+      [currentView removeFromSuperview];
+      [[self photoViewCache] replaceObjectAtIndex:index withObject:[NSNull null]];
+   }
+}
+
+- (void)setCurrentIndex:(NSInteger)newIndex
+{
+   currentIndex_ = newIndex;
+   
+   [self loadPage:currentIndex_];
+   [self loadPage:currentIndex_ + 1];
+   [self loadPage:currentIndex_ - 1];
+   [self unloadPage:currentIndex_ + 2];
+   [self unloadPage:currentIndex_ - 2];
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView 
+{
+   CGFloat pageWidth = scrollView.frame.size.width;
+   float fractionalPage = scrollView.contentOffset.x / pageWidth;
+   NSInteger page = floor(fractionalPage);
+	if (page != currentIndex_) {
+		[self setCurrentIndex:page];
+	}
+}
+
 @end

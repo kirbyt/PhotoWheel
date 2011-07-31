@@ -339,12 +339,15 @@
 
 - (NSInteger)photoBrowserViewControllerNumberOfPhotos:(PhotoBrowserViewController *)photoBrowser
 {
-   return 0;
+   NSInteger count = [self numberOfObjects];
+   return count;
 }
 
 - (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser imageAtIndex:(NSInteger)index
 {
-   return nil;
+   Photo *photo = [self objectAtIndex:index];
+   UIImage *image = [photo largeImage];
+   return image;
 }
 
 #pragma mark - Segues
