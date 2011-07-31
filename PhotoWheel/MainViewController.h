@@ -14,9 +14,8 @@
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) IBOutlet WheelView *wheelView;
-@property (nonatomic, assign) CGRect *pushFromRect;
 
-- (void)displayPhotoBrowser:(id)sender;
+- (void)displayPhotoBrowser;
 - (IBAction)addPhotoAlbum:(id)sender;
 
 @end

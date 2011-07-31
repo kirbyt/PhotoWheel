@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic, assign, readwrite) NSInteger selectedItemIndex;
 @property (nonatomic, assign, readwrite) CGRect selectedItemRect;
+@property (nonatomic, strong, readwrite) id pushFromView;
 @end
 
 @implementation PhotoAlbumViewController
@@ -34,6 +35,7 @@
 @synthesize fetchedResultsController = fetchedResultsController_;
 @synthesize selectedItemIndex = selectedItemIndex_;
 @synthesize selectedItemRect = selectedItemRect_;
+@synthesize pushFromView = pushFromView_;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -167,14 +169,6 @@
       [self presentPhotoPickerMenu];
    } else {
       [self presentPhotoLibrary];
-   }
-}
-
-- (IBAction)displayPhotoBrowser:(id)sender 
-{
-   id parent = [self parentViewController];
-   if (parent && [parent respondsToSelector:@selector(displayPhotoBrowser)]) {
-      [parent displayPhotoBrowser];
    }
 }
 
@@ -349,10 +343,7 @@
    [self setSelectedItemIndex:index];
    [self setSelectedItemRect:[cell frame]];
 
-   id parent = [self parentViewController];
-   if (parent && [parent respondsToSelector:@selector(displayPhotoBrowserWithSender)]) {
-      [parent displayPhotoBrowserWithSender:gridView];
-   }
+   [self performSegueWithIdentifier:@"PhotoBrowserSegue" sender:gridView];
 }
 
 #pragma mark - PhotoBrowserViewController
@@ -365,6 +356,25 @@
 - (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser imageAtIndex:(NSInteger)index
 {
    return nil;
+}
+
+#pragma mark - Segues
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+   if ([[segue destinationViewController] isKindOfClass:[PhotoBrowserViewController class]]) {
+      if ([sender isKindOfClass:[GridView class]] && [[segue sourceViewController] isKindOfClass:[PhotoAlbumViewController class]]) {
+         GridView *gridView = sender;
+         
+         PhotoBrowserViewController *photoBrowserViewController = [segue destinationViewController];
+         [photoBrowserViewController setDelegate:[segue sourceViewController]];
+         [photoBrowserViewController setStartAtIndex:[gridView indexForSelectedCell]];
+         
+         
+         GridViewCell *cell = [gridView cellAtIndex:[gridView indexForSelectedCell]];
+         [self setPushFromView:cell];
+      }
+   }
 }
 
 @end

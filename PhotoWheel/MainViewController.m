@@ -22,7 +22,6 @@
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize wheelView = wheelView_;
 @synthesize fetchedResultsController = fetchedResultsController_;
-@synthesize pushFromRect = pushFromRect_;
 
 - (void)viewDidLoad
 {
@@ -33,7 +32,7 @@
    [childController didMoveToParentViewController:self];
 }
 
-- (void)displayPhotoBrowser;
+- (void)displayPhotoBrowser
 {
    [self performSegueWithIdentifier:@"PhotoBrowserSegue" sender:self];
 }
@@ -41,16 +40,10 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
    if ([[segue destinationViewController] isKindOfClass:[PhotoBrowserViewController class]]) {
-      // We know we have only 1 child controller so it's safe to 
-      // always grab the first one.
-      PhotoAlbumViewController *childController = [[self childViewControllers] objectAtIndex:0];
-      PhotoBrowserViewController *photoBrowserViewController = [segue destinationViewController];
-      [photoBrowserViewController setDelegate:childController];
-      [photoBrowserViewController setStartAtIndex:[childController selectedItemIndex]];
-//      [self setPushFromRect:[photoBrowserViewController selectedItemRect]];
+//      PhotoBrowserViewController *photoBrowserViewController = [segue destinationViewController];
+//      [photoBrowserViewController setManagedObjectContext:[self managedObjectContext]];
    }
 }
-
 
 #pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate Methods
 

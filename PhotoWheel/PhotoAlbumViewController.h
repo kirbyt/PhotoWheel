@@ -19,10 +19,10 @@
 @property (nonatomic, strong) IBOutlet GridView *gridView;
 @property (nonatomic, assign, readonly) NSInteger selectedItemIndex;
 @property (nonatomic, assign, readonly) CGRect selectedItemRect;
+@property (nonatomic, strong, readonly) id pushFromView;
 
 - (IBAction)action:(id)sender;
 - (IBAction)addPhoto:(id)sender;
-- (IBAction)displayPhotoBrowser:(id)sender;
 - (void)refresh;
 
 

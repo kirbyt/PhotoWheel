@@ -290,6 +290,7 @@
 		68DA37D313B02F23003272F9 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "White Peak Software Inc.";
 			};
 			buildConfigurationList = 68DA37D613B02F23003272F9 /* Build configuration list for PBXProject "PhotoWheel" */;
