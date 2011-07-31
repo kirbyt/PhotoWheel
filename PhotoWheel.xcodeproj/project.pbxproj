@@ -15,6 +15,7 @@
 		685DA53C13D4A47300FACBE9 /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 685DA53B13D4A47200FACBE9 /* GridView.m */; };
 		685DA53E13D4A6E700FACBE9 /* stack-viewer-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 685DA53D13D4A6E700FACBE9 /* stack-viewer-shadow.png */; };
 		685DA54113D4A89500FACBE9 /* ImageGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 685DA54013D4A89400FACBE9 /* ImageGridViewCell.m */; };
+		686B60FA13E5D38D00FA7155 /* background-landscape-right-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 686B60F913E5D38D00FA7155 /* background-landscape-right-grooved.png */; };
 		68B804E313B0B2A500EB3B6C /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E213B0B2A500EB3B6C /* AboutViewController.m */; };
 		68B804E713B0B74200EB3B6C /* PhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */; };
 		68B804EE13B0B93000EB3B6C /* CustomPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */; };
@@ -67,6 +68,7 @@
 		685DA53D13D4A6E700FACBE9 /* stack-viewer-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-shadow.png"; sourceTree = "<group>"; };
 		685DA53F13D4A89200FACBE9 /* ImageGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageGridViewCell.h; sourceTree = "<group>"; };
 		685DA54013D4A89400FACBE9 /* ImageGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGridViewCell.m; sourceTree = "<group>"; };
+		686B60F913E5D38D00FA7155 /* background-landscape-right-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-landscape-right-grooved.png"; sourceTree = "<group>"; };
 		68B804E113B0B2A500EB3B6C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		68B804E213B0B2A500EB3B6C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 			children = (
 				68FC1E8413D8944D00E9D18E /* buttonNext.png */,
 				68FC1E8513D8944D00E9D18E /* buttonPrevious.png */,
+				686B60F913E5D38D00FA7155 /* background-landscape-right-grooved.png */,
 				68D2D62413B0359F000308BB /* background-portrait-grooved.png */,
 				685DA52B13D36E1200FACBE9 /* defaultPhoto.png */,
 				68D2D62F13B03AC4000308BB /* Icon.png */,
@@ -335,6 +338,7 @@
 				685DA53E13D4A6E700FACBE9 /* stack-viewer-shadow.png in Resources */,
 				68FC1E8613D8944D00E9D18E /* buttonNext.png in Resources */,
 				68FC1E8713D8944D00E9D18E /* buttonPrevious.png in Resources */,
+				686B60FA13E5D38D00FA7155 /* background-landscape-right-grooved.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

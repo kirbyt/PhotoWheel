@@ -21,6 +21,10 @@
 
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize wheelView = wheelView_;
+@synthesize backgroundImageView = backgroundImageView_;
+@synthesize discImageView = discImageView_;
+@synthesize addPhotoAlbumButton = addPhotoAlbumButton_;
+@synthesize infoButton = infoButton_;
 @synthesize fetchedResultsController = fetchedResultsController_;
 
 - (void)viewDidLoad
@@ -150,6 +154,59 @@
        */
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
+   }
+}
+
+#pragma mark - Rotation Support
+
+#define WHEELVIEW_INSET 50
+- (void)layoutForLandscape
+{
+   UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-right-grooved.png"];
+   [[self backgroundImageView] setImage:backgroundImage];
+   
+   [[self discImageView] setFrame:CGRectMake(700, 100, 551, 550)];
+   
+//   [[self wheelView] setTopAtDegrees:-90.0];
+   [[self wheelView] setFrame:CGRectInset([[self discImageView] frame], WHEELVIEW_INSET, WHEELVIEW_INSET)];
+   [[self wheelView] setNeedsLayout];
+   
+   [[self addPhotoAlbumButton] setCenter:[[self discImageView] center]];
+   
+   CGRect frame = [[self infoButton] frame];
+   frame.origin = CGPointMake(981, 712);
+   [[self infoButton] setFrame:frame];
+}
+
+- (void)layoutForPortrait
+{
+   UIImage *backgroundImage = [UIImage imageNamed:@"background-portrait-grooved.png"]; 
+   [[self backgroundImageView] setImage:backgroundImage];
+   
+   [[self discImageView] setFrame:CGRectMake(109, 680, 551, 550)];
+   
+//   [[self wheelView] setTopAtDegrees:0.0];
+   [[self wheelView] setFrame:CGRectInset([[self discImageView] frame], WHEELVIEW_INSET, WHEELVIEW_INSET)];
+   [[self wheelView] setNeedsLayout];
+   
+   [[self addPhotoAlbumButton] setCenter:[[self discImageView] center]];
+   
+   CGRect frame = [[self infoButton] frame];
+   frame.origin = CGPointMake(723, 960);
+   [[self infoButton] setFrame:frame];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+   return YES;
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+      [self layoutForLandscape];
+   } else {
+      [self layoutForPortrait];
    }
 }
 
