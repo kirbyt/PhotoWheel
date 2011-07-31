@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
 @property (nonatomic, strong) NSMutableArray *photoViewCache;
 @property (nonatomic, assign) NSInteger currentIndex;
+@property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden;
+@property (nonatomic, strong) NSTimer *chromeHideTimer;
 
 - (void)addButtonsToNavigationBar;
 - (void)initPhotoViewCache;
@@ -23,6 +25,14 @@
 - (void)setScrollViewContentSize;
 - (NSInteger)numberOfPhotos;
 - (UIImage*)imageAtIndex:(NSInteger)index;
+
+- (void)toggleChromeDisplay;
+- (void)toggleChrome:(BOOL)hide;
+- (void)hideChrome;
+- (void)showChrome;
+- (void)startChromeDisplayTimer;
+- (void)cancelChromeDisplayTimer; 
+
 @end
 
 
@@ -35,6 +45,8 @@
 @synthesize actionButton = actionButton_;
 @synthesize photoViewCache = photoViewCache_;
 @synthesize currentIndex = currentIndex_;
+@synthesize chromeHidden = chromeHidden_;
+@synthesize chromeHideTimer = chromeHideTimer_;
 
 - (void)loadView
 {
@@ -272,6 +284,67 @@
 	if (page != currentIndex_) {
 		[self setCurrentIndex:page];
 	}
+}
+
+#pragma mark - Chrome Helpers
+
+- (void)toggleChromeDisplay 
+{
+   [self toggleChrome:![self isChromeHidden]];
+}
+
+- (void)toggleChrome:(BOOL)hide 
+{
+   [self setChromeHidden:hide];
+   if (hide) {
+      [UIView beginAnimations:nil context:nil];
+      [UIView setAnimationDuration:0.4];
+   }
+   
+   CGFloat alpha = hide ? 0.0 : 1.0;
+   
+   // Must set the navigation bar's alpha, otherwise the photo
+   // view will be pushed until the navigation bar.
+   UINavigationBar *navbar = [[self navigationController] navigationBar];
+   [navbar setAlpha:alpha];
+   
+   if (hide) {
+      [UIView commitAnimations];
+   }
+   
+   if ( ! [self isChromeHidden] ) {
+      [self startChromeDisplayTimer];
+   }
+}
+
+- (void)hideChrome 
+{
+   NSTimer *timer = [self chromeHideTimer];
+   if (timer && [timer isValid]) {
+      [timer invalidate];
+      [self setChromeHideTimer:nil];
+   }
+   [self toggleChrome:YES];
+}
+
+- (void)showChrome 
+{
+   [self toggleChrome:NO];
+}
+
+- (void)startChromeDisplayTimer 
+{
+   [self cancelChromeDisplayTimer];
+   NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(hideChrome) userInfo:nil repeats:NO];
+   [self setChromeHideTimer:timer];
+}
+
+- (void)cancelChromeDisplayTimer 
+{
+   if ([self chromeHideTimer]) {
+      [[self chromeHideTimer] invalidate];
+      [self setChromeHideTimer:nil];
+   }
 }
 
 @end
