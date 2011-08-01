@@ -16,6 +16,8 @@
 @property (nonatomic, assign) NSInteger startAtIndex;
 @property (nonatomic, assign, getter = pushedFromFrame) CGRect pushFromFrame;
 
+- (void)toggleChromeDisplay;
+
 @end
 
 @protocol PhotoBrowserViewControllerDelegate <NSObject>

@@ -8,6 +8,7 @@
 
 #import "PhotoBrowserViewController.h"
 #import "ClearToolbar.h"
+#import "PhotoBrowserPhotoView.h"
 
 @interface PhotoBrowserViewController ()
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -32,7 +33,6 @@
 - (void)loadPage:(NSInteger)index;
 - (void)unloadPage:(NSInteger)index;
 
-- (void)toggleChromeDisplay;
 - (void)toggleChrome:(BOOL)hide;
 - (void)hideChrome;
 - (void)showChrome;
@@ -286,17 +286,15 @@
    }
    
    id currentView = [[self photoViewCache] objectAtIndex:index];
-   if ([currentView isKindOfClass:[UIImageView class]] == NO) {
+   if ([currentView isKindOfClass:[PhotoBrowserPhotoView class]] == NO) {
       // Load the photo view.
       CGRect frame = [self frameForPageAtIndex:index];
-      UIImageView *newView = [[UIImageView alloc] initWithFrame:frame];
+      PhotoBrowserPhotoView *newView = [[PhotoBrowserPhotoView alloc] initWithFrame:frame];
       [newView setBackgroundColor:[UIColor clearColor]];
       [newView setImage:[self imageAtIndex:index]];
-      
-      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
-      [newView addGestureRecognizer:tap];
-      [newView setUserInteractionEnabled:YES];
-      
+      [newView setScroller:self];
+      [newView setIndex:index];
+
       [[self scrollView] addSubview:newView];
       [[self photoViewCache] replaceObjectAtIndex:index withObject:newView];
    }
@@ -309,7 +307,7 @@
    }
    
    id currentView = [[self photoViewCache] objectAtIndex:index];
-   if ([currentView isKindOfClass:[UIImageView class]]) {
+   if ([currentView isKindOfClass:[PhotoBrowserPhotoView class]]) {
       [currentView removeFromSuperview];
       [[self photoViewCache] replaceObjectAtIndex:index withObject:[NSNull null]];
    }
