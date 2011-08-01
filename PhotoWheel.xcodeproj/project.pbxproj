@@ -23,6 +23,7 @@
 		68B804F613B0BB3D00EB3B6C /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804F513B0BB3D00EB3B6C /* CustomNavigationController.m */; };
 		68B804F913B0C12600EB3B6C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804F813B0C12600EB3B6C /* MainViewController.m */; };
 		68B804FC13B0C15000EB3B6C /* PhotoAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B804FB13B0C15000EB3B6C /* PhotoAlbumViewController.m */; };
+		68BB5CC513E63B5300CE8F4B /* PhotoBrowserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BB5CC413E63B5300CE8F4B /* PhotoBrowserPhotoView.m */; };
 		68D2D62513B0359F000308BB /* background-portrait-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62413B0359F000308BB /* background-portrait-grooved.png */; };
 		68D2D62813B03638000308BB /* stack-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62713B03638000308BB /* stack-bg.png */; };
 		68D2D62A13B037EF000308BB /* stack-viewer-bg-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */; };
@@ -82,6 +83,8 @@
 		68B804F813B0C12600EB3B6C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		68B804FA13B0C15000EB3B6C /* PhotoAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumViewController.h; sourceTree = "<group>"; };
 		68B804FB13B0C15000EB3B6C /* PhotoAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumViewController.m; sourceTree = "<group>"; };
+		68BB5CC313E63B5300CE8F4B /* PhotoBrowserPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserPhotoView.h; sourceTree = "<group>"; };
+		68BB5CC413E63B5300CE8F4B /* PhotoBrowserPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserPhotoView.m; sourceTree = "<group>"; };
 		68D2D62413B0359F000308BB /* background-portrait-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-portrait-grooved.png"; sourceTree = "<group>"; };
 		68D2D62713B03638000308BB /* stack-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-bg.png"; sourceTree = "<group>"; };
 		68D2D62913B037EF000308BB /* stack-viewer-bg-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-portrait.png"; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 				68B804FB13B0C15000EB3B6C /* PhotoAlbumViewController.m */,
 				68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */,
 				68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */,
+				68BB5CC313E63B5300CE8F4B /* PhotoBrowserPhotoView.h */,
+				68BB5CC413E63B5300CE8F4B /* PhotoBrowserPhotoView.m */,
 				68B804EC13B0B93000EB3B6C /* CustomPushSegue.h */,
 				68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */,
 				68B804F413B0BB3D00EB3B6C /* CustomNavigationController.h */,
@@ -366,6 +371,7 @@
 				685DA53613D459B800FACBE9 /* ClearToolbar.m in Sources */,
 				685DA53C13D4A47300FACBE9 /* GridView.m in Sources */,
 				685DA54113D4A89500FACBE9 /* ImageGridViewCell.m in Sources */,
+				68BB5CC513E63B5300CE8F4B /* PhotoBrowserPhotoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
