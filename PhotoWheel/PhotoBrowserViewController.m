@@ -297,6 +297,8 @@
 
       [[self scrollView] addSubview:newView];
       [[self photoViewCache] replaceObjectAtIndex:index withObject:newView];
+   } else {
+      [currentView turnOffZoom];
    }
 }
 
@@ -436,12 +438,12 @@
    
    NSArray *subviews = [[self scrollView] subviews];
    
-   for (UIView *view in subviews) {
-//      CGPoint restorePoint = [view pointToCenterAfterRotation];
-//      CGFloat restoreScale = [view scaleToRestoreAfterRotation];
-//      [view setFrame:[self frameForPageAtIndex:[photoView index]]];
-//      [view setMaxMinZoomScalesForCurrentBounds];
-//      [view restoreCenterPoint:restorePoint scale:restoreScale];
+   for (PhotoBrowserPhotoView *view in subviews) {
+      CGPoint restorePoint = [view pointToCenterAfterRotation];
+      CGFloat restoreScale = [view scaleToRestoreAfterRotation];
+      [view setFrame:[self frameForPageAtIndex:[view index]]];
+      [view setMaxMinZoomScalesForCurrentBounds];
+      [view restoreCenterPoint:restorePoint scale:restoreScale];
    }
    
    // adjust contentOffset to preserve page location based on values collected prior to location
