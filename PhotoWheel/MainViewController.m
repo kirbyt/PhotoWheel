@@ -15,6 +15,10 @@
 
 @interface MainViewController ()
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, assign) UIDeviceOrientation currentOrientation;
+
+- (void)layoutForPortrait;
+- (void)layoutForLandscape;
 @end
 
 @implementation MainViewController
@@ -26,6 +30,7 @@
 @synthesize addPhotoAlbumButton = addPhotoAlbumButton_;
 @synthesize infoButton = infoButton_;
 @synthesize fetchedResultsController = fetchedResultsController_;
+@synthesize currentOrientation = currentOrientation_;
 
 - (void)viewDidLoad
 {
@@ -34,6 +39,46 @@
    PhotoAlbumViewController *childController = [[self storyboard] instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
    [self addChildViewController:childController];
    [childController didMoveToParentViewController:self];
+   
+   // Unfortunately this controller cannot rely on autoresizing views
+   // because we provide a different look in landscape compared to
+   // portrait. Therefore, the controller must listen for changing in
+   // the device orientation and adjust the layout as needed.
+	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
+- (void)viewDidUnload
+{
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+   [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+
+   [self setWheelView:nil];
+   [self setBackgroundImageView:nil];
+   [self setDiscImageView:nil];
+   [self setAddPhotoAlbumButton:nil];
+   [self setInfoButton:nil];
+   
+   [super viewDidUnload];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+   [super viewWillAppear:animated];
+   
+   SEL selector;
+   if (UIInterfaceOrientationIsLandscape([self currentOrientation])) {
+      selector = @selector(layoutForLandscape);
+   } else {
+      selector = @selector(layoutForPortrait);
+   }
+
+   [self performSelector:selector];
+   for (id childController in [self childViewControllers]) {
+      if ([childController respondsToSelector:selector]) {
+         [childController performSelector:selector];
+      }
+   }
 }
 
 - (void)displayPhotoBrowser
@@ -209,5 +254,12 @@
       [self layoutForPortrait];
    }
 }
+
+- (void)orientationChanged:(NSNotification *)notification
+{
+   UIDeviceOrientation orientation = [[UIDevice currentDevice] orientation];
+   [self setCurrentOrientation:orientation];
+}
+
 
 @end
