@@ -46,14 +46,30 @@
 {
    [super viewDidLoad];
    [[self gridView] setAlwaysBounceVertical:YES];
+
+    [[NSNotificationCenter defaultCenter] addObserverForName:@"RefetchAllDatabaseData"
+                                                      object:[[UIApplication sharedApplication] delegate]
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *__strong note) {
+                                                      NSLog(@"Got refetch notification");
+                                                      
+                                                      [self setFetchedResultsController:nil];
+                                                      [[self gridView] reloadData];
+                                                  }];
 }
 
 - (void)viewDidUnload
 {
    [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
    [self setTextField:nil];
    [self setAddButton:nil];
    [self setGridView:nil];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (UIImagePickerController *)imagePickerController
@@ -287,8 +303,8 @@
    [newFetchedResultsController setDelegate:self];
    [self setFetchedResultsController:newFetchedResultsController];
    
-	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error])
+   NSError *error = nil;
+   if (![[self fetchedResultsController] performFetch:&error])
    {
       /*
        Replace this implementation with code to handle the error appropriately.
@@ -297,7 +313,7 @@
        */
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
-	}
+   }
    
    return fetchedResultsController_;
 }

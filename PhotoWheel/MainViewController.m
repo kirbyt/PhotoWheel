@@ -39,18 +39,29 @@
    PhotoAlbumViewController *childController = [[self storyboard] instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
    [self addChildViewController:childController];
    [childController didMoveToParentViewController:self];
-   
+
+   [[NSNotificationCenter defaultCenter] addObserverForName:@"RefetchAllDatabaseData"
+                                                      object:[[UIApplication sharedApplication] delegate]
+                                                       queue:[NSOperationQueue mainQueue]
+                                                  usingBlock:^(NSNotification *__strong note) {
+                                                      NSLog(@"Got refetch notification");
+                                                      
+                                                      [self setFetchedResultsController:nil];
+                                                      [[self wheelView] reloadData];
+                                                  }];
+
    // Unfortunately this controller cannot rely on autoresizing views
    // because we provide a different look in landscape compared to
    // portrait. Therefore, the controller must listen for changing in
    // the device orientation and adjust the layout as needed.
-	[[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+   [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(orientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 - (void)viewDidUnload
 {
    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RefetchAllDatabaseData" object:nil];
    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 
    [self setWheelView:nil];
@@ -79,6 +90,11 @@
          [childController performSelector:selector];
       }
    }
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)displayPhotoBrowser
@@ -113,8 +129,8 @@
    self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:cacheName];
    [self.fetchedResultsController setDelegate:self];
    
-	NSError *error = nil;
-	if (![[self fetchedResultsController] performFetch:&error])
+   NSError *error = nil;
+   if (![[self fetchedResultsController] performFetch:&error])
    {
       /*
        Replace this implementation with code to handle the error appropriately.
@@ -123,7 +139,7 @@
        */
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
-	}
+   }
    
    return fetchedResultsController_;
 }
