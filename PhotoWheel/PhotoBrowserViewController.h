@@ -10,7 +10,7 @@
 
 @protocol PhotoBrowserViewControllerDelegate;
 
-@interface PhotoBrowserViewController : UIViewController <UIScrollViewDelegate>
+@interface PhotoBrowserViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
 
 @property (nonatomic, strong) id<PhotoBrowserViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSInteger startAtIndex;

@@ -264,7 +264,14 @@
 
 - (void)showActionMenu:(id)sender
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [self cancelChromeDisplayTimer];
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+   [actionSheet setDelegate:self];
+   if ([UIPrintInteractionController isPrintingAvailable]) {
+      [actionSheet addButtonWithTitle:@"Print"];
+   }
+   
+   [actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
 - (void)slideshow:(id)sender
@@ -275,6 +282,45 @@
 - (void)photoTapped:(id)sender
 {
    [self toggleChromeDisplay];
+}
+
+#pragma mark - Printing
+
+- (void)printCurrentPhoto
+{
+   UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
+   
+   UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+   if(!controller){
+      NSLog(@"Couldn't get shared UIPrintInteractionController!");
+      return;
+   }
+   
+   UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+      [self startChromeDisplayTimer];
+      if(completed && error)
+         NSLog(@"FAILED! due to error in domain %@ with error code %u", error.domain, error.code);
+   };
+   
+   UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+   [printInfo setOutputType:UIPrintInfoOutputPhoto];
+   [printInfo setJobName:[NSString stringWithFormat:@"photo-%i", [self currentIndex]]];
+   
+   [controller setPrintInfo:printInfo];
+   [controller setPrintingItem:currentPhoto];
+   
+   [controller presentFromBarButtonItem:[self actionButton] animated:YES completionHandler:completionHandler];
+}
+
+#pragma mark - UIActionSheetDelegate methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   if ([UIPrintInteractionController isPrintingAvailable] && buttonIndex == 0) {
+      [self printCurrentPhoto];
+   } else {
+      [self startChromeDisplayTimer];
+   }
 }
 
 #pragma mark - Page Management
