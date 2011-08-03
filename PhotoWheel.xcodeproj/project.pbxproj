@@ -54,6 +54,8 @@
 		68F3286A13D35729006A9CEB /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F3286213D35729006A9CEB /* _PhotoAlbum.m */; };
 		68F3286B13D35729006A9CEB /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F3286413D35729006A9CEB /* Photo.m */; };
 		68F3286C13D35729006A9CEB /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F3286613D35729006A9CEB /* PhotoAlbum.m */; };
+		68F5E63413E9A5FE0053139F /* SendEmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5E63313E9A5FE0053139F /* SendEmailController.m */; };
+		68F5E63713E9A6160053139F /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F5E63613E9A6160053139F /* MessageUI.framework */; };
 		68FC1E8613D8944D00E9D18E /* buttonNext.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FC1E8413D8944D00E9D18E /* buttonNext.png */; };
 		68FC1E8713D8944D00E9D18E /* buttonPrevious.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FC1E8513D8944D00E9D18E /* buttonPrevious.png */; };
 /* End PBXBuildFile section */
@@ -129,6 +131,9 @@
 		68F3286413D35729006A9CEB /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		68F3286513D35729006A9CEB /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbum.h; sourceTree = "<group>"; };
 		68F3286613D35729006A9CEB /* PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbum.m; sourceTree = "<group>"; };
+		68F5E63213E9A5FE0053139F /* SendEmailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendEmailController.h; sourceTree = "<group>"; };
+		68F5E63313E9A5FE0053139F /* SendEmailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendEmailController.m; sourceTree = "<group>"; };
+		68F5E63613E9A6160053139F /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		68FC1E8413D8944D00E9D18E /* buttonNext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonNext.png; sourceTree = "<group>"; };
 		68FC1E8513D8944D00E9D18E /* buttonPrevious.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonPrevious.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -138,6 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68F5E63713E9A6160053139F /* MessageUI.framework in Frameworks */,
 				68B804F313B0B9FF00EB3B6C /* QuartzCore.framework in Frameworks */,
 				68DA37E113B02F23003272F9 /* UIKit.framework in Frameworks */,
 				68DA37E313B02F23003272F9 /* Foundation.framework in Frameworks */,
@@ -195,6 +201,7 @@
 		68DA37DF13B02F23003272F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68F5E63613E9A6160053139F /* MessageUI.framework */,
 				68B804F213B0B9FF00EB3B6C /* QuartzCore.framework */,
 				68DA37E013B02F23003272F9 /* UIKit.framework */,
 				68DA37E213B02F23003272F9 /* Foundation.framework */,
@@ -242,6 +249,8 @@
 				685DA53B13D4A47200FACBE9 /* GridView.m */,
 				685DA53F13D4A89200FACBE9 /* ImageGridViewCell.h */,
 				685DA54013D4A89400FACBE9 /* ImageGridViewCell.m */,
+				68F5E63213E9A5FE0053139F /* SendEmailController.h */,
+				68F5E63313E9A5FE0053139F /* SendEmailController.m */,
 				68D2D62313B0359F000308BB /* images */,
 				68DA37E913B02F23003272F9 /* Supporting Files */,
 			);
@@ -380,6 +389,7 @@
 				685DA53C13D4A47300FACBE9 /* GridView.m in Sources */,
 				685DA54113D4A89500FACBE9 /* ImageGridViewCell.m in Sources */,
 				68BB5CC513E63B5300CE8F4B /* PhotoBrowserPhotoView.m in Sources */,
+				68F5E63413E9A5FE0053139F /* SendEmailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

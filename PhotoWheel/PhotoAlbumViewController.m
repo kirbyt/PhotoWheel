@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIPopoverController *popoverController;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) SendEmailController *sendEmailController;
 @end
 
 @implementation PhotoAlbumViewController
@@ -33,6 +34,7 @@
 @synthesize imagePickerController = imagePickerController_;
 @synthesize popoverController = popoverController_;
 @synthesize fetchedResultsController = fetchedResultsController_;
+@synthesize sendEmailController = sendEmailController_;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -154,6 +156,11 @@
 {
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
    [actionSheet setDelegate:self];
+   
+   if ([SendEmailController canSendMail]) {
+      [actionSheet addButtonWithTitle:@"Email Photo Album"];
+   }
+
    [actionSheet addButtonWithTitle:@"Delete Photo Album"];
 
    [actionSheet showFromBarButtonItem:sender animated:YES];
@@ -169,16 +176,40 @@
    }
 }
 
+#pragma mark - Email
+
+- (void)emailPhotos
+{
+   NSManagedObjectContext *context = [self managedObjectContext];
+   PhotoAlbum *album = (PhotoAlbum *)[context objectWithID:[self objectID]];
+   NSSet *photos = [[album photos] set];
+   
+   SendEmailController *controller = [[SendEmailController alloc] initWithViewController:self];
+   [controller setPhotos:photos];
+   [controller sendEmail];
+   
+   [self setSendEmailController:controller];
+}
+
+- (void)sendEmailControllerDidFinish:(SendEmailController *)controller
+{
+   if ([controller isEqual:[self sendEmailController]]) {
+      [self setSendEmailController:nil];
+   }
+}
+
 #pragma mark - UIActionSheetDelegate Methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    if ([actionSheet tag] == 0) {
-      switch (buttonIndex) {
-         case 0:
-            [self confirmDeletePhotoAlbum];
-            break;
+      
+      if ([SendEmailController canSendMail] && buttonIndex == 0) {
+         [self emailPhotos];
+      } else if ( ([SendEmailController canSendMail] && buttonIndex == 1) || buttonIndex == 0) {
+         [self confirmDeletePhotoAlbum];
       }
+      
    } else {
       switch (buttonIndex) {
          case 0:

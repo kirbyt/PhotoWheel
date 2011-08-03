@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSTimer *chromeHideTimer;
 @property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
 @property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
+@property (nonatomic, strong) SendEmailController *sendEmailController;
 
 - (void)addButtonsToNavigationBar;
 - (void)initPhotoViewCache;
@@ -55,6 +56,7 @@
 @synthesize chromeHideTimer = chromeHideTimer_;
 @synthesize firstVisiblePageIndexBeforeRotation = firstVisiblePageIndexBeforeRotation_;
 @synthesize percentScrolledIntoFirstVisiblePage = percentScrolledIntoFirstVisiblePage_;
+@synthesize sendEmailController = sendEmailController_;
 
 - (void)loadView
 {
@@ -267,6 +269,11 @@
    [self cancelChromeDisplayTimer];
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
    [actionSheet setDelegate:self];
+
+   if ([SendEmailController canSendMail]) {
+      [actionSheet addButtonWithTitle:@"Email"];
+   }
+
    if ([UIPrintInteractionController isPrintingAvailable]) {
       [actionSheet addButtonWithTitle:@"Print"];
    }
@@ -312,14 +319,41 @@
    [controller presentFromBarButtonItem:[self actionButton] animated:YES completionHandler:completionHandler];
 }
 
+#pragma mark - Email
+
+- (void)emailCurrentPhoto
+{
+   UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
+   NSSet *photos = [NSSet setWithObject:currentPhoto];
+
+   SendEmailController *controller = [[SendEmailController alloc] initWithViewController:self];
+   [controller setPhotos:photos];
+   [controller sendEmail];
+   
+   [self setSendEmailController:controller];
+}
+
+- (void)sendEmailControllerDidFinish:(SendEmailController *)controller
+{
+   if ([controller isEqual:[self sendEmailController]]) {
+      [self setSendEmailController:nil];
+   }
+}
+
 #pragma mark - UIActionSheetDelegate methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-   if ([UIPrintInteractionController isPrintingAvailable] && buttonIndex == 0) {
-      [self printCurrentPhoto];
-   } else {
-      [self startChromeDisplayTimer];
+   if (buttonIndex == 0) {
+      if ([SendEmailController canSendMail]) {
+         [self emailCurrentPhoto];
+      } else if ([UIPrintInteractionController isPrintingAvailable]) {
+         [self printCurrentPhoto];
+      }
+   } else if (buttonIndex == 1) {
+      if ([UIPrintInteractionController isPrintingAvailable]) {
+         [self printCurrentPhoto];
+      }      
    }
 }
 
