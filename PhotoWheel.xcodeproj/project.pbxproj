@@ -56,6 +56,7 @@
 		68F3286C13D35729006A9CEB /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F3286613D35729006A9CEB /* PhotoAlbum.m */; };
 		68FC1E8613D8944D00E9D18E /* buttonNext.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FC1E8413D8944D00E9D18E /* buttonNext.png */; };
 		68FC1E8713D8944D00E9D18E /* buttonPrevious.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FC1E8513D8944D00E9D18E /* buttonPrevious.png */; };
+		EE94D05113E8A689005CD297 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE94D05013E8A689005CD297 /* CoreImage.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +76,7 @@
 		68B804E113B0B2A500EB3B6C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		68B804E213B0B2A500EB3B6C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
-		68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserViewController.m; sourceTree = "<group>"; };
+		68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserViewController.m; sourceTree = "<group>"; usesTabs = 0; };
 		68B804EC13B0B93000EB3B6C /* CustomPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPushSegue.h; sourceTree = "<group>"; };
 		68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPushSegue.m; sourceTree = "<group>"; };
 		68B804EF13B0B9BC00EB3B6C /* UIView+PWCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PWCategory.h"; sourceTree = "<group>"; };
@@ -111,7 +112,7 @@
 		68DA37EE13B02F23003272F9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		68DA37F013B02F23003272F9 /* PhotoWheel-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PhotoWheel-Prefix.pch"; sourceTree = "<group>"; };
 		68DA37F113B02F23003272F9 /* PhotoWheelAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoWheelAppDelegate.h; sourceTree = "<group>"; };
-		68DA37F213B02F23003272F9 /* PhotoWheelAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelAppDelegate.m; sourceTree = "<group>"; };
+		68DA37F213B02F23003272F9 /* PhotoWheelAppDelegate.m */ = {isa = PBXFileReference; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelAppDelegate.m; sourceTree = "<group>"; usesTabs = 0; };
 		68DA380013B030CC003272F9 /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		68EE13DB13D35883009D2CC7 /* PhotoWheelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewCell.h; sourceTree = "<group>"; };
 		68EE13DC13D35883009D2CC7 /* PhotoWheelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewCell.m; sourceTree = "<group>"; };
@@ -132,6 +133,7 @@
 		68FC1E8413D8944D00E9D18E /* buttonNext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonNext.png; sourceTree = "<group>"; };
 		68FC1E8513D8944D00E9D18E /* buttonPrevious.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonPrevious.png; sourceTree = "<group>"; };
 		EE3B6D2213E752B000830BAD /* PhotoWheel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PhotoWheel.entitlements; sourceTree = "<group>"; };
+		EE94D05013E8A689005CD297 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE94D05113E8A689005CD297 /* CoreImage.framework in Frameworks */,
 				68B804F313B0B9FF00EB3B6C /* QuartzCore.framework in Frameworks */,
 				68DA37E113B02F23003272F9 /* UIKit.framework in Frameworks */,
 				68DA37E313B02F23003272F9 /* Foundation.framework in Frameworks */,
@@ -179,6 +182,7 @@
 		68DA37D113B02F23003272F9 = {
 			isa = PBXGroup;
 			children = (
+				EE94D05013E8A689005CD297 /* CoreImage.framework */,
 				68DA37E813B02F23003272F9 /* PhotoWheel */,
 				68DA37DF13B02F23003272F9 /* Frameworks */,
 				68DA37DD13B02F23003272F9 /* Products */,

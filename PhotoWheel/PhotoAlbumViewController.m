@@ -369,6 +369,13 @@
    return image;
 }
 
+- (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser smallImageAtIndex:(NSInteger)index
+{
+	Photo *photo = [self objectAtIndex:index];
+	UIImage *image = [photo smallImage];
+	return image;
+}
+
 - (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser deleteImageAtIndex:(NSInteger)index
 {
    Photo *photo = [self objectAtIndex:index];
@@ -377,6 +384,12 @@
    [self saveChanges];   
 }
 
+- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser updateToNewImage:(UIImage *)image atIndex:(NSInteger)index;
+{
+	Photo *photo = [self objectAtIndex:index];
+	[photo saveImage:image];
+	[[self gridView] reloadData];
+}
 
 #pragma mark - Segues
 

@@ -210,72 +210,72 @@ const NSString *containerID = @"FZTVR399HK.com.atomicbird.PhotoWheel";
  */
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-    if (__persistentStoreCoordinator != nil)
-    {
-        return __persistentStoreCoordinator;
-    }
-    
-    // assign the PSC to our app delegate ivar before adding the persistent store in the background
-    // this leverages a behavior in Core Data where you can create NSManagedObjectContext and fetch requests
-    // even if the PSC has no stores.  Fetch requests return empty arrays until the persistent store is added
-    // so it's possible to bring up the UI and then fill in the results later
-    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
-    
-    // do this asynchronously since if this is the first time this particular device is syncing with preexisting
-    // iCloud content it may take a long long time to download
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        // Build a URL to use as NSPersistentStoreUbiquitousContentURLKey
-        NSURL *cloudURL;
+   if (__persistentStoreCoordinator != nil)
+   {
+      return __persistentStoreCoordinator;
+   }
+   
+   // assign the PSC to our app delegate ivar before adding the persistent store in the background
+   // this leverages a behavior in Core Data where you can create NSManagedObjectContext and fetch requests
+   // even if the PSC has no stores.  Fetch requests return empty arrays until the persistent store is added
+   // so it's possible to bring up the UI and then fill in the results later
+   __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
+   
+   NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
+   
+   // do this asynchronously since if this is the first time this particular device is syncing with preexisting
+   // iCloud content it may take a long long time to download
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      
+      // Build a URL to use as NSPersistentStoreUbiquitousContentURLKey
+      NSURL *cloudURL;
 #ifdef TARGET_IPHONE_SIMULATOR
-        cloudURL = nil;
+      cloudURL = nil;
 #else
-        cloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:(NSString *)containerID];
+      cloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:(NSString *)containerID];
 #endif
-        
-        NSDictionary *options;
-        
-        if (cloudURL != nil) {
-            NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"photowheel"];
-            cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
-            
-            // here you add the API to turn on Core Data iCloud support
-            options = [NSDictionary dictionaryWithObjectsAndKeys:
-                       @"com.whitepeaksoftware.photowheel", NSPersistentStoreUbiquitousContentNameKey,
-                       cloudURL, NSPersistentStoreUbiquitousContentURLKey,
-                       [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                       [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
-            
-            // Workaround needed on iOS 5 beta 3 (but not Mac OS X)
-            [self workaround_weakpackages_9653904:options];
-        } else {
-            NSLog(@"Uh-oh, nil result from URLForUbiquityContainerIdentifier");
-            options = [NSDictionary dictionaryWithObjectsAndKeys:
-                       [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                       [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
-        }
-        
-        NSError *error = nil;
-        [__persistentStoreCoordinator lock];
-        if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
-        {
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-        [__persistentStoreCoordinator unlock];
-        
-        // tell the UI on the main thread we finally added the store and then
-        // post a custom notification to make your views do whatever they need to such as tell their
-        // NSFetchedResultsController to -performFetch again now there is a real store
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSLog(@"asynchronously added persistent store!");
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
-        });
-    });
-    
-    return __persistentStoreCoordinator;
+      
+      NSDictionary *options;
+      
+      if (cloudURL != nil) {
+         NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"photowheel"];
+         cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
+         
+         // here you add the API to turn on Core Data iCloud support
+         options = [NSDictionary dictionaryWithObjectsAndKeys:
+                    @"com.whitepeaksoftware.photowheel", NSPersistentStoreUbiquitousContentNameKey,
+                    cloudURL, NSPersistentStoreUbiquitousContentURLKey,
+                    [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                    [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
+         
+         // Workaround needed on iOS 5 beta 3 (but not Mac OS X)
+         [self workaround_weakpackages_9653904:options];
+      } else {
+         NSLog(@"Uh-oh, nil result from URLForUbiquityContainerIdentifier");
+         options = [NSDictionary dictionaryWithObjectsAndKeys:
+                    [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                    [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
+      }
+      
+      NSError *error = nil;
+      [__persistentStoreCoordinator lock];
+      if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
+      {
+         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+         abort();
+      }
+      [__persistentStoreCoordinator unlock];
+      
+      // tell the UI on the main thread we finally added the store and then
+      // post a custom notification to make your views do whatever they need to such as tell their
+      // NSFetchedResultsController to -performFetch again now there is a real store
+      dispatch_async(dispatch_get_main_queue(), ^{
+         NSLog(@"asynchronously added persistent store!");
+         [[NSNotificationCenter defaultCenter] postNotificationName:@"RefetchAllDatabaseData" object:self userInfo:nil];
+      });
+   });
+   
+   return __persistentStoreCoordinator;
 }
 
 // Begin methods needed on iOS 5 beta 3 as a workaround for known issues, but not Mac OS X ----------------------------------------------

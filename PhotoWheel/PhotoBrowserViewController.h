@@ -18,12 +18,23 @@
 
 - (void)toggleChromeDisplay;
 
+@property (strong, nonatomic) IBOutlet UIView *filterViewContainer;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *filterButtons;
+- (IBAction)revertToOriginal:(id)sender;
+- (IBAction)saveImage:(id)sender;
+- (IBAction)cancel:(id)sender;
+- (IBAction)applyFilter:(id)sender;
+- (IBAction)enhanceImage:(id)sender;
+- (IBAction)zoomToFaces:(id)sender;
+
 @end
 
 @protocol PhotoBrowserViewControllerDelegate <NSObject>
 @required
 - (NSInteger)photoBrowserViewControllerNumberOfPhotos:(PhotoBrowserViewController *)photoBrowser;
 - (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser imageAtIndex:(NSInteger)index;
+- (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser smallImageAtIndex:(NSInteger)index;
 - (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser deleteImageAtIndex:(NSInteger)index;
+- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser updateToNewImage:(UIImage *)image atIndex:(NSInteger)index;
 
 @end
