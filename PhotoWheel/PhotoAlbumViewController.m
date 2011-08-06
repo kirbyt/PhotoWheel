@@ -360,7 +360,7 @@
 {
    ImageGridViewCell *cell = [gridView dequeueReusableCell];
    if (cell == nil) {
-      cell = [ImageGridViewCell imageGridViewCell];
+      cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(100, 100)];
    }
    
    Photo *photo = [self objectAtIndex:index];
@@ -371,7 +371,7 @@
 
 - (CGSize)gridViewCellSize:(GridView *)gridView
 {
-   return [ImageGridViewCell size];
+   return CGSizeMake(100, 100);
 }
 
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index

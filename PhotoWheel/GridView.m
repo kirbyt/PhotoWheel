@@ -118,6 +118,7 @@
 - (void)reloadCellAtIndex:(NSInteger)index
 {
    [[self dataSource] gridView:self cellAtIndex:index];
+   [self setNeedsLayout];
 }
 
 - (GridViewCell *)cellAtIndex:(NSInteger)index

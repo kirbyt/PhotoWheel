@@ -100,7 +100,7 @@
 {
    ImageGridViewCell *cell = [gridView dequeueReusableCell];
    if (cell == nil) {
-      cell = [ImageGridViewCell imageGridViewCell];
+      cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(100, 75)];
    }
    
    ImageDownloader *downloader = [[self downloaders] objectAtIndex:index];
@@ -112,7 +112,7 @@
 
 - (CGSize)gridViewCellSize:(GridView *)gridView
 {
-   return [ImageGridViewCell size];
+   return CGSizeMake(100, 75);
 }
 
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index

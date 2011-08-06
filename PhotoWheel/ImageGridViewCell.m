@@ -19,7 +19,16 @@
 
 - (id)init
 {
-   CGSize size = [[self class] size];
+   CGSize size = CGSizeMake(100, 100);
+   self = [self initWithSize:size];
+   if (self) {
+      
+   }
+   return self;
+}
+
+- (id)initWithSize:(CGSize)size
+{
    CGRect frame = CGRectMake(0, 0, size.width, size.height);
    self = [super initWithFrame:frame];
    if (self) {
@@ -30,6 +39,7 @@
    }
    return self;
 }
+
 
 - (void)setImage:(UIImage *)image withShadow:(BOOL)shadow
 {
@@ -46,15 +56,10 @@
    }
 }
 
-+ (ImageGridViewCell *)imageGridViewCell
++ (ImageGridViewCell *)imageGridViewCellWithSize:(CGSize)size
 {
-   ImageGridViewCell *newCell = [[ImageGridViewCell alloc] init];
+   ImageGridViewCell *newCell = [[ImageGridViewCell alloc] initWithSize:size];
    return newCell;
-}
-
-+ (CGSize)size
-{
-   return CGSizeMake(100, 100);
 }
 
 @end

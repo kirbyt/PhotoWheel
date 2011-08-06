@@ -10,9 +10,9 @@
 
 @interface ImageGridViewCell : GridViewCell
 
-+ (ImageGridViewCell *)imageGridViewCell;
-+ (CGSize)size;
++ (ImageGridViewCell *)imageGridViewCellWithSize:(CGSize)size;
 
+- (id)initWithSize:(CGSize)size;
 - (void)setImage:(UIImage *)image withShadow:(BOOL)shadow;
 
 @end
