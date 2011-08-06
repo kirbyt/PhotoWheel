@@ -69,7 +69,7 @@
    NSMutableArray *downloaders = [[NSMutableArray alloc] initWithCapacity:[photos count]];
    for (NSInteger index = 0; index < [photos count]; index++) {
       NSDictionary *flickrPhoto = [photos objectAtIndex:index];
-      NSString *urlString = [flickrPhoto objectForKey:@"url_t"];
+      NSString *urlString = [flickrPhoto objectForKey:@"url_sq"];
       NSURL *URL = [NSURL URLWithString:urlString];
       
       ImageDownloader *downloader = [[ImageDownloader alloc] init];
@@ -105,7 +105,7 @@
 {
    ImageGridViewCell *cell = [gridView dequeueReusableCell];
    if (cell == nil) {
-      cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(100, 75)];
+      cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(75, 75)];
    }
    
    ImageDownloader *downloader = [[self downloaders] objectAtIndex:index];
@@ -117,7 +117,7 @@
 
 - (CGSize)gridViewCellSize:(GridView *)gridView
 {
-   return CGSizeMake(100, 75);
+   return CGSizeMake(75, 75);
 }
 
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index

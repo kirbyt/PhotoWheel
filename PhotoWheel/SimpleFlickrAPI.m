@@ -53,7 +53,7 @@
 
 - (NSArray *)photosWithPhotoSetId:(NSString *)photoSetId
 {
-   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:flickrMethodGetPhotosWithPhotoSetId, flickrParamMethod, flickrAPIKey, flickrParamAppKey, photoSetId, flickrParamPhotoSetId, @"url_t, url_s, url_m", flickrParamExtras, nil];
+   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:flickrMethodGetPhotosWithPhotoSetId, flickrParamMethod, flickrAPIKey, flickrParamAppKey, photoSetId, flickrParamPhotoSetId, @"url_t, url_s, url_m, url_sq", flickrParamExtras, nil];
    NSDictionary *json = [self flickrJSONSWithParameters:parameters];
    NSDictionary *photoset = [json objectForKey:@"photoset"];
    NSArray *photos = [photoset objectForKey:@"photo"];
