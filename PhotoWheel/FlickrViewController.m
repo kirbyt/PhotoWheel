@@ -84,6 +84,11 @@
 
    NSArray *indexes = [[self gridView] indexesForSelectedCells];
    __block NSInteger count = [indexes count];
+   
+   if (count == 0) {
+      [self dismissModalViewControllerAnimated:YES];
+      return;
+   }
 
    ImageDownloaderCompletionBlock completion = ^(UIImage *image, NSError *error) {
       NSLog(@"block: count: %i", count);
