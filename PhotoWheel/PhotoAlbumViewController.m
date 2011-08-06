@@ -168,6 +168,10 @@
 
 - (IBAction)addPhoto:(id)sender
 {
+   if ([self popoverController]) {
+      [[self popoverController] dismissPopoverAnimated:YES];
+   }
+   
    BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
    if (hasCamera) {
       [self presentPhotoPickerMenu];
