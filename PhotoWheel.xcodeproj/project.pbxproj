@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68398B0713ED26E200B30FEE /* FlickrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68398B0613ED26E200B30FEE /* FlickrViewController.m */; };
+		68398B0B13ED30E900B30FEE /* SimpleFlickrAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 68398B0A13ED30E900B30FEE /* SimpleFlickrAPI.m */; };
 		685DA52613D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 685DA52413D35BFE00FACBE9 /* PhotoWheel.xcdatamodeld */; };
 		685DA52C13D36E1200FACBE9 /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 685DA52B13D36E1200FACBE9 /* defaultPhoto.png */; };
 		685DA53113D37E2B00FACBE9 /* stack-overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 685DA53013D37E2B00FACBE9 /* stack-overlay.png */; };
@@ -61,6 +63,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		68398B0513ED26E200B30FEE /* FlickrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrViewController.h; sourceTree = "<group>"; };
+		68398B0613ED26E200B30FEE /* FlickrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrViewController.m; sourceTree = "<group>"; };
+		68398B0913ED30E900B30FEE /* SimpleFlickrAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleFlickrAPI.h; sourceTree = "<group>"; };
+		68398B0A13ED30E900B30FEE /* SimpleFlickrAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleFlickrAPI.m; sourceTree = "<group>"; };
 		685DA52513D35BFE00FACBE9 /* PhotoWheel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PhotoWheel.xcdatamodel; sourceTree = "<group>"; };
 		685DA52B13D36E1200FACBE9 /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		685DA53013D37E2B00FACBE9 /* stack-overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-overlay.png"; sourceTree = "<group>"; };
@@ -251,6 +257,10 @@
 				685DA54013D4A89400FACBE9 /* ImageGridViewCell.m */,
 				68F5E63213E9A5FE0053139F /* SendEmailController.h */,
 				68F5E63313E9A5FE0053139F /* SendEmailController.m */,
+				68398B0513ED26E200B30FEE /* FlickrViewController.h */,
+				68398B0613ED26E200B30FEE /* FlickrViewController.m */,
+				68398B0913ED30E900B30FEE /* SimpleFlickrAPI.h */,
+				68398B0A13ED30E900B30FEE /* SimpleFlickrAPI.m */,
 				68D2D62313B0359F000308BB /* images */,
 				68DA37E913B02F23003272F9 /* Supporting Files */,
 			);
@@ -390,6 +400,8 @@
 				685DA54113D4A89500FACBE9 /* ImageGridViewCell.m in Sources */,
 				68BB5CC513E63B5300CE8F4B /* PhotoBrowserPhotoView.m in Sources */,
 				68F5E63413E9A5FE0053139F /* SendEmailController.m in Sources */,
+				68398B0713ED26E200B30FEE /* FlickrViewController.m in Sources */,
+				68398B0B13ED30E900B30FEE /* SimpleFlickrAPI.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

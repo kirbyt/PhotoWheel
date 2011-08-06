@@ -11,6 +11,7 @@
 #import "PhotoAlbum.h"
 #import "Photo.h"
 #import "ImageGridViewCell.h"
+#import "FlickrViewController.h"
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
@@ -142,7 +143,7 @@
 
 - (void)presentFlickr
 {
-   
+   [self performSegueWithIdentifier:@"FlickrSegue" sender:self];
 }
 
 - (void)presentPhotoPickerMenu
@@ -154,7 +155,7 @@
       [actionSheet addButtonWithTitle:@"Take Photo"];
    }
    [actionSheet addButtonWithTitle:@"Choose from Library"];
-   [actionSheet addButtonWithTitle:@"Choose from Flick"];
+   [actionSheet addButtonWithTitle:@"Choose from Flickr"];
    [actionSheet setTag:1];
    [actionSheet showFromBarButtonItem:[self addButton] animated:YES];
 }
@@ -420,6 +421,9 @@
          CGRect pushFromFrame = [[photoBrowserViewController view] convertRect:cellFrame fromView:gridView];
          [photoBrowserViewController setPushFromFrame:pushFromFrame];
       }
+   } else if ([[segue destinationViewController] isKindOfClass:[FlickrViewController class]]) {
+      [[segue destinationViewController] setManagedObjectContext:[self managedObjectContext]];
+      [[segue destinationViewController] setObjectID:[self objectID]];
    }
 }
 
