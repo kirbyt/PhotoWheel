@@ -15,12 +15,14 @@
 @interface GridView : UIScrollView <UIScrollViewDelegate>
 
 @property (nonatomic, strong) IBOutlet id<GridViewDataSource> dataSource;
+@property (nonatomic, assign) BOOL allowsMultipleSelection;
 
 
 - (id)dequeueReusableCell;
 - (void)reloadData;
 - (GridViewCell *)cellAtIndex:(NSInteger)index;
 - (NSInteger)indexForSelectedCell;
+- (NSArray *)indexesForSelectedCells;
 
 @end
 

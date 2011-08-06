@@ -26,7 +26,7 @@
 @property (nonatomic, assign) NSInteger firstVisibleIndex;
 @property (nonatomic, assign) NSInteger lastVisibleIndex;
 @property (nonatomic, assign) NSInteger previousItemsPerRow;
-@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, strong) NSMutableSet *selectedCells;
 @end
 
 @implementation GridView
@@ -36,7 +36,8 @@
 @synthesize firstVisibleIndex = firstVisibleIndex_;
 @synthesize lastVisibleIndex = lastVisibleIndex_;
 @synthesize previousItemsPerRow = previousItemsPerRow_;
-@synthesize selectedIndex = selectedIndex_;
+@synthesize selectedCells = selectedCells;
+@synthesize allowsMultipleSelection = allowsMultipleSelection_;
 
 - (void)commonInit
 {
@@ -54,6 +55,9 @@
    
    [self setDelaysContentTouches:YES];
    [self setClipsToBounds:YES];
+   
+   [self setAllowsMultipleSelection:NO];
+   self.selectedCells = [[NSMutableSet alloc] init];
    
    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
    [self addGestureRecognizer:tap];
@@ -106,7 +110,7 @@
    
    [self setFirstVisibleIndex:NSIntegerMax];
    [self setLastVisibleIndex:NSIntegerMin];
-   [self setSelectedIndex:-1];
+   [[self selectedCells] removeAllObjects];
 }
 
 - (void)reloadData
@@ -249,15 +253,25 @@
    // If a cell was tapped then let the data source know
    // which cell was tapped.
    
-   [self setSelectedIndex:-1];
    CGPoint touchPoint = [recognizer locationInView:self];
    
    for (id view in [self subviews]) {
       if ([view isKindOfClass:[GridViewCell class]]) {
          if (CGRectContainsPoint([view frame], touchPoint)) {
-            [self setSelectedIndex:[view indexInGrid]];
+
+            if ([self allowsMultipleSelection] == NO) {
+               [[self selectedCells] removeAllObjects];
+               [[self selectedCells] addObject:view];
+            } else {
+               if ([[self selectedCells] containsObject:view]) {
+                  [[self selectedCells] removeObject:view];
+               } else {
+                  [[self selectedCells] addObject:view];
+               }
+            }
+            
             if ([[self dataSource] respondsToSelector:@selector(gridView:didSelectCellAtIndex:)]) {
-               [[self dataSource] gridView:self didSelectCellAtIndex:[self selectedIndex]];
+               [[self dataSource] gridView:self didSelectCellAtIndex:[view indexInGrid]];
             }
             break;
          }
@@ -267,7 +281,27 @@
 
 - (NSInteger)indexForSelectedCell
 {
-   return [self selectedIndex];
+   NSInteger selectedIndex = -1;
+   GridViewCell *selectedCell = [[self selectedCells] anyObject];
+   if (selectedCell) {
+      selectedIndex = [selectedCell indexInGrid];
+   }
+   return selectedIndex;
+}
+
+- (NSArray *)indexesForSelectedCells
+{
+   NSArray *selectedIndexes = nil;
+   NSInteger count = [[self selectedCells] count];
+   if (count > 0) {
+      NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithCapacity:count];
+      for (GridViewCell *cell in [self selectedCells]) {
+         NSInteger indexInGrid = [cell indexInGrid];
+         [mutableArray addObject:[NSNumber numberWithInteger:indexInGrid]];
+      }
+      selectedIndexes = [NSArray arrayWithArray:mutableArray];
+   }
+   return selectedIndexes;
 }
 
 @end
