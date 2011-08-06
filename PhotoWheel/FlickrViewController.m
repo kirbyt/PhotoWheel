@@ -130,7 +130,8 @@
 - (void)imageDownloaderDidFinish:(ImageDownloader *)downloader
 {
    NSInteger index = [[self downloaders] indexOfObject:downloader];
-   [[self gridView] reloadCellAtIndex:index];
+   id cell = [[self gridView] cellAtIndex:index];
+   [cell setImage:[downloader image] withShadow:NO];
 }
 
 - (void)imageDownloader:(ImageDownloader *)downloader didFailWithError:(NSError *)error

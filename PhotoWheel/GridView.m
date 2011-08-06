@@ -115,12 +115,6 @@
    [self setNeedsLayout];
 }
 
-- (void)reloadCellAtIndex:(NSInteger)index
-{
-   [[self dataSource] gridView:self cellAtIndex:index];
-   [self setNeedsLayout];
-}
-
 - (GridViewCell *)cellAtIndex:(NSInteger)index
 {
    GridViewCell *cell = nil;
