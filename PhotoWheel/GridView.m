@@ -36,7 +36,7 @@
 @synthesize firstVisibleIndex = firstVisibleIndex_;
 @synthesize lastVisibleIndex = lastVisibleIndex_;
 @synthesize previousItemsPerRow = previousItemsPerRow_;
-@synthesize selectedCells = selectedCells;
+@synthesize selectedCells = selectedCells_;
 @synthesize allowsMultipleSelection = allowsMultipleSelection_;
 
 - (void)commonInit
@@ -259,20 +259,41 @@
       if ([view isKindOfClass:[GridViewCell class]]) {
          if (CGRectContainsPoint([view frame], touchPoint)) {
 
+            NSInteger previousIndex = -1;
+            NSInteger selectedIndex = -1;
+            
+            NSMutableSet *selectedCells = [self selectedCells];
             if ([self allowsMultipleSelection] == NO) {
-               [[self selectedCells] removeAllObjects];
-               [[self selectedCells] addObject:view];
+               // Out the old.
+               previousIndex = [[selectedCells anyObject] indexInGrid];
+               [selectedCells removeAllObjects];
+               
+               // And in with the new.
+               selectedIndex = [view indexInGrid];
+               [selectedCells addObject:view];
+
             } else {
-               if ([[self selectedCells] containsObject:view]) {
-                  [[self selectedCells] removeObject:view];
+               if ([selectedCells containsObject:view]) {
+                  previousIndex = [view indexInGrid];
+                  [selectedCells removeObject:view];
                } else {
-                  [[self selectedCells] addObject:view];
+                  selectedIndex = [view indexInGrid];
+                  [selectedCells addObject:view];
                }
             }
             
-            if ([[self dataSource] respondsToSelector:@selector(gridView:didSelectCellAtIndex:)]) {
-               [[self dataSource] gridView:self didSelectCellAtIndex:[view indexInGrid]];
+            id <GridViewDataSource> dataSource = [self dataSource];
+            if (previousIndex >= 0) {
+               if ([dataSource respondsToSelector:@selector(gridView:didDeselectCellAtIndex:)]) {
+                  [dataSource gridView:self didDeselectCellAtIndex:previousIndex];
+               }
             }
+            if (selectedIndex >= 0) {
+               if ([dataSource respondsToSelector:@selector(gridView:didSelectCellAtIndex:)]) {
+                  [dataSource gridView:self didSelectCellAtIndex:selectedIndex];
+               }
+            }
+            
             break;
          }
       }

@@ -35,6 +35,7 @@
    [[self overlayView] addGestureRecognizer:tap];
    
    [[self gridView] setAlwaysBounceVertical:YES];
+   [[self gridView] setAllowsMultipleSelection:YES];
 }
 
 - (void)viewDidUnload
@@ -156,7 +157,14 @@
 
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
 {
-   
+   id cell = [gridView cellAtIndex:index];
+   [cell setSelected:YES];
+}
+
+- (void)gridView:(GridView *)gridView didDeselectCellAtIndex:(NSInteger)index
+{
+   id cell = [gridView cellAtIndex:index];
+   [cell setSelected:NO];
 }
 
 #pragma mark - ImageDownloaderDelegate Methods

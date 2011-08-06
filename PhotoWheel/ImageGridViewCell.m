@@ -11,11 +11,14 @@
 
 @interface ImageGridViewCell ()
 @property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIImageView *selectedIndicator;
 @end
 
 @implementation ImageGridViewCell
 
+@synthesize selected = selected_;
 @synthesize imageView = imageView_;
+@synthesize selectedIndicator = selectedIndicator_;
 
 - (id)init
 {
@@ -36,6 +39,10 @@
       
       self.imageView = [[UIImageView alloc] initWithFrame:frame];
       [self addSubview:[self imageView]];
+      
+      NSInteger baseSize = 29;
+      self.selectedIndicator = [[UIImageView alloc] initWithFrame:CGRectMake(size.width - baseSize - 4, size.height - baseSize - 4, baseSize, baseSize)];
+      [self addSubview:[self selectedIndicator]];
    }
    return self;
 }
@@ -54,6 +61,17 @@
    } else {
       [layer setShadowOpacity:0.0];
    }
+}
+
+- (void)setSelected:(BOOL)selected
+{
+   selected_ = selected;
+   
+   UIImage *image = nil;
+   if (selected) {
+      image = [UIImage imageNamed:@"addphoto.png"];
+   }
+   [[self selectedIndicator] setImage:image];
 }
 
 + (ImageGridViewCell *)imageGridViewCellWithSize:(CGSize)size

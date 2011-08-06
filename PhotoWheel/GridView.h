@@ -36,6 +36,7 @@
 @optional
 - (NSInteger)gridViewCellsPerRow:(GridView *)gridView;
 - (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index;
+- (void)gridView:(GridView *)gridView didDeselectCellAtIndex:(NSInteger)index;
 @end
 
 

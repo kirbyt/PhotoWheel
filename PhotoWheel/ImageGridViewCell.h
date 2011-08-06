@@ -10,6 +10,8 @@
 
 @interface ImageGridViewCell : GridViewCell
 
+@property (nonatomic, assign, getter = isSelected) BOOL selected;
+
 + (ImageGridViewCell *)imageGridViewCellWithSize:(CGSize)size;
 
 - (id)initWithSize:(CGSize)size;
