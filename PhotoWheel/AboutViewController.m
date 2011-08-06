@@ -10,6 +10,11 @@
 
 @implementation AboutViewController
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+   return YES;
+}
+
 - (IBAction)done:(id)sender 
 {
    [self dismissModalViewControllerAnimated:YES];

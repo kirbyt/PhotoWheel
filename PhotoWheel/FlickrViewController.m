@@ -35,6 +35,11 @@
    [super viewDidUnload];
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+   return YES;
+}
+
 #pragma mark - Actions
 
 - (IBAction)done:(id)sender
