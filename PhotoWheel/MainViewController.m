@@ -159,7 +159,7 @@
    PhotoAlbum *photoAlbum = [self.fetchedResultsController objectAtIndexPath:indexPath];
    [[cell label] setText:[photoAlbum name]];
 
-   Photo *photo = [photoAlbum keyPhoto];
+   Photo *photo = [[photoAlbum photos] lastObject];
    if (photo) {
       [[cell imageView] setImage:[photo thumbnailImage]];
    }
