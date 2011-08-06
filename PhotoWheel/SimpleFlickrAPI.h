@@ -13,5 +13,6 @@
 - (NSString *)userIdForUsername:(NSString *)username;          // Returns the Flickr NSID for the given user name.
 - (NSArray *)photoSetListWithUserId:(NSString *)userId;   // userId is the Flickr NSID of the user.
 - (NSArray *)photosWithPhotoSetId:(NSString *)photoSetId;
+- (NSArray *)photosWithSearchString:(NSString *)string;
 
 @end

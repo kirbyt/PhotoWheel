@@ -20,10 +20,12 @@
 #define flickrParamUserid @"user_id"
 #define flickrParamPhotoSetId @"photoset_id"
 #define flickrParamExtras @"extras"
+#define flickrParamText @"text"
 
 #define flickrMethodFindByUsername @"flickr.people.findByUsername"
 #define flickrMethodGetPhotoSetList @"flickr.photosets.getList"
 #define flickrMethodGetPhotosWithPhotoSetId @"flickr.photosets.getPhotos"
+#define flickrMethodSearchPhotos @"flickr.photos.search"
 
 
 @interface SimpleFlickrAPI ()
@@ -60,6 +62,14 @@
    return photos;
 }
 
+- (NSArray *)photosWithSearchString:(NSString *)string
+{
+   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:flickrMethodSearchPhotos, flickrParamMethod, flickrAPIKey, flickrParamAppKey, string, flickrParamText, @"url_t, url_s, url_m, url_sq", flickrParamExtras, nil];
+   NSDictionary *json = [self flickrJSONSWithParameters:parameters];
+   NSDictionary *photoset = [json objectForKey:@"photos"];
+   NSArray *photos = [photoset objectForKey:@"photo"];
+   return photos;
+}
 
 #pragma -
 #pragma Helper Methods

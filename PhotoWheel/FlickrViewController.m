@@ -33,6 +33,8 @@
    
    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(overlayViewTapped:)];
    [[self overlayView] addGestureRecognizer:tap];
+   
+   [[self gridView] setAlwaysBounceVertical:YES];
 }
 
 - (void)viewDidUnload
@@ -80,23 +82,11 @@
 
 #pragma mark - Flickr
 
-- (void)fetchFlickrPhotoWithSearchCriteria:(NSString *)searchCriteria
+- (void)fetchFlickrPhotoWithSearchString:(NSString *)searchString
 {
    SimpleFlickrAPI *flickr = [[SimpleFlickrAPI alloc] init];
-   NSString *userId = [flickr userIdForUsername:@"Kirby Turner"];
-   NSArray *photoSets = [flickr photoSetListWithUserId:userId];
-   
-   NSString *photoSetId;
-   for (NSDictionary *photoSet in photoSets) {
-      NSDictionary *titleDict = [photoSet objectForKey:@"title"];
-      NSString *titleContent = [titleDict objectForKey:@"_content"];
-      if ([titleContent isEqualToString:@"Rowan"]) {
-         photoSetId = [photoSet objectForKey:@"id"];
-         break;
-      }
-   }
-   
-   NSArray *photos = [flickr photosWithPhotoSetId:photoSetId];
+   NSArray *photos = [flickr photosWithSearchString:searchString];
+
    NSMutableArray *downloaders = [[NSMutableArray alloc] initWithCapacity:[photos count]];
    for (NSInteger index = 0; index < [photos count]; index++) {
       NSDictionary *flickrPhoto = [photos objectAtIndex:index];
@@ -128,7 +118,7 @@
 {
    [searchBar resignFirstResponder];
    [self showsOverlay:NO];
-   [self fetchFlickrPhotoWithSearchCriteria:[searchBar text]];
+   [self fetchFlickrPhotoWithSearchString:[searchBar text]];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
