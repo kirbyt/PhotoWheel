@@ -19,6 +19,7 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;
 
-- (IBAction)done:(id)sender;
+- (IBAction)save:(id)sender;
+- (IBAction)cancel:(id)sender;
 
 @end

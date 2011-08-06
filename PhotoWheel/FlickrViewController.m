@@ -52,10 +52,16 @@
 
 #pragma mark - Actions
 
-- (IBAction)done:(id)sender
+- (IBAction)save:(id)sender
 {
    [self dismissModalViewControllerAnimated:YES];
 }
+
+- (IBAction)cancel:(id)sender
+{
+   [self dismissModalViewControllerAnimated:YES];
+}
+
 
 #pragma mark - Overlay Methods
 
