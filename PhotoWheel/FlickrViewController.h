@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "GridView.h"
+#import "ImageDownloader.h"
 
 
-@interface FlickrViewController : UIViewController <UISearchBarDelegate, GridViewDataSource>
+@interface FlickrViewController : UIViewController <UISearchBarDelegate, GridViewDataSource, ImageDownloaderDelegate>
 
 @property (nonatomic, strong) IBOutlet GridView *gridView;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;

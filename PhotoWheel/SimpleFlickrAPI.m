@@ -27,8 +27,6 @@
 
 
 @interface SimpleFlickrAPI ()
-- (NSURL *)buildFlickrURLWithParameters:(NSDictionary *)parameters;
-//- (NSString *)stringByRemovingFlickrJavaScript:(NSData *)data;
 - (id)flickrJSONSWithParameters:(NSDictionary *)parameters;
 @end
 

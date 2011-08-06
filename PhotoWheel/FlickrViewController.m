@@ -12,6 +12,7 @@
 
 @interface FlickrViewController ()
 @property (nonatomic, strong) NSArray *flickrPhotos;
+@property (nonatomic, strong) NSArray *downloaders;
 @end
 
 @implementation FlickrViewController
@@ -20,6 +21,7 @@
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize objectID = objectID_;
 @synthesize flickrPhotos = flickrPhotos_;
+@synthesize downloaders = downloaders_;
 
 - (void)viewDidLoad
 {
@@ -47,7 +49,6 @@
    SimpleFlickrAPI *flickr = [[SimpleFlickrAPI alloc] init];
    NSString *userId = [flickr userIdForUsername:@"Kirby Turner"];
    NSArray *photoSets = [flickr photoSetListWithUserId:userId];
-//   NSString *photoSetId = [self photoSetIdWithTitle:@"Rowan" photoSets:photoSets];
    
    NSString *photoSetId;
    for (NSDictionary *photoSet in photoSets) {
@@ -60,6 +61,20 @@
    }
    
    NSArray *photos = [flickr photosWithPhotoSetId:photoSetId];
+   NSMutableArray *downloaders = [[NSMutableArray alloc] initWithCapacity:[photos count]];
+   for (NSInteger index = 0; index < [photos count]; index++) {
+      NSDictionary *flickrPhoto = [photos objectAtIndex:index];
+      NSString *urlString = [flickrPhoto objectForKey:@"url_t"];
+      NSURL *URL = [NSURL URLWithString:urlString];
+      
+      ImageDownloader *downloader = [[ImageDownloader alloc] init];
+      [downloader setDelegate:self];
+      [downloader setURL:URL];
+      
+      [downloaders addObject:downloader];
+   }
+   
+   [self setDownloaders:downloaders];
    [self setFlickrPhotos:photos];
    [[self gridView] reloadData];
 }
@@ -88,11 +103,9 @@
       cell = [ImageGridViewCell imageGridViewCell];
    }
    
-   NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:index];
-   NSString *urlString = [flickrPhoto objectForKey:@"url_t"];
-   NSURL *URL = [NSURL URLWithString:urlString];
-   NSLog(@"imageURL: %@", URL);
-   //[cell setImageURL:URL withShadow:NO];
+   ImageDownloader *downloader = [[self downloaders] objectAtIndex:index];
+   UIImage *image = [downloader image];
+   [cell setImage:image withShadow:NO];
    
    return cell;
 }
@@ -106,5 +119,19 @@
 {
    
 }
+
+#pragma mark - ImageDownloaderDelegate Methods
+
+- (void)imageDownloaderDidFinish:(ImageDownloader *)downloader
+{
+   NSInteger index = [[self downloaders] indexOfObject:downloader];
+   [[self gridView] reloadCellAtIndex:index];
+}
+
+- (void)imageDownloader:(ImageDownloader *)downloader didFailWithError:(NSError *)error
+{
+   
+}
+
 
 @end
