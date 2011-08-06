@@ -9,10 +9,13 @@
 #import "FlickrViewController.h"
 #import "ImageGridViewCell.h"
 #import "SimpleFlickrAPI.h"
+#import "ImageDownloader.h"
+#import "Photo.h"
+#import "PhotoAlbum.h"
 
 @interface FlickrViewController ()
 @property (nonatomic, strong) NSArray *flickrPhotos;
-@property (nonatomic, strong) NSArray *downloaders;
+@property (nonatomic, strong) NSMutableArray *downloaders;
 @end
 
 @implementation FlickrViewController
@@ -20,6 +23,7 @@
 @synthesize gridView = gridView_;
 @synthesize overlayView = overlayView_;
 @synthesize searchBar = searchBar_;
+@synthesize activityIndicator = activityIndicator_;
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize objectID = objectID_;
 @synthesize flickrPhotos = flickrPhotos_;
@@ -41,7 +45,9 @@
 - (void)viewDidUnload
 {
    [self setGridView:nil];
+   [self setOverlayView:nil];
    [self setSearchBar:nil];
+   [self setActivityIndicator:nil];
    [super viewDidUnload];
 }
 
@@ -50,11 +56,80 @@
    return YES;
 }
 
+#pragma mark - Save Photos
+
+- (void)saveContextAndExit
+{
+   NSManagedObjectContext *context = [self managedObjectContext];
+   NSError *error = nil;
+   if (![context save:&error])
+   {
+      /*
+       Replace this implementation with code to handle the error appropriately.
+       
+       abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+       */
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }
+   
+   [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)saveSelectedPhotos
+{
+   NSManagedObjectContext *context = [self managedObjectContext];
+   id photoAlbum = [context objectWithID:[self objectID]];
+   NSAssert(photoAlbum, @"nil photo album");
+
+   NSArray *indexes = [[self gridView] indexesForSelectedCells];
+   __block NSInteger count = [indexes count];
+
+   ImageDownloaderCompletionBlock completion = ^(UIImage *image, NSError *error) {
+      NSLog(@"block: count: %i", count);
+      if (image) {
+         Photo *newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+         [newPhoto setDateAdded:[NSDate date]];
+         [newPhoto saveImage:image];
+         [newPhoto setPhotoAlbum:photoAlbum];
+      } else {
+         NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+      }
+      
+      count--;
+      if (count == 0) {
+         [self saveContextAndExit];
+      }
+   };
+   
+   for (NSNumber *indexNumber in indexes) {
+      NSInteger index = [indexNumber integerValue];
+      NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:index];
+      NSURL *URL = [NSURL URLWithString:[flickrPhoto objectForKey:@"url_m"]];
+      NSLog(@"URL: %@", URL);
+      ImageDownloader *downloader = [[ImageDownloader alloc] init];
+      [downloader downloadImageAtURL:URL completion:completion];
+      
+      [[self downloaders] addObject:downloader];
+   }
+}
+
 #pragma mark - Actions
 
 - (IBAction)save:(id)sender
 {
-   [self dismissModalViewControllerAnimated:YES];
+   void (^animations)(void) = ^ {
+      [[self overlayView] setAlpha:0.4];
+   };
+   
+   void (^completion)(BOOL) = ^(BOOL finished) {
+      if (finished) {
+         [[self activityIndicator] startAnimating];
+      }
+   };
+   
+   [UIView animateWithDuration:0.2 animations:animations completion:completion];
+   [self saveSelectedPhotos];
 }
 
 - (IBAction)cancel:(id)sender
@@ -96,14 +171,7 @@
 
    NSMutableArray *downloaders = [[NSMutableArray alloc] initWithCapacity:[photos count]];
    for (NSInteger index = 0; index < [photos count]; index++) {
-      NSDictionary *flickrPhoto = [photos objectAtIndex:index];
-      NSString *urlString = [flickrPhoto objectForKey:@"url_sq"];
-      NSURL *URL = [NSURL URLWithString:urlString];
-      
       ImageDownloader *downloader = [[ImageDownloader alloc] init];
-      [downloader setDelegate:self];
-      [downloader setURL:URL];
-      
       [downloaders addObject:downloader];
    }
    
@@ -149,9 +217,23 @@
       cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(75, 75)];
    }
    
+   ImageDownloaderCompletionBlock completion = ^(UIImage *image, NSError *error) {
+      if (image) {
+         [cell setImage:image withShadow:NO];
+      } else {
+         NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+      }
+   };
+   
    ImageDownloader *downloader = [[self downloaders] objectAtIndex:index];
    UIImage *image = [downloader image];
-   [cell setImage:image withShadow:NO];
+   if (image) {
+      [cell setImage:image withShadow:NO];
+   } else {
+      NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:index];
+      NSURL *URL = [NSURL URLWithString:[flickrPhoto objectForKey:@"url_sq"]];
+      [downloader downloadImageAtURL:URL completion:completion];
+   }
    
    return cell;
 }
@@ -172,20 +254,5 @@
    id cell = [gridView cellAtIndex:index];
    [cell setSelected:NO];
 }
-
-#pragma mark - ImageDownloaderDelegate Methods
-
-- (void)imageDownloaderDidFinish:(ImageDownloader *)downloader
-{
-   NSInteger index = [[self downloaders] indexOfObject:downloader];
-   id cell = [[self gridView] cellAtIndex:index];
-   [cell setImage:[downloader image] withShadow:NO];
-}
-
-- (void)imageDownloader:(ImageDownloader *)downloader didFailWithError:(NSError *)error
-{
-   
-}
-
 
 @end

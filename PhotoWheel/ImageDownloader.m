@@ -10,31 +10,26 @@
 
 @interface ImageDownloader ()
 @property (nonatomic, strong, readwrite) UIImage *image;
-@property (nonatomic, assign, getter = isDownloading) BOOL downloading;
 @property (nonatomic, strong) NSMutableData *receivedData;
+@property (nonatomic, strong) ImageDownloaderCompletionBlock completion;
 @end
 
 @implementation ImageDownloader
 
-@synthesize delegate = delegate_;
-@synthesize URL = URL_;
 @synthesize image = image_;
-@synthesize downloading = downloading_;
+@synthesize completion = completion_;
 @synthesize receivedData = receivedData_;
 
-- (UIImage *)image
+- (void)downloadImageAtURL:(NSURL *)URL completion:(void(^)(UIImage *image, NSError*))completion
 {
-   if (image_ == nil && [self isDownloading] == NO) {
-      if ([self URL]) {
-         self.receivedData = [[NSMutableData alloc] init];
-         NSURLRequest *request = [NSURLRequest requestWithURL:[self URL]];
-         NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
-         [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
-         [connection start];
-         [self setDownloading:YES];
-      }
+   if (URL) {
+      [self setCompletion:completion];
+      [self setReceivedData:[[NSMutableData alloc] init]];
+      NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+      NSURLConnection *connection = [[NSURLConnection alloc] initWithRequest:request delegate:self startImmediately:NO];
+      [connection scheduleInRunLoop:[NSRunLoop currentRunLoop] forMode:NSRunLoopCommonModes];
+      [connection start];
    }
-   return image_;
 }
 
 #pragma mark - NSURLConnection delegate Methods
@@ -53,23 +48,17 @@
 {
    [self setImage:[UIImage imageWithData:[self receivedData]]];
    [self setReceivedData:nil];
-   [self setDownloading:NO];
-   
-   id <ImageDownloaderDelegate> delegate = [self delegate];
-   if ([delegate respondsToSelector:@selector(imageDownloaderDidFinish:)]) {
-      [delegate imageDownloaderDidFinish:self];
-   }
+
+   ImageDownloaderCompletionBlock completion = [self completion];
+   completion([self image], nil);
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error 
 {
    [self setReceivedData:nil];
-   [self setDownloading:NO];
    
-   id <ImageDownloaderDelegate> delegate = [self delegate];
-   if ([delegate respondsToSelector:@selector(imageDownloader:didFailWithError:)]) {
-      [delegate imageDownloader:self didFailWithError:error];
-   }
+   ImageDownloaderCompletionBlock completion = [self completion];
+   completion(nil, error);
 }
 
 

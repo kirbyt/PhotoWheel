@@ -8,18 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol ImageDownloaderDelegate;
+typedef void(^ImageDownloaderCompletionBlock)(UIImage *image, NSError *);
 
 @interface ImageDownloader : NSObject
 
-@property (nonatomic, weak) id<ImageDownloaderDelegate> delegate;
-@property (nonatomic, strong) NSURL *URL;
 @property (nonatomic, strong, readonly) UIImage *image;
 
-@end
+- (void)downloadImageAtURL:(NSURL *)URL completion:(ImageDownloaderCompletionBlock)completion;
 
-@protocol ImageDownloaderDelegate <NSObject>
-@optional
-- (void)imageDownloaderDidFinish:(ImageDownloader *)downloader;
-- (void)imageDownloader:(ImageDownloader *)downloader didFailWithError:(NSError *)error;
 @end
