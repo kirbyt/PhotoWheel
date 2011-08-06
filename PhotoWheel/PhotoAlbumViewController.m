@@ -49,6 +49,7 @@
 {
    [super viewDidLoad];
    [[self gridView] setAlwaysBounceVertical:YES];
+   [self refresh];
 }
 
 - (void)viewDidUnload
@@ -75,10 +76,17 @@
 
 - (void)refresh
 {
-   self.photoAlbum = (PhotoAlbum *)[self.managedObjectContext objectWithID:[self objectID]];
-   [self.textField setText:[self.photoAlbum name]];
-   [self setFetchedResultsController:nil];
-   [self.gridView reloadData];
+   if ([self managedObjectContext] && [self objectID]) {
+      self.photoAlbum = (PhotoAlbum *)[self.managedObjectContext objectWithID:[self objectID]];
+      [self.toolbar setHidden:NO];
+      [self.textField setText:[self.photoAlbum name]];
+      [self setFetchedResultsController:nil];
+      [self.gridView reloadData];
+      
+   } else {
+      [self.toolbar setHidden:YES];
+      [self.textField setText:@""];
+   }
 }
 
 - (void)saveChanges
@@ -116,7 +124,10 @@
 {
    if (buttonIndex == 1) {
       [self.managedObjectContext deleteObject:[self photoAlbum]];
+      [self setPhotoAlbum:nil];
+      [self setObjectID:nil];
       [self saveChanges];
+      [self refresh];
    }
 }
 

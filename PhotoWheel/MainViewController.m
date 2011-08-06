@@ -160,9 +160,11 @@
    [[cell label] setText:[photoAlbum name]];
 
    Photo *photo = [[photoAlbum photos] lastObject];
-   if (photo) {
-      [[cell imageView] setImage:[photo thumbnailImage]];
+   UIImage *image = [photo thumbnailImage];
+   if (image == nil) {
+      image = [UIImage imageNamed:@"defaultPhoto.png"];
    }
+   [[cell imageView] setImage:image];
    
    return cell;
 }
