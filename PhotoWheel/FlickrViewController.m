@@ -18,6 +18,8 @@
 @implementation FlickrViewController
 
 @synthesize gridView = gridView_;
+@synthesize overlayView = overlayView_;
+@synthesize searchBar = searchBar_;
 @synthesize managedObjectContext = managedObjectContext_;
 @synthesize objectID = objectID_;
 @synthesize flickrPhotos = flickrPhotos_;
@@ -27,11 +29,16 @@
 {
    [super viewDidLoad];
    self.flickrPhotos = [NSArray array];
+   [[self overlayView] setAlpha:0.0];
+   
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(overlayViewTapped:)];
+   [[self overlayView] addGestureRecognizer:tap];
 }
 
 - (void)viewDidUnload
 {
    [self setGridView:nil];
+   [self setSearchBar:nil];
    [super viewDidUnload];
 }
 
@@ -45,6 +52,30 @@
 - (IBAction)done:(id)sender
 {
    [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - Overlay Methods
+
+- (void)overlayViewTapped:(UITapGestureRecognizer *)recognizer
+{
+   [[self overlayView] setAlpha:0.0];
+   [[self searchBar] resignFirstResponder];
+}
+
+- (void)showsOverlay:(BOOL)showsOverlay
+{
+   CGFloat alpha = showsOverlay ? 0.4 : 0.0;
+   void (^animations)(void) = ^ {
+      [[self overlayView] setAlpha:alpha];
+      [[self searchBar] setShowsCancelButton:showsOverlay animated:YES];
+   };
+   
+   void (^completion)(BOOL) = ^(BOOL finished) {
+      if (finished) {
+      }
+   };
+   
+   [UIView animateWithDuration:0.2 animations:animations completion:completion];
 }
 
 #pragma mark - Flickr
@@ -82,16 +113,29 @@
    [self setDownloaders:downloaders];
    [self setFlickrPhotos:photos];
    [[self gridView] reloadData];
+   [[self searchBar] resignFirstResponder];
 }
 
 #pragma mark - UISearchBarDelegate Methods
 
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
+{
+   [self showsOverlay:YES];
+   return YES;
+}
+
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
    [searchBar resignFirstResponder];
+   [self showsOverlay:NO];
    [self fetchFlickrPhotoWithSearchCriteria:[searchBar text]];
 }
 
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+   [searchBar resignFirstResponder];
+   [self showsOverlay:NO];
+}
 
 #pragma mark - GridViewDataSource Methods
 

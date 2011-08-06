@@ -14,6 +14,8 @@
 @interface FlickrViewController : UIViewController <UISearchBarDelegate, GridViewDataSource, ImageDownloaderDelegate>
 
 @property (nonatomic, strong) IBOutlet GridView *gridView;
+@property (nonatomic, strong) IBOutlet UIView *overlayView;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;
 
