@@ -140,12 +140,21 @@
    [self setPopoverController:newPopoverController];
 }
 
+- (void)presentFlickr
+{
+   
+}
+
 - (void)presentPhotoPickerMenu
 {
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
    [actionSheet setDelegate:self];
-   [actionSheet addButtonWithTitle:@"Take Photo"];
+   BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+   if (hasCamera) {
+      [actionSheet addButtonWithTitle:@"Take Photo"];
+   }
    [actionSheet addButtonWithTitle:@"Choose from Library"];
+   [actionSheet addButtonWithTitle:@"Choose from Flick"];
    [actionSheet setTag:1];
    [actionSheet showFromBarButtonItem:[self addButton] animated:YES];
 }
@@ -171,13 +180,8 @@
    if ([self popoverController]) {
       [[self popoverController] dismissPopoverAnimated:YES];
    }
-   
-   BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-   if (hasCamera) {
-      [self presentPhotoPickerMenu];
-   } else {
-      [self presentPhotoLibrary];
-   }
+
+   [self presentPhotoPickerMenu];   
 }
 
 #pragma mark - Email
@@ -206,24 +210,25 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+   if (buttonIndex < 0) {
+      return;
+   }
+   
+   NSMutableArray *names = [[NSMutableArray alloc] init];
+
    if ([actionSheet tag] == 0) {
-      
-      if ([SendEmailController canSendMail] && buttonIndex == 0) {
-         [self emailPhotos];
-      } else if ( ([SendEmailController canSendMail] && buttonIndex == 1) || buttonIndex == 0) {
-         [self confirmDeletePhotoAlbum];
-      }
+      if ([SendEmailController canSendMail]) [names addObject:@"emailPhotos"];
+      [names addObject:@"confirmDeletePhotoAlbum"];
       
    } else {
-      switch (buttonIndex) {
-         case 0:
-            [self presentCamera];
-            break;
-         case 1:
-            [self presentPhotoLibrary];
-            break;
-      }
+      BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+      if (hasCamera) [names addObject:@"presentCamera"];
+      [names addObject:@"presentPhotoLibrary"];
+      [names addObject:@"presentFlickr"];
    }
+   
+   SEL selector = NSSelectorFromString([names objectAtIndex:buttonIndex]);
+   [self performSelector:selector];
 }
 
 #pragma mark - UITextFieldDelegate Methods
