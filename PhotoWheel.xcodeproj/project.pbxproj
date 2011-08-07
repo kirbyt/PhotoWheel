@@ -65,6 +65,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		680D689013EDFFB90032BA56 /* PhotoWheel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PhotoWheel.entitlements; sourceTree = "<group>"; };
 		68398B0513ED26E200B30FEE /* FlickrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrViewController.h; sourceTree = "<group>"; };
 		68398B0613ED26E200B30FEE /* FlickrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrViewController.m; sourceTree = "<group>"; };
 		68398B0913ED30E900B30FEE /* SimpleFlickrAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleFlickrAPI.h; sourceTree = "<group>"; };
@@ -278,6 +279,7 @@
 		68DA37E913B02F23003272F9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				680D689013EDFFB90032BA56 /* PhotoWheel.entitlements */,
 				68DA37EA13B02F23003272F9 /* PhotoWheel-Info.plist */,
 				68DA37EB13B02F23003272F9 /* InfoPlist.strings */,
 				68DA37EE13B02F23003272F9 /* main.m */,
@@ -479,6 +481,7 @@
 		68DA37FA13B02F23003272F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
 				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
@@ -490,6 +493,7 @@
 		68DA37FB13B02F23003272F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
 				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
