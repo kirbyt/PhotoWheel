@@ -311,6 +311,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68DA37F913B02F23003272F9 /* Build configuration list for PBXNativeTarget "PhotoWheel" */;
 			buildPhases = (
+				6861F8FB13EE46F0001FA035 /* ShellScript */,
 				68DA37D813B02F23003272F9 /* Sources */,
 				68DA37D913B02F23003272F9 /* Frameworks */,
 				68DA37DA13B02F23003272F9 /* Resources */,
@@ -382,6 +383,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		6861F8FB13EE46F0001FA035 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n# Auto Increment Version Script\nif [ \"${CONFIGURATION}\" != \"Debug\" ]; then\n\nplist=\"./${PRODUCT_NAME}/${PRODUCT_NAME}-Info.plist\"\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$plist\")\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$plist\"\n\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		68DA37D813B02F23003272F9 /* Sources */ = {
@@ -481,7 +498,6 @@
 		68DA37FA13B02F23003272F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
 				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
@@ -493,11 +509,12 @@
 		68DA37FB13B02F23003272F9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
 				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
