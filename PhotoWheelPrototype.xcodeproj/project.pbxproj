@@ -36,7 +36,7 @@
 
 /* Begin PBXFileReference section */
 		6838920613BA2C06007E51B7 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		6885BB4413C4AF1E004093F7 /* SpinGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; path = SpinGestureRecognizer.h; sourceTree = "<group>"; };
+		6885BB4413C4AF1E004093F7 /* SpinGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinGestureRecognizer.h; sourceTree = "<group>"; };
 		6885BB4513C4AF1E004093F7 /* SpinGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinGestureRecognizer.m; sourceTree = "<group>"; };
 		68A55D3B13AA555B0007FF8F /* NameEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEditorViewController.h; sourceTree = "<group>"; };
 		68A55D3C13AA555B0007FF8F /* NameEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEditorViewController.m; sourceTree = "<group>"; };
@@ -202,6 +202,7 @@
 		68DA2C3613A99DD800BC0B80 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "White Peak Software Inc.";
 			};
 			buildConfigurationList = 68DA2C3913A99DD800BC0B80 /* Build configuration list for PBXProject "PhotoWheelPrototype" */;

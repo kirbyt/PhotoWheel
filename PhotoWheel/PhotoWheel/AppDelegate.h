@@ -1,14 +1,14 @@
 //
-//  PhotoWheelAppDelegate.h
+//  AppDelegate.h
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 6/20/11.
-//  Copyright 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 8/7/11.
+//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoWheelAppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

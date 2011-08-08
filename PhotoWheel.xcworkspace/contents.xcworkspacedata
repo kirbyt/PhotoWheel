@@ -2,7 +2,7 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:PhotoWheel.xcodeproj">
+      location = "group:PhotoWheel/PhotoWheel.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:PhotoWheelPrototype.xcodeproj">
