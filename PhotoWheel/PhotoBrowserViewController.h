@@ -20,12 +20,14 @@
 
 @property (strong, nonatomic) IBOutlet UIView *filterViewContainer;
 @property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *filterButtons;
+
+- (IBAction)enhanceImage:(id)sender;
+- (IBAction)zoomToFaces:(id)sender;
+- (IBAction)applyFilter:(id)sender;
+
 - (IBAction)revertToOriginal:(id)sender;
 - (IBAction)saveImage:(id)sender;
 - (IBAction)cancel:(id)sender;
-- (IBAction)applyFilter:(id)sender;
-- (IBAction)enhanceImage:(id)sender;
-- (IBAction)zoomToFaces:(id)sender;
 
 @end
 
