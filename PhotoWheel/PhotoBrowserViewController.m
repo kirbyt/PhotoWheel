@@ -9,6 +9,7 @@
 #import "PhotoBrowserViewController.h"
 #import "ClearToolbar.h"
 #import "PhotoBrowserPhotoView.h"
+#import "MainSlideShowViewController.h"
 
 @interface PhotoBrowserViewController ()
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) NSTimer *chromeHideTimer;
 @property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
 @property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
+@property (nonatomic, strong) MainSlideShowViewController *slideShowController;
 
 - (void)addButtonsToNavigationBar;
 - (void)initPhotoViewCache;
@@ -55,6 +57,7 @@
 @synthesize chromeHideTimer = chromeHideTimer_;
 @synthesize firstVisiblePageIndexBeforeRotation = firstVisiblePageIndexBeforeRotation_;
 @synthesize percentScrolledIntoFirstVisiblePage = percentScrolledIntoFirstVisiblePage_;
+@synthesize slideShowController = slideShowController_;
 
 - (void)loadView
 {
@@ -79,6 +82,10 @@
    
    [self addButtonsToNavigationBar];
    [self initPhotoViewCache];
+
+	// Create a custom "back" button which will be used when the slide show view controller is pushed onto the navigation controller
+	UIBarButtonItem *customBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Back to album" style:UIBarButtonItemStyleBordered target:nil action:nil];
+	[[self navigationItem] setBackBarButtonItem:customBackButton];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -92,8 +99,14 @@
    [[self navigationController] setNavigationBarHidden:NO animated:YES];
    
    [self setScrollViewContentSize];
-   [self setCurrentIndex:[self startAtIndex]];
-   [self scrollToIndex:[self startAtIndex]];
+   if ([self slideShowController] != nil) {
+      [self setCurrentIndex:[[self slideShowController] currentIndex]];
+      [self scrollToIndex:[[self slideShowController] currentIndex]];
+      [self setSlideShowController:nil];
+   } else {
+      [self setCurrentIndex:[self startAtIndex]];
+      [self scrollToIndex:[self startAtIndex]];
+   }
    [self setTitleWithCurrentIndex];
    [self startChromeDisplayTimer];
 }
@@ -269,12 +282,25 @@
 
 - (void)slideshow:(id)sender
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+	NSLog(@"%s", __PRETTY_FUNCTION__);
+	[self performSegueWithIdentifier:@"SlideshowSegue" sender:self];
 }
 
 - (void)photoTapped:(id)sender
 {
    [self toggleChromeDisplay];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+   NSLog(@"Preparing for segue: %@", segue);
+   
+   if ([[segue destinationViewController] isKindOfClass:[MainSlideShowViewController class]]) {
+      [self setSlideShowController:(MainSlideShowViewController *)[segue destinationViewController]];
+      [[self slideShowController] setDelegate:[self delegate]];
+      [[self slideShowController] setStartIndex:[self currentIndex]];
+   }
+   
 }
 
 #pragma mark - Page Management

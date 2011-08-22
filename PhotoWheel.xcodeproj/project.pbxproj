@@ -56,6 +56,9 @@
 		68F3286C13D35729006A9CEB /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F3286613D35729006A9CEB /* PhotoAlbum.m */; };
 		68FC1E8613D8944D00E9D18E /* buttonNext.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FC1E8413D8944D00E9D18E /* buttonNext.png */; };
 		68FC1E8713D8944D00E9D18E /* buttonPrevious.png in Resources */ = {isa = PBXBuildFile; fileRef = 68FC1E8513D8944D00E9D18E /* buttonPrevious.png */; };
+		EE335FA513FDBBCE0010EE27 /* SlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE335FA413FDBBCD0010EE27 /* SlideShowViewController.m */; };
+		EE335FA813FDBBE30010EE27 /* MainSlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE335FA713FDBBE30010EE27 /* MainSlideShowViewController.m */; };
+		EED850EA1402F7290039C4E0 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EED850E91402F7290039C4E0 /* MediaPlayer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +78,7 @@
 		68B804E113B0B2A500EB3B6C /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		68B804E213B0B2A500EB3B6C /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		68B804E513B0B74200EB3B6C /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
-		68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserViewController.m; sourceTree = "<group>"; };
+		68B804E613B0B74200EB3B6C /* PhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserViewController.m; sourceTree = "<group>"; usesTabs = 0; };
 		68B804EC13B0B93000EB3B6C /* CustomPushSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomPushSegue.h; sourceTree = "<group>"; };
 		68B804ED13B0B93000EB3B6C /* CustomPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPushSegue.m; sourceTree = "<group>"; };
 		68B804EF13B0B9BC00EB3B6C /* UIView+PWCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PWCategory.h"; sourceTree = "<group>"; };
@@ -131,7 +134,12 @@
 		68F3286613D35729006A9CEB /* PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbum.m; sourceTree = "<group>"; };
 		68FC1E8413D8944D00E9D18E /* buttonNext.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonNext.png; sourceTree = "<group>"; };
 		68FC1E8513D8944D00E9D18E /* buttonPrevious.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = buttonPrevious.png; sourceTree = "<group>"; };
+		EE335FA313FDBBCD0010EE27 /* SlideShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideShowViewController.h; sourceTree = "<group>"; };
+		EE335FA413FDBBCD0010EE27 /* SlideShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = SlideShowViewController.m; sourceTree = "<group>"; usesTabs = 0; };
+		EE335FA613FDBBE20010EE27 /* MainSlideShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.h; path = MainSlideShowViewController.h; sourceTree = "<group>"; usesTabs = 0; };
+		EE335FA713FDBBE30010EE27 /* MainSlideShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; indentWidth = 3; lastKnownFileType = sourcecode.c.objc; path = MainSlideShowViewController.m; sourceTree = "<group>"; usesTabs = 0; };
 		EE3B6D2213E752B000830BAD /* PhotoWheel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PhotoWheel.entitlements; sourceTree = "<group>"; };
+		EED850E91402F7290039C4E0 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EED850EA1402F7290039C4E0 /* MediaPlayer.framework in Frameworks */,
 				68B804F313B0B9FF00EB3B6C /* QuartzCore.framework in Frameworks */,
 				68DA37E113B02F23003272F9 /* UIKit.framework in Frameworks */,
 				68DA37E313B02F23003272F9 /* Foundation.framework in Frameworks */,
@@ -196,6 +205,7 @@
 		68DA37DF13B02F23003272F9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EED850E91402F7290039C4E0 /* MediaPlayer.framework */,
 				68B804F213B0B9FF00EB3B6C /* QuartzCore.framework */,
 				68DA37E013B02F23003272F9 /* UIKit.framework */,
 				68DA37E213B02F23003272F9 /* Foundation.framework */,
@@ -244,6 +254,10 @@
 				685DA53B13D4A47200FACBE9 /* GridView.m */,
 				685DA53F13D4A89200FACBE9 /* ImageGridViewCell.h */,
 				685DA54013D4A89400FACBE9 /* ImageGridViewCell.m */,
+				EE335FA313FDBBCD0010EE27 /* SlideShowViewController.h */,
+				EE335FA413FDBBCD0010EE27 /* SlideShowViewController.m */,
+				EE335FA613FDBBE20010EE27 /* MainSlideShowViewController.h */,
+				EE335FA713FDBBE30010EE27 /* MainSlideShowViewController.m */,
 				68D2D62313B0359F000308BB /* images */,
 				68DA37E913B02F23003272F9 /* Supporting Files */,
 			);
@@ -382,6 +396,8 @@
 				685DA53C13D4A47300FACBE9 /* GridView.m in Sources */,
 				685DA54113D4A89500FACBE9 /* ImageGridViewCell.m in Sources */,
 				68BB5CC513E63B5300CE8F4B /* PhotoBrowserPhotoView.m in Sources */,
+				EE335FA513FDBBCE0010EE27 /* SlideShowViewController.m in Sources */,
+				EE335FA813FDBBE30010EE27 /* MainSlideShowViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
