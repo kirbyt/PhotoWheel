@@ -36,10 +36,9 @@
 }
 
 #pragma mark - View lifecycle
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
+- (void)viewWillAppear:(BOOL)animated
 {
-   [super loadView];
+   [super viewWillAppear:animated];
    [self setCurrentIndex:[self startIndex]];
 }
 
@@ -53,6 +52,9 @@
 #pragma mark - Custom setters
 - (void)setCurrentIndex:(NSInteger)rawNewCurrentIndex
 {
+   if (rawNewCurrentIndex == [self currentIndex]) {
+      return;
+   }
    // If the new index is outside the existing range, wrap around to the other end.
    NSInteger photoCount = [[self delegate] photoBrowserViewControllerNumberOfPhotos:nil];
    NSInteger newCurrentIndex = rawNewCurrentIndex;

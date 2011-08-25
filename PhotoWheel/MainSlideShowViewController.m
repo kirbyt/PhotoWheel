@@ -77,21 +77,22 @@
       [self configureExternalScreen:externalScreen];
    }
    
+   NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
    // Add observers for screen connect/disconnect
-   [[NSNotificationCenter defaultCenter] addObserverForName:UIScreenDidConnectNotification
-                                                     object:nil
-                                                      queue:[NSOperationQueue mainQueue]
-                                                 usingBlock:^(NSNotification *note) 
+   [notificationCenter addObserverForName:UIScreenDidConnectNotification
+                                   object:nil
+                                    queue:[NSOperationQueue mainQueue]
+                               usingBlock:^(NSNotification *note) 
     {
        UIScreen *newExternalScreen = [note object];
        NSLog(@"New screen connected: %@", newExternalScreen);
        [self configureExternalScreen:newExternalScreen];
     }];
    
-   [[NSNotificationCenter defaultCenter] addObserverForName:UIScreenDidDisconnectNotification
-                                                     object:nil
-                                                      queue:[NSOperationQueue mainQueue]
-                                                 usingBlock:^(NSNotification *note)
+   [notificationCenter addObserverForName:UIScreenDidDisconnectNotification
+                                   object:nil
+                                    queue:[NSOperationQueue mainQueue]
+                               usingBlock:^(NSNotification *note)
     {
        NSLog(@"External screen disconnected");
        [self setExternalDisplaySlideshowController:nil];
@@ -176,8 +177,12 @@
 {
    NSLog(@"Configuring external screen %@", externalScreen);
    
+   // Clear any existing external screen items
+   [self setExternalDisplaySlideshowController:nil];
+   [self setExternalScreenWindow:nil];
+   
    // Create a new window and move it to the external screen
-   [self setExternalScreenWindow:[[UIWindow alloc] initWithFrame:[externalScreen bounds]]];
+   [self setExternalScreenWindow:[[UIWindow alloc] initWithFrame:[externalScreen applicationFrame]]];
    [[self externalScreenWindow] setScreen:externalScreen];
    
    // Create a SlideShowViewController to handle slides on the external screen
@@ -201,16 +206,28 @@
 - (void)updateNavBarButtonsForPlayingState:(BOOL)playing
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
-   UIBarButtonItem *rewindButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(backOnePhoto:)];
+   UIBarButtonItem *rewindButton = [[UIBarButtonItem alloc] 
+                                    initWithBarButtonSystemItem:UIBarButtonSystemItemRewind
+                                    target:self
+                                    action:@selector(backOnePhoto:)];
    [rewindButton setStyle:UIBarButtonItemStyleBordered];
    UIBarButtonItem *playPauseButton;
    if (playing) {
-      playPauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pause:)];
+      playPauseButton = [[UIBarButtonItem alloc] 
+                         initWithBarButtonSystemItem:UIBarButtonSystemItemPause
+                         target:self
+                         action:@selector(pause:)];
    } else {
-      playPauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resume:)];
+      playPauseButton = [[UIBarButtonItem alloc]
+                         initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
+                         target:self
+                         action:@selector(resume:)];
    }
    [playPauseButton setStyle:UIBarButtonItemStyleBordered];
-   UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(forwardOnePhoto:)];
+   UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc]
+                                     initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
+                                     target:self
+                                     action:@selector(forwardOnePhoto:)];
    [forwardButton setStyle:UIBarButtonItemStyleBordered];
    
    // Add the AirPlay selector
