@@ -134,6 +134,7 @@
 - (void)viewDidUnload
 {
    [super viewDidUnload];
+   [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Rotation handling
