@@ -9,24 +9,12 @@
 #import "PhotoWheelAppDelegate.h"
 #import "MainViewController.h"
 
-const NSString *containerID = @"FZTVR399HK.com.atomicbird.PhotoWheel";
-
-@interface PhotoWheelAppDelegate ()
-// these are just work arounds for iOS 5 beta 3 issues
-@property (strong, nonatomic) NSMetadataQuery *ubiquitousQuery;
-- (void)pollnewfiles_weakpackages:(NSNotification*)note;
-- (void)workaround_weakpackages_9653904:(NSDictionary*)options;
-@end
-
 @implementation PhotoWheelAppDelegate
 
 @synthesize window = _window;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
-
-// this is just work arounds for iOS 5 beta 3 issues
-@synthesize ubiquitousQuery=ubiquitousQuery__;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -247,9 +235,6 @@ const NSString *containerID = @"FZTVR399HK.com.atomicbird.PhotoWheel";
                        cloudURL, NSPersistentStoreUbiquitousContentURLKey,
                        [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
                        [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption,nil];
-            
-            // Workaround needed on iOS 5 beta 3 (but not Mac OS X)
-            [self workaround_weakpackages_9653904:options];
         } else {
             NSLog(@"Uh-oh, nil result from URLForUbiquityContainerIdentifier");
             options = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -277,66 +262,6 @@ const NSString *containerID = @"FZTVR399HK.com.atomicbird.PhotoWheel";
     
     return __persistentStoreCoordinator;
 }
-
-// Begin methods needed on iOS 5 beta 3 as a workaround for known issues, but not Mac OS X ----------------------------------------------
-static dispatch_queue_t polling_queue;
-
-- (void)workaround_weakpackages_9653904:(NSDictionary*)options {
-#if 1
-   /*    
-    NSURL* cloudURL = [options objectForKey:NSPersistentStoreUbiquitousContentURLKey];
-    NSString* name = [options objectForKey:NSPersistentStoreUbiquitousContentNameKey];
-    NSString* cloudPath = [cloudURL path];
-    */    
-    NSMetadataQuery *query = [[NSMetadataQuery alloc] init];
-    [query setSearchScopes:[NSArray arrayWithObjects:NSMetadataQueryUbiquitousDataScope, NSMetadataQueryUbiquitousDocumentsScope, nil]];
-    [query setPredicate:[NSPredicate predicateWithFormat:@"kMDItemFSName == '*'"]]; // Just get everything.
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollnewfiles_weakpackages:) name:NSMetadataQueryGatheringProgressNotification object:query];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollnewfiles_weakpackages:) name:NSMetadataQueryDidUpdateNotification object:query];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollnewfiles_weakpackages:) name:NSMetadataQueryDidFinishGatheringNotification object:query];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pollnewfiles_weakpackages:) name:NSMetadataQueryDidStartGatheringNotification object:query];
-    
-    // May also register for NSMetadataQueryDidFinishGatheringNotification if you want to update any user interface items when the initial result-gathering phase of the query is complete.
-    
-    self.ubiquitousQuery = query;
-    
-    polling_queue = dispatch_queue_create("workaround_weakpackages_9653904", DISPATCH_QUEUE_SERIAL);
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        if (![query startQuery]) {
-            NSLog(@"NSMetadataQuery failed to start!");
-        } else {
-            NSLog(@"started NSMetadataQuery!");
-        };
-    });
-    
-#endif
-}
-
-- (void)pollnewfiles_weakpackages:(NSNotification*)note {
-    [self.ubiquitousQuery disableUpdates];
-    NSArray *results = [self.ubiquitousQuery results];
-    NSFileManager* fm = [NSFileManager defaultManager];
-    NSFileCoordinator* fc = [[NSFileCoordinator alloc] initWithFilePresenter:nil];
-    
-    for (NSMetadataItem *item in results) {
-        NSURL* itemurl = [item valueForAttribute:NSMetadataItemURLKey];
-        
-        NSString* filepath = [itemurl path];
-        if (![fm fileExistsAtPath:filepath]) {
-            dispatch_async(polling_queue, ^(void) {
-                NSLog(@"coordinated reading of URL '%@'", itemurl);
-                [fc coordinateReadingItemAtURL:itemurl options:0 error:nil byAccessor:^(NSURL* url) { }];
-            });
-        }
-    }
-    
-    //[fc release];
-    [self.ubiquitousQuery enableUpdates];
-    
-}
-// End of methods needed on iOS 5 beta 3 as a workaround for known issues, but not Mac OS X ----------------------------------------------
 
 #pragma mark - Application's Documents directory
 
