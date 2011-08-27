@@ -217,10 +217,10 @@
         
         // Build a URL to use as NSPersistentStoreUbiquitousContentURLKey
         NSURL *cloudURL;
-#ifdef TARGET_IPHONE_SIMULATOR
+#if TARGET_IPHONE_SIMULATOR
         cloudURL = nil;
 #else
-        cloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:(NSString *)containerID];
+        cloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
 #endif
         
         NSDictionary *options;
