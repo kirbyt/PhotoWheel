@@ -52,7 +52,7 @@
 #pragma mark - Custom setters
 - (void)setCurrentIndex:(NSInteger)rawNewCurrentIndex
 {
-   if (rawNewCurrentIndex == [self currentIndex]) {
+   if ((rawNewCurrentIndex == [self currentIndex]) && ([[[self view] subviews] count] != 0)) {
       return;
    }
    // If the new index is outside the existing range, wrap around to the other end.
