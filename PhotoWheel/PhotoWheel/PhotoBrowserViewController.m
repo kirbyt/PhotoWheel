@@ -252,6 +252,7 @@
       [newView setBackgroundColor:[UIColor clearColor]];
       [newView setImage:[self imageAtIndex:index]];
       [newView setPhotoBrowserViewController:self];
+      [newView setIndex:index];
       
       [[self scrollView] addSubview:newView];
       [[self photoViewCache] replaceObjectAtIndex:index withObject:newView];
