@@ -8,7 +8,7 @@
 
 #import "CustomNavigationController.h"
 #import "UIView+PWCategory.h"
-#import "PhotoBrowserViewController.h"
+#import "PhotoAlbumViewController.h"
 
 
 @implementation CustomNavigationController
@@ -21,6 +21,21 @@
    UIView *sourceView = [sourceViewController view];
    UIImage *sourceViewImage = [sourceView pw_imageSnapshot];
    UIImageView *sourceImageView = [[UIImageView alloc] initWithImage:sourceViewImage];
+
+   // Offset the sourceImageView frame by the height of the status bar.
+   // This prevents the image from dropping down after the view controller
+   // is popped from the stack.
+   BOOL isLandscape = UIInterfaceOrientationIsLandscape([sourceViewController interfaceOrientation]);
+   CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+   CGFloat statusBarHeight;
+   if (isLandscape) {
+      statusBarHeight = statusBarFrame.size.width;
+   } else {
+      statusBarHeight = statusBarFrame.size.height;
+   }
+   CGRect newFrame = CGRectOffset([sourceImageView frame], 0, -statusBarHeight);
+   [sourceImageView setFrame:newFrame];
+
    
    NSArray *viewControllers = [self viewControllers];
    NSInteger count = [viewControllers count];
@@ -30,15 +45,23 @@
    UIView *destinationView = [destinationViewController view];
    UIImage *destinationViewImage = [destinationView pw_imageSnapshot];
    UIImageView *destinationImageView = [[UIImageView alloc] initWithImage:destinationViewImage];
-   
+
    [super popViewControllerAnimated:NO];
    
    [destinationView addSubview:destinationImageView];
    [destinationView addSubview:sourceImageView];
    
-   CGRect pushFromFrame = [(PhotoBrowserViewController *)sourceViewController pushFromFrame];
-   CGRect frame = [sourceView convertRect:pushFromFrame fromView:destinationView];
-   CGPoint shrinkToPoint = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame));
+   // We need the selectedCellFrame from the PhotoAlbumViewController. This 
+   // controller is a child of the destination control.
+   CGRect selectedCellFrame = CGRectZero;
+   for (id childViewController in [destinationViewController childViewControllers])
+   {
+      if ([childViewController isKindOfClass:[PhotoAlbumViewController class]]) {
+         selectedCellFrame = [childViewController selectedCellFrame];
+         break;
+      }
+   }
+   CGPoint shrinkToPoint = CGPointMake(CGRectGetMidX(selectedCellFrame), CGRectGetMidY(selectedCellFrame));
 
    void (^animations)(void) = ^ {
       [sourceImageView setFrame:CGRectMake(shrinkToPoint.x, shrinkToPoint.y, 0, 0)];

@@ -13,6 +13,7 @@
 @interface PhotoBrowserPhotoView : UIScrollView <UIScrollViewDelegate>
 
 @property (nonatomic, weak) PhotoBrowserViewController *photoBrowserViewController;
+@property (nonatomic, assign) NSInteger index;
 
 - (void)setImage:(UIImage *)newImage;
 - (void)turnOffZoom;

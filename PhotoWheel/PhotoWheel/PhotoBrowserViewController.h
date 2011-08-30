@@ -15,7 +15,6 @@
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) id<PhotoBrowserViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSInteger startAtIndex;
-@property (nonatomic, assign) CGRect pushFromFrame;
 
 - (void)toggleChromeDisplay;
 

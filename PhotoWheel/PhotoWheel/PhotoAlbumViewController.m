@@ -353,11 +353,25 @@
    [destinationViewController setDelegate:self];
    NSInteger index = [gridView indexForSelectedCell];
    [destinationViewController setStartAtIndex:index];
-   
-   GridViewCell *cell = [gridView cellAtIndex:index];
-   CGRect cellFrame = [cell frame];
-   CGRect pushFromFrame = [[destinationViewController view] convertRect:cellFrame fromView:gridView];
-   [destinationViewController setPushFromFrame:pushFromFrame];
+}
+
+- (UIImage *)selectedImage
+{
+   GridView *gridView = [self gridView];
+   NSInteger selectedIndex = [gridView indexForSelectedCell];
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+   Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   return [photo largeImage];
+}
+
+- (CGRect)selectedCellFrame
+{
+   GridView *gridView = [self gridView];
+   NSInteger selectedIndex = [gridView indexForSelectedCell];
+   GridViewCell *cell = [gridView cellAtIndex:selectedIndex];
+   UIView *parentView = [[self parentViewController] view];
+   CGRect rect = [parentView convertRect:[cell frame] fromView:gridView];
+   return rect;
 }
 
 #pragma mark - PhotoBrowserViewControllerDelegate Methods

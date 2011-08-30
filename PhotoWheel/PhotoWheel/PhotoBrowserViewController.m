@@ -8,7 +8,9 @@
 
 #import "PhotoBrowserViewController.h"
 #import "PhotoBrowserPhotoView.h"
+/*
 #import "ClearToolbar.h"
+ */
 
 #define ACTIONSHEET_TAG_DELETE 1
 #define ACTIONSHEET_TAG_ACTIONS 2
@@ -18,9 +20,10 @@
 @property (nonatomic, strong) NSMutableArray *photoViewCache;
 @property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden;
 @property (nonatomic, strong) NSTimer *chromeHideTimer;
+@property (nonatomic, assign) CGFloat statusBarHeight;
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
 
-- (void)addButtonsToNavigationBar;
+//- (void)addButtonsToNavigationBar;
 - (void)initPhotoViewCache;
 - (void)setScrollViewContentSize;
 - (void)scrollToIndex:(NSInteger)index;
@@ -32,7 +35,6 @@
 - (void)hideChrome;
 - (void)startChromeDisplayTimer;
 - (void)cancelChromeDisplayTimer; 
-
 @end
 
 @implementation PhotoBrowserViewController
@@ -42,17 +44,27 @@
 @synthesize startAtIndex = startAtIndex_;
 @synthesize currentIndex = currentIndex_;
 @synthesize photoViewCache = photoViewCache_;
-@synthesize pushFromFrame = pushFromFrame_;
 @synthesize chromeHidden = chromeHidden_;
 @synthesize chromeHideTimer = chromeHideTimer_;
+@synthesize statusBarHeight = statusBarHeight_;
 @synthesize actionButton = actionButton_;
 
-- (void)viewDidLoad
+- (void)viewDidLoad 
 {
    [super viewDidLoad];
 
-   UIScrollView *scrollView = [self scrollView];
-   [scrollView setFrame:[self frameForPagingScrollView]];
+   // Make sure to set wantsFullScreenLayout or the photo
+   // will not display behind the status bar.
+   [self setWantsFullScreenLayout:YES];
+
+   // Set the view's frame size. This ensures the scroll view
+   // autoresizing correctly and avoids surprises when retrieving
+   // the scroll view's bounds later.
+   CGRect frame = [[UIScreen mainScreen] bounds];
+   [[self view] setFrame:frame];
+   
+   UIScrollView *scrollView = [self scrollView]; 
+   [scrollView setFrame:[self frameForPagingScrollView]];   // Set the initial size.
    [scrollView setDelegate:self];
    [scrollView setBackgroundColor:[UIColor blackColor]];
    [scrollView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
@@ -60,25 +72,34 @@
    [scrollView setPagingEnabled:YES];
    [scrollView setShowsVerticalScrollIndicator:NO];
    [scrollView setShowsHorizontalScrollIndicator:NO];
-
-   [self addButtonsToNavigationBar];
-   [self initPhotoViewCache];
    
-   [self setScrollViewContentSize];
-   [self setCurrentIndex:[self startAtIndex]];
-   [self scrollToIndex:[self startAtIndex]];
-   [self setTitleWithCurrentIndex];
+   // Must store the status bar size while it is still visible.
+   CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+   if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
+      [self setStatusBarHeight:statusBarFrame.size.width];
+   } else {
+      [self setStatusBarHeight:statusBarFrame.size.height];
+   }
+
+   /*
+   [self addButtonsToNavigationBar];
+    */
+   [self initPhotoViewCache];   
 }
 
-- (void)viewDidUnload
+- (void)viewDidUnload 
 {
    [self setScrollView:nil];
    [super viewDidUnload];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated 
 {
    [super viewWillAppear:animated];
+   [self setScrollViewContentSize];
+   [self setCurrentIndex:[self startAtIndex]];
+   [self scrollToIndex:[self startAtIndex]];
+   [self setTitleWithCurrentIndex];
    [self startChromeDisplayTimer];
 }
 
@@ -90,7 +111,7 @@
 
 #pragma mark - Delegate Callback Helpers
 
-- (NSInteger)numberOfPhotos
+- (NSInteger)numberOfPhotos   
 {
    NSInteger numberOfPhotos = 0;
    id<PhotoBrowserViewControllerDelegate> delegate = [self delegate];
@@ -100,7 +121,7 @@
    return numberOfPhotos;
 }
 
-- (UIImage*)imageAtIndex:(NSInteger)index
+- (UIImage*)imageAtIndex:(NSInteger)index 
 {
    UIImage *image = nil;
    id<PhotoBrowserViewControllerDelegate> delegate = [self delegate];
@@ -111,7 +132,7 @@
 }
 
 #pragma mark - Helper Methods
-
+/*
 - (void)addButtonsToNavigationBar
 {
    // Add buttons to the navigation bar. The nav bar allows
@@ -148,7 +169,7 @@
    UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
    [[self navigationItem] setRightBarButtonItem:customBarButtonItem animated:YES];
 }
-
+*/
 - (void)initPhotoViewCache
 {
    // Setup our photo view cache. We only keep 3 views in
@@ -162,25 +183,25 @@
    }
 }
 
-- (void)setScrollViewContentSize
+- (void)setScrollViewContentSize 
 {
    NSInteger pageCount = [self numberOfPhotos];
    if (pageCount == 0) {
       pageCount = 1;
    }
    
-   CGRect frame = [[self scrollView] frame];
-   CGSize size = CGSizeMake(frame.size.width * pageCount, 
-                            frame.size.height / 2);   // Cut in half to prevent horizontal scrolling.
+   CGRect bounds = [[self scrollView] bounds];
+   CGSize size = CGSizeMake(bounds.size.width * pageCount, 
+                            bounds.size.height / 2);   // Cut in half to prevent horizontal scrolling.
    [[self scrollView] setContentSize:size];
 }
 
-- (void)scrollToIndex:(NSInteger)index 
+- (void)scrollToIndex:(NSInteger)index
 {
-   CGRect frame = [[self scrollView] frame];
-   frame.origin.x = frame.size.width * index;
-   frame.origin.y = 0;
-   [[self scrollView] scrollRectToVisible:frame animated:NO];
+   CGRect bounds = [[self scrollView] bounds];
+   bounds.origin.x = bounds.size.width * index;
+   bounds.origin.y = 0;
+   [[self scrollView] scrollRectToVisible:bounds animated:NO];
 }
 
 - (void)setTitleWithCurrentIndex 
@@ -218,7 +239,7 @@
 
 #pragma mark - Page Management
 
-- (void)loadPage:(NSInteger)index
+- (void)loadPage:(NSInteger)index   
 {
    if (index < 0 || index >= [self numberOfPhotos]) {
       return;
@@ -229,9 +250,9 @@
       // Load the photo view.
       CGRect frame = [self frameForPageAtIndex:index];
       PhotoBrowserPhotoView *newView = [[PhotoBrowserPhotoView alloc] initWithFrame:frame];
-      [newView setBackgroundColor:[UIColor clearColor]];
       [newView setImage:[self imageAtIndex:index]];
       [newView setPhotoBrowserViewController:self];
+      [newView setIndex:index];
       
       [[self scrollView] addSubview:newView];
       [[self photoViewCache] replaceObjectAtIndex:index withObject:newView];
@@ -240,7 +261,7 @@
    }
 }
 
-- (void)unloadPage:(NSInteger)index
+- (void)unloadPage:(NSInteger)index 
 {
    if (index < 0 || index >= [self numberOfPhotos]) {
       return;
@@ -253,7 +274,7 @@
    }
 }
 
-- (void)setCurrentIndex:(NSInteger)newIndex
+- (void)setCurrentIndex:(NSInteger)newIndex 
 {
    currentIndex_ = newIndex;
    
@@ -268,14 +289,16 @@
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-   CGFloat pageWidth = scrollView.frame.size.width;
-   float fractionalPage = scrollView.contentOffset.x / pageWidth;
-   NSInteger page = floor(fractionalPage);
-	if (page != currentIndex_) {
-		[self setCurrentIndex:page];
-	}
+   if ([scrollView isScrollEnabled]) {
+      CGFloat pageWidth = scrollView.bounds.size.width;
+      float fractionalPage = scrollView.contentOffset.x / pageWidth;
+      NSInteger page = floor(fractionalPage);
+      if (page != currentIndex_) {
+         [self setCurrentIndex:page];
+      }
+   }
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView 
@@ -304,6 +327,8 @@
    // view will be pushed until the navigation bar.
    UINavigationBar *navbar = [[self navigationController] navigationBar];
    [navbar setAlpha:alpha];
+   
+   [[UIApplication sharedApplication] setStatusBarHidden:hide];
    
    if (hide) {
       [UIView commitAnimations];

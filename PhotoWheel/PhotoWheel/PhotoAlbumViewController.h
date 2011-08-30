@@ -23,4 +23,7 @@
 - (IBAction)showActionMenu:(id)sender;
 - (IBAction)addPhoto:(id)sender;
 
+- (UIImage *)selectedImage;
+- (CGRect)selectedCellFrame;
+
 @end
