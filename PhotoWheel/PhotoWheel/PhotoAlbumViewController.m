@@ -347,11 +347,9 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   GridView *gridView = [self gridView];
-   
    PhotoBrowserViewController *destinationViewController = [segue destinationViewController];
    [destinationViewController setDelegate:self];
-   NSInteger index = [gridView indexForSelectedCell];
+   NSInteger index = [[self gridView] indexForSelectedCell];
    [destinationViewController setStartAtIndex:index];
 }
 

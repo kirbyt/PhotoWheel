@@ -15,7 +15,7 @@
 - (void)perform
 {
    id sourceViewController = [self sourceViewController];
-
+   
    UIView *sourceView = [[sourceViewController parentViewController] view];
    UIImageView *sourceImageView = [[UIImageView alloc] initWithImage:[sourceView pw_imageSnapshot]];
    
@@ -30,13 +30,13 @@
    }
    CGRect newFrame = CGRectOffset([sourceImageView frame], 0, statusBarHeight);
    [sourceImageView setFrame:newFrame];
-
+   
    
    CGRect destinationFrame = [[UIScreen mainScreen] bounds];
    if (isLandscape) {
       destinationFrame.size = CGSizeMake(destinationFrame.size.height, destinationFrame.size.width);
    }
-
+   
    UIImage *destinationImage = [sourceViewController selectedImage];
    UIImageView *destinationImageView = [[UIImageView alloc] initWithImage:destinationImage];
    [destinationImageView setContentMode:UIViewContentModeScaleAspectFit];
@@ -50,7 +50,7 @@
    UINavigationBar *navBar = [navController navigationBar];
    [navController setNavigationBarHidden:NO];
    [navBar setFrame:CGRectOffset(navBar.frame, 0, -navBar.frame.size.height)];
-
+   
    UIView *destinationView = [[self destinationViewController] view];
    [destinationView addSubview:sourceImageView];
    [destinationView addSubview:destinationImageView];

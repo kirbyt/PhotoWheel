@@ -97,7 +97,7 @@
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="gi3-Rd-Awc">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vgm-Iq-zTO">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
@@ -106,7 +106,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="41"/>
                     <connections>
-                        <outlet property="scrollView" destination="gi3-Rd-Awc" id="eNI-fW-BvJ"/>
+                        <outlet property="scrollView" destination="vgm-Iq-zTO" id="h6F-Xp-piF"/>
                     </connections>
                 </viewController>
             </objects>
@@ -193,7 +193,7 @@
                         <outlet property="gridView" destination="htM-SB-wey" id="UeD-Lc-Riz"/>
                         <outlet property="textField" destination="THo-ZJ-9ZF" id="tU0-Kj-fPP"/>
                         <outlet property="toolbar" destination="nHD-nf-mXc" id="XhO-3E-jCn"/>
-                        <segue destination="29" kind="custom" identifier="PushPhotoBrowser" customClass="CustomPushSegue" id="ndc-8p-A7e"/>
+                        <segue destination="29" kind="custom" identifier="PushPhotoBrowser" customClass="CustomPushSegue" id="5p7-l6-lUq"/>
                     </connections>
                 </viewController>
             </objects>

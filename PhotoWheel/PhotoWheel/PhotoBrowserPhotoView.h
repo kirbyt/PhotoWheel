@@ -2,7 +2,7 @@
 //  PhotoBrowserPhotoView.h
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 8/27/11.
+//  Created by Kirby Turner on 8/30/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
@@ -11,12 +11,11 @@
 @class PhotoBrowserViewController;
 
 @interface PhotoBrowserPhotoView : UIScrollView <UIScrollViewDelegate>
+@property (nonatomic, assign) NSInteger index;
 
 @property (nonatomic, weak) PhotoBrowserViewController *photoBrowserViewController;
-@property (nonatomic, assign) NSInteger index;
 
 - (void)setImage:(UIImage *)newImage;
 - (void)turnOffZoom;
-
 
 @end

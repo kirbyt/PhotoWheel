@@ -21,7 +21,7 @@
    UIView *sourceView = [sourceViewController view];
    UIImage *sourceViewImage = [sourceView pw_imageSnapshot];
    UIImageView *sourceImageView = [[UIImageView alloc] initWithImage:sourceViewImage];
-
+   
    // Offset the sourceImageView frame by the height of the status bar.
    // This prevents the image from dropping down after the view controller
    // is popped from the stack.
@@ -35,7 +35,7 @@
    }
    CGRect newFrame = CGRectOffset([sourceImageView frame], 0, -statusBarHeight);
    [sourceImageView setFrame:newFrame];
-
+   
    
    NSArray *viewControllers = [self viewControllers];
    NSInteger count = [viewControllers count];
@@ -45,7 +45,7 @@
    UIView *destinationView = [destinationViewController view];
    UIImage *destinationViewImage = [destinationView pw_imageSnapshot];
    UIImageView *destinationImageView = [[UIImageView alloc] initWithImage:destinationViewImage];
-
+   
    [super popViewControllerAnimated:NO];
    
    [destinationView addSubview:destinationImageView];
@@ -62,7 +62,7 @@
       }
    }
    CGPoint shrinkToPoint = CGPointMake(CGRectGetMidX(selectedCellFrame), CGRectGetMidY(selectedCellFrame));
-
+   
    void (^animations)(void) = ^ {
       [sourceImageView setFrame:CGRectMake(shrinkToPoint.x, shrinkToPoint.y, 0, 0)];
       [sourceImageView setAlpha:0.0];

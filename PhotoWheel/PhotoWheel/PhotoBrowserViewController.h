@@ -2,7 +2,7 @@
 //  PhotoBrowserViewController.h
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 8/26/11.
+//  Created by Kirby Turner on 8/30/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
@@ -27,4 +27,5 @@
 
 @optional
 - (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser deleteImageAtIndex:(NSInteger)index;
+
 @end
