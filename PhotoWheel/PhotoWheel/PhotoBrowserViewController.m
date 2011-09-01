@@ -411,7 +411,15 @@
 
 - (void)showActionMenu:(id)sender
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [self cancelChromeDisplayTimer];
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+   [actionSheet setDelegate:self];
+   [actionSheet setTag:ACTIONSHEET_TAG_ACTIONS];
+   if ([UIPrintInteractionController isPrintingAvailable]) {
+      [actionSheet addButtonWithTitle:@"Print"];
+   }
+   
+   [actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
 - (void)slideshow:(id)sender
@@ -419,12 +427,41 @@
    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
+#pragma mark - Printing
+
+- (void)printCurrentPhoto
+{
+   [self cancelChromeDisplayTimer];
+   UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
+   
+   UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+   if(!controller){
+      NSLog(@"Couldn't get shared UIPrintInteractionController!");
+      return;
+   }
+   
+   UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+      [self startChromeDisplayTimer];
+      if(completed && error)
+         NSLog(@"FAILED! due to error in domain %@ with error code %u", error.domain, error.code);
+   };
+   
+   UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+   [printInfo setOutputType:UIPrintInfoOutputPhoto];
+   [printInfo setJobName:[NSString stringWithFormat:@"photo-%i", [self currentIndex]]];
+   
+   [controller setPrintInfo:printInfo];
+   [controller setPrintingItem:currentPhoto];
+   
+   [controller presentFromBarButtonItem:[self actionButton] animated:YES completionHandler:completionHandler];
+}
+
 #pragma mark - UIActionSheetDelegate Methods
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    [self startChromeDisplayTimer];
-   
+
    // Do nothing if the user taps outside the action 
    // sheet (thus closing the popover containing the
    // action sheet).
@@ -434,6 +471,8 @@
    
    if ([actionSheet tag] == ACTIONSHEET_TAG_DELETE) {
       [self deletePhotoConfirmed];
+   } else if ([actionSheet tag] == ACTIONSHEET_TAG_ACTIONS) {
+      [self printCurrentPhoto];      
    }
 }
 
