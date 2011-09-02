@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
 @property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
 @property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
+@property (nonatomic, strong) SendEmailController *sendEmailController;
 
 - (void)addButtonsToNavigationBar;
 - (void)initPhotoViewCache;
@@ -35,6 +36,8 @@
 - (void)hideChrome;
 - (void)startChromeDisplayTimer;
 - (void)cancelChromeDisplayTimer;
+
+- (void)emailCurrentPhoto;
 
 @end
 
@@ -51,6 +54,7 @@
 @synthesize actionButton = actionButton_;
 @synthesize firstVisiblePageIndexBeforeRotation = firstVisiblePageIndexBeforeRotation_;
 @synthesize percentScrolledIntoFirstVisiblePage = percentScrolledIntoFirstVisiblePage_;
+@synthesize sendEmailController = sendEmailController_;
 
 - (void)viewDidLoad
 {
@@ -415,6 +419,11 @@
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
    [actionSheet setDelegate:self];
    [actionSheet setTag:ACTIONSHEET_TAG_ACTIONS];
+   
+   if ([SendEmailController canSendMail]) {
+      [actionSheet addButtonWithTitle:@"Email"];
+   }
+   
    if ([UIPrintInteractionController isPrintingAvailable]) {
       [actionSheet addButtonWithTitle:@"Print"];
    }
@@ -471,8 +480,21 @@
    
    if ([actionSheet tag] == ACTIONSHEET_TAG_DELETE) {
       [self deletePhotoConfirmed];
+      
    } else if ([actionSheet tag] == ACTIONSHEET_TAG_ACTIONS) {
-      [self printCurrentPhoto];      
+      // Button index 0 can be Email or Print. It depends on whether or
+      // not the device supports that feature.
+      if (buttonIndex == 0) {
+         if ([SendEmailController canSendMail]) {
+            [self emailCurrentPhoto];
+         } else if ([UIPrintInteractionController isPrintingAvailable]) {
+            [self printCurrentPhoto];
+         }
+      } else {
+         // If there is a button index 1 then it
+         // will also be Print.
+         [self printCurrentPhoto];
+      }
    }
 }
 
@@ -550,6 +572,27 @@
 {
    [[self scrollView] setScrollEnabled:YES];
    [self startChromeDisplayTimer];
+}
+
+#pragma mark - Email and SendEmailControllerDelegate Methods
+
+- (void)emailCurrentPhoto
+{
+   UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
+   NSSet *photos = [NSSet setWithObject:currentPhoto];
+   
+   SendEmailController *controller = [[SendEmailController alloc] initWithViewController:self];
+   [controller setPhotos:photos];
+   [controller sendEmail];
+   
+   [self setSendEmailController:controller];
+}
+
+- (void)sendEmailControllerDidFinish:(SendEmailController *)controller
+{
+   if ([controller isEqual:[self sendEmailController]]) {
+      [self setSendEmailController:nil];
+   }
 }
 
 @end

@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SendEmailController.h"
 
 @protocol PhotoBrowserViewControllerDelegate;
 
-@interface PhotoBrowserViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate>
+@interface PhotoBrowserViewController : UIViewController <UIScrollViewDelegate, UIActionSheetDelegate, SendEmailControllerDelegate>
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) id<PhotoBrowserViewControllerDelegate> delegate;

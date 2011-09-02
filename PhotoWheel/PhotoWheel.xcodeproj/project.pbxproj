@@ -29,6 +29,8 @@
 		68973F5C13FC049100AD8DAF /* SpinGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68973F5213FC049100AD8DAF /* SpinGestureRecognizer.m */; };
 		68973F5D13FC049100AD8DAF /* UIImage+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68973F5413FC049100AD8DAF /* UIImage+PWCategory.m */; };
 		68973F5E13FC049100AD8DAF /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68973F5613FC049100AD8DAF /* WheelView.m */; };
+		68BFC9EE141124D600010802 /* SendEmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BFC9ED141124D600010802 /* SendEmailController.m */; };
+		68BFC9F11411267300010802 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68BFC9F01411267300010802 /* MessageUI.framework */; };
 		68D444B213EF21290076949E /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D4449E13EF21290076949E /* addphoto.png */; };
 		68D444B313EF21290076949E /* background-landscape-right-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D4449F13EF21290076949E /* background-landscape-right-grooved.png */; };
 		68D444B413EF21290076949E /* background-portrait-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D444A013EF21290076949E /* background-portrait-grooved.png */; };
@@ -102,6 +104,9 @@
 		68973F5413FC049100AD8DAF /* UIImage+PWCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PWCategory.m"; sourceTree = "<group>"; };
 		68973F5513FC049100AD8DAF /* WheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelView.h; sourceTree = "<group>"; };
 		68973F5613FC049100AD8DAF /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
+		68BFC9EC141124D600010802 /* SendEmailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendEmailController.h; sourceTree = "<group>"; };
+		68BFC9ED141124D600010802 /* SendEmailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendEmailController.m; sourceTree = "<group>"; };
+		68BFC9F01411267300010802 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		68D4449E13EF21290076949E /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
 		68D4449F13EF21290076949E /* background-landscape-right-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-landscape-right-grooved.png"; sourceTree = "<group>"; };
 		68D444A013EF21290076949E /* background-portrait-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-portrait-grooved.png"; sourceTree = "<group>"; };
@@ -149,6 +154,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68BFC9F11411267300010802 /* MessageUI.framework in Frameworks */,
 				689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */,
 				68FA6AD613EEF3BB00E046BD /* UIKit.framework in Frameworks */,
 				68FA6AD813EEF3BB00E046BD /* Foundation.framework in Frameworks */,
@@ -210,6 +216,7 @@
 		68FA6AD413EEF3BB00E046BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				68BFC9F01411267300010802 /* MessageUI.framework */,
 				689199B113F5BFFA0037CBAC /* CoreGraphics.framework */,
 				68FA6AD513EEF3BB00E046BD /* UIKit.framework */,
 				68FA6AD713EEF3BB00E046BD /* Foundation.framework */,
@@ -266,6 +273,8 @@
 				6874571C140D10D20042206D /* PhotoBrowserViewController.m */,
 				6874571F140D166D0042206D /* PhotoBrowserPhotoView.h */,
 				68745720140D166D0042206D /* PhotoBrowserPhotoView.m */,
+				68BFC9EC141124D600010802 /* SendEmailController.h */,
+				68BFC9ED141124D600010802 /* SendEmailController.m */,
 				68D4449D13EF21290076949E /* images */,
 				68FA6ADC13EEF3BB00E046BD /* Supporting Files */,
 			);
@@ -394,6 +403,7 @@
 				6872202F1402E2DD001A5D8F /* ImageGridViewCell.m in Sources */,
 				6874571D140D10D20042206D /* PhotoBrowserViewController.m in Sources */,
 				68745721140D166D0042206D /* PhotoBrowserPhotoView.m in Sources */,
+				68BFC9EE141124D600010802 /* SendEmailController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
