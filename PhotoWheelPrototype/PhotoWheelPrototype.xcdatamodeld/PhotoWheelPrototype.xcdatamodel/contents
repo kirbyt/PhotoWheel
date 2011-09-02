@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="844" systemVersion="10K540" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="864" systemVersion="10K549" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Photo" representedClassName="Photo">
         <attribute name="dateAdded" optional="YES" attributeType="Date"/>
-        <attribute name="largeImageData" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
-        <attribute name="originalImageData" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
-        <attribute name="thumbnailImageData" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
+        <attribute name="largeImageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="originalImageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
+        <attribute name="thumbnailImageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <relationship name="keyPhotoAlbum" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoAlbum" inverseName="keyPhoto" inverseEntity="PhotoAlbum"/>
         <relationship name="photoAlbum" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoAlbum" inverseName="photos" inverseEntity="PhotoAlbum"/>
     </entity>
