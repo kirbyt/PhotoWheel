@@ -355,22 +355,42 @@
    [destinationViewController setStartAtIndex:index];
 }
 
-- (UIImage *)selectedImage
+- (NSInteger)indexForSelectedGridCell
 {
    GridView *gridView = [self gridView];
    NSInteger selectedIndex = [gridView indexForSelectedCell];
-   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
-   Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-   return [photo largeImage];
+   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
+   if (selectedIndex < 0 && count > 0) {
+      selectedIndex = 0;
+   }
+   return selectedIndex;
+}
+
+- (UIImage *)selectedImage
+{
+   UIImage *selectedImage = nil;
+   NSInteger selectedIndex = [self indexForSelectedGridCell];
+   if (selectedIndex >= 0) {
+      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+      Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+      selectedImage = [photo largeImage];
+   }
+   return selectedImage;
 }
 
 - (CGRect)selectedCellFrame
 {
+   CGRect rect;
    GridView *gridView = [self gridView];
-   NSInteger selectedIndex = [gridView indexForSelectedCell];
-   GridViewCell *cell = [gridView cellAtIndex:selectedIndex];
-   UIView *parentView = [[self parentViewController] view];
-   CGRect rect = [parentView convertRect:[cell frame] fromView:gridView];
+   NSInteger selectedIndex = [self indexForSelectedGridCell];
+   if (selectedIndex >= 0) {
+      GridViewCell *cell = [gridView cellAtIndex:selectedIndex];
+      UIView *parentView = [[self parentViewController] view];
+      rect = [parentView convertRect:[cell frame] fromView:gridView];
+   } else {
+      CGRect gridFrame = [gridView frame];
+      rect = CGRectMake(CGRectGetMidX(gridFrame), CGRectGetMidY(gridFrame), 0, 0);
+   }
    return rect;
 }
 
