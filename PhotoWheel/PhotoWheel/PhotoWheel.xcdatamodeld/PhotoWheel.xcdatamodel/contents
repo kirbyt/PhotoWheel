@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<<<<<<< HEAD
-<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="851" systemVersion="11A511" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-=======
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="864" systemVersion="11B26" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
->>>>>>> chapter20
     <entity name="Photo" representedClassName="Photo">
         <attribute name="dateAdded" optional="YES" attributeType="Date"/>
         <attribute name="largeImageData" optional="YES" attributeType="Binary" storedInTruthFile="YES"/>
@@ -13,7 +9,7 @@
         <relationship name="keyPhotoAlbum" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoAlbum" inverseName="keyPhoto" inverseEntity="PhotoAlbum"/>
         <relationship name="photoAlbum" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoAlbum" inverseName="photos" inverseEntity="PhotoAlbum"/>
     </entity>
-    <entity name="PhotoAlbum" representedClassName="PhotoAlbum">
+    <entity name="PhotoAlbum" representedClassName="_PhotoAlbum">
         <attribute name="dateAdded" optional="YES" attributeType="Date"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="userSortPosition" optional="YES" attributeType="Integer 16" defaultValueString="0"/>

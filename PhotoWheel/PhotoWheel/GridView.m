@@ -60,9 +60,6 @@
    [self setAllowsMultipleSelection:NO];
    self.selectedCells = [[NSMutableSet alloc] init];
    
-   [self setAllowsMultipleSelection:NO];
-   self.selectedCells = [[NSMutableSet alloc] init];
-   
    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
    [self addGestureRecognizer:tap];
 }

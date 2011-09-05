@@ -10,7 +10,6 @@
 #import "PhotoAlbum.h"
 #import "Photo.h"
 #import "ImageGridViewCell.h"
-#import "FlickrViewController.h"
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
@@ -52,12 +51,7 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-<<<<<<< HEAD
-   [[self gridView] setAlwaysBounceVertical:YES];
-   [self refresh];
-=======
    [self reload];
->>>>>>> chapter20
 }
 
 - (void)viewDidUnload 
@@ -88,15 +82,6 @@
       self.photoAlbum = (PhotoAlbum *)[self.managedObjectContext objectWithID:[self objectID]];
       [self.toolbar setHidden:NO];
       [self.textField setText:[self.photoAlbum name]];
-<<<<<<< HEAD
-      [self setFetchedResultsController:nil];
-      [self.gridView reloadData];
-      
-   } else {
-      [self.toolbar setHidden:YES];
-      [self.textField setText:@""];
-   }
-=======
    } else {
       [self setPhotoAlbum:nil];
       [self.toolbar setHidden:YES];
@@ -105,7 +90,6 @@
 
    [self setFetchedResultsController:nil];
    [self.gridView reloadData];
->>>>>>> chapter20
 }
 
 - (void)saveChanges
@@ -125,36 +109,7 @@
    }
 }
 
-<<<<<<< HEAD
-- (void)confirmDeletePhotoAlbum
-{
-   NSString *message;
-   if ([[self.photoAlbum name] length] > 0) {
-      message = [NSString stringWithFormat:@"Delete the photo album \"%@\". This action cannot be undone.", [self.photoAlbum name]];
-   } else {
-      message = @"Delete this photo album. This action cannot be undone.";
-   }
-   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Photo Album" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-   [alertView show];
-}
-
-#pragma mark - UIAlertViewDelegate Methods
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-   if (buttonIndex == 1) {
-      [self.managedObjectContext deleteObject:[self photoAlbum]];
-      [self setPhotoAlbum:nil];
-      [self setObjectID:nil];
-      [self saveChanges];
-      [self refresh];
-   }
-}
-
-#pragma mark - Image Picker Helper Methods
-=======
 #pragma mark - UITextFieldDelegate Methods
->>>>>>> chapter20
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
@@ -174,30 +129,10 @@
    [self saveChanges];
 }
 
-<<<<<<< HEAD
-- (void)presentFlickr
-{
-   [self performSegueWithIdentifier:@"FlickrSegue" sender:self];
-}
-
-- (void)presentPhotoPickerMenu
-{
-   UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
-   [actionSheet setDelegate:self];
-   BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
-   if (hasCamera) {
-      [actionSheet addButtonWithTitle:@"Take Photo"];
-   }
-   [actionSheet addButtonWithTitle:@"Choose from Library"];
-   [actionSheet addButtonWithTitle:@"Choose from Flickr"];
-   [actionSheet setTag:1];
-   [actionSheet showFromBarButtonItem:[self addButton] animated:YES];
-=======
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
    [textField resignFirstResponder];
    return NO;
->>>>>>> chapter20
 }
 
 #pragma mark Actions
@@ -220,11 +155,7 @@
    if ([self popoverController]) {
       [[self popoverController] dismissPopoverAnimated:YES];
    }
-<<<<<<< HEAD
-
-=======
    
->>>>>>> chapter20
    [self presentPhotoPickerMenu];   
 }
 
@@ -260,14 +191,6 @@
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-<<<<<<< HEAD
-   if (buttonIndex < 0) {
-      return;
-   }
-   
-   NSMutableArray *names = [[NSMutableArray alloc] init];
-
-=======
    // Do nothing if the user taps outside the action 
    // sheet (thus closing the popover containing the
    // action sheet).
@@ -277,7 +200,6 @@
 
    NSMutableArray *names = [[NSMutableArray alloc] init];
    
->>>>>>> chapter20
    if ([actionSheet tag] == 0) {
       if ([SendEmailController canSendMail]) [names addObject:@"emailPhotos"];
       [names addObject:@"confirmDeletePhotoAlbum"];
@@ -286,10 +208,6 @@
       BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
       if (hasCamera) [names addObject:@"presentCamera"];
       [names addObject:@"presentPhotoLibrary"];
-<<<<<<< HEAD
-      [names addObject:@"presentFlickr"];
-=======
->>>>>>> chapter20
    }
    
    SEL selector = NSSelectorFromString([names objectAtIndex:buttonIndex]);
@@ -509,36 +427,7 @@
    [self saveChanges];   
 }
 
-<<<<<<< HEAD
-
-#pragma mark - Segues
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-   if ([[segue destinationViewController] isKindOfClass:[PhotoBrowserViewController class]]) {
-      if ([sender isKindOfClass:[GridView class]] && [[segue sourceViewController] isKindOfClass:[PhotoAlbumViewController class]]) {
-         GridView *gridView = sender;
-         NSInteger selectedIndex = [gridView indexForSelectedCell];
-         GridViewCell *cell = [gridView cellAtIndex:selectedIndex];
-         CGRect cellFrame = [cell frame];
-         
-         PhotoBrowserViewController *photoBrowserViewController = [segue destinationViewController];
-         [photoBrowserViewController setDelegate:[segue sourceViewController]];
-         [photoBrowserViewController setStartAtIndex:selectedIndex];
-         
-         CGRect pushFromFrame = [[photoBrowserViewController view] convertRect:cellFrame fromView:gridView];
-         [photoBrowserViewController setPushFromFrame:pushFromFrame];
-      }
-   } else if ([[segue destinationViewController] isKindOfClass:[FlickrViewController class]]) {
-      [[segue destinationViewController] setManagedObjectContext:[self managedObjectContext]];
-      [[segue destinationViewController] setObjectID:[self objectID]];
-   }
-}
-
-#pragma mark - Rotation Support
-=======
 #pragma mark - Rotation
->>>>>>> chapter20
 
 - (void)layoutForLandscape
 {
