@@ -16,6 +16,7 @@
 @interface FlickrViewController ()
 @property (nonatomic, strong) NSArray *flickrPhotos;
 @property (nonatomic, strong) NSMutableArray *downloaders;
+@property (nonatomic, assign) NSInteger showOverlayCount;
 @end
 
 @implementation FlickrViewController
@@ -28,6 +29,7 @@
 @synthesize objectID = objectID_;
 @synthesize flickrPhotos = flickrPhotos_;
 @synthesize downloaders = downloaders_;
+@synthesize showOverlayCount = showOverlayCount_;
 
 - (void)viewDidLoad
 {
@@ -54,6 +56,11 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
    return YES;
+}
+
+- (BOOL)disablesAutomaticKeyboardDismissal
+{
+   return NO;
 }
 
 #pragma mark - Save Photos
@@ -123,18 +130,15 @@
 
 - (IBAction)save:(id)sender
 {
+   [[self overlayView] setUserInteractionEnabled:NO];
+
    void (^animations)(void) = ^ {
-      [[self overlayView] setUserInteractionEnabled:NO];
       [[self overlayView] setAlpha:0.4];
+      [[self activityIndicator] startAnimating];
    };
    
-   void (^completion)(BOOL) = ^(BOOL finished) {
-      if (finished) {
-         [[self activityIndicator] startAnimating];
-      }
-   };
+   [UIView animateWithDuration:0.2 animations:animations];
    
-   [UIView animateWithDuration:0.2 animations:animations completion:completion];
    [self saveSelectedPhotos];
 }
 
@@ -146,26 +150,46 @@
 
 #pragma mark - Overlay Methods
 
-- (void)overlayViewTapped:(UITapGestureRecognizer *)recognizer
-{
-   [[self overlayView] setAlpha:0.0];
-   [[self searchBar] resignFirstResponder];
-}
-
 - (void)showOverlay:(BOOL)showOverlay
 {
-   CGFloat alpha = showOverlay ? 0.4 : 0.0;
-   void (^animations)(void) = ^ {
-      [[self overlayView] setAlpha:alpha];
-      [[self searchBar] setShowsCancelButton:showOverlay animated:YES];
-   };
-   
-   void (^completion)(BOOL) = ^(BOOL finished) {
-      if (finished) {
-      }
-   };
-   
-   [UIView animateWithDuration:0.2 animations:animations completion:completion];
+   BOOL isVisible = ([[self overlayView] alpha] > 0.0);
+   if (isVisible != showOverlay) {
+      CGFloat alpha = showOverlay ? 0.4 : 0.0;
+      void (^animations)(void) = ^ {
+         [[self overlayView] setAlpha:alpha];
+         [[self searchBar] setShowsCancelButton:showOverlay animated:YES];
+      };
+      
+      void (^completion)(BOOL) = ^(BOOL finished) {
+         if (finished) {
+         }
+      };
+      
+      [UIView animateWithDuration:0.2 animations:animations completion:completion];
+   }
+}
+
+- (void)showOverlay
+{
+   self.showOverlayCount += 1;
+   BOOL showOverlay = (self.showOverlayCount > 0);
+   [self showOverlay:showOverlay];
+}
+
+- (void)hideOverlay
+{
+   self.showOverlayCount -= 1;
+   BOOL showOverlay = (self.showOverlayCount > 0);
+   [self showOverlay:showOverlay];
+   if (self.showOverlayCount < 0) {
+      self.showOverlayCount = 0;
+   }
+}
+
+- (void)overlayViewTapped:(UITapGestureRecognizer *)recognizer
+{
+   [self hideOverlay];
+   [[self searchBar] resignFirstResponder];
 }
 
 #pragma mark - Flickr
@@ -173,6 +197,8 @@
 - (void)fetchFlickrPhotoWithSearchString:(NSString *)searchString
 {
    [[self activityIndicator] startAnimating];
+   [self showOverlay];
+   [[self overlayView] setUserInteractionEnabled:NO];
    
    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       SimpleFlickrAPI *flickr = [[SimpleFlickrAPI alloc] init];
@@ -189,7 +215,8 @@
 
       dispatch_async(dispatch_get_main_queue(), ^{
          [[self gridView] reloadData];
-         [self showOverlay:NO];
+         [self hideOverlay];
+         [[self overlayView] setUserInteractionEnabled:YES];
          [[self searchBar] resignFirstResponder];
          [[self activityIndicator] stopAnimating];
       });
@@ -200,20 +227,25 @@
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
-   [self showOverlay:YES];
+   [self showOverlay];
    return YES;
+}
+
+- (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
+{
+   [searchBar resignFirstResponder];
+   [self hideOverlay];
 }
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-   [searchBar resignFirstResponder];
    [self fetchFlickrPhotoWithSearchString:[searchBar text]];
 }
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
    [searchBar resignFirstResponder];
-   [self showOverlay:NO];
+   [self hideOverlay];
 }
 
 #pragma mark - GridViewDataSource Methods

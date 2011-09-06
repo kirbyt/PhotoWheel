@@ -9,8 +9,8 @@
 #import "SimpleFlickrAPI.h"
 #import <Foundation/NSJSONSerialization.h>
 
-//#error Changes this value to your own application key. More info at http://www.flickr.com/services/api/misc.api_keys.html 
-#define flickrAPIKey @"0fce010de1cc46ddc041c5bcd8c31bd2" //@"YOUR_FLICKR_APP_KEY"
+#error Changes this value to your own application key. More info at http://www.flickr.com/services/api/misc.api_keys.html 
+#define flickrAPIKey @"YOUR_FLICKR_APP_KEY"
 
 #define flickrBaseURL @"http://api.flickr.com/services/rest/?format=json&"
 
