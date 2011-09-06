@@ -18,6 +18,8 @@
 		68745732140D97900042206D /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68745730140D97900042206D /* Default.png */; };
 		68745735140DBBEF0042206D /* background-landscape-left-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68745733140DBBEF0042206D /* background-landscape-left-grooved.png */; };
 		68745736140DBBEF0042206D /* stack-viewer-bg-landscape-left.png in Resources */ = {isa = PBXBuildFile; fileRef = 68745734140DBBEF0042206D /* stack-viewer-bg-landscape-left.png */; };
+		687D11D71415158D00F98544 /* FlickrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 687D11D61415158D00F98544 /* FlickrViewController.m */; };
+		687D11DB14152C1200F98544 /* SimpleFlickrAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 687D11DA14152C1200F98544 /* SimpleFlickrAPI.m */; };
 		689199B013F5B6530037CBAC /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199AF13F5B6530037CBAC /* UIView+PWCategory.m */; };
 		689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689199B113F5BFFA0037CBAC /* CoreGraphics.framework */; };
 		689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199B413F5C8320037CBAC /* CustomNavigationController.m */; };
@@ -31,6 +33,7 @@
 		68973F5E13FC049100AD8DAF /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68973F5613FC049100AD8DAF /* WheelView.m */; };
 		68BFC9EE141124D600010802 /* SendEmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68BFC9ED141124D600010802 /* SendEmailController.m */; };
 		68BFC9F11411267300010802 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68BFC9F01411267300010802 /* MessageUI.framework */; };
+		68D21AF0141563ED003E1166 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 68D21AEF141563ED003E1166 /* ImageDownloader.m */; };
 		68D444B213EF21290076949E /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D4449E13EF21290076949E /* addphoto.png */; };
 		68D444B313EF21290076949E /* background-landscape-right-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D4449F13EF21290076949E /* background-landscape-right-grooved.png */; };
 		68D444B413EF21290076949E /* background-portrait-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D444A013EF21290076949E /* background-portrait-grooved.png */; };
@@ -83,6 +86,10 @@
 		68745730140D97900042206D /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		68745733140DBBEF0042206D /* background-landscape-left-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-landscape-left-grooved.png"; sourceTree = "<group>"; };
 		68745734140DBBEF0042206D /* stack-viewer-bg-landscape-left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-bg-landscape-left.png"; sourceTree = "<group>"; };
+		687D11D51415158D00F98544 /* FlickrViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlickrViewController.h; sourceTree = "<group>"; };
+		687D11D61415158D00F98544 /* FlickrViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlickrViewController.m; sourceTree = "<group>"; };
+		687D11D914152C1200F98544 /* SimpleFlickrAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SimpleFlickrAPI.h; sourceTree = "<group>"; };
+		687D11DA14152C1200F98544 /* SimpleFlickrAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleFlickrAPI.m; sourceTree = "<group>"; };
 		689199AE13F5B6530037CBAC /* UIView+PWCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PWCategory.h"; sourceTree = "<group>"; };
 		689199AF13F5B6530037CBAC /* UIView+PWCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PWCategory.m"; sourceTree = "<group>"; };
 		689199B113F5BFFA0037CBAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -107,6 +114,8 @@
 		68BFC9EC141124D600010802 /* SendEmailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SendEmailController.h; sourceTree = "<group>"; };
 		68BFC9ED141124D600010802 /* SendEmailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SendEmailController.m; sourceTree = "<group>"; };
 		68BFC9F01411267300010802 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		68D21AEE141563ED003E1166 /* ImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
+		68D21AEF141563ED003E1166 /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
 		68D4449E13EF21290076949E /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
 		68D4449F13EF21290076949E /* background-landscape-right-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-landscape-right-grooved.png"; sourceTree = "<group>"; };
 		68D444A013EF21290076949E /* background-portrait-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-portrait-grooved.png"; sourceTree = "<group>"; };
@@ -275,6 +284,12 @@
 				68745720140D166D0042206D /* PhotoBrowserPhotoView.m */,
 				68BFC9EC141124D600010802 /* SendEmailController.h */,
 				68BFC9ED141124D600010802 /* SendEmailController.m */,
+				687D11D51415158D00F98544 /* FlickrViewController.h */,
+				687D11D61415158D00F98544 /* FlickrViewController.m */,
+				687D11D914152C1200F98544 /* SimpleFlickrAPI.h */,
+				687D11DA14152C1200F98544 /* SimpleFlickrAPI.m */,
+				68D21AEE141563ED003E1166 /* ImageDownloader.h */,
+				68D21AEF141563ED003E1166 /* ImageDownloader.m */,
 				68D4449D13EF21290076949E /* images */,
 				68FA6ADC13EEF3BB00E046BD /* Supporting Files */,
 			);
@@ -404,6 +419,9 @@
 				6874571D140D10D20042206D /* PhotoBrowserViewController.m in Sources */,
 				68745721140D166D0042206D /* PhotoBrowserPhotoView.m in Sources */,
 				68BFC9EE141124D600010802 /* SendEmailController.m in Sources */,
+				687D11D71415158D00F98544 /* FlickrViewController.m in Sources */,
+				687D11DB14152C1200F98544 /* SimpleFlickrAPI.m in Sources */,
+				68D21AF0141563ED003E1166 /* ImageDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,6 +10,7 @@
 #import "PhotoAlbum.h"
 #import "Photo.h"
 #import "ImageGridViewCell.h"
+#import "FlickrViewController.h"
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
@@ -208,6 +209,7 @@
       BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
       if (hasCamera) [names addObject:@"presentCamera"];
       [names addObject:@"presentPhotoLibrary"];
+      [names addObject:@"presentFlickr"];
    }
    
    SEL selector = NSSelectorFromString([names objectAtIndex:buttonIndex]);
@@ -235,6 +237,11 @@
    [self setPopoverController:newPopoverController];
 }
 
+- (void)presentFlickr
+{
+   [self performSegueWithIdentifier:@"PushFlickrScene" sender:self];
+}
+
 - (void)presentPhotoPickerMenu
 {
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
@@ -244,6 +251,7 @@
       [actionSheet addButtonWithTitle:@"Take Photo"];
    }
    [actionSheet addButtonWithTitle:@"Choose from Library"];
+   [actionSheet addButtonWithTitle:@"Choose from Flickr"];
    [actionSheet setTag:1];
    [actionSheet showFromBarButtonItem:[self addButton] animated:YES];
 }
@@ -358,10 +366,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   PhotoBrowserViewController *destinationViewController = [segue destinationViewController];
-   [destinationViewController setDelegate:self];
-   NSInteger index = [[self gridView] indexForSelectedCell];
-   [destinationViewController setStartAtIndex:index];
+   if ([[segue destinationViewController] isKindOfClass:[PhotoBrowserViewController class]]) {
+      PhotoBrowserViewController *destinationViewController = [segue destinationViewController];
+      [destinationViewController setDelegate:self];
+      NSInteger index = [[self gridView] indexForSelectedCell];
+      [destinationViewController setStartAtIndex:index];
+   } else if ([[segue destinationViewController] isKindOfClass:[FlickrViewController class]]) {
+      [[segue destinationViewController] setManagedObjectContext:[self managedObjectContext]];
+      [[segue destinationViewController] setObjectID:[self objectID]];
+   }
 }
 
 - (NSInteger)indexForSelectedGridCell
