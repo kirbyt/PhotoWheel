@@ -41,9 +41,6 @@
 
 
 @interface GridViewCell : UIView
-{
-   
-}
-
+@property (nonatomic, assign, getter = isSelected) BOOL selected;
 @end
 
