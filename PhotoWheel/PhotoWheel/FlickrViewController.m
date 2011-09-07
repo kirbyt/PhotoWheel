@@ -290,16 +290,16 @@
    return CGSizeMake(75, 75);
 }
 
-- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
-{
-   id cell = [gridView cellAtIndex:index];
-   [cell setSelected:YES];
-}
-
-- (void)gridView:(GridView *)gridView didDeselectCellAtIndex:(NSInteger)index
-{
-   id cell = [gridView cellAtIndex:index];
-   [cell setSelected:NO];
-}
+//- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
+//{
+//   id cell = [gridView cellAtIndex:index];
+//   [cell setSelected:YES];
+//}
+//
+//- (void)gridView:(GridView *)gridView didDeselectCellAtIndex:(NSInteger)index
+//{
+//   id cell = [gridView cellAtIndex:index];
+//   [cell setSelected:NO];
+//}
 
 @end
