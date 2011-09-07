@@ -15,7 +15,6 @@
 
 @implementation ImageGridViewCell
 
-@synthesize selected = selected_;
 @synthesize imageView = imageView_;
 @synthesize selectedIndicator = selectedIndicator_;
 
@@ -56,7 +55,7 @@
 
 - (void)setSelected:(BOOL)selected
 {
-   selected_ = selected;
+   [super setSelected:selected];
    [[self selectedIndicator] setHidden:!selected];
 }
 
