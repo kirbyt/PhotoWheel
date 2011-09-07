@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong, readonly) UIImageView *imageView;
 @property (nonatomic, strong, readonly) UIImageView *selectedIndicator;
-@property (nonatomic, assign, getter = isSelected) BOOL selected;
 
 + (ImageGridViewCell *)imageGridViewCellWithSize:(CGSize)size;
 - (id)initWithSize:(CGSize)size;

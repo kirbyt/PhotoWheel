@@ -15,6 +15,7 @@
 @end
 
 @implementation GridViewCell
+@synthesize selected = selected_;
 @synthesize indexInGrid = indexInGrid_;
 @end
 
@@ -26,7 +27,7 @@
 @property (nonatomic, assign) NSInteger firstVisibleIndex;
 @property (nonatomic, assign) NSInteger lastVisibleIndex;
 @property (nonatomic, assign) NSInteger previousItemsPerRow;
-@property (nonatomic, strong) NSMutableSet *selectedCells;
+@property (nonatomic, strong) NSMutableSet *selectedCellIndexes;
 @end
 
 @implementation GridView
@@ -36,7 +37,7 @@
 @synthesize firstVisibleIndex = firstVisibleIndex_;
 @synthesize lastVisibleIndex = lastVisibleIndex_;
 @synthesize previousItemsPerRow = previousItemsPerRow_;
-@synthesize selectedCells = selectedCells_;
+@synthesize selectedCellIndexes = selectedCellIndexes_;
 @synthesize allowsMultipleSelection = allowsMultipleSelection_;
 
 - (void)commonInit
@@ -58,7 +59,7 @@
    [self setAlwaysBounceVertical:YES];
    
    [self setAllowsMultipleSelection:NO];
-   self.selectedCells = [[NSMutableSet alloc] init];
+   self.selectedCellIndexes = [[NSMutableSet alloc] init];
    
    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
    [self addGestureRecognizer:tap];
@@ -111,7 +112,7 @@
    
    [self setFirstVisibleIndex:NSIntegerMax];
    [self setLastVisibleIndex:NSIntegerMin];
-   [[self selectedCells] removeAllObjects];
+   [[self selectedCellIndexes] removeAllObjects];
 }
 
 - (void)reloadData
@@ -229,6 +230,8 @@
       // view is not missing.
       BOOL isViewMissing = !(index >= [self firstVisibleIndex] && index < [self lastVisibleIndex]);
       if (isViewMissing) {
+         BOOL selected = [[self selectedCellIndexes] containsObject:[NSNumber numberWithInteger:index]];
+         [view setSelected:selected];
          [view setIndexInGrid:index];
          [self addSubview:view];
       }
@@ -263,23 +266,31 @@
             NSInteger previousIndex = -1;
             NSInteger selectedIndex = -1;
             
-            NSMutableSet *selectedCells = [self selectedCells];
+            NSMutableSet *selectedCellIndexes = [self selectedCellIndexes];
             if ([self allowsMultipleSelection] == NO) {
                // Out the old.
-               previousIndex = [[selectedCells anyObject] indexInGrid];
-               [selectedCells removeAllObjects];
+               if ([selectedCellIndexes count] > 0) {
+                  previousIndex = [[selectedCellIndexes anyObject] integerValue];
+                  [[self cellAtIndex:previousIndex] setSelected:NO];
+                  [selectedCellIndexes removeAllObjects];
+               }
                
                // And in with the new.
                selectedIndex = [view indexInGrid];
-               [selectedCells addObject:view];
+               [view setSelected:YES];
+               [selectedCellIndexes addObject:[NSNumber numberWithInteger:selectedIndex]];
 
             } else {
-               if ([selectedCells containsObject:view]) {
-                  previousIndex = [view indexInGrid];
-                  [selectedCells removeObject:view];
+               NSInteger indexInGrid = [view indexInGrid];
+               NSNumber *numberIndexInGrid = [NSNumber numberWithInteger:indexInGrid];
+               if ([selectedCellIndexes containsObject:numberIndexInGrid]) {
+                  previousIndex = indexInGrid;
+                  [view setSelected:NO];
+                  [selectedCellIndexes removeObject:numberIndexInGrid];
                } else {
-                  selectedIndex = [view indexInGrid];
-                  [selectedCells addObject:view];
+                  selectedIndex = indexInGrid;
+                  [view setSelected:YES];
+                  [selectedCellIndexes addObject:numberIndexInGrid];
                }
             }
             
@@ -304,9 +315,9 @@
 - (NSInteger)indexForSelectedCell
 {
    NSInteger selectedIndex = -1;
-   GridViewCell *selectedCell = [[self selectedCells] anyObject];
-   if (selectedCell) {
-      selectedIndex = [selectedCell indexInGrid];
+   NSMutableSet *selectedCellIndexes = [self selectedCellIndexes];
+   if ([selectedCellIndexes count] > 0) {
+      selectedIndex = [[selectedCellIndexes anyObject] integerValue];
    }
    return selectedIndex;
 }
@@ -314,14 +325,10 @@
 - (NSArray *)indexesForSelectedCells
 {
    NSArray *selectedIndexes = nil;
-   NSInteger count = [[self selectedCells] count];
-   if (count > 0) {
-      NSMutableArray *mutableArray = [[NSMutableArray alloc] initWithCapacity:count];
-      for (GridViewCell *cell in [self selectedCells]) {
-         NSInteger indexInGrid = [cell indexInGrid];
-         [mutableArray addObject:[NSNumber numberWithInteger:indexInGrid]];
-      }
-      selectedIndexes = [NSArray arrayWithArray:mutableArray];
+   NSMutableSet *selectedCellIndexes = [self selectedCellIndexes];
+   if ([selectedCellIndexes count] > 0) {
+      NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+      selectedIndexes = [selectedCellIndexes sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
    }
    return selectedIndexes;
 }
