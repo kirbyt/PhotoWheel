@@ -338,16 +338,4 @@
    return CGSizeMake(100, 100);
 }
 
-- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
-{
-   ImageGridViewCell *cell = (ImageGridViewCell *)[gridView cellAtIndex:index];
-   [cell setSelected:YES];
-}
-
-- (void)gridView:(GridView *)gridView didDeselectCellAtIndex:(NSInteger)index
-{
-   ImageGridViewCell *cell = (ImageGridViewCell *)[gridView cellAtIndex:index];
-   [cell setSelected:NO];
-}
-
 @end
