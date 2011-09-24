@@ -68,6 +68,28 @@
       [newArray addObject:cell];
    }
    [self setData:[newArray copy]];
+   
+   NSArray *segmentedItems = [NSArray arrayWithObjects:
+                              @"Wheel", @"Carousel", nil];
+   UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] 
+                                           initWithItems:segmentedItems];
+   [segmentedControl addTarget:self 
+                        action:@selector(segmentedControlValueChanged:) 
+              forControlEvents:UIControlEventValueChanged];
+   [segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+   [segmentedControl setSelectedSegmentIndex:0];
+   [[self navigationItem] setTitleView:segmentedControl];
+}
+
+- (void)segmentedControlValueChanged:(id)sender
+{
+   NSInteger index = [sender selectedSegmentIndex];
+   if (index == 0) {
+      [[self wheelView] setStyle:WheelViewStyleWheel];
+   } else {
+      [[self wheelView] setStyle:WheelViewStyleCarousel];
+   }
+   
 }
 
 - (void)viewDidUnload
