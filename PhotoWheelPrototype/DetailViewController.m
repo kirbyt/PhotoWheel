@@ -12,6 +12,9 @@
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @property (strong, nonatomic) NSArray *data;
+@property (strong, nonatomic) PhotoWheelViewCell *selectedPhotoWheelViewCell;
+@property (strong, nonatomic) UIActionSheet *actionSheet;
+@property (strong, nonatomic) UIImagePickerController *imagePickerController;
 - (void)configureView;
 @end
 
@@ -22,6 +25,9 @@
 @synthesize masterPopoverController = _masterPopoverController;
 @synthesize data = _data;
 @synthesize wheelView = _wheelView;
+@synthesize selectedPhotoWheelViewCell = _selectedPhotoWheelViewCell;
+@synthesize actionSheet = _actionSheet;
+@synthesize imagePickerController = _imagePickerController;
 
 #pragma mark - Managing the detail item
 
@@ -143,11 +149,21 @@
    return YES;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+   if ([self actionSheet]) {
+      [[self actionSheet] dismissWithClickedButtonIndex:-1 animated:YES];
+   }
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
    if (self) {
       self.title = NSLocalizedString(@"Detail", @"Detail");
+
+      [self setImagePickerController:[[UIImagePickerController alloc] init]];
+      [[self imagePickerController] setDelegate:self];
    }
    return self;
 }
@@ -183,16 +199,114 @@
    return cell;
 }
 
+- (void)presentCamera
+{
+   // Display the camera.
+   [[self imagePickerController] 
+    setSourceType:UIImagePickerControllerSourceTypeCamera];
+   [self presentModalViewController:[self imagePickerController] animated:YES];
+}
+
+- (void)presentPhotoLibrary
+{
+   // Display assets from the Photos library only.
+   [[self imagePickerController] 
+    setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+   
+   UIView *view = [self selectedPhotoWheelViewCell];
+   CGRect rect = [view bounds];
+   
+   UIPopoverController *newPopoverController = 
+      [[UIPopoverController alloc] 
+       initWithContentViewController:[self imagePickerController]];
+   [newPopoverController presentPopoverFromRect:rect inView:view 
+                       permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                       animated:YES];
+   [self setMasterPopoverController:newPopoverController];
+}
+
+- (void)presentPhotoPickerMenu
+{
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+   [actionSheet setDelegate:self];
+   [actionSheet addButtonWithTitle:@"Take Photo"];
+   [actionSheet addButtonWithTitle:@"Choose from Library"];
+   
+   UIView *view = [self selectedPhotoWheelViewCell];
+   CGRect rect = [view bounds];
+   [actionSheet showFromRect:rect inView:view animated:YES];
+   
+   [self setActionSheet:actionSheet];
+}
+
 // Other code left out for brevity's sake.
+
+#pragma mark - UIActionSheetDelegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet 
+clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+   switch (buttonIndex) {
+      case 0:
+         [self presentCamera];
+         break;
+      case 1:
+         [self presentPhotoLibrary];
+         break;
+   }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet 
+didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+   [self setActionSheet:nil];
+}
 
 - (void)cellTapped:(UIGestureRecognizer *)recognizer
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [self setSelectedPhotoWheelViewCell:(PhotoWheelViewCell *)[recognizer view]];
+   
+   BOOL hasCamera = 
+   [UIImagePickerController 
+    isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+   if (hasCamera) {
+      [self presentPhotoPickerMenu];
+   } else {
+      [self presentPhotoLibrary];
+   }
 }
 
 - (void)cellDoubleTapped:(UIGestureRecognizer *)recognizer
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+#pragma mark - UIImagePickerControllerDelegate Methods
+
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+   // If the popover controller is available,
+   // assume the photo is selected from the library
+   // and not from the camera.
+   BOOL takenWithCamera = ([self masterPopoverController] == nil);
+   
+   // Dismiss the popover controller if available; 
+   // otherwise dismiss the camera view.
+   if ([self masterPopoverController]) {
+      [[self masterPopoverController] dismissPopoverAnimated:YES];
+      [self setMasterPopoverController:nil];
+   } else {
+      [self dismissModalViewControllerAnimated:YES];
+   }
+   
+   // Retrieve and display the image.
+   UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+   [[self selectedPhotoWheelViewCell] setImage:image];
+   
+   if (takenWithCamera) {
+      UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+   }
 }
 
 @end
