@@ -10,42 +10,62 @@
 
 @implementation NameEditorViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
+@synthesize nameTextField = _nameTextField;
+@synthesize delegate = _delegate;
+@synthesize indexPath = _indexPath;
+@synthesize defaultNameText = _defaultNameText;
 
-- (void)didReceiveMemoryWarning
+- (id)initWithDefaultNib 
 {
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+   self = [super initWithNibName:@"NameEditorViewController" bundle:nil];
+   if (self) {
+      // Custom initialization.
+   }
+   return self;
 }
-
-#pragma mark - View lifecycle
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+   [super viewDidLoad];
+   if ([self isEditing]) {
+      [[self nameTextField] setText:[self defaultNameText]];
+   }
 }
 
 - (void)viewDidUnload
 {
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+   [self setNameTextField:nil];
+   [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:
+(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+   return YES;
+}
+
+#pragma mark - Actions methods
+
+- (IBAction)cancel:(id)sender
+{
+   id<NameEditorViewControllerDelegate> delegate = [self delegate];
+   if (delegate && 
+       [delegate respondsToSelector:@selector(nameEditorViewControllerDidCancel:)]) 
+   {
+      [delegate nameEditorViewControllerDidCancel:self];
+   }
+   [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)done:(id)sender
+{
+   id<NameEditorViewControllerDelegate> delegate = [self delegate];
+   if (delegate && 
+       [delegate respondsToSelector:@selector(nameEditorViewControllerDidFinish:)]) 
+   {
+      [delegate nameEditorViewControllerDidFinish:self]; 
+   }
+   [self dismissModalViewControllerAnimated:YES];
 }
 
 @end

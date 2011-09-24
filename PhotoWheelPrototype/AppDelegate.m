@@ -37,6 +37,10 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
       [[UINavigationController alloc] 
        initWithRootViewController:detailViewController];
    
+   // Add this line. It tells the master view controller which
+   // detail view controller to use.
+   [masterViewController setDetailViewController:detailViewController];
+   
    self.splitViewController = [[UISplitViewController alloc] init];
    self.splitViewController.delegate = detailViewController;
    self.splitViewController.viewControllers = [NSArray arrayWithObjects:
