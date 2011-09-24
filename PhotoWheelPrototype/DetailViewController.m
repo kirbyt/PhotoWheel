@@ -7,6 +7,7 @@
 //
 
 #import "DetailViewController.h"
+#import "PhotoWheelViewCell.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -59,12 +60,14 @@
 {
    [super viewDidLoad];
    
+   UIImage *defaultPhoto = [UIImage imageNamed:@"defaultPhoto.png"];
    CGRect cellFrame = CGRectMake(0, 0, 75, 75);
    NSInteger count = 10;
    NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:count];
    for (NSInteger index = 0; index < count; index++) {
-      WheelViewCell *cell = [[WheelViewCell alloc] initWithFrame:cellFrame];
-      [cell setBackgroundColor:[UIColor blueColor]];
+      PhotoWheelViewCell *cell = 
+      [[PhotoWheelViewCell alloc] initWithFrame:cellFrame];      
+      [cell setImage:defaultPhoto];
       [newArray addObject:cell];
    }
    [self setData:[newArray copy]];

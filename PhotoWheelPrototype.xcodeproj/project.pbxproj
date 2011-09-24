@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		68625D59142E515200267A4C /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68625D58142E515200267A4C /* WheelView.m */; };
+		68625D5D142E654100267A4C /* PhotoWheelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68625D5C142E654100267A4C /* PhotoWheelViewCell.m */; };
+		68625D5F142E673B00267A4C /* defaultPhoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 68625D5E142E673B00267A4C /* defaultPhoto.png */; };
 		68F53547142E19A600797CD6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F53546142E19A600797CD6 /* UIKit.framework */; };
 		68F53549142E19A600797CD6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F53548142E19A600797CD6 /* Foundation.framework */; };
 		68F5354B142E19A600797CD6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68F5354A142E19A600797CD6 /* CoreGraphics.framework */; };
@@ -25,6 +27,9 @@
 /* Begin PBXFileReference section */
 		68625D57142E515200267A4C /* WheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelView.h; sourceTree = "<group>"; };
 		68625D58142E515200267A4C /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
+		68625D5B142E654100267A4C /* PhotoWheelViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoWheelViewCell.h; sourceTree = "<group>"; };
+		68625D5C142E654100267A4C /* PhotoWheelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewCell.m; sourceTree = "<group>"; };
+		68625D5E142E673B00267A4C /* defaultPhoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = defaultPhoto.png; sourceTree = "<group>"; };
 		68F53542142E19A600797CD6 /* PhotoWheelPrototype.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoWheelPrototype.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68F53546142E19A600797CD6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68F53548142E19A600797CD6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -103,6 +108,9 @@
 				68F53577142E3BCB00797CD6 /* NameEditorViewController.xib */,
 				68625D57142E515200267A4C /* WheelView.h */,
 				68625D58142E515200267A4C /* WheelView.m */,
+				68625D5B142E654100267A4C /* PhotoWheelViewCell.h */,
+				68625D5C142E654100267A4C /* PhotoWheelViewCell.m */,
+				68625D5E142E673B00267A4C /* defaultPhoto.png */,
 				68F5354D142E19A600797CD6 /* Supporting Files */,
 			);
 			path = PhotoWheelPrototype;
@@ -174,6 +182,7 @@
 				68F53560142E19A600797CD6 /* MasterViewController.xib in Resources */,
 				68F53563142E19A600797CD6 /* DetailViewController.xib in Resources */,
 				68F53579142E3BCB00797CD6 /* NameEditorViewController.xib in Resources */,
+				68625D5F142E673B00267A4C /* defaultPhoto.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,6 +199,7 @@
 				68F5355D142E19A600797CD6 /* DetailViewController.m in Sources */,
 				68F53578142E3BCB00797CD6 /* NameEditorViewController.m in Sources */,
 				68625D59142E515200267A4C /* WheelView.m in Sources */,
+				68625D5D142E654100267A4C /* PhotoWheelViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
