@@ -20,6 +20,7 @@
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize masterPopoverController = _masterPopoverController;
 @synthesize data = _data;
+@synthesize wheelView = _wheelView;
 
 #pragma mark - Managing the detail item
 
