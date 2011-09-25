@@ -8,6 +8,8 @@
 
 #import "DetailViewController.h"
 #import "PhotoWheelViewCell.h"
+#import "PhotoAlbum.h"
+#import "Photo.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
@@ -28,6 +30,8 @@
 @synthesize selectedPhotoWheelViewCell = _selectedPhotoWheelViewCell;
 @synthesize actionSheet = _actionSheet;
 @synthesize imagePickerController = _imagePickerController;
+@synthesize photoAlbum = _photoAlbum;
+@synthesize selectedWheelViewCellIndex = _selectedWheelViewCellIndex;
 
 #pragma mark - Managing the detail item
 
@@ -265,6 +269,8 @@ didDismissWithButtonIndex:(NSInteger)buttonIndex
 - (void)cellTapped:(UIGestureRecognizer *)recognizer
 {
    [self setSelectedPhotoWheelViewCell:(PhotoWheelViewCell *)[recognizer view]];
+   [self setSelectedWheelViewCellIndex:
+    [[self data] indexOfObject:[self selectedPhotoWheelViewCell]]];
    
    BOOL hasCamera = 
    [UIImagePickerController 
@@ -304,8 +310,35 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
    [[self selectedPhotoWheelViewCell] setImage:image];
    
+   Photo *targetPhoto = [[[self photoAlbum] photos]
+                         objectAtIndex:[self selectedWheelViewCellIndex]];
+   [targetPhoto saveImage:image];
+   [targetPhoto setDateAdded:[NSDate date]];
+   
+   [[self photoAlbum] setKeyPhoto:targetPhoto];
+   
+   NSError *error = nil;
+   [[[self photoAlbum] managedObjectContext] save:&error];
+   
    if (takenWithCamera) {
       UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
+   }
+}
+
+- (void)setPhotoAlbum:(PhotoAlbum *)photoAlbum
+{
+   _photoAlbum = photoAlbum;
+   
+   UIImage *defaultPhoto = [UIImage imageNamed:@"defaultPhoto.png"];
+   for (NSUInteger index=0; index<10; index++) {
+      PhotoWheelViewCell *cell = [[self data] objectAtIndex:index];
+      Photo *photo = [[[self photoAlbum] photos] objectAtIndex:index];
+      UIImage *thumbnail = [photo thumbnailImage];
+      if (thumbnail != nil) {
+         [cell setImage:thumbnail];
+      } else {
+         [cell setImage:defaultPhoto];
+      }
    }
 }
 
