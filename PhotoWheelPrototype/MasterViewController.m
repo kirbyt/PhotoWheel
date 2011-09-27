@@ -174,7 +174,7 @@ accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
    [newController setDelegate:self];
    [newController setEditing:YES];
    [newController setIndexPath:indexPath];
-   NSString *name = [[self data] objectAtIndex:[indexPath row]];
+   NSString *name = [[[self data] objectAtIndex:[indexPath row]] valueForKey:@"name"];
    [newController setDefaultNameText:name];
    [newController setModalPresentationStyle:UIModalPresentationFormSheet];
    [self presentModalViewController:newController animated:YES];
