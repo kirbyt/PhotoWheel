@@ -17,6 +17,5 @@
 @dynamic thumbnailImageData;
 @dynamic largeImageData;
 @dynamic photoAlbum;
-@dynamic keyPhotoAlbum;
 
 @end

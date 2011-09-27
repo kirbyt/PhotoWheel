@@ -315,8 +315,6 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    [targetPhoto saveImage:image];
    [targetPhoto setDateAdded:[NSDate date]];
    
-   [[self photoAlbum] setKeyPhoto:targetPhoto];
-   
    NSError *error = nil;
    [[[self photoAlbum] managedObjectContext] save:&error];
    

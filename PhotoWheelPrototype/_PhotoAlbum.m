@@ -15,6 +15,5 @@
 @dynamic name;
 @dynamic dateAdded;
 @dynamic photos;
-@dynamic keyPhoto;
 
 @end
