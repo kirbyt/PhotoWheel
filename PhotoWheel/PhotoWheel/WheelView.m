@@ -10,7 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "SpinGestureRecognizer.h"
 
-#pragma mark WheelViewCell
+#pragma mark - WheelViewCell
 
 @interface WheelViewCell ()
 @property (nonatomic, assign) NSInteger indexInWheelView;
@@ -21,7 +21,7 @@
 @end
 
 
-#pragma mark WheelView
+#pragma mark - WheelView
 
 @interface WheelView ()
 @property (nonatomic, assign) CGFloat currentAngle;
