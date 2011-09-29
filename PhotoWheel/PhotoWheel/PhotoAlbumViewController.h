@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "GridView.h"
 
-@interface PhotoAlbumViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, GridViewDataSource>
+@interface PhotoAlbumViewController : UIViewController 
+<UIActionSheetDelegate, UIImagePickerControllerDelegate, 
+UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, 
+GridViewDataSource>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;

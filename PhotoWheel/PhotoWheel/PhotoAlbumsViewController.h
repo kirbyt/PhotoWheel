@@ -11,7 +11,8 @@
 
 @class PhotoAlbumViewController;
 
-@interface PhotoAlbumsViewController : UIViewController <NSFetchedResultsControllerDelegate, WheelViewDataSource, WheelViewDelegate>
+@interface PhotoAlbumsViewController : UIViewController 
+<NSFetchedResultsControllerDelegate, WheelViewDataSource, WheelViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) IBOutlet WheelView *wheelView;
