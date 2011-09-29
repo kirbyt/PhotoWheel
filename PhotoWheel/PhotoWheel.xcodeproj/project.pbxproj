@@ -21,7 +21,6 @@
 		68973F5A13FC049100AD8DAF /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 68973F4E13FC049100AD8DAF /* PhotoAlbum.m */; };
 		68973F5B13FC049100AD8DAF /* PhotoWheelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 68973F5013FC049100AD8DAF /* PhotoWheelViewCell.m */; };
 		68973F5C13FC049100AD8DAF /* SpinGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 68973F5213FC049100AD8DAF /* SpinGestureRecognizer.m */; };
-		68973F5D13FC049100AD8DAF /* UIImage+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 68973F5413FC049100AD8DAF /* UIImage+PWCategory.m */; };
 		68973F5E13FC049100AD8DAF /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68973F5613FC049100AD8DAF /* WheelView.m */; };
 		68D444B213EF21290076949E /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D4449E13EF21290076949E /* addphoto.png */; };
 		68D444B313EF21290076949E /* background-landscape-right-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D4449F13EF21290076949E /* background-landscape-right-grooved.png */; };
@@ -84,8 +83,6 @@
 		68973F5013FC049100AD8DAF /* PhotoWheelViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoWheelViewCell.m; sourceTree = "<group>"; };
 		68973F5113FC049100AD8DAF /* SpinGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinGestureRecognizer.h; sourceTree = "<group>"; };
 		68973F5213FC049100AD8DAF /* SpinGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinGestureRecognizer.m; sourceTree = "<group>"; };
-		68973F5313FC049100AD8DAF /* UIImage+PWCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PWCategory.h"; sourceTree = "<group>"; };
-		68973F5413FC049100AD8DAF /* UIImage+PWCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PWCategory.m"; sourceTree = "<group>"; };
 		68973F5513FC049100AD8DAF /* WheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelView.h; sourceTree = "<group>"; };
 		68973F5613FC049100AD8DAF /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
 		68D4449E13EF21290076949E /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
@@ -234,8 +231,6 @@
 				682A59681402077F00FFD6F3 /* PhotoWheelViewCell.xib */,
 				68973F5113FC049100AD8DAF /* SpinGestureRecognizer.h */,
 				68973F5213FC049100AD8DAF /* SpinGestureRecognizer.m */,
-				68973F5313FC049100AD8DAF /* UIImage+PWCategory.h */,
-				68973F5413FC049100AD8DAF /* UIImage+PWCategory.m */,
 				68973F5513FC049100AD8DAF /* WheelView.h */,
 				68973F5613FC049100AD8DAF /* WheelView.m */,
 				682A59641401EB1500FFD6F3 /* ClearToolbar.h */,
@@ -361,7 +356,6 @@
 				68973F5A13FC049100AD8DAF /* PhotoAlbum.m in Sources */,
 				68973F5B13FC049100AD8DAF /* PhotoWheelViewCell.m in Sources */,
 				68973F5C13FC049100AD8DAF /* SpinGestureRecognizer.m in Sources */,
-				68973F5D13FC049100AD8DAF /* UIImage+PWCategory.m in Sources */,
 				68973F5E13FC049100AD8DAF /* WheelView.m in Sources */,
 				682A59661401EB1500FFD6F3 /* ClearToolbar.m in Sources */,
 				6872202B1402CA02001A5D8F /* GridView.m in Sources */,
