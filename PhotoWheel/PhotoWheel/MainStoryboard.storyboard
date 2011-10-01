@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1923" systemVersion="11B26" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="35">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1934" systemVersion="11B26" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="35">
     <dependencies>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="919"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="931"/>
     </dependencies>
     <scenes>
         <scene sceneID="9">
@@ -37,10 +37,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="40"/>
                     <connections>
-                        <outlet property="backgroundImageView" destination="11" id="HvL-7L-GUy"/>
-                        <outlet property="infoButton" destination="15" id="4IG-hq-li4"/>
-                        <outlet property="textField" destination="THo-ZJ-9ZF" id="dtH-zc-Xqw"/>
-                        <outlet property="toolbar" destination="nHD-nf-mXc" id="Zz8-JA-3wo"/>
+                        <outlet property="backgroundImageView" destination="11" id="joP-y2-xrb"/>
+                        <outlet property="infoButton" destination="15" id="6sP-Kf-DCp"/>
                     </connections>
                 </viewController>
             </objects>
@@ -99,7 +97,7 @@
                         <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="vgm-Iq-zTO">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pdw-7D-aKC">
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
@@ -108,7 +106,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="41"/>
                     <connections>
-                        <outlet property="scrollView" destination="vgm-Iq-zTO" id="h6F-Xp-piF"/>
+                        <outlet property="scrollView" destination="Pdw-7D-aKC" id="oQt-6B-NaF"/>
                     </connections>
                 </viewController>
             </objects>
@@ -143,19 +141,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="716" height="717"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="nHD-nf-mXc" customClass="ClearToolbar">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="BYg-8L-4mf" customClass="ClearToolbar">
                                 <rect key="frame" x="9" y="6" width="698" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <items>
-                                    <barButtonItem systemItem="action" id="pAb-2g-8Fz">
+                                    <barButtonItem systemItem="action" id="TbA-dR-kXT">
                                         <connections>
-                                            <action selector="showActionMenu:" destination="42" id="dl6-aa-4nd"/>
+                                            <action selector="showActionMenu:" destination="42" id="AJv-uc-7wD"/>
                                         </connections>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="4qt-pi-8zv"/>
-                                    <barButtonItem style="plain" id="1T0-7m-O2l">
-                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tap to edit" textAlignment="center" minimumFontSize="17" id="THo-ZJ-9ZF">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8LR-tM-m7k"/>
+                                    <barButtonItem style="plain" id="c1V-8p-M9x">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tap to edit" textAlignment="center" minimumFontSize="17" id="yTf-IH-CSS">
                                             <rect key="frame" x="82" y="7" width="533" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -163,27 +161,27 @@
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
                                             <connections>
-                                                <outlet property="delegate" destination="42" id="rt2-pX-ney"/>
+                                                <outlet property="delegate" destination="42" id="EEZ-iX-urf"/>
                                             </connections>
                                         </textField>
                                     </barButtonItem>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="tXu-3g-vCW"/>
-                                    <barButtonItem systemItem="add" id="ZDp-6J-SVA">
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="iTy-2a-InX"/>
+                                    <barButtonItem systemItem="add" id="Jgk-Bz-Yta">
                                         <connections>
-                                            <action selector="addPhoto:" destination="42" id="EfR-L0-tzX"/>
+                                            <action selector="addPhoto:" destination="42" id="iUB-ZU-pn4"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <view contentMode="scaleToFill" id="htM-SB-wey" customClass="GridView">
+                            <view contentMode="scaleToFill" id="rcP-0A-Mjr" customClass="GridView">
                                 <rect key="frame" x="9" y="51" width="698" height="597"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="42" id="1kv-1O-gO6"/>
+                                    <outlet property="dataSource" destination="42" id="Cvp-hJ-JGN"/>
                                 </connections>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stack-viewer-shadow.png" id="3a4-yE-uPq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stack-viewer-shadow.png" id="XVS-eo-L2R">
                                 <rect key="frame" x="9" y="51" width="698" height="8"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
@@ -191,13 +189,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="addButton" destination="ZDp-6J-SVA" id="pBB-pa-WPz"/>
-                        <outlet property="backgroundImageView" destination="52" id="PZK-iz-vdG"/>
-                        <outlet property="gridView" destination="htM-SB-wey" id="UeD-Lc-Riz"/>
-                        <outlet property="shadowImageView" destination="3a4-yE-uPq" id="ec0-68-aeo"/>
-                        <outlet property="textField" destination="THo-ZJ-9ZF" id="tU0-Kj-fPP"/>
-                        <outlet property="toolbar" destination="nHD-nf-mXc" id="XhO-3E-jCn"/>
-                        <segue destination="29" kind="custom" identifier="PushPhotoBrowser" customClass="CustomPushSegue" id="5p7-l6-lUq"/>
+                        <outlet property="addButton" destination="Jgk-Bz-Yta" id="uEL-pt-ETK"/>
+                        <outlet property="backgroundImageView" destination="52" id="Xhh-xB-KKZ"/>
+                        <outlet property="gridView" destination="rcP-0A-Mjr" id="dw3-ab-pQm"/>
+                        <outlet property="shadowImageView" destination="XVS-eo-L2R" id="abC-pK-ZHg"/>
+                        <outlet property="textField" destination="yTf-IH-CSS" id="XGl-3W-dCp"/>
+                        <outlet property="toolbar" destination="BYg-8L-4mf" id="nK3-xS-Aui"/>
+                        <segue destination="29" kind="custom" identifier="PushPhotoBrowser" customClass="CustomPushSegue" id="hmP-y7-EEC"/>
                     </connections>
                 </viewController>
             </objects>
@@ -215,13 +213,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="551" height="550"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" id="55" customClass="WheelView">
+                            <view contentMode="scaleToFill" id="Kwf-pf-Zvu" customClass="WheelView">
                                 <rect key="frame" x="31" y="33" width="488" height="484"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="46" id="58"/>
-                                    <outlet property="delegate" destination="46" id="bUe-dQ-pqu"/>
+                                    <outlet property="dataSource" destination="46" id="th9-vu-Ows"/>
+                                    <outlet property="delegate" destination="46" id="zX8-Kj-api"/>
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="51">
@@ -236,14 +234,14 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="addPhotoAlbum:" destination="46" eventType="touchUpInside" id="4d6-oi-1p3"/>
+                                    <action selector="addPhotoAlbum:" destination="46" eventType="touchUpInside" id="ZJE-m7-QGI"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <outlet property="wheelView" destination="55" id="MUD-JY-0cq"/>
+                        <outlet property="wheelView" destination="Kwf-pf-Zvu" id="pLT-VG-2X2"/>
                     </connections>
                 </viewController>
             </objects>
