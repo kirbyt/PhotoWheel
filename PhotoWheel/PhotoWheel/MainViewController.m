@@ -17,17 +17,21 @@
 {
    [super viewDidLoad];
    
-   AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-   NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+   AppDelegate *appDelegate = 
+      (AppDelegate *)[[UIApplication sharedApplication] delegate];      // 1
+   NSManagedObjectContext *managedObjectContext = 
+      [appDelegate managedObjectContext];                               // 2
    
    UIStoryboard *storyboard = [self storyboard];
    
-   PhotoAlbumsViewController *photoAlbumsScene = [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumsScene"];
-   [photoAlbumsScene setManagedObjectContext:managedObjectContext];
+   PhotoAlbumsViewController *photoAlbumsScene = 
+      [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumsScene"];
+   [photoAlbumsScene setManagedObjectContext:managedObjectContext];     // 3
    [self addChildViewController:photoAlbumsScene];
    [photoAlbumsScene didMoveToParentViewController:self];
-
-   PhotoAlbumViewController *photoAlbumScene = [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
+   
+   PhotoAlbumViewController *photoAlbumScene = 
+      [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
    [self addChildViewController:photoAlbumScene];
    [photoAlbumScene didMoveToParentViewController:self];
    
