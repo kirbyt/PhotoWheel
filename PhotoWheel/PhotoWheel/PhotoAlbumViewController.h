@@ -19,7 +19,7 @@ GridViewDataSource>
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addButton;
-@property (strong, nonatomic) IBOutlet GridView *gridView;
+@property (nonatomic, strong) IBOutlet GridView *gridView;
 
 - (void)reload;
 - (IBAction)showActionMenu:(id)sender;
