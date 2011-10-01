@@ -2,99 +2,90 @@
 //  PhotoBrowserViewController.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 8/30/11.
+//  Created by Kirby Turner on 10/1/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import "PhotoBrowserViewController.h"
-#import "PhotoBrowserPhotoView.h"
-#import "ClearToolbar.h"
+#import "PhotoBrowserPhotoView.h"                                         // 2
+#import "ClearToolbar.h"                                                // 3
 
-#define ACTIONSHEET_TAG_DELETE 1
-#define ACTIONSHEET_TAG_ACTIONS 2
+#define ACTIONSHEET_TAG_DELETE 1                                        // 4
+#define ACTIONSHEET_TAG_ACTIONS 2                                       // 5
 
 @interface PhotoBrowserViewController ()
-@property (nonatomic, assign) NSInteger currentIndex;
-@property (nonatomic, strong) NSMutableArray *photoViewCache;
-@property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden;
-@property (nonatomic, strong) NSTimer *chromeHideTimer;
-@property (nonatomic, assign) CGFloat statusBarHeight;
-@property (nonatomic, strong) UIBarButtonItem *actionButton;
-@property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
-@property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
+@property (nonatomic, assign) NSInteger currentIndex;                   // 1
+@property (nonatomic, strong) NSMutableArray *photoViewCache;           // 2
+@property (nonatomic, strong) UIBarButtonItem *actionButton;            // 6
 
-- (void)addButtonsToNavigationBar;
-- (void)initPhotoViewCache;
+- (void)initPhotoViewCache;                                             // 3
 - (void)setScrollViewContentSize;
 - (void)scrollToIndex:(NSInteger)index;
 - (void)setTitleWithCurrentIndex;
 - (CGRect)frameForPagingScrollView;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
-
-- (void)toggleChrome:(BOOL)hide;
-- (void)hideChrome;
-- (void)startChromeDisplayTimer;
-- (void)cancelChromeDisplayTimer;
+- (void)addButtonsToNavigationBar;                                      // 7
 
 @end
 
 @implementation PhotoBrowserViewController
 
-@synthesize scrollView = scrollView_;
-@synthesize delegate = delegate_;
-@synthesize startAtIndex = startAtIndex_;
-@synthesize currentIndex = currentIndex_;
-@synthesize photoViewCache = photoViewCache_;
-@synthesize chromeHidden = chromeHidden_;
-@synthesize chromeHideTimer = chromeHideTimer_;
-@synthesize statusBarHeight = statusBarHeight_;
-@synthesize actionButton = actionButton_;
-@synthesize firstVisiblePageIndexBeforeRotation = firstVisiblePageIndexBeforeRotation_;
-@synthesize percentScrolledIntoFirstVisiblePage = percentScrolledIntoFirstVisiblePage_;
+@synthesize scrollView = _scrollView;                                   // 4
+@synthesize delegate = _delegate;
+@synthesize startAtIndex = _startAtIndex;
+@synthesize currentIndex = _currentIndex;
+@synthesize photoViewCache = _photoViewCache;
+@synthesize chromeHidden = _chromeHidden;                                 // 9
+@synthesize chromeHideTimer = _chromeHideTimer;                           // 10
+@synthesize statusBarHeight = _statusBarHeight;                           // 11
+@synthesize actionButton = _actionButton;                               // 8
 
-- (void)viewDidLoad
+- (void)viewDidLoad                                                     // 5
 {
    [super viewDidLoad];
    
    // Make sure to set wantsFullScreenLayout or the photo
    // will not display behind the status bar.
-   [self setWantsFullScreenLayout:YES];
+   [self setWantsFullScreenLayout:YES];                                 // 6
    
-   // Must store the status bar size while it is still visible.
-   CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-   if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
-      [self setStatusBarHeight:statusBarFrame.size.width];
-   } else {
-      [self setStatusBarHeight:statusBarFrame.size.height];
-   }
-   
-   // Set the view's frame size. This ensures the scroll view
-   // autoresizing correctly and avoids surprises when retrieving
+   // Set the view's frame size. This ensures that the scroll view
+   // autoresizes correctly and avoids surprises when retrieving
    // the scroll view's bounds later.
-   CGRect frame = [[UIScreen mainScreen] bounds];
+   CGRect frame = [[UIScreen mainScreen] bounds];                       // 7
    [[self view] setFrame:frame];
    
-   UIScrollView *scrollView = [self scrollView];
-   [scrollView setFrame:[self frameForPagingScrollView]];   // Set the initial size.
+   UIScrollView *scrollView = [self scrollView];                        // 8
+   // Set the initial size.
+   [scrollView setFrame:[self frameForPagingScrollView]];
    [scrollView setDelegate:self];
    [scrollView setBackgroundColor:[UIColor blackColor]];
-   [scrollView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+   [scrollView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | 
+    UIViewAutoresizingFlexibleHeight];
    [scrollView setAutoresizesSubviews:YES];
    [scrollView setPagingEnabled:YES];
    [scrollView setShowsVerticalScrollIndicator:NO];
    [scrollView setShowsHorizontalScrollIndicator:NO];
    
-   [self addButtonsToNavigationBar];
-   [self initPhotoViewCache];
+   [self addButtonsToNavigationBar];                                    // 9
+   [self initPhotoViewCache];                                           // 9
+
+   // Must store the status bar size while it is still visible.
+   CGRect statusBarFrame = [[UIApplication sharedApplication] 
+                            statusBarFrame];                              // 12
+   if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
+      [self setStatusBarHeight:statusBarFrame.size.width];
+   } else {
+      [self setStatusBarHeight:statusBarFrame.size.height];
+   }
 }
 
-- (void)viewDidUnload
+- (void)viewDidUnload                                                   // 10
 {
    [self setScrollView:nil];
    [super viewDidUnload];
 }
 
-- (void)viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated                                   // 11
 {
    [super viewWillAppear:animated];
    [self setScrollViewContentSize];
@@ -102,58 +93,74 @@
    [self scrollToIndex:[self startAtIndex]];
    [self setTitleWithCurrentIndex];
    
-   [self startChromeDisplayTimer];
+   [self startChromeDisplayTimer];                                        // 13
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated                                  // 14
 {
    [self cancelChromeDisplayTimer];
    [super viewWillDisappear:animated];
 }
 
+#pragma mark - Delegate callback helpers
 
-#pragma mark - Delegate Callback Helpers
-
-- (NSInteger)numberOfPhotos
+- (NSInteger)numberOfPhotos                                             // 12
 {
    NSInteger numberOfPhotos = 0;
    id<PhotoBrowserViewControllerDelegate> delegate = [self delegate];
-   if (delegate && [delegate respondsToSelector:@selector(photoBrowserViewControllerNumberOfPhotos:)]) {
+   if (delegate && [delegate respondsToSelector:
+                    @selector(photoBrowserViewControllerNumberOfPhotos:)]) 
+   {
       numberOfPhotos = [delegate photoBrowserViewControllerNumberOfPhotos:self];
    }
    return numberOfPhotos;
 }
 
-- (UIImage*)imageAtIndex:(NSInteger)index
+- (UIImage*)imageAtIndex:(NSInteger)index                               // 13
 {
    UIImage *image = nil;
    id<PhotoBrowserViewControllerDelegate> delegate = [self delegate];
-   if (delegate && [delegate respondsToSelector:@selector(photoBrowserViewController:imageAtIndex:)]) {
+   if (delegate && [delegate respondsToSelector:
+                    @selector(photoBrowserViewController:imageAtIndex:)]) 
+   {
       image = [delegate photoBrowserViewController:self imageAtIndex:index];
    }
    return image;
 }
 
-#pragma mark - Helper Methods
+#pragma mark - Helper methods
 
-- (void)addButtonsToNavigationBar
+- (void)addButtonsToNavigationBar                                       // 10
 {
    // Add buttons to the navigation bar. The nav bar allows
-   // one button on the left and one on the right. Optionally
+   // one button on the left and one on the right. Optionally,
    // a custom view can be used instead of a button. To get
    // multiple buttons we must create a short toolbar containing
    // the buttons we want.
    
-   UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deletePhoto:)];
+   UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] 
+                       initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
+                       target:self 
+                       action:@selector(deletePhoto:)];
    [trashButton setStyle:UIBarButtonItemStyleBordered];
    
-   UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionMenu:)];
+   UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] 
+                        initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
+                        target:self 
+                        action:@selector(showActionMenu:)];
    [actionButton setStyle:UIBarButtonItemStyleBordered];
    [self setActionButton:actionButton];
    
-   UIBarButtonItem *slideshowButton = [[UIBarButtonItem alloc] initWithTitle:@"Slideshow" style:UIBarButtonItemStyleBordered target:self action:@selector(slideshow:)];
+   UIBarButtonItem *slideshowButton = [[UIBarButtonItem alloc] 
+                                       initWithTitle:@"Slideshow" 
+                                       style:UIBarButtonItemStyleBordered 
+                                       target:self 
+                                       action:@selector(slideshow:)];
    
-   UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+   UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] 
+                initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
+                target:nil 
+                action:nil];
    
    
    NSMutableArray *toolbarItems = [[NSMutableArray alloc] initWithCapacity:3];
@@ -162,31 +169,35 @@
    [toolbarItems addObject:actionButton];
    [toolbarItems addObject:trashButton];
    
-   UIToolbar *toolbar = [[ClearToolbar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+   UIToolbar *toolbar = [[ClearToolbar alloc] 
+                         initWithFrame:CGRectMake(0, 0, 200, 44)];
    [toolbar setBackgroundColor:[UIColor clearColor]];
    [toolbar setBarStyle:UIBarStyleBlack];
    [toolbar setTranslucent:YES];
    
    [toolbar setItems:toolbarItems];
    
-   UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
-   [[self navigationItem] setRightBarButtonItem:customBarButtonItem animated:YES];
+   UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] 
+                                           initWithCustomView:toolbar];
+   [[self navigationItem] setRightBarButtonItem:customBarButtonItem 
+                                       animated:YES];
 }
 
-- (void)initPhotoViewCache
+- (void)initPhotoViewCache                                              // 14
 {
-   // Setup our photo view cache. We only keep 3 views in
+   // Set up the photo's view cache. We keep only three views in
    // memory. NSNull is used as a placeholder for the other
    // elements in the view cache array.
    
    NSInteger numberOfPhotos = [self numberOfPhotos];;
-   self.photoViewCache = [[NSMutableArray alloc] initWithCapacity:numberOfPhotos];
+   [self setPhotoViewCache:
+    [[NSMutableArray alloc] initWithCapacity:numberOfPhotos]];
    for (int i=0; i < numberOfPhotos; i++) {
       [self.photoViewCache addObject:[NSNull null]];
    }
 }
 
-- (void)setScrollViewContentSize
+- (void)setScrollViewContentSize                                        // 15
 {
    NSInteger pageCount = [self numberOfPhotos];
    if (pageCount == 0) {
@@ -195,11 +206,13 @@
    
    CGRect bounds = [[self scrollView] bounds];
    CGSize size = CGSizeMake(bounds.size.width * pageCount, 
-                            bounds.size.height / 2);   // Cut in half to prevent horizontal scrolling.
+                            // Divide in half to prevent horizontal
+                            // scrolling.
+                            bounds.size.height / 2);
    [[self scrollView] setContentSize:size];
 }
 
-- (void)scrollToIndex:(NSInteger)index
+- (void)scrollToIndex:(NSInteger)index                                  // 16
 {
    CGRect bounds = [[self scrollView] bounds];
    bounds.origin.x = bounds.size.width * index;
@@ -207,7 +220,7 @@
    [[self scrollView] scrollRectToVisible:bounds animated:NO];
 }
 
-- (void)setTitleWithCurrentIndex
+- (void)setTitleWithCurrentIndex                                        // 17
 {
    NSInteger index = [self currentIndex] + 1;
    if (index < 1) {
@@ -216,14 +229,15 @@
       index = 1;
    }
    NSInteger count = [self numberOfPhotos];
-   NSString *title = title = [NSString stringWithFormat:@"%1$i of %2$i", index, count, nil];
+   NSString *title = title = [NSString stringWithFormat:@"%1$i of %2$i", 
+                              index, count, nil];
    [self setTitle:title];
 }
 
 #pragma mark - Frame calculations
 #define PADDING  20
 
-- (CGRect)frameForPagingScrollView
+- (CGRect)frameForPagingScrollView                                      // 18
 {
    CGRect frame = [[UIScreen mainScreen] bounds];
    frame.origin.x -= PADDING;
@@ -231,7 +245,7 @@
    return frame;
 }
 
-- (CGRect)frameForPageAtIndex:(NSUInteger)index
+- (CGRect)frameForPageAtIndex:(NSUInteger)index                         // 19
 {
    CGRect bounds = [[self scrollView] bounds];
    CGRect pageFrame = bounds;
@@ -240,23 +254,24 @@
    return pageFrame;
 }
 
-#pragma mark - Page Management
+#pragma mark - Page management
 
-- (void)loadPage:(NSInteger)index
+- (void)loadPage:(NSInteger)index                                       // 20
 {
    if (index < 0 || index >= [self numberOfPhotos]) {
       return;
    }
    
    id currentView = [[self photoViewCache] objectAtIndex:index];
-   if ([currentView isKindOfClass:[PhotoBrowserPhotoView class]] == NO) {
+   if ([currentView isKindOfClass:[PhotoBrowserPhotoView class]] == NO) { // 3
       // Load the photo view.
       CGRect frame = [self frameForPageAtIndex:index];
-      PhotoBrowserPhotoView *newView = [[PhotoBrowserPhotoView alloc] initWithFrame:frame];
-      [newView setBackgroundColor:[UIColor clearColor]];
-      [newView setImage:[self imageAtIndex:index]];
-      [newView setPhotoBrowserViewController:self];
-      [newView setIndex:index];
+      PhotoBrowserPhotoView *newView = [[PhotoBrowserPhotoView alloc] 
+                                        initWithFrame:frame];             // 4
+      [newView setBackgroundColor:[UIColor clearColor]];                  // 5
+      [newView setImage:[self imageAtIndex:index]];                       // 6
+      [newView setPhotoBrowserViewController:self];                       // 7
+      [newView setIndex:index];                                           // 8
       
       [[self scrollView] addSubview:newView];
       [[self photoViewCache] replaceObjectAtIndex:index withObject:newView];
@@ -265,59 +280,59 @@
    }
 }
 
-- (void)unloadPage:(NSInteger)index
+- (void)unloadPage:(NSInteger)index                                     // 21
 {
    if (index < 0 || index >= [self numberOfPhotos]) {
       return;
    }
    
    id currentView = [[self photoViewCache] objectAtIndex:index];
-   if ([currentView isKindOfClass:[PhotoBrowserPhotoView class]]) {
+   if ([currentView isKindOfClass:[PhotoBrowserPhotoView class]]) {       // 9
       [currentView removeFromSuperview];
       [[self photoViewCache] replaceObjectAtIndex:index withObject:[NSNull null]];
    }
 }
 
-- (void)setCurrentIndex:(NSInteger)newIndex
+- (void)setCurrentIndex:(NSInteger)newIndex                             // 22
 {
-   currentIndex_ = newIndex;
+   _currentIndex = newIndex;
    
-   [self loadPage:currentIndex_];
-   [self loadPage:currentIndex_ + 1];
-   [self loadPage:currentIndex_ - 1];
-   [self unloadPage:currentIndex_ + 2];
-   [self unloadPage:currentIndex_ - 2];
+   [self loadPage:_currentIndex];
+   [self loadPage:_currentIndex + 1];
+   [self loadPage:_currentIndex - 1];
+   [self unloadPage:_currentIndex + 2];
+   [self unloadPage:_currentIndex - 2];
    
    [self setTitleWithCurrentIndex];
 }
 
 #pragma mark - UIScrollViewDelegate
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView                  // 23
 {
    if ([scrollView isScrollEnabled]) {
       CGFloat pageWidth = scrollView.bounds.size.width;
       float fractionalPage = scrollView.contentOffset.x / pageWidth;
       NSInteger page = floor(fractionalPage);
-      if (page != currentIndex_) {
+      if (page != [self currentIndex]) {
          [self setCurrentIndex:page];
       }
    }
 }
 
-- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView            // 18
 {
    [self hideChrome];
 }
 
-#pragma mark - Chrome Helpers
+#pragma mark - Chrome helpers
 
-- (void)toggleChromeDisplay
+- (void)toggleChromeDisplay                                               // 19
 {
    [self toggleChrome:![self isChromeHidden]];
 }
 
-- (void)toggleChrome:(BOOL)hide
+- (void)toggleChrome:(BOOL)hide                                           // 20
 {
    [self setChromeHidden:hide];
    if (hide) {
@@ -327,8 +342,6 @@
    
    CGFloat alpha = hide ? 0.0 : 1.0;
    
-   // Must set the navigation bar's alpha, otherwise the photo
-   // view will be pushed until the navigation bar.
    UINavigationBar *navbar = [[self navigationController] navigationBar];
    [navbar setAlpha:alpha];
    
@@ -343,7 +356,7 @@
    }
 }
 
-- (void)hideChrome
+- (void)hideChrome                                                        // 21
 {
    NSTimer *timer = [self chromeHideTimer];
    if (timer && [timer isValid]) {
@@ -353,14 +366,18 @@
    [self toggleChrome:YES];
 }
 
-- (void)startChromeDisplayTimer
+- (void)startChromeDisplayTimer                                           // 22
 {
    [self cancelChromeDisplayTimer];
-   NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(hideChrome) userInfo:nil repeats:NO];
+   NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 
+                                                     target:self 
+                                                   selector:@selector(hideChrome) 
+                                                   userInfo:nil 
+                                                    repeats:NO];
    [self setChromeHideTimer:timer];
 }
 
-- (void)cancelChromeDisplayTimer
+- (void)cancelChromeDisplayTimer                                          // 23
 {
    if ([self chromeHideTimer]) {
       [[self chromeHideTimer] invalidate];
@@ -368,19 +385,21 @@
    }
 }
 
-#pragma mark - Gesture Handlers
+#pragma mark - Gesture handlers
 
-- (void)imageTapped:(UITapGestureRecognizer *)recognizer
+- (void)imageTapped:(UITapGestureRecognizer *)recognizer                  // 24
 {
    [self toggleChromeDisplay];
 }
 
 #pragma mark - Actions
 
-- (void)deletePhotoConfirmed
+- (void)deletePhotoConfirmed                                            // 11
 {
    id<PhotoBrowserViewControllerDelegate> delegate = [self delegate];
-   if (delegate && [delegate respondsToSelector:@selector(photoBrowserViewController:deleteImageAtIndex:)]) {
+   if (delegate && [delegate respondsToSelector:
+                    @selector(photoBrowserViewController:deleteImageAtIndex:)]) 
+   {
       NSInteger count = [self numberOfPhotos];
       NSInteger indexToDelete = [self currentIndex];
       [self unloadPage:indexToDelete];
@@ -401,27 +420,32 @@
    }
 }
 
-- (void)deletePhoto:(id)sender
+- (void)deletePhoto:(id)sender                                          // 12
 {
    [self cancelChromeDisplayTimer];
-   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Delete Photo" otherButtonTitles:nil, nil];
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+                                                            delegate:self 
+                                                   cancelButtonTitle:nil 
+                                              destructiveButtonTitle:@"Delete Photo"
+                                                   otherButtonTitles:nil, nil];
    [actionSheet setTag:ACTIONSHEET_TAG_DELETE];
    [actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
-- (void)showActionMenu:(id)sender
+- (void)showActionMenu:(id)sender                                       // 13
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-- (void)slideshow:(id)sender
+- (void)slideshow:(id)sender                                            // 14
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-#pragma mark - UIActionSheetDelegate Methods
+#pragma mark - UIActionSheetDelegate methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet 
+clickedButtonAtIndex:(NSInteger)buttonIndex                             // 15
 {
    [self startChromeDisplayTimer];
    
@@ -435,82 +459,6 @@
    if ([actionSheet tag] == ACTIONSHEET_TAG_DELETE) {
       [self deletePhotoConfirmed];
    }
-}
-
-#pragma mark - Rotation Support
-/**
- **
- ** Portions of the rotation code comes from the Apple sample project PhotoScroller available at:
- ** http://developer.apple.com/library/prerelease/ios/#samplecode/PhotoScroller/Introduction/Intro.html
- **
- **/
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-   return YES;
-}
-
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
-                                duration:(NSTimeInterval)duration 
-{
-   [[self scrollView] setScrollEnabled:NO];
-   
-   // Here, our pagingScrollView bounds have not yet been updated for the 
-   // new interface orientation. So this is a good place to calculate the 
-   // content offset that we will need in the new orientation
-   CGFloat offset = [self scrollView].contentOffset.x;
-   CGFloat pageWidth = [self scrollView].bounds.size.width;
-   
-   if (offset >= 0) {
-      [self setFirstVisiblePageIndexBeforeRotation:floorf(offset / pageWidth)];
-      [self setPercentScrolledIntoFirstVisiblePage:(offset - ([self firstVisiblePageIndexBeforeRotation] * pageWidth)) / pageWidth];
-   } else {
-      [self setFirstVisiblePageIndexBeforeRotation:0];
-      [self setPercentScrolledIntoFirstVisiblePage:offset / pageWidth];
-   }
-}
-
-- (void)layoutScrollViewSubviews
-{
-   [self setScrollViewContentSize];
-   
-   NSArray *subviews = [[self scrollView] subviews];
-   
-   for (PhotoBrowserPhotoView *view in subviews) {
-      CGPoint restorePoint = [view pointToCenterAfterRotation];
-      CGFloat restoreScale = [view scaleToRestoreAfterRotation];
-      [view setFrame:[self frameForPageAtIndex:[view index]]];
-      [view setMaxMinZoomScalesForCurrentBounds];
-      [view restoreCenterPoint:restorePoint scale:restoreScale];
-   }
-   
-   // adjust contentOffset to preserve page location based on values collected prior to location
-   CGRect bounds = [[self scrollView] bounds];
-   CGFloat pageWidth = bounds.size.width;
-   CGFloat newOffset = ([self firstVisiblePageIndexBeforeRotation] * pageWidth) + ([self percentScrolledIntoFirstVisiblePage] * pageWidth);
-   [[self scrollView] setContentOffset:CGPointMake(newOffset, 0)];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                         duration:(NSTimeInterval)duration 
-{
-   [self layoutScrollViewSubviews];
-   
-   // If the chrome is hidden then the navigation
-   // bar must be repositioned under the status
-   // bar.
-   if ([self isChromeHidden]) {
-      UINavigationBar *navbar = [[self navigationController] navigationBar];
-      CGRect frame = [navbar frame];
-      frame.origin.y = [self statusBarHeight];
-      [navbar setFrame:frame];
-   }
-}
-
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation 
-{
-   [[self scrollView] setScrollEnabled:YES];
-   [self startChromeDisplayTimer];
 }
 
 @end

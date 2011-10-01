@@ -2,19 +2,17 @@
 //  main.m
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 6/15/11.
-//  Copyright 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 9/24/11.
+//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-#import "PhotoWheelPrototypeAppDelegate.h"
+#import "AppDelegate.h"
 
 int main(int argc, char *argv[])
 {
-   int retVal = 0;
    @autoreleasepool {
-       retVal = UIApplicationMain(argc, argv, nil, NSStringFromClass([PhotoWheelPrototypeAppDelegate class]));
+       return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
    }
-   return retVal;
 }

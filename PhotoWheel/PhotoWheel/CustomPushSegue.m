@@ -8,44 +8,51 @@
 
 #import "CustomPushSegue.h"
 #import "UIView+PWCategory.h"
-#import "PhotoAlbumViewController.h"
+#import "PhotoAlbumViewController.h"                                    // 1
 
 @implementation CustomPushSegue
 
 - (void)perform
 {
-   id sourceViewController = [self sourceViewController];
+   id sourceViewController = [self sourceViewController];               // 2
    
    UIView *sourceView = [[sourceViewController parentViewController] view];
-   UIImageView *sourceImageView = [[UIImageView alloc] initWithImage:[sourceView pw_imageSnapshot]];
+   UIImageView *sourceImageView = [[UIImageView alloc] 
+                                   initWithImage:[sourceView pw_imageSnapshot]];
    
-   BOOL isLandscape = UIInterfaceOrientationIsLandscape([sourceViewController interfaceOrientation]);
+   BOOL isLandscape = UIInterfaceOrientationIsLandscape(
+      [sourceViewController interfaceOrientation]);                     // 3
    
-   CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+   CGRect statusBarFrame = [[UIApplication sharedApplication] 
+                            statusBarFrame];                            // 4
    CGFloat statusBarHeight;
-   if (isLandscape) {
+   if (isLandscape) {                                                   // 5
       statusBarHeight = statusBarFrame.size.width;
    } else {
       statusBarHeight = statusBarFrame.size.height;
    }
    CGRect newFrame = CGRectOffset([sourceImageView frame], 0, statusBarHeight);
-   [sourceImageView setFrame:newFrame];
+   [sourceImageView setFrame:newFrame];                                 // 6
    
    
    CGRect destinationFrame = [[UIScreen mainScreen] bounds];
-   if (isLandscape) {
-      destinationFrame.size = CGSizeMake(destinationFrame.size.height, destinationFrame.size.width);
+   if (isLandscape) {                                                   // 7
+      destinationFrame.size = CGSizeMake(destinationFrame.size.height, 
+                                         destinationFrame.size.width);
    }
    
    UIImage *destinationImage = [sourceViewController selectedImage];
-   UIImageView *destinationImageView = [[UIImageView alloc] initWithImage:destinationImage];
+   UIImageView *destinationImageView = [[UIImageView alloc] 
+                                        initWithImage:destinationImage];
    [destinationImageView setContentMode:UIViewContentModeScaleAspectFit];
    [destinationImageView setBackgroundColor:[UIColor blackColor]];
    [destinationImageView setFrame:[sourceViewController selectedCellFrame]];
    [destinationImageView setAlpha:0.3];
    
-   UINavigationController *navController = [sourceViewController navigationController];
-   [navController pushViewController:[self destinationViewController] animated:NO];
+   UINavigationController *navController = 
+      [sourceViewController navigationController];
+   [navController pushViewController:[self destinationViewController] 
+                            animated:NO];
    
    UINavigationBar *navBar = [navController navigationBar];
    [navController setNavigationBarHidden:NO];
