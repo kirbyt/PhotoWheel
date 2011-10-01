@@ -22,6 +22,8 @@
 		689199B013F5B6530037CBAC /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199AF13F5B6530037CBAC /* UIView+PWCategory.m */; };
 		689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689199B113F5BFFA0037CBAC /* CoreGraphics.framework */; };
 		689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199B413F5C8320037CBAC /* CustomNavigationController.m */; };
+		68C8C6C01437725C00480F4E /* PhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C8C6BF1437725C00480F4E /* PhotoBrowserViewController.m */; };
+		68C8C6C414377AF900480F4E /* PhotoBrowserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C8C6C314377AF900480F4E /* PhotoBrowserPhotoView.m */; };
 		68D444B213EF21290076949E /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D4449E13EF21290076949E /* addphoto.png */; };
 		68D444B313EF21290076949E /* background-landscape-right-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D4449F13EF21290076949E /* background-landscape-right-grooved.png */; };
 		68D444B413EF21290076949E /* background-portrait-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 68D444A013EF21290076949E /* background-portrait-grooved.png */; };
@@ -85,6 +87,10 @@
 		689199B113F5BFFA0037CBAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		689199B313F5C8320037CBAC /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		689199B413F5C8320037CBAC /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		68C8C6BE1437725C00480F4E /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
+		68C8C6BF1437725C00480F4E /* PhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserViewController.m; sourceTree = "<group>"; };
+		68C8C6C214377AF900480F4E /* PhotoBrowserPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserPhotoView.h; sourceTree = "<group>"; };
+		68C8C6C314377AF900480F4E /* PhotoBrowserPhotoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserPhotoView.m; sourceTree = "<group>"; };
 		68D4449E13EF21290076949E /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
 		68D4449F13EF21290076949E /* background-landscape-right-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-landscape-right-grooved.png"; sourceTree = "<group>"; };
 		68D444A013EF21290076949E /* background-portrait-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-portrait-grooved.png"; sourceTree = "<group>"; };
@@ -239,6 +245,10 @@
 				682BC4CF14351A9000286C9D /* GridView.m */,
 				682BC4D114351EFF00286C9D /* ImageGridViewCell.h */,
 				682BC4D214351EFF00286C9D /* ImageGridViewCell.m */,
+				68C8C6BE1437725C00480F4E /* PhotoBrowserViewController.h */,
+				68C8C6BF1437725C00480F4E /* PhotoBrowserViewController.m */,
+				68C8C6C214377AF900480F4E /* PhotoBrowserPhotoView.h */,
+				68C8C6C314377AF900480F4E /* PhotoBrowserPhotoView.m */,
 				68D4449D13EF21290076949E /* images */,
 				68FA6ADC13EEF3BB00E046BD /* Supporting Files */,
 			);
@@ -360,6 +370,8 @@
 				682BC4C71434F0C800286C9D /* ClearToolbar.m in Sources */,
 				682BC4D014351A9100286C9D /* GridView.m in Sources */,
 				682BC4D314351EFF00286C9D /* ImageGridViewCell.m in Sources */,
+				68C8C6C01437725C00480F4E /* PhotoBrowserViewController.m in Sources */,
+				68C8C6C414377AF900480F4E /* PhotoBrowserPhotoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
