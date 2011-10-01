@@ -72,31 +72,29 @@
 
 - (NSFetchedResultsController *)fetchedResultsController               // 8
 {
-   if (_fetchedResultsController) {                                   // 9
+   if (_fetchedResultsController) {                                    // 9
       return _fetchedResultsController;
    }
    
    NSString *cacheName = NSStringFromClass([self class]);              // 10
-   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];       // 11
-   NSEntityDescription *entityDescription = 
-      [NSEntityDescription entityForName:@"PhotoAlbum" 
-                  inManagedObjectContext:[self managedObjectContext]]; // 12
-   [fetchRequest setEntity:entityDescription];
+   NSFetchRequest *fetchRequest = 
+      [NSFetchRequest fetchRequestWithEntityName:@"PhotoAlbum"];       // 11
    
    NSSortDescriptor *sortDescriptor = 
       [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" 
-                                    ascending:YES];                    // 13
+                                    ascending:YES];                    // 12
    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-   
-   self.fetchedResultsController = [[NSFetchedResultsController alloc] 
-                              initWithFetchRequest:fetchRequest 
-                              managedObjectContext:[self managedObjectContext] 
-                              sectionNameKeyPath:nil 
-                              cacheName:cacheName];                    // 14
-   [self.fetchedResultsController setDelegate:self];                   // 15
+
+   NSFetchedResultsController *newFetchedResultsController = 
+      [[NSFetchedResultsController alloc] 
+       initWithFetchRequest:fetchRequest 
+       managedObjectContext:[self managedObjectContext] 
+         sectionNameKeyPath:nil 
+                  cacheName:cacheName];                                // 13
+   [newFetchedResultsController setDelegate:self];                     // 14
    
    NSError *error = nil;
-   if (![[self fetchedResultsController] performFetch:&error])         // 16
+   if (![newFetchedResultsController performFetch:&error])             // 15
    {
       /*
        Replace this implementation with code to handle the error appropriately.
@@ -111,6 +109,7 @@
       abort();
    }
    
+   [self setFetchedResultsController:newFetchedResultsController];     // 16
    return _fetchedResultsController;                                   // 17
 }
 
