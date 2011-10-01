@@ -12,11 +12,11 @@
 
 #pragma mark - WheelViewCell
 
-@interface WheelViewCell ()                                              // 1
-@property (nonatomic, assign) NSInteger indexInWheelView;                // 2
+@interface WheelViewCell ()
+@property (nonatomic, assign) NSInteger indexInWheelView;
 @end
 
-@implementation WheelViewCell                                            // 3
+@implementation WheelViewCell
 @synthesize indexInWheelView = indexInWheelView_;
 @end
 
@@ -25,14 +25,14 @@
 
 @interface WheelView ()
 @property (nonatomic, assign) CGFloat currentAngle;
-@property (nonatomic, strong) NSMutableSet *reusableCells;               // 4
+@property (nonatomic, strong) NSMutableSet *reusableCells;
 
 // The visible cell indexes are stored in a mutable dictionary
 // instead of a mutable array because the number of visible cells
 // can change. Using an array requires additional logic to maintain
 // the dimensions of the array. This is avoided by using the 
 // dictionary where the key represents the element index number.
-@property (nonatomic, strong) NSMutableDictionary *visibleCellIndexes;   // 5
+@property (nonatomic, strong) NSMutableDictionary *visibleCellIndexes;
 @end
 
 @implementation WheelView
@@ -41,11 +41,12 @@
 @synthesize delegate = _delegate;
 @synthesize style = _style;
 @synthesize currentAngle = _currentAngle;
-@synthesize selectedIndex = _selectedIndex;                             // 6
+@synthesize selectedIndex = _selectedIndex;
 @synthesize reusableCells = _reusableCells;
 @synthesize visibleCellIndexes = _visibleCellIndexes;
+@synthesize angleOffset = _angleOffset;
 
-- (void)commonInit                                                      // 7
+- (void)commonInit
 {
    [self setSelectedIndex:-1];
    [self setCurrentAngle:0.0];
@@ -59,7 +60,7 @@
    self.reusableCells = [[NSMutableSet alloc] init];
 }
 
-- (id)init                                                             // 8
+- (id)init
 {
    self = [super init];
    if (self) {
@@ -86,7 +87,7 @@
    return self;
 }
 
-- (NSInteger)numberOfCells                                              // 9
+- (NSInteger)numberOfCells
 {
    NSInteger cellCount = 0;
    id<WheelViewDataSource> dataSource = [self dataSource];
@@ -96,7 +97,7 @@
    return cellCount;
 }
 
-- (NSInteger)numberOfVisibleCells                                      // 10
+- (NSInteger)numberOfVisibleCells
 {
    NSInteger cellCount = [self numberOfCells];
    NSInteger numberOfVisibleCells = cellCount;
@@ -109,7 +110,7 @@
    return numberOfVisibleCells;
 }
 
-- (BOOL)isSelectedItemForAngle:(CGFloat)angle                          // 11
+- (BOOL)isSelectedItemForAngle:(CGFloat)angle
 {
    // The selected item is one whose angle is
    // at or near 0 degrees.
@@ -129,7 +130,7 @@
    return isSelectedItem;
 }
 
-- (BOOL)isIndexVisible:(NSInteger)index                                 // 12
+- (BOOL)isIndexVisible:(NSInteger)index
 {
    NSNumber *cellIndex = [NSNumber numberWithInteger:index];
    __block BOOL visible = NO;
@@ -143,7 +144,7 @@
    return visible;
 }
 
-- (void)queueNonVisibleCells                                           // 13
+- (void)queueNonVisibleCells
 {
    NSArray *subviews = [self subviews];
    for (id view in subviews) {
@@ -158,7 +159,7 @@
    }
 }
 
-- (NSInteger)cellIndexForIndex:(NSInteger)index                         // 14
+- (NSInteger)cellIndexForIndex:(NSInteger)index
 {
    NSInteger numberOfCells = [self numberOfCells];
    NSInteger numberOfVisibleCells = [self numberOfVisibleCells];
@@ -176,7 +177,7 @@
    return cellIndex;
 }
 
-- (NSSet*)cellIndexesToDisplay                                          // 15
+- (NSSet*)cellIndexesToDisplay
 {
    NSInteger numberOfVisibleCells = [self numberOfVisibleCells];
    NSMutableSet *cellIndexes = 
@@ -189,10 +190,10 @@
    return cellIndexes;
 }
 
-- (void)setAngle:(CGFloat)angle                                         // 16
+- (void)setAngle:(CGFloat)angle
 {
-   [self queueNonVisibleCells];                                         // 17
-   NSSet *cellIndexesToDisplay = [self cellIndexesToDisplay];           // 18
+   [self queueNonVisibleCells];
+   NSSet *cellIndexesToDisplay = [self cellIndexesToDisplay];
    
    // The following code is inspired by the carousel example at
    // http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad
@@ -226,7 +227,7 @@
    // This is the index that is replaced. It is replaced with the one
    // index in cellIndexesToDisplay not found in visibleCellIndexes.
    
-   BOOL wrap = [self numberOfCells] > numberOfVisibleCells;             // 19
+   BOOL wrap = [self numberOfCells] > numberOfVisibleCells;
    
    // Lay out visible cells.
    for (NSInteger index = 0; index < numberOfVisibleCells; index++)
@@ -282,7 +283,7 @@
       
       // Set the selected index if it has changed.
       if (cellIndex != [self selectedIndex] && 
-          [self isSelectedItemForAngle:angle])                          // 20
+          [self isSelectedItemForAngle:angle])
       {
          [self setSelectedIndex:cellIndex];
          if ([[self dataSource] 
@@ -292,7 +293,7 @@
          }
       }
       
-      float angleInRadians = (angle + 180.0) * M_PI / 180.0f;           // 21
+      float angleInRadians = ((angle + [self angleOffset]) + 180.0) * M_PI / 180.0f;
       
       // Get a position based on the angle
       float xPosition = center.x + (radiusX * sinf(angleInRadians)) 
@@ -324,12 +325,12 @@
    }
 }
 
-- (void)layoutSubviews                                                  // 22
+- (void)layoutSubviews
 {
    [self setAngle:[self currentAngle]];
 }
 
-- (void)setStyle:(WheelViewStyle)newStyle                               // 23
+- (void)setStyle:(WheelViewStyle)newStyle
 {
    if (_style != newStyle) {
       _style = newStyle;
@@ -340,7 +341,7 @@
    }
 }
 
-- (void)spin:(SpinGestureRecognizer *)recognizer                        // 24
+- (void)spin:(SpinGestureRecognizer *)recognizer
 {
    CGFloat angleInRadians = -[recognizer rotation];
    CGFloat degrees = 180.0 * angleInRadians / M_PI;   // Radians to degrees
@@ -348,7 +349,7 @@
    [self setAngle:[self currentAngle]];
 }
 
-- (id)dequeueReusableCell                                              // 25
+- (id)dequeueReusableCell
 {
    id view = [[self reusableCells] anyObject];
    if (view != nil) {
@@ -357,7 +358,7 @@
    return view;
 }
 
-- (void)queueReusableCells                                              // 26
+- (void)queueReusableCells
 {
    for (UIView *view in [self subviews]) {
       if ([view isKindOfClass:[WheelViewCell class]]) {
@@ -370,13 +371,13 @@
    [self setSelectedIndex:-1];
 }
 
-- (void)reloadData                                                      // 27
+- (void)reloadData
 {
    [self queueReusableCells];
    [self layoutSubviews];
 }
 
-- (WheelViewCell *)cellAtIndex:(NSInteger)index                         // 28
+- (WheelViewCell *)cellAtIndex:(NSInteger)index
 {
    if (index < 0 || index > [self numberOfCells] - 1) {
       return nil;
@@ -400,6 +401,14 @@
    }
    
    return cell;
+}
+
+- (void)setAngleOffset:(CGFloat)angleOffset
+{
+   if (_angleOffset != angleOffset) {
+      _angleOffset = -angleOffset;
+      [self layoutSubviews];
+   }
 }
 
 @end

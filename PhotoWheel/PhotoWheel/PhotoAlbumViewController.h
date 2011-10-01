@@ -21,6 +21,8 @@ GridViewDataSource, PhotoBrowserViewControllerDelegate>                 // 2
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addButton;
 @property (nonatomic, strong) IBOutlet GridView *gridView;
+@property (nonatomic, strong) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, strong) IBOutlet UIImageView *shadowImageView;
 
 - (void)reload;
 - (IBAction)showActionMenu:(id)sender;

@@ -7,23 +7,23 @@
 //
 
 #import "PhotoBrowserPhotoView.h"
-#import "PhotoBrowserViewController.h"                                  // 7
+#import "PhotoBrowserViewController.h"
 
-@interface PhotoBrowserPhotoView ()                                     // 8
-@property (nonatomic, strong) UIImageView *imageView;                   // 9
+@interface PhotoBrowserPhotoView ()
+@property (nonatomic, strong) UIImageView *imageView;
 
-- (void)loadSubviewsWithFrame:(CGRect)frame;                            // 10
-- (BOOL)isZoomed;                                                       // 11
+- (void)loadSubviewsWithFrame:(CGRect)frame;
+- (BOOL)isZoomed;
 @end
 
 @implementation PhotoBrowserPhotoView
 
-@synthesize photoBrowserViewController = _photoBrowserViewController;   // 12
+@synthesize photoBrowserViewController = _photoBrowserViewController;
 @synthesize imageView = _imageView;
 
 @synthesize index = _index;
 
-- (id)initWithFrame:(CGRect)frame                                       // 13
+- (id)initWithFrame:(CGRect)frame
 {
    self = [super initWithFrame:frame];
    if (self) {
@@ -51,7 +51,7 @@
    return self;
 }
 
-- (void)loadSubviewsWithFrame:(CGRect)frame                             // 14
+- (void)loadSubviewsWithFrame:(CGRect)frame
 {
    frame.origin = CGPointMake(0, 0);
    UIImageView *newImageView = [[UIImageView alloc] initWithFrame:frame];
@@ -63,23 +63,22 @@
    [self setImageView:newImageView];
 }
 
-- (void)setImage:(UIImage *)newImage                                    // 15
+- (void)setImage:(UIImage *)newImage
 {
    [[self imageView] setImage:newImage];
 }
 
-- (BOOL)isZoomed                                                        // 16
+- (BOOL)isZoomed
 {
    return !([self zoomScale] == [self minimumZoomScale]);
 }
 
-- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center      // 17
+- (CGRect)zoomRectForScale:(float)scale withCenter:(CGPoint)center
 {
    // The following is derived from the ScrollViewSuite sample project 
    // provided by Apple:
    //
    // http://developer.apple.com/library/ios/#samplecode/ScrollViewSuite/Introduction/Intro.html
-   // http://bit.ly/pYoPat
    
    CGRect zoomRect;
    
@@ -98,7 +97,7 @@
    return zoomRect;
 }
 
-- (void)zoomToLocation:(CGPoint)location                                // 18
+- (void)zoomToLocation:(CGPoint)location
 {
    float newScale;
    CGRect zoomRect;
@@ -112,7 +111,7 @@
    [self zoomToRect:zoomRect animated:YES];
 }
 
-- (void)turnOffZoom                                                     // 19
+- (void)turnOffZoom
 {
    if ([self isZoomed]) {
       [self zoomToLocation:CGPointZero];
@@ -121,21 +120,123 @@
 
 #pragma mark - Touch gestures
 
-- (void)doubleTapped:(UITapGestureRecognizer *)recognizer               // 20
+- (void)doubleTapped:(UITapGestureRecognizer *)recognizer
 {
    [self zoomToLocation:[recognizer locationInView:self]];
 }
 
-- (void)tapped:(UITapGestureRecognizer *)recognizer                     // 21
+- (void)tapped:(UITapGestureRecognizer *)recognizer
 {
    [[self photoBrowserViewController] toggleChromeDisplay];
 }
 
 #pragma mark  - UIScrollViewDelegate methods
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView       // 22
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
    return [self imageView];
+}
+
+#pragma mark - Rotation methods
+
+/**
+ ** Methods called during rotation to preserve the zoomScale and the visible 
+ ** portion of the image.
+ **
+ ** The following code comes from the Apple sample project PhotoScroller
+ ** available at
+ ** http://developer.apple.com/library/prerelease/ios/#samplecode/PhotoScroller/Introduction/Intro.html
+ **
+ **/
+
+- (void)setMaxMinZoomScalesForCurrentBounds
+{
+   CGSize boundsSize = self.bounds.size;
+   CGSize imageSize = [[self imageView] bounds].size;
+   
+   // Calculate min/max zoom scale
+   CGFloat xScale = boundsSize.width / imageSize.width;    // the scale needed to perfectly fit the image width-wise
+   CGFloat yScale = boundsSize.height / imageSize.height;  // the scale needed to perfectly fit the image height-wise
+   CGFloat minScale = MIN(xScale, yScale);                 // use minimum of these to allow the image to become fully visible
+   
+   // On high-resolution screens we have double the pixel density, 
+   // so we will be seeing every pixel if we limit the maximum
+   // zoom scale to 0.5.
+   CGFloat maxScale = 1.0 / [[UIScreen mainScreen] scale];
+   
+   // Don't let minScale exceed maxScale. (If the image is smaller 
+   // than the screen, we don't want to force it to be zoomed.) 
+   if (minScale > maxScale) {
+      minScale = maxScale;
+   }
+   
+   self.maximumZoomScale = maxScale;
+   self.minimumZoomScale = minScale;
+}
+
+// Returns the center point, in image coordinate space, to try 
+// to restore after rotation. 
+- (CGPoint)pointToCenterAfterRotation
+{
+   CGPoint boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), 
+                                      CGRectGetMidY(self.bounds));
+   return [self convertPoint:boundsCenter toView:[self imageView]];
+}
+
+// Returns the zoom scale to attempt to restore after rotation. 
+- (CGFloat)scaleToRestoreAfterRotation
+{
+   CGFloat contentScale = self.zoomScale;
+   
+   // If we're at the minimum zoom scale, preserve that by returning 0, 
+   // which will be converted to the minimum allowable scale when the 
+   // scale is restored.
+   if (contentScale <= self.minimumZoomScale + FLT_EPSILON)
+      contentScale = 0;
+   
+   return contentScale;
+}
+
+- (CGPoint)maximumContentOffset
+{
+   CGSize contentSize = self.contentSize;
+   CGSize boundsSize = self.bounds.size;
+   return CGPointMake(contentSize.width - boundsSize.width, 
+                      contentSize.height - boundsSize.height);
+}
+
+- (CGPoint)minimumContentOffset
+{
+   return CGPointZero;
+}
+
+// Adjusts content offset and scale to try to preserve the old 
+// zoom scale and center.
+- (void)restoreCenterPoint:(CGPoint)oldCenter scale:(CGFloat)oldScale
+{    
+   // Step 1: Restore zoom scale, first making sure it is within 
+   // the allowable range.
+   self.zoomScale = MIN(self.maximumZoomScale, MAX(self.minimumZoomScale, 
+                                                   oldScale));
+   
+   
+   // Step 2: Restore center point, first making sure it is within 
+   // the allowable range.
+   
+   // Step 2a: Convert the desired center point back to our own 
+   // coordinate space.
+   CGPoint boundsCenter = [self convertPoint:oldCenter fromView:[self imageView]];
+   // Step 2b: Calculate the content offset that would yield that center
+   // point.
+   CGPoint offset = CGPointMake(boundsCenter.x - self.bounds.size.width / 2.0, 
+                                boundsCenter.y - self.bounds.size.height / 2.0);
+   // Step 2c: Restore the offset, adjusted to be within the allowable 
+   // range.
+   CGPoint maxOffset = [self maximumContentOffset];
+   CGPoint minOffset = [self minimumContentOffset];
+   offset.x = MAX(minOffset.x, MIN(maxOffset.x, offset.x));
+   offset.y = MAX(minOffset.y, MIN(maxOffset.y, offset.y));
+   self.contentOffset = offset;
 }
 
 @end

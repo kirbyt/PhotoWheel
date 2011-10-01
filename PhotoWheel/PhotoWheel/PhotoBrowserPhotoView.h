@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@class PhotoBrowserViewController;                                      // 1
+@class PhotoBrowserViewController;
 
-@interface PhotoBrowserPhotoView : UIScrollView <UIScrollViewDelegate>  // 2
+@interface PhotoBrowserPhotoView : UIScrollView <UIScrollViewDelegate>
 
-@property (nonatomic, assign) NSInteger index;                          // 3
-@property (nonatomic, weak) PhotoBrowserViewController 
-*photoBrowserViewController;                                            // 4
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, weak) PhotoBrowserViewController *photoBrowserViewController;
 
-- (void)setImage:(UIImage *)newImage;                                   // 5
-- (void)turnOffZoom;                                                    // 6
+- (void)setImage:(UIImage *)newImage;
+- (void)turnOffZoom;
+- (CGPoint)pointToCenterAfterRotation;
+- (CGFloat)scaleToRestoreAfterRotation;
+- (void)setMaxMinZoomScalesForCurrentBounds;
+- (void)restoreCenterPoint:(CGPoint)oldCenter scale:(CGFloat)oldScale;
 
 @end
