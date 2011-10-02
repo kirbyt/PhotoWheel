@@ -110,7 +110,70 @@
                     </connections>
                 </viewController>
             </objects>
-            <point key="canvasLocation" x="1651" y="1888"/>
+            <point key="canvasLocation" x="1651" y="1444"/>
+        </scene>
+        <scene sceneID="yNS-2d-FRY">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S8X-Mq-mmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="DDM-r0-lBW" customClass="FlickrViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Osd-dl-Yad">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="SGW-Ki-leZ">
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="yhT-1N-qNA">
+                                        <connections>
+                                            <action selector="cancel:" destination="DDM-r0-lBW" id="2JR-Ag-e2M"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qNf-my-CB9"/>
+                                    <barButtonItem systemItem="save" id="rES-Sc-oEQ">
+                                        <connections>
+                                            <action selector="save:" destination="DDM-r0-lBW" id="R56-yU-VpJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <searchBar contentMode="redraw" id="SvF-1q-T6G">
+                                <rect key="frame" x="0.0" y="44" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="DDM-r0-lBW" id="CEb-Z4-fmH"/>
+                                </connections>
+                            </searchBar>
+                            <view contentMode="scaleToFill" id="oI7-Dx-2Ei" customClass="GridView">
+                                <rect key="frame" x="0.0" y="88" width="540" height="532"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="DDM-r0-lBW" id="7IX-cS-X3H"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" id="p7g-B6-zlc">
+                                <rect key="frame" x="0.0" y="88" width="540" height="532"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="bAH-W7-9Hp">
+                                <rect key="frame" x="252" y="291" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="bAH-W7-9Hp" id="qv7-gp-uRL"/>
+                        <outlet property="gridView" destination="oI7-Dx-2Ei" id="SL6-vp-USv"/>
+                        <outlet property="overlayView" destination="p7g-B6-zlc" id="RB3-xG-Ofo"/>
+                        <outlet property="searchBar" destination="SvF-1q-T6G" id="aih-4s-1Oj"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1657" y="2591"/>
         </scene>
         <scene sceneID="38">
             <objects>
@@ -196,6 +259,7 @@
                         <outlet property="textField" destination="yTf-IH-CSS" id="XGl-3W-dCp"/>
                         <outlet property="toolbar" destination="BYg-8L-4mf" id="nK3-xS-Aui"/>
                         <segue destination="29" kind="custom" identifier="PushPhotoBrowser" customClass="CustomPushSegue" id="hmP-y7-EEC"/>
+                        <segue destination="DDM-r0-lBW" kind="modal" identifier="PushFlickrScene" modalPresentationStyle="formSheet" id="IqA-Qm-hjd"/>
                     </connections>
                 </viewController>
             </objects>
@@ -269,6 +333,17 @@
         </class>
         <class className="CustomNavigationController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomNavigationController.h"/>
+        </class>
+        <class className="FlickrViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="gridView" candidateClass="GridView"/>
+                <relationship kind="outlet" name="overlayView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
         </class>
         <class className="GridView" superclassName="UIScrollView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/GridView.h"/>
