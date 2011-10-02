@@ -19,6 +19,7 @@
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
 @property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
 @property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
+@property (nonatomic, strong) SendEmailController *sendEmailController;    // 3
 
 - (void)initPhotoViewCache;
 - (void)setScrollViewContentSize;
@@ -27,7 +28,7 @@
 - (CGRect)frameForPagingScrollView;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
 - (void)addButtonsToNavigationBar;
-
+- (void)emailCurrentPhoto;                                                 // 4
 @end
 
 @implementation PhotoBrowserViewController
@@ -43,6 +44,7 @@
 @synthesize actionButton = _actionButton;
 @synthesize firstVisiblePageIndexBeforeRotation = _firstVisiblePageIndexBeforeRotation;
 @synthesize percentScrolledIntoFirstVisiblePage = _percentScrolledIntoFirstVisiblePage;
+@synthesize sendEmailController = _sendEmailController;                    // 5
 
 - (void)viewDidLoad
 {
@@ -442,6 +444,11 @@
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
    [actionSheet setDelegate:self];
    [actionSheet setTag:ACTIONSHEET_TAG_ACTIONS];
+   
+   if ([SendEmailController canSendMail]) {                                // 6
+      [actionSheet addButtonWithTitle:@"Email"];
+   }
+   
    if ([UIPrintInteractionController isPrintingAvailable]) {
       [actionSheet addButtonWithTitle:@"Print"];
    }
@@ -507,8 +514,21 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    
    if ([actionSheet tag] == ACTIONSHEET_TAG_DELETE) {
       [self deletePhotoConfirmed];
+      
    } else if ([actionSheet tag] == ACTIONSHEET_TAG_ACTIONS) {
-      [self printCurrentPhoto];      
+      // Button index 0 can be Email or Print. It depends on whether or
+      // not the device supports that feature.
+      if (buttonIndex == 0) {                                              // 7
+         if ([SendEmailController canSendMail]) {
+            [self emailCurrentPhoto];
+         } else if ([UIPrintInteractionController isPrintingAvailable]) {
+            [self printCurrentPhoto];
+         }
+      } else {
+         // If there is a button index 1, it
+         // will also be Print.
+         [self printCurrentPhoto];
+      }
    }
 }
 
@@ -587,6 +607,28 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    [[self scrollView] setScrollEnabled:YES];
    [self startChromeDisplayTimer];
+}
+
+#pragma mark - Email and SendEmailControllerDelegate methods
+
+- (void)emailCurrentPhoto                                                  // 8
+{
+   UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
+   NSSet *photos = [NSSet setWithObject:currentPhoto];
+   
+   SendEmailController *controller = [[SendEmailController alloc] 
+                                      initWithViewController:self];
+   [controller setPhotos:photos];
+   [controller sendEmail];
+   
+   [self setSendEmailController:controller];
+}
+
+- (void)sendEmailControllerDidFinish:(SendEmailController *)controller     // 9
+{
+   if ([controller isEqual:[self sendEmailController]]) {
+      [self setSendEmailController:nil];
+   }
 }
 
 @end

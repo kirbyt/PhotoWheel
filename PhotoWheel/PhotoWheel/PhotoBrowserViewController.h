@@ -7,24 +7,25 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SendEmailController.h"                                            // 1
 
 @protocol PhotoBrowserViewControllerDelegate;
 
 @interface PhotoBrowserViewController : UIViewController <UIScrollViewDelegate, 
-UIActionSheetDelegate>                                                     // 1
+UIActionSheetDelegate, SendEmailControllerDelegate>                        // 2
 
 @property (nonatomic, strong) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, strong) id<PhotoBrowserViewControllerDelegate> delegate;
 @property (nonatomic, assign) NSInteger startAtIndex;
-@property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden; // 1
-@property (nonatomic, strong) NSTimer *chromeHideTimer;                   // 2
-@property (nonatomic, assign) CGFloat statusBarHeight;                    // 3
+@property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden;
+@property (nonatomic, strong) NSTimer *chromeHideTimer;
+@property (nonatomic, assign) CGFloat statusBarHeight;
 
-- (void)toggleChrome:(BOOL)hide;                                          // 4
-- (void)hideChrome;                                                       // 5
-- (void)startChromeDisplayTimer;                                          // 7
-- (void)cancelChromeDisplayTimer;                                         // 8
-- (void)toggleChromeDisplay;                                              // 1
+- (void)toggleChrome:(BOOL)hide;
+- (void)hideChrome;
+- (void)startChromeDisplayTimer;
+- (void)cancelChromeDisplayTimer;
+- (void)toggleChromeDisplay;
 
 @end
 
@@ -37,6 +38,6 @@ UIActionSheetDelegate>                                                     // 1
 
 @optional
 - (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser 
-                deleteImageAtIndex:(NSInteger)index;                       // 2
+                deleteImageAtIndex:(NSInteger)index;
 
 @end
