@@ -2,7 +2,7 @@
 //  PhotoBrowserViewController.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 8/30/11.
+//  Created by Kirby Turner on 10/1/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
@@ -16,45 +16,35 @@
 @interface PhotoBrowserViewController ()
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, strong) NSMutableArray *photoViewCache;
-@property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden;
-@property (nonatomic, strong) NSTimer *chromeHideTimer;
-@property (nonatomic, assign) CGFloat statusBarHeight;
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
 @property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
 @property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
-@property (nonatomic, strong) SendEmailController *sendEmailController;
+@property (nonatomic, strong) SendEmailController *sendEmailController;    // 3
 
-- (void)addButtonsToNavigationBar;
 - (void)initPhotoViewCache;
 - (void)setScrollViewContentSize;
 - (void)scrollToIndex:(NSInteger)index;
 - (void)setTitleWithCurrentIndex;
 - (CGRect)frameForPagingScrollView;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
-
-- (void)toggleChrome:(BOOL)hide;
-- (void)hideChrome;
-- (void)startChromeDisplayTimer;
-- (void)cancelChromeDisplayTimer;
-
-- (void)emailCurrentPhoto;
-
+- (void)addButtonsToNavigationBar;
+- (void)emailCurrentPhoto;                                                 // 4
 @end
 
 @implementation PhotoBrowserViewController
 
-@synthesize scrollView = scrollView_;
-@synthesize delegate = delegate_;
-@synthesize startAtIndex = startAtIndex_;
-@synthesize currentIndex = currentIndex_;
-@synthesize photoViewCache = photoViewCache_;
-@synthesize chromeHidden = chromeHidden_;
-@synthesize chromeHideTimer = chromeHideTimer_;
-@synthesize statusBarHeight = statusBarHeight_;
-@synthesize actionButton = actionButton_;
-@synthesize firstVisiblePageIndexBeforeRotation = firstVisiblePageIndexBeforeRotation_;
-@synthesize percentScrolledIntoFirstVisiblePage = percentScrolledIntoFirstVisiblePage_;
-@synthesize sendEmailController = sendEmailController_;
+@synthesize scrollView = _scrollView;
+@synthesize delegate = _delegate;
+@synthesize startAtIndex = _startAtIndex;
+@synthesize currentIndex = _currentIndex;
+@synthesize photoViewCache = _photoViewCache;
+@synthesize chromeHidden = _chromeHidden;
+@synthesize chromeHideTimer = _chromeHideTimer;
+@synthesize statusBarHeight = _statusBarHeight;
+@synthesize actionButton = _actionButton;
+@synthesize firstVisiblePageIndexBeforeRotation = _firstVisiblePageIndexBeforeRotation;
+@synthesize percentScrolledIntoFirstVisiblePage = _percentScrolledIntoFirstVisiblePage;
+@synthesize sendEmailController = _sendEmailController;                    // 5
 
 - (void)viewDidLoad
 {
@@ -64,25 +54,19 @@
    // will not display behind the status bar.
    [self setWantsFullScreenLayout:YES];
    
-   // Must store the status bar size while it is still visible.
-   CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
-   if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
-      [self setStatusBarHeight:statusBarFrame.size.width];
-   } else {
-      [self setStatusBarHeight:statusBarFrame.size.height];
-   }
-   
-   // Set the view's frame size. This ensures the scroll view
-   // autoresizing correctly and avoids surprises when retrieving
+   // Set the view's frame size. This ensures that the scroll view
+   // autoresizes correctly and avoids surprises when retrieving
    // the scroll view's bounds later.
    CGRect frame = [[UIScreen mainScreen] bounds];
    [[self view] setFrame:frame];
    
    UIScrollView *scrollView = [self scrollView];
-   [scrollView setFrame:[self frameForPagingScrollView]];   // Set the initial size.
+   // Set the initial size.
+   [scrollView setFrame:[self frameForPagingScrollView]];
    [scrollView setDelegate:self];
    [scrollView setBackgroundColor:[UIColor blackColor]];
-   [scrollView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+   [scrollView setAutoresizingMask:UIViewAutoresizingFlexibleWidth | 
+    UIViewAutoresizingFlexibleHeight];
    [scrollView setAutoresizesSubviews:YES];
    [scrollView setPagingEnabled:YES];
    [scrollView setShowsVerticalScrollIndicator:NO];
@@ -90,6 +74,15 @@
    
    [self addButtonsToNavigationBar];
    [self initPhotoViewCache];
+
+   // Must store the status bar size while it is still visible.
+   CGRect statusBarFrame = [[UIApplication sharedApplication] 
+                            statusBarFrame];
+   if (UIInterfaceOrientationIsLandscape([self interfaceOrientation])) {
+      [self setStatusBarHeight:statusBarFrame.size.width];
+   } else {
+      [self setStatusBarHeight:statusBarFrame.size.height];
+   }
 }
 
 - (void)viewDidUnload
@@ -115,14 +108,15 @@
    [super viewWillDisappear:animated];
 }
 
-
-#pragma mark - Delegate Callback Helpers
+#pragma mark - Delegate callback helpers
 
 - (NSInteger)numberOfPhotos
 {
    NSInteger numberOfPhotos = 0;
    id<PhotoBrowserViewControllerDelegate> delegate = [self delegate];
-   if (delegate && [delegate respondsToSelector:@selector(photoBrowserViewControllerNumberOfPhotos:)]) {
+   if (delegate && [delegate respondsToSelector:
+                    @selector(photoBrowserViewControllerNumberOfPhotos:)]) 
+   {
       numberOfPhotos = [delegate photoBrowserViewControllerNumberOfPhotos:self];
    }
    return numberOfPhotos;
@@ -132,32 +126,47 @@
 {
    UIImage *image = nil;
    id<PhotoBrowserViewControllerDelegate> delegate = [self delegate];
-   if (delegate && [delegate respondsToSelector:@selector(photoBrowserViewController:imageAtIndex:)]) {
+   if (delegate && [delegate respondsToSelector:
+                    @selector(photoBrowserViewController:imageAtIndex:)]) 
+   {
       image = [delegate photoBrowserViewController:self imageAtIndex:index];
    }
    return image;
 }
 
-#pragma mark - Helper Methods
+#pragma mark - Helper methods
 
 - (void)addButtonsToNavigationBar
 {
    // Add buttons to the navigation bar. The nav bar allows
-   // one button on the left and one on the right. Optionally
+   // one button on the left and one on the right. Optionally,
    // a custom view can be used instead of a button. To get
    // multiple buttons we must create a short toolbar containing
    // the buttons we want.
    
-   UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deletePhoto:)];
+   UIBarButtonItem *trashButton = [[UIBarButtonItem alloc] 
+                       initWithBarButtonSystemItem:UIBarButtonSystemItemTrash 
+                       target:self 
+                       action:@selector(deletePhoto:)];
    [trashButton setStyle:UIBarButtonItemStyleBordered];
    
-   UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionMenu:)];
+   UIBarButtonItem *actionButton = [[UIBarButtonItem alloc] 
+                        initWithBarButtonSystemItem:UIBarButtonSystemItemAction 
+                        target:self 
+                        action:@selector(showActionMenu:)];
    [actionButton setStyle:UIBarButtonItemStyleBordered];
    [self setActionButton:actionButton];
    
-   UIBarButtonItem *slideshowButton = [[UIBarButtonItem alloc] initWithTitle:@"Slideshow" style:UIBarButtonItemStyleBordered target:self action:@selector(slideshow:)];
+   UIBarButtonItem *slideshowButton = [[UIBarButtonItem alloc] 
+                                       initWithTitle:@"Slideshow" 
+                                       style:UIBarButtonItemStyleBordered 
+                                       target:self 
+                                       action:@selector(slideshow:)];
    
-   UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+   UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] 
+                initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace 
+                target:nil 
+                action:nil];
    
    
    NSMutableArray *toolbarItems = [[NSMutableArray alloc] initWithCapacity:3];
@@ -166,25 +175,29 @@
    [toolbarItems addObject:actionButton];
    [toolbarItems addObject:trashButton];
    
-   UIToolbar *toolbar = [[ClearToolbar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
+   UIToolbar *toolbar = [[ClearToolbar alloc] 
+                         initWithFrame:CGRectMake(0, 0, 200, 44)];
    [toolbar setBackgroundColor:[UIColor clearColor]];
    [toolbar setBarStyle:UIBarStyleBlack];
    [toolbar setTranslucent:YES];
    
    [toolbar setItems:toolbarItems];
    
-   UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
-   [[self navigationItem] setRightBarButtonItem:customBarButtonItem animated:YES];
+   UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] 
+                                           initWithCustomView:toolbar];
+   [[self navigationItem] setRightBarButtonItem:customBarButtonItem 
+                                       animated:YES];
 }
 
 - (void)initPhotoViewCache
 {
-   // Setup our photo view cache. We only keep 3 views in
+   // Set up the photo's view cache. We keep only three views in
    // memory. NSNull is used as a placeholder for the other
    // elements in the view cache array.
    
    NSInteger numberOfPhotos = [self numberOfPhotos];;
-   self.photoViewCache = [[NSMutableArray alloc] initWithCapacity:numberOfPhotos];
+   [self setPhotoViewCache:
+    [[NSMutableArray alloc] initWithCapacity:numberOfPhotos]];
    for (int i=0; i < numberOfPhotos; i++) {
       [self.photoViewCache addObject:[NSNull null]];
    }
@@ -199,7 +212,9 @@
    
    CGRect bounds = [[self scrollView] bounds];
    CGSize size = CGSizeMake(bounds.size.width * pageCount, 
-                            bounds.size.height / 2);   // Cut in half to prevent horizontal scrolling.
+                            // Divide in half to prevent horizontal
+                            // scrolling.
+                            bounds.size.height / 2);
    [[self scrollView] setContentSize:size];
 }
 
@@ -220,7 +235,8 @@
       index = 1;
    }
    NSInteger count = [self numberOfPhotos];
-   NSString *title = title = [NSString stringWithFormat:@"%1$i of %2$i", index, count, nil];
+   NSString *title = title = [NSString stringWithFormat:@"%1$i of %2$i", 
+                              index, count, nil];
    [self setTitle:title];
 }
 
@@ -244,7 +260,7 @@
    return pageFrame;
 }
 
-#pragma mark - Page Management
+#pragma mark - Page management
 
 - (void)loadPage:(NSInteger)index
 {
@@ -256,7 +272,8 @@
    if ([currentView isKindOfClass:[PhotoBrowserPhotoView class]] == NO) {
       // Load the photo view.
       CGRect frame = [self frameForPageAtIndex:index];
-      PhotoBrowserPhotoView *newView = [[PhotoBrowserPhotoView alloc] initWithFrame:frame];
+      PhotoBrowserPhotoView *newView = [[PhotoBrowserPhotoView alloc] 
+                                        initWithFrame:frame];
       [newView setBackgroundColor:[UIColor clearColor]];
       [newView setImage:[self imageAtIndex:index]];
       [newView setPhotoBrowserViewController:self];
@@ -284,13 +301,13 @@
 
 - (void)setCurrentIndex:(NSInteger)newIndex
 {
-   currentIndex_ = newIndex;
+   _currentIndex = newIndex;
    
-   [self loadPage:currentIndex_];
-   [self loadPage:currentIndex_ + 1];
-   [self loadPage:currentIndex_ - 1];
-   [self unloadPage:currentIndex_ + 2];
-   [self unloadPage:currentIndex_ - 2];
+   [self loadPage:_currentIndex];
+   [self loadPage:_currentIndex + 1];
+   [self loadPage:_currentIndex - 1];
+   [self unloadPage:_currentIndex + 2];
+   [self unloadPage:_currentIndex - 2];
    
    [self setTitleWithCurrentIndex];
 }
@@ -303,7 +320,7 @@
       CGFloat pageWidth = scrollView.bounds.size.width;
       float fractionalPage = scrollView.contentOffset.x / pageWidth;
       NSInteger page = floor(fractionalPage);
-      if (page != currentIndex_) {
+      if (page != [self currentIndex]) {
          [self setCurrentIndex:page];
       }
    }
@@ -314,7 +331,7 @@
    [self hideChrome];
 }
 
-#pragma mark - Chrome Helpers
+#pragma mark - Chrome helpers
 
 - (void)toggleChromeDisplay
 {
@@ -331,8 +348,6 @@
    
    CGFloat alpha = hide ? 0.0 : 1.0;
    
-   // Must set the navigation bar's alpha, otherwise the photo
-   // view will be pushed until the navigation bar.
    UINavigationBar *navbar = [[self navigationController] navigationBar];
    [navbar setAlpha:alpha];
    
@@ -360,7 +375,11 @@
 - (void)startChromeDisplayTimer
 {
    [self cancelChromeDisplayTimer];
-   NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(hideChrome) userInfo:nil repeats:NO];
+   NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 
+                                                     target:self 
+                                                   selector:@selector(hideChrome) 
+                                                   userInfo:nil 
+                                                    repeats:NO];
    [self setChromeHideTimer:timer];
 }
 
@@ -372,7 +391,7 @@
    }
 }
 
-#pragma mark - Gesture Handlers
+#pragma mark - Gesture handlers
 
 - (void)imageTapped:(UITapGestureRecognizer *)recognizer
 {
@@ -384,7 +403,9 @@
 - (void)deletePhotoConfirmed
 {
    id<PhotoBrowserViewControllerDelegate> delegate = [self delegate];
-   if (delegate && [delegate respondsToSelector:@selector(photoBrowserViewController:deleteImageAtIndex:)]) {
+   if (delegate && [delegate respondsToSelector:
+                    @selector(photoBrowserViewController:deleteImageAtIndex:)]) 
+   {
       NSInteger count = [self numberOfPhotos];
       NSInteger indexToDelete = [self currentIndex];
       [self unloadPage:indexToDelete];
@@ -408,7 +429,11 @@
 - (void)deletePhoto:(id)sender
 {
    [self cancelChromeDisplayTimer];
-   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Delete Photo" otherButtonTitles:nil, nil];
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil 
+                                                            delegate:self 
+                                                   cancelButtonTitle:nil 
+                                              destructiveButtonTitle:@"Delete Photo"
+                                                   otherButtonTitles:nil, nil];
    [actionSheet setTag:ACTIONSHEET_TAG_DELETE];
    [actionSheet showFromBarButtonItem:sender animated:YES];
 }
@@ -420,7 +445,7 @@
    [actionSheet setDelegate:self];
    [actionSheet setTag:ACTIONSHEET_TAG_ACTIONS];
    
-   if ([SendEmailController canSendMail]) {
+   if ([SendEmailController canSendMail]) {                                // 6
       [actionSheet addButtonWithTitle:@"Email"];
    }
    
@@ -443,34 +468,43 @@
    [self cancelChromeDisplayTimer];
    UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
    
-   UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
+   UIPrintInteractionController *controller = 
+      [UIPrintInteractionController sharedPrintController];
    if(!controller){
       NSLog(@"Couldn't get shared UIPrintInteractionController!");
       return;
    }
    
-   UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
+   UIPrintInteractionCompletionHandler completionHandler = 
+      ^(UIPrintInteractionController *printController, BOOL completed, 
+        NSError *error) 
+   {
       [self startChromeDisplayTimer];
       if(completed && error)
-         NSLog(@"FAILED! due to error in domain %@ with error code %u", error.domain, error.code);
+         NSLog(@"FAILED! due to error in domain %@ with error code %u", 
+               error.domain, error.code);
    };
    
    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
    [printInfo setOutputType:UIPrintInfoOutputPhoto];
-   [printInfo setJobName:[NSString stringWithFormat:@"photo-%i", [self currentIndex]]];
+   [printInfo setJobName:[NSString stringWithFormat:@"photo-%i", 
+                          [self currentIndex]]];
    
    [controller setPrintInfo:printInfo];
    [controller setPrintingItem:currentPhoto];
    
-   [controller presentFromBarButtonItem:[self actionButton] animated:YES completionHandler:completionHandler];
+   [controller presentFromBarButtonItem:[self actionButton] 
+                               animated:YES 
+                      completionHandler:completionHandler];
 }
 
-#pragma mark - UIActionSheetDelegate Methods
+#pragma mark - UIActionSheetDelegate methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet 
+clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    [self startChromeDisplayTimer];
-
+   
    // Do nothing if the user taps outside the action 
    // sheet (thus closing the popover containing the
    // action sheet).
@@ -484,24 +518,25 @@
    } else if ([actionSheet tag] == ACTIONSHEET_TAG_ACTIONS) {
       // Button index 0 can be Email or Print. It depends on whether or
       // not the device supports that feature.
-      if (buttonIndex == 0) {
+      if (buttonIndex == 0) {                                              // 7
          if ([SendEmailController canSendMail]) {
             [self emailCurrentPhoto];
          } else if ([UIPrintInteractionController isPrintingAvailable]) {
             [self printCurrentPhoto];
          }
       } else {
-         // If there is a button index 1 then it
+         // If there is a button index 1, it
          // will also be Print.
          [self printCurrentPhoto];
       }
    }
 }
 
-#pragma mark - Rotation Support
+#pragma mark - Rotation support
 /**
  **
- ** Portions of the rotation code comes from the Apple sample project PhotoScroller available at:
+ ** Portions of the rotation code come from the Apple sample project
+ ** PhotoScroller available at
  ** http://developer.apple.com/library/prerelease/ios/#samplecode/PhotoScroller/Introduction/Intro.html
  **
  **/
@@ -511,14 +546,13 @@
    return YES;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
-                                duration:(NSTimeInterval)duration 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
    [[self scrollView] setScrollEnabled:NO];
    
    // Here, our pagingScrollView bounds have not yet been updated for the 
    // new interface orientation. So this is a good place to calculate the 
-   // content offset that we will need in the new orientation
+   // content offset that we will need in the new orientation.
    CGFloat offset = [self scrollView].contentOffset.x;
    CGFloat pageWidth = [self scrollView].bounds.size.width;
    
@@ -545,19 +579,19 @@
       [view restoreCenterPoint:restorePoint scale:restoreScale];
    }
    
-   // adjust contentOffset to preserve page location based on values collected prior to location
+   // Adjust contentOffset to preserve page location based on 
+   // values collected prior to location.
    CGRect bounds = [[self scrollView] bounds];
    CGFloat pageWidth = bounds.size.width;
    CGFloat newOffset = ([self firstVisiblePageIndexBeforeRotation] * pageWidth) + ([self percentScrolledIntoFirstVisiblePage] * pageWidth);
    [[self scrollView] setContentOffset:CGPointMake(newOffset, 0)];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                         duration:(NSTimeInterval)duration 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
    [self layoutScrollViewSubviews];
    
-   // If the chrome is hidden then the navigation
+   // If the chrome is hidden, the navigation
    // bar must be repositioned under the status
    // bar.
    if ([self isChromeHidden]) {
@@ -568,27 +602,29 @@
    }
 }
 
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation 
+- (void)didRotateFromInterfaceOrientation:
+(UIInterfaceOrientation)fromInterfaceOrientation 
 {
    [[self scrollView] setScrollEnabled:YES];
    [self startChromeDisplayTimer];
 }
 
-#pragma mark - Email and SendEmailControllerDelegate Methods
+#pragma mark - Email and SendEmailControllerDelegate methods
 
-- (void)emailCurrentPhoto
+- (void)emailCurrentPhoto                                                  // 8
 {
    UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
    NSSet *photos = [NSSet setWithObject:currentPhoto];
    
-   SendEmailController *controller = [[SendEmailController alloc] initWithViewController:self];
+   SendEmailController *controller = [[SendEmailController alloc] 
+                                      initWithViewController:self];
    [controller setPhotos:photos];
    [controller sendEmail];
    
    [self setSendEmailController:controller];
 }
 
-- (void)sendEmailControllerDidFinish:(SendEmailController *)controller
+- (void)sendEmailControllerDidFinish:(SendEmailController *)controller     // 9
 {
    if ([controller isEqual:[self sendEmailController]]) {
       [self setSendEmailController:nil];

@@ -11,21 +11,24 @@
 #import "PhotoBrowserViewController.h"
 #import "SendEmailController.h"
 
-@interface PhotoAlbumViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, GridViewDataSource, PhotoBrowserViewControllerDelegate, SendEmailControllerDelegate>
+@interface PhotoAlbumViewController : UIViewController 
+<UIActionSheetDelegate, UIImagePickerControllerDelegate, 
+UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, 
+GridViewDataSource, PhotoBrowserViewControllerDelegate, 
+SendEmailControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;
 @property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UIBarButtonItem *addButton;
-@property (strong, nonatomic) IBOutlet GridView *gridView;
+@property (nonatomic, strong) IBOutlet GridView *gridView;
 @property (nonatomic, strong) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, strong) IBOutlet UIImageView *shadowImageView;
 
 - (void)reload;
 - (IBAction)showActionMenu:(id)sender;
 - (IBAction)addPhoto:(id)sender;
-
 - (UIImage *)selectedImage;
 - (CGRect)selectedCellFrame;
 

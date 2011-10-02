@@ -2,7 +2,7 @@
 //  SendEmailController.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 9/2/11.
+//  Created by Kirby Turner on 10/2/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
@@ -11,10 +11,11 @@
 
 @implementation SendEmailController
 
-@synthesize viewController = viewController_;
-@synthesize photos = photos_;
+@synthesize viewController = _viewController;
+@synthesize photos = _photos;
 
-- (id)initWithViewController:(UIViewController<SendEmailControllerDelegate> *)viewController 
+- (id)initWithViewController:(UIViewController<SendEmailControllerDelegate> *)
+viewController 
 {
    self = [super init];
    if (self) {
@@ -25,7 +26,8 @@
 
 - (void)sendEmail 
 {
-	MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+   MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] 
+                                          init];
    [mailer setMailComposeDelegate:self];
    [mailer setSubject:@"Pictures from PhotoWheel"];
    
@@ -42,19 +44,26 @@
       if (image) {
          NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
          NSString *fileName = [NSString stringWithFormat:@"photo-%1", index];
-         [mailer addAttachmentData:imageData mimeType:@"image/jpeg" fileName:fileName];
+         [mailer addAttachmentData:imageData 
+                          mimeType:@"image/jpeg" 
+                          fileName:fileName];
       }
    }];
    
-	[[self viewController] presentModalViewController:mailer animated:YES];
+   [[self viewController] presentModalViewController:mailer animated:YES];
 }
 
 
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
-{	
-   UIViewController<SendEmailControllerDelegate> *viewController = [self viewController];
-	[viewController dismissModalViewControllerAnimated:YES];
-   if (viewController && [viewController respondsToSelector:@selector(sendEmailControllerDidFinish:)]) {
+- (void)mailComposeController:(MFMailComposeViewController*)controller 
+          didFinishWithResult:(MFMailComposeResult)result 
+                        error:(NSError*)error 
+{
+   UIViewController<SendEmailControllerDelegate> *viewController = 
+      [self viewController];
+   [viewController dismissModalViewControllerAnimated:YES];
+   if (viewController && [viewController respondsToSelector:
+                          @selector(sendEmailControllerDidFinish:)]) 
+   {
       [viewController sendEmailControllerDidFinish:self];
    }
 }
@@ -65,5 +74,3 @@
 }
 
 @end
-
-

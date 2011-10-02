@@ -2,8 +2,8 @@
 //  WheelView.m
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 7/1/11.
-//  Copyright 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 9/24/11.
+//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import "WheelView.h"
@@ -16,15 +16,17 @@
 
 @implementation WheelView
 
-@synthesize dataSource = dataSource_;
-@synthesize style = style_;
-@synthesize currentAngle = currentAngle_;
+@synthesize dataSource = _dataSource;
+@synthesize style = _style;
+@synthesize currentAngle = _currentAngle;
 
 - (void)commonInit
 {
    [self setCurrentAngle:0.0];
    
-   SpinGestureRecognizer *spin = [[SpinGestureRecognizer alloc] initWithTarget:self action:@selector(spin:)];
+   SpinGestureRecognizer *spin = [[SpinGestureRecognizer alloc] 
+                                  initWithTarget:self 
+                                  action:@selector(spin:)];   
    [self addGestureRecognizer:spin];
 }
 
@@ -57,11 +59,13 @@
 
 - (void)setAngle:(CGFloat)angle
 {
-   // The follow code is inspired from the carousel example at:
+   // The following code is inspired by the carousel example at
    // http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad
    
-   CGPoint center = CGPointMake(CGRectGetMidX([self bounds]), CGRectGetMidY([self bounds]));
-   CGFloat radiusX = MIN([self bounds].size.width, [self bounds].size.height) * 0.35;
+   CGPoint center = CGPointMake(CGRectGetMidX([self bounds]), 
+                                CGRectGetMidY([self bounds]));
+   CGFloat radiusX = MIN([self bounds].size.width, 
+                         [self bounds].size.height) * 0.35;
    CGFloat radiusY = radiusX;
    if ([self style] == WheelViewStyleCarousel) {
       radiusY = radiusX * 0.30;
@@ -80,26 +84,31 @@
       float angleInRadians = (angle + 180.0) * M_PI / 180.0f;
       
       // Get a position based on the angle
-      float xPosition = center.x + (radiusX * sinf(angleInRadians)) - (CGRectGetWidth([cell frame]) / 2);
-      float yPosition = center.y + (radiusY * cosf(angleInRadians)) - (CGRectGetHeight([cell frame]) / 2);
+      float xPosition = center.x + (radiusX * sinf(angleInRadians)) 
+      - (CGRectGetWidth([cell frame]) / 2);
+      float yPosition = center.y + (radiusY * cosf(angleInRadians)) 
+      - (CGRectGetHeight([cell frame]) / 2);
       
       float scale = 0.75f + 0.25f * (cosf(angleInRadians) + 1.0);
       
-      // apply location and scale
+      // Apply location and scale
       if ([self style] == WheelViewStyleCarousel) {
-         [cell setTransform:CGAffineTransformScale(CGAffineTransformMakeTranslation(xPosition, yPosition), scale, scale)];
-         // tweak alpha using the same system as applied for scale, this time
-         // with 0.3 the minimum and a semicircle range of 0.5
+         [cell setTransform:CGAffineTransformScale(
+                  CGAffineTransformMakeTranslation(xPosition, yPosition), 
+                  scale, scale)];         
+         // Tweak alpha using the same system as applied for scale, this time
+         // with 0.3 as the minimum and a semicircle range of 0.5
          [cell setAlpha:(0.3f + 0.5f * (cosf(angleInRadians) + 1.0))];
          
       } else {
-         [cell setTransform:CGAffineTransformMakeTranslation(xPosition, yPosition)];
+         [cell setTransform:CGAffineTransformMakeTranslation(xPosition, 
+                                                             yPosition)];
          [cell setAlpha:1.0];
       }
       
       [[cell layer] setZPosition:scale];         
       
-      // work out what the next angle is going to be
+      // Work out what the next angle is going to be
       angle += angleToAdd;
    }
 }
@@ -111,8 +120,8 @@
 
 - (void)setStyle:(WheelViewStyle)newStyle
 {
-   if (style_ != newStyle) {
-      style_ = newStyle;
+   if (_style != newStyle) {
+      _style = newStyle;
       
       [UIView beginAnimations:@"WheelViewStyleChange" context:nil];
       [self setAngle:[self currentAngle]];
@@ -130,7 +139,5 @@
 
 @end
 
-
 @implementation WheelViewCell
-
 @end

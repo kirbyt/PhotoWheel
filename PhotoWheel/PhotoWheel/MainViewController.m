@@ -11,31 +11,31 @@
 #import "PhotoAlbumsViewController.h"
 #import "AppDelegate.h"
 
-@interface MainViewController ()
-@property (nonatomic, assign) BOOL skipRotation;
-@end
-
 @implementation MainViewController
 
-@synthesize backgroundImageView = backgroundImageView_;
-@synthesize infoButton = infoButton_;
-@synthesize skipRotation = skipRotation_;
+@synthesize backgroundImageView = _backgroundImageView;           // 1
+@synthesize infoButton = _infoButton;                             // 2
+@synthesize skipRotation = _skipRotation;
 
-- (void)viewDidLoad
+- (void)viewDidLoad                                               // 3
 {
    [super viewDidLoad];
    
-   AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-   NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+   AppDelegate *appDelegate = 
+      (AppDelegate *)[[UIApplication sharedApplication] delegate];
+   NSManagedObjectContext *managedObjectContext = 
+      [appDelegate managedObjectContext];
    
    UIStoryboard *storyboard = [self storyboard];
    
-   PhotoAlbumsViewController *photoAlbumsScene = [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumsScene"];
+   PhotoAlbumsViewController *photoAlbumsScene = 
+      [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumsScene"];
    [photoAlbumsScene setManagedObjectContext:managedObjectContext];
    [self addChildViewController:photoAlbumsScene];
    [photoAlbumsScene didMoveToParentViewController:self];
-
-   PhotoAlbumViewController *photoAlbumScene = [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
+   
+   PhotoAlbumViewController *photoAlbumScene = 
+      [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
    [self addChildViewController:photoAlbumScene];
    [photoAlbumScene didMoveToParentViewController:self];
    
@@ -43,21 +43,14 @@
    [self setSkipRotation:YES];
 }
 
-- (void)viewDidUnload
-{
-   [self setBackgroundImageView:nil];
-   [self setInfoButton:nil];
-   [super viewDidUnload];
-}
-
 - (void)viewWillAppear:(BOOL)animated
 {
    [super viewWillAppear:animated];
-
+   
    if ([self skipRotation] == NO) {
       UIInterfaceOrientation interfaceOrientation = [self interfaceOrientation];
       NSTimeInterval interval = 0.35;
-
+      
       void (^animation)() = ^ {
          [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:interval];
          for (UIViewController *childController in [self childViewControllers]) {
@@ -70,16 +63,25 @@
    [self setSkipRotation:NO];
 }
 
-#pragma mark - Rotation Support
+- (void)viewDidUnload                                             // 4
+{
+   [self setBackgroundImageView:nil];
+   [self setInfoButton:nil];
+   [super viewDidUnload];
+}
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+#pragma mark - Rotation support
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:
+(UIInterfaceOrientation)toInterfaceOrientation                    // 5
 {
    return YES;
 }
 
-- (void)layoutForLandscape
+- (void)layoutForLandscape                                        // 6
 {
-   UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-right-grooved.png"];
+   UIImage *backgroundImage = [UIImage 
+                         imageNamed:@"background-landscape-right-grooved.png"];
    [[self backgroundImageView] setImage:backgroundImage];
    
    CGRect frame = [[self infoButton] frame];
@@ -87,9 +89,10 @@
    [[self infoButton] setFrame:frame];
 }
 
-- (void)layoutForPortrait
+- (void)layoutForPortrait                                         // 7
 {
-   UIImage *backgroundImage = [UIImage imageNamed:@"background-portrait-grooved.png"]; 
+   UIImage *backgroundImage = [UIImage 
+                               imageNamed:@"background-portrait-grooved.png"]; 
    [[self backgroundImageView] setImage:backgroundImage];
    
    CGRect frame = [[self infoButton] frame];
@@ -97,7 +100,9 @@
    [[self infoButton] setFrame:frame];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willAnimateRotationToInterfaceOrientation:
+(UIInterfaceOrientation)toInterfaceOrientation 
+duration:(NSTimeInterval)duration                                // 8
 {
    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
       [self layoutForLandscape];
@@ -105,6 +110,5 @@
       [self layoutForPortrait];
    }
 }
-
 
 @end

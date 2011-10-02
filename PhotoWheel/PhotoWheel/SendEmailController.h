@@ -2,7 +2,7 @@
 //  SendEmailController.h
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 9/2/11.
+//  Created by Kirby Turner on 10/2/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
@@ -15,8 +15,6 @@
 
 
 @interface SendEmailController : NSObject <MFMailComposeViewControllerDelegate> 
-{
-}
 
 @property (nonatomic, strong) UIViewController<SendEmailControllerDelegate> *viewController;
 @property (nonatomic, strong) NSSet *photos;

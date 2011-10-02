@@ -2,27 +2,27 @@
 //  GridView.h
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 7/18/11.
-//  Copyright 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 9/29/11.
+//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@class GridViewCell;
-@protocol GridViewDataSource;
+@class GridViewCell;                                                     // 1
+@protocol GridViewDataSource;                                            // 2
 
 
-@interface GridView : UIScrollView <UIScrollViewDelegate>
+@interface GridView : UIScrollView <UIScrollViewDelegate>                // 3
 
-@property (nonatomic, strong) IBOutlet id<GridViewDataSource> dataSource;
-@property (nonatomic, assign) BOOL allowsMultipleSelection;
+@property (nonatomic, strong) IBOutlet id<GridViewDataSource> dataSource;// 4
+@property (nonatomic, assign) BOOL allowsMultipleSelection;              // 5
 
 
-- (id)dequeueReusableCell;
-- (void)reloadData;
-- (GridViewCell *)cellAtIndex:(NSInteger)index;
-- (NSInteger)indexForSelectedCell;
-- (NSArray *)indexesForSelectedCells;
+- (id)dequeueReusableCell;                                               // 6
+- (void)reloadData;                                                      // 7
+- (GridViewCell *)cellAtIndex:(NSInteger)index;                          // 8
+- (NSInteger)indexForSelectedCell;                                       // 9
+- (NSArray *)indexesForSelectedCells;                                    // 10
 
 @end
 
@@ -41,6 +41,5 @@
 
 
 @interface GridViewCell : UIView
-@property (nonatomic, assign, getter = isSelected) BOOL selected;
+@property (nonatomic, assign, getter = isSelected) BOOL selected;       // 11
 @end
-
