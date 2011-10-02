@@ -2,7 +2,7 @@
 //  ClearToolbar.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 8/21/11.
+//  Created by Kirby Turner on 9/29/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 

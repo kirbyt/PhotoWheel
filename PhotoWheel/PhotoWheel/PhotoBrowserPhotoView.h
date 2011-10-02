@@ -2,7 +2,7 @@
 //  PhotoBrowserPhotoView.h
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 8/30/11.
+//  Created by Kirby Turner on 10/1/11.
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
@@ -17,7 +17,6 @@
 
 - (void)setImage:(UIImage *)newImage;
 - (void)turnOffZoom;
-
 - (CGPoint)pointToCenterAfterRotation;
 - (CGFloat)scaleToRestoreAfterRotation;
 - (void)setMaxMinZoomScalesForCurrentBounds;

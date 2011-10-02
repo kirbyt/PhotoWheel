@@ -2,18 +2,18 @@
 //  NameEditorViewController.m
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 6/16/11.
-//  Copyright 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 9/24/11.
+//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import "NameEditorViewController.h"
 
 @implementation NameEditorViewController
 
-@synthesize nameTextField = nameTextField_;
-@synthesize delegate = delegate_;
-@synthesize indexPath = indexPath_;
-@synthesize defaultNameText = defaultNameText_;
+@synthesize nameTextField = _nameTextField;
+@synthesize delegate = _delegate;
+@synthesize indexPath = _indexPath;
+@synthesize defaultNameText = _defaultNameText;
 
 - (id)initWithDefaultNib 
 {
@@ -23,6 +23,7 @@
    }
    return self;
 }
+
 - (void)viewDidLoad
 {
    [super viewDidLoad];
@@ -37,17 +38,20 @@
    [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:
+(UIInterfaceOrientation)interfaceOrientation
 {
    return YES;
 }
 
-#pragma mark - Actions Methods
+#pragma mark - Actions methods
 
 - (IBAction)cancel:(id)sender
 {
    id<NameEditorViewControllerDelegate> delegate = [self delegate];
-   if (delegate && [delegate respondsToSelector:@selector(nameEditorViewControllerDidCancel:)]) {
+   if (delegate && 
+       [delegate respondsToSelector:@selector(nameEditorViewControllerDidCancel:)]) 
+   {
       [delegate nameEditorViewControllerDidCancel:self];
    }
    [self dismissModalViewControllerAnimated:YES];
@@ -56,7 +60,9 @@
 - (IBAction)done:(id)sender
 {
    id<NameEditorViewControllerDelegate> delegate = [self delegate];
-   if (delegate && [delegate respondsToSelector:@selector(nameEditorViewControllerDidFinish:)]) {
+   if (delegate && 
+       [delegate respondsToSelector:@selector(nameEditorViewControllerDidFinish:)]) 
+   {
       [delegate nameEditorViewControllerDidFinish:self]; 
    }
    [self dismissModalViewControllerAnimated:YES];
