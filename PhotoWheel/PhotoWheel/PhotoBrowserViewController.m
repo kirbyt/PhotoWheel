@@ -17,8 +17,8 @@
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, strong) NSMutableArray *photoViewCache;
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
-@property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation; // 1
-@property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage; // 2
+@property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
+@property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
 
 - (void)initPhotoViewCache;
 - (void)setScrollViewContentSize;
@@ -41,8 +41,8 @@
 @synthesize chromeHideTimer = _chromeHideTimer;
 @synthesize statusBarHeight = _statusBarHeight;
 @synthesize actionButton = _actionButton;
-@synthesize firstVisiblePageIndexBeforeRotation = _firstVisiblePageIndexBeforeRotation;   // 3
-@synthesize percentScrolledIntoFirstVisiblePage = _percentScrolledIntoFirstVisiblePage;   // 4
+@synthesize firstVisiblePageIndexBeforeRotation = _firstVisiblePageIndexBeforeRotation;
+@synthesize percentScrolledIntoFirstVisiblePage = _percentScrolledIntoFirstVisiblePage;
 
 - (void)viewDidLoad
 {
@@ -458,11 +458,11 @@
 
 - (void)printCurrentPhoto
 {
-   [self cancelChromeDisplayTimer];                                     // 2
-   UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];     // 3
+   [self cancelChromeDisplayTimer];
+   UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
    
    UIPrintInteractionController *controller = 
-      [UIPrintInteractionController sharedPrintController];             // 4
+      [UIPrintInteractionController sharedPrintController];
    if(!controller){
       NSLog(@"Couldn't get shared UIPrintInteractionController!");
       return;
@@ -476,19 +476,19 @@
       if(completed && error)
          NSLog(@"FAILED! due to error in domain %@ with error code %u", 
                error.domain, error.code);
-   };                                                                   // 5
+   };
    
-   UIPrintInfo *printInfo = [UIPrintInfo printInfo];                    // 6
-   [printInfo setOutputType:UIPrintInfoOutputPhoto];                    // 7
+   UIPrintInfo *printInfo = [UIPrintInfo printInfo];
+   [printInfo setOutputType:UIPrintInfoOutputPhoto];
    [printInfo setJobName:[NSString stringWithFormat:@"photo-%i", 
-                          [self currentIndex]]];                        // 8
+                          [self currentIndex]]];
    
-   [controller setPrintInfo:printInfo];                                 // 9
-   [controller setPrintingItem:currentPhoto];                           // 10
+   [controller setPrintInfo:printInfo];
+   [controller setPrintingItem:currentPhoto];
    
    [controller presentFromBarButtonItem:[self actionButton] 
                                animated:YES 
-                      completionHandler:completionHandler];             // 11
+                      completionHandler:completionHandler];
 }
 
 #pragma mark - UIActionSheetDelegate methods
@@ -507,7 +507,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    
    if ([actionSheet tag] == ACTIONSHEET_TAG_DELETE) {
       [self deletePhotoConfirmed];
-   } else if ([actionSheet tag] == ACTIONSHEET_TAG_ACTIONS) {           // 12
+   } else if ([actionSheet tag] == ACTIONSHEET_TAG_ACTIONS) {
       [self printCurrentPhoto];      
    }
 }
@@ -526,7 +526,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    return YES;
 }
 
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration  // 5
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
    [[self scrollView] setScrollEnabled:NO];
    
@@ -545,7 +545,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    }
 }
 
-- (void)layoutScrollViewSubviews                                            // 6
+- (void)layoutScrollViewSubviews
 {
    [self setScrollViewContentSize];
    
@@ -567,7 +567,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    [[self scrollView] setContentOffset:CGPointMake(newOffset, 0)];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration  // 7
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
    [self layoutScrollViewSubviews];
    
