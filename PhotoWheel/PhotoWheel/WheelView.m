@@ -405,7 +405,7 @@
 
 - (void)setAngleOffset:(CGFloat)angleOffset
 {
-   if (_angleOffset != angleOffset) {
+   if (_angleOffset != -angleOffset) {
       _angleOffset = -angleOffset;
       [self layoutSubviews];
    }
