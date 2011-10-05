@@ -94,7 +94,6 @@
 {
    NSManagedObjectContext *context = [self managedObjectContext];
    id photoAlbum = [context objectWithID:[self objectID]];
-   NSAssert(photoAlbum, @"nil photo album");
    
    NSArray *indexes = [[self gridView] indexesForSelectedCells];
    __block NSInteger count = [indexes count];                              // 9
