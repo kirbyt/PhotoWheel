@@ -172,6 +172,7 @@
       
       void (^completion)(BOOL) = ^(BOOL finished) {
          if (finished) {
+            // Do other clean if needed.
          }
       };
       
