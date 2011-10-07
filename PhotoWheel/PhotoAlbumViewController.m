@@ -47,7 +47,7 @@
    [super viewDidLoad];
    [[self gridView] setAlwaysBounceVertical:YES];
 
-    [[NSNotificationCenter defaultCenter] addObserverForName:@"RefetchAllDatabaseData"
+    [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification
                                                       object:[[UIApplication sharedApplication] delegate]
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *__strong note) {

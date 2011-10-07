@@ -40,7 +40,7 @@
    [self addChildViewController:childController];
    [childController didMoveToParentViewController:self];
 
-   [[NSNotificationCenter defaultCenter] addObserverForName:@"RefetchAllDatabaseData"
+   [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification
                                                       object:[[UIApplication sharedApplication] delegate]
                                                        queue:[NSOperationQueue mainQueue]
                                                   usingBlock:^(NSNotification *__strong note) {
@@ -61,7 +61,7 @@
 - (void)viewDidUnload
 {
    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-   [[NSNotificationCenter defaultCenter] removeObserver:self name:@"RefetchAllDatabaseData" object:nil];
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
 
    [self setWheelView:nil];
