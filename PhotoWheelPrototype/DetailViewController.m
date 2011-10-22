@@ -2,19 +2,19 @@
 //  DetailViewController.m
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 6/15/11.
-//  Copyright 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 9/24/11.
+//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import "DetailViewController.h"
-#import "RootViewController.h"
 #import "PhotoWheelViewCell.h"
+#import "PhotoAlbum.h"
+#import "Photo.h"
 
 @interface DetailViewController ()
+@property (strong, nonatomic) UIPopoverController *masterPopoverController;
 @property (strong, nonatomic) NSArray *data;
-@property (strong, nonatomic) UIPopoverController *popoverController;
 @property (strong, nonatomic) PhotoWheelViewCell *selectedPhotoWheelViewCell;
-@property (assign, nonatomic) NSUInteger selectedWheelViewCellIndex;
 @property (strong, nonatomic) UIActionSheet *actionSheet;
 @property (strong, nonatomic) UIImagePickerController *imagePickerController;
 - (void)configureView;
@@ -22,29 +22,16 @@
 
 @implementation DetailViewController
 
-@synthesize data = data_;
 @synthesize detailItem = _detailItem;
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
-@synthesize toolbar = _toolbar;
-@synthesize popoverController = _myPopoverController;
-@synthesize wheelView = wheelView_;
-@synthesize photoAlbum = photoAlbum_;
-@synthesize selectedPhotoWheelViewCell = selectedPhotoWheelViewCell;
-@synthesize selectedWheelViewCellIndex = selectedWheelViewCellIndex_;
-@synthesize actionSheet = actionSheet_;
-@synthesize imagePickerController = imagePickerController_;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-   if (self) {
-      self.title = NSLocalizedString(@"Detail", @"Detail");
-      
-      [self setImagePickerController:[[UIImagePickerController alloc] init]];
-      [self.imagePickerController setDelegate:self];
-   }
-   return self;
-}
+@synthesize masterPopoverController = _masterPopoverController;
+@synthesize data = _data;
+@synthesize wheelView = _wheelView;
+@synthesize selectedPhotoWheelViewCell = _selectedPhotoWheelViewCell;
+@synthesize actionSheet = _actionSheet;
+@synthesize imagePickerController = _imagePickerController;
+@synthesize photoAlbum = _photoAlbum;
+@synthesize selectedWheelViewCellIndex = _selectedWheelViewCellIndex;
 
 #pragma mark - Managing the detail item
 
@@ -57,8 +44,8 @@
       [self configureView];
    }
    
-   if (self.popoverController != nil) {
-      [self.popoverController dismissPopoverAnimated:YES];
+   if (self.masterPopoverController != nil) {
+      [self.masterPopoverController dismissPopoverAnimated:YES];
    }        
 }
 
@@ -82,24 +69,55 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-
+   
+   UIImage *defaultPhoto = [UIImage imageNamed:@"defaultPhoto.png"];
    CGRect cellFrame = CGRectMake(0, 0, 75, 75);
    NSInteger count = 10;
    NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:count];
    for (NSInteger index = 0; index < count; index++) {
-      PhotoWheelViewCell *cell = [[PhotoWheelViewCell alloc] initWithFrame:cellFrame];
+      PhotoWheelViewCell *cell = 
+      [[PhotoWheelViewCell alloc] initWithFrame:cellFrame];      
+      [cell setImage:defaultPhoto];
       
-      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellDoubleTapped:)];
+      // Add a double-tap gesture to the cell.
+      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] 
+                                           initWithTarget:self 
+                                           action:@selector(cellDoubleTapped:)];      
       [doubleTap setNumberOfTapsRequired:2];
       [cell addGestureRecognizer:doubleTap];
       
-      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
+      // Add a single-tap gesture to the cell.
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] 
+                                     initWithTarget:self 
+                                     action:@selector(cellTapped:)];      
       [tap requireGestureRecognizerToFail:doubleTap];
       [cell addGestureRecognizer:tap];
       
       [newArray addObject:cell];
    }
    [self setData:[newArray copy]];
+   
+   NSArray *segmentedItems = [NSArray arrayWithObjects:
+                              @"Wheel", @"Carousel", nil];
+   UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] 
+                                           initWithItems:segmentedItems];
+   [segmentedControl addTarget:self 
+                        action:@selector(segmentedControlValueChanged:) 
+              forControlEvents:UIControlEventValueChanged];
+   [segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+   [segmentedControl setSelectedSegmentIndex:0];
+   [[self navigationItem] setTitleView:segmentedControl];
+}
+
+- (void)segmentedControlValueChanged:(id)sender
+{
+   NSInteger index = [sender selectedSegmentIndex];
+   if (index == 0) {
+      [[self wheelView] setStyle:WheelViewStyleWheel];
+   } else {
+      [[self wheelView] setStyle:WheelViewStyleCarousel];
+   }
+   
 }
 
 - (void)viewDidUnload
@@ -121,12 +139,12 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-   [super viewWillDisappear:animated];
+	[super viewWillDisappear:animated];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
 {
-   [super viewDidDisappear:animated];
+	[super viewDidDisappear:animated];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -138,64 +156,77 @@
 - (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
    if ([self actionSheet]) {
-      [self.actionSheet dismissWithClickedButtonIndex:-1 animated:YES];
+      [[self actionSheet] dismissWithClickedButtonIndex:-1 animated:YES];
    }
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+   if (self) {
+      self.title = NSLocalizedString(@"Detail", @"Detail");
+
+      [self setImagePickerController:[[UIImagePickerController alloc] init]];
+      [[self imagePickerController] setDelegate:self];
+   }
+   return self;
 }
 
 #pragma mark - Split view
 
-- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController: (UIPopoverController *)pc
+- (void)splitViewController:(UISplitViewController *)splitController willHideViewController:(UIViewController *)viewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)popoverController
 {
-   barButtonItem.title = @"Photo Albums";
-   NSMutableArray *items = [[self.toolbar items] mutableCopy];
-   [items insertObject:barButtonItem atIndex:0];
-   [self.toolbar setItems:items animated:YES];
-   self.popoverController = pc;
+   barButtonItem.title = NSLocalizedString(@"Photo Albums", @"Photo albums title");
+   [self.navigationItem setLeftBarButtonItem:barButtonItem animated:YES];
+   self.masterPopoverController = popoverController;
 }
 
-- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
+- (void)splitViewController:(UISplitViewController *)splitController willShowViewController:(UIViewController *)viewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem
 {
-   // Called when the view is shown again in the split view, invalidating the button and popover controller.
-   NSMutableArray *items = [[self.toolbar items] mutableCopy];
-   [items removeObjectAtIndex:0];
-   [self.toolbar setItems:items animated:YES];
-   self.popoverController = nil;
+   // Called when the view is shown again in the split view, invalidating 
+   // the button and popover controller.
+   [self.navigationItem setLeftBarButtonItem:nil animated:YES];
+   self.masterPopoverController = nil;
 }
 
 #pragma mark - WheelViewDataSource Methods
 
 - (NSInteger)wheelViewNumberOfCells:(WheelView *)wheelView
 {
-   NSInteger count = [self.data count];
+   NSInteger count = [[self data] count];
    return count;
 }
 
 - (WheelViewCell *)wheelView:(WheelView *)wheelView cellAtIndex:(NSInteger)index
 {
-   WheelViewCell *cell = [self.data objectAtIndex:index];
+   WheelViewCell *cell = [[self data] objectAtIndex:index];
    return cell;
 }
-
-#pragma mark - Image Picker Helper Methods
 
 - (void)presentCamera
 {
    // Display the camera.
-   [self.imagePickerController setSourceType:UIImagePickerControllerSourceTypeCamera];
+   [[self imagePickerController] 
+    setSourceType:UIImagePickerControllerSourceTypeCamera];
    [self presentModalViewController:[self imagePickerController] animated:YES];
 }
 
 - (void)presentPhotoLibrary
 {
-   // Display assets from the photo library only.
-   [self.imagePickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+   // Display assets from the Photos library only.
+   [[self imagePickerController] 
+    setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
    
    UIView *view = [self selectedPhotoWheelViewCell];
    CGRect rect = [view bounds];
    
-   UIPopoverController *newPopoverController = [[UIPopoverController alloc] initWithContentViewController:[self imagePickerController]];
-   [newPopoverController presentPopoverFromRect:rect inView:view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-   [self setPopoverController:newPopoverController];
+   UIPopoverController *newPopoverController = 
+      [[UIPopoverController alloc] 
+       initWithContentViewController:[self imagePickerController]];
+   [newPopoverController presentPopoverFromRect:rect inView:view 
+                       permittedArrowDirections:UIPopoverArrowDirectionAny 
+                                       animated:YES];
+   [self setMasterPopoverController:newPopoverController];
 }
 
 - (void)presentPhotoPickerMenu
@@ -208,28 +239,42 @@
    UIView *view = [self selectedPhotoWheelViewCell];
    CGRect rect = [view bounds];
    [actionSheet showFromRect:rect inView:view animated:YES];
-
+   
    [self setActionSheet:actionSheet];
 }
 
-#pragma mark - Actions
+// Other code left out for brevity's sake.
 
-- (IBAction)segmentedControlValueChanged:(id)sender
+#pragma mark - UIActionSheetDelegate Methods
+
+- (void)actionSheet:(UIActionSheet *)actionSheet 
+clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-   NSInteger index = [sender selectedSegmentIndex];
-   if (index == 0) {
-      [self.wheelView setStyle:WheelViewStyleWheel];
-   } else {
-      [self.wheelView setStyle:WheelViewStyleCarousel];
+   switch (buttonIndex) {
+      case 0:
+         [self presentCamera];
+         break;
+      case 1:
+         [self presentPhotoLibrary];
+         break;
    }
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet 
+didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+   [self setActionSheet:nil];
 }
 
 - (void)cellTapped:(UIGestureRecognizer *)recognizer
 {
    [self setSelectedPhotoWheelViewCell:(PhotoWheelViewCell *)[recognizer view]];
-   [self setSelectedWheelViewCellIndex:[[self data] indexOfObject:[self selectedPhotoWheelViewCell]]];
-
-   BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+   [self setSelectedWheelViewCellIndex:
+    [[self data] indexOfObject:[self selectedPhotoWheelViewCell]]];
+   
+   BOOL hasCamera = 
+   [UIImagePickerController 
+    isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
    if (hasCamera) {
       [self presentPhotoPickerMenu];
    } else {
@@ -242,66 +287,46 @@
    NSLog(@"%s", __PRETTY_FUNCTION__);
 }
 
-#pragma mark - UIActionSheetDelegate Methods
-
-- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-   switch (buttonIndex) {
-      case 0:
-         [self presentCamera];
-         break;
-      case 1:
-         [self presentPhotoLibrary];
-         break;
-   }
-}
-
-- (void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex
-{
-   [self setActionSheet:nil];
-}
-
 #pragma mark - UIImagePickerControllerDelegate Methods
 
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController:(UIImagePickerController *)picker
+didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-   // If the popover controller is available then
+   // If the popover controller is available,
    // assume the photo is selected from the library
    // and not from the camera.
-   BOOL takenWithCamera = ([self popoverController] == nil);
+   BOOL takenWithCamera = ([self masterPopoverController] == nil);
    
-   // Dismiss the popover controller if available, 
+   // Dismiss the popover controller if available; 
    // otherwise dismiss the camera view.
-   if ([self popoverController]) {
-      [self.popoverController dismissPopoverAnimated:YES];
-      [self setPopoverController:nil];
+   if ([self masterPopoverController]) {
+      [[self masterPopoverController] dismissPopoverAnimated:YES];
+      [self setMasterPopoverController:nil];
    } else {
       [self dismissModalViewControllerAnimated:YES];
    }
-
+   
    // Retrieve and display the image.
    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-   [self.selectedPhotoWheelViewCell setImage:image];
+   [[self selectedPhotoWheelViewCell] setImage:image];
    
-   Photo *targetPhoto = [[[self photoAlbum] photos] objectAtIndex:[self selectedWheelViewCellIndex]];
+   Photo *targetPhoto = [[[self photoAlbum] photos]
+                         objectAtIndex:[self selectedWheelViewCellIndex]];
    [targetPhoto saveImage:image];
    [targetPhoto setDateAdded:[NSDate date]];
    
-   [[self photoAlbum] setKeyPhoto:targetPhoto];
-   
    NSError *error = nil;
    [[[self photoAlbum] managedObjectContext] save:&error];
-
+   
    if (takenWithCamera) {
       UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil);
    }
 }
 
-#pragma mark - Accessors
-
 - (void)setPhotoAlbum:(PhotoAlbum *)photoAlbum
 {
-   photoAlbum_ = photoAlbum;
+   _photoAlbum = photoAlbum;
+   
    UIImage *defaultPhoto = [UIImage imageNamed:@"defaultPhoto.png"];
    for (NSUInteger index=0; index<10; index++) {
       PhotoWheelViewCell *cell = [[self data] objectAtIndex:index];

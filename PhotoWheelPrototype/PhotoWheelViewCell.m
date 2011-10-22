@@ -2,8 +2,8 @@
 //  PhotoWheelViewCell.m
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 7/2/11.
-//  Copyright 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 9/24/11.
+//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import "PhotoWheelViewCell.h"
@@ -17,7 +17,7 @@
    CALayer *layer = [self layer];
    id imageRef = (__bridge id)[newImage CGImage];
    [layer setContents:imageRef];
-
+   
    // Add border and shadow.
    [layer setBorderColor:[UIColor colorWithWhite:1.0 alpha:1.0].CGColor];
    [layer setBorderWidth:5.0];

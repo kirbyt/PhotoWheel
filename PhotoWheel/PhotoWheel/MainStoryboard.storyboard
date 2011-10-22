@@ -1,0 +1,588 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="35">
+    <dependencies>
+        <development defaultVersion="4200" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+    </dependencies>
+    <scenes>
+        <scene sceneID="9">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="MainScene" id="6" customClass="MainViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="7">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="background-portrait-grooved.png" id="11">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" id="15">
+                                <rect key="frame" x="722" y="959" width="18" height="19"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="16" kind="modal" identifier="AboutSceneSegue" modalPresentationStyle="formSheet" id="27"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="40"/>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="11" id="joP-y2-xrb"/>
+                        <outlet property="infoButton" destination="15" id="6sP-Kf-DCp"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="698" y="701"/>
+        </scene>
+        <scene sceneID="19">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="18" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="16" customClass="AboutViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="17">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="20">
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="22"/>
+                                    <barButtonItem systemItem="done" id="21">
+                                        <connections>
+                                            <action selector="done:" destination="16" id="28"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="Icon@2x.png" id="23">
+                                <rect key="frame" x="160" y="190" width="114" height="114"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="PhotoWheel" lineBreakMode="tailTruncation" minimumFontSize="10" id="24">
+                                <rect key="frame" x="317" y="190" width="193" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Version 1.0" lineBreakMode="tailTruncation" minimumFontSize="10" id="25">
+                                <rect key="frame" x="317" y="219" width="193" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1651" y="719"/>
+        </scene>
+        <scene sceneID="32">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="31" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="29" customClass="PhotoBrowserViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="30">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="Pdw-7D-aKC">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </scrollView>
+                            <view contentMode="scaleToFill" id="bVh-pO-wOi">
+                                <rect key="frame" x="0.0" y="835" width="768" height="169"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="iNe-eO-Tul">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <items>
+                                            <barButtonItem title="Revert" id="E9h-ID-kz2">
+                                                <connections>
+                                                    <action selector="revertToOriginal:" destination="29" id="YKl-mB-A8O"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Enhance" id="94k-DI-ydt">
+                                                <connections>
+                                                    <action selector="enhanceImage:" destination="29" id="CuF-Db-652"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Face Zoom" id="ewF-wz-qIX">
+                                                <connections>
+                                                    <action selector="zoomToFaces:" destination="29" id="BXJ-Ry-bVH"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="l0N-Ft-Yzi"/>
+                                            <barButtonItem systemItem="cancel" id="IBq-KH-Y8m">
+                                                <connections>
+                                                    <action selector="cancel:" destination="29" id="jtR-NK-PoG"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="save" id="zRK-xO-EhD">
+                                                <connections>
+                                                    <action selector="saveImage:" destination="29" id="mSL-fz-koh"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Mhn-N1-4hZ">
+                                        <rect key="frame" x="10" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="0U5-G0-pQ1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lje-sp-1xg">
+                                        <rect key="frame" x="118" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="tFn-ia-hmY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bnf-4i-32y">
+                                        <rect key="frame" x="226" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="2zj-de-hNk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mCC-RC-fc3">
+                                        <rect key="frame" x="334" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="1Ec-7R-qNh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AsF-C4-9uZ">
+                                        <rect key="frame" x="442" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="yhB-LS-X2l"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wwA-ZX-3nj">
+                                        <rect key="frame" x="550" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="iLZ-Cd-Na0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mC2-Eu-Hno">
+                                        <rect key="frame" x="658" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="Wrd-2H-IwW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="41"/>
+                    <connections>
+                        <outlet property="filterViewContainer" destination="bVh-pO-wOi" id="7QN-g9-6z9"/>
+                        <outlet property="scrollView" destination="Pdw-7D-aKC" id="oQt-6B-NaF"/>
+                        <outletCollection property="filterButtons" destination="Mhn-N1-4hZ" id="Shc-zp-oka"/>
+                        <outletCollection property="filterButtons" destination="lje-sp-1xg" id="yAs-sa-aUo"/>
+                        <outletCollection property="filterButtons" destination="bnf-4i-32y" id="xcA-Jx-Lou"/>
+                        <outletCollection property="filterButtons" destination="mCC-RC-fc3" id="wDv-Q1-zFC"/>
+                        <outletCollection property="filterButtons" destination="AsF-C4-9uZ" id="3QK-l3-axz"/>
+                        <outletCollection property="filterButtons" destination="wwA-ZX-3nj" id="Nb3-FJ-oFK"/>
+                        <outletCollection property="filterButtons" destination="mC2-Eu-Hno" id="pGy-dn-fzX"/>
+                        <segue destination="lcc-sx-gN7" kind="push" identifier="SlideshowSegue" id="aP9-wO-Wgx"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1651" y="1444"/>
+        </scene>
+        <scene sceneID="yNS-2d-FRY">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S8X-Mq-mmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="DDM-r0-lBW" customClass="FlickrViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Osd-dl-Yad">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="SGW-Ki-leZ">
+                                <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <barButtonItem systemItem="cancel" id="yhT-1N-qNA">
+                                        <connections>
+                                            <action selector="cancel:" destination="DDM-r0-lBW" id="2JR-Ag-e2M"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="qNf-my-CB9"/>
+                                    <barButtonItem systemItem="save" id="rES-Sc-oEQ">
+                                        <connections>
+                                            <action selector="save:" destination="DDM-r0-lBW" id="R56-yU-VpJ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <searchBar contentMode="redraw" id="SvF-1q-T6G">
+                                <rect key="frame" x="0.0" y="44" width="540" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="DDM-r0-lBW" id="CEb-Z4-fmH"/>
+                                </connections>
+                            </searchBar>
+                            <view contentMode="scaleToFill" id="oI7-Dx-2Ei" customClass="GridView">
+                                <rect key="frame" x="0.0" y="88" width="540" height="532"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="DDM-r0-lBW" id="7IX-cS-X3H"/>
+                                </connections>
+                            </view>
+                            <view contentMode="scaleToFill" id="p7g-B6-zlc">
+                                <rect key="frame" x="0.0" y="88" width="540" height="532"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" id="bAH-W7-9Hp">
+                                <rect key="frame" x="252" y="291" width="37" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="bAH-W7-9Hp" id="qv7-gp-uRL"/>
+                        <outlet property="gridView" destination="oI7-Dx-2Ei" id="SL6-vp-USv"/>
+                        <outlet property="overlayView" destination="p7g-B6-zlc" id="RB3-xG-Ofo"/>
+                        <outlet property="searchBar" destination="SvF-1q-T6G" id="aih-4s-1Oj"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="1657" y="2591"/>
+        </scene>
+        <scene sceneID="QCR-Il-k8y">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e0o-Li-hUz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="lcc-sx-gN7" customClass="MainSlideShowViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="a74-ou-Dh2">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Usw-RA-gGY"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2549" y="1438"/>
+        </scene>
+        <scene sceneID="38">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="37" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <navigationController navigationBarHidden="YES" id="35" customClass="CustomNavigationController" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" barStyle="blackTranslucent" id="36">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="6" kind="relationship" relationship="rootViewController" id="39"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="-276" y="701"/>
+        </scene>
+        <scene sceneID="45">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="44" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="PhotoAlbumScene" id="42" customClass="PhotoAlbumViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="43">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stack-viewer-bg-portrait.png" id="52">
+                                <rect key="frame" x="0.0" y="0.0" width="716" height="717"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="BYg-8L-4mf" customClass="ClearToolbar">
+                                <rect key="frame" x="9" y="6" width="698" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="TbA-dR-kXT">
+                                        <connections>
+                                            <action selector="showActionMenu:" destination="42" id="AJv-uc-7wD"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8LR-tM-m7k"/>
+                                    <barButtonItem style="plain" id="c1V-8p-M9x">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tap to edit" textAlignment="center" minimumFontSize="17" id="yTf-IH-CSS">
+                                            <rect key="frame" x="82" y="7" width="533" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="42" id="EEZ-iX-urf"/>
+                                            </connections>
+                                        </textField>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="iTy-2a-InX"/>
+                                    <barButtonItem systemItem="add" id="Jgk-Bz-Yta">
+                                        <connections>
+                                            <action selector="addPhoto:" destination="42" id="iUB-ZU-pn4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" id="rcP-0A-Mjr" customClass="GridView">
+                                <rect key="frame" x="9" y="51" width="698" height="597"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="42" id="Cvp-hJ-JGN"/>
+                                </connections>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stack-viewer-shadow.png" id="XVS-eo-L2R">
+                                <rect key="frame" x="9" y="51" width="698" height="8"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="addButton" destination="Jgk-Bz-Yta" id="uEL-pt-ETK"/>
+                        <outlet property="backgroundImageView" destination="52" id="Xhh-xB-KKZ"/>
+                        <outlet property="gridView" destination="rcP-0A-Mjr" id="dw3-ab-pQm"/>
+                        <outlet property="shadowImageView" destination="XVS-eo-L2R" id="abC-pK-ZHg"/>
+                        <outlet property="textField" destination="yTf-IH-CSS" id="XGl-3W-dCp"/>
+                        <outlet property="toolbar" destination="BYg-8L-4mf" id="nK3-xS-Aui"/>
+                        <segue destination="29" kind="custom" identifier="PushPhotoBrowser" customClass="CustomPushSegue" id="hmP-y7-EEC"/>
+                        <segue destination="DDM-r0-lBW" kind="modal" identifier="PushFlickrScene" modalPresentationStyle="formSheet" id="IqA-Qm-hjd"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="698" y="1888"/>
+        </scene>
+        <scene sceneID="49">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="48" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController storyboardIdentifier="PhotoAlbumsScene" id="46" customClass="PhotoAlbumsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="47">
+                        <rect key="frame" x="0.0" y="20" width="768" height="1004"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stack-bg.png" id="50">
+                                <rect key="frame" x="0.0" y="0.0" width="551" height="550"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" id="Kwf-pf-Zvu" customClass="WheelView">
+                                <rect key="frame" x="31" y="33" width="488" height="484"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="46" id="th9-vu-Ows"/>
+                                    <outlet property="delegate" destination="46" id="zX8-Kj-api"/>
+                                </connections>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="51">
+                                <rect key="frame" x="186" y="186" width="178" height="178"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="stack-add.png">
+                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted" image="stack-add-down.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="addPhotoAlbum:" destination="46" eventType="touchUpInside" id="ZJE-m7-QGI"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="wheelView" destination="Kwf-pf-Zvu" id="pLT-VG-2X2"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="-276" y="1888"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Icon@2x.png" width="114" height="114"/>
+        <image name="background-portrait-grooved.png" width="768" height="1004"/>
+        <image name="stack-add-down.png" width="178" height="178"/>
+        <image name="stack-add.png" width="178" height="178"/>
+        <image name="stack-bg.png" width="551" height="550"/>
+        <image name="stack-viewer-bg-portrait.png" width="716" height="717"/>
+        <image name="stack-viewer-shadow.png" width="5" height="8"/>
+    </resources>
+    <classes>
+        <class className="AboutViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/AboutViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="done:"/>
+            </relationships>
+        </class>
+        <class className="ClearToolbar" superclassName="UIToolbar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ClearToolbar.h"/>
+        </class>
+        <class className="CustomNavigationController" superclassName="UINavigationController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomNavigationController.h"/>
+        </class>
+        <class className="FlickrViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/FlickrViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="save:"/>
+                <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
+                <relationship kind="outlet" name="gridView" candidateClass="GridView"/>
+                <relationship kind="outlet" name="overlayView" candidateClass="UIView"/>
+                <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
+            </relationships>
+        </class>
+        <class className="GridView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GridView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+            </relationships>
+        </class>
+        <class className="MainSlideShowViewController" superclassName="SlideShowViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainSlideShowViewController.h"/>
+        </class>
+        <class className="MainViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="infoButton" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="PhotoAlbumViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoAlbumViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addPhoto:"/>
+                <relationship kind="action" name="showActionMenu:"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="gridView" candidateClass="GridView"/>
+                <relationship kind="outlet" name="shadowImageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
+        </class>
+        <class className="PhotoAlbumsViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoAlbumsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addPhotoAlbum:"/>
+                <relationship kind="outlet" name="wheelView" candidateClass="WheelView"/>
+            </relationships>
+        </class>
+        <class className="PhotoBrowserViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoBrowserViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="applyFilter:"/>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="enhanceImage:"/>
+                <relationship kind="action" name="revertToOriginal:"/>
+                <relationship kind="action" name="saveImage:"/>
+                <relationship kind="action" name="zoomToFaces:"/>
+                <relationship kind="outlet" name="filterViewContainer" candidateClass="UIView"/>
+                <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outletCollection" name="filterButtons" candidateClass="UIButton"/>
+            </relationships>
+        </class>
+        <class className="SlideShowViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/SlideShowViewController.h"/>
+        </class>
+        <class className="WheelView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WheelView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
+        </class>
+    </classes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackTranslucent"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination"/>
+    </simulatedMetricsContainer>
+</document>
