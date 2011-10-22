@@ -2,8 +2,8 @@
 //  PhotoWheelViewCell.h
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 7/2/11.
-//  Copyright 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 9/24/11.
+//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
 #import "WheelView.h"

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="872" systemVersion="11C74" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Photo" representedClassName="Photo" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="largeImageData" optional="YES" transient="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="originalImageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <attribute name="smallImageData" optional="YES" transient="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="thumbnailImageData" optional="YES" transient="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
+        <relationship name="photoAlbum" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="PhotoAlbum" inverseName="photos" inverseEntity="PhotoAlbum" syncable="YES"/>
+    </entity>
+    <entity name="PhotoAlbum" representedClassName="PhotoAlbum" syncable="YES">
+        <attribute name="dateAdded" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="photos" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Photo" inverseName="photoAlbum" inverseEntity="Photo" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Photo" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="PhotoAlbum" positionX="160" positionY="192" width="128" height="90"/>
+    </elements>
+</model>
