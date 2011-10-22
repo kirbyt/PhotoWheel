@@ -36,8 +36,8 @@
 		68A156C514379FDE008400B0 /* IconSmall.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A156AD14379FDE008400B0 /* IconSmall.png */; };
 		68A156C614379FDE008400B0 /* IconSmall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A156AE14379FDE008400B0 /* IconSmall@2x.png */; };
 		68A156C714379FDE008400B0 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 68A156AF14379FDE008400B0 /* iTunesArtwork */; };
-		68A156C814379FDE008400B0 /* Default-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A156B014379FDE008400B0 /* Default-landscape.png */; };
-		68A156C914379FDE008400B0 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A156B114379FDE008400B0 /* Default.png */; };
+		68A156C814379FDE008400B0 /* PWDefault-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A156B014379FDE008400B0 /* PWDefault-Landscape.png */; };
+		68A156C914379FDE008400B0 /* PWDefault.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A156B114379FDE008400B0 /* PWDefault.png */; };
 		68A156CA14379FDE008400B0 /* stack-add-down.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A156B214379FDE008400B0 /* stack-add-down.png */; };
 		68A156CB14379FDE008400B0 /* stack-add.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A156B314379FDE008400B0 /* stack-add.png */; };
 		68A156CC14379FDE008400B0 /* stack-bg.png in Resources */ = {isa = PBXBuildFile; fileRef = 68A156B414379FDE008400B0 /* stack-bg.png */; };
@@ -105,8 +105,8 @@
 		68A156AD14379FDE008400B0 /* IconSmall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = IconSmall.png; sourceTree = "<group>"; };
 		68A156AE14379FDE008400B0 /* IconSmall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "IconSmall@2x.png"; sourceTree = "<group>"; };
 		68A156AF14379FDE008400B0 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; path = iTunesArtwork; sourceTree = "<group>"; };
-		68A156B014379FDE008400B0 /* Default-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-landscape.png"; sourceTree = "<group>"; };
-		68A156B114379FDE008400B0 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		68A156B014379FDE008400B0 /* PWDefault-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PWDefault-Landscape.png"; sourceTree = "<group>"; };
+		68A156B114379FDE008400B0 /* PWDefault.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PWDefault.png; sourceTree = "<group>"; };
 		68A156B214379FDE008400B0 /* stack-add-down.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-add-down.png"; sourceTree = "<group>"; };
 		68A156B314379FDE008400B0 /* stack-add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-add.png"; sourceTree = "<group>"; };
 		68A156B414379FDE008400B0 /* stack-bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-bg.png"; sourceTree = "<group>"; };
@@ -173,8 +173,8 @@
 				68A156AD14379FDE008400B0 /* IconSmall.png */,
 				68A156AE14379FDE008400B0 /* IconSmall@2x.png */,
 				68A156AF14379FDE008400B0 /* iTunesArtwork */,
-				68A156B014379FDE008400B0 /* Default-landscape.png */,
-				68A156B114379FDE008400B0 /* Default.png */,
+				68A156B014379FDE008400B0 /* PWDefault-Landscape.png */,
+				68A156B114379FDE008400B0 /* PWDefault.png */,
 				68A156B214379FDE008400B0 /* stack-add-down.png */,
 				68A156B314379FDE008400B0 /* stack-add.png */,
 				68A156B414379FDE008400B0 /* stack-bg.png */,
@@ -346,8 +346,8 @@
 				68A156C514379FDE008400B0 /* IconSmall.png in Resources */,
 				68A156C614379FDE008400B0 /* IconSmall@2x.png in Resources */,
 				68A156C714379FDE008400B0 /* iTunesArtwork in Resources */,
-				68A156C814379FDE008400B0 /* Default-landscape.png in Resources */,
-				68A156C914379FDE008400B0 /* Default.png in Resources */,
+				68A156C814379FDE008400B0 /* PWDefault-Landscape.png in Resources */,
+				68A156C914379FDE008400B0 /* PWDefault.png in Resources */,
 				68A156CA14379FDE008400B0 /* stack-add-down.png in Resources */,
 				68A156CB14379FDE008400B0 /* stack-add.png in Resources */,
 				68A156CC14379FDE008400B0 /* stack-bg.png in Resources */,
