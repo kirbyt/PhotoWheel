@@ -10,6 +10,7 @@
 #import "PhotoAlbum.h"
 #import "Photo.h"
 #import "ImageGridViewCell.h"
+#import "FlickrViewController.h"                                        // 1
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
@@ -223,6 +224,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
                isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
       if (hasCamera) [names addObject:@"presentCamera"];
       [names addObject:@"presentPhotoLibrary"];
+      [names addObject:@"presentFlickr"];                               // 2
    }
    
    SEL selector = NSSelectorFromString([names objectAtIndex:buttonIndex]);
@@ -253,6 +255,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    [self setImagePickerPopoverController:newPopoverController];
 }
 
+- (void)presentFlickr                                                   // 3
+{
+   [self performSegueWithIdentifier:@"PushFlickrScene" sender:self];
+}
+
 - (void)presentPhotoPickerMenu
 {
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
@@ -263,6 +270,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
       [actionSheet addButtonWithTitle:@"Take Photo"];
    }
    [actionSheet addButtonWithTitle:@"Choose from Library"];
+   [actionSheet addButtonWithTitle:@"Choose from Flickr"];              // 4
    [actionSheet setTag:1];
    [actionSheet showFromBarButtonItem:[self addButton] animated:YES];
 }
@@ -392,13 +400,17 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 #pragma mark - Segue
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender    // 5
 {
-   PhotoBrowserViewController *destinationViewController = 
-      [segue destinationViewController];
-   [destinationViewController setDelegate:self];
-   NSInteger index = [[self gridView] indexForSelectedCell];
-   [destinationViewController setStartAtIndex:index];
+   if ([[segue destinationViewController] isKindOfClass:[PhotoBrowserViewController class]]) {
+      PhotoBrowserViewController *destinationViewController = [segue destinationViewController];
+      [destinationViewController setDelegate:self];
+      NSInteger index = [[self gridView] indexForSelectedCell];
+      [destinationViewController setStartAtIndex:index];
+   } else if ([[segue destinationViewController] isKindOfClass:[FlickrViewController class]]) {
+      [[segue destinationViewController] setManagedObjectContext:[self managedObjectContext]];
+      [[segue destinationViewController] setObjectID:[self objectID]];
+   }
 }
 
 #pragma mark - PhotoBrowserViewControllerDelegate methods
