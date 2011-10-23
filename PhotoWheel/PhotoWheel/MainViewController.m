@@ -13,11 +13,11 @@
 
 @implementation MainViewController
 
-@synthesize backgroundImageView = _backgroundImageView;           // 1
-@synthesize infoButton = _infoButton;                             // 2
+@synthesize backgroundImageView = _backgroundImageView;
+@synthesize infoButton = _infoButton;
 @synthesize skipRotation = _skipRotation;
 
-- (void)viewDidLoad                                               // 3
+- (void)viewDidLoad
 {
    [super viewDidLoad];
    

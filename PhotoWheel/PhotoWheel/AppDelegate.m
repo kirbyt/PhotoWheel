@@ -84,18 +84,31 @@
  */
 - (NSManagedObjectContext *)managedObjectContext
 {
-    if (__managedObjectContext != nil)
-    {
-        return __managedObjectContext;
-    }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil)
-    {
-        __managedObjectContext = [[NSManagedObjectContext alloc] init];
-        [__managedObjectContext setPersistentStoreCoordinator:coordinator];
-    }
-    return __managedObjectContext;
+   if (__managedObjectContext != nil)
+   {
+      return __managedObjectContext;
+   }
+   
+   NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+   if (coordinator != nil)
+   {
+      __managedObjectContext = [[NSManagedObjectContext alloc]
+                                initWithConcurrencyType:NSMainQueueConcurrencyType];
+      [__managedObjectContext performBlockAndWait:^(void) {
+         [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+         
+         [__managedObjectContext
+          setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+         
+         [[NSNotificationCenter defaultCenter]
+          addObserver:self
+          selector:@selector(mergeChangesFrom_iCloud:)
+          name:
+          NSPersistentStoreDidImportUbiquitousContentChangesNotification
+          object:coordinator];
+      }];
+   }
+   return __managedObjectContext;
 }
 
 /**
@@ -119,45 +132,62 @@
  */
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-    if (__persistentStoreCoordinator != nil)
-    {
-        return __persistentStoreCoordinator;
-    }
-    
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
-    
-    NSError *error = nil;
-    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error])
-    {
-        /*
-         Replace this implementation with code to handle the error appropriately.
+   if (__persistentStoreCoordinator != nil)
+   {
+      return __persistentStoreCoordinator;
+   }
+   
+   __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
+                                   initWithManagedObjectModel: [self managedObjectModel]];
+   
+   NSURL *storeURL = [[self applicationDocumentsDirectory]
+                      URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
+   
+   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      
+      // Build a URL to use as NSPersistentStoreUbiquitousContentURLKey
+      NSURL *cloudURL = [[NSFileManager defaultManager]
+                         URLForUbiquityContainerIdentifier:nil];
+      
+      NSDictionary *options = nil;
+      
+      if (cloudURL != nil) {
+         NSString* coreDataCloudContent = [[cloudURL path]
+                                           stringByAppendingPathComponent:@"photowheel"];
+         cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
          
-         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-         
-         Typical reasons for an error here include:
-         * The persistent store is not accessible;
-         * The schema for the persistent store is incompatible with current managed object model.
-         Check the error message to determine what the actual problem was.
-         
-         
-         If the persistent store is not accessible, there is typically something wrong with the file path. Often, a file URL is pointing into the application's resources directory instead of a writeable directory.
-         
-         If you encounter schema incompatibility errors during development, you can reduce their frequency by:
-         * Simply deleting the existing store:
-         [[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]
-         
-         * Performing automatic lightweight migration by passing the following dictionary as the options parameter: 
-         [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
-         
-         Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
-         
-         */
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }    
-    
-    return __persistentStoreCoordinator;
+         options = [NSDictionary dictionaryWithObjectsAndKeys:
+                    @"com.whitepeaksoftware.photowheel",
+                    NSPersistentStoreUbiquitousContentNameKey,
+                    cloudURL,
+                    NSPersistentStoreUbiquitousContentURLKey,
+                    nil];
+      }
+      
+      NSError *error = nil;
+      [__persistentStoreCoordinator lock];
+      if (![__persistentStoreCoordinator
+            addPersistentStoreWithType:NSSQLiteStoreType
+            configuration:nil
+            URL:storeURL
+            options:options
+            error:&error])
+      {
+         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+         abort();
+      }
+      [__persistentStoreCoordinator unlock];
+      
+      dispatch_async(dispatch_get_main_queue(), ^{
+         NSLog(@"asynchronously added persistent store!");
+         [[NSNotificationCenter defaultCenter]
+          postNotificationName:kRefetchAllDataNotification
+          object:self
+          userInfo:nil];
+      });
+   });
+   
+   return __persistentStoreCoordinator;
 }
 
 #pragma mark - Application's Documents directory
@@ -168,6 +198,63 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - iCloud
+
+- (void)mergeiCloudChanges:(NSDictionary*)noteInfo
+                forContext:(NSManagedObjectContext*)moc
+{
+   @autoreleasepool {
+      NSMutableDictionary *localUserInfo = [NSMutableDictionary dictionary];
+      
+      NSString* materializeKeys[] = { NSDeletedObjectsKey, NSInsertedObjectsKey };
+      int c = (sizeof(materializeKeys) / sizeof(NSString*));
+      for (int i = 0; i < c; i++) {
+         NSSet* set = [noteInfo objectForKey:materializeKeys[i]];
+         if ([set count] > 0) {
+            NSMutableSet* objectSet = [NSMutableSet set];
+            for (NSManagedObjectID* moid in set) {
+               [objectSet addObject:[moc objectWithID:moid]];
+            }
+            [localUserInfo setObject:objectSet forKey:materializeKeys[i]];
+         }
+      }
+      
+      NSString* noMaterializeKeys[] = { NSUpdatedObjectsKey,
+         NSRefreshedObjectsKey, NSInvalidatedObjectsKey };
+      c = (sizeof(noMaterializeKeys) / sizeof(NSString*));
+      for (int i = 0; i < 2; i++) {
+         NSSet* set = [noteInfo objectForKey:noMaterializeKeys[i]];
+         if ([set count] > 0) {
+            NSMutableSet* objectSet = [NSMutableSet set];
+            for (NSManagedObjectID* moid in set) {
+               NSManagedObject* realObj = [moc objectRegisteredForID:moid];
+               if (realObj) {
+                  [objectSet addObject:realObj];
+               }
+            }
+            [localUserInfo setObject:objectSet forKey:noMaterializeKeys[i]];
+         }
+      }
+      
+      NSNotification *fakeSave = [NSNotification
+                                  notificationWithName:NSManagedObjectContextDidSaveNotification 
+                                  object:self 
+                                  userInfo:localUserInfo];
+      [moc mergeChangesFromContextDidSaveNotification:fakeSave]; 
+      
+      [moc processPendingChanges];
+   }
+}
+
+- (void)mergeChangesFrom_iCloud:(NSNotification *)notification {
+   NSDictionary* userInfo = [notification userInfo];
+   NSManagedObjectContext* moc = [self managedObjectContext];
+   
+   [moc performBlock:^{
+      [self mergeiCloudChanges:userInfo forContext:moc];
+   }];
 }
 
 @end

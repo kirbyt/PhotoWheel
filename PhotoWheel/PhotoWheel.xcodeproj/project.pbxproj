@@ -68,6 +68,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		681DB3BC145314CE00DF0849 /* PhotoWheel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PhotoWheel.entitlements; sourceTree = "<group>"; };
 		682BC4A71434DE4600286C9D /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Photo.h; sourceTree = "<group>"; };
 		682BC4A81434DE4600286C9D /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Photo.m; sourceTree = "<group>"; };
 		682BC4A91434DE4600286C9D /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _PhotoAlbum.h; sourceTree = "<group>"; };
@@ -234,6 +235,7 @@
 		68FA6ADB13EEF3BB00E046BD /* PhotoWheel */ = {
 			isa = PBXGroup;
 			children = (
+				681DB3BC145314CE00DF0849 /* PhotoWheel.entitlements */,
 				68FA6AE413EEF3BB00E046BD /* AppDelegate.h */,
 				68FA6AE513EEF3BB00E046BD /* AppDelegate.m */,
 				68FA6AE713EEF3BB00E046BD /* PhotoWheel.xcdatamodeld */,
@@ -483,6 +485,7 @@
 		68FA6AED13EEF3BB00E046BD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
 				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
@@ -494,6 +497,7 @@
 		68FA6AEE13EEF3BB00E046BD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
 				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";

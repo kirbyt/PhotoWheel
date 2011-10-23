@@ -39,6 +39,11 @@
 @synthesize shadowImageView = _shadowImageView;
 @synthesize sendEmailController = _sendEmailController;
 
+- (void)dealloc 
+{
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
+}
+
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
    // Position the view within the new parent.
@@ -53,10 +58,20 @@
 {
    [super viewDidLoad];
    [self reload];
+   
+   [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification 
+                                                     object:[[UIApplication sharedApplication] delegate] 
+                                                      queue:[NSOperationQueue mainQueue] 
+                                                 usingBlock:^(NSNotification *__strong note) {
+                                                    [self reload];
+                                                 }
+    ];
 }
 
 - (void)viewDidUnload
 {
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
+   
    [self setToolbar:nil];
    [self setTextField:nil];
    [self setAddButton:nil];

@@ -7,24 +7,29 @@
 //
 
 #import "PhotoAlbumsViewController.h"
-#import "PhotoWheelViewCell.h"                                           // 1
+#import "PhotoWheelViewCell.h"
 #import "PhotoAlbum.h"
 #import "Photo.h"
 #import "PhotoAlbumViewController.h"
 
-@interface PhotoAlbumsViewController ()                                  // 2
+@interface PhotoAlbumsViewController ()
 @property (nonatomic, strong) 
-   NSFetchedResultsController *fetchedResultsController;                 // 3
+   NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation PhotoAlbumsViewController
 
 @synthesize managedObjectContext = _managedObjectContext;
-@synthesize wheelView = _wheelView;                                     // 4
+@synthesize wheelView = _wheelView;
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize photoAlbumViewController = _photoAlbumViewController;
 
-- (void)didMoveToParentViewController:(UIViewController *)parent        // 5
+- (void)dealloc 
+{
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
+}
+
+- (void)didMoveToParentViewController:(UIViewController *)parent
 {
    // Position the view within the new parent.
    [[parent view] addSubview:[self view]];
@@ -32,10 +37,20 @@
    [[self view] setFrame:newFrame];   
    
    [[self view] setBackgroundColor:[UIColor clearColor]];
+
+   [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification 
+                                                     object:[[UIApplication sharedApplication] delegate] 
+                                                      queue:[NSOperationQueue mainQueue] 
+                                                 usingBlock:^(NSNotification *__strong note) {
+                                                    [self setFetchedResultsController:nil];
+                                                    [[self wheelView] reloadData];
+                                                 }
+    ];
 }
 
-- (void)viewDidUnload                                                   // 6
+- (void)viewDidUnload
 {
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
    [self setWheelView:nil];
    [super viewDidUnload];
 }
@@ -58,17 +73,17 @@
 
 #pragma mark - Actions
 
-- (IBAction)addPhotoAlbum:(id)sender                                    // 7
+- (IBAction)addPhotoAlbum:(id)sender
 {
-   NSManagedObjectContext *context = [self managedObjectContext];        // 1
+   NSManagedObjectContext *context = [self managedObjectContext];
    PhotoAlbum *photoAlbum = [NSEntityDescription 
                              insertNewObjectForEntityForName:@"PhotoAlbum" 
-                             inManagedObjectContext:context];            // 2
-   [photoAlbum setDateAdded:[NSDate date]];                              // 3
+                             inManagedObjectContext:context];
+   [photoAlbum setDateAdded:[NSDate date]];
    
    // Save the context.
    NSError *error = nil;
-   if (![context save:&error])                                           // 4
+   if (![context save:&error])
    {
       /*
        Replace this implementation with code to handle the error appropriately.
@@ -86,19 +101,19 @@
 
 #pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate
 
-- (NSFetchedResultsController *)fetchedResultsController               // 8
+- (NSFetchedResultsController *)fetchedResultsController
 {
-   if (_fetchedResultsController) {                                    // 9
+   if (_fetchedResultsController) {
       return _fetchedResultsController;
    }
    
-   NSString *cacheName = NSStringFromClass([self class]);              // 10
+   NSString *cacheName = NSStringFromClass([self class]);
    NSFetchRequest *fetchRequest = 
-      [NSFetchRequest fetchRequestWithEntityName:@"PhotoAlbum"];       // 11
+      [NSFetchRequest fetchRequestWithEntityName:@"PhotoAlbum"];
    
    NSSortDescriptor *sortDescriptor = 
       [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" 
-                                    ascending:YES];                    // 12
+                                    ascending:YES];
    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 
    NSFetchedResultsController *newFetchedResultsController = 
@@ -106,11 +121,11 @@
        initWithFetchRequest:fetchRequest 
        managedObjectContext:[self managedObjectContext] 
          sectionNameKeyPath:nil 
-                  cacheName:cacheName];                                // 13
-   [newFetchedResultsController setDelegate:self];                     // 14
+                  cacheName:cacheName];
+   [newFetchedResultsController setDelegate:self];
    
    NSError *error = nil;
-   if (![newFetchedResultsController performFetch:&error])             // 15
+   if (![newFetchedResultsController performFetch:&error])
    {
       /*
        Replace this implementation with code to handle the error appropriately.
@@ -125,28 +140,28 @@
       abort();
    }
    
-   [self setFetchedResultsController:newFetchedResultsController];     // 16
-   return _fetchedResultsController;                                   // 17
+   [self setFetchedResultsController:newFetchedResultsController];
+   return _fetchedResultsController;
 }
 
 - (void)controller:(NSFetchedResultsController *)controller 
    didChangeObject:(id)anObject 
        atIndexPath:(NSIndexPath *)indexPath 
      forChangeType:(NSFetchedResultsChangeType)type 
-      newIndexPath:(NSIndexPath *)newIndexPath                         // 18
+      newIndexPath:(NSIndexPath *)newIndexPath
 {
    [[self wheelView] reloadData];
 }
 
 
-#pragma mark - WheelViewDataSource and WheelViewDelegate methods       // 19
+#pragma mark - WheelViewDataSource and WheelViewDelegate methods
 
-- (NSInteger)wheelViewNumberOfVisibleCells:(WheelView *)wheelView      // 20
+- (NSInteger)wheelViewNumberOfVisibleCells:(WheelView *)wheelView
 {
    return 7;
 }
 
-- (NSInteger)wheelViewNumberOfCells:(WheelView *)wheelView             // 21
+- (NSInteger)wheelViewNumberOfCells:(WheelView *)wheelView
 {
    NSArray *sections = [[self fetchedResultsController] sections];
    NSInteger count = [[sections objectAtIndex:0] numberOfObjects];
@@ -154,11 +169,11 @@
 }
 
 - (WheelViewCell *)wheelView:(WheelView *)wheelView 
-                 cellAtIndex:(NSInteger)index                          // 22
+                 cellAtIndex:(NSInteger)index
 {
    PhotoWheelViewCell *cell = [wheelView dequeueReusableCell];
    if (!cell) {
-      cell = [PhotoWheelViewCell photoWheelViewCell];                   // 1
+      cell = [PhotoWheelViewCell photoWheelViewCell];
    }
    
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
@@ -170,18 +185,18 @@
       image = [UIImage imageNamed:@"defaultPhoto.png"];
    }
    
-   [[cell imageView] setImage:image];                                  // 2
-   [[cell label] setText:[photoAlbum name]];                           // 3
+   [[cell imageView] setImage:image];
+   [[cell label] setText:[photoAlbum name]];
    
    return cell;
 }
 
 - (void)wheelView:(WheelView *)wheelView 
-didSelectCellAtIndex:(NSInteger)index                                  // 30
+didSelectCellAtIndex:(NSInteger)index
 {
    // Retrieve the photo album from the fetched results.
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index 
-                                               inSection:0];           // 1
+                                               inSection:0];
    PhotoAlbum *photoAlbum = nil;
    // index = -1 means no selected cell and nothing to retrieve 
    // from the fetched results.
@@ -195,9 +210,9 @@ didSelectCellAtIndex:(NSInteger)index                                  // 30
    PhotoAlbumViewController *photoAlbumViewController = 
       [self photoAlbumViewController];
    [photoAlbumViewController 
-      setManagedObjectContext:[self managedObjectContext]];            // 2
-   [photoAlbumViewController setObjectID:[photoAlbum objectID]];       // 3
-   [photoAlbumViewController reload];                                  // 4
+      setManagedObjectContext:[self managedObjectContext]];
+   [photoAlbumViewController setObjectID:[photoAlbum objectID]];
+   [photoAlbumViewController reload];
 }
 
 @end
