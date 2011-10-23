@@ -68,6 +68,21 @@
       PhotoWheelViewCell *cell = 
       [[PhotoWheelViewCell alloc] initWithFrame:cellFrame];      
       [cell setImage:defaultPhoto];
+      
+      // Add a double-tap gesture to the cell.
+      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] 
+                                           initWithTarget:self 
+                                           action:@selector(cellDoubleTapped:)];      
+      [doubleTap setNumberOfTapsRequired:2];
+      [cell addGestureRecognizer:doubleTap];
+      
+      // Add a single-tap gesture to the cell.
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] 
+                                     initWithTarget:self 
+                                     action:@selector(cellTapped:)];      
+      [tap requireGestureRecognizerToFail:doubleTap];
+      [cell addGestureRecognizer:tap];
+      
       [newArray addObject:cell];
    }
    [self setData:[newArray copy]];
@@ -167,4 +182,17 @@
    WheelViewCell *cell = [[self data] objectAtIndex:index];
    return cell;
 }
+
+// Other code left out for brevity's sake.
+
+- (void)cellTapped:(UIGestureRecognizer *)recognizer
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+- (void)cellDoubleTapped:(UIGestureRecognizer *)recognizer
+{
+   NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
 @end

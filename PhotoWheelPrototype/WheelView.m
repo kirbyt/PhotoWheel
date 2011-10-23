@@ -8,11 +8,54 @@
 
 #import "WheelView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "SpinGestureRecognizer.h"
+
+@interface WheelView ()
+@property (nonatomic, assign) CGFloat currentAngle;
+@end
 
 @implementation WheelView
 
 @synthesize dataSource = _dataSource;
 @synthesize style = _style;
+@synthesize currentAngle = _currentAngle;
+
+- (void)commonInit
+{
+   [self setCurrentAngle:0.0];
+   
+   SpinGestureRecognizer *spin = [[SpinGestureRecognizer alloc] 
+                                  initWithTarget:self 
+                                  action:@selector(spin:)];   
+   [self addGestureRecognizer:spin];
+}
+
+- (id)init
+{
+   self = [super init];
+   if (self) {
+      [self commonInit];
+   }
+   return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+   self = [super initWithCoder:aDecoder];
+   if (self) {
+      [self commonInit];
+   }
+   return self;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+   self = [super initWithFrame:frame];
+   if (self) {
+      [self commonInit];
+   }
+   return self;
+}
 
 - (void)setAngle:(CGFloat)angle
 {
@@ -52,11 +95,9 @@
       if ([self style] == WheelViewStyleCarousel) {
          [cell setTransform:CGAffineTransformScale(
                   CGAffineTransformMakeTranslation(xPosition, yPosition), 
-                  scale, 
-                  scale)];         
-         // Tweak alpha using the same system as applied for scale, 
-         // this time with 0.3 as the minimum and a semicircle range 
-         // of 0.5
+                  scale, scale)];         
+         // Tweak alpha using the same system as applied for scale, this time
+         // with 0.3 as the minimum and a semicircle range of 0.5
          [cell setAlpha:(0.3f + 0.5f * (cosf(angleInRadians) + 1.0))];
          
       } else {
@@ -74,23 +115,29 @@
 
 - (void)layoutSubviews
 {
-   [self setAngle:0];
+   [self setAngle:[self currentAngle]];
 }
 
-// Add to the bottom of the WheelView implementation.
 - (void)setStyle:(WheelViewStyle)newStyle
 {
    if (_style != newStyle) {
       _style = newStyle;
       
       [UIView beginAnimations:@"WheelViewStyleChange" context:nil];
-      [self setAngle:0];
+      [self setAngle:[self currentAngle]];
       [UIView commitAnimations];
    }
 }
 
-@end
+- (void)spin:(SpinGestureRecognizer *)recognizer
+{
+   CGFloat angleInRadians = -[recognizer rotation];
+   CGFloat degrees = 180.0 * angleInRadians / M_PI;   // radians to degrees
+   [self setCurrentAngle:[self currentAngle] + degrees];
+   [self setAngle:[self currentAngle]];
+}
 
+@end
 
 @implementation WheelViewCell
 @end
