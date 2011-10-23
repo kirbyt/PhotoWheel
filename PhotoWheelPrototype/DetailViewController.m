@@ -7,9 +7,11 @@
 //
 
 #import "DetailViewController.h"
+#import "PhotoWheelViewCell.h"
 
 @interface DetailViewController ()
 @property (strong, nonatomic) UIPopoverController *masterPopoverController;
+@property (strong, nonatomic) NSArray *data;
 - (void)configureView;
 @end
 
@@ -18,6 +20,8 @@
 @synthesize detailItem = _detailItem;
 @synthesize detailDescriptionLabel = _detailDescriptionLabel;
 @synthesize masterPopoverController = _masterPopoverController;
+@synthesize data = _data;
+@synthesize wheelView = _wheelView;
 
 #pragma mark - Managing the detail item
 
@@ -55,8 +59,40 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-   [self configureView];
+   
+   UIImage *defaultPhoto = [UIImage imageNamed:@"defaultPhoto.png"];
+   CGRect cellFrame = CGRectMake(0, 0, 75, 75);
+   NSInteger count = 10;
+   NSMutableArray *newArray = [[NSMutableArray alloc] initWithCapacity:count];
+   for (NSInteger index = 0; index < count; index++) {
+      PhotoWheelViewCell *cell = 
+      [[PhotoWheelViewCell alloc] initWithFrame:cellFrame];      
+      [cell setImage:defaultPhoto];
+      [newArray addObject:cell];
+   }
+   [self setData:[newArray copy]];
+   
+   NSArray *segmentedItems = [NSArray arrayWithObjects:
+                              @"Wheel", @"Carousel", nil];
+   UISegmentedControl *segmentedControl = [[UISegmentedControl alloc] 
+                                           initWithItems:segmentedItems];
+   [segmentedControl addTarget:self 
+                        action:@selector(segmentedControlValueChanged:) 
+              forControlEvents:UIControlEventValueChanged];
+   [segmentedControl setSegmentedControlStyle:UISegmentedControlStyleBar];
+   [segmentedControl setSelectedSegmentIndex:0];
+   [[self navigationItem] setTitleView:segmentedControl];
+}
+
+- (void)segmentedControlValueChanged:(id)sender
+{
+   NSInteger index = [sender selectedSegmentIndex];
+   if (index == 0) {
+      [[self wheelView] setStyle:WheelViewStyleWheel];
+   } else {
+      [[self wheelView] setStyle:WheelViewStyleCarousel];
+   }
+   
 }
 
 - (void)viewDidUnload
@@ -118,4 +154,17 @@
    self.masterPopoverController = nil;
 }
 
+#pragma mark - WheelViewDataSource Methods
+
+- (NSInteger)wheelViewNumberOfCells:(WheelView *)wheelView
+{
+   NSInteger count = [[self data] count];
+   return count;
+}
+
+- (WheelViewCell *)wheelView:(WheelView *)wheelView cellAtIndex:(NSInteger)index
+{
+   WheelViewCell *cell = [[self data] objectAtIndex:index];
+   return cell;
+}
 @end
