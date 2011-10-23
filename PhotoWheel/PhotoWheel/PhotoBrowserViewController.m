@@ -9,6 +9,7 @@
 #import "PhotoBrowserViewController.h"
 #import "PhotoBrowserPhotoView.h"
 #import "ClearToolbar.h"
+#import "MainSlideShowViewController.h"
 
 #define ACTIONSHEET_TAG_DELETE 1
 #define ACTIONSHEET_TAG_ACTIONS 2
@@ -19,7 +20,8 @@
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
 @property (nonatomic, assign) NSInteger firstVisiblePageIndexBeforeRotation;
 @property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
-@property (nonatomic, strong) SendEmailController *sendEmailController;    // 3
+@property (nonatomic, strong) SendEmailController *sendEmailController;
+@property (nonatomic, strong) MainSlideShowViewController *slideShowController;
 
 - (void)initPhotoViewCache;
 - (void)setScrollViewContentSize;
@@ -28,7 +30,7 @@
 - (CGRect)frameForPagingScrollView;
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
 - (void)addButtonsToNavigationBar;
-- (void)emailCurrentPhoto;                                                 // 4
+- (void)emailCurrentPhoto;
 @end
 
 @implementation PhotoBrowserViewController
@@ -44,7 +46,8 @@
 @synthesize actionButton = _actionButton;
 @synthesize firstVisiblePageIndexBeforeRotation = _firstVisiblePageIndexBeforeRotation;
 @synthesize percentScrolledIntoFirstVisiblePage = _percentScrolledIntoFirstVisiblePage;
-@synthesize sendEmailController = _sendEmailController;                    // 5
+@synthesize sendEmailController = _sendEmailController;
+@synthesize slideShowController = _slideShowController;
 
 - (void)viewDidLoad
 {
@@ -83,6 +86,10 @@
    } else {
       [self setStatusBarHeight:statusBarFrame.size.height];
    }
+   
+	// Create a custom "back" button which will be used when the slide show view controller is pushed onto the navigation controller
+	UIBarButtonItem *customBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Back to album" style:UIBarButtonItemStyleBordered target:nil action:nil];
+	[[self navigationItem] setBackBarButtonItem:customBackButton];
 }
 
 - (void)viewDidUnload
@@ -100,6 +107,20 @@
    [self setTitleWithCurrentIndex];
    
    [self startChromeDisplayTimer];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+   [super viewDidAppear:animated];
+   
+   if ([self slideShowController] != nil) {
+      [self setCurrentIndex:[[self slideShowController] currentIndex]];
+      [self scrollToIndex:[[self slideShowController] currentIndex]];
+      [self setSlideShowController:nil];
+   } else {
+      [self setCurrentIndex:[self startAtIndex]];
+      [self scrollToIndex:[self startAtIndex]];
+   }
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -445,7 +466,7 @@
    [actionSheet setDelegate:self];
    [actionSheet setTag:ACTIONSHEET_TAG_ACTIONS];
    
-   if ([SendEmailController canSendMail]) {                                // 6
+   if ([SendEmailController canSendMail]) {
       [actionSheet addButtonWithTitle:@"Email"];
    }
    
@@ -458,7 +479,19 @@
 
 - (void)slideshow:(id)sender
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [self performSegueWithIdentifier:@"SlideshowSegue" sender:self];
+}
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+   if ([[segue destinationViewController] isKindOfClass:
+        [MainSlideShowViewController class]]) {
+      [self setSlideShowController:(MainSlideShowViewController *)[segue destinationViewController]];
+      [[self slideShowController] setDelegate:[self delegate]];
+      [[self slideShowController] setStartIndex:[self currentIndex]];
+   }
 }
 
 #pragma mark - Printing
@@ -518,7 +551,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    } else if ([actionSheet tag] == ACTIONSHEET_TAG_ACTIONS) {
       // Button index 0 can be Email or Print. It depends on whether or
       // not the device supports that feature.
-      if (buttonIndex == 0) {                                              // 7
+      if (buttonIndex == 0) {
          if ([SendEmailController canSendMail]) {
             [self emailCurrentPhoto];
          } else if ([UIPrintInteractionController isPrintingAvailable]) {
@@ -611,7 +644,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 #pragma mark - Email and SendEmailControllerDelegate methods
 
-- (void)emailCurrentPhoto                                                  // 8
+- (void)emailCurrentPhoto
 {
    UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
    NSSet *photos = [NSSet setWithObject:currentPhoto];
@@ -624,7 +657,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    [self setSendEmailController:controller];
 }
 
-- (void)sendEmailControllerDidFinish:(SendEmailController *)controller     // 9
+- (void)sendEmailControllerDidFinish:(SendEmailController *)controller
 {
    if ([controller isEqual:[self sendEmailController]]) {
       [self setSendEmailController:nil];

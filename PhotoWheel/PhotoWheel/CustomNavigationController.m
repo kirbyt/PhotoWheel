@@ -8,7 +8,8 @@
 
 #import "CustomNavigationController.h"
 #import "UIView+PWCategory.h"
-#import "PhotoAlbumViewController.h"                                    // 1
+#import "PhotoAlbumViewController.h"
+#import "MainSlideShowViewController.h"
 
 
 @implementation CustomNavigationController
@@ -16,6 +17,11 @@
 - (UIViewController *)popViewControllerAnimated:(BOOL)animated
 {
    UIViewController *sourceViewController = [self topViewController];
+   
+   // Do not perform custom pop when coming from the slide show.
+   if ([sourceViewController isKindOfClass:[MainSlideShowViewController class]]) {
+      return [super popViewControllerAnimated:animated];
+   }
    
    // Animates image snapshot of the view.
    UIView *sourceView = [sourceViewController view];
@@ -27,7 +33,7 @@
    // This prevents the image from dropping down after the view controller
    // is popped from the stack.
    BOOL isLandscape = UIInterfaceOrientationIsLandscape(
-     [sourceViewController interfaceOrientation]);                      // 2
+     [sourceViewController interfaceOrientation]);
    CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
    CGFloat statusBarHeight;
    if (isLandscape) {
@@ -57,7 +63,7 @@
    
    // We need the selectedCellFrame from the PhotoAlbumViewController. This 
    // controller is a child of the destination controller.
-   CGRect selectedCellFrame = CGRectZero;                               // 3
+   CGRect selectedCellFrame = CGRectZero;
    for (id childViewController in [destinationViewController childViewControllers])
    {
       if ([childViewController isKindOfClass:[PhotoAlbumViewController class]]) {

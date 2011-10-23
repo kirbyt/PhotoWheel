@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		681DB3D01453334600DF0849 /* SlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 681DB3CF1453334600DF0849 /* SlideShowViewController.m */; };
+		681DB3D41453335D00DF0849 /* MainSlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 681DB3D31453335D00DF0849 /* MainSlideShowViewController.m */; };
+		681DB3D614533BEC00DF0849 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681DB3D514533BEC00DF0849 /* MediaPlayer.framework */; };
 		682BC4B51434DE4600286C9D /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4A81434DE4600286C9D /* _Photo.m */; };
 		682BC4B61434DE4600286C9D /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4AA1434DE4600286C9D /* _PhotoAlbum.m */; };
 		682BC4B71434DE4600286C9D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4AC1434DE4600286C9D /* Photo.m */; };
@@ -69,6 +72,11 @@
 
 /* Begin PBXFileReference section */
 		681DB3BC145314CE00DF0849 /* PhotoWheel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PhotoWheel.entitlements; sourceTree = "<group>"; };
+		681DB3CE1453334600DF0849 /* SlideShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideShowViewController.h; sourceTree = "<group>"; };
+		681DB3CF1453334600DF0849 /* SlideShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideShowViewController.m; sourceTree = "<group>"; };
+		681DB3D21453335D00DF0849 /* MainSlideShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSlideShowViewController.h; sourceTree = "<group>"; };
+		681DB3D31453335D00DF0849 /* MainSlideShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSlideShowViewController.m; sourceTree = "<group>"; };
+		681DB3D514533BEC00DF0849 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		682BC4A71434DE4600286C9D /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Photo.h; sourceTree = "<group>"; };
 		682BC4A81434DE4600286C9D /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Photo.m; sourceTree = "<group>"; };
 		682BC4A91434DE4600286C9D /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _PhotoAlbum.h; sourceTree = "<group>"; };
@@ -161,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				681DB3D614533BEC00DF0849 /* MediaPlayer.framework in Frameworks */,
 				6856FE1714389AC3003502DB /* MessageUI.framework in Frameworks */,
 				689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */,
 				68FA6AD613EEF3BB00E046BD /* UIKit.framework in Frameworks */,
@@ -208,6 +217,7 @@
 			children = (
 				68FA6ADB13EEF3BB00E046BD /* PhotoWheel */,
 				68FA6AD413EEF3BB00E046BD /* Frameworks */,
+				681DB3D514533BEC00DF0849 /* MediaPlayer.framework */,
 				68FA6AD213EEF3BB00E046BD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -287,6 +297,10 @@
 				6856FE291438ACED003502DB /* SimpleFlickrAPI.m */,
 				6856FE2B1438AEF7003502DB /* ImageDownloader.h */,
 				6856FE2C1438AEF7003502DB /* ImageDownloader.m */,
+				681DB3CE1453334600DF0849 /* SlideShowViewController.h */,
+				681DB3CF1453334600DF0849 /* SlideShowViewController.m */,
+				681DB3D21453335D00DF0849 /* MainSlideShowViewController.h */,
+				681DB3D31453335D00DF0849 /* MainSlideShowViewController.m */,
 				68D4449D13EF21290076949E /* images */,
 				68FA6ADC13EEF3BB00E046BD /* Supporting Files */,
 			);
@@ -418,6 +432,8 @@
 				6856FE261438A840003502DB /* FlickrViewController.m in Sources */,
 				6856FE2A1438ACED003502DB /* SimpleFlickrAPI.m in Sources */,
 				6856FE2D1438AEF7003502DB /* ImageDownloader.m in Sources */,
+				681DB3D01453334600DF0849 /* SlideShowViewController.m in Sources */,
+				681DB3D41453335D00DF0849 /* MainSlideShowViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
