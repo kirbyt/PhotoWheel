@@ -10,7 +10,7 @@
 #import "PhotoAlbum.h"
 #import "Photo.h"
 #import "ImageGridViewCell.h"
-#import "FlickrViewController.h"                                        // 1
+#import "FlickrViewController.h"
 
 @interface PhotoAlbumViewController ()
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
@@ -270,7 +270,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    [self setImagePickerPopoverController:newPopoverController];
 }
 
-- (void)presentFlickr                                                   // 3
+- (void)presentFlickr
 {
    [self performSegueWithIdentifier:@"PushFlickrScene" sender:self];
 }
@@ -285,7 +285,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
       [actionSheet addButtonWithTitle:@"Take Photo"];
    }
    [actionSheet addButtonWithTitle:@"Choose from Library"];
-   [actionSheet addButtonWithTitle:@"Choose from Flickr"];              // 4
+   [actionSheet addButtonWithTitle:@"Choose from Flickr"];
    [actionSheet setTag:1];
    [actionSheet showFromBarButtonItem:[self addButton] animated:YES];
 }
@@ -415,7 +415,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 #pragma mark - Segue
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender    // 5
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
    if ([[segue destinationViewController] isKindOfClass:[PhotoBrowserViewController class]]) {
       PhotoBrowserViewController *destinationViewController = [segue destinationViewController];
@@ -431,7 +431,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 #pragma mark - PhotoBrowserViewControllerDelegate methods
 
 - (NSInteger)photoBrowserViewControllerNumberOfPhotos:
-(PhotoBrowserViewController *)photoBrowser                              // 3
+(PhotoBrowserViewController *)photoBrowser
 {
    NSInteger count = [[[[self fetchedResultsController] sections] 
                        objectAtIndex:0] numberOfObjects];
@@ -439,11 +439,31 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 }
 
 - (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser 
-                           imageAtIndex:(NSInteger)index                // 4
+                           imageAtIndex:(NSInteger)index
 {
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    return [photo largeImage];
+}
+
+- (UIImage *)photoBrowserViewController:
+(PhotoBrowserViewController *)photoBrowser
+                      smallImageAtIndex:(NSInteger)index
+{
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   UIImage *image = [photo smallImage];
+   return image;
+}
+
+- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser
+                  updateToNewImage:(UIImage *)image
+                           atIndex:(NSInteger)index;
+{
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   [photo saveImage:image];
+   [[self gridView] reloadData];
 }
 
 #pragma mark -

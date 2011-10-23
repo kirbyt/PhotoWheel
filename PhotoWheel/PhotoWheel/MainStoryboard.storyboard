@@ -101,12 +101,171 @@
                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1004"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </scrollView>
+                            <view contentMode="scaleToFill" id="bVh-pO-wOi">
+                                <rect key="frame" x="0.0" y="835" width="768" height="169"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackTranslucent" id="iNe-eO-Tul">
+                                        <rect key="frame" x="0.0" y="0.0" width="768" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <items>
+                                            <barButtonItem title="Revert" id="E9h-ID-kz2">
+                                                <connections>
+                                                    <action selector="revertToOriginal:" destination="29" id="YKl-mB-A8O"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Enhance" id="94k-DI-ydt">
+                                                <connections>
+                                                    <action selector="enhanceImage:" destination="29" id="CuF-Db-652"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem title="Face Zoom" id="ewF-wz-qIX">
+                                                <connections>
+                                                    <action selector="zoomToFaces:" destination="29" id="BXJ-Ry-bVH"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem style="plain" systemItem="flexibleSpace" id="l0N-Ft-Yzi"/>
+                                            <barButtonItem systemItem="cancel" id="IBq-KH-Y8m">
+                                                <connections>
+                                                    <action selector="cancel:" destination="29" id="jtR-NK-PoG"/>
+                                                </connections>
+                                            </barButtonItem>
+                                            <barButtonItem systemItem="save" id="zRK-xO-EhD">
+                                                <connections>
+                                                    <action selector="saveImage:" destination="29" id="mSL-fz-koh"/>
+                                                </connections>
+                                            </barButtonItem>
+                                        </items>
+                                    </toolbar>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Mhn-N1-4hZ">
+                                        <rect key="frame" x="10" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="0U5-G0-pQ1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lje-sp-1xg">
+                                        <rect key="frame" x="118" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="tFn-ia-hmY"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="bnf-4i-32y">
+                                        <rect key="frame" x="226" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="2zj-de-hNk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mCC-RC-fc3">
+                                        <rect key="frame" x="334" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="1Ec-7R-qNh"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="AsF-C4-9uZ">
+                                        <rect key="frame" x="442" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="yhB-LS-X2l"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wwA-ZX-3nj">
+                                        <rect key="frame" x="550" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="iLZ-Cd-Na0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mC2-Eu-Hno">
+                                        <rect key="frame" x="658" y="49" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                        <state key="normal">
+                                            <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="applyFilter:" destination="29" eventType="touchUpInside" id="Wrd-2H-IwW"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="41"/>
                     <connections>
+                        <outlet property="filterViewContainer" destination="bVh-pO-wOi" id="7QN-g9-6z9"/>
                         <outlet property="scrollView" destination="Pdw-7D-aKC" id="oQt-6B-NaF"/>
+                        <outletCollection property="filterButtons" destination="Mhn-N1-4hZ" id="Shc-zp-oka"/>
+                        <outletCollection property="filterButtons" destination="lje-sp-1xg" id="yAs-sa-aUo"/>
+                        <outletCollection property="filterButtons" destination="bnf-4i-32y" id="xcA-Jx-Lou"/>
+                        <outletCollection property="filterButtons" destination="mCC-RC-fc3" id="wDv-Q1-zFC"/>
+                        <outletCollection property="filterButtons" destination="AsF-C4-9uZ" id="3QK-l3-axz"/>
+                        <outletCollection property="filterButtons" destination="wwA-ZX-3nj" id="Nb3-FJ-oFK"/>
+                        <outletCollection property="filterButtons" destination="mC2-Eu-Hno" id="pGy-dn-fzX"/>
                         <segue destination="lcc-sx-gN7" kind="push" identifier="SlideshowSegue" id="aP9-wO-Wgx"/>
                     </connections>
                 </viewController>
@@ -399,7 +558,15 @@
         <class className="PhotoBrowserViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoBrowserViewController.h"/>
             <relationships>
+                <relationship kind="action" name="applyFilter:"/>
+                <relationship kind="action" name="cancel:"/>
+                <relationship kind="action" name="enhanceImage:"/>
+                <relationship kind="action" name="revertToOriginal:"/>
+                <relationship kind="action" name="saveImage:"/>
+                <relationship kind="action" name="zoomToFaces:"/>
+                <relationship kind="outlet" name="filterViewContainer" candidateClass="UIView"/>
                 <relationship kind="outlet" name="scrollView" candidateClass="UIScrollView"/>
+                <relationship kind="outletCollection" name="filterButtons" candidateClass="UIButton"/>
             </relationships>
         </class>
         <class className="SlideShowViewController" superclassName="UIViewController">

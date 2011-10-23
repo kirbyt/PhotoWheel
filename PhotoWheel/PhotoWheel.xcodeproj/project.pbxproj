@@ -10,6 +10,7 @@
 		681DB3D01453334600DF0849 /* SlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 681DB3CF1453334600DF0849 /* SlideShowViewController.m */; };
 		681DB3D41453335D00DF0849 /* MainSlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 681DB3D31453335D00DF0849 /* MainSlideShowViewController.m */; };
 		681DB3D614533BEC00DF0849 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681DB3D514533BEC00DF0849 /* MediaPlayer.framework */; };
+		681DB410145374D400DF0849 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681DB40F145374D400DF0849 /* CoreImage.framework */; };
 		682BC4B51434DE4600286C9D /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4A81434DE4600286C9D /* _Photo.m */; };
 		682BC4B61434DE4600286C9D /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4AA1434DE4600286C9D /* _PhotoAlbum.m */; };
 		682BC4B71434DE4600286C9D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4AC1434DE4600286C9D /* Photo.m */; };
@@ -77,6 +78,7 @@
 		681DB3D21453335D00DF0849 /* MainSlideShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainSlideShowViewController.h; sourceTree = "<group>"; };
 		681DB3D31453335D00DF0849 /* MainSlideShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainSlideShowViewController.m; sourceTree = "<group>"; };
 		681DB3D514533BEC00DF0849 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		681DB40F145374D400DF0849 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
 		682BC4A71434DE4600286C9D /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Photo.h; sourceTree = "<group>"; };
 		682BC4A81434DE4600286C9D /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Photo.m; sourceTree = "<group>"; };
 		682BC4A91434DE4600286C9D /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _PhotoAlbum.h; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				681DB410145374D400DF0849 /* CoreImage.framework in Frameworks */,
 				681DB3D614533BEC00DF0849 /* MediaPlayer.framework in Frameworks */,
 				6856FE1714389AC3003502DB /* MessageUI.framework in Frameworks */,
 				689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */,
@@ -217,7 +220,6 @@
 			children = (
 				68FA6ADB13EEF3BB00E046BD /* PhotoWheel */,
 				68FA6AD413EEF3BB00E046BD /* Frameworks */,
-				681DB3D514533BEC00DF0849 /* MediaPlayer.framework */,
 				68FA6AD213EEF3BB00E046BD /* Products */,
 			);
 			sourceTree = "<group>";
@@ -233,6 +235,8 @@
 		68FA6AD413EEF3BB00E046BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				681DB3D514533BEC00DF0849 /* MediaPlayer.framework */,
+				681DB40F145374D400DF0849 /* CoreImage.framework */,
 				6856FE1614389AC3003502DB /* MessageUI.framework */,
 				689199B113F5BFFA0037CBAC /* CoreGraphics.framework */,
 				68FA6AD513EEF3BB00E046BD /* UIKit.framework */,

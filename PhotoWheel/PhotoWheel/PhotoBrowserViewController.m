@@ -14,6 +14,9 @@
 #define ACTIONSHEET_TAG_DELETE 1
 #define ACTIONSHEET_TAG_ACTIONS 2
 
+#define RAND_IN_RANGE(low,high) (low + (high - low) * \
+(arc4random_uniform(RAND_MAX) / (double)RAND_MAX))
+
 @interface PhotoBrowserViewController ()
 @property (nonatomic, assign) NSInteger currentIndex;
 @property (nonatomic, strong) NSMutableArray *photoViewCache;
@@ -22,6 +25,11 @@
 @property (nonatomic, assign) NSInteger percentScrolledIntoFirstVisiblePage;
 @property (nonatomic, strong) SendEmailController *sendEmailController;
 @property (nonatomic, strong) MainSlideShowViewController *slideShowController;
+@property (readwrite, strong) CIContext *ciContext;
+@property (nonatomic, strong) NSMutableArray *imageFilters;
+@property (nonatomic, strong) NSMutableArray *filteredThumbnailPreviewImages;
+@property (nonatomic, strong) UIImage *filteredThumbnailImage;
+@property (nonatomic, strong) UIImage *filteredLargeImage;
 
 - (void)initPhotoViewCache;
 - (void)setScrollViewContentSize;
@@ -31,6 +39,16 @@
 - (CGRect)frameForPageAtIndex:(NSUInteger)index;
 - (void)addButtonsToNavigationBar;
 - (void)emailCurrentPhoto;
+
+- (void)hideFilters;
+- (void)randomizeFilters;
+- (CIColor *)randomCIColor;
+- (CIColor *)randomCIColorAlpha;
+- (CIFilter *)hueAdjustFilter;
+- (CIFilter *)colorTintFilter;
+- (CIFilter *)falseColorFilter;
+- (CIFilter *)invertColorFilter;
+- (CIFilter *)filterWithAffineTransform:(CGAffineTransform)transform;
 @end
 
 @implementation PhotoBrowserViewController
@@ -48,6 +66,13 @@
 @synthesize percentScrolledIntoFirstVisiblePage = _percentScrolledIntoFirstVisiblePage;
 @synthesize sendEmailController = _sendEmailController;
 @synthesize slideShowController = _slideShowController;
+@synthesize ciContext = _ciContext;
+@synthesize imageFilters = _imageFilters;
+@synthesize filteredThumbnailPreviewImages = _filteredThumbnailPreviewImages;
+@synthesize filteredThumbnailImage = _filteredThumbnailImage;
+@synthesize filteredLargeImage = _filteredLargeImage;
+@synthesize filterViewContainer = _filterViewContainer;
+@synthesize filterButtons = _filterButtons;
 
 - (void)viewDidLoad
 {
@@ -87,6 +112,8 @@
       [self setStatusBarHeight:statusBarFrame.size.height];
    }
    
+   [[self filterViewContainer] setAlpha:0.0];
+   
 	// Create a custom "back" button which will be used when the slide show view controller is pushed onto the navigation controller
 	UIBarButtonItem *customBackButton = [[UIBarButtonItem alloc] initWithTitle:@"Back to album" style:UIBarButtonItemStyleBordered target:nil action:nil];
 	[[self navigationItem] setBackBarButtonItem:customBackButton];
@@ -95,6 +122,8 @@
 - (void)viewDidUnload
 {
    [self setScrollView:nil];
+   [self setFilterViewContainer:nil];
+   [self setFilterButtons:nil];
    [super viewDidUnload];
 }
 
@@ -190,14 +219,21 @@
                 action:nil];
    
    
-   NSMutableArray *toolbarItems = [[NSMutableArray alloc] initWithCapacity:3];
+   UIBarButtonItem *filterButton = [[UIBarButtonItem alloc]
+                                    initWithTitle:@"Edit"
+                                    style:UIBarButtonItemStyleBordered
+                                    target:self
+                                    action:@selector(showFilters:)];
+   
+   NSMutableArray *toolbarItems = [[NSMutableArray alloc] initWithCapacity:4];
    [toolbarItems addObject:flexibleSpace];
+   [toolbarItems addObject:filterButton];
    [toolbarItems addObject:slideshowButton];
    [toolbarItems addObject:actionButton];
    [toolbarItems addObject:trashButton];
    
    UIToolbar *toolbar = [[ClearToolbar alloc] 
-                         initWithFrame:CGRectMake(0, 0, 200, 44)];
+                         initWithFrame:CGRectMake(0, 0, 250, 44)];
    [toolbar setBackgroundColor:[UIColor clearColor]];
    [toolbar setBarStyle:UIBarStyleBlack];
    [toolbar setTranslucent:YES];
@@ -350,6 +386,7 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
 {
    [self hideChrome];
+   [self hideFilters];
 }
 
 #pragma mark - Chrome helpers
@@ -662,6 +699,294 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    if ([controller isEqual:[self sendEmailController]]) {
       [self setSendEmailController:nil];
    }
+}
+
+#pragma mark - Filters
+
+- (void)showFilters:(id)sender
+{
+   if ([self imageFilters] == nil) {
+      [self setImageFilters:
+       [NSMutableArray arrayWithCapacity:[[self filterButtons] count]]];
+      
+      [self setCiContext:[CIContext contextWithOptions:nil]];
+      
+      [self setFilteredThumbnailPreviewImages:[NSMutableArray array]];
+   }
+   
+   [self setFilteredThumbnailImage:[[self delegate]
+                                    photoBrowserViewController:self
+                                    smallImageAtIndex:[self currentIndex]]];
+   UIImage *largeImage = [[self delegate]
+                          photoBrowserViewController:self
+                          imageAtIndex:[self currentIndex]];
+   [self setFilteredLargeImage:largeImage];
+   
+   [self randomizeFilters];
+   
+   [[self view] bringSubviewToFront:[self filterViewContainer]];
+   [UIView animateWithDuration:0.3 animations:^(void) {
+      [[self filterViewContainer] setAlpha:1.0];
+   }];
+}
+
+- (void)hideFilters
+{
+   // Hide filter container
+   [UIView animateWithDuration:0.3 animations:^(void) {
+      [[self filterViewContainer] setAlpha:0.0];
+   }];
+}
+
+- (void)setFilterButtons:(NSArray *)filterButtonsFromIB
+{
+   // Set background for each button.
+   UIColor *backgroundColor = [[self filterViewContainer] backgroundColor];
+   for (UIButton *button in filterButtonsFromIB) {
+      [button setBackgroundColor:backgroundColor];
+   }
+   // Sort buttons by tag number.
+   _filterButtons = [filterButtonsFromIB sortedArrayUsingComparator:
+                     ^NSComparisonResult(UIButton *button1, UIButton *button2) {
+                        return [button1 tag] > [button2 tag];
+                     }];
+}
+
+- (void)randomizeFilters
+{
+   [[self imageFilters] removeAllObjects];
+   [[self filteredThumbnailPreviewImages] removeAllObjects];
+   
+   // Hue adjust filter
+   CIFilter *hueAdjustFilter = [self hueAdjustFilter];
+   [[self imageFilters] addObject:hueAdjustFilter];
+   
+   // Color tint filter
+   CIFilter *tintFilter = [self colorTintFilter];
+   [[self imageFilters] addObject:tintFilter];
+   
+   // False color filter
+   CIFilter *falseColorFilter = [self falseColorFilter];
+   [[self imageFilters] addObject:falseColorFilter];
+   
+   // Invert color filter
+   CIFilter *invertFilter = [self invertColorFilter];
+   [[self imageFilters] addObject:invertFilter];
+   
+   // Rotate 180 degrees filter
+   CIFilter *rotateFilter = [self filterWithAffineTransform:
+                             CGAffineTransformMakeRotation(M_PI)];
+   [[self imageFilters] addObject:rotateFilter];
+   
+   // Mirror image filter
+   CIFilter *mirrorFilter = [self filterWithAffineTransform:
+                             CGAffineTransformMakeScale(-1, 1)];
+   [[self imageFilters] addObject:mirrorFilter];
+   
+   // Skew filter
+   CIFilter *skewFilter = [self filterWithAffineTransform:
+                           CGAffineTransformMake(1, tan(M_PI/12), tan(M_PI/16), 1, 0, 0)];
+   [[self imageFilters] addObject:skewFilter];
+   
+   CIImage *thumbnailCIImage = [CIImage imageWithCGImage:
+                                [[self filteredThumbnailImage] CGImage]];
+   
+   dispatch_apply([[self imageFilters] count],
+                  dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
+                  ^(size_t i) {
+                     
+                     CIFilter *filter = [[self imageFilters] objectAtIndex:i];
+                     [filter setValue:thumbnailCIImage forKey:kCIInputImageKey];
+                     CIImage *filterResult = [filter outputImage];
+                     
+                     CGImageRef filteredCGImage = [[self ciContext]
+                                                   createCGImage:filterResult
+                                                   fromRect:[filterResult extent]];
+                     UIImage *filteredImage = [UIImage imageWithCGImage:filteredCGImage];
+                     CFRelease(filteredCGImage);
+                     
+                     [[self filteredThumbnailPreviewImages] addObject:filteredImage];
+                     
+                     dispatch_async(dispatch_get_main_queue(), ^(void) {
+                        UIButton *filterButton = [[self filterButtons] objectAtIndex:i];
+                        [filterButton setImage:filteredImage forState:UIControlStateNormal];
+                     });
+                  });
+}
+
+- (void)applySpecifiedFilter:(CIFilter *)filter
+{
+   CIImage *filteredLargeImage = [filter outputImage];
+   CGImageRef filteredLargeCGImage = [[self ciContext]
+                                      createCGImage:filteredLargeImage
+                                      fromRect:[filteredLargeImage extent]];
+   UIImage *filteredImage = [UIImage imageWithCGImage:filteredLargeCGImage];
+   [[[self photoViewCache] objectAtIndex:[self currentIndex]]
+    setImage:filteredImage];
+   [self setFilteredLargeImage:filteredImage];
+   CFRelease(filteredLargeCGImage);
+}
+
+- (IBAction)applyFilter:(id)sender {
+   CIFilter *filter = [[self imageFilters] objectAtIndex:[sender tag]];
+   [self applySpecifiedFilter:filter];
+   [self setFilteredThumbnailImage:
+    [[self filteredThumbnailPreviewImages] objectAtIndex:[sender tag]]];
+   [self randomizeFilters];
+}
+
+- (IBAction)enhanceImage:(id)sender {
+   CIImage *largeCIImage = [CIImage imageWithCGImage:
+                            [[self filteredLargeImage] CGImage]];
+   NSArray *autoAdjustmentFilters = [largeCIImage autoAdjustmentFilters];
+   CIImage *enhancedImage = largeCIImage;
+   for (CIFilter *filter in autoAdjustmentFilters) {
+      [filter setValue:enhancedImage forKey:kCIInputImageKey];
+      enhancedImage = [filter outputImage];
+   }
+   [self applySpecifiedFilter:[autoAdjustmentFilters lastObject]];
+}
+
+- (IBAction)zoomToFaces:(id)sender {
+   NSDictionary *detectorOptions = [NSDictionary 
+                                    dictionaryWithObject:CIDetectorAccuracyLow
+                                    forKey:CIDetectorAccuracy];
+   CIDetector *faceDetector = [CIDetector
+                               detectorOfType:CIDetectorTypeFace
+                               context:nil
+                               options:detectorOptions];
+   
+   CIImage *largeCIImage = [CIImage imageWithCGImage:
+                            [[self filteredLargeImage] CGImage]];
+   NSArray *faces = [faceDetector featuresInImage:largeCIImage options:nil];
+   
+   if ([faces count] > 0) {
+      CGRect faceZoomRect = CGRectNull;
+      
+      for (CIFaceFeature *face in faces) {
+         if (CGRectEqualToRect(faceZoomRect, CGRectNull)) {
+            faceZoomRect = [face bounds];
+         } else {
+            faceZoomRect = CGRectUnion(faceZoomRect, [face bounds]);
+         }
+      }
+      
+      faceZoomRect = CGRectIntersection([largeCIImage extent],
+                                        CGRectInset(faceZoomRect, -50.0, -50.0)) ;
+      
+      CIFilter *cropFilter = [CIFilter filterWithName:@"CICrop"];
+      [cropFilter setValue:largeCIImage forKey:kCIInputImageKey];
+      [cropFilter setValue:[CIVector
+                            vectorWithCGRect:faceZoomRect] forKey:@"inputRectangle"];
+      
+      [self applySpecifiedFilter:cropFilter];
+   } else {
+      UIAlertView *noFacesAlert = [[UIAlertView alloc] 
+                                   initWithTitle:@"No Faces"
+                                   message:@"Sorry, I couldn't find any faces in this picture."
+                                   delegate:nil
+                                   cancelButtonTitle:@"OK"
+                                   otherButtonTitles:nil];
+      [noFacesAlert show];
+   }
+}
+
+- (IBAction)revertToOriginal:(id)sender {
+   [self setFilteredThumbnailImage:[[self delegate]
+                                    photoBrowserViewController:self
+                                    smallImageAtIndex:[self currentIndex]]];
+   [self randomizeFilters];
+   UIImage *originalImage = [[self delegate]
+                             photoBrowserViewController:self
+                             imageAtIndex:[self currentIndex]];
+   [[[self photoViewCache] objectAtIndex:[self currentIndex]]
+    setImage:originalImage];
+   [self setFilteredLargeImage:originalImage];
+}
+
+- (IBAction)saveImage:(id)sender {
+   // Save the filtered large image
+   if ([self filteredLargeImage] != nil) {
+      [[self delegate] photoBrowserViewController:self
+                                 updateToNewImage:[self filteredLargeImage]
+                                          atIndex:[self currentIndex]];
+   }
+   
+   [self hideFilters];
+}
+
+- (IBAction)cancel:(id)sender {
+   // Restore original large image
+   UIImage *originalImage = [[self delegate]
+                             photoBrowserViewController:self
+                             imageAtIndex:[self currentIndex]];
+   [[[self photoViewCache] objectAtIndex:[self currentIndex]]
+    setImage:originalImage];
+   
+   [self hideFilters];
+}
+
+#pragma mark - Colors
+
+- (CIColor *)randomCIColor
+{
+   CIColor *randomColor = [CIColor colorWithRed:RAND_IN_RANGE(0.0, 1.0)
+                                          green:RAND_IN_RANGE(0.0, 1.0)
+                                           blue:RAND_IN_RANGE(0.0, 1.0)];
+   return randomColor;
+}
+
+- (CIColor *)randomCIColorAlpha
+{
+   CIColor *randomColor = [CIColor colorWithRed:RAND_IN_RANGE(0.0, 1.0)
+                                          green:RAND_IN_RANGE(0.0, 1.0)
+                                           blue:RAND_IN_RANGE(0.0, 1.0)
+                                          alpha:RAND_IN_RANGE(0.0, 1.0)];
+   return randomColor;
+}
+
+- (CIFilter *)hueAdjustFilter
+{
+   CIFilter *hueAdjust = [CIFilter filterWithName:@"CIHueAdjust"];
+   CGFloat inputAngle = RAND_IN_RANGE(-M_PI, M_PI);
+   [hueAdjust setValue:[NSNumber numberWithFloat: inputAngle]
+                forKey:@"inputAngle"];
+   return hueAdjust;
+}
+
+- (CIFilter *)colorTintFilter
+{
+   CIColor *tintColor = [self randomCIColor];
+   CIFilter *tintFilter = [CIFilter filterWithName:@"CIColorMonochrome"];
+   [tintFilter setValue:tintColor forKey:@"inputColor"];
+   return tintFilter;
+}
+
+- (CIFilter *)falseColorFilter
+{
+   CIColor *color0 = [self randomCIColor];
+   CIColor *color1 = [CIColor colorWithRed:(1.0 - [color0 red])
+                                     green:(1.0 - [color0 green])
+                                      blue:(1.0 - [color0 blue])];
+   CIFilter *falseColor = [CIFilter filterWithName:@"CIFalseColor"];
+   [falseColor setValue:color0 forKey:@"inputColor0"];
+   [falseColor setValue:color1 forKey:@"inputColor1"];
+   return falseColor;
+}
+
+- (CIFilter *)invertColorFilter
+{
+   CIFilter *invertFilter = [CIFilter filterWithName:@"CIColorInvert"];
+   return invertFilter;
+}
+
+- (CIFilter *)filterWithAffineTransform:(CGAffineTransform)transform
+{
+   CIFilter *transformFilter = [CIFilter filterWithName:@"CIAffineTransform"];
+   [transformFilter setDefaults];
+   [transformFilter setValue:[NSValue valueWithCGAffineTransform:transform]
+                      forKey:@"inputTransform"];
+   return transformFilter;
 }
 
 @end
