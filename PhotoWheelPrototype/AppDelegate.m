@@ -1,36 +1,48 @@
 //
-//  PhotoWheelPrototypeAppDelegate.m
+//  AppDelegate.m
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 6/15/11.
-//  Copyright 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 9/24/11.
+//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "PhotoWheelPrototypeAppDelegate.h"
+#import "AppDelegate.h"
 
-#import "RootViewController.h"
+#import "MasterViewController.h"
 
 #import "DetailViewController.h"
 
-@implementation PhotoWheelPrototypeAppDelegate
+@implementation AppDelegate
 
 @synthesize window = _window;
 @synthesize splitViewController = _splitViewController;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+- (BOOL)application:(UIApplication *)application 
+didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   // Override point for customization after application launch.
    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+   // Override point for customization after application launch.
    
-   RootViewController *controller = [[RootViewController alloc] initWithNibName:@"RootViewController" bundle:nil];
-   UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:controller];
+   MasterViewController *masterViewController = 
+      [[MasterViewController alloc] initWithNibName:@"MasterViewController" 
+                                             bundle:nil];
+   UINavigationController *masterNavigationController = 
+      [[UINavigationController alloc] 
+       initWithRootViewController:masterViewController];
    
-   DetailViewController *detailViewController = [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:nil];
-   [controller setDetailViewController:detailViewController];
+   DetailViewController *detailViewController = 
+      [[DetailViewController alloc] initWithNibName:@"DetailViewController" 
+                                             bundle:nil];
+   UINavigationController *detailNavigationController = 
+      [[UINavigationController alloc] 
+       initWithRootViewController:detailViewController];
    
    self.splitViewController = [[UISplitViewController alloc] init];
    self.splitViewController.delegate = detailViewController;
-   self.splitViewController.viewControllers = [NSArray arrayWithObjects:navigationController, detailViewController, nil];
+   self.splitViewController.viewControllers = [NSArray arrayWithObjects:
+                                               masterNavigationController, 
+                                               detailNavigationController, 
+                                               nil];
    self.window.rootViewController = self.splitViewController;
    [self.window makeKeyAndVisible];
    return YES;
