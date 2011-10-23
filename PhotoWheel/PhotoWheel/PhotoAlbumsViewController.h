@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "WheelView.h"
 
-@interface PhotoAlbumsViewController : UIViewController
+@class PhotoAlbumViewController;
+
+@interface PhotoAlbumsViewController : UIViewController 
+<NSFetchedResultsControllerDelegate, WheelViewDataSource, WheelViewDelegate>
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) IBOutlet WheelView *wheelView;
+@property (nonatomic, strong) PhotoAlbumViewController *photoAlbumViewController;
+
+- (IBAction)addPhotoAlbum:(id)sender;
 
 @end

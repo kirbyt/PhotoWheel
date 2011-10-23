@@ -128,24 +128,59 @@
                                 <rect key="frame" x="0.0" y="0.0" width="716" height="717"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="53">
-                                <rect key="frame" x="322" y="340" width="72" height="37"/>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="blackOpaque" id="BYg-8L-4mf" customClass="ClearToolbar">
+                                <rect key="frame" x="9" y="6" width="698" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal">
-                                    <color key="titleColor" red="0.19607843459999999" green="0.30980393290000002" blue="0.52156865600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <items>
+                                    <barButtonItem systemItem="action" id="TbA-dR-kXT">
+                                        <connections>
+                                            <action selector="showActionMenu:" destination="42" id="AJv-uc-7wD"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="8LR-tM-m7k"/>
+                                    <barButtonItem style="plain" id="c1V-8p-M9x">
+                                        <textField key="customView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Tap to edit" textAlignment="center" minimumFontSize="17" id="yTf-IH-CSS">
+                                            <rect key="frame" x="82" y="7" width="533" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="42" id="EEZ-iX-urf"/>
+                                            </connections>
+                                        </textField>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="iTy-2a-InX"/>
+                                    <barButtonItem systemItem="add" id="Jgk-Bz-Yta">
+                                        <connections>
+                                            <action selector="addPhoto:" destination="42" id="iUB-ZU-pn4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <view contentMode="scaleToFill" id="rcP-0A-Mjr" customClass="GridView">
+                                <rect key="frame" x="9" y="51" width="698" height="597"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="29" kind="custom" customClass="CustomPushSegue" id="54"/>
+                                    <outlet property="dataSource" destination="42" id="Cvp-hJ-JGN"/>
                                 </connections>
-                            </button>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stack-viewer-shadow.png" id="XVS-eo-L2R">
+                                <rect key="frame" x="9" y="51" width="698" height="8"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="addButton" destination="Jgk-Bz-Yta" id="uEL-pt-ETK"/>
+                        <outlet property="gridView" destination="rcP-0A-Mjr" id="dw3-ab-pQm"/>
+                        <outlet property="textField" destination="yTf-IH-CSS" id="XGl-3W-dCp"/>
+                        <outlet property="toolbar" destination="BYg-8L-4mf" id="nK3-xS-Aui"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="698" y="1888"/>
@@ -162,6 +197,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="551" height="550"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <view contentMode="scaleToFill" id="Kwf-pf-Zvu" customClass="WheelView">
+                                <rect key="frame" x="31" y="33" width="488" height="484"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="46" id="th9-vu-Ows"/>
+                                    <outlet property="delegate" destination="46" id="zX8-Kj-api"/>
+                                </connections>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="51">
                                 <rect key="frame" x="186" y="186" width="178" height="178"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -173,10 +217,16 @@
                                 <state key="highlighted" image="stack-add-down.png">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="addPhotoAlbum:" destination="46" eventType="touchUpInside" id="ZJE-m7-QGI"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="wheelView" destination="Kwf-pf-Zvu" id="pLT-VG-2X2"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="-276" y="1888"/>
@@ -189,6 +239,7 @@
         <image name="stack-add.png" width="178" height="178"/>
         <image name="stack-bg.png" width="551" height="550"/>
         <image name="stack-viewer-bg-portrait.png" width="716" height="717"/>
+        <image name="stack-viewer-shadow.png" width="5" height="8"/>
     </resources>
     <classes>
         <class className="AboutViewController" superclassName="UIViewController">
@@ -197,17 +248,45 @@
                 <relationship kind="action" name="done:"/>
             </relationships>
         </class>
+        <class className="ClearToolbar" superclassName="UIToolbar">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ClearToolbar.h"/>
+        </class>
         <class className="CustomNavigationController" superclassName="UINavigationController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/CustomNavigationController.h"/>
+        </class>
+        <class className="GridView" superclassName="UIScrollView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/GridView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+            </relationships>
         </class>
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
         </class>
         <class className="PhotoAlbumViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoAlbumViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addPhoto:"/>
+                <relationship kind="action" name="showActionMenu:"/>
+                <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
+                <relationship kind="outlet" name="gridView" candidateClass="GridView"/>
+                <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
+                <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
+            </relationships>
         </class>
         <class className="PhotoAlbumsViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/PhotoAlbumsViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="addPhotoAlbum:"/>
+                <relationship kind="outlet" name="wheelView" candidateClass="WheelView"/>
+            </relationships>
+        </class>
+        <class className="WheelView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/WheelView.h"/>
+            <relationships>
+                <relationship kind="outlet" name="dataSource"/>
+                <relationship kind="outlet" name="delegate"/>
+            </relationships>
         </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
