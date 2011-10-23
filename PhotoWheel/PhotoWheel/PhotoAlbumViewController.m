@@ -16,7 +16,10 @@
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIPopoverController *imagePickerPopoverController;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) SendEmailController *sendEmailController;
+
 - (void)presentPhotoPickerMenu;
+- (void)emailPhotos;
 @end
 
 @implementation PhotoAlbumViewController
@@ -33,6 +36,7 @@
 @synthesize fetchedResultsController = _fetchedResultsController;
 @synthesize backgroundImageView = _backgroundImageView;
 @synthesize shadowImageView = _shadowImageView;
+@synthesize sendEmailController = _sendEmailController;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -142,6 +146,11 @@
 {
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
    [actionSheet setDelegate:self];
+   
+   if ([SendEmailController canSendMail]) {
+      [actionSheet addButtonWithTitle:@"Email Photo Album"];
+   }
+   
    [actionSheet addButtonWithTitle:@"Delete Photo Album"];
    [actionSheet showFromBarButtonItem:sender animated:YES];
 }
@@ -206,11 +215,12 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    NSMutableArray *names = [[NSMutableArray alloc] init];
    
    if ([actionSheet tag] == 0) {
+      if ([SendEmailController canSendMail]) [names addObject:@"emailPhotos"];
       [names addObject:@"confirmDeletePhotoAlbum"];
       
    } else {
       BOOL hasCamera = [UIImagePickerController 
-          isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+               isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
       if (hasCamera) [names addObject:@"presentCamera"];
       [names addObject:@"presentPhotoLibrary"];
    }
@@ -496,6 +506,29 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
       [self layoutForLandscape];
    } else {
       [self layoutForPortrait];
+   }
+}
+
+#pragma mark - Email and SendEmailControllerDelegate methods
+
+- (void)emailPhotos
+{
+   NSManagedObjectContext *context = [self managedObjectContext];
+   PhotoAlbum *album = (PhotoAlbum *)[context objectWithID:[self objectID]];
+   NSSet *photos = [[album photos] set];
+   
+   SendEmailController *controller = [[SendEmailController alloc] 
+                                      initWithViewController:self];
+   [controller setPhotos:photos];
+   [controller sendEmail];
+   
+   [self setSendEmailController:controller];
+}
+
+- (void)sendEmailControllerDidFinish:(SendEmailController *)controller
+{
+   if ([controller isEqual:[self sendEmailController]]) {
+      [self setSendEmailController:nil];
    }
 }
 
