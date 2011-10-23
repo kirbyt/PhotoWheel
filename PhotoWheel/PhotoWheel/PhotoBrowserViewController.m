@@ -438,12 +438,57 @@
 
 - (void)showActionMenu:(id)sender
 {
-   NSLog(@"%s", __PRETTY_FUNCTION__);
+   [self cancelChromeDisplayTimer];
+   UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
+   [actionSheet setDelegate:self];
+   [actionSheet setTag:ACTIONSHEET_TAG_ACTIONS];
+   if ([UIPrintInteractionController isPrintingAvailable]) {
+      [actionSheet addButtonWithTitle:@"Print"];
+   }
+   
+   [actionSheet showFromBarButtonItem:sender animated:YES];
 }
 
 - (void)slideshow:(id)sender
 {
    NSLog(@"%s", __PRETTY_FUNCTION__);
+}
+
+#pragma mark - Printing
+
+- (void)printCurrentPhoto
+{
+   [self cancelChromeDisplayTimer];                                     // 2
+   UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];     // 3
+   
+   UIPrintInteractionController *controller = 
+      [UIPrintInteractionController sharedPrintController];             // 4
+   if(!controller){
+      NSLog(@"Couldn't get shared UIPrintInteractionController!");
+      return;
+   }
+   
+   UIPrintInteractionCompletionHandler completionHandler = 
+      ^(UIPrintInteractionController *printController, BOOL completed, 
+        NSError *error) 
+   {
+      [self startChromeDisplayTimer];
+      if(completed && error)
+         NSLog(@"FAILED! due to error in domain %@ with error code %u", 
+               error.domain, error.code);
+   };                                                                   // 5
+   
+   UIPrintInfo *printInfo = [UIPrintInfo printInfo];                    // 6
+   [printInfo setOutputType:UIPrintInfoOutputPhoto];                    // 7
+   [printInfo setJobName:[NSString stringWithFormat:@"photo-%i", 
+                          [self currentIndex]]];                        // 8
+   
+   [controller setPrintInfo:printInfo];                                 // 9
+   [controller setPrintingItem:currentPhoto];                           // 10
+   
+   [controller presentFromBarButtonItem:[self actionButton] 
+                               animated:YES 
+                      completionHandler:completionHandler];             // 11
 }
 
 #pragma mark - UIActionSheetDelegate methods
@@ -462,6 +507,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    
    if ([actionSheet tag] == ACTIONSHEET_TAG_DELETE) {
       [self deletePhotoConfirmed];
+   } else if ([actionSheet tag] == ACTIONSHEET_TAG_ACTIONS) {           // 12
+      [self printCurrentPhoto];      
    }
 }
 
