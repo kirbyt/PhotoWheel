@@ -17,6 +17,8 @@
 		68F5355D142E19A600797CD6 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5355C142E19A600797CD6 /* DetailViewController.m */; };
 		68F53560142E19A600797CD6 /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F5355E142E19A600797CD6 /* MasterViewController.xib */; };
 		68F53563142E19A600797CD6 /* DetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F53561142E19A600797CD6 /* DetailViewController.xib */; };
+		68F53578142E3BCB00797CD6 /* NameEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F53576142E3BCB00797CD6 /* NameEditorViewController.m */; };
+		68F53579142E3BCB00797CD6 /* NameEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68F53577142E3BCB00797CD6 /* NameEditorViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,9 @@
 		68F5355C142E19A600797CD6 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		68F5355F142E19A600797CD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController.xib; sourceTree = "<group>"; };
 		68F53562142E19A600797CD6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/DetailViewController.xib; sourceTree = "<group>"; };
+		68F53575142E3BCB00797CD6 /* NameEditorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEditorViewController.h; sourceTree = "<group>"; };
+		68F53576142E3BCB00797CD6 /* NameEditorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEditorViewController.m; sourceTree = "<group>"; };
+		68F53577142E3BCB00797CD6 /* NameEditorViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameEditorViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +95,9 @@
 				68F5355C142E19A600797CD6 /* DetailViewController.m */,
 				68F5355E142E19A600797CD6 /* MasterViewController.xib */,
 				68F53561142E19A600797CD6 /* DetailViewController.xib */,
+				68F53575142E3BCB00797CD6 /* NameEditorViewController.h */,
+				68F53576142E3BCB00797CD6 /* NameEditorViewController.m */,
+				68F53577142E3BCB00797CD6 /* NameEditorViewController.xib */,
 				68F5354D142E19A600797CD6 /* Supporting Files */,
 			);
 			path = PhotoWheelPrototype;
@@ -160,6 +168,7 @@
 				68F53551142E19A600797CD6 /* InfoPlist.strings in Resources */,
 				68F53560142E19A600797CD6 /* MasterViewController.xib in Resources */,
 				68F53563142E19A600797CD6 /* DetailViewController.xib in Resources */,
+				68F53579142E3BCB00797CD6 /* NameEditorViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,6 +183,7 @@
 				68F53557142E19A600797CD6 /* AppDelegate.m in Sources */,
 				68F5355A142E19A600797CD6 /* MasterViewController.m in Sources */,
 				68F5355D142E19A600797CD6 /* DetailViewController.m in Sources */,
+				68F53578142E3BCB00797CD6 /* NameEditorViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -295,6 +305,7 @@
 				68F53568142E19A600797CD6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
