@@ -23,11 +23,12 @@ typedef enum  {
 @property (nonatomic, strong) IBOutlet id<WheelViewDataSource> dataSource;
 @property (nonatomic, strong) IBOutlet id<WheelViewDelegate> delegate;
 @property (nonatomic, assign) WheelViewStyle style;
-@property (nonatomic, assign) NSInteger selectedIndex;                // 1
+@property (nonatomic, assign) NSInteger selectedIndex;
+@property (nonatomic, assign) CGFloat angleOffset;
 
-- (id)dequeueReusableCell;                                            // 2
-- (void)reloadData;                                                   // 3
-- (WheelViewCell *)cellAtIndex:(NSInteger)index;                      // 4
+- (id)dequeueReusableCell;
+- (void)reloadData;
+- (WheelViewCell *)cellAtIndex:(NSInteger)index;
 
 @end
 
@@ -39,10 +40,10 @@ typedef enum  {
                  cellAtIndex:(NSInteger)index;
 @optional
 - (void)wheelView:(WheelView *)wheelView 
-   didSelectCellAtIndex:(NSInteger)index;                            // 5
+   didSelectCellAtIndex:(NSInteger)index;
 @end
 
-@protocol WheelViewDelegate <NSObject>                               // 6
+@protocol WheelViewDelegate <NSObject>
 @optional
 - (NSInteger)wheelViewNumberOfVisibleCells:(WheelView *)wheelView;
 @end

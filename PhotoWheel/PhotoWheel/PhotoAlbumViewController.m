@@ -31,6 +31,8 @@
 @synthesize imagePickerPopoverController = _imagePickerPopoverController;
 @synthesize gridView = _gridView;
 @synthesize fetchedResultsController = _fetchedResultsController;
+@synthesize backgroundImageView = _backgroundImageView;
+@synthesize shadowImageView = _shadowImageView;
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
@@ -461,6 +463,40 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    NSManagedObjectContext *context = [self managedObjectContext];
    [context deleteObject:photo];
    [self saveChanges];   
+}
+
+#pragma mark - Rotation support
+
+- (void)layoutForLandscape
+{
+   [[self view] setFrame:CGRectMake(18, 20, 738, 719)];
+   [[self backgroundImageView] setImage:[UIImage 
+                             imageNamed:@"stack-viewer-bg-landscape-right.png"]];
+   [[self backgroundImageView] setFrame:[[self view] bounds]];
+   [[self shadowImageView] setFrame:CGRectMake(9, 51, 678, 8)];
+   [[self gridView] setFrame:CGRectMake(20, 52, 654, 632)];
+   [[self toolbar] setFrame:CGRectMake(9, 6, 678, 44)];
+}
+
+- (void)layoutForPortrait
+{
+   [[self view] setFrame:CGRectMake(26, 18, 716, 717)];
+   [[self backgroundImageView] setImage:[UIImage 
+                                   imageNamed:@"stack-viewer-bg-portrait.png"]];
+   [[self backgroundImageView] setFrame:[[self view] bounds]];
+   [[self shadowImageView] setFrame:CGRectMake(9, 51, 698, 8)];
+   [[self gridView] setFrame:CGRectMake(20, 51, 678, 597)];
+   [[self toolbar] setFrame:CGRectMake(9, 6, 698, 44)];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:
+(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+      [self layoutForLandscape];
+   } else {
+      [self layoutForPortrait];
+   }
 }
 
 @end
