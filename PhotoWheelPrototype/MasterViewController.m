@@ -7,13 +7,19 @@
 //
 
 #import "MasterViewController.h"
-
 #import "DetailViewController.h"
+#import "PhotoAlbum.h"
+
+@interface MasterViewController ()
+@property (readwrite, assign) NSUInteger currentAlbumIndex;
+@end
 
 @implementation MasterViewController
 
 @synthesize detailViewController = _detailViewController;
 @synthesize data = _data;
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize currentAlbumIndex = _currentAlbumIndex;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,10 +46,16 @@
    
    self.title = NSLocalizedString(@"Photo Albums", @"Photo albums title");
    
-   [self setData:[[NSMutableOrderedSet alloc] init]];
-   [[self data] addObject:@"A Sample Photo Album"];
-   [[self data] addObject:@"Another Photo Album"];
-
+   [self setData:[PhotoAlbum allPhotoAlbumsInContext:[self managedObjectContext]]];
+   
+   if ([[self data] count] == 0) {
+      PhotoAlbum *newAlbum = [PhotoAlbum
+                              newPhotoAlbumWithName:@"First album"
+                              inContext:[self managedObjectContext]];
+      [self setData:[NSMutableArray arrayWithObject:newAlbum]];
+      [[self managedObjectContext] save:nil];
+   }
+   
    [self.tableView selectRowAtIndexPath:[NSIndexPath indexPathForRow:0 
                                                            inSection:0] 
                                animated:NO 
@@ -55,6 +67,8 @@
                                  action:@selector(add:)];   
    [[self navigationItem] setRightBarButtonItem:addButton];
    [[self navigationItem] setLeftBarButtonItem:[self editButtonItem]];
+   
+   [[self detailViewController] setPhotoAlbum:[[self data] objectAtIndex:0]];
 }
 
 - (void)add:(id)sender
@@ -133,8 +147,14 @@
    }
    
    // Configure the cell.
-   NSString *text = [[self data] objectAtIndex:[indexPath row]];
-   [[cell textLabel] setText:text];
+   PhotoAlbum *album = [[self data] objectAtIndex:[indexPath row]];
+   [[cell textLabel] setText:[album name]];
+   
+   if ([indexPath row] == [self currentAlbumIndex]) {
+      [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+   } else {
+      [cell setAccessoryType:UITableViewCellAccessoryNone];
+   }
    return cell;
 }
 
@@ -154,7 +174,7 @@ accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
    [newController setDelegate:self];
    [newController setEditing:YES];
    [newController setIndexPath:indexPath];
-   NSString *name = [[self data] objectAtIndex:[indexPath row]];
+   NSString *name = [[[self data] objectAtIndex:[indexPath row]] valueForKey:@"name"];
    [newController setDefaultNameText:name];
    [newController setModalPresentationStyle:UIModalPresentationFormSheet];
    [self presentModalViewController:newController animated:YES];
@@ -179,8 +199,16 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   NSString *name = [[self data] objectAtIndex:[indexPath row]];
-   [[self detailViewController] setDetailItem:name];
+   NSIndexPath *oldCurrentAlbumIndexPath = [NSIndexPath
+                                            indexPathForRow:[self currentAlbumIndex]
+                                            inSection:0];
+   [self setCurrentAlbumIndex:[indexPath row]];
+   [tableView reloadRowsAtIndexPaths:
+    [NSArray arrayWithObjects:indexPath, oldCurrentAlbumIndexPath, nil]
+                    withRowAnimation:UITableViewRowAnimationNone];
+   
+   PhotoAlbum *selectedAlbum = [[self data] objectAtIndex:[indexPath row]];
+   [[self detailViewController] setPhotoAlbum:selectedAlbum];
 }
 
 #pragma mark - NameEditorViewControllerDelegate
@@ -190,11 +218,16 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
    NSString *newName = [[controller nameTextField] text];
    if (newName && [newName length] > 0) {
       if ([controller isEditing]) {
-         [[self data] replaceObjectAtIndex:[[controller indexPath] row] 
-                                withObject:newName];
+         PhotoAlbum *album = [[self data]
+                              objectAtIndex:[[controller indexPath] row]];
+         [album setName:newName];
       } else {
-         [[self data] addObject:newName];
+         PhotoAlbum *newAlbum = [PhotoAlbum
+                                 newPhotoAlbumWithName:newName
+                                 inContext:[self managedObjectContext]];
+         [[self data] addObject:newAlbum];
       }
+      [[self managedObjectContext] save:nil];
       [[self tableView] reloadData];
    }
 }

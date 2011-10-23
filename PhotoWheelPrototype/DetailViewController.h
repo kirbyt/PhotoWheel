@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "WheelView.h"
 
+@class PhotoAlbum;
+
 @interface DetailViewController : UIViewController 
 <UISplitViewControllerDelegate, WheelViewDataSource, UIActionSheetDelegate, 
 UINavigationControllerDelegate, UIImagePickerControllerDelegate>
@@ -18,5 +20,9 @@ UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 
 @property (strong, nonatomic) IBOutlet WheelView *wheelView;
+
+@property (strong, nonatomic) PhotoAlbum *photoAlbum;
+
+@property (assign, nonatomic) NSUInteger selectedWheelViewCellIndex;
 
 @end

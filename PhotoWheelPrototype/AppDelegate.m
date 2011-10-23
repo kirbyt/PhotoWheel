@@ -17,6 +17,10 @@
 @synthesize window = _window;
 @synthesize splitViewController = _splitViewController;
 
+@synthesize managedObjectContext = __managedObjectContext;
+@synthesize managedObjectModel = __managedObjectModel;
+@synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
+
 - (BOOL)application:(UIApplication *)application 
 didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -40,6 +44,7 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
    // Add this line. It tells the master view controller which
    // detail view controller to use.
    [masterViewController setDetailViewController:detailViewController];
+   [masterViewController setManagedObjectContext:[self managedObjectContext]];
    
    self.splitViewController = [[UISplitViewController alloc] init];
    self.splitViewController.delegate = detailViewController;
@@ -89,6 +94,69 @@ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
     Save data if appropriate.
     See also applicationDidEnterBackground:.
     */
+}
+
+#pragma mark - Core Data Stack 
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+   if (__managedObjectContext != nil)
+   {
+      return __managedObjectContext;
+   }
+   
+   NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+   if (coordinator != nil)
+   {
+      __managedObjectContext = [[NSManagedObjectContext alloc] init];
+      [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+   }
+   return __managedObjectContext;
+}
+
+- (NSManagedObjectModel *)managedObjectModel
+{
+   if (__managedObjectModel != nil)
+   {
+      return __managedObjectModel;
+   }
+   NSURL *modelURL = [[NSBundle mainBundle]
+                      URLForResource:@"PhotoWheelPrototype"
+                      withExtension:@"momd"];
+   __managedObjectModel = 
+   [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
+   return __managedObjectModel;
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
+{
+   if (__persistentStoreCoordinator != nil)
+   {
+      return __persistentStoreCoordinator;
+   }
+   
+   NSURL *applicationDocumentsDirectory = [[[NSFileManager defaultManager]
+                                            URLsForDirectory:NSDocumentDirectory
+                                            inDomains:NSUserDomainMask]
+                                           lastObject];
+   NSURL *storeURL = [applicationDocumentsDirectory
+                      URLByAppendingPathComponent:@"PhotoWheelPrototype.sqlite"];
+   
+   NSError *error = nil;
+   __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
+                                   initWithManagedObjectModel:[self managedObjectModel]];
+   if (![__persistentStoreCoordinator
+         addPersistentStoreWithType:NSSQLiteStoreType
+         configuration:nil
+         URL:storeURL
+         options:nil
+         error:&error])
+   {
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }    
+   
+   return __persistentStoreCoordinator;
 }
 
 @end
