@@ -7,7 +7,7 @@
 //
 
 
-// #error Changes the follow values to your own application key.
+#error Changes the follow values to your own application key.
 
 // Changes this value to your own application key. More info at:
 // http://www.flickr.com/services/api/misc.api_keys.html. 
