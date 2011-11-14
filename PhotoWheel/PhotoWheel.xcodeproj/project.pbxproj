@@ -28,6 +28,9 @@
 		6856FE261438A840003502DB /* FlickrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6856FE251438A840003502DB /* FlickrViewController.m */; };
 		6856FE2A1438ACED003502DB /* SimpleFlickrAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6856FE291438ACED003502DB /* SimpleFlickrAPI.m */; };
 		6856FE2D1438AEF7003502DB /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6856FE2C1438AEF7003502DB /* ImageDownloader.m */; };
+		6891947314715D4C00F6B58E /* CHANGES.md in Resources */ = {isa = PBXBuildFile; fileRef = 6891947014715D4C00F6B58E /* CHANGES.md */; };
+		6891947414715D4C00F6B58E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6891947114715D4C00F6B58E /* LICENSE */; };
+		6891947514715D4C00F6B58E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6891947214715D4C00F6B58E /* README.md */; };
 		689199B013F5B6530037CBAC /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199AF13F5B6530037CBAC /* UIView+PWCategory.m */; };
 		689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689199B113F5BFFA0037CBAC /* CoreGraphics.framework */; };
 		689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199B413F5C8320037CBAC /* CustomNavigationController.m */; };
@@ -111,6 +114,9 @@
 		6856FE291438ACED003502DB /* SimpleFlickrAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleFlickrAPI.m; sourceTree = "<group>"; };
 		6856FE2B1438AEF7003502DB /* ImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
 		6856FE2C1438AEF7003502DB /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
+		6891947014715D4C00F6B58E /* CHANGES.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CHANGES.md; path = ../CHANGES.md; sourceTree = "<group>"; };
+		6891947114715D4C00F6B58E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		6891947214715D4C00F6B58E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		689199AE13F5B6530037CBAC /* UIView+PWCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PWCategory.h"; sourceTree = "<group>"; };
 		689199AF13F5B6530037CBAC /* UIView+PWCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PWCategory.m"; sourceTree = "<group>"; };
 		689199B113F5BFFA0037CBAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -218,6 +224,9 @@
 		68FA6AC613EEF3BA00E046BD = {
 			isa = PBXGroup;
 			children = (
+				6891947014715D4C00F6B58E /* CHANGES.md */,
+				6891947114715D4C00F6B58E /* LICENSE */,
+				6891947214715D4C00F6B58E /* README.md */,
 				68FA6ADB13EEF3BB00E046BD /* PhotoWheel */,
 				68FA6AD413EEF3BB00E046BD /* Frameworks */,
 				68FA6AD213EEF3BB00E046BD /* Products */,
@@ -400,6 +409,9 @@
 				68A156D014379FDE008400B0 /* stack-viewer-bg-portrait.png in Resources */,
 				68A156D114379FDE008400B0 /* stack-viewer-shadow.png in Resources */,
 				68F32AC514530D9900D477DF /* Default-Landscape.png in Resources */,
+				6891947314715D4C00F6B58E /* CHANGES.md in Resources */,
+				6891947414715D4C00F6B58E /* LICENSE in Resources */,
+				6891947514715D4C00F6B58E /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

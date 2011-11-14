@@ -4,7 +4,4 @@
    <FileRef
       location = "group:PhotoWheel/PhotoWheel.xcodeproj">
    </FileRef>
-   <FileRef
-      location = "group:PhotoWheelPrototype.xcodeproj">
-   </FileRef>
 </Workspace>
