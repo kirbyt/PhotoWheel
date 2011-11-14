@@ -54,14 +54,12 @@
    [self setExternalScreenWindow:nil];
    
    // Create a new window and move it to the external screen
-   [self setExternalScreenWindow:[[UIWindow alloc]
-                                  initWithFrame:[externalScreen applicationFrame]]];
+   [self setExternalScreenWindow:[[UIWindow alloc] initWithFrame:[externalScreen applicationFrame]]];
    [[self externalScreenWindow] setScreen:externalScreen];
    
    // Create a SlideShowViewController to handle slides on the 
    // external screen
-   SlideShowViewController *externalSlideController =
-   [[SlideShowViewController alloc] init];
+   SlideShowViewController *externalSlideController = [[SlideShowViewController alloc] init];
    [self setExternalDisplaySlideshowController:externalSlideController];
    [externalSlideController setDelegate:[self delegate]];
    [externalSlideController setStartIndex:[self currentIndex]];
@@ -73,8 +71,7 @@
    
    // Set the external screen view's background color to match the 
    // one configured in the storyboard
-   [[externalSlideController view]
-    setBackgroundColor:[[self view] backgroundColor]];
+   [[externalSlideController view] setBackgroundColor:[[self view] backgroundColor]];
    
    // Show the window
    [[self externalScreenWindow] makeKeyAndVisible];
@@ -94,23 +91,15 @@
    
    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
    // Add observers for screen connect/disconnect
-   [notificationCenter addObserverForName:UIScreenDidConnectNotification
-                                   object:nil
-                                    queue:[NSOperationQueue mainQueue]
-                               usingBlock:^(NSNotification *note) 
-    {
-       UIScreen *newExternalScreen = [note object];
-       [self configureExternalScreen:newExternalScreen];
-    }];
+   [notificationCenter addObserverForName:UIScreenDidConnectNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+      UIScreen *newExternalScreen = [note object];
+      [self configureExternalScreen:newExternalScreen];
+   }];
    
-   [notificationCenter addObserverForName:UIScreenDidDisconnectNotification
-                                   object:nil
-                                    queue:[NSOperationQueue mainQueue]
-                               usingBlock:^(NSNotification *note)
-    {
-       [self setExternalDisplaySlideshowController:nil];
-       [self setExternalScreenWindow:nil];
-    }];
+   [notificationCenter addObserverForName:UIScreenDidDisconnectNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *note) {
+      [self setExternalDisplaySlideshowController:nil];
+      [self setExternalScreenWindow:nil];
+   }];
 }
 
 - (void)setCurrentIndex:(NSInteger)currentIndex
@@ -119,10 +108,7 @@
    [[self externalDisplaySlideshowController] setCurrentIndex:currentIndex];
    
    [[self currentPhotoView] setUserInteractionEnabled:YES];
-   UITapGestureRecognizer *photoTapRecognizer =
-   [[UITapGestureRecognizer alloc]
-    initWithTarget:self
-    action:@selector(photoTapped:)];
+   UITapGestureRecognizer *photoTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
    [[self currentPhotoView] addGestureRecognizer:photoTapRecognizer];
 }
 
@@ -130,11 +116,7 @@
 {
    [super viewWillAppear:animated];
    
-   NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0
-                                                     target:self
-                                                   selector:@selector(advanceSlide:)
-                                                   userInfo:nil
-                                                    repeats:YES];
+   NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(advanceSlide:) userInfo:nil repeats:YES];
    [self setSlideAdvanceTimer:timer];
 
    UINavigationBar *navBar = [[self navigationController] navigationBar];
@@ -163,57 +145,36 @@
 
 - (void)updateNavBarButtonsForPlayingState:(BOOL)playing
 {
-   UIBarButtonItem *rewindButton = [[UIBarButtonItem alloc]
-                                    initWithBarButtonSystemItem:UIBarButtonSystemItemRewind
-                                    target:self
-                                    action:@selector(backOnePhoto:)];
+   UIBarButtonItem *rewindButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(backOnePhoto:)];
    [rewindButton setStyle:UIBarButtonItemStyleBordered];
    UIBarButtonItem *playPauseButton;
    if (playing) {
-      playPauseButton = [[UIBarButtonItem alloc]
-                         initWithBarButtonSystemItem:UIBarButtonSystemItemPause
-                         target:self
-                         action:@selector(pause:)];
+      playPauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pause:)];
    } else {
-      playPauseButton = [[UIBarButtonItem alloc]
-                         initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
-                         target:self
-                         action:@selector(resume:)];
+      playPauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resume:)];
    }
    [playPauseButton setStyle:UIBarButtonItemStyleBordered];
-   UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc]
-                                     initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
-                                     target:self
-                                     action:@selector(forwardOnePhoto:)];
+   UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(forwardOnePhoto:)];
    [forwardButton setStyle:UIBarButtonItemStyleBordered];
    
    // Add the AirPlay selector
    MPVolumeView *airPlaySelectorView = [[MPVolumeView alloc] init];
    [airPlaySelectorView setShowsVolumeSlider:NO];
    [airPlaySelectorView setShowsRouteButton:YES];
-   CGSize airPlaySelectorSize = [airPlaySelectorView
-                                 sizeThatFits:CGSizeMake(44.0, 44.0)];
-   [airPlaySelectorView setFrame:
-    CGRectMake(0, 0, airPlaySelectorSize.width,
-               airPlaySelectorSize.height)];
-   UIBarButtonItem *airPlayButton = [[UIBarButtonItem alloc]
-                                     initWithCustomView:airPlaySelectorView];
+   CGSize airPlaySelectorSize = [airPlaySelectorView sizeThatFits:CGSizeMake(44.0, 44.0)];
+   [airPlaySelectorView setFrame:CGRectMake(0, 0, airPlaySelectorSize.width, airPlaySelectorSize.height)];
+   UIBarButtonItem *airPlayButton = [[UIBarButtonItem alloc] initWithCustomView:airPlaySelectorView];
    
-   NSArray *toolbarItems = [NSArray arrayWithObjects:
-                            airPlayButton, rewindButton, playPauseButton, forwardButton, nil];
+   NSArray *toolbarItems = [NSArray arrayWithObjects:airPlayButton, rewindButton, playPauseButton, forwardButton, nil];
    
-   UIToolbar *toolbar = [[ClearToolbar alloc]
-                         initWithFrame:CGRectMake(0, 0, 200, 44)];
+   UIToolbar *toolbar = [[ClearToolbar alloc] initWithFrame:CGRectMake(0, 0, 200, 44)];
    [toolbar setBackgroundColor:[UIColor clearColor]];
    [toolbar setBarStyle:UIBarStyleBlack];
    [toolbar setTranslucent:YES];
    [toolbar setItems:toolbarItems];
    
-   UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc]
-                                           initWithCustomView:toolbar];
-   [[self navigationItem]
-    setRightBarButtonItem:customBarButtonItem
-    animated:YES];
+   UIBarButtonItem *customBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:toolbar];
+   [[self navigationItem] setRightBarButtonItem:customBarButtonItem animated:YES];
 }
 
 #pragma mark - Actions that control the slide display
@@ -261,8 +222,7 @@
    return YES;
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-                                         duration:(NSTimeInterval)duration 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration 
 {
    // Adjust navigation bar if needed.
    if ([self isChromeHidden]) {
@@ -322,11 +282,7 @@
 - (void)startChromeDisplayTimer
 {
    [self cancelChromeDisplayTimer];
-   NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 
-                                                     target:self 
-                                                   selector:@selector(hideChrome) 
-                                                   userInfo:nil 
-                                                    repeats:NO];
+   NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(hideChrome) userInfo:nil repeats:NO];
    [self setChromeHideTimer:timer];
 }
 

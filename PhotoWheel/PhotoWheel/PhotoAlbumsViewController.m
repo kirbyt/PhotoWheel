@@ -38,14 +38,10 @@
    
    [[self view] setBackgroundColor:[UIColor clearColor]];
 
-   [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification 
-                                                     object:[[UIApplication sharedApplication] delegate] 
-                                                      queue:[NSOperationQueue mainQueue] 
-                                                 usingBlock:^(NSNotification *__strong note) {
-                                                    [self setFetchedResultsController:nil];
-                                                    [[self wheelView] reloadData];
-                                                 }
-    ];
+   [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification object:[[UIApplication sharedApplication] delegate] queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *__strong note) {
+      [self setFetchedResultsController:nil];
+      [[self wheelView] reloadData];
+   }];
 }
 
 - (void)viewDidUnload
@@ -55,8 +51,7 @@
    [super viewDidUnload];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:
-(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
    CGRect newFrame;
    CGFloat angleOffset;
@@ -76,9 +71,7 @@
 - (IBAction)addPhotoAlbum:(id)sender
 {
    NSManagedObjectContext *context = [self managedObjectContext];
-   PhotoAlbum *photoAlbum = [NSEntityDescription 
-                             insertNewObjectForEntityForName:@"PhotoAlbum" 
-                             inManagedObjectContext:context];
+   PhotoAlbum *photoAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:context];
    [photoAlbum setDateAdded:[NSDate date]];
    
    // Save the context.
@@ -108,20 +101,12 @@
    }
    
    NSString *cacheName = NSStringFromClass([self class]);
-   NSFetchRequest *fetchRequest = 
-      [NSFetchRequest fetchRequestWithEntityName:@"PhotoAlbum"];
+   NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"PhotoAlbum"];
    
-   NSSortDescriptor *sortDescriptor = 
-      [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" 
-                                    ascending:YES];
+   NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES];
    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
 
-   NSFetchedResultsController *newFetchedResultsController = 
-      [[NSFetchedResultsController alloc] 
-       initWithFetchRequest:fetchRequest 
-       managedObjectContext:[self managedObjectContext] 
-         sectionNameKeyPath:nil 
-                  cacheName:cacheName];
+   NSFetchedResultsController *newFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:cacheName];
    [newFetchedResultsController setDelegate:self];
    
    NSError *error = nil;
@@ -144,11 +129,7 @@
    return _fetchedResultsController;
 }
 
-- (void)controller:(NSFetchedResultsController *)controller 
-   didChangeObject:(id)anObject 
-       atIndexPath:(NSIndexPath *)indexPath 
-     forChangeType:(NSFetchedResultsChangeType)type 
-      newIndexPath:(NSIndexPath *)newIndexPath
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
 {
    [[self wheelView] reloadData];
 }
@@ -177,8 +158,7 @@
    }
    
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-   PhotoAlbum *photoAlbum = [[self fetchedResultsController] 
-                             objectAtIndexPath:indexPath];
+   PhotoAlbum *photoAlbum = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    Photo *photo = [[photoAlbum photos] lastObject];
    UIImage *image = [photo thumbnailImage];
    if (image == nil) {
@@ -191,26 +171,21 @@
    return cell;
 }
 
-- (void)wheelView:(WheelView *)wheelView 
-didSelectCellAtIndex:(NSInteger)index
+- (void)wheelView:(WheelView *)wheelView didSelectCellAtIndex:(NSInteger)index
 {
    // Retrieve the photo album from the fetched results.
-   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index 
-                                               inSection:0];
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    PhotoAlbum *photoAlbum = nil;
    // index = -1 means no selected cell and nothing to retrieve 
    // from the fetched results.
    if (index >= 0) {
-      photoAlbum = [[self fetchedResultsController] 
-                    objectAtIndexPath:indexPath];
+      photoAlbum = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    }
    
    // Pass the current managed object context and object id for the 
    // photo album to the photo album view controller. 
-   PhotoAlbumViewController *photoAlbumViewController = 
-      [self photoAlbumViewController];
-   [photoAlbumViewController 
-      setManagedObjectContext:[self managedObjectContext]];
+   PhotoAlbumViewController *photoAlbumViewController = [self photoAlbumViewController];
+   [photoAlbumViewController setManagedObjectContext:[self managedObjectContext]];
    [photoAlbumViewController setObjectID:[photoAlbum objectID]];
    [photoAlbumViewController reload];
 }

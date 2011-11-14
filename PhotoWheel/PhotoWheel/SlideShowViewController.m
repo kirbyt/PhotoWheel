@@ -18,15 +18,13 @@
 
 - (void)setCurrentIndex:(NSInteger)rawNewCurrentIndex
 {
-   if ((rawNewCurrentIndex == [self currentIndex]) && 
-       ([[[self view] subviews] count] != 0))
+   if ((rawNewCurrentIndex == [self currentIndex]) && ([[[self view] subviews] count] != 0))
    {
       return;
    }
    // If the new index is outside the existing range, wrap 
    // around to the other end.
-   NSInteger photoCount = [[self delegate]
-                           photoBrowserViewControllerNumberOfPhotos:nil];
+   NSInteger photoCount = [[self delegate] photoBrowserViewControllerNumberOfPhotos:nil];
    NSInteger newCurrentIndex = rawNewCurrentIndex;
    if (newCurrentIndex >= photoCount) {
       newCurrentIndex = 0;
@@ -36,9 +34,7 @@
    }
    
    // Create a new image view for the current photo
-   UIImage *newImage = [[self delegate]
-                        photoBrowserViewController:nil
-                        imageAtIndex:newCurrentIndex];
+   UIImage *newImage = [[self delegate] photoBrowserViewController:nil imageAtIndex:newCurrentIndex];
    UIImageView *newPhotoView = [[UIImageView alloc] initWithImage:newImage];
    [newPhotoView setContentMode:UIViewContentModeScaleAspectFit];
    [newPhotoView setFrame:[[self view] bounds]];
@@ -60,13 +56,9 @@
          transitionOptions = UIViewAnimationOptionTransitionCurlDown;
       }
       // Replace the current photo view with the new one on screen
-      [UIView transitionFromView:[self currentPhotoView] 
-                          toView:newPhotoView
-                        duration:1.0
-                         options:transitionOptions
-                      completion:^(BOOL finished) {
-                         
-                      }];
+      [UIView transitionFromView:[self currentPhotoView] toView:newPhotoView duration:1.0 options:transitionOptions completion:^(BOOL finished) {
+         
+      }];
    }
    [self setCurrentPhotoView:newPhotoView];
    

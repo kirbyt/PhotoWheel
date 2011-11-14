@@ -49,17 +49,14 @@
    // circle that represents the rotation gesture.
    
    UIView *view = [self view];
-   CGPoint center = CGPointMake(CGRectGetMidX([view bounds]), 
-                                CGRectGetMidY([view bounds]));
+   CGPoint center = CGPointMake(CGRectGetMidX([view bounds]), CGRectGetMidY([view bounds]));
    CGPoint currentTouchPoint = [touch locationInView:view];
    CGPoint previousTouchPoint = [touch previousLocationInView:view];
    
    CGPoint line2Start = currentTouchPoint;
    CGPoint line1Start = previousTouchPoint;
-   CGPoint line2End = CGPointMake(center.x + (center.x - line2Start.x), 
-                                  center.y + (center.y - line2Start.y));
-   CGPoint line1End = CGPointMake(center.x + (center.x - line1Start.x), 
-                                  center.y + (center.y - line1Start.y));
+   CGPoint line2End = CGPointMake(center.x + (center.x - line2Start.x), center.y + (center.y - line2Start.y));
+   CGPoint line1End = CGPointMake(center.x + (center.x - line1Start.x), center.y + (center.y - line1Start.y));
    
    //////
    // Calculate the angle in radians.

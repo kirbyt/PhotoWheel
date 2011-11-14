@@ -95,20 +95,12 @@
    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
    if (coordinator != nil)
    {
-      __managedObjectContext = [[NSManagedObjectContext alloc]
-                                initWithConcurrencyType:NSMainQueueConcurrencyType];
+      __managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
       [__managedObjectContext performBlockAndWait:^(void) {
          [__managedObjectContext setPersistentStoreCoordinator:coordinator];
+         [__managedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
          
-         [__managedObjectContext
-          setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-         
-         [[NSNotificationCenter defaultCenter]
-          addObserver:self
-          selector:@selector(mergeChangesFrom_iCloud:)
-          name:
-          NSPersistentStoreDidImportUbiquitousContentChangesNotification
-          object:coordinator];
+         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
       }];
    }
    return __managedObjectContext;
@@ -140,41 +132,27 @@
       return __persistentStoreCoordinator;
    }
    
-   __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc]
-                                   initWithManagedObjectModel: [self managedObjectModel]];
+   __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
    
-   NSURL *storeURL = [[self applicationDocumentsDirectory]
-                      URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
+   NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
    
    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       
       // Build a URL to use as NSPersistentStoreUbiquitousContentURLKey
-      NSURL *cloudURL = [[NSFileManager defaultManager]
-                         URLForUbiquityContainerIdentifier:nil];
+      NSURL *cloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
       
       NSDictionary *options = nil;
       
       if (cloudURL != nil) {
-         NSString* coreDataCloudContent = [[cloudURL path]
-                                           stringByAppendingPathComponent:@"photowheel"];
+         NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"photowheel"];
          cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
          
-         options = [NSDictionary dictionaryWithObjectsAndKeys:
-                    @"com.whitepeaksoftware.photowheel",
-                    NSPersistentStoreUbiquitousContentNameKey,
-                    cloudURL,
-                    NSPersistentStoreUbiquitousContentURLKey,
-                    nil];
+         options = [NSDictionary dictionaryWithObjectsAndKeys:@"com.whitepeaksoftware.photowheel", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, nil];
       }
       
       NSError *error = nil;
       [__persistentStoreCoordinator lock];
-      if (![__persistentStoreCoordinator
-            addPersistentStoreWithType:NSSQLiteStoreType
-            configuration:nil
-            URL:storeURL
-            options:options
-            error:&error])
+      if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
       {
          NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
          abort();
@@ -183,10 +161,7 @@
       
       dispatch_async(dispatch_get_main_queue(), ^{
          NSLog(@"asynchronously added persistent store!");
-         [[NSNotificationCenter defaultCenter]
-          postNotificationName:kRefetchAllDataNotification
-          object:self
-          userInfo:nil];
+         [[NSNotificationCenter defaultCenter] postNotificationName:kRefetchAllDataNotification object:self userInfo:nil];
       });
    });
    
@@ -205,8 +180,7 @@
 
 #pragma mark - iCloud
 
-- (void)mergeiCloudChanges:(NSDictionary*)noteInfo
-                forContext:(NSManagedObjectContext*)moc
+- (void)mergeiCloudChanges:(NSDictionary*)noteInfo forContext:(NSManagedObjectContext*)moc
 {
    @autoreleasepool {
       NSMutableDictionary *localUserInfo = [NSMutableDictionary dictionary];
@@ -224,8 +198,7 @@
          }
       }
       
-      NSString* noMaterializeKeys[] = { NSUpdatedObjectsKey,
-         NSRefreshedObjectsKey, NSInvalidatedObjectsKey };
+      NSString* noMaterializeKeys[] = { NSUpdatedObjectsKey, NSRefreshedObjectsKey, NSInvalidatedObjectsKey };
       c = (sizeof(noMaterializeKeys) / sizeof(NSString*));
       for (int i = 0; i < 2; i++) {
          NSSet* set = [noteInfo objectForKey:noMaterializeKeys[i]];
@@ -241,10 +214,7 @@
          }
       }
       
-      NSNotification *fakeSave = [NSNotification
-                                  notificationWithName:NSManagedObjectContextDidSaveNotification 
-                                  object:self 
-                                  userInfo:localUserInfo];
+      NSNotification *fakeSave = [NSNotification notificationWithName:NSManagedObjectContextDidSaveNotification object:self userInfo:localUserInfo];
       [moc mergeChangesFromContextDidSaveNotification:fakeSave]; 
       
       [moc processPendingChanges];

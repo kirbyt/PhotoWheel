@@ -10,10 +10,10 @@
 
 @interface ImageGridViewCell : GridViewCell
 
-@property (nonatomic, strong, readonly) UIImageView *imageView;         // 1
-@property (nonatomic, strong, readonly) UIImageView *selectedIndicator; // 2
+@property (nonatomic, strong, readonly) UIImageView *imageView;
+@property (nonatomic, strong, readonly) UIImageView *selectedIndicator;
 
-+ (ImageGridViewCell *)imageGridViewCellWithSize:(CGSize)size;          // 3
++ (ImageGridViewCell *)imageGridViewCellWithSize:(CGSize)size;
 - (id)initWithSize:(CGSize)size;
 
 @end

@@ -59,13 +59,9 @@
    [super viewDidLoad];
    [self reload];
    
-   [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification 
-                                                     object:[[UIApplication sharedApplication] delegate] 
-                                                      queue:[NSOperationQueue mainQueue] 
-                                                 usingBlock:^(NSNotification *__strong note) {
-                                                    [self reload];
-                                                 }
-    ];
+   [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification object:[[UIApplication sharedApplication] delegate] queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *__strong note) {
+      [self reload];
+   }];
 }
 
 - (void)viewDidUnload
@@ -95,8 +91,7 @@
 - (void)reload
 {
    if ([self managedObjectContext] && [self objectID]) {
-      self.photoAlbum = (PhotoAlbum *)[self.managedObjectContext 
-                                       objectWithID:[self objectID]];
+      self.photoAlbum = (PhotoAlbum *)[self.managedObjectContext objectWithID:[self objectID]];
       [[self toolbar] setHidden:NO];
       [[self textField] setText:[self.photoAlbum name]];
    } else {
@@ -187,25 +182,17 @@
    NSString *message;
    NSString *name = [[self photoAlbum] name];
    if ([name length] > 0) {
-      message = [NSString stringWithFormat:
-                 @"Delete the photo album \"%@\". This action cannot be undone.", 
-                 name];
+      message = [NSString stringWithFormat:@"Delete the photo album \"%@\". This action cannot be undone.", name];
    } else {
       message = @"Delete this photo album? This action cannot be undone.";
    }
-   UIAlertView *alertView = [[UIAlertView alloc] 
-                             initWithTitle:@"Delete Photo Album" 
-                             message:message 
-                             delegate:self 
-                             cancelButtonTitle:@"Cancel" 
-                             otherButtonTitles:@"OK", nil];
+   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Photo Album" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
    [alertView show];
 }
 
 #pragma mark - UIAlertViewDelegate methods
 
-- (void)alertView:(UIAlertView *)alertView 
-clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    if (buttonIndex == 1) {
       [self.managedObjectContext deleteObject:[self photoAlbum]];
@@ -218,8 +205,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 #pragma mark - UIActionSheetDelegate methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet 
-clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    // Do nothing if the user taps outside the action 
    // sheet (thus closing the popover containing the
@@ -235,11 +221,10 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
       [names addObject:@"confirmDeletePhotoAlbum"];
       
    } else {
-      BOOL hasCamera = [UIImagePickerController 
-               isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+      BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
       if (hasCamera) [names addObject:@"presentCamera"];
       [names addObject:@"presentPhotoLibrary"];
-      [names addObject:@"presentFlickr"];                               // 2
+      [names addObject:@"presentFlickr"];
    }
    
    SEL selector = NSSelectorFromString([names objectAtIndex:buttonIndex]);
@@ -262,11 +247,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    UIImagePickerController *imagePicker = [self imagePickerController];
    [imagePicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
    
-   UIPopoverController *newPopoverController = 
-      [[UIPopoverController alloc] initWithContentViewController:imagePicker];
-   [newPopoverController presentPopoverFromBarButtonItem:[self addButton] 
-                                permittedArrowDirections:UIPopoverArrowDirectionAny 
-                                                animated:YES];
+   UIPopoverController *newPopoverController = [[UIPopoverController alloc] initWithContentViewController:imagePicker];
+   [newPopoverController presentPopoverFromBarButtonItem:[self addButton] permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
    [self setImagePickerPopoverController:newPopoverController];
 }
 
@@ -279,8 +261,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
    [actionSheet setDelegate:self];
-   BOOL hasCamera = [UIImagePickerController 
-               isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+   BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
    if (hasCamera) {
       [actionSheet addButtonWithTitle:@"Take Photo"];
    }
@@ -292,8 +273,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 #pragma mark - UIImagePickerControllerDelegate methods
 
-- (void)imagePickerController:(UIImagePickerController *)picker 
-didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
    // If the popover controller is available, 
    // assume the photo is selected from the library
@@ -311,9 +291,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
    
    NSManagedObjectContext *context = [self managedObjectContext];
-   Photo *newPhoto = 
-      [NSEntityDescription insertNewObjectForEntityForName:@"Photo" 
-                                    inManagedObjectContext:context];
+   Photo *newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
    [newPhoto setDateAdded:[NSDate date]];
    [newPhoto saveImage:image];
    [newPhoto setPhotoAlbum:[self photoAlbum]];
@@ -334,26 +312,17 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
       return nil;
    }
    
-   NSString *cacheName = [NSString stringWithFormat:@"%@-%@", 
-                          [self.photoAlbum name], [self.photoAlbum dateAdded]];
+   NSString *cacheName = [NSString stringWithFormat:@"%@-%@", [self.photoAlbum name], [self.photoAlbum dateAdded]];
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-   NSEntityDescription *entityDescription = 
-      [NSEntityDescription entityForName:@"Photo" 
-                  inManagedObjectContext:context];
+   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:context];
    [fetchRequest setEntity:entityDescription];
    
-   NSSortDescriptor *sortDescriptor = 
-      [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES];
+   NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES];
    [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
    
-   [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"photoAlbum = %@", 
-                               [self photoAlbum]]];
+   [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"photoAlbum = %@", [self photoAlbum]]];
    
-   NSFetchedResultsController *newFetchedResultsController = 
-      [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest 
-                                          managedObjectContext:context 
-                                            sectionNameKeyPath:nil 
-                                                     cacheName:cacheName];
+   NSFetchedResultsController *newFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:cacheName];
    [newFetchedResultsController setDelegate:self];
    [self setFetchedResultsController:newFetchedResultsController];
    
@@ -385,8 +354,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 - (NSInteger)gridViewNumberOfCells:(GridView *)gridView
 {
-   NSInteger count = [[[[self fetchedResultsController] sections] 
-                       objectAtIndex:0] numberOfObjects];
+   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
    return count;
 }
 
@@ -430,25 +398,20 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 #pragma mark - PhotoBrowserViewControllerDelegate methods
 
-- (NSInteger)photoBrowserViewControllerNumberOfPhotos:
-(PhotoBrowserViewController *)photoBrowser
+- (NSInteger)photoBrowserViewControllerNumberOfPhotos:(PhotoBrowserViewController *)photoBrowser
 {
-   NSInteger count = [[[[self fetchedResultsController] sections] 
-                       objectAtIndex:0] numberOfObjects];
+   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
    return count;
 }
 
-- (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser 
-                           imageAtIndex:(NSInteger)index
+- (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser imageAtIndex:(NSInteger)index
 {
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    return [photo largeImage];
 }
 
-- (UIImage *)photoBrowserViewController:
-(PhotoBrowserViewController *)photoBrowser
-                      smallImageAtIndex:(NSInteger)index
+- (UIImage *)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser smallImageAtIndex:(NSInteger)index
 {
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
@@ -456,9 +419,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    return image;
 }
 
-- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser
-                  updateToNewImage:(UIImage *)image
-                           atIndex:(NSInteger)index;
+- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser updateToNewImage:(UIImage *)image atIndex:(NSInteger)index;
 {
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
@@ -472,8 +433,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
    GridView *gridView = [self gridView];
    NSInteger selectedIndex = [gridView indexForSelectedCell];
-   NSInteger count = [[[[self fetchedResultsController] sections] 
-                       objectAtIndex:0] numberOfObjects];
+   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
    if (selectedIndex < 0 && count > 0) {
       selectedIndex = 0;
    }
@@ -486,10 +446,8 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    UIImage *selectedImage = nil;
    NSInteger selectedIndex = [self indexForSelectedGridCell];
    if (selectedIndex >= 0) {
-      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectedIndex 
-                                                  inSection:0];
-      Photo *photo = [[self fetchedResultsController] 
-                      objectAtIndexPath:indexPath];
+      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+      Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
       selectedImage = [photo largeImage];
    }
    return selectedImage;
@@ -506,14 +464,12 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
       rect = [parentView convertRect:[cell frame] fromView:gridView];
    } else {
       CGRect gridFrame = [gridView frame];
-      rect = CGRectMake(CGRectGetMidX(gridFrame), 
-                        CGRectGetMidY(gridFrame), 0, 0);
+      rect = CGRectMake(CGRectGetMidX(gridFrame), CGRectGetMidY(gridFrame), 0, 0);
    }
    return rect;
 }
 
-- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser 
-                deleteImageAtIndex:(NSInteger)index
+- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser deleteImageAtIndex:(NSInteger)index
 {
    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
@@ -527,8 +483,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 - (void)layoutForLandscape
 {
    [[self view] setFrame:CGRectMake(18, 20, 738, 719)];
-   [[self backgroundImageView] setImage:[UIImage 
-                             imageNamed:@"stack-viewer-bg-landscape-right.png"]];
+   [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
    [[self backgroundImageView] setFrame:[[self view] bounds]];
    [[self shadowImageView] setFrame:CGRectMake(9, 51, 678, 8)];
    [[self gridView] setFrame:CGRectMake(20, 52, 654, 632)];
@@ -538,16 +493,14 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 - (void)layoutForPortrait
 {
    [[self view] setFrame:CGRectMake(26, 18, 716, 717)];
-   [[self backgroundImageView] setImage:[UIImage 
-                                   imageNamed:@"stack-viewer-bg-portrait.png"]];
+   [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
    [[self backgroundImageView] setFrame:[[self view] bounds]];
    [[self shadowImageView] setFrame:CGRectMake(9, 51, 698, 8)];
    [[self gridView] setFrame:CGRectMake(20, 51, 678, 597)];
    [[self toolbar] setFrame:CGRectMake(9, 6, 698, 44)];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:
-(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
       [self layoutForLandscape];
@@ -564,8 +517,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    PhotoAlbum *album = (PhotoAlbum *)[context objectWithID:[self objectID]];
    NSSet *photos = [[album photos] set];
    
-   SendEmailController *controller = [[SendEmailController alloc] 
-                                      initWithViewController:self];
+   SendEmailController *controller = [[SendEmailController alloc] initWithViewController:self];
    [controller setPhotos:photos];
    [controller sendEmail];
    

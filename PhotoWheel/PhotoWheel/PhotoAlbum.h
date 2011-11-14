@@ -10,8 +10,7 @@
 
 @interface PhotoAlbum : _PhotoAlbum
 
-+ (PhotoAlbum *)newPhotoAlbumWithName:(NSString *)albumName
-                            inContext:(NSManagedObjectContext *)context;
++ (PhotoAlbum *)newPhotoAlbumWithName:(NSString *)albumName inContext:(NSManagedObjectContext *)context;
 + (NSMutableArray *)allPhotoAlbumsInContext:(NSManagedObjectContext *)context;
 
 @end

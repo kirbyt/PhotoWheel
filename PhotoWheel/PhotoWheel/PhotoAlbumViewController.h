@@ -11,11 +11,7 @@
 #import "PhotoBrowserViewController.h"
 #import "SendEmailController.h"
 
-@interface PhotoAlbumViewController : UIViewController 
-<UIActionSheetDelegate, UIImagePickerControllerDelegate, 
-UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, 
-GridViewDataSource, PhotoBrowserViewControllerDelegate, 
-SendEmailControllerDelegate>
+@interface PhotoAlbumViewController : UIViewController <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, NSFetchedResultsControllerDelegate, GridViewDataSource, PhotoBrowserViewControllerDelegate, SendEmailControllerDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;

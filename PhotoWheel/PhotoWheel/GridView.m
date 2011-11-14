@@ -10,11 +10,11 @@
 
 #pragma mark - GridViewCell
 
-@interface GridViewCell ()                                              // 1
+@interface GridViewCell ()
 @property (nonatomic, assign) NSInteger indexInGrid;
 @end
 
-@implementation GridViewCell                                            // 2
+@implementation GridViewCell
 @synthesize selected = selected_;
 @synthesize indexInGrid = indexInGrid_;
 @end
@@ -22,7 +22,7 @@
 
 #pragma mark - GridView
 
-@interface GridView ()                                                  // 3
+@interface GridView ()
 @property (nonatomic, strong) NSMutableSet *reusableViews;
 @property (nonatomic, assign) NSInteger firstVisibleIndex;
 @property (nonatomic, assign) NSInteger lastVisibleIndex;
@@ -30,7 +30,7 @@
 @property (nonatomic, strong) NSMutableSet *selectedCellIndexes;
 @end
 
-@implementation GridView                                                // 4
+@implementation GridView
 
 @synthesize dataSource = _dataSource;
 @synthesize reusableViews = _reusableViews;
@@ -40,7 +40,7 @@
 @synthesize selectedCellIndexes = _selectedCellIndexes;
 @synthesize allowsMultipleSelection = _allowsMultipleSelection;
 
-- (void)commonInit                                                      // 5
+- (void)commonInit
 {
    // We keep a collection of reusable views. This 
    // improves scrolling performance by not requiring
@@ -54,19 +54,18 @@
    [self setLastVisibleIndex:NSIntegerMin];
    [self setPreviousItemsPerRow:NSIntegerMin];
    
-   [self setDelaysContentTouches:YES];                                  // 6
-   [self setClipsToBounds:YES];                                         // 7
-   [self setAlwaysBounceVertical:YES];                                  // 8
+   [self setDelaysContentTouches:YES];
+   [self setClipsToBounds:YES];
+   [self setAlwaysBounceVertical:YES];
    
-   [self setAllowsMultipleSelection:NO];                                // 9
-   self.selectedCellIndexes = [[NSMutableSet alloc] init];              // 10
+   [self setAllowsMultipleSelection:NO];
+   self.selectedCellIndexes = [[NSMutableSet alloc] init];
    
-   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] 
-          initWithTarget:self action:@selector(didTap:)];               // 11
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];
    [self addGestureRecognizer:tap];
 }
 
-- (id)init                                                              // 12
+- (id)init
 {
    self = [super init];
    if (self) {
@@ -93,7 +92,7 @@
    return self;
 }
 
-- (id)dequeueReusableCell                                              // 13
+- (id)dequeueReusableCell
 {
    id view = [[self reusableViews] anyObject];
    if (view != nil) {
@@ -102,7 +101,7 @@
    return view;
 }
 
-- (void)queueReusableCells                                             // 14
+- (void)queueReusableCells
 {
    for (UIView *view in [self subviews]) {
       if ([view isKindOfClass:[GridViewCell class]]) {
@@ -116,13 +115,13 @@
    [[self selectedCellIndexes] removeAllObjects];
 }
 
-- (void)reloadData                                                      // 15
+- (void)reloadData
 {
    [self queueReusableCells];
    [self setNeedsLayout];
 }
 
-- (GridViewCell *)cellAtIndex:(NSInteger)index                          // 16
+- (GridViewCell *)cellAtIndex:(NSInteger)index
 {
    GridViewCell *cell = nil;
    if (index >= [self firstVisibleIndex] && index <= [self lastVisibleIndex]) {
@@ -143,19 +142,19 @@
    return cell;
 }
 
-- (void)layoutSubviews                                                  // 17
+- (void)layoutSubviews
 {
    [super layoutSubviews];
    
-   CGRect visibleBounds = [self bounds];                                // 18
+   CGRect visibleBounds = [self bounds];
    NSInteger visibleWidth = visibleBounds.size.width;
    NSInteger visibleHeight = visibleBounds.size.height;
    
-   CGSize viewSize = [[self dataSource] gridViewCellSize:self];         // 19
+   CGSize viewSize = [[self dataSource] gridViewCellSize:self];
    
    // Do some math to determine which rows and columns
    // are visible.
-   NSInteger itemsPerRow = NSIntegerMin;                                // 20
+   NSInteger itemsPerRow = NSIntegerMin;
    if ([[self dataSource] respondsToSelector:@selector(gridViewCellsPerRow:)]) {
       itemsPerRow = [[self dataSource] gridViewCellsPerRow:self];
    }
@@ -188,22 +187,17 @@
    NSInteger viewCount = [[self dataSource] gridViewNumberOfCells:self];
    NSInteger rowCount = ceil(viewCount / (float)itemsPerRow);
    NSInteger rowHeight = viewSize.height + spaceHeight;
-   CGSize contentSize = CGSizeMake(visibleWidth, 
-                                   (rowHeight * rowCount + spaceHeight));
-   [self setContentSize:contentSize];                                   // 21
+   CGSize contentSize = CGSizeMake(visibleWidth, (rowHeight * rowCount + spaceHeight));
+   [self setContentSize:contentSize];
    
    NSInteger numberOfVisibleRows = visibleHeight / rowHeight;
    NSInteger topRow = MAX(0, floorf(visibleBounds.origin.y / rowHeight));
    NSInteger bottomRow = topRow + numberOfVisibleRows;
    
-   CGRect extendedVisibleBounds = 
-      CGRectMake(visibleBounds.origin.x, 
-                 MAX(0, visibleBounds.origin.y), 
-                 visibleBounds.size.width, 
-                 visibleBounds.size.height + rowHeight);
+   CGRect extendedVisibleBounds = CGRectMake(visibleBounds.origin.x, MAX(0, visibleBounds.origin.y), visibleBounds.size.width, visibleBounds.size.height + rowHeight);
    
    // Recycle all views that are no longer visible.
-   for (UIView *view in [self subviews]) {                              // 22
+   for (UIView *view in [self subviews]) {
       if ([view isKindOfClass:[GridViewCell class]]) {
          CGRect viewFrame = [view frame];
          
@@ -216,11 +210,10 @@
    }
    
    /////////////
-   // Whew! We're now ready to lay out the subviews.                    // 23
+   // Whew! We're now ready to lay out the subviews.
    
    NSInteger startAtIndex = MAX(0, topRow * itemsPerRow);
-   NSInteger stopAtIndex = MIN(viewCount, 
-                               (bottomRow * itemsPerRow) + itemsPerRow);
+   NSInteger stopAtIndex = MIN(viewCount, (bottomRow * itemsPerRow) + itemsPerRow);
    
    // Set the initial origin.
    NSInteger x = spaceWidth;
@@ -239,8 +232,7 @@
       BOOL isViewMissing = 
          !(index >= [self firstVisibleIndex] && index < [self lastVisibleIndex]);
       if (isViewMissing) {
-         BOOL selected = [[self selectedCellIndexes] 
-                          containsObject:[NSNumber numberWithInteger:index]];
+         BOOL selected = [[self selectedCellIndexes] containsObject:[NSNumber numberWithInteger:index]];
          [view setSelected:selected];
          [view setIndexInGrid:index];
          [self addSubview:view];
@@ -261,7 +253,7 @@
    [self setLastVisibleIndex:stopAtIndex];
 }
 
-- (void)didTap:(UITapGestureRecognizer *)recognizer                     // 24
+- (void)didTap:(UITapGestureRecognizer *)recognizer
 {
    // Need to figure out if the user tapped a cell or not.
    // If a cell was tapped, let the data source know
@@ -271,9 +263,9 @@
    
    for (id view in [self subviews]) {
       if ([view isKindOfClass:[GridViewCell class]]) {
-         if (CGRectContainsPoint([view frame], touchPoint)) {           // 25
+         if (CGRectContainsPoint([view frame], touchPoint)) {
             
-            NSInteger previousIndex = -1;                               // 26
+            NSInteger previousIndex = -1;
             NSInteger selectedIndex = -1;
             
             NSMutableSet *selectedCellIndexes = [self selectedCellIndexes];
@@ -293,8 +285,7 @@
                
             } else {
                NSInteger indexInGrid = [view indexInGrid];
-               NSNumber *numberIndexInGrid = 
-                  [NSNumber numberWithInteger:indexInGrid];
+               NSNumber *numberIndexInGrid = [NSNumber numberWithInteger:indexInGrid];
                if ([selectedCellIndexes containsObject:numberIndexInGrid]) {
                   previousIndex = indexInGrid;
                   [view setSelected:NO];
@@ -306,17 +297,15 @@
                }
             }
             
-            id <GridViewDataSource> dataSource = [self dataSource];     // 27
+            id <GridViewDataSource> dataSource = [self dataSource];
             if (previousIndex >= 0) {
-               if ([dataSource 
-                    respondsToSelector:@selector(gridView:didDeselectCellAtIndex:)])
+               if ([dataSource respondsToSelector:@selector(gridView:didDeselectCellAtIndex:)])
                {
                   [dataSource gridView:self didDeselectCellAtIndex:previousIndex];
                }
             }
             if (selectedIndex >= 0) {
-               if ([dataSource 
-                    respondsToSelector:@selector(gridView:didSelectCellAtIndex:)])
+               if ([dataSource respondsToSelector:@selector(gridView:didSelectCellAtIndex:)])
                {
                   [dataSource gridView:self didSelectCellAtIndex:selectedIndex];
                }
@@ -328,7 +317,7 @@
    }
 }
 
-- (NSInteger)indexForSelectedCell                                       // 28
+- (NSInteger)indexForSelectedCell
 {
    NSInteger selectedIndex = -1;
    NSMutableSet *selectedCellIndexes = [self selectedCellIndexes];
@@ -338,16 +327,13 @@
    return selectedIndex;
 }
 
-- (NSArray *)indexesForSelectedCells                                   // 29
+- (NSArray *)indexesForSelectedCells
 {
    NSArray *selectedIndexes = nil;
    NSMutableSet *selectedCellIndexes = [self selectedCellIndexes];
    if ([selectedCellIndexes count] > 0) {
-      NSSortDescriptor *sortDescriptor = [NSSortDescriptor 
-                                          sortDescriptorWithKey:@"self" 
-                                          ascending:YES];
-      selectedIndexes = [selectedCellIndexes 
-       sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+      NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES];
+      selectedIndexes = [selectedCellIndexes sortedArrayUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
    }
    return selectedIndexes;
 }

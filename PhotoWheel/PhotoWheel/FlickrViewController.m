@@ -6,7 +6,7 @@
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "FlickrViewController.h"                                           // 1
+#import "FlickrViewController.h"
 #import "ImageGridViewCell.h"
 #import "SimpleFlickrAPI.h"
 #import "ImageDownloader.h"
@@ -14,9 +14,9 @@
 #import "PhotoAlbum.h"
 
 @interface FlickrViewController ()
-@property (nonatomic, strong) NSArray *flickrPhotos;                       // 2
-@property (nonatomic, strong) NSMutableArray *downloaders;                 // 3
-@property (nonatomic, assign) NSInteger showOverlayCount;                  // 4
+@property (nonatomic, strong) NSArray *flickrPhotos;
+@property (nonatomic, strong) NSMutableArray *downloaders;
+@property (nonatomic, assign) NSInteger showOverlayCount;
 @end
 
 @implementation FlickrViewController
@@ -35,15 +35,13 @@
 {
    [super viewDidLoad];
    self.flickrPhotos = [NSArray array];
-   [[self overlayView] setAlpha:0.0];                                      // 5
+   [[self overlayView] setAlpha:0.0];
    
-   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] 
-                                  initWithTarget:self 
-                                  action:@selector(overlayViewTapped:)];   // 6
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(overlayViewTapped:)];
    [[self overlayView] addGestureRecognizer:tap];
    
    [[self gridView] setAlwaysBounceVertical:YES];
-   [[self gridView] setAllowsMultipleSelection:YES];                       // 7
+   [[self gridView] setAllowsMultipleSelection:YES];
 }
 
 - (void)viewDidUnload
@@ -55,13 +53,12 @@
    [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:
-(UIInterfaceOrientation)toInterfaceOrientation
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
    return YES;
 }
 
-- (BOOL)disablesAutomaticKeyboardDismissal                                 // 8
+- (BOOL)disablesAutomaticKeyboardDismissal
 {
    return NO;
 }
@@ -96,35 +93,32 @@
    id photoAlbum = [context objectWithID:[self objectID]];
    
    NSArray *indexes = [[self gridView] indexesForSelectedCells];
-   __block NSInteger count = [indexes count];                              // 9
+   __block NSInteger count = [indexes count];
    
-   if (count == 0) {                                                       // 10
+   if (count == 0) {
       [self dismissModalViewControllerAnimated:YES];
       return;
    }
    
    ImageDownloaderCompletionBlock completion = 
-      ^(UIImage *image, NSError *error) {                                  // 11
+      ^(UIImage *image, NSError *error) {
       NSLog(@"block: count: %i", count);
       if (image) {
-         Photo *newPhoto = [NSEntityDescription 
-                            insertNewObjectForEntityForName:@"Photo" 
-                            inManagedObjectContext:context];
+         Photo *newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
          [newPhoto setDateAdded:[NSDate date]];
          [newPhoto saveImage:image];
          [newPhoto setPhotoAlbum:photoAlbum];
       } else {
-         NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, 
-               [error localizedDescription]);
+         NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, [error localizedDescription]);
       }
       
-      count--;                                                             // 12
+      count--;
       if (count == 0) {
          [self saveContextAndExit];
       }
    };
    
-   for (NSNumber *indexNumber in indexes) {                                // 13
+   for (NSNumber *indexNumber in indexes) {
       NSInteger index = [indexNumber integerValue];
       NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:index];
       NSURL *URL = [NSURL URLWithString:[flickrPhoto objectForKey:@"url_m"]];
@@ -138,7 +132,7 @@
 
 #pragma mark - Actions
 
-- (IBAction)save:(id)sender                                                // 14
+- (IBAction)save:(id)sender
 {
    [[self overlayView] setUserInteractionEnabled:NO];
    
@@ -160,7 +154,7 @@
 
 #pragma mark - Overlay methods
 
-- (void)showOverlay:(BOOL)showOverlay                                      // 15
+- (void)showOverlay:(BOOL)showOverlay
 {
    BOOL isVisible = ([[self overlayView] alpha] > 0.0);
    if (isVisible != showOverlay) {
@@ -176,19 +170,18 @@
          }
       };
       
-      [UIView animateWithDuration:0.2 animations:animations 
-                       completion:completion];
+      [UIView animateWithDuration:0.2 animations:animations completion:completion];
    }
 }
 
-- (void)showOverlay                                                        // 16
+- (void)showOverlay
 {
    self.showOverlayCount += 1;
    BOOL showOverlay = (self.showOverlayCount > 0);
    [self showOverlay:showOverlay];
 }
 
-- (void)hideOverlay                                                        // 17
+- (void)hideOverlay
 {
    self.showOverlayCount -= 1;
    BOOL showOverlay = (self.showOverlayCount > 0);
@@ -198,7 +191,7 @@
    }
 }
 
-- (void)overlayViewTapped:(UITapGestureRecognizer *)recognizer             // 18
+- (void)overlayViewTapped:(UITapGestureRecognizer *)recognizer
 {
    [self hideOverlay];
    [[self searchBar] resignFirstResponder];
@@ -208,26 +201,26 @@
 
 - (void)fetchFlickrPhotoWithSearchString:(NSString *)searchString
 {
-   [[self activityIndicator] startAnimating];                              // 19
+   [[self activityIndicator] startAnimating];
    [self showOverlay];
    [[self overlayView] setUserInteractionEnabled:NO];
    
    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
       SimpleFlickrAPI *flickr = [[SimpleFlickrAPI alloc] init];
-      NSArray *photos = [flickr photosWithSearchString:searchString];      // 20
+      NSArray *photos = [flickr photosWithSearchString:searchString];
       
       NSMutableArray *downloaders = [[NSMutableArray alloc] 
                                      initWithCapacity:[photos count]];
       for (NSInteger index = 0; index < [photos count]; index++) {
-         ImageDownloader *downloader = [[ImageDownloader alloc] init];     // 21
+         ImageDownloader *downloader = [[ImageDownloader alloc] init];
          [downloaders addObject:downloader];
       }
       
-      [self setDownloaders:downloaders];                                   // 22
-      [self setFlickrPhotos:photos];                                       // 23
+      [self setDownloaders:downloaders];
+      [self setFlickrPhotos:photos];
       
       dispatch_async(dispatch_get_main_queue(), ^{
-         [[self gridView] reloadData];                                     // 24
+         [[self gridView] reloadData];
          [self hideOverlay];
          [[self overlayView] setUserInteractionEnabled:YES];
          [[self searchBar] resignFirstResponder];
@@ -236,7 +229,7 @@
    });
 }
 
-#pragma mark - UISearchBarDelegate methods                                 // 25
+#pragma mark - UISearchBarDelegate methods
 
 - (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
 {
@@ -250,7 +243,7 @@
    [self hideOverlay];
 }
 
-- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar              // 26
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
    [self fetchFlickrPhotoWithSearchString:[searchBar text]];
 }
@@ -261,7 +254,7 @@
    [self hideOverlay];
 }
 
-#pragma mark - GridViewDataSource methods                                  // 27
+#pragma mark - GridViewDataSource methods
 
 - (NSInteger)gridViewNumberOfCells:(GridView *)gridView
 {
@@ -275,11 +268,11 @@
    if (cell == nil) {
       cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(75, 75)];
       [[cell selectedIndicator] setImage:
-       [UIImage imageNamed:@"addphoto.png"]];                              // 28
+       [UIImage imageNamed:@"addphoto.png"]];
    }
    
    ImageDownloaderCompletionBlock completion = 
-      ^(UIImage *image, NSError *error) {                                  // 29
+      ^(UIImage *image, NSError *error) {
       if (image) {
          [[cell imageView] setImage:image];
       } else {
@@ -288,7 +281,7 @@
    };
    
    ImageDownloader *downloader = [[self downloaders] objectAtIndex:index];
-   UIImage *image = [downloader image];                                    // 30
+   UIImage *image = [downloader image];
    if (image) {
       [[cell imageView] setImage:image];
    } else {

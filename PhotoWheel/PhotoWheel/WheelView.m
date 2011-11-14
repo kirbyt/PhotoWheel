@@ -53,8 +53,7 @@
    
    [self setVisibleCellIndexes:[[NSMutableDictionary alloc] init]];
    
-   SpinGestureRecognizer *spin = [[SpinGestureRecognizer alloc] 
-                                  initWithTarget:self action:@selector(spin:)];
+   SpinGestureRecognizer *spin = [[SpinGestureRecognizer alloc] initWithTarget:self action:@selector(spin:)];
    [self addGestureRecognizer:spin];
    
    self.reusableCells = [[NSMutableSet alloc] init];
@@ -102,8 +101,7 @@
    NSInteger cellCount = [self numberOfCells];
    NSInteger numberOfVisibleCells = cellCount;
    id<WheelViewDelegate> delegate = [self delegate];
-   if (delegate && 
-       [delegate respondsToSelector:@selector(wheelViewNumberOfVisibleCells:)]) 
+   if (delegate && [delegate respondsToSelector:@selector(wheelViewNumberOfVisibleCells:)]) 
    {
       numberOfVisibleCells = [delegate wheelViewNumberOfVisibleCells:self];
    }
@@ -125,8 +123,7 @@
    // have to be exact.
    CGFloat padding = 20.0;   // Allow 20 degrees on either side.
    
-   BOOL isSelectedItem = 
-      relativeAngle >= (360.0 - padding) || relativeAngle <= padding;
+   BOOL isSelectedItem = relativeAngle >= (360.0 - padding) || relativeAngle <= padding;
    return isSelectedItem;
 }
 
@@ -180,8 +177,7 @@
 - (NSSet*)cellIndexesToDisplay
 {
    NSInteger numberOfVisibleCells = [self numberOfVisibleCells];
-   NSMutableSet *cellIndexes = 
-      [[NSMutableSet alloc] initWithCapacity:numberOfVisibleCells];
+   NSMutableSet *cellIndexes = [[NSMutableSet alloc] initWithCapacity:numberOfVisibleCells];
    for (NSInteger index = 0; index < numberOfVisibleCells; index++)
    {
       NSInteger cellIndex = [self cellIndexForIndex:index];
@@ -198,10 +194,8 @@
    // The following code is inspired by the carousel example at
    // http://stackoverflow.com/questions/5243614/3d-carousel-effect-on-the-ipad
    
-   CGPoint center = CGPointMake(CGRectGetMidX([self bounds]), 
-                                CGRectGetMidY([self bounds]));
-   CGFloat radiusX = MIN([self bounds].size.width, 
-                         [self bounds].size.height) * 0.35;
+   CGPoint center = CGPointMake(CGRectGetMidX([self bounds]), CGRectGetMidY([self bounds]));
+   CGFloat radiusX = MIN([self bounds].size.width, [self bounds].size.height) * 0.35;
    CGFloat radiusY = radiusX;
    if ([self style] == WheelViewStyleCarousel) {
       radiusY = radiusX * 0.30;
@@ -234,14 +228,12 @@
    {
       NSNumber *cellIndexNumber;
       if (wrap) {
-         cellIndexNumber = [[self visibleCellIndexes] 
-                            objectForKey:[NSNumber numberWithInteger:index]];
+         cellIndexNumber = [[self visibleCellIndexes] objectForKey:[NSNumber numberWithInteger:index]];
          if (cellIndexNumber == nil) {
             // First time through, visibleCellIndexes is empty, hence the nil
             // cellIndexNumber. Initialize it with the appropriate cell
             // index.
-            cellIndexNumber = 
-               [NSNumber numberWithInteger:[self cellIndexForIndex:index]];
+            cellIndexNumber = [NSNumber numberWithInteger:[self cellIndexForIndex:index]];
          }
       } else {
          // Cell indexes are sequential when wrapping is turned off.
@@ -275,8 +267,7 @@
       // cell is missing from the view and it must be added.
       BOOL visible = [self isIndexVisible:cellIndex];
       if (!visible) {
-         [[self visibleCellIndexes] setObject:cellIndexNumber 
-                                       forKey:[NSNumber numberWithInteger:index]];
+         [[self visibleCellIndexes] setObject:cellIndexNumber forKey:[NSNumber numberWithInteger:index]];
          [cell setIndexInWheelView:cellIndex];
          [self addSubview:cell];
       }
@@ -286,8 +277,7 @@
           [self isSelectedItemForAngle:angle])
       {
          [self setSelectedIndex:cellIndex];
-         if ([[self dataSource] 
-              respondsToSelector:@selector(wheelView:didSelectCellAtIndex:)]) 
+         if ([[self dataSource] respondsToSelector:@selector(wheelView:didSelectCellAtIndex:)]) 
          {
             [[self dataSource] wheelView:self didSelectCellAtIndex:cellIndex];
          }
@@ -296,25 +286,20 @@
       float angleInRadians = ((angle + [self angleOffset]) + 180.0) * M_PI / 180.0f;
       
       // Get a position based on the angle
-      float xPosition = center.x + (radiusX * sinf(angleInRadians)) 
-                        - (CGRectGetWidth([cell frame]) / 2);
-      float yPosition = center.y + (radiusY * cosf(angleInRadians)) 
-                        - (CGRectGetHeight([cell frame]) / 2);
+      float xPosition = center.x + (radiusX * sinf(angleInRadians)) - (CGRectGetWidth([cell frame]) / 2);
+      float yPosition = center.y + (radiusY * cosf(angleInRadians)) - (CGRectGetHeight([cell frame]) / 2);
       
       float scale = 0.75f + 0.25f * (cosf(angleInRadians) + 1.0);
       
       // Apply location and scale
       if ([self style] == WheelViewStyleCarousel) {
-         [cell setTransform:CGAffineTransformScale(
-                     CGAffineTransformMakeTranslation(xPosition, yPosition), 
-                     scale, scale)];         
+         [cell setTransform:CGAffineTransformScale(CGAffineTransformMakeTranslation(xPosition, yPosition), scale, scale)];         
          // Tweak alpha using the same system as applied for scale, this time
          // with 0.3 the minimum and a semicircle range of 0.5
          [cell setAlpha:(0.3f + 0.5f * (cosf(angleInRadians) + 1.0))];
          
       } else {
-         [cell setTransform:CGAffineTransformMakeTranslation(xPosition, 
-                                                             yPosition)];
+         [cell setTransform:CGAffineTransformMakeTranslation(xPosition, yPosition)];
          [cell setAlpha:1.0];
       }
       

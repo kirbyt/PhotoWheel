@@ -21,21 +21,17 @@
 {
    [super viewDidLoad];
    
-   AppDelegate *appDelegate = 
-      (AppDelegate *)[[UIApplication sharedApplication] delegate];
-   NSManagedObjectContext *managedObjectContext = 
-      [appDelegate managedObjectContext];
+   AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+   NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
    
    UIStoryboard *storyboard = [self storyboard];
    
-   PhotoAlbumsViewController *photoAlbumsScene = 
-      [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumsScene"];
+   PhotoAlbumsViewController *photoAlbumsScene = [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumsScene"];
    [photoAlbumsScene setManagedObjectContext:managedObjectContext];
    [self addChildViewController:photoAlbumsScene];
    [photoAlbumsScene didMoveToParentViewController:self];
    
-   PhotoAlbumViewController *photoAlbumScene = 
-      [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
+   PhotoAlbumViewController *photoAlbumScene = [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
    [self addChildViewController:photoAlbumScene];
    [photoAlbumScene didMoveToParentViewController:self];
    
@@ -63,7 +59,7 @@
    [self setSkipRotation:NO];
 }
 
-- (void)viewDidUnload                                             // 4
+- (void)viewDidUnload
 {
    [self setBackgroundImageView:nil];
    [self setInfoButton:nil];
@@ -72,16 +68,14 @@
 
 #pragma mark - Rotation support
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:
-(UIInterfaceOrientation)toInterfaceOrientation                    // 5
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
    return YES;
 }
 
-- (void)layoutForLandscape                                        // 6
+- (void)layoutForLandscape
 {
-   UIImage *backgroundImage = [UIImage 
-                         imageNamed:@"background-landscape-right-grooved.png"];
+   UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-right-grooved.png"];
    [[self backgroundImageView] setImage:backgroundImage];
    
    CGRect frame = [[self infoButton] frame];
@@ -89,10 +83,9 @@
    [[self infoButton] setFrame:frame];
 }
 
-- (void)layoutForPortrait                                         // 7
+- (void)layoutForPortrait
 {
-   UIImage *backgroundImage = [UIImage 
-                               imageNamed:@"background-portrait-grooved.png"]; 
+   UIImage *backgroundImage = [UIImage imageNamed:@"background-portrait-grooved.png"]; 
    [[self backgroundImageView] setImage:backgroundImage];
    
    CGRect frame = [[self infoButton] frame];
@@ -100,9 +93,7 @@
    [[self infoButton] setFrame:frame];
 }
 
-- (void)willAnimateRotationToInterfaceOrientation:
-(UIInterfaceOrientation)toInterfaceOrientation 
-duration:(NSTimeInterval)duration                                // 8
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
       [self layoutForLandscape];

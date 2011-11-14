@@ -26,8 +26,7 @@
    // Animates image snapshot of the view.
    UIView *sourceView = [sourceViewController view];
    UIImage *sourceViewImage = [sourceView pw_imageSnapshot];
-   UIImageView *sourceImageView = [[UIImageView alloc] 
-                                   initWithImage:sourceViewImage];
+   UIImageView *sourceImageView = [[UIImageView alloc] initWithImage:sourceViewImage];
    
    // Offset the sourceImageView frame by the height of the status bar.
    // This prevents the image from dropping down after the view controller
@@ -49,12 +48,10 @@
    NSInteger count = [viewControllers count];
    NSInteger index = count - 2;
    
-   UIViewController *destinationViewController =[viewControllers 
-                                                 objectAtIndex:index];
+   UIViewController *destinationViewController =[viewControllers objectAtIndex:index];
    UIView *destinationView = [destinationViewController view];
    UIImage *destinationViewImage = [destinationView pw_imageSnapshot];
-   UIImageView *destinationImageView = [[UIImageView alloc] 
-                                        initWithImage:destinationViewImage];
+   UIImageView *destinationImageView = [[UIImageView alloc] initWithImage:destinationViewImage];
    
    [super popViewControllerAnimated:NO];
    
@@ -75,8 +72,7 @@
                                        CGRectGetMidY(selectedCellFrame));
    
    void (^animations)(void) = ^ {
-      [sourceImageView setFrame:CGRectMake(shrinkToPoint.x, shrinkToPoint.y, 
-                                           0, 0)];
+      [sourceImageView setFrame:CGRectMake(shrinkToPoint.x, shrinkToPoint.y, 0, 0)];
       [sourceImageView setAlpha:0.0];
       
       // Animate the nav bar too.
@@ -94,11 +90,7 @@
       [destinationImageView removeFromSuperview];
    };
    
-   [UIView transitionWithView:destinationView
-                     duration:0.3
-                      options:UIViewAnimationOptionTransitionNone
-                   animations:animations
-                   completion:completion];
+   [UIView transitionWithView:destinationView duration:0.3 options:UIViewAnimationOptionTransitionNone animations:animations completion:completion];
    
    return sourceViewController;
 }

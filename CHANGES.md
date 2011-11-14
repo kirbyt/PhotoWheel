@@ -10,6 +10,7 @@
    * [NEW] Added QuincyKit for crash reporting.
    * [NEW] Added -fno-objc-arc flag for QuincyKit.
    * [CHANGED] Moved the Flickr API Key to AppKeys.h.
+   * [CHANGED] Removed the book print formating and anontation markers.
 
 **Version 1.1 (build 002)**
 

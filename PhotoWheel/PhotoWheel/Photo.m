@@ -62,12 +62,9 @@
       offsetX = (imageSize.width / 2) - (imageSize.height / 2);
    }
    
-   CGRect cropRect = CGRectMake(offsetX, offsetY,
-                                imageSize.width - (offsetX * 2),
-                                imageSize.height - (offsetY * 2));
+   CGRect cropRect = CGRectMake(offsetX, offsetY, imageSize.width - (offsetX * 2), imageSize.height - (offsetY * 2));
    
-   CGImageRef croppedImageRef 
-   = CGImageCreateWithImageInRect([scaledImage CGImage], cropRect);
+   CGImageRef croppedImageRef = CGImageCreateWithImageInRect([scaledImage CGImage], cropRect);
    UIImage *newImage = [UIImage imageWithCGImage:croppedImageRef];
    CGImageRelease(croppedImageRef);
    
@@ -78,18 +75,11 @@
 {
    if ([[self objectID] isTemporaryID]) {
       NSError *error = nil;
-      [[self managedObjectContext]
-       obtainPermanentIDsForObjects:[NSArray arrayWithObject:self]
-       error:&error];
+      [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:&error];
    }
-   NSUInteger filenameID = [[[[self objectID] URIRepresentation]
-                             absoluteURL] hash];
-   NSString *filename = [NSString stringWithFormat:@"%@-%ld", 
-                         attributeName, filenameID];
-   NSURL *documentsDirectory = [[[NSFileManager defaultManager]
-                                 URLsForDirectory:NSDocumentDirectory
-                                 inDomains:NSUserDomainMask]
-                                lastObject];
+   NSUInteger filenameID = [[[[self objectID] URIRepresentation] absoluteURL] hash];
+   NSString *filename = [NSString stringWithFormat:@"%@-%ld", attributeName, filenameID];
+   NSURL *documentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
    return [documentsDirectory URLByAppendingPathComponent:filename];
 }
 
@@ -97,8 +87,7 @@
 {
    // Save thumbnail
    CGSize thumbnailSize = CGSizeMake(75.0, 75.0);
-   UIImage *thumbnailImage = [self image:originalImage 
-                   scaleAndCropToMaxSize:thumbnailSize];
+   UIImage *thumbnailImage = [self image:originalImage scaleAndCropToMaxSize:thumbnailSize];
    NSData *thumbnailImageData = UIImageJPEGRepresentation(thumbnailImage, 0.8);
    [self setThumbnailImageData:thumbnailImageData];
    
@@ -112,8 +101,7 @@
    CGRect screenBounds = [[UIScreen mainScreen] bounds];
    // Calculate size for retina displays
    CGFloat scale = [[UIScreen mainScreen] scale]; 
-   CGFloat maxScreenSize = MAX(screenBounds.size.width,
-                               screenBounds.size.height) * scale;
+   CGFloat maxScreenSize = MAX(screenBounds.size.width, screenBounds.size.height) * scale;
    
    CGSize imageSize = [originalImage size];
    CGFloat maxImageSize = MAX(imageSize.width, imageSize.height) * scale;

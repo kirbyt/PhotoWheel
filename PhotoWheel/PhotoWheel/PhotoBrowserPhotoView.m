@@ -36,15 +36,11 @@
       [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
        UIViewAutoresizingFlexibleHeight];
       
-      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] 
-                                           initWithTarget:self 
-                                           action:@selector(doubleTapped:)];
+      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapped:)];
       [doubleTap setNumberOfTapsRequired:2];
       [self addGestureRecognizer:doubleTap];
       
-      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] 
-                                     initWithTarget:self 
-                                     action:@selector(tapped:)];
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
       [tap requireGestureRecognizerToFail:doubleTap];
       [self addGestureRecognizer:tap];
    }
@@ -55,8 +51,7 @@
 {
    frame.origin = CGPointMake(0, 0);
    UIImageView *newImageView = [[UIImageView alloc] initWithFrame:frame];
-   [newImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-    UIViewAutoresizingFlexibleHeight];
+   [newImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
    [newImageView setContentMode:UIViewContentModeScaleAspectFit];
    [self addSubview:newImageView];
    
@@ -178,8 +173,7 @@
 // to restore after rotation. 
 - (CGPoint)pointToCenterAfterRotation
 {
-   CGPoint boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), 
-                                      CGRectGetMidY(self.bounds));
+   CGPoint boundsCenter = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));
    return [self convertPoint:boundsCenter toView:[self imageView]];
 }
 
@@ -201,8 +195,7 @@
 {
    CGSize contentSize = self.contentSize;
    CGSize boundsSize = self.bounds.size;
-   return CGPointMake(contentSize.width - boundsSize.width, 
-                      contentSize.height - boundsSize.height);
+   return CGPointMake(contentSize.width - boundsSize.width, contentSize.height - boundsSize.height);
 }
 
 - (CGPoint)minimumContentOffset
@@ -216,8 +209,7 @@
 {    
    // Step 1: Restore zoom scale, first making sure it is within 
    // the allowable range.
-   self.zoomScale = MIN(self.maximumZoomScale, MAX(self.minimumZoomScale, 
-                                                   oldScale));
+   self.zoomScale = MIN(self.maximumZoomScale, MAX(self.minimumZoomScale, oldScale));
    
    
    // Step 2: Restore center point, first making sure it is within 
@@ -228,8 +220,7 @@
    CGPoint boundsCenter = [self convertPoint:oldCenter fromView:[self imageView]];
    // Step 2b: Calculate the content offset that would yield that center
    // point.
-   CGPoint offset = CGPointMake(boundsCenter.x - self.bounds.size.width / 2.0, 
-                                boundsCenter.y - self.bounds.size.height / 2.0);
+   CGPoint offset = CGPointMake(boundsCenter.x - self.bounds.size.width / 2.0, boundsCenter.y - self.bounds.size.height / 2.0);
    // Step 2c: Restore the offset, adjusted to be within the allowable 
    // range.
    CGPoint maxOffset = [self maximumContentOffset];

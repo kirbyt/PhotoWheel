@@ -44,9 +44,7 @@ viewController
       if (image) {
          NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
          NSString *fileName = [NSString stringWithFormat:@"photo-%1", index];
-         [mailer addAttachmentData:imageData 
-                          mimeType:@"image/jpeg" 
-                          fileName:fileName];
+         [mailer addAttachmentData:imageData mimeType:@"image/jpeg" fileName:fileName];
       }
    }];
    
@@ -54,15 +52,11 @@ viewController
 }
 
 
-- (void)mailComposeController:(MFMailComposeViewController*)controller 
-          didFinishWithResult:(MFMailComposeResult)result 
-                        error:(NSError*)error 
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
 {
-   UIViewController<SendEmailControllerDelegate> *viewController = 
-      [self viewController];
+   UIViewController<SendEmailControllerDelegate> *viewController = [self viewController];
    [viewController dismissModalViewControllerAnimated:YES];
-   if (viewController && [viewController respondsToSelector:
-                          @selector(sendEmailControllerDidFinish:)]) 
+   if (viewController && [viewController respondsToSelector:@selector(sendEmailControllerDidFinish:)]) 
    {
       [viewController sendEmailControllerDidFinish:self];
    }

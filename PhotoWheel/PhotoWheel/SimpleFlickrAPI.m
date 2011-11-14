@@ -93,9 +93,7 @@
    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
    NSURLResponse *response = nil;
    NSError *error = nil;
-   NSData *data = [NSURLConnection sendSynchronousRequest:request 
-                                        returningResponse:&response 
-                                                    error:&error];
+   NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
    if (data == nil) {
       NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, [error localizedDescription]);
    }
@@ -104,12 +102,10 @@
 
 - (NSURL *)buildFlickrURLWithParameters:(NSDictionary *)parameters
 {
-   NSMutableString *URLString = [[NSMutableString alloc] 
-                                 initWithString:flickrBaseURL];
+   NSMutableString *URLString = [[NSMutableString alloc] initWithString:flickrBaseURL];
    for (id key in parameters) {
       NSString *value = [parameters objectForKey:key];
-      [URLString appendFormat:@"%@=%@&", key, 
-       [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+      [URLString appendFormat:@"%@=%@&", key, [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
    }
    NSURL *URL = [NSURL URLWithString:URLString];
    return URL;
@@ -117,9 +113,7 @@
 
 - (NSString *)stringWithData:(NSData *)data
 {
-   NSString *result = [[NSString alloc] initWithBytes:[data bytes] 
-                                               length:[data length] 
-                                             encoding:NSUTF8StringEncoding];
+   NSString *result = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
    return result;
 }
 
@@ -148,9 +142,7 @@
    NSLog(@"%s: json: %@", __PRETTY_FUNCTION__, string);
    
    NSError *error = nil;
-   id json = [NSJSONSerialization JSONObjectWithData:jsonData 
-                                             options:NSJSONReadingAllowFragments 
-                                               error:&error];
+   id json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
    if (json == nil) {
       NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, [error localizedDescription]);
    }

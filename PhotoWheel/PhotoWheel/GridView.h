@@ -8,21 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
-@class GridViewCell;                                                     // 1
-@protocol GridViewDataSource;                                            // 2
+@class GridViewCell;
+@protocol GridViewDataSource;
 
 
-@interface GridView : UIScrollView <UIScrollViewDelegate>                // 3
+@interface GridView : UIScrollView <UIScrollViewDelegate>
 
-@property (nonatomic, strong) IBOutlet id<GridViewDataSource> dataSource;// 4
-@property (nonatomic, assign) BOOL allowsMultipleSelection;              // 5
+@property (nonatomic, strong) IBOutlet id<GridViewDataSource> dataSource;
+@property (nonatomic, assign) BOOL allowsMultipleSelection;
 
 
-- (id)dequeueReusableCell;                                               // 6
-- (void)reloadData;                                                      // 7
-- (GridViewCell *)cellAtIndex:(NSInteger)index;                          // 8
-- (NSInteger)indexForSelectedCell;                                       // 9
-- (NSArray *)indexesForSelectedCells;                                    // 10
+- (id)dequeueReusableCell;
+- (void)reloadData;
+- (GridViewCell *)cellAtIndex:(NSInteger)index;
+- (NSInteger)indexForSelectedCell;
+- (NSArray *)indexesForSelectedCells;
 
 @end
 
@@ -41,5 +41,5 @@
 
 
 @interface GridViewCell : UIView
-@property (nonatomic, assign, getter = isSelected) BOOL selected;       // 11
+@property (nonatomic, assign, getter = isSelected) BOOL selected;
 @end

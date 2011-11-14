@@ -17,19 +17,14 @@
    [self setDateAdded:[NSDate date]];
 }
 
-+ (PhotoAlbum *)newPhotoAlbumWithName:(NSString *)albumName
-                            inContext:(NSManagedObjectContext *)context
++ (PhotoAlbum *)newPhotoAlbumWithName:(NSString *)albumName inContext:(NSManagedObjectContext *)context
 {
-   PhotoAlbum *newAlbum = [NSEntityDescription
-                           insertNewObjectForEntityForName:@"PhotoAlbum"
-                           inManagedObjectContext:context];
+   PhotoAlbum *newAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:context];
    [newAlbum setName:albumName];
    
    NSMutableOrderedSet *photos = [newAlbum mutableOrderedSetValueForKey:@"photos"];
    for (int index=0; index<10; index++) {
-      Photo *placeholderPhoto = [NSEntityDescription
-                                 insertNewObjectForEntityForName:@"Photo"
-                                 inManagedObjectContext:context];
+      Photo *placeholderPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
       [photos addObject:placeholderPhoto];
    }
    return newAlbum;
@@ -37,17 +32,13 @@
 
 + (NSMutableArray *)allPhotoAlbumsInContext:(NSManagedObjectContext *)context
 {
-   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]
-                                   initWithEntityName:@"PhotoAlbum"];
+   NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"PhotoAlbum"];
    
-   NSArray *sortDescriptors = [NSArray arrayWithObject:
-                               [NSSortDescriptor sortDescriptorWithKey:@"name"
-                                                             ascending:YES]];
+   NSArray *sortDescriptors = [NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]];
    [fetchRequest setSortDescriptors:sortDescriptors];
    
    NSError *error = nil;
-   NSArray *photoAlbums = [context executeFetchRequest:fetchRequest
-                                                 error:&error];
+   NSArray *photoAlbums = [context executeFetchRequest:fetchRequest error:&error];
    
    if (photoAlbums != nil) {
       return [photoAlbums mutableCopy];

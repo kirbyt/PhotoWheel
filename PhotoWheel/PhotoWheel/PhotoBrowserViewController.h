@@ -49,7 +49,6 @@ UIActionSheetDelegate, SendEmailControllerDelegate>
 - (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser updateToNewImage:(UIImage *)image atIndex:(NSInteger)index;
 
 @optional
-- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser 
-                deleteImageAtIndex:(NSInteger)index;
+- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser deleteImageAtIndex:(NSInteger)index;
 
 @end
