@@ -427,6 +427,15 @@
    [[self gridView] reloadData];
 }
 
+- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser deleteImageAtIndex:(NSInteger)index
+{
+   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   NSManagedObjectContext *context = [self managedObjectContext];
+   [context deleteObject:photo];
+   [self saveChanges];   
+}
+
 #pragma mark -
 
 - (NSInteger)indexForSelectedGridCell
@@ -467,15 +476,6 @@
       rect = CGRectMake(CGRectGetMidX(gridFrame), CGRectGetMidY(gridFrame), 0, 0);
    }
    return rect;
-}
-
-- (void)photoBrowserViewController:(PhotoBrowserViewController *)photoBrowser deleteImageAtIndex:(NSInteger)index
-{
-   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-   Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-   NSManagedObjectContext *context = [self managedObjectContext];
-   [context deleteObject:photo];
-   [self saveChanges];   
 }
 
 #pragma mark - Rotation support

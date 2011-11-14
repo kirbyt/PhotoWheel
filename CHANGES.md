@@ -11,6 +11,7 @@
    * [NEW] Added -fno-objc-arc flag for QuincyKit.
    * [CHANGED] Moved the Flickr API Key to AppKeys.h.
    * [CHANGED] Removed the book print formating and anontation markers.
+   * [FIXED] Fixed crash caused by not copying the completion block in ImageDownloader.
 
 **Version 1.1**
 
