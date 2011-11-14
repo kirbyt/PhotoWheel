@@ -11,7 +11,7 @@
 @interface ImageDownloader ()
 @property (nonatomic, strong, readwrite) UIImage *image;
 @property (nonatomic, strong) NSMutableData *receivedData;
-@property (nonatomic, strong) ImageDownloaderCompletionBlock completion;
+@property (nonatomic, copy) ImageDownloaderCompletionBlock completion;
 @end
 
 @implementation ImageDownloader
