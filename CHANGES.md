@@ -1,6 +1,6 @@
 # Change History
 
-**Version 1.1 (build 002)**
+**Version 1.2 (build 004)**
 
    * [NEW] Added change history file.
    * [NEW] Added license and readme to the PhotoWheel workspace.
@@ -12,11 +12,11 @@
    * [CHANGED] Moved the Flickr API Key to AppKeys.h.
    * [CHANGED] Removed the book print formating and anontation markers.
 
-**Version 1.1 (build 002)**
+**Version 1.1**
 
    * Completed app as presented in the [book][1].
 
-**Version 1.0 (build 001)**
+**Version 1.0**
 
    * Submitted to and approved by Apple. Pre-iOS 5.0 release.
    
