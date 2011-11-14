@@ -6,6 +6,7 @@
    * [NEW] Added license and readme to the PhotoWheel workspace.
    * [CHANGED] Removed the PhotoWheelPrototype from the workspace.
    * [NEW] Added run script to the build phase that auto-increments the build number.
+   * [CHANGED] Added additional information to the about screen.
 
 **Version 1.1 (build 002)**
 

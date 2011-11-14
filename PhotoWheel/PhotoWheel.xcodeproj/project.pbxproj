@@ -31,6 +31,7 @@
 		6891947314715D4C00F6B58E /* CHANGES.md in Resources */ = {isa = PBXBuildFile; fileRef = 6891947014715D4C00F6B58E /* CHANGES.md */; };
 		6891947414715D4C00F6B58E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6891947114715D4C00F6B58E /* LICENSE */; };
 		6891947514715D4C00F6B58E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6891947214715D4C00F6B58E /* README.md */; };
+		6891947D1471645200F6B58E /* PhotoWheelAboutIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6891947C1471645200F6B58E /* PhotoWheelAboutIcon.png */; };
 		689199B013F5B6530037CBAC /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199AF13F5B6530037CBAC /* UIView+PWCategory.m */; };
 		689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689199B113F5BFFA0037CBAC /* CoreGraphics.framework */; };
 		689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199B413F5C8320037CBAC /* CustomNavigationController.m */; };
@@ -117,6 +118,7 @@
 		6891947014715D4C00F6B58E /* CHANGES.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CHANGES.md; path = ../CHANGES.md; sourceTree = "<group>"; };
 		6891947114715D4C00F6B58E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		6891947214715D4C00F6B58E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		6891947C1471645200F6B58E /* PhotoWheelAboutIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoWheelAboutIcon.png; sourceTree = "<group>"; };
 		689199AE13F5B6530037CBAC /* UIView+PWCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PWCategory.h"; sourceTree = "<group>"; };
 		689199AF13F5B6530037CBAC /* UIView+PWCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PWCategory.m"; sourceTree = "<group>"; };
 		689199B113F5BFFA0037CBAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -209,6 +211,7 @@
 				68A156AF14379FDE008400B0 /* iTunesArtwork */,
 				68F32AC414530D9900D477DF /* Default-Landscape.png */,
 				68A156B114379FDE008400B0 /* Default.png */,
+				6891947C1471645200F6B58E /* PhotoWheelAboutIcon.png */,
 				68A156B214379FDE008400B0 /* stack-add-down.png */,
 				68A156B314379FDE008400B0 /* stack-add.png */,
 				68A156B414379FDE008400B0 /* stack-bg.png */,
@@ -413,6 +416,7 @@
 				6891947314715D4C00F6B58E /* CHANGES.md in Resources */,
 				6891947414715D4C00F6B58E /* LICENSE in Resources */,
 				6891947514715D4C00F6B58E /* README.md in Resources */,
+				6891947D1471645200F6B58E /* PhotoWheelAboutIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

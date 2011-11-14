@@ -10,6 +10,10 @@
 
 @interface AboutViewController : UIViewController
 
+@property (nonatomic, strong) IBOutlet UILabel *version;
+@property (nonatomic, strong) IBOutletCollection(UIButton) NSArray *buttons;
+
 - (IBAction)done:(id)sender;
+- (IBAction)visitWebsite:(id)sender;
 
 @end
