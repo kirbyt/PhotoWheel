@@ -1,6 +1,6 @@
 # Change History
 
-**Version 1.2 (build 004)**
+**Version 1.2**
 
    * [NEW] Added change history file.
    * [NEW] Added license and readme to the PhotoWheel workspace.
