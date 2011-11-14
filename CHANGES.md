@@ -7,6 +7,9 @@
    * [CHANGED] Removed the PhotoWheelPrototype from the workspace.
    * [NEW] Added run script to the build phase that auto-increments the build number.
    * [CHANGED] Added additional information to the about screen.
+   * [NEW] Added QuincyKit for crash reporting.
+   * [NEW] Added -fno-objc-arc flag for QuincyKit.
+   * [CHANGED] Moved the Flickr API Key to AppKeys.h.
 
 **Version 1.1 (build 002)**
 
