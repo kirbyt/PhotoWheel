@@ -1,5 +1,8 @@
 # Change History
 
+**Version 1.2.1**
+   * [FIXED] App crashes with error at _deleteExternalReferenceFromPermanentLocation. 
+
 **Version 1.2**
 
    * [NEW] Added change history file.
