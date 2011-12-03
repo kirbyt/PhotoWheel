@@ -2,6 +2,7 @@
 
 **Version 1.2.1**
 
+   * [FIXED] Divide by zero error can occur during the spin gesture recognizer.
    * [FIXED] App crashes with error at _deleteExternalReferenceFromPermanentLocation. 
 
 **Version 1.2**
