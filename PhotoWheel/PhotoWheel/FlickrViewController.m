@@ -65,9 +65,8 @@
 
 #pragma mark - Save photos
 
-- (void)saveContextAndExit
+- (void)saveContextAndExit:(NSManagedObjectContext *)context
 {
-   NSManagedObjectContext *context = [self managedObjectContext];
    NSError *error = nil;
    if (![context save:&error])
    {
@@ -83,13 +82,21 @@
       NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
       abort();
    }
+   [context reset];
    
    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)saveSelectedPhotos
 {
-   NSManagedObjectContext *context = [self managedObjectContext];
+   NSManagedObjectContext *mainContext = [self managedObjectContext];
+   NSPersistentStoreCoordinator *coordinator = [mainContext persistentStoreCoordinator];
+   // Create a separate context for saving the data. This is done so the
+   // context can be reset and work around the annoying _deleteExternalReferenceFromPermanentLocation
+   // bug.
+   NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+   [context setPersistentStoreCoordinator:coordinator];
+
    id photoAlbum = [context objectWithID:[self objectID]];
    
    NSArray *indexes = [[self gridView] indexesForSelectedCells];
@@ -114,7 +121,7 @@
       
       count--;
       if (count == 0) {
-         [self saveContextAndExit];
+         [self saveContextAndExit:context];
       }
    };
    
