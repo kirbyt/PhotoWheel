@@ -297,6 +297,11 @@
    [newPhoto setPhotoAlbum:[self photoAlbum]];
    
    [self saveChanges];
+   
+   // Workaround for the _deleteExternalReferenceFromPermanentLocation error
+   // caused by using external storage for the images.
+   // http://stackoverflow.com/questions/7930427/error-uiimage-deleteexternalreferencefrompermanentlocation-unrecognized-se
+   [context refreshObject:newPhoto mergeChanges:NO];
 }
 
 #pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate
