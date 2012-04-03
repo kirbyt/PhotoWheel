@@ -228,7 +228,10 @@
    }
    
    SEL selector = NSSelectorFromString([names objectAtIndex:buttonIndex]);
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
    [self performSelector:selector];
+#pragma clang diagnostic pop
 }
 
 #pragma mark - Image picker helper methods
