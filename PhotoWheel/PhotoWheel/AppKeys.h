@@ -16,4 +16,8 @@
 
 // Change this value to your own application key. More info at:
 // http://support.hockeyapp.net/kb/client-integration/crash-reporting-on-ios-quincykit
-#define QUINCYKIT_APPKEY @"YOUR_QUINCY_APP_KEY"
+#define QUINCYKIT_APPKEY @"YOUR_QUINCYKIT_APP_KEY"
+
+// Change this value to your own application key. More info at:
+// http://support.hockeyapp.net/kb/client-integration/beta-distribution-on-ios-hockeykit
+#define HOCKEYKIT_APPKEY @"YOUR_HOCKEYKIT_APP_KEY"

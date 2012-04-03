@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "BWHockeyManager.h"
 #import "BWQuincyManager.h"
 
 @implementation AppDelegate
@@ -18,6 +19,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+#if defined (CONFIGURATION_Beta)
+   [[BWHockeyManager sharedHockeyManager] setAppIdentifier:HOCKEYKIT_APPKEY];
+   [[BWHockeyManager sharedHockeyManager] setDelegate:self];
+#endif
    [[BWQuincyManager sharedQuincyManager] setAppIdentifier:QUINCYKIT_APPKEY];
    
    [self.window makeKeyAndVisible];
@@ -242,4 +247,15 @@
    }];
 }
 
+#pragma mark BWHockeyManagerDelegate Methods
+
+- (NSString *)customDeviceIdentifier {
+#if defined (CONFIGURATION_Beta)
+   if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)]) {
+      return [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];
+   }
+#endif
+   
+   return nil;
+}
 @end

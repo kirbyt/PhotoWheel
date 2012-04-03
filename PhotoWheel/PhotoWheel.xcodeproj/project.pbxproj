@@ -22,6 +22,19 @@
 		682BC4C91434F28200286C9D /* PhotoWheelViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682BC4C81434F28100286C9D /* PhotoWheelViewCell.xib */; };
 		682BC4D014351A9100286C9D /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4CF14351A9000286C9D /* GridView.m */; };
 		682BC4D314351EFF00286C9D /* ImageGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4D214351EFF00286C9D /* ImageGridViewCell.m */; };
+		684F03BE152B9E5A000CB64A /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03A8152B9E5A000CB64A /* BWApp.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03BF152B9E5A000CB64A /* BWGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03AA152B9E5A000CB64A /* BWGlobal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03C0152B9E5A000CB64A /* BWHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03AC152B9E5A000CB64A /* BWHockeyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03C1152B9E5A000CB64A /* BWHockeySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03AE152B9E5A000CB64A /* BWHockeySettingsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03C2152B9E5A000CB64A /* BWHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B0152B9E5A000CB64A /* BWHockeyViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03C3152B9E5A000CB64A /* NSString+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B3152B9E5A000CB64A /* NSString+HockeyAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03C4152B9E5A000CB64A /* PSAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B5152B9E5A000CB64A /* PSAppStoreHeader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03C5152B9E5A000CB64A /* PSStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B7152B9E5A000CB64A /* PSStoreButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03C6152B9E5A000CB64A /* PSWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B9152B9E5A000CB64A /* PSWebTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03C7152B9E5A000CB64A /* UIImage+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03BB152B9E5A000CB64A /* UIImage+HockeyAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		684F03C8152B9E5A000CB64A /* Hockey.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 684F03BC152B9E5A000CB64A /* Hockey.bundle */; };
+		684F03C9152B9E5A000CB64A /* README.mkdown in Resources */ = {isa = PBXBuildFile; fileRef = 684F03BD152B9E5A000CB64A /* README.mkdown */; };
+		684F03CB152B9F69000CB64A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684F03CA152B9F69000CB64A /* QuartzCore.framework */; };
 		68529C4213F05B4E00674415 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68529C4113F05B4E00674415 /* AboutViewController.m */; };
 		6856FE1714389AC3003502DB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6856FE1614389AC3003502DB /* MessageUI.framework */; };
 		6856FE1B14389B05003502DB /* SendEmailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6856FE1A14389B05003502DB /* SendEmailController.m */; };
@@ -108,6 +121,30 @@
 		682BC4CF14351A9000286C9D /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 		682BC4D114351EFF00286C9D /* ImageGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageGridViewCell.h; sourceTree = "<group>"; };
 		682BC4D214351EFF00286C9D /* ImageGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGridViewCell.m; sourceTree = "<group>"; };
+		684F03A4152B9E42000CB64A /* Acknowledgements.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Acknowledgements.txt; sourceTree = "<group>"; };
+		684F03A7152B9E5A000CB64A /* BWApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWApp.h; sourceTree = "<group>"; };
+		684F03A8152B9E5A000CB64A /* BWApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWApp.m; sourceTree = "<group>"; };
+		684F03A9152B9E5A000CB64A /* BWGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWGlobal.h; sourceTree = "<group>"; };
+		684F03AA152B9E5A000CB64A /* BWGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWGlobal.m; sourceTree = "<group>"; };
+		684F03AB152B9E5A000CB64A /* BWHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyManager.h; sourceTree = "<group>"; };
+		684F03AC152B9E5A000CB64A /* BWHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyManager.m; sourceTree = "<group>"; };
+		684F03AD152B9E5A000CB64A /* BWHockeySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeySettingsViewController.h; sourceTree = "<group>"; };
+		684F03AE152B9E5A000CB64A /* BWHockeySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeySettingsViewController.m; sourceTree = "<group>"; };
+		684F03AF152B9E5A000CB64A /* BWHockeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyViewController.h; sourceTree = "<group>"; };
+		684F03B0152B9E5A000CB64A /* BWHockeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyViewController.m; sourceTree = "<group>"; };
+		684F03B2152B9E5A000CB64A /* NSString+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HockeyAdditions.h"; sourceTree = "<group>"; };
+		684F03B3152B9E5A000CB64A /* NSString+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HockeyAdditions.m"; sourceTree = "<group>"; };
+		684F03B4152B9E5A000CB64A /* PSAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAppStoreHeader.h; sourceTree = "<group>"; };
+		684F03B5152B9E5A000CB64A /* PSAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAppStoreHeader.m; sourceTree = "<group>"; };
+		684F03B6152B9E5A000CB64A /* PSStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStoreButton.h; sourceTree = "<group>"; };
+		684F03B7152B9E5A000CB64A /* PSStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStoreButton.m; sourceTree = "<group>"; };
+		684F03B8152B9E5A000CB64A /* PSWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSWebTableViewCell.h; sourceTree = "<group>"; };
+		684F03B9152B9E5A000CB64A /* PSWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebTableViewCell.m; sourceTree = "<group>"; };
+		684F03BA152B9E5A000CB64A /* UIImage+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HockeyAdditions.h"; sourceTree = "<group>"; };
+		684F03BB152B9E5A000CB64A /* UIImage+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HockeyAdditions.m"; sourceTree = "<group>"; };
+		684F03BC152B9E5A000CB64A /* Hockey.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Hockey.bundle; sourceTree = "<group>"; };
+		684F03BD152B9E5A000CB64A /* README.mkdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mkdown; sourceTree = "<group>"; };
+		684F03CA152B9F69000CB64A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		68529C4013F05B4E00674415 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		68529C4113F05B4E00674415 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		6856FE1614389AC3003502DB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -189,6 +226,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				684F03CB152B9F69000CB64A /* QuartzCore.framework in Frameworks */,
 				6891948B14716EC300F6B58E /* SystemConfiguration.framework in Frameworks */,
 				681DB410145374D400DF0849 /* CoreImage.framework in Frameworks */,
 				681DB3D614533BEC00DF0849 /* MediaPlayer.framework in Frameworks */,
@@ -204,9 +242,48 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		684F03A6152B9E5A000CB64A /* HockeyKit */ = {
+			isa = PBXGroup;
+			children = (
+				684F03A7152B9E5A000CB64A /* BWApp.h */,
+				684F03A8152B9E5A000CB64A /* BWApp.m */,
+				684F03A9152B9E5A000CB64A /* BWGlobal.h */,
+				684F03AA152B9E5A000CB64A /* BWGlobal.m */,
+				684F03AB152B9E5A000CB64A /* BWHockeyManager.h */,
+				684F03AC152B9E5A000CB64A /* BWHockeyManager.m */,
+				684F03AD152B9E5A000CB64A /* BWHockeySettingsViewController.h */,
+				684F03AE152B9E5A000CB64A /* BWHockeySettingsViewController.m */,
+				684F03AF152B9E5A000CB64A /* BWHockeyViewController.h */,
+				684F03B0152B9E5A000CB64A /* BWHockeyViewController.m */,
+				684F03B1152B9E5A000CB64A /* Helper */,
+				684F03BC152B9E5A000CB64A /* Hockey.bundle */,
+				684F03BD152B9E5A000CB64A /* README.mkdown */,
+			);
+			path = HockeyKit;
+			sourceTree = "<group>";
+		};
+		684F03B1152B9E5A000CB64A /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				684F03B2152B9E5A000CB64A /* NSString+HockeyAdditions.h */,
+				684F03B3152B9E5A000CB64A /* NSString+HockeyAdditions.m */,
+				684F03B4152B9E5A000CB64A /* PSAppStoreHeader.h */,
+				684F03B5152B9E5A000CB64A /* PSAppStoreHeader.m */,
+				684F03B6152B9E5A000CB64A /* PSStoreButton.h */,
+				684F03B7152B9E5A000CB64A /* PSStoreButton.m */,
+				684F03B8152B9E5A000CB64A /* PSWebTableViewCell.h */,
+				684F03B9152B9E5A000CB64A /* PSWebTableViewCell.m */,
+				684F03BA152B9E5A000CB64A /* UIImage+HockeyAdditions.h */,
+				684F03BB152B9E5A000CB64A /* UIImage+HockeyAdditions.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		6891948914716E9800F6B58E /* AdditionalLibraries */ = {
 			isa = PBXGroup;
 			children = (
+				684F03A4152B9E42000CB64A /* Acknowledgements.txt */,
+				684F03A6152B9E5A000CB64A /* HockeyKit */,
 				6891948C14716F2900F6B58E /* QuincyKit */,
 			);
 			path = AdditionalLibraries;
@@ -278,6 +355,7 @@
 		68FA6AD413EEF3BB00E046BD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				684F03CA152B9F69000CB64A /* QuartzCore.framework */,
 				6891948A14716EC300F6B58E /* SystemConfiguration.framework */,
 				681DB3D514533BEC00DF0849 /* MediaPlayer.framework */,
 				681DB40F145374D400DF0849 /* CoreImage.framework */,
@@ -452,6 +530,8 @@
 				6891947514715D4C00F6B58E /* README.md in Resources */,
 				6891947D1471645200F6B58E /* PhotoWheelAboutIcon.png in Resources */,
 				6891949514716F2900F6B58E /* Quincy.bundle in Resources */,
+				684F03C8152B9E5A000CB64A /* Hockey.bundle in Resources */,
+				684F03C9152B9E5A000CB64A /* README.mkdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +587,16 @@
 				681DB3D01453334600DF0849 /* SlideShowViewController.m in Sources */,
 				681DB3D41453335D00DF0849 /* MainSlideShowViewController.m in Sources */,
 				6891949214716F2900F6B58E /* BWQuincyManager.m in Sources */,
+				684F03BE152B9E5A000CB64A /* BWApp.m in Sources */,
+				684F03BF152B9E5A000CB64A /* BWGlobal.m in Sources */,
+				684F03C0152B9E5A000CB64A /* BWHockeyManager.m in Sources */,
+				684F03C1152B9E5A000CB64A /* BWHockeySettingsViewController.m in Sources */,
+				684F03C2152B9E5A000CB64A /* BWHockeyViewController.m in Sources */,
+				684F03C3152B9E5A000CB64A /* NSString+HockeyAdditions.m in Sources */,
+				684F03C4152B9E5A000CB64A /* PSAppStoreHeader.m in Sources */,
+				684F03C5152B9E5A000CB64A /* PSStoreButton.m in Sources */,
+				684F03C6152B9E5A000CB64A /* PSWebTableViewCell.m in Sources */,
+				684F03C7152B9E5A000CB64A /* UIImage+HockeyAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +614,82 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		684F03CE152BA1D5000CB64A /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = AppStore;
+		};
+		684F03CF152BA1D5000CB64A /* AppStore */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/QuincyKit\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
+				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = AppStore;
+		};
+		684F03D0152BA1F7000CB64A /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Beta;
+		};
+		684F03D1152BA1F7000CB64A /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/QuincyKit\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
+				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Beta;
+		};
 		68FA6AEA13EEF3BB00E046BD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -581,6 +747,10 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"CONFIGURATION_$(CONFIGURATION)",
+				);
 				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -597,6 +767,7 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = "CONFIGURATION_$(CONFIGURATION)";
 				INFOPLIST_FILE = "PhotoWheel/PhotoWheel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -611,6 +782,8 @@
 			buildConfigurations = (
 				68FA6AEA13EEF3BB00E046BD /* Debug */,
 				68FA6AEB13EEF3BB00E046BD /* Release */,
+				684F03D0152BA1F7000CB64A /* Beta */,
+				684F03CE152BA1D5000CB64A /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -620,6 +793,8 @@
 			buildConfigurations = (
 				68FA6AED13EEF3BB00E046BD /* Debug */,
 				68FA6AEE13EEF3BB00E046BD /* Release */,
+				684F03D1152BA1F7000CB64A /* Beta */,
+				684F03CF152BA1D5000CB64A /* AppStore */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

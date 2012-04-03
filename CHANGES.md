@@ -1,5 +1,9 @@
 # Change History
 
+**Version 1.3**
+
+   * [NEW] Added HockeyKit and updated QuincyKit.
+   
 **Version 1.2.1**
 
    * [FIXED] Divide by zero error can occur during the spin gesture recognizer.
