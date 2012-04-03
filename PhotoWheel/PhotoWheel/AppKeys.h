@@ -7,7 +7,7 @@
 //
 
 
-#error Change the follow values to your own application key.
+#error Change the follow values to your own application key then comment out this line.
 
 // Change this value to your own application key. More info at:
 // http://www.flickr.com/services/api/misc.api_keys.html. 
