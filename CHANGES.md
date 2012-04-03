@@ -3,6 +3,7 @@
 **Version 1.3**
 
    * [NEW] Added HockeyKit and updated QuincyKit.
+   * [NEW] Removed the PhotoWheel workspace and prototype project as they are no longer needed or used.
    
 **Version 1.2.1**
 

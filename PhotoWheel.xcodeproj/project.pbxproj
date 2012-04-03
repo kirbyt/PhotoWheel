@@ -41,9 +41,6 @@
 		6856FE261438A840003502DB /* FlickrViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6856FE251438A840003502DB /* FlickrViewController.m */; };
 		6856FE2A1438ACED003502DB /* SimpleFlickrAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 6856FE291438ACED003502DB /* SimpleFlickrAPI.m */; };
 		6856FE2D1438AEF7003502DB /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6856FE2C1438AEF7003502DB /* ImageDownloader.m */; };
-		6891947314715D4C00F6B58E /* CHANGES.md in Resources */ = {isa = PBXBuildFile; fileRef = 6891947014715D4C00F6B58E /* CHANGES.md */; };
-		6891947414715D4C00F6B58E /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 6891947114715D4C00F6B58E /* LICENSE */; };
-		6891947514715D4C00F6B58E /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6891947214715D4C00F6B58E /* README.md */; };
 		6891947D1471645200F6B58E /* PhotoWheelAboutIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6891947C1471645200F6B58E /* PhotoWheelAboutIcon.png */; };
 		6891948B14716EC300F6B58E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6891948A14716EC300F6B58E /* SystemConfiguration.framework */; };
 		6891949214716F2900F6B58E /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6891948E14716F2900F6B58E /* BWQuincyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -145,6 +142,9 @@
 		684F03BC152B9E5A000CB64A /* Hockey.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Hockey.bundle; sourceTree = "<group>"; };
 		684F03BD152B9E5A000CB64A /* README.mkdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mkdown; sourceTree = "<group>"; };
 		684F03CA152B9F69000CB64A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		684F03DF152BAB87000CB64A /* CHANGES.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGES.md; sourceTree = "<group>"; };
+		684F03E0152BAB87000CB64A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		684F03E1152BAB87000CB64A /* README.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		68529C4013F05B4E00674415 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
 		68529C4113F05B4E00674415 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
 		6856FE1614389AC3003502DB /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -156,9 +156,6 @@
 		6856FE291438ACED003502DB /* SimpleFlickrAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleFlickrAPI.m; sourceTree = "<group>"; };
 		6856FE2B1438AEF7003502DB /* ImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
 		6856FE2C1438AEF7003502DB /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
-		6891947014715D4C00F6B58E /* CHANGES.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = CHANGES.md; path = ../CHANGES.md; sourceTree = "<group>"; };
-		6891947114715D4C00F6B58E /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		6891947214715D4C00F6B58E /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		6891947C1471645200F6B58E /* PhotoWheelAboutIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoWheelAboutIcon.png; sourceTree = "<group>"; };
 		6891948A14716EC300F6B58E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		6891948D14716F2900F6B58E /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
@@ -335,9 +332,9 @@
 		68FA6AC613EEF3BA00E046BD = {
 			isa = PBXGroup;
 			children = (
-				6891947014715D4C00F6B58E /* CHANGES.md */,
-				6891947114715D4C00F6B58E /* LICENSE */,
-				6891947214715D4C00F6B58E /* README.md */,
+				684F03DF152BAB87000CB64A /* CHANGES.md */,
+				684F03E0152BAB87000CB64A /* LICENSE */,
+				684F03E1152BAB87000CB64A /* README.md */,
 				68FA6ADB13EEF3BB00E046BD /* PhotoWheel */,
 				68FA6AD413EEF3BB00E046BD /* Frameworks */,
 				68FA6AD213EEF3BB00E046BD /* Products */,
@@ -525,9 +522,6 @@
 				68A156D014379FDE008400B0 /* stack-viewer-bg-portrait.png in Resources */,
 				68A156D114379FDE008400B0 /* stack-viewer-shadow.png in Resources */,
 				68F32AC514530D9900D477DF /* Default-Landscape.png in Resources */,
-				6891947314715D4C00F6B58E /* CHANGES.md in Resources */,
-				6891947414715D4C00F6B58E /* LICENSE in Resources */,
-				6891947514715D4C00F6B58E /* README.md in Resources */,
 				6891947D1471645200F6B58E /* PhotoWheelAboutIcon.png in Resources */,
 				6891949514716F2900F6B58E /* Quincy.bundle in Resources */,
 				684F03C8152B9E5A000CB64A /* Hockey.bundle in Resources */,
