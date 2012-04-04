@@ -574,7 +574,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\nif [ ${CONFIGURATION} != \"Debug\" ];\nthen\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" ${INFOPLIST_FILE})\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" ${INFOPLIST_FILE}\n\nversionNumber=$(/usr/libexec/PlistBuddy -c \"Print KTBundleShortVersionString\" ${INFOPLIST_FILE})\nif [ -n \"$versionNumber\" ];\nthen\nbundleVersion=\"$versionNumber.$buildNumber\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString $bundleVersion\" ${INFOPLIST_FILE}\nfi\nfi";
+			shellScript = "#!/bin/bash\n\nif [ ${CONFIGURATION} == \"Distribution\" ] || [ ${CONFIGURATION} == \"Adhoc\" ] || [ ${CONFIGURATION} == \"Beta\" ] || [ ${CONFIGURATION} == \"AppStore\" ];\nthen\n  buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" ${INFOPLIST_FILE})\n  buildNumber=$(($buildNumber + 1))\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" ${INFOPLIST_FILE}\n\n  # Commit the current build using Git.\n  commitMessage=\"Automated commit for build $buildNumber (configuration: ${CONFIGURATION})\" \n  git commit -am \"$commitMessage\"\n\n  # Tag the build with the configuration name and build number.\n  # Format the configuration name to replace characters that will cause tagging to fail.\n  tagName=\"build-$buildNumber\"\n  git tag $tagName\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
