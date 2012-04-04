@@ -664,6 +664,7 @@
 		684F03CF152BA1D5000CB64A /* AppStore */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_IDENTIFIER = com.whitepeaksoftware.PhotoWheel;
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -702,6 +703,7 @@
 		684F03D1152BA1F7000CB64A /* Beta */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_IDENTIFIER = "com.whitepeaksoftware.PhotoWheel-beta";
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -766,6 +768,7 @@
 		68FA6AED13EEF3BB00E046BD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_IDENTIFIER = "com.whitepeaksoftware.PhotoWheel-beta";
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -786,6 +789,7 @@
 		68FA6AEE13EEF3BB00E046BD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUNDLE_IDENTIFIER = com.whitepeaksoftware.PhotoWheel;
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
