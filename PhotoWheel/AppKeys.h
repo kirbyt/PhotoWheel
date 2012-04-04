@@ -12,9 +12,6 @@
 #define flickrAPIKey @"YOUR_FLICKR_APP_KEY"
 
 // Change this value to your own application key. More info at:
-// http://support.hockeyapp.net/kb/client-integration/crash-reporting-on-ios-quincykit
-#define QUINCYKIT_APPKEY @"YOUR_QUINCYKIT_APP_KEY"
-
-// Change this value to your own application key. More info at:
-// http://support.hockeyapp.net/kb/client-integration/beta-distribution-on-ios-hockeykit
-#define HOCKEYKIT_APPKEY @"YOUR_HOCKEYKIT_APP_KEY"
+// https://github.com/codenauts/HockeySDK-iOS
+#define HOCKEYKIT_BETA_APPKEY @"YOUR_HOCKEYKIT_BETA_APP_KEY"
+#define HOCKEYKIT_LIVE_APPKEY @"YOUR_HOCKEYKIT_LIVE_APP_KEY"

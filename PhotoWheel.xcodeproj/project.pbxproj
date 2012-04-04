@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6802A36F152BD7F50048C2A0 /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A348152BD7F50048C2A0 /* BWApp.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A370152BD7F50048C2A0 /* BWGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A34A152BD7F50048C2A0 /* BWGlobal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A371152BD7F50048C2A0 /* BWHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A34C152BD7F50048C2A0 /* BWHockeyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A372152BD7F50048C2A0 /* BWHockeySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A34E152BD7F50048C2A0 /* BWHockeySettingsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A373152BD7F50048C2A0 /* BWHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A350152BD7F50048C2A0 /* BWHockeyViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A374152BD7F50048C2A0 /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A352152BD7F50048C2A0 /* BWQuincyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A375152BD7F50048C2A0 /* CNSHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A355152BD7F50048C2A0 /* CNSHockeyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A376152BD7F50048C2A0 /* NSString+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A357152BD7F50048C2A0 /* NSString+HockeyAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A377152BD7F50048C2A0 /* PSAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A359152BD7F50048C2A0 /* PSAppStoreHeader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A378152BD7F50048C2A0 /* PSStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A35B152BD7F50048C2A0 /* PSStoreButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A379152BD7F50048C2A0 /* PSWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A35D152BD7F50048C2A0 /* PSWebTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A37A152BD7F50048C2A0 /* UIImage+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6802A35F152BD7F50048C2A0 /* UIImage+HockeyAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		6802A37B152BD7F50048C2A0 /* HockeySDK.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 6802A360152BD7F50048C2A0 /* HockeySDK.podspec */; };
+		6802A37C152BD7F50048C2A0 /* LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = 6802A361152BD7F50048C2A0 /* LICENSE.txt */; };
+		6802A37D152BD7F50048C2A0 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 6802A362152BD7F50048C2A0 /* README.md */; };
+		6802A37E152BD7F50048C2A0 /* Hockey.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6802A364152BD7F50048C2A0 /* Hockey.bundle */; };
+		6802A37F152BD7F50048C2A0 /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6802A365152BD7F50048C2A0 /* Quincy.bundle */; };
+		6802A380152BD7F50048C2A0 /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6802A36B152BD7F50048C2A0 /* CrashReporter.framework */; };
 		681DB3D01453334600DF0849 /* SlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 681DB3CF1453334600DF0849 /* SlideShowViewController.m */; };
 		681DB3D41453335D00DF0849 /* MainSlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 681DB3D31453335D00DF0849 /* MainSlideShowViewController.m */; };
 		681DB3D614533BEC00DF0849 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681DB3D514533BEC00DF0849 /* MediaPlayer.framework */; };
@@ -22,18 +40,6 @@
 		682BC4C91434F28200286C9D /* PhotoWheelViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682BC4C81434F28100286C9D /* PhotoWheelViewCell.xib */; };
 		682BC4D014351A9100286C9D /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4CF14351A9000286C9D /* GridView.m */; };
 		682BC4D314351EFF00286C9D /* ImageGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4D214351EFF00286C9D /* ImageGridViewCell.m */; };
-		684F03BE152B9E5A000CB64A /* BWApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03A8152B9E5A000CB64A /* BWApp.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03BF152B9E5A000CB64A /* BWGlobal.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03AA152B9E5A000CB64A /* BWGlobal.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03C0152B9E5A000CB64A /* BWHockeyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03AC152B9E5A000CB64A /* BWHockeyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03C1152B9E5A000CB64A /* BWHockeySettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03AE152B9E5A000CB64A /* BWHockeySettingsViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03C2152B9E5A000CB64A /* BWHockeyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B0152B9E5A000CB64A /* BWHockeyViewController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03C3152B9E5A000CB64A /* NSString+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B3152B9E5A000CB64A /* NSString+HockeyAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03C4152B9E5A000CB64A /* PSAppStoreHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B5152B9E5A000CB64A /* PSAppStoreHeader.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03C5152B9E5A000CB64A /* PSStoreButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B7152B9E5A000CB64A /* PSStoreButton.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03C6152B9E5A000CB64A /* PSWebTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03B9152B9E5A000CB64A /* PSWebTableViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03C7152B9E5A000CB64A /* UIImage+HockeyAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 684F03BB152B9E5A000CB64A /* UIImage+HockeyAdditions.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		684F03C8152B9E5A000CB64A /* Hockey.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 684F03BC152B9E5A000CB64A /* Hockey.bundle */; };
-		684F03C9152B9E5A000CB64A /* README.mkdown in Resources */ = {isa = PBXBuildFile; fileRef = 684F03BD152B9E5A000CB64A /* README.mkdown */; };
 		684F03CB152B9F69000CB64A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684F03CA152B9F69000CB64A /* QuartzCore.framework */; };
 		68529C4213F05B4E00674415 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68529C4113F05B4E00674415 /* AboutViewController.m */; };
 		6856FE1714389AC3003502DB /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6856FE1614389AC3003502DB /* MessageUI.framework */; };
@@ -43,9 +49,6 @@
 		6856FE2D1438AEF7003502DB /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6856FE2C1438AEF7003502DB /* ImageDownloader.m */; };
 		6891947D1471645200F6B58E /* PhotoWheelAboutIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6891947C1471645200F6B58E /* PhotoWheelAboutIcon.png */; };
 		6891948B14716EC300F6B58E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6891948A14716EC300F6B58E /* SystemConfiguration.framework */; };
-		6891949214716F2900F6B58E /* BWQuincyManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6891948E14716F2900F6B58E /* BWQuincyManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		6891949314716F2900F6B58E /* CrashReporter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6891948F14716F2900F6B58E /* CrashReporter.framework */; };
-		6891949514716F2900F6B58E /* Quincy.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 6891949114716F2900F6B58E /* Quincy.bundle */; };
 		689199B013F5B6530037CBAC /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199AF13F5B6530037CBAC /* UIView+PWCategory.m */; };
 		689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689199B113F5BFFA0037CBAC /* CoreGraphics.framework */; };
 		689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199B413F5C8320037CBAC /* CustomNavigationController.m */; };
@@ -90,6 +93,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6802A347152BD7F50048C2A0 /* BWApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWApp.h; sourceTree = "<group>"; };
+		6802A348152BD7F50048C2A0 /* BWApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWApp.m; sourceTree = "<group>"; };
+		6802A349152BD7F50048C2A0 /* BWGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWGlobal.h; sourceTree = "<group>"; };
+		6802A34A152BD7F50048C2A0 /* BWGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWGlobal.m; sourceTree = "<group>"; };
+		6802A34B152BD7F50048C2A0 /* BWHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyManager.h; sourceTree = "<group>"; };
+		6802A34C152BD7F50048C2A0 /* BWHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyManager.m; sourceTree = "<group>"; };
+		6802A34D152BD7F50048C2A0 /* BWHockeySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeySettingsViewController.h; sourceTree = "<group>"; };
+		6802A34E152BD7F50048C2A0 /* BWHockeySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeySettingsViewController.m; sourceTree = "<group>"; };
+		6802A34F152BD7F50048C2A0 /* BWHockeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyViewController.h; sourceTree = "<group>"; };
+		6802A350152BD7F50048C2A0 /* BWHockeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyViewController.m; sourceTree = "<group>"; };
+		6802A351152BD7F50048C2A0 /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
+		6802A352152BD7F50048C2A0 /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWQuincyManager.m; sourceTree = "<group>"; };
+		6802A353152BD7F50048C2A0 /* CNSFixCategoryBug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNSFixCategoryBug.h; sourceTree = "<group>"; };
+		6802A354152BD7F50048C2A0 /* CNSHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CNSHockeyManager.h; sourceTree = "<group>"; };
+		6802A355152BD7F50048C2A0 /* CNSHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CNSHockeyManager.m; sourceTree = "<group>"; };
+		6802A356152BD7F50048C2A0 /* NSString+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HockeyAdditions.h"; sourceTree = "<group>"; };
+		6802A357152BD7F50048C2A0 /* NSString+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HockeyAdditions.m"; sourceTree = "<group>"; };
+		6802A358152BD7F50048C2A0 /* PSAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAppStoreHeader.h; sourceTree = "<group>"; };
+		6802A359152BD7F50048C2A0 /* PSAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAppStoreHeader.m; sourceTree = "<group>"; };
+		6802A35A152BD7F50048C2A0 /* PSStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStoreButton.h; sourceTree = "<group>"; };
+		6802A35B152BD7F50048C2A0 /* PSStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStoreButton.m; sourceTree = "<group>"; };
+		6802A35C152BD7F50048C2A0 /* PSWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSWebTableViewCell.h; sourceTree = "<group>"; };
+		6802A35D152BD7F50048C2A0 /* PSWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebTableViewCell.m; sourceTree = "<group>"; };
+		6802A35E152BD7F50048C2A0 /* UIImage+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HockeyAdditions.h"; sourceTree = "<group>"; };
+		6802A35F152BD7F50048C2A0 /* UIImage+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HockeyAdditions.m"; sourceTree = "<group>"; };
+		6802A360152BD7F50048C2A0 /* HockeySDK.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = HockeySDK.podspec; sourceTree = "<group>"; };
+		6802A361152BD7F50048C2A0 /* LICENSE.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
+		6802A362152BD7F50048C2A0 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		6802A364152BD7F50048C2A0 /* Hockey.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Hockey.bundle; sourceTree = "<group>"; };
+		6802A365152BD7F50048C2A0 /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
+		6802A36B152BD7F50048C2A0 /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
 		681DB3BC145314CE00DF0849 /* PhotoWheel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PhotoWheel.entitlements; sourceTree = "<group>"; };
 		681DB3CE1453334600DF0849 /* SlideShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SlideShowViewController.h; sourceTree = "<group>"; };
 		681DB3CF1453334600DF0849 /* SlideShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SlideShowViewController.m; sourceTree = "<group>"; };
@@ -119,28 +153,6 @@
 		682BC4D114351EFF00286C9D /* ImageGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageGridViewCell.h; sourceTree = "<group>"; };
 		682BC4D214351EFF00286C9D /* ImageGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGridViewCell.m; sourceTree = "<group>"; };
 		684F03A4152B9E42000CB64A /* Acknowledgements.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Acknowledgements.txt; sourceTree = "<group>"; };
-		684F03A7152B9E5A000CB64A /* BWApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWApp.h; sourceTree = "<group>"; };
-		684F03A8152B9E5A000CB64A /* BWApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWApp.m; sourceTree = "<group>"; };
-		684F03A9152B9E5A000CB64A /* BWGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWGlobal.h; sourceTree = "<group>"; };
-		684F03AA152B9E5A000CB64A /* BWGlobal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWGlobal.m; sourceTree = "<group>"; };
-		684F03AB152B9E5A000CB64A /* BWHockeyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyManager.h; sourceTree = "<group>"; };
-		684F03AC152B9E5A000CB64A /* BWHockeyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyManager.m; sourceTree = "<group>"; };
-		684F03AD152B9E5A000CB64A /* BWHockeySettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeySettingsViewController.h; sourceTree = "<group>"; };
-		684F03AE152B9E5A000CB64A /* BWHockeySettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeySettingsViewController.m; sourceTree = "<group>"; };
-		684F03AF152B9E5A000CB64A /* BWHockeyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWHockeyViewController.h; sourceTree = "<group>"; };
-		684F03B0152B9E5A000CB64A /* BWHockeyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWHockeyViewController.m; sourceTree = "<group>"; };
-		684F03B2152B9E5A000CB64A /* NSString+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HockeyAdditions.h"; sourceTree = "<group>"; };
-		684F03B3152B9E5A000CB64A /* NSString+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HockeyAdditions.m"; sourceTree = "<group>"; };
-		684F03B4152B9E5A000CB64A /* PSAppStoreHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSAppStoreHeader.h; sourceTree = "<group>"; };
-		684F03B5152B9E5A000CB64A /* PSAppStoreHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSAppStoreHeader.m; sourceTree = "<group>"; };
-		684F03B6152B9E5A000CB64A /* PSStoreButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSStoreButton.h; sourceTree = "<group>"; };
-		684F03B7152B9E5A000CB64A /* PSStoreButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSStoreButton.m; sourceTree = "<group>"; };
-		684F03B8152B9E5A000CB64A /* PSWebTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PSWebTableViewCell.h; sourceTree = "<group>"; };
-		684F03B9152B9E5A000CB64A /* PSWebTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PSWebTableViewCell.m; sourceTree = "<group>"; };
-		684F03BA152B9E5A000CB64A /* UIImage+HockeyAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+HockeyAdditions.h"; sourceTree = "<group>"; };
-		684F03BB152B9E5A000CB64A /* UIImage+HockeyAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+HockeyAdditions.m"; sourceTree = "<group>"; };
-		684F03BC152B9E5A000CB64A /* Hockey.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Hockey.bundle; sourceTree = "<group>"; };
-		684F03BD152B9E5A000CB64A /* README.mkdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.mkdown; sourceTree = "<group>"; };
 		684F03CA152B9F69000CB64A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		684F03DF152BAB87000CB64A /* CHANGES.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGES.md; sourceTree = "<group>"; };
 		684F03E0152BAB87000CB64A /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -158,10 +170,6 @@
 		6856FE2C1438AEF7003502DB /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
 		6891947C1471645200F6B58E /* PhotoWheelAboutIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PhotoWheelAboutIcon.png; sourceTree = "<group>"; };
 		6891948A14716EC300F6B58E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		6891948D14716F2900F6B58E /* BWQuincyManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWQuincyManager.h; sourceTree = "<group>"; };
-		6891948E14716F2900F6B58E /* BWQuincyManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWQuincyManager.m; sourceTree = "<group>"; };
-		6891948F14716F2900F6B58E /* CrashReporter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = CrashReporter.framework; sourceTree = "<group>"; };
-		6891949114716F2900F6B58E /* Quincy.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Quincy.bundle; sourceTree = "<group>"; };
 		689194961471704100F6B58E /* AppKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppKeys.h; sourceTree = "<group>"; };
 		689199AE13F5B6530037CBAC /* UIView+PWCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PWCategory.h"; sourceTree = "<group>"; };
 		689199AF13F5B6530037CBAC /* UIView+PWCategory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PWCategory.m"; sourceTree = "<group>"; };
@@ -232,69 +240,90 @@
 				68FA6AD613EEF3BB00E046BD /* UIKit.framework in Frameworks */,
 				68FA6AD813EEF3BB00E046BD /* Foundation.framework in Frameworks */,
 				68FA6ADA13EEF3BB00E046BD /* CoreData.framework in Frameworks */,
-				6891949314716F2900F6B58E /* CrashReporter.framework in Frameworks */,
+				6802A380152BD7F50048C2A0 /* CrashReporter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		684F03A6152B9E5A000CB64A /* HockeyKit */ = {
+		6802A345152BD7F50048C2A0 /* HockeySDK */ = {
 			isa = PBXGroup;
 			children = (
-				684F03A7152B9E5A000CB64A /* BWApp.h */,
-				684F03A8152B9E5A000CB64A /* BWApp.m */,
-				684F03A9152B9E5A000CB64A /* BWGlobal.h */,
-				684F03AA152B9E5A000CB64A /* BWGlobal.m */,
-				684F03AB152B9E5A000CB64A /* BWHockeyManager.h */,
-				684F03AC152B9E5A000CB64A /* BWHockeyManager.m */,
-				684F03AD152B9E5A000CB64A /* BWHockeySettingsViewController.h */,
-				684F03AE152B9E5A000CB64A /* BWHockeySettingsViewController.m */,
-				684F03AF152B9E5A000CB64A /* BWHockeyViewController.h */,
-				684F03B0152B9E5A000CB64A /* BWHockeyViewController.m */,
-				684F03B1152B9E5A000CB64A /* Helper */,
-				684F03BC152B9E5A000CB64A /* Hockey.bundle */,
-				684F03BD152B9E5A000CB64A /* README.mkdown */,
+				6802A346152BD7F50048C2A0 /* Classes */,
+				6802A360152BD7F50048C2A0 /* HockeySDK.podspec */,
+				6802A361152BD7F50048C2A0 /* LICENSE.txt */,
+				6802A362152BD7F50048C2A0 /* README.md */,
+				6802A363152BD7F50048C2A0 /* Resources */,
+				6802A366152BD7F50048C2A0 /* Support */,
+				6802A36A152BD7F50048C2A0 /* Vendor */,
 			);
-			path = HockeyKit;
+			path = HockeySDK;
 			sourceTree = "<group>";
 		};
-		684F03B1152B9E5A000CB64A /* Helper */ = {
+		6802A346152BD7F50048C2A0 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				684F03B2152B9E5A000CB64A /* NSString+HockeyAdditions.h */,
-				684F03B3152B9E5A000CB64A /* NSString+HockeyAdditions.m */,
-				684F03B4152B9E5A000CB64A /* PSAppStoreHeader.h */,
-				684F03B5152B9E5A000CB64A /* PSAppStoreHeader.m */,
-				684F03B6152B9E5A000CB64A /* PSStoreButton.h */,
-				684F03B7152B9E5A000CB64A /* PSStoreButton.m */,
-				684F03B8152B9E5A000CB64A /* PSWebTableViewCell.h */,
-				684F03B9152B9E5A000CB64A /* PSWebTableViewCell.m */,
-				684F03BA152B9E5A000CB64A /* UIImage+HockeyAdditions.h */,
-				684F03BB152B9E5A000CB64A /* UIImage+HockeyAdditions.m */,
+				6802A347152BD7F50048C2A0 /* BWApp.h */,
+				6802A348152BD7F50048C2A0 /* BWApp.m */,
+				6802A349152BD7F50048C2A0 /* BWGlobal.h */,
+				6802A34A152BD7F50048C2A0 /* BWGlobal.m */,
+				6802A34B152BD7F50048C2A0 /* BWHockeyManager.h */,
+				6802A34C152BD7F50048C2A0 /* BWHockeyManager.m */,
+				6802A34D152BD7F50048C2A0 /* BWHockeySettingsViewController.h */,
+				6802A34E152BD7F50048C2A0 /* BWHockeySettingsViewController.m */,
+				6802A34F152BD7F50048C2A0 /* BWHockeyViewController.h */,
+				6802A350152BD7F50048C2A0 /* BWHockeyViewController.m */,
+				6802A351152BD7F50048C2A0 /* BWQuincyManager.h */,
+				6802A352152BD7F50048C2A0 /* BWQuincyManager.m */,
+				6802A353152BD7F50048C2A0 /* CNSFixCategoryBug.h */,
+				6802A354152BD7F50048C2A0 /* CNSHockeyManager.h */,
+				6802A355152BD7F50048C2A0 /* CNSHockeyManager.m */,
+				6802A356152BD7F50048C2A0 /* NSString+HockeyAdditions.h */,
+				6802A357152BD7F50048C2A0 /* NSString+HockeyAdditions.m */,
+				6802A358152BD7F50048C2A0 /* PSAppStoreHeader.h */,
+				6802A359152BD7F50048C2A0 /* PSAppStoreHeader.m */,
+				6802A35A152BD7F50048C2A0 /* PSStoreButton.h */,
+				6802A35B152BD7F50048C2A0 /* PSStoreButton.m */,
+				6802A35C152BD7F50048C2A0 /* PSWebTableViewCell.h */,
+				6802A35D152BD7F50048C2A0 /* PSWebTableViewCell.m */,
+				6802A35E152BD7F50048C2A0 /* UIImage+HockeyAdditions.h */,
+				6802A35F152BD7F50048C2A0 /* UIImage+HockeyAdditions.m */,
 			);
-			path = Helper;
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		6802A363152BD7F50048C2A0 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6802A364152BD7F50048C2A0 /* Hockey.bundle */,
+				6802A365152BD7F50048C2A0 /* Quincy.bundle */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6802A366152BD7F50048C2A0 /* Support */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Support;
+			sourceTree = "<group>";
+		};
+		6802A36A152BD7F50048C2A0 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				6802A36B152BD7F50048C2A0 /* CrashReporter.framework */,
+			);
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 		6891948914716E9800F6B58E /* AdditionalLibraries */ = {
 			isa = PBXGroup;
 			children = (
 				684F03A4152B9E42000CB64A /* Acknowledgements.txt */,
-				684F03A6152B9E5A000CB64A /* HockeyKit */,
-				6891948C14716F2900F6B58E /* QuincyKit */,
+				6802A345152BD7F50048C2A0 /* HockeySDK */,
 			);
 			path = AdditionalLibraries;
-			sourceTree = "<group>";
-		};
-		6891948C14716F2900F6B58E /* QuincyKit */ = {
-			isa = PBXGroup;
-			children = (
-				6891948D14716F2900F6B58E /* BWQuincyManager.h */,
-				6891948E14716F2900F6B58E /* BWQuincyManager.m */,
-				6891948F14716F2900F6B58E /* CrashReporter.framework */,
-				6891949114716F2900F6B58E /* Quincy.bundle */,
-			);
-			path = QuincyKit;
 			sourceTree = "<group>";
 		};
 		68D4449D13EF21290076949E /* images */ = {
@@ -523,9 +552,11 @@
 				68A156D114379FDE008400B0 /* stack-viewer-shadow.png in Resources */,
 				68F32AC514530D9900D477DF /* Default-Landscape.png in Resources */,
 				6891947D1471645200F6B58E /* PhotoWheelAboutIcon.png in Resources */,
-				6891949514716F2900F6B58E /* Quincy.bundle in Resources */,
-				684F03C8152B9E5A000CB64A /* Hockey.bundle in Resources */,
-				684F03C9152B9E5A000CB64A /* README.mkdown in Resources */,
+				6802A37B152BD7F50048C2A0 /* HockeySDK.podspec in Resources */,
+				6802A37C152BD7F50048C2A0 /* LICENSE.txt in Resources */,
+				6802A37D152BD7F50048C2A0 /* README.md in Resources */,
+				6802A37E152BD7F50048C2A0 /* Hockey.bundle in Resources */,
+				6802A37F152BD7F50048C2A0 /* Quincy.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,17 +611,18 @@
 				6856FE2D1438AEF7003502DB /* ImageDownloader.m in Sources */,
 				681DB3D01453334600DF0849 /* SlideShowViewController.m in Sources */,
 				681DB3D41453335D00DF0849 /* MainSlideShowViewController.m in Sources */,
-				6891949214716F2900F6B58E /* BWQuincyManager.m in Sources */,
-				684F03BE152B9E5A000CB64A /* BWApp.m in Sources */,
-				684F03BF152B9E5A000CB64A /* BWGlobal.m in Sources */,
-				684F03C0152B9E5A000CB64A /* BWHockeyManager.m in Sources */,
-				684F03C1152B9E5A000CB64A /* BWHockeySettingsViewController.m in Sources */,
-				684F03C2152B9E5A000CB64A /* BWHockeyViewController.m in Sources */,
-				684F03C3152B9E5A000CB64A /* NSString+HockeyAdditions.m in Sources */,
-				684F03C4152B9E5A000CB64A /* PSAppStoreHeader.m in Sources */,
-				684F03C5152B9E5A000CB64A /* PSStoreButton.m in Sources */,
-				684F03C6152B9E5A000CB64A /* PSWebTableViewCell.m in Sources */,
-				684F03C7152B9E5A000CB64A /* UIImage+HockeyAdditions.m in Sources */,
+				6802A36F152BD7F50048C2A0 /* BWApp.m in Sources */,
+				6802A370152BD7F50048C2A0 /* BWGlobal.m in Sources */,
+				6802A371152BD7F50048C2A0 /* BWHockeyManager.m in Sources */,
+				6802A372152BD7F50048C2A0 /* BWHockeySettingsViewController.m in Sources */,
+				6802A373152BD7F50048C2A0 /* BWHockeyViewController.m in Sources */,
+				6802A374152BD7F50048C2A0 /* BWQuincyManager.m in Sources */,
+				6802A375152BD7F50048C2A0 /* CNSHockeyManager.m in Sources */,
+				6802A376152BD7F50048C2A0 /* NSString+HockeyAdditions.m in Sources */,
+				6802A377152BD7F50048C2A0 /* PSAppStoreHeader.m in Sources */,
+				6802A378152BD7F50048C2A0 /* PSStoreButton.m in Sources */,
+				6802A379152BD7F50048C2A0 /* PSWebTableViewCell.m in Sources */,
+				6802A37A152BD7F50048C2A0 /* UIImage+HockeyAdditions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,7 +667,7 @@
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/QuincyKit\"",
+					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/HockeySDK/Vendor\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
@@ -673,7 +705,7 @@
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/QuincyKit\"",
+					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/HockeySDK/Vendor\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
@@ -737,7 +769,7 @@
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/QuincyKit\"",
+					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/HockeySDK/Vendor\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";
@@ -757,7 +789,7 @@
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/QuincyKit\"",
+					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/HockeySDK/Vendor\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PhotoWheel/PhotoWheel-Prefix.pch";

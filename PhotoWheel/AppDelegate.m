@@ -7,8 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "BWHockeyManager.h"
-#import "BWQuincyManager.h"
+
 
 @implementation AppDelegate
 
@@ -19,11 +18,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-#if defined (CONFIGURATION_Beta)
-   [[BWHockeyManager sharedHockeyManager] setAppIdentifier:HOCKEYKIT_APPKEY];
-   [[BWHockeyManager sharedHockeyManager] setDelegate:self];
-#endif
-   [[BWQuincyManager sharedQuincyManager] setAppIdentifier:QUINCYKIT_APPKEY];
+   [[CNSHockeyManager sharedHockeyManager] configureWithBetaIdentifier:HOCKEYKIT_BETA_APPKEY
+                                                        liveIdentifier:HOCKEYKIT_LIVE_APPKEY
+                                                              delegate:self];
    
    [self.window makeKeyAndVisible];
    return YES;
@@ -43,7 +40,7 @@
     Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     */
-
+   
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc removeObserver:self name:NSManagedObjectContextDidSaveNotification object:nil];
 }
@@ -53,7 +50,7 @@
    /*
     Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     */
-
+   
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -247,7 +244,7 @@
    }];
 }
 
-#pragma mark BWHockeyManagerDelegate Methods
+#pragma mark CNSHockeyManagerDelegate Methods
 
 - (NSString *)customDeviceIdentifier {
 #if defined (CONFIGURATION_Beta)

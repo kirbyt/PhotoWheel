@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CNSHockeyManager.h"
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, CNSHockeyManagerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 
