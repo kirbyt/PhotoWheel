@@ -6,7 +6,7 @@
    * [NEW] Removed the PhotoWheel workspace and prototype project as they are no longer needed or used.
    * [CHANGED] Build run script updated to commit info.plist after updating the build number.
    * [NEW] Added user defined build settings to set the bundle id and bundle display name based on the build type.
-   * [CHANGED] Removed run script that increments build number. This step has been moved to the build script.
+   * [CHANGED] Removed run script that increments build number. This step has been moved to the external build script.
    
 **Version 1.2.1**
 
