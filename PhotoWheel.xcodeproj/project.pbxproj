@@ -479,7 +479,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 68FA6AEC13EEF3BB00E046BD /* Build configuration list for PBXNativeTarget "PhotoWheel" */;
 			buildPhases = (
-				6891947B14715F8A00F6B58E /* ShellScript */,
 				68FA6ACD13EEF3BB00E046BD /* Sources */,
 				68FA6ACE13EEF3BB00E046BD /* Frameworks */,
 				68FA6ACF13EEF3BB00E046BD /* Resources */,
@@ -561,22 +560,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		6891947B14715F8A00F6B58E /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\nif [ ${CONFIGURATION} == \"Distribution\" ] || [ ${CONFIGURATION} == \"Adhoc\" ] || [ ${CONFIGURATION} == \"Beta\" ] || [ ${CONFIGURATION} == \"AppStore\" ];\nthen\n  buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" ${INFOPLIST_FILE})\n  buildNumber=$(($buildNumber + 1))\n  /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" ${INFOPLIST_FILE}\n\n  # Commit the current build using Git.\n  commitMessage=\"Automated commit for build $buildNumber (configuration: ${CONFIGURATION})\" \n  git commit -am \"$commitMessage\"\n\n  # Tag the build with the configuration name and build number.\n  # Format the configuration name to replace characters that will cause tagging to fail.\n  tagName=\"build-$buildNumber\"\n  git tag $tagName\nfi";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		68FA6ACD13EEF3BB00E046BD /* Sources */ = {
