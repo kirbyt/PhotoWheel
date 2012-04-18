@@ -11,9 +11,12 @@
 	<key>CFBundleIconFiles</key>
 	<array>
 		<string>Icon.png</string>
+		<string>Icon@2x.png</string>
 		<string>Icon72x72.png</string>
 		<string>IconSmall-50x50.png</string>
 		<string>IconSmall.png</string>
+		<string>IconSmall@2x.png</string>
+		<string>Icon144x144.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>${BUNDLE_IDENTIFIER}</string>
