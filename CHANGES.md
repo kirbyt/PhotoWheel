@@ -7,6 +7,7 @@
    * [CHANGED] Build run script updated to commit info.plist after updating the build number.
    * [NEW] Added user defined build settings to set the bundle id and bundle display name based on the build type.
    * [CHANGED] Removed run script that increments build number. This step has been moved to the external build script.
+   * [NEW] Retina support.
    
 **Version 1.2.1**
 
