@@ -14,7 +14,7 @@
 
 @interface GridView : UIScrollView <UIScrollViewDelegate>
 
-@property (nonatomic, strong) IBOutlet id<GridViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id<GridViewDataSource> dataSource;
 @property (nonatomic, assign) BOOL allowsMultipleSelection;
 
 
