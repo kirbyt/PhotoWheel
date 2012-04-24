@@ -8,6 +8,7 @@
    * [NEW] Added user defined build settings to set the bundle id and bundle display name based on the build type.
    * [CHANGED] Removed run script that increments build number. This step has been moved to the external build script.
    * [NEW] Retina support.
+   * [CHANGED] Replaced Default.png and Default-Landscape.png with .jpg formatted images to save storage space.
    
 **Version 1.2.1**
 
