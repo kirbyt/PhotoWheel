@@ -87,6 +87,9 @@
 		689199B013F5B6530037CBAC /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199AF13F5B6530037CBAC /* UIView+PWCategory.m */; };
 		689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689199B113F5BFFA0037CBAC /* CoreGraphics.framework */; };
 		689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199B413F5C8320037CBAC /* CustomNavigationController.m */; };
+		68B7C445156975AD009371AB /* defaultPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B7C444156975AD009371AB /* defaultPhoto@2x.png */; };
+		68B7C448156975B6009371AB /* addphoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B7C447156975B6009371AB /* addphoto@2x.png */; };
+		68B7C44A15697808009371AB /* PhotoWheelAboutIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B7C44915697806009371AB /* PhotoWheelAboutIcon@2x.png */; };
 		68C8C6C01437725C00480F4E /* PhotoBrowserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C8C6BF1437725C00480F4E /* PhotoBrowserViewController.m */; };
 		68C8C6C414377AF900480F4E /* PhotoBrowserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C8C6C314377AF900480F4E /* PhotoBrowserPhotoView.m */; };
 		68DC3FA013F59EB400C1E402 /* CustomPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DC3F9F13F59EB400C1E402 /* CustomPushSegue.m */; };
@@ -222,6 +225,9 @@
 		689199B113F5BFFA0037CBAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		689199B313F5C8320037CBAC /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		689199B413F5C8320037CBAC /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		68B7C444156975AD009371AB /* defaultPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "defaultPhoto@2x.png"; sourceTree = "<group>"; };
+		68B7C447156975B6009371AB /* addphoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addphoto@2x.png"; sourceTree = "<group>"; };
+		68B7C44915697806009371AB /* PhotoWheelAboutIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoWheelAboutIcon@2x.png"; sourceTree = "<group>"; };
 		68C8C6BE1437725C00480F4E /* PhotoBrowserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserViewController.h; sourceTree = "<group>"; };
 		68C8C6BF1437725C00480F4E /* PhotoBrowserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoBrowserViewController.m; sourceTree = "<group>"; };
 		68C8C6C214377AF900480F4E /* PhotoBrowserPhotoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoBrowserPhotoView.h; sourceTree = "<group>"; };
@@ -343,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				6830593B153E608B00CE7799 /* addphoto.png */,
+				68B7C447156975B6009371AB /* addphoto@2x.png */,
 				6830593F153E608B00CE7799 /* background-landscape-right-grooved.png */,
 				68305940153E608B00CE7799 /* background-landscape-right-grooved@2x.png */,
 				68305942153E608B00CE7799 /* background-portrait-grooved.png */,
@@ -352,6 +359,7 @@
 				6867D5DA1546E73700DEA1DD /* Default.jpg */,
 				6867D5DB1546E73700DEA1DD /* Default@2x.jpg */,
 				68305948153E608B00CE7799 /* defaultPhoto.png */,
+				68B7C444156975AD009371AB /* defaultPhoto@2x.png */,
 				6830594A153E608B00CE7799 /* Icon-Small-50x50.png */,
 				6830594B153E608B00CE7799 /* Icon-Small.png */,
 				6830594C153E608B00CE7799 /* Icon-Small@2x.png */,
@@ -364,6 +372,7 @@
 				68305953153E608B00CE7799 /* IconSmall@2x.png */,
 				68305954153E608B00CE7799 /* iTunesArtwork */,
 				68305956153E608B00CE7799 /* PhotoWheelAboutIcon.png */,
+				68B7C44915697806009371AB /* PhotoWheelAboutIcon@2x.png */,
 				68305957153E608B00CE7799 /* stack-add-down.png */,
 				68305958153E608B00CE7799 /* stack-add-down@2x.png */,
 				68305959153E608B00CE7799 /* stack-add.png */,
@@ -600,6 +609,9 @@
 				6867D5DD1546E73700DEA1DD /* Default-Landscape@2x.jpg in Resources */,
 				6867D5DE1546E73700DEA1DD /* Default.jpg in Resources */,
 				6867D5DF1546E73700DEA1DD /* Default@2x.jpg in Resources */,
+				68B7C445156975AD009371AB /* defaultPhoto@2x.png in Resources */,
+				68B7C448156975B6009371AB /* addphoto@2x.png in Resources */,
+				68B7C44A15697808009371AB /* PhotoWheelAboutIcon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
