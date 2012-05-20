@@ -746,7 +746,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_DISPLAY_NAME = "PhotoWheel Beta";
-				BUNDLE_IDENTIFIER = com.whitepeaksoftware.PhotoWheel.beta;
+				BUNDLE_IDENTIFIER = com.whitepeaksoftware.PhotoWheel.beta2;
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				FRAMEWORK_SEARCH_PATHS = (
