@@ -109,13 +109,14 @@
    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
    if (coordinator != nil)
    {
-      __managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-      [__managedObjectContext performBlockAndWait:^(void) {
-         [__managedObjectContext setPersistentStoreCoordinator:coordinator];
-         [__managedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+      NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+      [moc performBlockAndWait:^(void) {
+         [moc setPersistentStoreCoordinator:coordinator];
+         [moc setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
          
          [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
       }];
+      __managedObjectContext = moc;
    }
    return __managedObjectContext;
 }
@@ -161,7 +162,8 @@
          NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"photowheel"];
          cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
          
-         options = [NSDictionary dictionaryWithObjectsAndKeys:@"com.whitepeaksoftware.photowheel", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, nil];
+         //  The API to turn on Core Data iCloud support here.
+         options = [NSDictionary dictionaryWithObjectsAndKeys:@"com.whitepeaksoftware.photowheel", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
       }
       
       NSError *error = nil;
@@ -194,53 +196,18 @@
 
 #pragma mark - iCloud
 
-- (void)mergeiCloudChanges:(NSDictionary*)noteInfo forContext:(NSManagedObjectContext*)moc
+- (void)mergeiCloudChanges:(NSNotification*)notification forContext:(NSManagedObjectContext*)moc
 {
-   @autoreleasepool {
-      NSMutableDictionary *localUserInfo = [NSMutableDictionary dictionary];
-      
-      NSString* materializeKeys[] = { NSDeletedObjectsKey, NSInsertedObjectsKey };
-      int c = (sizeof(materializeKeys) / sizeof(NSString*));
-      for (int i = 0; i < c; i++) {
-         NSSet* set = [noteInfo objectForKey:materializeKeys[i]];
-         if ([set count] > 0) {
-            NSMutableSet* objectSet = [NSMutableSet set];
-            for (NSManagedObjectID* moid in set) {
-               [objectSet addObject:[moc objectWithID:moid]];
-            }
-            [localUserInfo setObject:objectSet forKey:materializeKeys[i]];
-         }
-      }
-      
-      NSString* noMaterializeKeys[] = { NSUpdatedObjectsKey, NSRefreshedObjectsKey, NSInvalidatedObjectsKey };
-      c = (sizeof(noMaterializeKeys) / sizeof(NSString*));
-      for (int i = 0; i < 2; i++) {
-         NSSet* set = [noteInfo objectForKey:noMaterializeKeys[i]];
-         if ([set count] > 0) {
-            NSMutableSet* objectSet = [NSMutableSet set];
-            for (NSManagedObjectID* moid in set) {
-               NSManagedObject* realObj = [moc objectRegisteredForID:moid];
-               if (realObj) {
-                  [objectSet addObject:realObj];
-               }
-            }
-            [localUserInfo setObject:objectSet forKey:noMaterializeKeys[i]];
-         }
-      }
-      
-      NSNotification *fakeSave = [NSNotification notificationWithName:NSManagedObjectContextDidSaveNotification object:self userInfo:localUserInfo];
-      [moc mergeChangesFromContextDidSaveNotification:fakeSave]; 
-      
-      [moc processPendingChanges];
-   }
+   [moc mergeChangesFromContextDidSaveNotification:notification];
+   NSNotification *refreshNotificaiton = [NSNotification notificationWithName:kRefetchAllDataNotification object:self userInfo:[notification userInfo]];
+   [[NSNotificationCenter defaultCenter] postNotification:refreshNotificaiton];
 }
 
-- (void)mergeChangesFrom_iCloud:(NSNotification *)notification {
-   NSDictionary* userInfo = [notification userInfo];
+- (void)mergeChangesFrom_iCloud:(NSNotification *)notification 
+{
    NSManagedObjectContext* moc = [self managedObjectContext];
-   
    [moc performBlock:^{
-      [self mergeiCloudChanges:userInfo forContext:moc];
+      [self mergeiCloudChanges:notification forContext:moc];
    }];
 }
 
