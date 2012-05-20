@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.0" toolsVersion="1938" systemVersion="11C74" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="35">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="1.1" toolsVersion="2182" systemVersion="11D50b" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" initialViewController="35">
     <dependencies>
+        <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="933"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
     </dependencies>
     <scenes>
+        <!--Main View Controller-->
         <scene sceneID="9">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -44,6 +46,7 @@
             </objects>
             <point key="canvasLocation" x="698" y="701"/>
         </scene>
+        <!--About View Controller-->
         <scene sceneID="19">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="18" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -65,7 +68,7 @@
                                 </items>
                             </toolbar>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="PhotoWheelAboutIcon.png" id="23">
-                                <rect key="frame" x="65" y="73" width="100" height="123"/>
+                                <rect key="frame" x="65" y="73" width="100" height="129"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="PhotoWheel" lineBreakMode="tailTruncation" minimumFontSize="10" id="24">
@@ -200,6 +203,7 @@
             </objects>
             <point key="canvasLocation" x="1651" y="719"/>
         </scene>
+        <!--Photo Browser View Controller-->
         <scene sceneID="32">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -383,6 +387,7 @@
             </objects>
             <point key="canvasLocation" x="1651" y="1444"/>
         </scene>
+        <!--Flickr View Controller-->
         <scene sceneID="yNS-2d-FRY">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8X-Mq-mmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -446,6 +451,7 @@
             </objects>
             <point key="canvasLocation" x="1657" y="2591"/>
         </scene>
+        <!--Main Slide Show View Controller-->
         <scene sceneID="QCR-Il-k8y">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0o-Li-hUz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -460,6 +466,7 @@
             </objects>
             <point key="canvasLocation" x="2549" y="1438"/>
         </scene>
+        <!--Custom Navigation Controller-->
         <scene sceneID="38">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="37" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -477,6 +484,7 @@
             </objects>
             <point key="canvasLocation" x="-276" y="701"/>
         </scene>
+        <!--Photo Album View Controller-->
         <scene sceneID="45">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="44" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -550,6 +558,7 @@
             </objects>
             <point key="canvasLocation" x="698" y="1888"/>
         </scene>
+        <!--Photo Albums View Controller-->
         <scene sceneID="49">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="48" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -598,10 +607,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="PhotoWheelAboutIcon.png" width="100" height="123"/>
+        <image name="PhotoWheelAboutIcon.png" width="100" height="129"/>
         <image name="background-portrait-grooved.png" width="768" height="1004"/>
-        <image name="stack-add-down.png" width="178" height="178"/>
-        <image name="stack-add.png" width="178" height="178"/>
+        <image name="stack-add-down.png" width="177" height="178"/>
+        <image name="stack-add.png" width="177" height="178"/>
         <image name="stack-bg.png" width="551" height="550"/>
         <image name="stack-viewer-bg-portrait.png" width="716" height="717"/>
         <image name="stack-viewer-shadow.png" width="5" height="8"/>
