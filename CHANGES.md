@@ -9,6 +9,7 @@
    * [CHANGED] Removed run script that increments build number. This step has been moved to the external build script.
    * [NEW] Retina support.
    * [CHANGED] Replaced Default.png and Default-Landscape.png with .jpg formatted images to save storage space.
+   * [FIXED] Fixed iCloud syncing issues.
    
 **Version 1.2.1**
 
