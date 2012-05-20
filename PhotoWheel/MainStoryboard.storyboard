@@ -85,8 +85,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Copyright © 2011 White Peak Software, Inc. All Rights Reserved." textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="cye-ay-bjW">
-                                <rect key="frame" x="65" y="579" width="411" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Copyright © 2011-2012 White Peak Software, Inc. All Rights Reserved." textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" id="cye-ay-bjW">
+                                <rect key="frame" x="20" y="579" width="500" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
