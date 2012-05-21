@@ -8,6 +8,11 @@
 
 #import "AppDelegate.h"
 
+@interface AppDelegate ()
+@property (nonatomic, strong) NSMutableArray *iCloudNotificationQueue;
+@property (nonatomic, assign, getter=isPersistentStoreReady) BOOL persistentStoreReady;
+- (void)processMergeiCloudNotifications;
+@end
 
 @implementation AppDelegate
 
@@ -15,6 +20,8 @@
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
+@synthesize iCloudNotificationQueue = _iCloudNotificationQueue;
+@synthesize persistentStoreReady = _persistentStoreReady;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -142,6 +149,7 @@
       return __persistentStoreCoordinator;
    }
    
+   [self setPersistentStoreReady:NO];
    __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
    
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
@@ -169,9 +177,11 @@
          ZAssert(NO, @"Unresolved error %@\n%@", [error localizedDescription], [error userInfo]);
       }
       [__persistentStoreCoordinator unlock];
+      [self setPersistentStoreReady:YES];
       
       dispatch_async(dispatch_get_main_queue(), ^{
          DLog(@"asynchronously added persistent store!");
+         [self processMergeiCloudNotifications];
          [[NSNotificationCenter defaultCenter] postNotificationName:kRefetchAllDataNotification object:self userInfo:nil];
       });
    });
@@ -193,17 +203,48 @@
 
 - (void)mergeiCloudChanges:(NSNotification*)notification forContext:(NSManagedObjectContext*)moc
 {
+   DLog(@"Notification:\n%@", [notification userInfo]);
    [moc mergeChangesFromContextDidSaveNotification:notification];
    NSNotification *refreshNotificaiton = [NSNotification notificationWithName:kRefetchAllDataNotification object:self userInfo:[notification userInfo]];
    [[NSNotificationCenter defaultCenter] postNotification:refreshNotificaiton];
 }
 
+- (void)processMergeiCloudNotifications
+{
+   DLog(@"Processing %i notifications.", [[self iCloudNotificationQueue] count]);
+   NSManagedObjectContext* moc = [self managedObjectContext];
+   [[self iCloudNotificationQueue] enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+      [moc performBlock:^{
+         [self mergeiCloudChanges:obj forContext:moc];
+      }];
+   }];
+   [[self iCloudNotificationQueue] removeAllObjects];
+}
+
+- (void)queueMergeiCloudNotification:(NSNotification *)notification
+{
+   DLog(@"Queuing iCloud merge notification.");
+   if (![self iCloudNotificationQueue]) {
+      NSMutableArray *newQueue = [[NSMutableArray alloc] init];
+      [self setICloudNotificationQueue:newQueue];
+   }
+   [[self iCloudNotificationQueue] addObject:notification];
+}
+
 - (void)mergeChangesFrom_iCloud:(NSNotification *)notification 
 {
-   NSManagedObjectContext* moc = [self managedObjectContext];
-   [moc performBlock:^{
-      [self mergeiCloudChanges:notification forContext:moc];
-   }];
+   if ([self isPersistentStoreReady]) {
+      // Process queued notifications first.
+      [self processMergeiCloudNotifications];
+      // Process the current notification.
+      NSManagedObjectContext* moc = [self managedObjectContext];
+      [moc performBlock:^{
+         [self mergeiCloudChanges:notification forContext:moc];
+      }];
+      
+   } else {
+      [self queueMergeiCloudNotification:notification];
+   }
 }
 
 #pragma mark CNSHockeyManagerDelegate Methods

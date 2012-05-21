@@ -10,6 +10,7 @@
    * [NEW] Retina support.
    * [CHANGED] Replaced Default.png and Default-Landscape.png with .jpg formatted images to save storage space.
    * [FIXED] Fixed iCloud syncing issues.
+   * [NEW] iCloud notifications are queued until after the persistent data store is created.
    
 **Version 1.2.1**
 
