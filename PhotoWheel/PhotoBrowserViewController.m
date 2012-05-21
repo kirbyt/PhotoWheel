@@ -502,15 +502,15 @@
    
    UIPrintInteractionController *controller = [UIPrintInteractionController sharedPrintController];
    if(!controller){
-      NSLog(@"Couldn't get shared UIPrintInteractionController!");
+      ALog(@"Couldn't get shared UIPrintInteractionController!");
       return;
    }
    
    UIPrintInteractionCompletionHandler completionHandler = ^(UIPrintInteractionController *printController, BOOL completed, NSError *error) {
       [self startChromeDisplayTimer];
-      if(completed && error)
-         NSLog(@"FAILED! due to error in domain %@ with error code %u", 
-               error.domain, error.code);
+      if(completed && error) {
+         ALog(@"FAILED! due to error in domain %@ with error code %u", error.domain, error.code);
+      }
    };
    
    UIPrintInfo *printInfo = [UIPrintInfo printInfo];

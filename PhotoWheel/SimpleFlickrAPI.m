@@ -94,9 +94,7 @@
    NSURLResponse *response = nil;
    NSError *error = nil;
    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-   if (data == nil) {
-      NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, [error localizedDescription]);
-   }
+   ZAssert(data, @"NSURLConnection error: %@\n%@", [error localizedDescription], [error userInfo]);
    return data;
 }
 
@@ -139,14 +137,11 @@
    NSString *string = [self stringByRemovingFlickrJavaScript:data];
    NSData *jsonData = [string dataUsingEncoding:NSUTF8StringEncoding];
    
-   NSLog(@"%s: json: %@", __PRETTY_FUNCTION__, string);
+   DLog(@"flickr json: %@", string);
    
    NSError *error = nil;
    id json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
-   if (json == nil) {
-      NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, [error localizedDescription]);
-   }
-   
+   ZAssert(json, @"json error: %@\n%@", [error localizedDescription], [error userInfo]);
    return json;
 }
 

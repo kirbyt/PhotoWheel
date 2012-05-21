@@ -76,13 +76,8 @@
    {
       if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error])
       {
-         /*
-          Replace this implementation with code to handle the error appropriately.
-          
-          abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
-          */
-         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-         abort();
+         // Force assertion to report the error.
+         ZAssert(NO, @"Unresolved error %@\n%@", [error localizedDescription], [error userInfo]);
       } 
    }
 }
@@ -170,13 +165,13 @@
       [__persistentStoreCoordinator lock];
       if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
       {
-         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-         abort();
+         // Force assertion to report the error.
+         ZAssert(NO, @"Unresolved error %@\n%@", [error localizedDescription], [error userInfo]);
       }
       [__persistentStoreCoordinator unlock];
       
       dispatch_async(dispatch_get_main_queue(), ^{
-         NSLog(@"asynchronously added persistent store!");
+         DLog(@"asynchronously added persistent store!");
          [[NSNotificationCenter defaultCenter] postNotificationName:kRefetchAllDataNotification object:self userInfo:nil];
       });
    });

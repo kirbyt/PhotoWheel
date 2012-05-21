@@ -68,20 +68,7 @@
 - (void)saveContextAndExit:(NSManagedObjectContext *)context
 {
    NSError *error = nil;
-   if (![context save:&error])
-   {
-      /*
-       Replace this implementation with code to handle the error appropriately.
-       
-       abort() causes the application to generate a crash log and terminate. 
-       You should not use this function in a shipping application, although 
-       it may be useful during development. If it is not possible to recover 
-       from the error, display an alert panel that instructs the user to quit 
-       the application by pressing the Home button.
-       */
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-      abort();
-   }
+   ZAssert([context save:&error], @"Core Data save error: %@\n%@", [error localizedDescription], [error userInfo]);
    [context reset];
    
    [self dismissModalViewControllerAnimated:YES];
@@ -109,14 +96,14 @@
    
    ImageDownloaderCompletionBlock completion = 
       ^(UIImage *image, NSError *error) {
-      NSLog(@"block: count: %i", count);
+      DLog(@"block: count: %i", count);
       if (image) {
          Photo *newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
          [newPhoto setDateAdded:[NSDate date]];
          [newPhoto saveImage:image];
          [newPhoto setPhotoAlbum:photoAlbum];
       } else {
-         NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+         DLog(@"Image download error: %@\n%@",[error localizedDescription], [error userInfo]);
       }
       
       count--;
@@ -129,7 +116,7 @@
       NSInteger index = [indexNumber integerValue];
       NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:index];
       NSURL *URL = [NSURL URLWithString:[flickrPhoto objectForKey:@"url_m"]];
-      NSLog(@"URL: %@", URL);
+      DLog(@"URL: %@", URL);
       ImageDownloader *downloader = [[ImageDownloader alloc] init];
       [downloader downloadImageAtURL:URL completion:completion];
       
@@ -283,7 +270,7 @@
       if (image) {
          [[cell imageView] setImage:image];
       } else {
-         NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__, [error localizedDescription]);
+         DLog(@"Image download error: %@\n%@", [error localizedDescription], [error userInfo]);
       }
    };
    
