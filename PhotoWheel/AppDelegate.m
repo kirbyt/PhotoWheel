@@ -25,9 +25,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   [[CNSHockeyManager sharedHockeyManager] configureWithBetaIdentifier:HOCKEYKIT_BETA_APPKEY
+   [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:HOCKEYKIT_BETA_APPKEY
                                                         liveIdentifier:HOCKEYKIT_LIVE_APPKEY
                                                               delegate:self];
+   [[BITHockeyManager sharedHockeyManager] startManager];
    
    [self.window makeKeyAndVisible];
    return YES;
@@ -247,15 +248,14 @@
    }
 }
 
-#pragma mark CNSHockeyManagerDelegate Methods
-
-- (NSString *)customDeviceIdentifier {
-#if defined (CONFIGURATION_Beta)
-   if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)]) {
+#pragma mark - BITUpdateManagerDelegate
+- (NSString *)customDeviceIdentifierForUpdateManager:(BITUpdateManager *)updateManager
+{
+#ifndef CONFIGURATION_AppStore
+   if ([[UIDevice currentDevice] respondsToSelector:@selector(uniqueIdentifier)])
       return [[UIDevice currentDevice] performSelector:@selector(uniqueIdentifier)];
-   }
 #endif
-   
    return nil;
 }
+
 @end
