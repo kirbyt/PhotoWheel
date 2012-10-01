@@ -43,7 +43,7 @@ viewController
       
       if (image) {
          NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
-         NSString *fileName = [NSString stringWithFormat:@"photo-%1", index];
+         NSString *fileName = [NSString stringWithFormat:@"photo-%i", index];
          [mailer addAttachmentData:imageData mimeType:@"image/jpeg" fileName:fileName];
       }
    }];
