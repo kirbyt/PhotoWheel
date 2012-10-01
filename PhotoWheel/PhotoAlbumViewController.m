@@ -228,7 +228,7 @@
    // Display the camera.
    UIImagePickerController *imagePicker = [self imagePickerController];
    [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-   [self presentModalViewController:imagePicker animated:YES];
+   [self presentViewController:imagePicker animated:YES completion:nil];
 }
 
 - (void)presentPhotoLibrary
@@ -271,7 +271,7 @@
    BOOL takenWithCamera = ([self imagePickerPopoverController] == nil);
    
    if (takenWithCamera) {
-      [self dismissModalViewControllerAnimated:YES];
+      [self dismissViewControllerAnimated:YES completion:nil];
    } else {
       [[self imagePickerPopoverController] dismissPopoverAnimated:YES];
       [self setImagePickerPopoverController:nil];

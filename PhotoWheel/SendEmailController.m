@@ -48,14 +48,14 @@ viewController
       }
    }];
    
-   [[self viewController] presentModalViewController:mailer animated:YES];
+   [[self viewController] presentViewController:mailer animated:YES completion:nil];
 }
 
 
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
 {
    UIViewController<SendEmailControllerDelegate> *viewController = [self viewController];
-   [viewController dismissModalViewControllerAnimated:YES];
+   [viewController dismissViewControllerAnimated:YES completion:nil];
    if (viewController && [viewController respondsToSelector:@selector(sendEmailControllerDidFinish:)]) 
    {
       [viewController sendEmailControllerDidFinish:self];

@@ -71,7 +71,7 @@
    ZAssert([context save:&error], @"Core Data save error: %@\n%@", [error localizedDescription], [error userInfo]);
    [context reset];
    
-   [self dismissModalViewControllerAnimated:YES];
+   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)saveSelectedPhotos
@@ -90,7 +90,7 @@
    __block NSInteger count = [indexes count];
    
    if (count == 0) {
-      [self dismissModalViewControllerAnimated:YES];
+      [self dismissViewControllerAnimated:YES completion:nil];
       return;
    }
    
@@ -142,7 +142,7 @@
 
 - (IBAction)cancel:(id)sender
 {
-   [self dismissModalViewControllerAnimated:YES];
+   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 

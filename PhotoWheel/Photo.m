@@ -78,7 +78,7 @@
       [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:&error];
    }
    NSUInteger filenameID = [[[[self objectID] URIRepresentation] absoluteURL] hash];
-   NSString *filename = [NSString stringWithFormat:@"%@-%ld", attributeName, filenameID];
+   NSString *filename = [NSString stringWithFormat:@"%@-%d", attributeName, filenameID];
    NSURL *documentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
    return [documentsDirectory URLByAppendingPathComponent:filename];
 }
