@@ -1,5 +1,10 @@
 # Change History
 
+**Version 2.0b1**
+   * [CHANGED] Updated HockeySDK-iOS to version 2.5.4b1.
+   * [CHANGED] Replaced deprecated calls with iOS 6 equivalent.
+   * [CHANGED] Removed iOS 5 support. PhotoWheel v2 is iOS 6 only.
+
 **Version 1.3**
 
    * [NEW] Added HockeySDK and removed QuincyKit.
