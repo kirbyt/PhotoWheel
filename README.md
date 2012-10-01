@@ -50,4 +50,4 @@ License
 The source code for PhotoWheel is available for free under the [MIT license][2]. This license grants you the right to do anything you like with the source code. However, you are asked not to re-submit the app as is to Apple for App Store review. The authors have worked very hard creating the book and app so you can learn how to build your own iPad app. So please, don't be a dick and re-submit PhotoWheel as your own to the Apple.
 
    [1]: http://learnipadprogramming.com/
-   [2]: LICENSE
+   [2]: master/LICENSE
