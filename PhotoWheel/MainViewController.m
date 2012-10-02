@@ -13,29 +13,9 @@
 
 @implementation MainViewController
 
-@synthesize backgroundImageView = _backgroundImageView;
-@synthesize infoButton = _infoButton;
-@synthesize skipRotation = _skipRotation;
-
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-   
-   AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-   NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
-   
-   UIStoryboard *storyboard = [self storyboard];
-   
-   PhotoAlbumsViewController *photoAlbumsScene = [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumsScene"];
-   [photoAlbumsScene setManagedObjectContext:managedObjectContext];
-   [self addChildViewController:photoAlbumsScene];
-   [photoAlbumsScene didMoveToParentViewController:self];
-   
-   PhotoAlbumViewController *photoAlbumScene = [storyboard instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
-   [self addChildViewController:photoAlbumScene];
-   [photoAlbumScene didMoveToParentViewController:self];
-   
-   [photoAlbumsScene setPhotoAlbumViewController:photoAlbumScene];
    [self setSkipRotation:YES];
 }
 
@@ -59,11 +39,18 @@
    [self setSkipRotation:NO];
 }
 
-- (void)viewDidUnload
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   [self setBackgroundImageView:nil];
-   [self setInfoButton:nil];
-   [super viewDidUnload];
+   if ([[segue destinationViewController] isKindOfClass:[PhotoAlbumsViewController class]]) {
+      AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+      NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+
+      PhotoAlbumsViewController *destinationViewController = [segue destinationViewController];
+      [destinationViewController setManagedObjectContext:managedObjectContext];
+      
+      PhotoAlbumViewController *photoAlbumScene = [[self storyboard] instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
+      [destinationViewController setPhotoAlbumViewController:photoAlbumScene];
+   }
 }
 
 #pragma mark - Rotation support

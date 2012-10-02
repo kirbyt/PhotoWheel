@@ -25,33 +25,9 @@
 
 @implementation PhotoAlbumViewController
 
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize objectID = _objectID;
-@synthesize toolbar = _toolbar;
-@synthesize textField = _textField;
-@synthesize addButton = _addButton;
-@synthesize photoAlbum = _photoAlbum;
-@synthesize imagePickerController = _imagePickerController;
-@synthesize imagePickerPopoverController = _imagePickerPopoverController;
-@synthesize gridView = _gridView;
-@synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize backgroundImageView = _backgroundImageView;
-@synthesize shadowImageView = _shadowImageView;
-@synthesize sendEmailController = _sendEmailController;
-
 - (void)dealloc 
 {
    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
-}
-
-- (void)didMoveToParentViewController:(UIViewController *)parent
-{
-   // Position the view within the new parent.
-   [[parent view] addSubview:[self view]];
-   CGRect newFrame = CGRectMake(26, 18, 716, 717);
-   [[self view] setFrame:newFrame];
-   
-   [[self view] setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)viewDidLoad

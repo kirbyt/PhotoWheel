@@ -15,12 +15,12 @@
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;
-@property (nonatomic, strong) IBOutlet UIToolbar *toolbar;
-@property (nonatomic, strong) IBOutlet UITextField *textField;
-@property (nonatomic, strong) IBOutlet UIBarButtonItem *addButton;
-@property (nonatomic, strong) IBOutlet GridView *gridView;
-@property (nonatomic, strong) IBOutlet UIImageView *backgroundImageView;
-@property (nonatomic, strong) IBOutlet UIImageView *shadowImageView;
+@property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, weak) IBOutlet UITextField *textField;
+@property (nonatomic, weak) IBOutlet UIBarButtonItem *addButton;
+@property (nonatomic, weak) IBOutlet GridView *gridView;
+@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
+@property (nonatomic, weak) IBOutlet UIImageView *shadowImageView;
 
 - (void)reload;
 - (IBAction)showActionMenu:(id)sender;

@@ -31,13 +31,6 @@
 
 - (void)didMoveToParentViewController:(UIViewController *)parent
 {
-   // Position the view within the new parent.
-   [[parent view] addSubview:[self view]];
-   CGRect newFrame = CGRectMake(109, 680, 551, 550);
-   [[self view] setFrame:newFrame];   
-   
-   [[self view] setBackgroundColor:[UIColor clearColor]];
-
    [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification object:[[UIApplication sharedApplication] delegate] queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *__strong note) {
       [self setFetchedResultsController:nil];
       [[self wheelView] reloadData];
