@@ -7,8 +7,8 @@
 //
 
 #import "MainViewController.h"
-#import "PhotoAlbumViewController.h"
-#import "PhotoAlbumsViewController.h"
+#import "PhotosViewController.h"
+#import "AlbumsViewController.h"
 #import "AppDelegate.h"
 
 @implementation MainViewController
@@ -41,15 +41,15 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-   if ([[segue destinationViewController] isKindOfClass:[PhotoAlbumsViewController class]]) {
+   if ([[segue destinationViewController] isKindOfClass:[AlbumsViewController class]]) {
       AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
       NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
 
-      PhotoAlbumsViewController *destinationViewController = [segue destinationViewController];
+      AlbumsViewController *destinationViewController = [segue destinationViewController];
       [destinationViewController setManagedObjectContext:managedObjectContext];
       
-      PhotoAlbumViewController *photoAlbumScene = [[self storyboard] instantiateViewControllerWithIdentifier:@"PhotoAlbumScene"];
-      [destinationViewController setPhotoAlbumViewController:photoAlbumScene];
+      PhotosViewController *photosScene = [[self storyboard] instantiateViewControllerWithIdentifier:@"PhotosScene"];
+      [destinationViewController setPhotoAlbumViewController:photosScene];
    }
 }
 

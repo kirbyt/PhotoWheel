@@ -8,7 +8,7 @@
 
 #import "CustomNavigationController.h"
 #import "UIView+PWCategory.h"
-#import "PhotoAlbumViewController.h"
+#import "PhotosViewController.h"
 #import "MainSlideShowViewController.h"
 
 
@@ -63,7 +63,7 @@
    CGRect selectedCellFrame = CGRectZero;
    for (id childViewController in [destinationViewController childViewControllers])
    {
-      if ([childViewController isKindOfClass:[PhotoAlbumViewController class]]) {
+      if ([childViewController isKindOfClass:[PhotosViewController class]]) {
          selectedCellFrame = [childViewController selectedCellFrame];
          break;
       }

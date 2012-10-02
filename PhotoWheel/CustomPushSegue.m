@@ -8,7 +8,7 @@
 
 #import "CustomPushSegue.h"
 #import "UIView+PWCategory.h"
-#import "PhotoAlbumViewController.h"
+#import "PhotosViewController.h"
 
 @implementation CustomPushSegue
 

@@ -6,18 +6,18 @@
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "PhotoAlbumsViewController.h"
+#import "AlbumsViewController.h"
 #import "PhotoWheelViewCell.h"
 #import "PhotoAlbum.h"
 #import "Photo.h"
-#import "PhotoAlbumViewController.h"
+#import "PhotosViewController.h"
 
-@interface PhotoAlbumsViewController ()
+@interface AlbumsViewController ()
 @property (nonatomic, strong) 
    NSFetchedResultsController *fetchedResultsController;
 @end
 
-@implementation PhotoAlbumsViewController
+@implementation AlbumsViewController
 
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize wheelView = _wheelView;
@@ -151,7 +151,7 @@
    
    // Pass the current managed object context and object id for the 
    // photo album to the photo album view controller. 
-   PhotoAlbumViewController *photoAlbumViewController = [self photoAlbumViewController];
+   PhotosViewController *photoAlbumViewController = [self photoAlbumViewController];
    [photoAlbumViewController setManagedObjectContext:[self managedObjectContext]];
    [photoAlbumViewController setObjectID:[photoAlbum objectID]];
    [photoAlbumViewController reload];

@@ -54,6 +54,7 @@
 		68305991153E608B00CE7799 /* stack-viewer-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = 68305965153E608B00CE7799 /* stack-viewer-shadow.png */; };
 		68305992153E608B00CE7799 /* stack-viewer-shadow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68305966153E608B00CE7799 /* stack-viewer-shadow@2x.png */; };
 		68305994153E615900CE7799 /* Icon144x144.png in Resources */ = {isa = PBXBuildFile; fileRef = 68305993153E615900CE7799 /* Icon144x144.png */; };
+		683199FB161A9DAF00A00C57 /* AlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 683199FA161A9DAF00A00C57 /* AlbumsViewController.m */; };
 		684F03CB152B9F69000CB64A /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 684F03CA152B9F69000CB64A /* QuartzCore.framework */; };
 		68529C4213F05B4E00674415 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68529C4113F05B4E00674415 /* AboutViewController.m */; };
 		68550DA3161A0DDB00679153 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68550D9F161A0DDB00679153 /* HockeySDK.framework */; };
@@ -78,8 +79,7 @@
 		68C8C6C414377AF900480F4E /* PhotoBrowserPhotoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68C8C6C314377AF900480F4E /* PhotoBrowserPhotoView.m */; };
 		68DC3FA013F59EB400C1E402 /* CustomPushSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 68DC3F9F13F59EB400C1E402 /* CustomPushSegue.m */; };
 		68F5ED6C13F6CAF30006732C /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5ED6B13F6CAF30006732C /* MainViewController.m */; };
-		68F5ED7013F6CB020006732C /* PhotoAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5ED6F13F6CB020006732C /* PhotoAlbumViewController.m */; };
-		68F5ED7313F6CB100006732C /* PhotoAlbumsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5ED7213F6CB100006732C /* PhotoAlbumsViewController.m */; };
+		68F5ED7013F6CB020006732C /* PhotosViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 68F5ED6F13F6CB020006732C /* PhotosViewController.m */; };
 		68FA6AD613EEF3BB00E046BD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FA6AD513EEF3BB00E046BD /* UIKit.framework */; };
 		68FA6AD813EEF3BB00E046BD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FA6AD713EEF3BB00E046BD /* Foundation.framework */; };
 		68FA6ADA13EEF3BB00E046BD /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68FA6AD913EEF3BB00E046BD /* CoreData.framework */; };
@@ -151,6 +151,7 @@
 		68305965153E608B00CE7799 /* stack-viewer-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-shadow.png"; sourceTree = "<group>"; };
 		68305966153E608B00CE7799 /* stack-viewer-shadow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stack-viewer-shadow@2x.png"; sourceTree = "<group>"; };
 		68305993153E615900CE7799 /* Icon144x144.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon144x144.png; sourceTree = "<group>"; };
+		683199FA161A9DAF00A00C57 /* AlbumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumsViewController.m; sourceTree = "<group>"; };
 		684F03A4152B9E42000CB64A /* Acknowledgements.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = Acknowledgements.txt; sourceTree = "<group>"; };
 		684F03CA152B9F69000CB64A /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		684F03DF152BAB87000CB64A /* CHANGES.md */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGES.md; sourceTree = "<group>"; };
@@ -193,10 +194,9 @@
 		68DC3F9F13F59EB400C1E402 /* CustomPushSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomPushSegue.m; sourceTree = "<group>"; };
 		68F5ED6A13F6CAF30006732C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		68F5ED6B13F6CAF30006732C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
-		68F5ED6E13F6CB020006732C /* PhotoAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumViewController.h; sourceTree = "<group>"; };
-		68F5ED6F13F6CB020006732C /* PhotoAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumViewController.m; sourceTree = "<group>"; };
-		68F5ED7113F6CB100006732C /* PhotoAlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbumsViewController.h; sourceTree = "<group>"; };
-		68F5ED7213F6CB100006732C /* PhotoAlbumsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoAlbumsViewController.m; sourceTree = "<group>"; };
+		68F5ED6E13F6CB020006732C /* PhotosViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotosViewController.h; sourceTree = "<group>"; };
+		68F5ED6F13F6CB020006732C /* PhotosViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotosViewController.m; sourceTree = "<group>"; };
+		68F5ED7113F6CB100006732C /* AlbumsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumsViewController.h; sourceTree = "<group>"; };
 		68FA6AD113EEF3BB00E046BD /* PhotoWheel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhotoWheel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		68FA6AD513EEF3BB00E046BD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		68FA6AD713EEF3BB00E046BD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -353,10 +353,10 @@
 				689199B413F5C8320037CBAC /* CustomNavigationController.m */,
 				68F5ED6A13F6CAF30006732C /* MainViewController.h */,
 				68F5ED6B13F6CAF30006732C /* MainViewController.m */,
-				68F5ED6E13F6CB020006732C /* PhotoAlbumViewController.h */,
-				68F5ED6F13F6CB020006732C /* PhotoAlbumViewController.m */,
-				68F5ED7113F6CB100006732C /* PhotoAlbumsViewController.h */,
-				68F5ED7213F6CB100006732C /* PhotoAlbumsViewController.m */,
+				68F5ED6E13F6CB020006732C /* PhotosViewController.h */,
+				68F5ED6F13F6CB020006732C /* PhotosViewController.m */,
+				68F5ED7113F6CB100006732C /* AlbumsViewController.h */,
+				683199FA161A9DAF00A00C57 /* AlbumsViewController.m */,
 				682BC4A71434DE4600286C9D /* _Photo.h */,
 				682BC4A81434DE4600286C9D /* _Photo.m */,
 				682BC4A91434DE4600286C9D /* _PhotoAlbum.h */,
@@ -524,8 +524,7 @@
 				689199B013F5B6530037CBAC /* UIView+PWCategory.m in Sources */,
 				689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */,
 				68F5ED6C13F6CAF30006732C /* MainViewController.m in Sources */,
-				68F5ED7013F6CB020006732C /* PhotoAlbumViewController.m in Sources */,
-				68F5ED7313F6CB100006732C /* PhotoAlbumsViewController.m in Sources */,
+				68F5ED7013F6CB020006732C /* PhotosViewController.m in Sources */,
 				682BC4B51434DE4600286C9D /* _Photo.m in Sources */,
 				682BC4B61434DE4600286C9D /* _PhotoAlbum.m in Sources */,
 				682BC4B71434DE4600286C9D /* Photo.m in Sources */,
@@ -544,6 +543,7 @@
 				6856FE2D1438AEF7003502DB /* ImageDownloader.m in Sources */,
 				681DB3D01453334600DF0849 /* SlideShowViewController.m in Sources */,
 				681DB3D41453335D00DF0849 /* MainSlideShowViewController.m in Sources */,
+				683199FB161A9DAF00A00C57 /* AlbumsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

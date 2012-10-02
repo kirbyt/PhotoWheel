@@ -6,13 +6,13 @@
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "PhotoAlbumViewController.h"
+#import "PhotosViewController.h"
 #import "PhotoAlbum.h"
 #import "Photo.h"
 #import "ImageGridViewCell.h"
 #import "FlickrViewController.h"
 
-@interface PhotoAlbumViewController ()
+@interface PhotosViewController ()
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIPopoverController *imagePickerPopoverController;
@@ -23,7 +23,7 @@
 - (void)emailPhotos;
 @end
 
-@implementation PhotoAlbumViewController
+@implementation PhotosViewController
 
 - (void)dealloc 
 {
