@@ -676,8 +676,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kwf-pf-Zvu" customClass="WheelView">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="46" id="th9-vu-Ows"/>
-                                    <outlet property="delegate" destination="46" id="zX8-Kj-api"/>
+                                    <outlet property="dataSource" destination="46" id="hld-yB-8v2"/>
+                                    <outlet property="delegate" destination="46" id="JQH-32-Qje"/>
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="51">

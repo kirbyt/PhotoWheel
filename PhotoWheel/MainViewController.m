@@ -47,9 +47,6 @@
 
       AlbumsViewController *destinationViewController = [segue destinationViewController];
       [destinationViewController setManagedObjectContext:managedObjectContext];
-      
-      PhotosViewController *photosScene = [[self storyboard] instantiateViewControllerWithIdentifier:@"PhotosScene"];
-      [destinationViewController setPhotoAlbumViewController:photosScene];
    }
 }
 

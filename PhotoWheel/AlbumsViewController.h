@@ -15,7 +15,6 @@
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, weak) IBOutlet WheelView *wheelView;
-@property (nonatomic, weak) PhotosViewController *photoAlbumViewController;
 
 - (IBAction)addPhotoAlbum:(id)sender;
 

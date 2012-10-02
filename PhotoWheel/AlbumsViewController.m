@@ -13,18 +13,12 @@
 #import "PhotosViewController.h"
 
 @interface AlbumsViewController ()
-@property (nonatomic, strong) 
-   NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation AlbumsViewController
 
-@synthesize managedObjectContext = _managedObjectContext;
-@synthesize wheelView = _wheelView;
-@synthesize fetchedResultsController = _fetchedResultsController;
-@synthesize photoAlbumViewController = _photoAlbumViewController;
-
-- (void)dealloc 
+- (void)dealloc
 {
    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
 }
@@ -148,13 +142,21 @@
    if (index >= 0) {
       photoAlbum = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    }
+
+   // Find the PhotosViewController scene.
+   __block PhotosViewController *photosViewController = nil;
+   [[[self parentViewController] childViewControllers] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+      if ([obj isKindOfClass:[PhotosViewController class]]) {
+         photosViewController = obj;
+         *stop = YES;
+      }
+   }];
    
    // Pass the current managed object context and object id for the 
    // photo album to the photo album view controller. 
-   PhotosViewController *photoAlbumViewController = [self photoAlbumViewController];
-   [photoAlbumViewController setManagedObjectContext:[self managedObjectContext]];
-   [photoAlbumViewController setObjectID:[photoAlbum objectID]];
-   [photoAlbumViewController reload];
+   [photosViewController setManagedObjectContext:[self managedObjectContext]];
+   [photosViewController setObjectID:[photoAlbum objectID]];
+   [photosViewController reload];
 }
 
 @end
