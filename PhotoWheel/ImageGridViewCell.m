@@ -10,10 +10,10 @@
 
 @implementation ImageGridViewCell
 
-- (void)prepareForReuse
-{
-   [[self imageView] setImage:nil];
-   [[self selectedImageView] setImage:nil];
-}
+//- (void)prepareForReuse
+//{
+//   [[self imageView] setImage:nil];
+//   [[self selectedImageView] setImage:nil];
+//}
 
 @end

@@ -273,6 +273,8 @@
 
    if ([cell isSelected]) {
       [[cell selectedImageView] setImage:[UIImage imageNamed:@"addphoto.png"]];
+   } else {
+      [[cell selectedImageView] setImage:nil];
    }
    
    return cell;
