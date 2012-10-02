@@ -340,37 +340,6 @@
    [self performSegueWithIdentifier:@"PushPhotoBrowser" sender:self];
 }
 
-#pragma mark GridViewDataSource methods
-
-//- (NSInteger)gridViewNumberOfCells:(GridView *)gridView
-//{
-//   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
-//   return count;
-//}
-//
-//- (GridViewCell *)gridView:(GridView *)gridView cellAtIndex:(NSInteger)index
-//{
-//   ImageGridViewCell *cell = [gridView dequeueReusableCell];
-//   if (cell == nil) {
-//      cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(100, 100)];
-//   }
-//   
-//   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-//   Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-//   [[cell imageView] setImage:[photo smallImage]];
-//   
-//   return cell;
-//}
-//- (CGSize)gridViewCellSize:(GridView *)gridView
-//{
-//   return CGSizeMake(100, 100);
-//}
-//
-//- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
-//{
-//   [self performSegueWithIdentifier:@"PushPhotoBrowser" sender:self];
-//}
-
 #pragma mark - Segue
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -436,24 +405,23 @@
 
 #pragma mark -
 
-- (NSInteger)indexForSelectedGridCell
+- (NSIndexPath *)indexPathForSelectedGridCell
 {
-   GridView *gridView = [self gridView];
-   NSInteger selectedIndex = [gridView indexForSelectedCell];
-   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
-   if (selectedIndex < 0 && count > 0) {
-      selectedIndex = 0;
+   NSIndexPath *indexPath = nil;
+   NSArray *indexPaths = [[self gridView] indexPathsForSelectedItems];
+   if ([indexPaths count] > 0) {
+      // Multi-select is turned off, so there will only be one selected item.
+      indexPath = [indexPaths lastObject];
    }
-   return selectedIndex;
+   
+   return indexPath;
 }
-
 
 - (UIImage *)selectedImage
 {
    UIImage *selectedImage = nil;
-   NSInteger selectedIndex = [self indexForSelectedGridCell];
-   if (selectedIndex >= 0) {
-      NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectedIndex inSection:0];
+   NSIndexPath *indexPath = [self indexPathForSelectedGridCell];
+   if (indexPath) {
       Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
       selectedImage = [photo largeImage];
    }
@@ -462,17 +430,17 @@
 
 - (CGRect)selectedCellFrame
 {
-   CGRect rect;
-   GridView *gridView = [self gridView];
-   NSInteger selectedIndex = [self indexForSelectedGridCell];
-   if (selectedIndex >= 0) {
-      GridViewCell *cell = [gridView cellAtIndex:selectedIndex];
+   CGRect rect = CGRectZero;
+   NSIndexPath *indexPath = [self indexPathForSelectedGridCell];
+   if (indexPath) {
+      UICollectionViewCell *cell = [[self gridView] cellForItemAtIndexPath:indexPath];
       UIView *parentView = [[self parentViewController] view];
-      rect = [parentView convertRect:[cell frame] fromView:gridView];
+      rect = [parentView convertRect:[cell frame] fromView:[self gridView]];
    } else {
-      CGRect gridFrame = [gridView frame];
+      CGRect gridFrame = [[self gridView] frame];
       rect = CGRectMake(CGRectGetMidX(gridFrame), CGRectGetMidY(gridFrame), 0, 0);
    }
+   
    return rect;
 }
 

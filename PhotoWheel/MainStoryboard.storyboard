@@ -508,12 +508,50 @@
                                     <outlet property="delegate" destination="DDM-r0-lBW" id="CEb-Z4-fmH"/>
                                 </connections>
                             </searchBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oI7-Dx-2Ei" customClass="GridView">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hes-Mk-8Kc">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7UE-Fm-dmo">
+                                    <size key="itemSize" width="75" height="75"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageGridViewCell" id="jyt-B7-MFe" customClass="ImageGridViewCell">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIl-Rj-9l9"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMI-tY-its">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="29" id="314-eT-FZo"/>
+                                                        <constraint firstAttribute="width" constant="29" id="I3I-3C-SS3"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="leading" secondItem="jyt-B7-MFe" secondAttribute="leading" type="default" id="4Pz-RS-LQv"/>
+                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="top" secondItem="jyt-B7-MFe" secondAttribute="top" type="default" id="9rY-h7-nSA"/>
+                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="bottom" secondItem="jyt-B7-MFe" secondAttribute="bottom" type="default" id="AXg-5A-hiK"/>
+                                            <constraint firstItem="EMI-tY-its" firstAttribute="leading" secondItem="jyt-B7-MFe" secondAttribute="leading" constant="41" id="FLb-j9-RjV"/>
+                                            <constraint firstAttribute="bottom" secondItem="EMI-tY-its" secondAttribute="bottom" constant="5" id="t7W-Sn-BGM"/>
+                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="trailing" secondItem="jyt-B7-MFe" secondAttribute="trailing" type="default" id="tsb-iK-nG6"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="tIl-Rj-9l9" id="3zI-cb-etz"/>
+                                            <outlet property="selectedImageView" destination="EMI-tY-its" id="ojx-AG-iMk"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="DDM-r0-lBW" id="7IX-cS-X3H"/>
+                                    <outlet property="dataSource" destination="DDM-r0-lBW" id="Cpr-Er-HSH"/>
+                                    <outlet property="delegate" destination="DDM-r0-lBW" id="e3X-gg-Uba"/>
                                 </connections>
-                            </view>
+                            </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p7g-B6-zlc">
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -522,26 +560,25 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="p7g-B6-zlc" firstAttribute="leading" secondItem="Osd-dl-Yad" secondAttribute="leading" type="default" id="0Og-ja-hQk"/>
-                            <constraint firstItem="oI7-Dx-2Ei" firstAttribute="leading" secondItem="Osd-dl-Yad" secondAttribute="leading" type="default" id="1ds-pw-MiB"/>
-                            <constraint firstItem="oI7-Dx-2Ei" firstAttribute="trailing" secondItem="Osd-dl-Yad" secondAttribute="trailing" type="default" id="5al-Li-dgL"/>
                             <constraint firstItem="bAH-W7-9Hp" firstAttribute="top" secondItem="Osd-dl-Yad" secondAttribute="top" constant="291" id="GIh-jL-2so"/>
-                            <constraint firstItem="p7g-B6-zlc" firstAttribute="top" secondItem="oI7-Dx-2Ei" secondAttribute="top" type="default" id="JOI-i5-9Xv"/>
+                            <constraint firstItem="hes-Mk-8Kc" firstAttribute="top" secondItem="SvF-1q-T6G" secondAttribute="bottom" type="default" id="Gb9-Wu-oqu"/>
+                            <constraint firstItem="hes-Mk-8Kc" firstAttribute="bottom" secondItem="Osd-dl-Yad" secondAttribute="bottom" type="default" id="NpV-3Z-Ows"/>
+                            <constraint firstItem="hes-Mk-8Kc" firstAttribute="leading" secondItem="Osd-dl-Yad" secondAttribute="leading" type="default" id="Oj1-K7-Ieg"/>
                             <constraint firstItem="SGW-Ki-leZ" firstAttribute="leading" secondItem="Osd-dl-Yad" secondAttribute="leading" type="default" id="PK5-gd-cWi"/>
                             <constraint firstItem="SGW-Ki-leZ" firstAttribute="trailing" secondItem="Osd-dl-Yad" secondAttribute="trailing" type="default" id="Ryg-oQ-JBQ"/>
+                            <constraint firstItem="hes-Mk-8Kc" firstAttribute="top" secondItem="p7g-B6-zlc" secondAttribute="top" type="default" id="TpC-Eg-wYw"/>
                             <constraint firstItem="SGW-Ki-leZ" firstAttribute="top" secondItem="Osd-dl-Yad" secondAttribute="top" type="default" id="Zji-RC-hla"/>
+                            <constraint firstItem="hes-Mk-8Kc" firstAttribute="trailing" secondItem="Osd-dl-Yad" secondAttribute="trailing" type="default" id="aaN-Vm-g0t"/>
                             <constraint firstItem="p7g-B6-zlc" firstAttribute="bottom" secondItem="Osd-dl-Yad" secondAttribute="bottom" type="default" id="dNR-GW-9x6"/>
-                            <constraint firstItem="oI7-Dx-2Ei" firstAttribute="top" secondItem="SvF-1q-T6G" secondAttribute="bottom" type="default" id="eJV-C0-ZsX"/>
                             <constraint firstItem="SvF-1q-T6G" firstAttribute="trailing" secondItem="Osd-dl-Yad" secondAttribute="trailing" type="default" id="gWP-9f-kf9"/>
                             <constraint firstItem="SvF-1q-T6G" firstAttribute="leading" secondItem="Osd-dl-Yad" secondAttribute="leading" type="default" id="gYP-gH-nNz"/>
                             <constraint firstItem="p7g-B6-zlc" firstAttribute="trailing" secondItem="Osd-dl-Yad" secondAttribute="trailing" type="default" id="hcl-N8-uO2"/>
                             <constraint firstItem="SvF-1q-T6G" firstAttribute="top" secondItem="SGW-Ki-leZ" secondAttribute="bottom" type="default" id="mm7-2o-VDB"/>
-                            <constraint firstItem="oI7-Dx-2Ei" firstAttribute="bottom" secondItem="Osd-dl-Yad" secondAttribute="bottom" type="default" id="moB-f8-2qh"/>
                             <constraint firstItem="bAH-W7-9Hp" firstAttribute="centerX" secondItem="SvF-1q-T6G" secondAttribute="centerX" type="default" id="y1g-yp-CTU"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="bAH-W7-9Hp" id="qv7-gp-uRL"/>
-                        <outlet property="gridView" destination="oI7-Dx-2Ei" id="SL6-vp-USv"/>
                         <outlet property="overlayView" destination="p7g-B6-zlc" id="RB3-xG-Ofo"/>
                         <outlet property="searchBar" destination="SvF-1q-T6G" id="aih-4s-1Oj"/>
                     </connections>
@@ -789,22 +826,16 @@
                 <relationship kind="action" name="cancel:"/>
                 <relationship kind="action" name="save:"/>
                 <relationship kind="outlet" name="activityIndicator" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="gridView" candidateClass="GridView"/>
+                <relationship kind="outlet" name="gridView" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="overlayView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="searchBar" candidateClass="UISearchBar"/>
-            </relationships>
-        </class>
-        <class className="GridView" superclassName="UIScrollView">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/GridView.h"/>
-            <relationships>
-                <relationship kind="outlet" name="dataSource"/>
             </relationships>
         </class>
         <class className="ImageGridViewCell" superclassName="UICollectionViewCell">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageGridViewCell.h"/>
             <relationships>
                 <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="selectedIndicator" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="selectedImageView" candidateClass="UIImageView"/>
             </relationships>
         </class>
         <class className="MainSlideShowViewController" superclassName="SlideShowViewController">

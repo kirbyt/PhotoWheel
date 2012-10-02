@@ -20,7 +20,6 @@
 		682BC4BB1434DE4600286C9D /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4B41434DE4600286C9D /* WheelView.m */; };
 		682BC4C71434F0C800286C9D /* ClearToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4C61434F0C700286C9D /* ClearToolbar.m */; };
 		682BC4C91434F28200286C9D /* PhotoWheelViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682BC4C81434F28100286C9D /* PhotoWheelViewCell.xib */; };
-		682BC4D014351A9100286C9D /* GridView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4CF14351A9000286C9D /* GridView.m */; };
 		682BC4D314351EFF00286C9D /* ImageGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4D214351EFF00286C9D /* ImageGridViewCell.m */; };
 		68305967153E608B00CE7799 /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6830593B153E608B00CE7799 /* addphoto.png */; };
 		6830596B153E608B00CE7799 /* background-landscape-right-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 6830593F153E608B00CE7799 /* background-landscape-right-grooved.png */; };
@@ -115,8 +114,6 @@
 		682BC4C51434F0C700286C9D /* ClearToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClearToolbar.h; sourceTree = "<group>"; };
 		682BC4C61434F0C700286C9D /* ClearToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClearToolbar.m; sourceTree = "<group>"; };
 		682BC4C81434F28100286C9D /* PhotoWheelViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWheelViewCell.xib; sourceTree = "<group>"; };
-		682BC4CE14351A9000286C9D /* GridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridView.h; sourceTree = "<group>"; };
-		682BC4CF14351A9000286C9D /* GridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GridView.m; sourceTree = "<group>"; };
 		682BC4D114351EFF00286C9D /* ImageGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageGridViewCell.h; sourceTree = "<group>"; };
 		682BC4D214351EFF00286C9D /* ImageGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageGridViewCell.m; sourceTree = "<group>"; };
 		6830593B153E608B00CE7799 /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
@@ -374,8 +371,6 @@
 				682BC4B41434DE4600286C9D /* WheelView.m */,
 				682BC4C51434F0C700286C9D /* ClearToolbar.h */,
 				682BC4C61434F0C700286C9D /* ClearToolbar.m */,
-				682BC4CE14351A9000286C9D /* GridView.h */,
-				682BC4CF14351A9000286C9D /* GridView.m */,
 				682BC4D114351EFF00286C9D /* ImageGridViewCell.h */,
 				682BC4D214351EFF00286C9D /* ImageGridViewCell.m */,
 				68C8C6BE1437725C00480F4E /* PhotoBrowserViewController.h */,
@@ -533,7 +528,6 @@
 				682BC4BA1434DE4600286C9D /* SpinGestureRecognizer.m in Sources */,
 				682BC4BB1434DE4600286C9D /* WheelView.m in Sources */,
 				682BC4C71434F0C800286C9D /* ClearToolbar.m in Sources */,
-				682BC4D014351A9100286C9D /* GridView.m in Sources */,
 				682BC4D314351EFF00286C9D /* ImageGridViewCell.m in Sources */,
 				68C8C6C01437725C00480F4E /* PhotoBrowserViewController.m in Sources */,
 				68C8C6C414377AF900480F4E /* PhotoBrowserPhotoView.m in Sources */,

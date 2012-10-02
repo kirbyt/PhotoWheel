@@ -11,6 +11,6 @@
 @interface ImageGridViewCell : UICollectionViewCell
 
 @property (nonatomic, weak) IBOutlet UIImageView *imageView;
-@property (nonatomic, weak) IBOutlet UIImageView *selectedIndicator;
+@property (nonatomic, weak) IBOutlet UIImageView *selectedImageView;
 
 @end

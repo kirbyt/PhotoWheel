@@ -10,4 +10,17 @@
 
 @implementation ImageGridViewCell
 
+- (void)prepareForReuse
+{
+   [self setImageView:nil];
+   [[self selectedImageView] setImage:[UIImage imageNamed:@"addphoto.png"]];
+   [[self selectedImageView] setHidden:YES];
+}
+
+- (void)setSelected:(BOOL)selected
+{
+   [super setSelected:selected];
+   [[self selectedImageView] setHidden:!selected];
+}
+
 @end

@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GridView.h"
 
-@interface FlickrViewController : UIViewController <GridViewDataSource, 
-UISearchBarDelegate>
+@interface FlickrViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
 
-@property (nonatomic, strong) IBOutlet GridView *gridView;
-@property (nonatomic, strong) IBOutlet UIView *overlayView;
-@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
-@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, weak) IBOutlet UICollectionView *gridView;
+@property (nonatomic, weak) IBOutlet UIView *overlayView;
+@property (nonatomic, weak) IBOutlet UISearchBar *searchBar;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSManagedObjectID *objectID;
 
