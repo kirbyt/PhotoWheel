@@ -6,14 +6,11 @@
 //  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
 //
 
-#import "GridView.h"
+#import <UIKit/UIKit.h>
 
-@interface ImageGridViewCell : GridViewCell
+@interface ImageGridViewCell : UICollectionViewCell
 
-@property (nonatomic, strong, readonly) UIImageView *imageView;
-@property (nonatomic, strong, readonly) UIImageView *selectedIndicator;
-
-+ (ImageGridViewCell *)imageGridViewCellWithSize:(CGSize)size;
-- (id)initWithSize:(CGSize)size;
+@property (nonatomic, weak) IBOutlet UIImageView *imageView;
+@property (nonatomic, weak) IBOutlet UIImageView *selectedIndicator;
 
 @end

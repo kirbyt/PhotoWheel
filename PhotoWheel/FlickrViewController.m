@@ -250,58 +250,58 @@
 
 #pragma mark - GridViewDataSource methods
 
-- (NSInteger)gridViewNumberOfCells:(GridView *)gridView
-{
-   NSInteger count = [[self flickrPhotos] count];
-   return count;
-}
-
-- (GridViewCell *)gridView:(GridView *)gridView cellAtIndex:(NSInteger)index
-{
-   ImageGridViewCell *cell = [gridView dequeueReusableCell];
-   if (cell == nil) {
-      cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(75, 75)];
-      [[cell selectedIndicator] setImage:
-       [UIImage imageNamed:@"addphoto.png"]];
-   }
-   
-   ImageDownloaderCompletionBlock completion = 
-      ^(UIImage *image, NSError *error) {
-      if (image) {
-         [[cell imageView] setImage:image];
-      } else {
-         DLog(@"Image download error: %@\n%@", [error localizedDescription], [error userInfo]);
-      }
-   };
-   
-   ImageDownloader *downloader = [[self downloaders] objectAtIndex:index];
-   UIImage *image = [downloader image];
-   if (image) {
-      [[cell imageView] setImage:image];
-   } else {
-      NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:index];
-      NSURL *URL = [NSURL URLWithString:[flickrPhoto objectForKey:@"url_sq"]];
-      [downloader downloadImageAtURL:URL completion:completion];
-   }
-   
-   return cell;
-}
-
-- (CGSize)gridViewCellSize:(GridView *)gridView
-{
-   return CGSizeMake(75, 75);
-}
-
-- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
-{
-   id cell = [gridView cellAtIndex:index];
-   [cell setSelected:YES];
-}
-
-- (void)gridView:(GridView *)gridView didDeselectCellAtIndex:(NSInteger)index
-{
-   id cell = [gridView cellAtIndex:index];
-   [cell setSelected:NO];
-}
+//- (NSInteger)gridViewNumberOfCells:(GridView *)gridView
+//{
+//   NSInteger count = [[self flickrPhotos] count];
+//   return count;
+//}
+//
+//- (GridViewCell *)gridView:(GridView *)gridView cellAtIndex:(NSInteger)index
+//{
+//   ImageGridViewCell *cell = [gridView dequeueReusableCell];
+//   if (cell == nil) {
+//      cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(75, 75)];
+//      [[cell selectedIndicator] setImage:
+//       [UIImage imageNamed:@"addphoto.png"]];
+//   }
+//   
+//   ImageDownloaderCompletionBlock completion = 
+//      ^(UIImage *image, NSError *error) {
+//      if (image) {
+//         [[cell imageView] setImage:image];
+//      } else {
+//         DLog(@"Image download error: %@\n%@", [error localizedDescription], [error userInfo]);
+//      }
+//   };
+//   
+//   ImageDownloader *downloader = [[self downloaders] objectAtIndex:index];
+//   UIImage *image = [downloader image];
+//   if (image) {
+//      [[cell imageView] setImage:image];
+//   } else {
+//      NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:index];
+//      NSURL *URL = [NSURL URLWithString:[flickrPhoto objectForKey:@"url_sq"]];
+//      [downloader downloadImageAtURL:URL completion:completion];
+//   }
+//   
+//   return cell;
+//}
+//
+//- (CGSize)gridViewCellSize:(GridView *)gridView
+//{
+//   return CGSizeMake(75, 75);
+//}
+//
+//- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
+//{
+//   id cell = [gridView cellAtIndex:index];
+//   [cell setSelected:YES];
+//}
+//
+//- (void)gridView:(GridView *)gridView didDeselectCellAtIndex:(NSInteger)index
+//{
+//   id cell = [gridView cellAtIndex:index];
+//   [cell setSelected:NO];
+//}
 
 @end

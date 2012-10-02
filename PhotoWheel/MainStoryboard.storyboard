@@ -625,26 +625,58 @@
                                     </barButtonItem>
                                 </items>
                             </toolbar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rcP-0A-Mjr" customClass="GridView">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="iuv-em-yfF">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="687" id="6ZC-jy-5U5"/>
+                                    <constraint firstAttribute="height" constant="595" id="h7t-Lx-rJW"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Hhe-Hr-pdd">
+                                    <size key="itemSize" width="100" height="100"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="10" minY="10" maxX="10" maxY="10"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageGridViewCell" id="R5t-tn-pka" customClass="ImageGridViewCell">
+                                        <rect key="frame" x="10" y="10" width="100" height="100"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FRF-Ca-QDq"/>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="FRF-Ca-QDq" firstAttribute="top" secondItem="R5t-tn-pka" secondAttribute="top" type="default" id="DBh-7S-4HD"/>
+                                            <constraint firstItem="FRF-Ca-QDq" firstAttribute="bottom" secondItem="R5t-tn-pka" secondAttribute="bottom" type="default" id="Mpt-2C-gGc"/>
+                                            <constraint firstItem="FRF-Ca-QDq" firstAttribute="leading" secondItem="R5t-tn-pka" secondAttribute="leading" type="default" id="adG-KL-V2M"/>
+                                            <constraint firstItem="FRF-Ca-QDq" firstAttribute="trailing" secondItem="R5t-tn-pka" secondAttribute="trailing" type="default" id="woD-nG-VF2"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="imageView" destination="FRF-Ca-QDq" id="SoV-5g-0Hd"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
                                 <connections>
-                                    <outlet property="dataSource" destination="42" id="Cvp-hJ-JGN"/>
+                                    <outlet property="dataSource" destination="42" id="yia-vT-KVd"/>
+                                    <outlet property="delegate" destination="42" id="bRf-wT-ZpJ"/>
                                 </connections>
-                            </view>
+                            </collectionView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="stack-viewer-shadow.png" translatesAutoresizingMaskIntoConstraints="NO" id="XVS-eo-L2R"/>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="XVS-eo-L2R" firstAttribute="top" secondItem="43" secondAttribute="top" constant="51" id="Ezg-rn-ImN"/>
-                            <constraint firstItem="rcP-0A-Mjr" firstAttribute="leading" secondItem="XVS-eo-L2R" secondAttribute="leading" type="default" id="FVR-GN-8qt"/>
-                            <constraint firstAttribute="bottom" secondItem="rcP-0A-Mjr" secondAttribute="bottom" constant="69" id="Njg-xT-npF"/>
-                            <constraint firstItem="rcP-0A-Mjr" firstAttribute="top" secondItem="XVS-eo-L2R" secondAttribute="top" type="default" id="TFs-p6-Ehe"/>
+                            <constraint firstItem="52" firstAttribute="centerX" secondItem="BYg-8L-4mf" secondAttribute="centerX" type="default" id="GbP-dB-Rme"/>
+                            <constraint firstItem="iuv-em-yfF" firstAttribute="leading" secondItem="43" secondAttribute="leading" constant="14" id="ZOh-lx-GYF"/>
+                            <constraint firstItem="iuv-em-yfF" firstAttribute="top" secondItem="XVS-eo-L2R" secondAttribute="top" type="default" id="fvT-H7-cNF"/>
+                            <constraint firstItem="iuv-em-yfF" firstAttribute="top" secondItem="43" secondAttribute="top" constant="51" id="kDL-Lj-lmt"/>
                             <constraint firstItem="BYg-8L-4mf" firstAttribute="trailing" secondItem="XVS-eo-L2R" secondAttribute="trailing" type="default" id="lJj-Fe-QwR"/>
                             <constraint firstItem="BYg-8L-4mf" firstAttribute="leading" secondItem="XVS-eo-L2R" secondAttribute="leading" type="default" id="nwR-5m-KGE"/>
                             <constraint firstItem="52" firstAttribute="leading" secondItem="43" secondAttribute="leading" type="default" id="phe-yl-d7r"/>
-                            <constraint firstItem="BYg-8L-4mf" firstAttribute="centerX" secondItem="52" secondAttribute="centerX" type="default" id="s4E-Ll-QYq"/>
                             <constraint firstItem="BYg-8L-4mf" firstAttribute="top" secondItem="43" secondAttribute="top" constant="6" id="uDn-jZ-rD8"/>
-                            <constraint firstItem="XVS-eo-L2R" firstAttribute="trailing" secondItem="rcP-0A-Mjr" secondAttribute="trailing" type="default" id="yI0-Sn-r6f"/>
                             <constraint firstItem="52" firstAttribute="top" secondItem="43" secondAttribute="top" type="default" id="ybO-Sa-WWX"/>
                         </constraints>
                     </view>
@@ -652,7 +684,7 @@
                     <connections>
                         <outlet property="addButton" destination="Jgk-Bz-Yta" id="uEL-pt-ETK"/>
                         <outlet property="backgroundImageView" destination="52" id="Xhh-xB-KKZ"/>
-                        <outlet property="gridView" destination="rcP-0A-Mjr" id="dw3-ab-pQm"/>
+                        <outlet property="gridView" destination="iuv-em-yfF" id="0Sf-hm-8tR"/>
                         <outlet property="shadowImageView" destination="XVS-eo-L2R" id="abC-pK-ZHg"/>
                         <outlet property="textField" destination="yTf-IH-CSS" id="XGl-3W-dCp"/>
                         <outlet property="toolbar" destination="BYg-8L-4mf" id="nK3-xS-Aui"/>
@@ -768,6 +800,13 @@
                 <relationship kind="outlet" name="dataSource"/>
             </relationships>
         </class>
+        <class className="ImageGridViewCell" superclassName="UICollectionViewCell">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/ImageGridViewCell.h"/>
+            <relationships>
+                <relationship kind="outlet" name="imageView" candidateClass="UIImageView"/>
+                <relationship kind="outlet" name="selectedIndicator" candidateClass="UIImageView"/>
+            </relationships>
+        </class>
         <class className="MainSlideShowViewController" superclassName="SlideShowViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainSlideShowViewController.h"/>
         </class>
@@ -802,7 +841,7 @@
                 <relationship kind="action" name="showActionMenu:"/>
                 <relationship kind="outlet" name="addButton" candidateClass="UIBarButtonItem"/>
                 <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="gridView" candidateClass="GridView"/>
+                <relationship kind="outlet" name="gridView" candidateClass="UICollectionView"/>
                 <relationship kind="outlet" name="shadowImageView" candidateClass="UIImageView"/>
                 <relationship kind="outlet" name="textField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="toolbar" candidateClass="UIToolbar"/>
@@ -810,6 +849,18 @@
         </class>
         <class className="SlideShowViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/SlideShowViewController.h"/>
+        </class>
+        <class className="UICollectionReusableView" superclassName="UIView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionReusableView.h"/>
+        </class>
+        <class className="UICollectionViewCell" superclassName="UICollectionReusableView">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewCell.h"/>
+        </class>
+        <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
         <class className="WheelView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WheelView.h"/>

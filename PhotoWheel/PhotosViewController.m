@@ -11,6 +11,8 @@
 #import "Photo.h"
 #import "ImageGridViewCell.h"
 #import "FlickrViewController.h"
+#import "ImageGridViewCell.h"
+#import "AppDelegate.h"
 
 @interface PhotosViewController ()
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
@@ -33,6 +35,11 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
+   
+   AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+   NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+   [self setManagedObjectContext:managedObjectContext];
+
    [self reload];
    
    [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification object:[[UIApplication sharedApplication] delegate] queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *__strong note) {
@@ -67,7 +74,9 @@
 - (void)reload
 {
    if ([self managedObjectContext] && [self objectID]) {
-      self.photoAlbum = (PhotoAlbum *)[self.managedObjectContext objectWithID:[self objectID]];
+      NSManagedObjectContext *context = [self managedObjectContext];
+      PhotoAlbum *album = (PhotoAlbum *)[context objectWithID:[self objectID]];
+      [self setPhotoAlbum:album];
       [[self toolbar] setHidden:NO];
       [[self textField] setText:[self.photoAlbum name]];
    } else {
@@ -308,36 +317,59 @@
    [[self gridView] reloadData];
 }
 
-#pragma mark GridViewDataSource methods
+#pragma mark - UICollectionViewDataSource and UICollectionViewDelegate methods
 
-- (NSInteger)gridViewNumberOfCells:(GridView *)gridView
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
    NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
    return count;
 }
 
-- (GridViewCell *)gridView:(GridView *)gridView cellAtIndex:(NSInteger)index
+// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   ImageGridViewCell *cell = [gridView dequeueReusableCell];
-   if (cell == nil) {
-      cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(100, 100)];
-   }
-   
-   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   ImageGridViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageGridViewCell" forIndexPath:indexPath];
    Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
    [[cell imageView] setImage:[photo smallImage]];
    
    return cell;
 }
-- (CGSize)gridViewCellSize:(GridView *)gridView
-{
-   return CGSizeMake(100, 100);
-}
 
-- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
    [self performSegueWithIdentifier:@"PushPhotoBrowser" sender:self];
 }
+
+#pragma mark GridViewDataSource methods
+
+//- (NSInteger)gridViewNumberOfCells:(GridView *)gridView
+//{
+//   NSInteger count = [[[[self fetchedResultsController] sections] objectAtIndex:0] numberOfObjects];
+//   return count;
+//}
+//
+//- (GridViewCell *)gridView:(GridView *)gridView cellAtIndex:(NSInteger)index
+//{
+//   ImageGridViewCell *cell = [gridView dequeueReusableCell];
+//   if (cell == nil) {
+//      cell = [ImageGridViewCell imageGridViewCellWithSize:CGSizeMake(100, 100)];
+//   }
+//   
+//   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+//   Photo *photo = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+//   [[cell imageView] setImage:[photo smallImage]];
+//   
+//   return cell;
+//}
+//- (CGSize)gridViewCellSize:(GridView *)gridView
+//{
+//   return CGSizeMake(100, 100);
+//}
+//
+//- (void)gridView:(GridView *)gridView didSelectCellAtIndex:(NSInteger)index
+//{
+//   [self performSegueWithIdentifier:@"PushPhotoBrowser" sender:self];
+//}
 
 #pragma mark - Segue
 
@@ -346,8 +378,16 @@
    if ([[segue destinationViewController] isKindOfClass:[PhotoBrowserViewController class]]) {
       PhotoBrowserViewController *destinationViewController = [segue destinationViewController];
       [destinationViewController setDelegate:self];
-      NSInteger index = [[self gridView] indexForSelectedCell];
+
+      NSInteger index = 0;
+      NSArray *selectedIndexPath = [[self gridView] indexPathsForSelectedItems];
+      if ([selectedIndexPath count] > 0) {
+         // Multi-select is disabled, so there will only be one selected item.
+         NSIndexPath *indexPath = [selectedIndexPath objectAtIndex:0];
+         index = [indexPath item];
+      }
       [destinationViewController setStartAtIndex:index];
+      
    } else if ([[segue destinationViewController] isKindOfClass:[FlickrViewController class]]) {
       [[segue destinationViewController] setManagedObjectContext:[self managedObjectContext]];
       [[segue destinationViewController] setObjectID:[self objectID]];

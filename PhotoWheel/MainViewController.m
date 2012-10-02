@@ -41,11 +41,16 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+   AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+   NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
+   
    if ([[segue destinationViewController] isKindOfClass:[AlbumsViewController class]]) {
-      AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-      NSManagedObjectContext *managedObjectContext = [appDelegate managedObjectContext];
-
       AlbumsViewController *destinationViewController = [segue destinationViewController];
+      [destinationViewController setManagedObjectContext:managedObjectContext];
+   }
+   
+   if ([[segue destinationViewController] isKindOfClass:[PhotosViewController class]]) {
+      PhotosViewController *destinationViewController = [segue destinationViewController];
       [destinationViewController setManagedObjectContext:managedObjectContext];
    }
 }
