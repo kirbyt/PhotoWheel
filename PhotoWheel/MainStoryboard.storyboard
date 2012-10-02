@@ -509,7 +509,8 @@
                                 </connections>
                             </searchBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hes-Mk-8Kc">
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="7UE-Fm-dmo">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="7UE-Fm-dmo">
                                     <size key="itemSize" width="75" height="75"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -523,7 +524,12 @@
                                             <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIl-Rj-9l9"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tIl-Rj-9l9">
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="75" id="Axb-Ph-lif"/>
+                                                        <constraint firstAttribute="width" constant="75" id="RfO-Hq-Ba3"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EMI-tY-its">
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="29" id="314-eT-FZo"/>
@@ -534,12 +540,10 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="leading" secondItem="jyt-B7-MFe" secondAttribute="leading" type="default" id="4Pz-RS-LQv"/>
-                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="top" secondItem="jyt-B7-MFe" secondAttribute="top" type="default" id="9rY-h7-nSA"/>
-                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="bottom" secondItem="jyt-B7-MFe" secondAttribute="bottom" type="default" id="AXg-5A-hiK"/>
+                                            <constraint firstAttribute="bottom" secondItem="EMI-tY-its" secondAttribute="bottom" constant="4" id="5v1-6n-37R"/>
                                             <constraint firstItem="EMI-tY-its" firstAttribute="leading" secondItem="jyt-B7-MFe" secondAttribute="leading" constant="41" id="FLb-j9-RjV"/>
-                                            <constraint firstAttribute="bottom" secondItem="EMI-tY-its" secondAttribute="bottom" constant="5" id="t7W-Sn-BGM"/>
-                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="trailing" secondItem="jyt-B7-MFe" secondAttribute="trailing" type="default" id="tsb-iK-nG6"/>
+                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="leading" secondItem="jyt-B7-MFe" secondAttribute="leading" type="default" id="pAs-Ql-Ih6"/>
+                                            <constraint firstItem="tIl-Rj-9l9" firstAttribute="top" secondItem="jyt-B7-MFe" secondAttribute="top" type="default" id="trS-aU-lbm"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="imageView" destination="tIl-Rj-9l9" id="3zI-cb-etz"/>
@@ -579,6 +583,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="bAH-W7-9Hp" id="qv7-gp-uRL"/>
+                        <outlet property="gridView" destination="hes-Mk-8Kc" id="KOv-yE-UVN"/>
                         <outlet property="overlayView" destination="p7g-B6-zlc" id="RB3-xG-Ofo"/>
                         <outlet property="searchBar" destination="SvF-1q-T6G" id="aih-4s-1Oj"/>
                     </connections>
