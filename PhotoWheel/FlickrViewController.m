@@ -270,6 +270,10 @@
       NSURL *URL = [NSURL URLWithString:[flickrPhoto objectForKey:@"url_sq"]];
       [downloader downloadImageAtURL:URL completion:completion];
    }
+
+   if ([cell isSelected]) {
+      [[cell selectedImageView] setImage:[UIImage imageNamed:@"addphoto.png"]];
+   }
    
    return cell;
 }
@@ -277,13 +281,13 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
    ImageGridViewCell *cell = (ImageGridViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-   [cell setSelected:YES];
+   [[cell selectedImageView] setImage:[UIImage imageNamed:@"addphoto.png"]];
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
    ImageGridViewCell *cell = (ImageGridViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-   [cell setSelected:NO];
+   [[cell selectedImageView] setImage:nil];
 }
 
 @end
