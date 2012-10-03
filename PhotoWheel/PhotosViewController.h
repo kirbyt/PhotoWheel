@@ -18,8 +18,6 @@
 @property (nonatomic, weak) IBOutlet UITextField *textField;
 @property (nonatomic, weak) IBOutlet UIBarButtonItem *addButton;
 @property (nonatomic, weak) IBOutlet UICollectionView *gridView;
-@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
-@property (nonatomic, weak) IBOutlet UIImageView *shadowImageView;
 
 - (void)reload;
 - (IBAction)showActionMenu:(id)sender;

@@ -12,8 +12,5 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
 @property (nonatomic, weak) IBOutlet UIButton *infoButton;
-@property (nonatomic, weak) IBOutlet UIView *photosContainerView;
-@property (nonatomic, weak) IBOutlet UIView *albumsContainerView;
-@property (nonatomic, assign) BOOL skipRotation;
 
 @end

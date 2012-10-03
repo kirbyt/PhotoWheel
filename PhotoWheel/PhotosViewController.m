@@ -47,16 +47,6 @@
    }];
 }
 
-- (void)viewDidUnload
-{
-   [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
-   
-   [self setToolbar:nil];
-   [self setTextField:nil];
-   [self setAddButton:nil];
-   [self setGridView:nil];
-   [super viewDidUnload];
-}
 - (UIImagePickerController *)imagePickerController
 {
    if (_imagePickerController) {
@@ -442,37 +432,6 @@
    }
    
    return rect;
-}
-
-#pragma mark - Rotation support
-
-- (void)layoutForLandscape
-{
-   [[self view] setFrame:CGRectMake(0, 0, 738, 719)];
-   [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
-   [[self backgroundImageView] setFrame:[[self view] bounds]];
-   [[self shadowImageView] setFrame:CGRectMake(9, 51, 678, 8)];
-   [[self gridView] setFrame:CGRectMake(20, 52, 654, 632)];
-   [[self toolbar] setFrame:CGRectMake(9, 6, 678, 44)];
-}
-
-- (void)layoutForPortrait
-{
-   [[self view] setFrame:CGRectMake(0, 0, 716, 717)];
-   [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
-   [[self backgroundImageView] setFrame:[[self view] bounds]];
-   [[self shadowImageView] setFrame:CGRectMake(9, 51, 698, 8)];
-   [[self gridView] setFrame:CGRectMake(20, 51, 678, 597)];
-   [[self toolbar] setFrame:CGRectMake(9, 6, 698, 44)];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-      [self layoutForLandscape];
-   } else {
-      [self layoutForPortrait];
-   }
 }
 
 #pragma mark - Email and SendEmailControllerDelegate methods

@@ -71,6 +71,8 @@
 		689199B013F5B6530037CBAC /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199AF13F5B6530037CBAC /* UIView+PWCategory.m */; };
 		689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689199B113F5BFFA0037CBAC /* CoreGraphics.framework */; };
 		689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199B413F5C8320037CBAC /* CustomNavigationController.m */; };
+		68AAEADE161C87810043DEB1 /* MainViewController_Landscape.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AAEADB161C87810043DEB1 /* MainViewController_Landscape.m */; };
+		68AAEADF161C87810043DEB1 /* MainViewController_Portrait.m in Sources */ = {isa = PBXBuildFile; fileRef = 68AAEADD161C87810043DEB1 /* MainViewController_Portrait.m */; };
 		68B7C445156975AD009371AB /* defaultPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B7C444156975AD009371AB /* defaultPhoto@2x.png */; };
 		68B7C448156975B6009371AB /* addphoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B7C447156975B6009371AB /* addphoto@2x.png */; };
 		68B7C44A15697808009371AB /* PhotoWheelAboutIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B7C44915697806009371AB /* PhotoWheelAboutIcon@2x.png */; };
@@ -180,6 +182,10 @@
 		689199B113F5BFFA0037CBAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		689199B313F5C8320037CBAC /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		689199B413F5C8320037CBAC /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		68AAEADA161C87810043DEB1 /* MainViewController_Landscape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController_Landscape.h; sourceTree = "<group>"; };
+		68AAEADB161C87810043DEB1 /* MainViewController_Landscape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController_Landscape.m; sourceTree = "<group>"; };
+		68AAEADC161C87810043DEB1 /* MainViewController_Portrait.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController_Portrait.h; sourceTree = "<group>"; };
+		68AAEADD161C87810043DEB1 /* MainViewController_Portrait.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController_Portrait.m; sourceTree = "<group>"; };
 		68B7C444156975AD009371AB /* defaultPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "defaultPhoto@2x.png"; sourceTree = "<group>"; };
 		68B7C447156975B6009371AB /* addphoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addphoto@2x.png"; sourceTree = "<group>"; };
 		68B7C44915697806009371AB /* PhotoWheelAboutIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoWheelAboutIcon@2x.png"; sourceTree = "<group>"; };
@@ -350,6 +356,10 @@
 				689199B413F5C8320037CBAC /* CustomNavigationController.m */,
 				68F5ED6A13F6CAF30006732C /* MainViewController.h */,
 				68F5ED6B13F6CAF30006732C /* MainViewController.m */,
+				68AAEADA161C87810043DEB1 /* MainViewController_Landscape.h */,
+				68AAEADB161C87810043DEB1 /* MainViewController_Landscape.m */,
+				68AAEADC161C87810043DEB1 /* MainViewController_Portrait.h */,
+				68AAEADD161C87810043DEB1 /* MainViewController_Portrait.m */,
 				68F5ED6E13F6CB020006732C /* PhotosViewController.h */,
 				68F5ED6F13F6CB020006732C /* PhotosViewController.m */,
 				68F5ED7113F6CB100006732C /* AlbumsViewController.h */,
@@ -538,6 +548,8 @@
 				681DB3D01453334600DF0849 /* SlideShowViewController.m in Sources */,
 				681DB3D41453335D00DF0849 /* MainSlideShowViewController.m in Sources */,
 				683199FB161A9DAF00A00C57 /* AlbumsViewController.m in Sources */,
+				68AAEADE161C87810043DEB1 /* MainViewController_Landscape.m in Sources */,
+				68AAEADF161C87810043DEB1 /* MainViewController_Portrait.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
