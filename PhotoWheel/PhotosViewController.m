@@ -448,7 +448,7 @@
 
 - (void)layoutForLandscape
 {
-   [[self view] setFrame:CGRectMake(18, 20, 738, 719)];
+   [[self view] setFrame:CGRectMake(0, 0, 738, 719)];
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-landscape-right.png"]];
    [[self backgroundImageView] setFrame:[[self view] bounds]];
    [[self shadowImageView] setFrame:CGRectMake(9, 51, 678, 8)];
@@ -458,7 +458,7 @@
 
 - (void)layoutForPortrait
 {
-   [[self view] setFrame:CGRectMake(26, 18, 716, 717)];
+   [[self view] setFrame:CGRectMake(0, 0, 716, 717)];
    [[self backgroundImageView] setImage:[UIImage imageNamed:@"stack-viewer-bg-portrait.png"]];
    [[self backgroundImageView] setFrame:[[self view] bounds]];
    [[self shadowImageView] setFrame:CGRectMake(9, 51, 698, 8)];

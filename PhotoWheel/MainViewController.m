@@ -57,11 +57,6 @@
 
 #pragma mark - Rotation support
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-   return YES;
-}
-
 - (void)layoutForLandscape
 {
    UIImage *backgroundImage = [UIImage imageNamed:@"background-landscape-right-grooved.png"];
@@ -70,6 +65,9 @@
    CGRect frame = [[self infoButton] frame];
    frame.origin = CGPointMake(981, 712);
    [[self infoButton] setFrame:frame];
+   
+   [[self photosContainerView] setFrame:CGRectMake(18, 20, 738, 719)];
+   [[self albumsContainerView] setFrame:CGRectMake(700, 100, 551, 550)];
 }
 
 - (void)layoutForPortrait
@@ -80,6 +78,9 @@
    CGRect frame = [[self infoButton] frame];
    frame.origin = CGPointMake(723, 960);
    [[self infoButton] setFrame:frame];
+
+   [[self photosContainerView] setFrame:CGRectMake(26, 18, 716, 717)];
+   [[self albumsContainerView] setFrame:CGRectMake(109, 680, 551, 550)];
 }
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

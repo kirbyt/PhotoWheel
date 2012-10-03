@@ -40,13 +40,11 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-   CGRect newFrame;
+   CGRect newFrame = CGRectMake(0, 0, 551, 550);
    CGFloat angleOffset;
    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-      newFrame = CGRectMake(700, 100, 551, 550);
       angleOffset = 270.0;
    } else {
-      newFrame = CGRectMake(109, 680, 551, 550);
       angleOffset = 0.0;
    }
    [[self view] setFrame:newFrame];

@@ -29,11 +29,6 @@
    [[self version] setText:fullVersion];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-   return YES;
-}
-
 - (void)viewDidUnload 
 {
     [self setVersion:nil];
