@@ -40,14 +40,12 @@
 
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-   CGRect newFrame = CGRectMake(0, 0, 551, 550);
    CGFloat angleOffset;
    if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
       angleOffset = 270.0;
    } else {
       angleOffset = 0.0;
    }
-   [[self view] setFrame:newFrame];
    [[self wheelView] setAngleOffset:angleOffset];
 }
 
