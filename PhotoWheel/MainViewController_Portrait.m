@@ -14,6 +14,11 @@
 
 @implementation MainViewController_Portrait
 
+- (void)dealloc
+{
+   [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
+}
+
 - (void)awakeFromNib
 {
    [self setShowingLandscapeView:NO];
@@ -38,4 +43,5 @@
    }
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 @end
