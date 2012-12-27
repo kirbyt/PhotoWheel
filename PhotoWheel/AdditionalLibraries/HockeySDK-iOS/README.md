@@ -12,6 +12,7 @@ This document contains the following sections:
 - [Submit the UDID](#udid)
 - [Mac Desktop Uploader](#mac)
 - [Xcode Documentation](#documentation)
+- [Changelog](#changelog)
 
 <a id="requirements"></a> 
 ## Requirements
@@ -154,7 +155,49 @@ This documentation provides integrated help in Xcode for all public APIs and a s
 
 3. Copy the content into ~`/Library/Developer/Shared/Documentation/DocSet`
 
+<a id="changelog"></a> 
 ## Changelog
+
+### Version 2.5.5
+
+- General:
+
+    - [BUGFIX] Fix some new compiler warnings
+
+- Crash Reporting:
+
+    - [NEW] Add anonymous device ID to crash reports
+    - [BUGFIX] Move calculation of time interval between startup and crash further up in the code, so delegates can use this information e.g. to add it into a log file
+    - [BUGFIX] Call delegate also if a crash was detected but could not be read (if handling crashes on startup is implemented)
+    - [BUGFIX] Format timestamp in crash report to be always UTC in en_US locale
+    - [BUGFIX] Make sure crash reports incident identifier and key don't have special [] chars and some value
+
+- Updating:
+
+    - [BUGFIX] Fix a problem showing the update UI animated if there TTNavigator class is present even though not being used
+
+### Version 2.5.4
+
+- General:
+
+    - Declared as final release, since everything in 2.5.4b3 is working as expected
+
+### Version 2.5.4b3
+
+- General:
+
+    - [NEW] Atlassian JMC support disabled (Use subproject integration if you want it)
+
+### Version 2.5.4b2
+
+- Crash Reporting:
+
+    - [UPDATE] Migrate pre v2.5 auto send user setting
+    - [BUGFIX] The alert option 'Auto Send' did not persist correctly
+
+- Updating:
+
+    - [BUGFIX] Authorization option did not persist correctly and caused authorization to re-appear on every cold app start
 
 ### Version 2.5.4b1
 

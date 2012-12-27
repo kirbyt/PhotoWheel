@@ -7,8 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import <HockeySDK/HockeySDK.h>
 
-@interface AppDelegate ()
+@interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate>
 @property (nonatomic, strong) NSMutableArray *iCloudNotificationQueue;
 @property (nonatomic, assign, getter=isPersistentStoreReady) BOOL persistentStoreReady;
 @end
