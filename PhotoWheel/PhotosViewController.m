@@ -30,6 +30,9 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *toolbarWidthConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *collectionViewVerticalSpacingConstraint;
 
+@property (nonatomic, strong) UIActionSheet *addPhotoActionSheet;
+@property (nonatomic, strong) UIActionSheet *actionActionSheet;
+
 @property (nonatomic, assign, readwrite) NSInteger selectedPhotoIndex;
 @property (nonatomic, assign, readwrite) CGRect selectedPhotoFrame;
 
@@ -133,6 +136,29 @@
    return _imagePickerController;
 }
 
+- (BOOL)dismissPopovers:(id)popover
+{
+   BOOL didClose = NO;
+   if ([self imagePickerPopoverController]) {
+      if (popover == [self imagePickerPopoverController]) didClose = YES;
+      [[self imagePickerPopoverController] dismissPopoverAnimated:YES];
+      [self setImagePickerController:nil];
+   }
+   
+   if ([self actionActionSheet]) {
+      if (popover == [self actionActionSheet]) didClose = YES;
+      [[self actionActionSheet] dismissWithClickedButtonIndex:-1 animated:YES];
+      [self setActionActionSheet:nil];
+   }
+   
+   if ([self addPhotoActionSheet]) {
+      if (popover == [self addPhotoActionSheet]) didClose = YES;
+      [[self addPhotoActionSheet] dismissWithClickedButtonIndex:-1 animated:YES];
+      [self setAddPhotoActionSheet:nil];
+   }
+   return didClose;
+}
+
 #pragma mark - UITextFieldDelegate methods
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
@@ -163,6 +189,11 @@
 
 - (IBAction)showActionMenu:(id)sender
 {
+   if ([self dismissPopovers:[self actionActionSheet]]) {
+      // Return if closing the action sheet.
+      return;
+   }
+   
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
    [actionSheet setDelegate:self];
    if ([SendEmailController canSendMail]) {
@@ -170,14 +201,14 @@
    }
    [actionSheet addButtonWithTitle:@"Delete Photo Album"];
    [actionSheet showFromBarButtonItem:sender animated:YES];
+   [self setActionActionSheet:actionSheet];
 }
 
 - (IBAction)addPhoto:(id)sender
 {
-   if ([self imagePickerPopoverController]) {
-      [[self imagePickerPopoverController] dismissPopoverAnimated:YES];
+   if ([self dismissPopovers:[self addPhotoActionSheet]]) {
+      return;
    }
-   
    [self presentPhotoPickerMenu];
 }
 
@@ -218,16 +249,19 @@
    // sheet (thus closing the popover containing the
    // action sheet).
    if (buttonIndex < 0) {
+      [self dismissPopovers:nil];
       return;
    }
    
    NSMutableArray *names = [[NSMutableArray alloc] init];
    
-   if ([actionSheet tag] == 0) {
+   if (actionSheet == [self actionActionSheet]) {
+      [self setActionActionSheet:nil];
       if ([SendEmailController canSendMail]) [names addObject:@"emailPhotos"];
       [names addObject:@"confirmDeletePhotoAlbum"];
       
    } else {
+      [self setAddPhotoActionSheet:nil];
       BOOL hasCamera = [UIImagePickerController
                         isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
       if (hasCamera) [names addObject:@"presentCamera"];
@@ -284,6 +318,7 @@
    [actionSheet addButtonWithTitle:@"Choose from Flickr"];
    [actionSheet setTag:1];
    [actionSheet showFromBarButtonItem:[self addButton] animated:YES];
+   [self setAddPhotoActionSheet:actionSheet];
 }
 
 #pragma mark - Segue

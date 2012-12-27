@@ -27,6 +27,7 @@
 @property (nonatomic, assign) CGFloat statusBarHeight;
 @property (nonatomic, strong) UIBarButtonItem *actionButton;
 @property (nonatomic, strong) UIPopoverController *activityPopover;
+@property (nonatomic, strong) UIActionSheet *actionSheet;
 @property (nonatomic, strong) MainScreenSlideShowViewController *slideShowController;
 
 @property (readwrite, strong) CIContext *ciContext;
@@ -103,6 +104,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
    [self cancelChromeDisplayTimer];
+   [self dismissPopovers:nil];
    [super viewWillDisappear:animated];
 }
 
@@ -119,6 +121,24 @@
    Photo *photo = [[self photos] objectAtIndex:index];
    UIImage *image = [photo largeImage];
    return image;
+}
+
+- (BOOL)dismissPopovers:(id)popover
+{
+   BOOL didClose = NO;
+   if ([self actionSheet]) {
+      if (popover == [self actionSheet]) didClose = YES;
+      [[self actionSheet] dismissWithClickedButtonIndex:-1 animated:YES];
+      [self setActionSheet:nil];
+   }
+   
+   if ([self activityPopover]) {
+      if (popover == [self activityPopover]) didClose = YES;
+      [[self activityPopover] dismissPopoverAnimated:YES];
+      [self setActivityPopover:nil];
+   }
+   
+   return didClose;
 }
 
 #pragma mark - Helper methods
@@ -396,32 +416,36 @@
 - (void)deletePhoto:(id)sender
 {
    [self cancelChromeDisplayTimer];
+
+   if ([self dismissPopovers:[self actionSheet]]) {
+      return;
+   }
+   
    UIActionSheet *actionSheet = nil;
    actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Delete Photo" otherButtonTitles:nil, nil];
    [actionSheet setTag:ACTIONSHEET_TAG_DELETE];
    [actionSheet showFromBarButtonItem:sender animated:YES];
+   [self setActionSheet:actionSheet];
 }
 
 - (void)showActionMenu:(id)sender
 {
    [self cancelChromeDisplayTimer];
 
-   if ([self activityPopover]) {
-      [[self activityPopover] dismissPopoverAnimated:YES];
-      [self setActivityPopover:nil];
-
-   } else {
-      UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
-      NSArray *activityItems = @[@"Share me", currentPhoto];
-      UIActivityViewController *activityVC = nil;
-      activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
-      
-      UIPopoverController *popover = nil;
-      popover = [[UIPopoverController alloc] initWithContentViewController:activityVC];
-      [popover setDelegate:self];
-      [popover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
-      [self setActivityPopover:popover];
+   if ([self dismissPopovers:[self activityPopover]]) {
+      return;
    }
+
+   UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
+   NSArray *activityItems = @[@"Share me", currentPhoto];
+   UIActivityViewController *activityVC = nil;
+   activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
+   
+   UIPopoverController *popover = nil;
+   popover = [[UIPopoverController alloc] initWithContentViewController:activityVC];
+   [popover setDelegate:self];
+   [popover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+   [self setActivityPopover:popover];
 }
 
 - (void)slideshow:(id)sender
@@ -484,10 +508,12 @@
    // sheet (thus closing the popover containing the
    // action sheet).
    if (buttonIndex < 0) {
+      [self dismissPopovers:nil];
       return;
    }
    
    if ([actionSheet tag] == ACTIONSHEET_TAG_DELETE) {
+      [self setActionSheet:nil];
       [self deletePhotoConfirmed];
    } else if ([actionSheet tag] == ACTIONSHEET_TAG_ACTIONS) {
       // Button index 0 can be Email or Print. It depends on whether or
