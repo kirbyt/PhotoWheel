@@ -15,7 +15,12 @@
    #import "AppKeys.h"
 #endif
 
+#define kPhotoWheelDidSelectAlbum @"didSelectAlbum"
+#define kPhotoWheelDidDeletePhotoAtIndex @"didDeletePhotoAtIndex"
+
 #define kRefetchAllDataNotification @"RefetchAllDatabaseData"
+
+#define ADD_CONSTRAINT(PARENT, FORMAT, VIEWS) [PARENT addConstraints: [NSLayoutConstraint constraintsWithVisualFormat:FORMAT options:0 metrics:nil views:VIEWS]];
 
 // From Marcus Zarra (http://www.cimgf.com/2010/05/02/my-current-prefix-pch-file/)
 #ifdef DEBUG

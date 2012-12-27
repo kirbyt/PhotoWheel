@@ -2,8 +2,8 @@
 //  WheelView.h
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 9/24/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 10/17/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -16,7 +16,6 @@ typedef enum  {
    WheelViewStyleWheel,
    WheelViewStyleCarousel,
 } WheelViewStyle;
-
 
 @interface WheelView : UIView
 
@@ -38,14 +37,14 @@ typedef enum  {
 - (NSInteger)wheelViewNumberOfCells:(WheelView *)wheelView;
 - (WheelViewCell *)wheelView:(WheelView *)wheelView cellAtIndex:(NSInteger)index;
 @optional
-- (void)wheelView:(WheelView *)wheelView didSelectCellAtIndex:(NSInteger)index;
+- (void)wheelView:(WheelView *)wheelView
+didSelectCellAtIndex:(NSInteger)index;
 @end
 
 @protocol WheelViewDelegate <NSObject>
 @optional
 - (NSInteger)wheelViewNumberOfVisibleCells:(WheelView *)wheelView;
 @end
-
 
 @interface WheelViewCell : UIView
 @end

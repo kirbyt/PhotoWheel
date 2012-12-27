@@ -2,8 +2,8 @@
 //  SendEmailController.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 10/2/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 12/11/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import "SendEmailController.h"
@@ -11,11 +11,7 @@
 
 @implementation SendEmailController
 
-@synthesize viewController = _viewController;
-@synthesize photos = _photos;
-
-- (id)initWithViewController:(UIViewController<SendEmailControllerDelegate> *)
-viewController 
+- (id)initWithViewController:(UIViewController<SendEmailControllerDelegate> *)viewController
 {
    self = [super init];
    if (self) {
@@ -24,9 +20,9 @@ viewController
    return self;
 }
 
-- (void)sendEmail 
+- (void)sendEmail
 {
-   MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] 
+   MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc]
                                           init];
    [mailer setMailComposeDelegate:self];
    [mailer setSubject:@"Pictures from PhotoWheel"];
@@ -44,7 +40,9 @@ viewController
       if (image) {
          NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
          NSString *fileName = [NSString stringWithFormat:@"photo-%i", index];
-         [mailer addAttachmentData:imageData mimeType:@"image/jpeg" fileName:fileName];
+         [mailer addAttachmentData:imageData
+                          mimeType:@"image/jpeg"
+                          fileName:fileName];
       }
    }];
    
@@ -52,11 +50,11 @@ viewController
 }
 
 
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error 
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error
 {
    UIViewController<SendEmailControllerDelegate> *viewController = [self viewController];
    [viewController dismissViewControllerAnimated:YES completion:nil];
-   if (viewController && [viewController respondsToSelector:@selector(sendEmailControllerDidFinish:)]) 
+   if (viewController && [viewController respondsToSelector:@selector(sendEmailControllerDidFinish:)])
    {
       [viewController sendEmailControllerDidFinish:self];
    }

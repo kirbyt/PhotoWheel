@@ -2,8 +2,8 @@
 //  SpinGestureRecognizer.h
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 9/24/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 10/18/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -2,12 +2,16 @@
 //  SimpleFlickrAPI.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 10/2/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 12/16/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import "SimpleFlickrAPI.h"
 #import <Foundation/NSJSONSerialization.h>
+
+// Changes this value to your own application key. More info
+// at http://www.flickr.com/services/api/misc.api_keys.html.
+#define flickrAPIKey @"YOUR_FLICKR_APP_KEY"
 
 #define flickrBaseURL @"http://api.flickr.com/services/rest/?format=json&"
 
@@ -25,20 +29,16 @@
 #define flickrMethodSearchPhotos @"flickr.photos.search"
 
 
-@interface SimpleFlickrAPI ()
-- (id)flickrJSONSWithParameters:(NSDictionary *)parameters;
-@end
-
 @implementation SimpleFlickrAPI
 
 - (NSArray *)photosWithSearchString:(NSString *)string
 {
-   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                               flickrMethodSearchPhotos, flickrParamMethod, 
-                               flickrAPIKey, flickrParamAppKey, 
-                               string, flickrParamText, 
-                               @"url_t, url_s, url_m, url_sq", flickrParamExtras, 
-                               nil];
+   NSDictionary *parameters = @{
+      flickrParamMethod : flickrMethodSearchPhotos,
+      flickrParamAppKey : flickrAPIKey,
+      flickrParamText : string,
+      flickrParamExtras : @"url_t, url_s, url_m, url_sq",
+   };
    NSDictionary *json = [self flickrJSONSWithParameters:parameters];
    NSDictionary *photoset = [json objectForKey:@"photos"];
    NSArray *photos = [photoset objectForKey:@"photo"];
@@ -47,11 +47,11 @@
 
 - (NSString *)userIdForUsername:(NSString *)username
 {
-   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                               flickrMethodFindByUsername, flickrParamMethod, 
-                               flickrAPIKey, flickrParamAppKey, 
-                               username, flickrParamUsername, 
-                               nil];
+   NSDictionary *parameters = @{
+      flickrParamMethod : flickrMethodFindByUsername,
+      flickrParamAppKey : flickrAPIKey,
+      flickrParamUsername : username,
+   };
    NSDictionary *json = [self flickrJSONSWithParameters:parameters];
    NSDictionary *userDict = [json objectForKey:@"user"];
    NSString *nsid = [userDict objectForKey:@"nsid"];
@@ -61,11 +61,11 @@
 
 - (NSArray *)photoSetListWithUserId:(NSString *)userId
 {
-   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                               flickrMethodGetPhotoSetList, flickrParamMethod, 
-                               flickrAPIKey, flickrParamAppKey, 
-                               userId, flickrParamUserid, 
-                               nil];
+   NSDictionary *parameters = @{
+      flickrParamMethod : flickrMethodGetPhotoSetList,
+      flickrParamAppKey : flickrAPIKey,
+      flickrParamUserid : userId,
+   };
    NSDictionary *json = [self flickrJSONSWithParameters:parameters];
    NSDictionary *photosets = [json objectForKey:@"photosets"];
    NSArray *photoSet = [photosets objectForKey:@"photoset"];
@@ -74,12 +74,12 @@
 
 - (NSArray *)photosWithPhotoSetId:(NSString *)photoSetId
 {
-   NSDictionary *parameters = [NSDictionary dictionaryWithObjectsAndKeys:
-                         flickrMethodGetPhotosWithPhotoSetId, flickrParamMethod, 
-                         flickrAPIKey, flickrParamAppKey, 
-                         photoSetId, flickrParamPhotoSetId, 
-                         @"url_t, url_s, url_m, url_sq", flickrParamExtras, 
-                         nil];
+   NSDictionary *parameters = @{
+      flickrParamMethod : flickrMethodGetPhotosWithPhotoSetId,
+      flickrParamAppKey : flickrAPIKey,
+      flickrParamPhotoSetId : photoSetId,
+      flickrParamExtras : @"url_t, url_s, url_m, url_sq",
+   };
    NSDictionary *json = [self flickrJSONSWithParameters:parameters];
    NSDictionary *photoset = [json objectForKey:@"photoset"];
    NSArray *photos = [photoset objectForKey:@"photo"];
@@ -93,17 +93,24 @@
    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
    NSURLResponse *response = nil;
    NSError *error = nil;
-   NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-   ZAssert(data, @"NSURLConnection error: %@\n%@", [error localizedDescription], [error userInfo]);
+   NSData *data = [NSURLConnection sendSynchronousRequest:request
+                                        returningResponse:&response
+                                                    error:&error];
+   if (data == nil) {
+      NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__,
+            [error localizedDescription]);
+   }
    return data;
 }
 
 - (NSURL *)buildFlickrURLWithParameters:(NSDictionary *)parameters
 {
-   NSMutableString *URLString = [[NSMutableString alloc] initWithString:flickrBaseURL];
+   NSMutableString *URLString = [[NSMutableString alloc]
+                                 initWithString:flickrBaseURL];
    for (id key in parameters) {
       NSString *value = [parameters objectForKey:key];
-      [URLString appendFormat:@"%@=%@&", key, [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+      [URLString appendFormat:@"%@=%@&", key,
+       [value stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
    }
    NSURL *URL = [NSURL URLWithString:URLString];
    return URL;
@@ -111,7 +118,9 @@
 
 - (NSString *)stringWithData:(NSData *)data
 {
-   NSString *result = [[NSString alloc] initWithBytes:[data bytes] length:[data length] encoding:NSUTF8StringEncoding];
+   NSString *result = [[NSString alloc] initWithBytes:[data bytes]
+                                               length:[data length]
+                                             encoding:NSUTF8StringEncoding];
    return result;
 }
 
@@ -137,11 +146,18 @@
    NSString *string = [self stringByRemovingFlickrJavaScript:data];
    NSData *jsonData = [string dataUsingEncoding:NSUTF8StringEncoding];
    
-   DLog(@"flickr json: %@", string);
+   NSLog(@"%s: json: %@", __PRETTY_FUNCTION__, string);
    
    NSError *error = nil;
-   id json = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:&error];
-   ZAssert(json, @"json error: %@\n%@", [error localizedDescription], [error userInfo]);
+   id json = [NSJSONSerialization
+              JSONObjectWithData:jsonData
+              options:NSJSONReadingAllowFragments
+              error:&error];
+   if (json == nil) {
+      NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__,
+            [error localizedDescription]);
+   }
+   
    return json;
 }
 

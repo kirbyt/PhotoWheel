@@ -2,8 +2,8 @@
 //  SimpleFlickrAPI.h
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 10/2/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 12/16/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

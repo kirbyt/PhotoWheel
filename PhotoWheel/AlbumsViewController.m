@@ -1,52 +1,45 @@
 //
-//  PhotoAlbumsViewController.m
+//  AlbumsViewController.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 8/13/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 11/12/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import "AlbumsViewController.h"
-#import "PhotoWheelViewCell.h"
+#import "PhotoWheelViewCell.h"                                          
 #import "PhotoAlbum.h"
 #import "Photo.h"
-#import "PhotosViewController.h"
 
 @interface AlbumsViewController ()
-@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
+@property (nonatomic, strong)
+NSFetchedResultsController *fetchedResultsController;
 @end
 
 @implementation AlbumsViewController
+
+- (void)viewDidLoad
+{
+   [super viewDidLoad];
+   
+   [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleCloudUpdate:) name:kRefetchAllDataNotification object:[[UIApplication sharedApplication] delegate]];
+}
+
+- (void)handleCloudUpdate:(NSNotification *)notification
+{
+   [self setFetchedResultsController:nil];
+   [[self wheelView] reloadData];
+}
 
 - (void)dealloc
 {
    [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
 }
 
-- (void)didMoveToParentViewController:(UIViewController *)parent
+- (void)viewWillAppear:(BOOL)animated
 {
-   [[NSNotificationCenter defaultCenter] addObserverForName:kRefetchAllDataNotification object:[[UIApplication sharedApplication] delegate] queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *__strong note) {
-      [self setFetchedResultsController:nil];
-      [[self wheelView] reloadData];
-   }];
-}
-
-- (void)viewDidUnload
-{
-   [[NSNotificationCenter defaultCenter] removeObserver:self name:kRefetchAllDataNotification object:nil];
-   [self setWheelView:nil];
-   [super viewDidUnload];
-}
-
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-   CGFloat angleOffset;
-   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
-      angleOffset = 270.0;
-   } else {
-      angleOffset = 0.0;
-   }
-   [[self wheelView] setAngleOffset:angleOffset];
+   [super viewWillAppear:animated];
+   [self rotateToInterfaceOrientation:[self interfaceOrientation]];
 }
 
 #pragma mark - Actions
@@ -54,39 +47,66 @@
 - (IBAction)addPhotoAlbum:(id)sender
 {
    NSManagedObjectContext *context = [self managedObjectContext];
-   PhotoAlbum *photoAlbum = [NSEntityDescription insertNewObjectForEntityForName:@"PhotoAlbum" inManagedObjectContext:context];
-   [photoAlbum setDateAdded:[NSDate date]];
+   PhotoAlbum *photoAlbum;
+   photoAlbum = [NSEntityDescription
+     insertNewObjectForEntityForName:@"PhotoAlbum"
+     inManagedObjectContext:context];
+   [photoAlbum setDateAdded:[NSDate date]];  
    
    // Save the context.
    NSError *error = nil;
-   ZAssert([context save:&error], @"Core Data save error: %@\n%@", [error localizedDescription], [error userInfo]);
+   if (![context save:&error])          
+   {
+      // Replace this implementation with code to handle
+      // the error appropriately.
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }
 }
 
 #pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate
 
 - (NSFetchedResultsController *)fetchedResultsController
 {
-   if (_fetchedResultsController) {
+   if (_fetchedResultsController) {                                     
       return _fetchedResultsController;
    }
    
    NSString *cacheName = NSStringFromClass([self class]);
-   NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"PhotoAlbum"];
+   NSFetchRequest *fetchRequest =
+   [NSFetchRequest fetchRequestWithEntityName:@"PhotoAlbum"];
    
-   NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES];
-   [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-
-   NSFetchedResultsController *newFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:[self managedObjectContext] sectionNameKeyPath:nil cacheName:cacheName];
+   NSSortDescriptor *sortDescriptor =
+      [NSSortDescriptor sortDescriptorWithKey:@"dateAdded"
+                                    ascending:YES];
+   [fetchRequest setSortDescriptors:@[sortDescriptor]];
+   
+   NSFetchedResultsController *newFetchedResultsController;
+   newFetchedResultsController = [[NSFetchedResultsController alloc]
+       initWithFetchRequest:fetchRequest
+       managedObjectContext:[self managedObjectContext]
+       sectionNameKeyPath:nil
+       cacheName:cacheName];
    [newFetchedResultsController setDelegate:self];
    
    NSError *error = nil;
-   ZAssert([newFetchedResultsController performFetch:&error], @"Fetch error: %@\n%@", [error localizedDescription], [error userInfo]);
+   if (![newFetchedResultsController performFetch:&error])
+   {
+      // Replace this implementation with code to handle the
+      // error appropriately.
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }
    
    [self setFetchedResultsController:newFetchedResultsController];
    return _fetchedResultsController;
 }
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath
+- (void)controller:(NSFetchedResultsController *)controller
+   didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath
+     forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
 {
    [[self wheelView] reloadData];
 }
@@ -106,7 +126,7 @@
    return count;
 }
 
-- (WheelViewCell *)wheelView:(WheelView *)wheelView 
+- (WheelViewCell *)wheelView:(WheelView *)wheelView
                  cellAtIndex:(NSInteger)index
 {
    PhotoWheelViewCell *cell = [wheelView dequeueReusableCell];
@@ -114,8 +134,10 @@
       cell = [PhotoWheelViewCell photoWheelViewCell];
    }
    
-   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-   PhotoAlbum *photoAlbum = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+   NSIndexPath *indexPath;
+   indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+   NSFetchedResultsController *frc = [self fetchedResultsController];
+   PhotoAlbum *photoAlbum = [frc objectAtIndexPath:indexPath];
    Photo *photo = [[photoAlbum photos] lastObject];
    UIImage *image = [photo thumbnailImage];
    if (image == nil) {
@@ -128,31 +150,47 @@
    return cell;
 }
 
-- (void)wheelView:(WheelView *)wheelView didSelectCellAtIndex:(NSInteger)index
+- (void)wheelView:(WheelView *)wheelView
+didSelectCellAtIndex:(NSInteger)index
 {
-   // Retrieve the photo album from the fetched results.
-   NSIndexPath *indexPath = [NSIndexPath indexPathForRow:index inSection:0];
-   PhotoAlbum *photoAlbum = nil;
-   // index = -1 means no selected cell and nothing to retrieve 
+   NSDictionary *userInfo = nil;
+
+   // index = -1 means no selected cell and nothing to retrieve
    // from the fetched results.
    if (index >= 0) {
-      photoAlbum = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+      NSIndexPath *indexPath = nil;
+      indexPath = [NSIndexPath indexPathForRow:index inSection:0];
+
+      NSFetchedResultsController *frc = [self fetchedResultsController];
+      PhotoAlbum *photoAlbum = [frc objectAtIndexPath:indexPath];
+      userInfo = @{ @"PhotoAlbum":photoAlbum };
    }
 
-   // Find the PhotosViewController scene.
-   __block PhotosViewController *photosViewController = nil;
-   [[[self parentViewController] childViewControllers] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-      if ([obj isKindOfClass:[PhotosViewController class]]) {
-         photosViewController = obj;
-         *stop = YES;
-      }
-   }];
-   
-   // Pass the current managed object context and object id for the 
-   // photo album to the photo album view controller. 
-   [photosViewController setManagedObjectContext:[self managedObjectContext]];
-   [photosViewController setObjectID:[photoAlbum objectID]];
-   [photosViewController reload];
+   NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+   [nc postNotificationName:kPhotoWheelDidSelectAlbum
+                     object:nil
+                   userInfo:userInfo];
+}
+
+#pragma mark - Rotation
+
+- (void)rotateToInterfaceOrientation:
+(UIInterfaceOrientation)toInterfaceOrientation
+{
+   CGFloat angleOffset;
+   if (UIInterfaceOrientationIsLandscape(toInterfaceOrientation)) {
+      angleOffset = 270.0;
+   } else {
+      angleOffset = 0.0;
+   }
+   [[self wheelView] setAngleOffset:angleOffset];
+}
+
+- (void)willRotateToInterfaceOrientation:
+(UIInterfaceOrientation)toInterfaceOrientation
+                                duration:(NSTimeInterval)duration
+{
+   [self rotateToInterfaceOrientation:toInterfaceOrientation];
 }
 
 @end

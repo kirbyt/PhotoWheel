@@ -2,16 +2,14 @@
 //  SpinGestureRecognizer.m
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 9/24/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 10/18/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import "SpinGestureRecognizer.h"
 #import <UIKit/UIGestureRecognizerSubclass.h>
 
 @implementation SpinGestureRecognizer
-
-@synthesize rotation = _rotation;
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -23,7 +21,12 @@
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-   [self setState:UIGestureRecognizerStateEnded];
+   // Perform final check to make sure a tap was not misinterpreted.
+   if ([self state] == UIGestureRecognizerStateChanged) {
+      [self setState:UIGestureRecognizerStateEnded];
+   } else {
+      [self setState:UIGestureRecognizerStateFailed];
+   }
 }
 
 - (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event
@@ -39,8 +42,8 @@
       [self setState:UIGestureRecognizerStateChanged];
    }
    
-   // We can look at any touch object since we know we 
-   // have only 1. If there were more than 1, 
+   // We can look at any touch object since we know we
+   // have only 1. If there were more than 1,
    // touchesBegan:withEvent: would have failed the recognizer.
    UITouch *touch = [touches anyObject];
    

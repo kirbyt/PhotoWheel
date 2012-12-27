@@ -2,12 +2,11 @@
 //  FlickrViewController.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 10/2/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 12/16/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import "FlickrViewController.h"
-#import "ImageGridViewCell.h"
 #import "SimpleFlickrAPI.h"
 #import "ImageDownloader.h"
 #import "Photo.h"
@@ -24,31 +23,17 @@
 - (void)viewDidLoad
 {
    [super viewDidLoad];
-   
-   [[self gridView] setAllowsMultipleSelection:YES];
-   
-   self.flickrPhotos = [NSArray array];
+
+   [self setFlickrPhotos:[NSArray array]];
    [[self overlayView] setAlpha:0.0];
    
-   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(overlayViewTapped:)];
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                  initWithTarget:self
+                                  action:@selector(overlayViewTapped:)];
    [[self overlayView] addGestureRecognizer:tap];
    
-   [[self gridView] setAlwaysBounceVertical:YES];
-   [[self gridView] setAllowsMultipleSelection:YES];
-}
-
-- (void)viewDidUnload
-{
-   [self setGridView:nil];
-   [self setOverlayView:nil];
-   [self setSearchBar:nil];
-   [self setActivityIndicator:nil];
-   [super viewDidUnload];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-   return YES;
+   [[self collectionView] setAlwaysBounceVertical:YES];
+   [[self collectionView] setAllowsMultipleSelection:YES];
 }
 
 - (BOOL)disablesAutomaticKeyboardDismissal
@@ -58,57 +43,61 @@
 
 #pragma mark - Save photos
 
-- (void)saveContextAndExit:(NSManagedObjectContext *)context
+- (void)saveContextAndExit
 {
+   PhotoAlbum *photoAlbum = [self photoAlbum];
+   NSManagedObjectContext *context = [photoAlbum managedObjectContext];
    NSError *error = nil;
-   ZAssert([context save:&error], @"Core Data save error: %@\n%@", [error localizedDescription], [error userInfo]);
-   [context reset];
-   
+   if (![context save:&error])
+   {
+      // Replace this implementation with code to handle
+      // the error appropriately.
+      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+      abort();
+   }
+
    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)saveSelectedPhotos
 {
-   NSManagedObjectContext *mainContext = [self managedObjectContext];
-   NSPersistentStoreCoordinator *coordinator = [mainContext persistentStoreCoordinator];
-   // Create a separate context for saving the data. This is done so the
-   // context can be reset and work around the annoying _deleteExternalReferenceFromPermanentLocation
-   // bug.
-   NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-   [context setPersistentStoreCoordinator:coordinator];
-
-   id photoAlbum = [context objectWithID:[self objectID]];
+   PhotoAlbum *photoAlbum = [self photoAlbum];
+   NSManagedObjectContext *context = [photoAlbum managedObjectContext];
    
-   NSArray *indexPaths = [[self gridView] indexPathsForSelectedItems];
-   __block NSInteger count = [indexPaths count];
+   NSArray *indexes = [[self collectionView] indexPathsForSelectedItems];
+   __block NSInteger count = [indexes count];
    
    if (count == 0) {
       [self dismissViewControllerAnimated:YES completion:nil];
       return;
    }
    
-   ImageDownloaderCompletionBlock completion = 
-      ^(UIImage *image, NSError *error) {
-      DLog(@"block: count: %i", count);
+   ImageDownloaderCompletionBlock completion =
+   ^(UIImage *image, NSError *error) {
+      NSLog(@"block: count: %i", count);
       if (image) {
-         Photo *newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+         Photo *newPhoto = [NSEntityDescription
+                            insertNewObjectForEntityForName:@"Photo"
+                            inManagedObjectContext:context];
          [newPhoto setDateAdded:[NSDate date]];
          [newPhoto saveImage:image];
          [newPhoto setPhotoAlbum:photoAlbum];
       } else {
-         DLog(@"Image download error: %@\n%@",[error localizedDescription], [error userInfo]);
+         NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__,
+               [error localizedDescription]);
       }
       
       count--;
       if (count == 0) {
-         [self saveContextAndExit:context];
+         [self saveContextAndExit];
       }
    };
    
-   for (NSIndexPath *indexPath in indexPaths) {
-      NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:[indexPath item]];
+   for (NSIndexPath *indexPath in indexes) {
+      NSInteger index = [indexPath item];
+      NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:index];
       NSURL *URL = [NSURL URLWithString:[flickrPhoto objectForKey:@"url_m"]];
-      DLog(@"URL: %@", URL);
+      NSLog(@"URL: %@", URL);
       ImageDownloader *downloader = [[ImageDownloader alloc] init];
       [downloader downloadImageAtURL:URL completion:completion];
       
@@ -156,7 +145,8 @@
          }
       };
       
-      [UIView animateWithDuration:0.2 animations:animations completion:completion];
+      [UIView animateWithDuration:0.2 animations:animations
+                       completion:completion];
    }
 }
 
@@ -195,7 +185,7 @@
       SimpleFlickrAPI *flickr = [[SimpleFlickrAPI alloc] init];
       NSArray *photos = [flickr photosWithSearchString:searchString];
       
-      NSMutableArray *downloaders = [[NSMutableArray alloc] 
+      NSMutableArray *downloaders = [[NSMutableArray alloc]
                                      initWithCapacity:[photos count]];
       for (NSInteger index = 0; index < [photos count]; index++) {
          ImageDownloader *downloader = [[ImageDownloader alloc] init];
@@ -206,7 +196,7 @@
       [self setFlickrPhotos:photos];
       
       dispatch_async(dispatch_get_main_queue(), ^{
-         [[self gridView] reloadData];
+         [[self collectionView] reloadData];
          [self hideOverlay];
          [[self overlayView] setUserInteractionEnabled:YES];
          [[self searchBar] resignFirstResponder];
@@ -240,56 +230,70 @@
    [self hideOverlay];
 }
 
-#pragma mark - UICollectionViewDataSource and UICollectionViewDelegate methods
+#pragma mark - UICollectionViewDataSource and UICollectionViewDelegate
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView
+numberOfItemsInSection:(NSInteger)section
 {
    NSInteger count = [[self flickrPhotos] count];
    return count;
 }
 
-// The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
+cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   ImageGridViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageGridViewCell" forIndexPath:indexPath];
- 
-   ImageDownloaderCompletionBlock completion = ^(UIImage *image, NSError *error) {
+   UICollectionViewCell *cell = [collectionView
+      dequeueReusableCellWithReuseIdentifier:@"PhotoCell"
+      forIndexPath:indexPath];
+
+   UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:1];
+   UIImageView *selectedImageView = (UIImageView *)[cell viewWithTag:2];
+   
+   NSArray *selectedIndexPaths = [collectionView indexPathsForSelectedItems];
+   BOOL isSelected = [selectedIndexPaths containsObject:indexPath];
+   [selectedImageView setHidden:!isSelected];
+   
+   ImageDownloaderCompletionBlock completion =
+   ^(UIImage *image, NSError *error) {
       if (image) {
-         [[cell imageView] setImage:image];
+         [photoImageView setImage:image];
       } else {
-         DLog(@"Image download error: %@\n%@", [error localizedDescription], [error userInfo]);
+         NSLog(@"%s: Error: %@", __PRETTY_FUNCTION__,
+               [error localizedDescription]);
       }
    };
 
-   ImageDownloader *downloader = [[self downloaders] objectAtIndex:[indexPath item]];
-   UIImage *image = [downloader image];
+   NSInteger index = [indexPath item];
+   NSArray *downloaders = [self downloaders];
+   ImageDownloader *downloader = [downloaders objectAtIndex:index];
+   UIImage *image = [downloader image]; 
    if (image) {
-      [[cell imageView] setImage:image];
+      [photoImageView setImage:image];
    } else {
-      NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:[indexPath item]];
+      NSDictionary *flickrPhoto = [[self flickrPhotos] objectAtIndex:index];
       NSURL *URL = [NSURL URLWithString:[flickrPhoto objectForKey:@"url_sq"]];
       [downloader downloadImageAtURL:URL completion:completion];
-   }
-
-   if ([cell isSelected]) {
-      [[cell selectedImageView] setImage:[UIImage imageNamed:@"addphoto.png"]];
-   } else {
-      [[cell selectedImageView] setImage:nil];
    }
    
    return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView
+didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   ImageGridViewCell *cell = (ImageGridViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-   [[cell selectedImageView] setImage:[UIImage imageNamed:@"addphoto.png"]];
+   UICollectionViewCell *cell = nil;
+   cell = [collectionView cellForItemAtIndexPath:indexPath];
+   UIImageView *selectedImageView = (UIImageView *)[cell viewWithTag:2];
+   [selectedImageView setHidden:NO];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView
+didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   ImageGridViewCell *cell = (ImageGridViewCell *)[collectionView cellForItemAtIndexPath:indexPath];
-   [[cell selectedImageView] setImage:nil];
+   UICollectionViewCell *cell = nil;
+   cell = [collectionView cellForItemAtIndexPath:indexPath];
+   UIImageView *selectedImageView = (UIImageView *)[cell viewWithTag:2];
+   [selectedImageView setHidden:YES];
 }
 
 @end

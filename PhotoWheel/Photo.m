@@ -2,15 +2,15 @@
 //  Photo.m
 //  PhotoWheelPrototype
 //
-//  Created by Kirby Turner on 9/24/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Tom Harrington on 10/30/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import "Photo.h"
 
 @implementation Photo
 
-- (UIImage *)image:(UIImage *)image scaleAspectToMaxSize:(CGFloat)newSize 
+- (UIImage *)image:(UIImage *)image scaleAspectToMaxSize:(CGFloat)newSize
 {
    CGSize size = [image size];
    CGFloat ratio;
@@ -20,20 +20,25 @@
       ratio = newSize / size.height;
    }
    
-   CGRect rect = CGRectMake(0.0, 0.0, ratio * size.width, ratio * size.height);
+   CGRect rect =
+      CGRectMake(0.0, 0.0, ratio * size.width, ratio * size.height);
    UIGraphicsBeginImageContext(rect.size);
    [image drawInRect:rect];
    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
    return scaledImage;
 }
 
-- (UIImage *)image:(UIImage *)image scaleAndCropToMaxSize:(CGSize)newSize 
+- (UIImage *)image:(UIImage *)image scaleAndCropToMaxSize:(CGSize)size
 {
-   CGFloat largestSize = 
-   (newSize.width > newSize.height) ? newSize.width : newSize.height;
+   // Adjust for retina display.
+   CGFloat scale = [[UIScreen mainScreen] scale];
+   CGSize newSize = CGSizeMake(size.width * scale, size.height * scale);
+
+   CGFloat largestSize =
+      (newSize.width > newSize.height) ? newSize.width : newSize.height;
    CGSize imageSize = [image size];
    
-   // Scale the image while mainting the aspect and making sure the 
+   // Scale the image while maintaining the aspect and making sure the
    // the scaled image is not smaller then the given new size. In
    // other words we calculate the aspect ratio using the largest
    // dimension from the new size and the smaller dimension from the
@@ -45,8 +50,9 @@
       ratio = largestSize / imageSize.width;
    }
    
-   CGRect rect = 
-   CGRectMake(0.0, 0.0, ratio * imageSize.width, ratio * imageSize.height);
+   CGRect rect =
+      CGRectMake(0.0, 0.0,
+                 ratio * imageSize.width, ratio * imageSize.height);
    UIGraphicsBeginImageContext(rect.size);
    [image drawInRect:rect];
    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -62,33 +68,26 @@
       offsetX = (imageSize.width / 2) - (imageSize.height / 2);
    }
    
-   CGRect cropRect = CGRectMake(offsetX, offsetY, imageSize.width - (offsetX * 2), imageSize.height - (offsetY * 2));
+   CGRect cropRect = CGRectMake(offsetX, offsetY,
+                                imageSize.width - (offsetX * 2),
+                                imageSize.height - (offsetY * 2));
    
-   CGImageRef croppedImageRef = CGImageCreateWithImageInRect([scaledImage CGImage], cropRect);
+   CGImageRef croppedImageRef =
+      CGImageCreateWithImageInRect([scaledImage CGImage], cropRect);
    UIImage *newImage = [UIImage imageWithCGImage:croppedImageRef];
    CGImageRelease(croppedImageRef);
    
    return newImage;
 }
 
-- (NSURL *)fileURLForAttributeNamed:(NSString *)attributeName
-{
-   if ([[self objectID] isTemporaryID]) {
-      NSError *error = nil;
-      [[self managedObjectContext] obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:&error];
-   }
-   NSUInteger filenameID = [[[[self objectID] URIRepresentation] absoluteURL] hash];
-   NSString *filename = [NSString stringWithFormat:@"%@-%d", attributeName, filenameID];
-   NSURL *documentsDirectory = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-   return [documentsDirectory URLByAppendingPathComponent:filename];
-}
-
 - (void)createScaledImagesForImage:(UIImage *)originalImage
 {
    // Save thumbnail
    CGSize thumbnailSize = CGSizeMake(75.0, 75.0);
-   UIImage *thumbnailImage = [self image:originalImage scaleAndCropToMaxSize:thumbnailSize];
-   NSData *thumbnailImageData = UIImageJPEGRepresentation(thumbnailImage, 0.8);
+   UIImage *thumbnailImage = [self image:originalImage
+                   scaleAndCropToMaxSize:thumbnailSize];
+   NSData *thumbnailImageData = UIImageJPEGRepresentation(thumbnailImage,
+                                                          0.8);
    [self setThumbnailImageData:thumbnailImageData];
    
    // Save small image
@@ -100,36 +99,39 @@
    // Save large (screen-size) image
    CGRect screenBounds = [[UIScreen mainScreen] bounds];
    // Calculate size for retina displays
-   CGFloat scale = [[UIScreen mainScreen] scale]; 
-   CGFloat maxScreenSize = MAX(screenBounds.size.width, screenBounds.size.height) * scale;
+   CGFloat scale = [[UIScreen mainScreen] scale];
+   CGFloat maxScreenSize = MAX(screenBounds.size.width,
+                               screenBounds.size.height) * scale;
    
    CGSize imageSize = [originalImage size];
-   CGFloat maxImageSize = MAX(imageSize.width, imageSize.height) * scale;
+   CGFloat maxImageSize = MAX(imageSize.width,
+                              imageSize.height) * scale;
    
    CGFloat maxSize = MIN(maxScreenSize, maxImageSize);
-   UIImage *largeImage = [self image:originalImage scaleAspectToMaxSize:maxSize];
+   UIImage *largeImage = [self image:originalImage
+                scaleAspectToMaxSize:maxSize];
    NSData *largeImageData = UIImageJPEGRepresentation(largeImage, 0.8);
    [self setLargeImageData:largeImageData];
 }
 
-- (void)saveImage:(UIImage *)newImage;
+- (void)saveImage:(UIImage *)newImage
 {
    NSData *originalImageData = UIImageJPEGRepresentation(newImage, 0.8);
    [self setOriginalImageData:originalImageData];
    [self createScaledImagesForImage:newImage];
 }
 
-- (UIImage *)originalImage;
+- (UIImage *)originalImage
 {
    return [UIImage imageWithData:[self originalImageData]];
 }
 
-- (UIImage *)largeImage;
+- (UIImage *)largeImage
 {
    return [UIImage imageWithData:[self largeImageData]];
 }
 
-- (UIImage *)thumbnailImage;
+- (UIImage *)thumbnailImage
 {
    return [UIImage imageWithData:[self thumbnailImageData]];
 }
@@ -139,9 +141,27 @@
    return [UIImage imageWithData:[self smallImageData]];
 }
 
-#pragma mark - Setters for scaled image attributes
+- (NSURL *)fileURLForAttributeNamed:(NSString *)attributeName
+{
+   if ([[self objectID] isTemporaryID]) {
+      NSError *error = nil;
+      [[self managedObjectContext]
+       obtainPermanentIDsForObjects:[NSArray arrayWithObject:self]
+       error:&error];
+   }
+   NSUInteger filenameID = [[[[self objectID] URIRepresentation]
+                             absoluteURL] hash];
+   NSString *filename = [NSString stringWithFormat:@"%@-%d",
+                         attributeName, filenameID];
+   NSURL *documentsDirectory = [[[NSFileManager defaultManager]
+                                 URLsForDirectory:NSDocumentDirectory
+                                 inDomains:NSUserDomainMask]
+                                lastObject];
+   return [documentsDirectory URLByAppendingPathComponent:filename];
+}
 
-- (void)setImageData:(NSData *)imageData forAttributeNamed:(NSString *)attributeName
+- (void)setImageData:(NSData *)imageData
+   forAttributeNamed:(NSString *)attributeName
 {
    // Do the set
    [self willChangeValueForKey:attributeName];
@@ -149,25 +169,27 @@
    [self didChangeValueForKey:attributeName];
    
    // Now write to a file, since the attribute is transient.
-   [imageData writeToURL:[self fileURLForAttributeNamed:attributeName] atomically:YES];
+   [imageData writeToURL:[self fileURLForAttributeNamed:attributeName]
+              atomically:YES];
 }
 
 - (void)setLargeImageData:(NSData *)largeImageData
 {
-   [self setImageData:largeImageData forAttributeNamed:@"largeImageData"];
+   [self setImageData:largeImageData
+       forAttributeNamed:@"largeImageData"];
 }
 
 - (void)setSmallImageData:(NSData *)smallImageData
 {
-   [self setImageData:smallImageData forAttributeNamed:@"smallImageData"];
+   [self setImageData:smallImageData
+       forAttributeNamed:@"smallImageData"];
 }
 
 - (void)setThumbnailImageData:(NSData *)thumbnailImageData
 {
-   [self setImageData:thumbnailImageData forAttributeNamed:@"thumbnailImageData"];
+   [self setImageData:thumbnailImageData
+       forAttributeNamed:@"thumbnailImageData"];
 }
-
-#pragma mark - Getters for scaled image attributes
 
 - (NSData *)imageDataForAttributeNamed:(NSString *)attributeName
 {
@@ -179,7 +201,8 @@
    // If we don't already have image data, get it.
    if (imageData == nil) {
       NSURL *fileURL = [self fileURLForAttributeNamed:attributeName];
-      if ([[NSFileManager defaultManager] fileExistsAtPath:[fileURL path]]) {
+      if ([[NSFileManager defaultManager] fileExistsAtPath:
+           [fileURL path]]) {
          // Read image data from the appropriate file, if it exists.
          imageData = [NSData dataWithContentsOfURL:fileURL];
          [self willChangeValueForKey:attributeName];

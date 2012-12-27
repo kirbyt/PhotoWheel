@@ -8,10 +8,15 @@
 
 #import "AboutViewController.h"
 
-@implementation AboutViewController
+@interface AboutViewController ()
+@property (nonatomic, weak) IBOutlet UILabel *version;
+@property (nonatomic, weak) IBOutletCollection(UIButton) NSArray *buttons;
 
-@synthesize version = _version;
-@synthesize buttons = _buttons;
+- (IBAction)done:(id)sender;
+- (IBAction)visitWebsite:(id)sender;
+@end
+
+@implementation AboutViewController
 
 - (IBAction)done:(id)sender
 {

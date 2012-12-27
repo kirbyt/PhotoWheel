@@ -2,8 +2,8 @@
 //  PhotoBrowserPhotoView.h
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 10/1/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 11/26/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -12,14 +12,13 @@
 
 @interface PhotoBrowserPhotoView : UIScrollView <UIScrollViewDelegate>
 
+
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, weak) PhotoBrowserViewController *photoBrowserViewController;
 
 - (void)setImage:(UIImage *)newImage;
 - (void)turnOffZoom;
-- (CGPoint)pointToCenterAfterRotation;
-- (CGFloat)scaleToRestoreAfterRotation;
-- (void)setMaxMinZoomScalesForCurrentBounds;
-- (void)restoreCenterPoint:(CGPoint)oldCenter scale:(CGFloat)oldScale;
+
+- (void)restoreAfterRotation;
 
 @end

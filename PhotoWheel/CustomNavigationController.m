@@ -2,15 +2,14 @@
 //  CustomNavigationController.m
 //  PhotoWheel
 //
-//  Created by Kirby Turner on 8/12/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 11/13/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import "CustomNavigationController.h"
 #import "UIView+PWCategory.h"
-#import "PhotosViewController.h"
-#import "MainSlideShowViewController.h"
-
+#import "MainViewController.h"
+#import "PhotoBrowserViewController.h"
 
 @implementation CustomNavigationController
 
@@ -18,29 +17,32 @@
 {
    UIViewController *sourceViewController = [self topViewController];
    
-   // Do not perform custom pop when coming from the slide show.
-   if ([sourceViewController isKindOfClass:[MainSlideShowViewController class]]) {
+   if (![sourceViewController isKindOfClass: [PhotoBrowserViewController class]]) {
       return [super popViewControllerAnimated:animated];
    }
-   
    // Animates image snapshot of the view.
    UIView *sourceView = [sourceViewController view];
    UIImage *sourceViewImage = [sourceView pw_imageSnapshot];
-   UIImageView *sourceImageView = [[UIImageView alloc] initWithImage:sourceViewImage];
+   UIImageView *sourceImageView = nil;
+   sourceImageView = [[UIImageView alloc] initWithImage:sourceViewImage];
    
    // Offset the sourceImageView frame by the height of the status bar.
    // This prevents the image from dropping down after the view controller
    // is popped from the stack.
-   BOOL isLandscape = UIInterfaceOrientationIsLandscape(
-     [sourceViewController interfaceOrientation]);
-   CGRect statusBarFrame = [[UIApplication sharedApplication] statusBarFrame];
+   UIInterfaceOrientation orientation;
+   orientation = [sourceViewController interfaceOrientation];
+   BOOL isLandscape = UIInterfaceOrientationIsLandscape(orientation);
+
+   UIApplication *app = [UIApplication sharedApplication];
+   CGRect statusBarFrame = [app statusBarFrame];
    CGFloat statusBarHeight;
    if (isLandscape) {
       statusBarHeight = statusBarFrame.size.width;
    } else {
       statusBarHeight = statusBarFrame.size.height;
    }
-   CGRect newFrame = CGRectOffset([sourceImageView frame], 0, -statusBarHeight);
+   CGRect newFrame;
+   newFrame = CGRectOffset([sourceImageView frame], 0, -statusBarHeight);
    [sourceImageView setFrame:newFrame];
    
    
@@ -48,31 +50,25 @@
    NSInteger count = [viewControllers count];
    NSInteger index = count - 2;
    
-   UIViewController *destinationViewController =[viewControllers objectAtIndex:index];
+   id destinationViewController = nil;
+   destinationViewController = [viewControllers objectAtIndex:index];
    UIView *destinationView = [destinationViewController view];
    UIImage *destinationViewImage = [destinationView pw_imageSnapshot];
-   UIImageView *destinationImageView = [[UIImageView alloc] initWithImage:destinationViewImage];
+   UIImageView *destinationImageView = nil;
+   destinationImageView = [[UIImageView alloc] initWithImage:destinationViewImage];
    
    [super popViewControllerAnimated:NO];
    
    [destinationView addSubview:destinationImageView];
    [destinationView addSubview:sourceImageView];
    
-   // We need the selectedCellFrame from the PhotoAlbumViewController. This 
-   // controller is a child of the destination controller.
-   CGRect selectedCellFrame = CGRectZero;
-   for (id childViewController in [destinationViewController childViewControllers])
-   {
-      if ([childViewController isKindOfClass:[PhotosViewController class]]) {
-         selectedCellFrame = [childViewController selectedCellFrame];
-         break;
-      }
-   }
-   CGPoint shrinkToPoint = CGPointMake(CGRectGetMidX(selectedCellFrame), 
-                                       CGRectGetMidY(selectedCellFrame));
+   CGRect selectedPhotoFrame = [destinationViewController selectedPhotoFrame];
+   CGPoint shrinkToPoint = CGPointMake(CGRectGetMidX(selectedPhotoFrame),
+                                       CGRectGetMidY(selectedPhotoFrame));
    
    void (^animations)(void) = ^ {
-      [sourceImageView setFrame:CGRectMake(shrinkToPoint.x, shrinkToPoint.y, 0, 0)];
+      [sourceImageView setFrame:CGRectMake(shrinkToPoint.x, shrinkToPoint.y,
+                                           0, 0)];
       [sourceImageView setAlpha:0.0];
       
       // Animate the nav bar too.
@@ -90,7 +86,11 @@
       [destinationImageView removeFromSuperview];
    };
    
-   [UIView transitionWithView:destinationView duration:0.3 options:UIViewAnimationOptionTransitionNone animations:animations completion:completion];
+   [UIView transitionWithView:destinationView
+                     duration:0.3
+                      options:UIViewAnimationOptionTransitionNone
+                   animations:animations
+                   completion:completion];
    
    return sourceViewController;
 }

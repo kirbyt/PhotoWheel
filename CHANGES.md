@@ -1,5 +1,8 @@
 # Change History
 
+**Version 2.0b2**
+   * [CHANGED] Updated the source code with code from the second edition of the book.
+   
 **Version 2.0b1**
    * [CHANGED] Updated HockeySDK-iOS to version 2.5.4b1.
    * [CHANGED] Replaced deprecated calls with iOS 6 equivalent.

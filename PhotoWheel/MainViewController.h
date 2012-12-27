@@ -10,7 +10,7 @@
 
 @interface MainViewController : UIViewController
 
-@property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
-@property (nonatomic, weak) IBOutlet UIButton *infoButton;
+@property (nonatomic, assign, readonly) CGRect selectedPhotoFrame;
+@property (nonatomic, strong, readonly) UIImage *selectedPhotoImage;
 
 @end

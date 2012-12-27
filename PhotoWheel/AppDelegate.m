@@ -11,17 +11,13 @@
 @interface AppDelegate ()
 @property (nonatomic, strong) NSMutableArray *iCloudNotificationQueue;
 @property (nonatomic, assign, getter=isPersistentStoreReady) BOOL persistentStoreReady;
-- (void)processMergeiCloudNotifications;
 @end
 
 @implementation AppDelegate
 
-@synthesize window = _window;
-@synthesize managedObjectContext = __managedObjectContext;
-@synthesize managedObjectModel = __managedObjectModel;
-@synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
-@synthesize iCloudNotificationQueue = _iCloudNotificationQueue;
-@synthesize persistentStoreReady = _persistentStoreReady;
+@synthesize managedObjectContext = _managedObjectContext;
+@synthesize managedObjectModel = _managedObjectModel;
+@synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -104,24 +100,18 @@
  */
 - (NSManagedObjectContext *)managedObjectContext
 {
-   if (__managedObjectContext != nil)
-   {
-      return __managedObjectContext;
+   if (_managedObjectContext != nil) {
+      return _managedObjectContext;
    }
    
    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-   if (coordinator != nil)
-   {
-      NSManagedObjectContext *moc = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-      [moc performBlockAndWait:^(void) {
-         [moc setPersistentStoreCoordinator:coordinator];
-         [moc setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
-         
-         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChangesFrom_iCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
-      }];
-      __managedObjectContext = moc;
+   if (coordinator != nil) {
+      _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+      [_managedObjectContext setPersistentStoreCoordinator:coordinator];
+      [_managedObjectContext setMergePolicy:NSMergeByPropertyObjectTrumpMergePolicy];
+      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mergeChangesFromCloud:) name:NSPersistentStoreDidImportUbiquitousContentChangesNotification object:coordinator];
    }
-   return __managedObjectContext;
+   return _managedObjectContext;
 }
 
 /**
@@ -130,13 +120,12 @@
  */
 - (NSManagedObjectModel *)managedObjectModel
 {
-   if (__managedObjectModel != nil)
-   {
-      return __managedObjectModel;
+   if (_managedObjectModel != nil) {
+      return _managedObjectModel;
    }
    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"PhotoWheel" withExtension:@"momd"];
-   __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];    
-   return __managedObjectModel;
+   _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+   return _managedObjectModel;
 }
 
 /**
@@ -145,18 +134,16 @@
  */
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator
 {
-   if (__persistentStoreCoordinator != nil)
+   if (_persistentStoreCoordinator != nil)
    {
-      return __persistentStoreCoordinator;
+      return _persistentStoreCoordinator;
    }
    
    [self setPersistentStoreReady:NO];
-   __persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-   
+   _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
    
    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-      
       // Build a URL to use as NSPersistentStoreUbiquitousContentURLKey
       NSURL *cloudURL = [[NSFileManager defaultManager] URLForUbiquityContainerIdentifier:nil];
       
@@ -166,28 +153,68 @@
          NSString* coreDataCloudContent = [[cloudURL path] stringByAppendingPathComponent:@"photowheel"];
          cloudURL = [NSURL fileURLWithPath:coreDataCloudContent];
          
-         //  The API to turn on Core Data iCloud support here.
-         options = [NSDictionary dictionaryWithObjectsAndKeys:@"com.whitepeaksoftware.photowheel", NSPersistentStoreUbiquitousContentNameKey, cloudURL, NSPersistentStoreUbiquitousContentURLKey, [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption, [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+         options = @{
+         NSPersistentStoreUbiquitousContentNameKey : @"com.whitepeaksoftware.photowheel",
+         NSPersistentStoreUbiquitousContentURLKey : cloudURL,
+         NSMigratePersistentStoresAutomaticallyOption : @YES,
+         NSInferMappingModelAutomaticallyOption: @YES,
+         };
       }
       
       NSError *error = nil;
-      [__persistentStoreCoordinator lock];
-      if (![__persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
+      [_persistentStoreCoordinator lock];
+      if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
       {
-         // Force assertion to report the error.
          ZAssert(NO, @"Unresolved error %@\n%@", [error localizedDescription], [error userInfo]);
       }
-      [__persistentStoreCoordinator unlock];
+      [_persistentStoreCoordinator unlock];
       [self setPersistentStoreReady:YES];
       
       dispatch_async(dispatch_get_main_queue(), ^{
-         DLog(@"asynchronously added persistent store!");
-         [self processMergeiCloudNotifications];
+         DLog(@"Asynchronously added persistent store!");
          [[NSNotificationCenter defaultCenter] postNotificationName:kRefetchAllDataNotification object:self userInfo:nil];
       });
    });
    
-   return __persistentStoreCoordinator;
+   return _persistentStoreCoordinator;
+}
+
+#pragma mark - iCloud Sync
+
+- (void)mergeChangesFromCloud:(NSNotification *)notification
+{
+   [self queueMergeCloudNotification:notification];
+   if ([self isPersistentStoreReady]) {
+      [self processMergeCloudNotifications];
+   }
+}
+
+- (void)queueMergeCloudNotification:(NSNotification *)notification
+{
+   DLog(@"Queuing iCloud merge notification.");
+   if (![self iCloudNotificationQueue]) {
+      NSMutableArray *newQueue = [NSMutableArray array];
+      [self setICloudNotificationQueue:newQueue];
+   }
+   [[self iCloudNotificationQueue] addObject:notification];
+}
+
+- (void)processMergeCloudNotifications
+{
+   DLog(@"Processing %i notifications.", [[self iCloudNotificationQueue] count]);
+   NSManagedObjectContext* moc = [self managedObjectContext];
+   [moc performBlock:^{
+      [[self iCloudNotificationQueue] enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
+         [moc mergeChangesFromContextDidSaveNotification:obj];
+      }];
+      [moc processPendingChanges];
+      [[self iCloudNotificationQueue] removeAllObjects];
+      
+      dispatch_async(dispatch_get_main_queue(), ^{
+         NSNotification *refreshNotificaiton = [NSNotification notificationWithName:kRefetchAllDataNotification object:self userInfo:nil];
+         [[NSNotificationCenter defaultCenter] postNotification:refreshNotificaiton];
+      });
+   }];
 }
 
 #pragma mark - Application's Documents directory
@@ -198,54 +225,6 @@
 - (NSURL *)applicationDocumentsDirectory
 {
    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
-
-#pragma mark - iCloud
-
-- (void)mergeiCloudChanges:(NSNotification*)notification forContext:(NSManagedObjectContext*)moc
-{
-   DLog(@"Notification:\n%@", [notification userInfo]);
-   [moc mergeChangesFromContextDidSaveNotification:notification];
-   NSNotification *refreshNotificaiton = [NSNotification notificationWithName:kRefetchAllDataNotification object:self userInfo:[notification userInfo]];
-   [[NSNotificationCenter defaultCenter] postNotification:refreshNotificaiton];
-}
-
-- (void)processMergeiCloudNotifications
-{
-   DLog(@"Processing %i notifications.", [[self iCloudNotificationQueue] count]);
-   NSManagedObjectContext* moc = [self managedObjectContext];
-   [[self iCloudNotificationQueue] enumerateObjectsUsingBlock: ^(id obj, NSUInteger idx, BOOL *stop) {
-      [moc performBlock:^{
-         [self mergeiCloudChanges:obj forContext:moc];
-      }];
-   }];
-   [[self iCloudNotificationQueue] removeAllObjects];
-}
-
-- (void)queueMergeiCloudNotification:(NSNotification *)notification
-{
-   DLog(@"Queuing iCloud merge notification.");
-   if (![self iCloudNotificationQueue]) {
-      NSMutableArray *newQueue = [[NSMutableArray alloc] init];
-      [self setICloudNotificationQueue:newQueue];
-   }
-   [[self iCloudNotificationQueue] addObject:notification];
-}
-
-- (void)mergeChangesFrom_iCloud:(NSNotification *)notification 
-{
-   if ([self isPersistentStoreReady]) {
-      // Process queued notifications first.
-      [self processMergeiCloudNotifications];
-      // Process the current notification.
-      NSManagedObjectContext* moc = [self managedObjectContext];
-      [moc performBlock:^{
-         [self mergeiCloudChanges:notification forContext:moc];
-      }];
-      
-   } else {
-      [self queueMergeiCloudNotification:notification];
-   }
 }
 
 #pragma mark - BITUpdateManagerDelegate
