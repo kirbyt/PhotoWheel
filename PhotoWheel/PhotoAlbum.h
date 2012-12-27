@@ -8,9 +8,12 @@
 
 #import "_PhotoAlbum.h"
 
+@class Photo;
+
 @interface PhotoAlbum : _PhotoAlbum
 
 + (PhotoAlbum *)newPhotoAlbumWithName:(NSString *)albumName inContext:(NSManagedObjectContext *)context;
 + (NSMutableArray *)allPhotoAlbumsInContext:(NSManagedObjectContext *)context;
+- (Photo *)keyPhoto;
 
 @end

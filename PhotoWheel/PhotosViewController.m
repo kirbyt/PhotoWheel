@@ -526,7 +526,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 - (void)emailPhotos
 {
    PhotoAlbum *album = [self photoAlbum];
-   NSSet *photos = [[album photos] set];
+   NSSet *photos = [album photos];
    
    SendEmailController *controller = [[SendEmailController alloc]
                                       initWithViewController:self];

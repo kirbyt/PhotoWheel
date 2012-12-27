@@ -47,4 +47,11 @@
    }
 }
 
+- (Photo *)keyPhoto
+{
+   NSSortDescriptor *sortBy = [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES];
+   NSArray *sortedPhotos = [[self photos] sortedArrayUsingDescriptors:@[sortBy]];
+   return [sortedPhotos lastObject];
+}
+
 @end

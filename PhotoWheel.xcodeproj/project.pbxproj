@@ -13,8 +13,8 @@
 		682194B7168CAA6300B28A3E /* ThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682194B6168CAA6300B28A3E /* ThumbnailCell.m */; };
 		682194BC168CAAC000B28A3E /* ExternalSlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682194B9168CAAC000B28A3E /* ExternalSlideShowViewController.m */; };
 		682194BD168CAAC000B28A3E /* MainScreenSlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682194BB168CAAC000B28A3E /* MainScreenSlideShowViewController.m */; };
-		682BC4B51434DE4600286C9D /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4A81434DE4600286C9D /* _Photo.m */; };
-		682BC4B61434DE4600286C9D /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4AA1434DE4600286C9D /* _PhotoAlbum.m */; };
+		682194C0168CB72300B28A3E /* _Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 682194BF168CB72300B28A3E /* _Photo.m */; };
+		682194C3168CB72300B28A3E /* _PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 682194C2168CB72300B28A3E /* _PhotoAlbum.m */; };
 		682BC4B71434DE4600286C9D /* Photo.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4AC1434DE4600286C9D /* Photo.m */; };
 		682BC4B81434DE4600286C9D /* PhotoAlbum.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4AE1434DE4600286C9D /* PhotoAlbum.m */; };
 		682BC4B91434DE4600286C9D /* PhotoWheelViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4B01434DE4600286C9D /* PhotoWheelViewCell.m */; };
@@ -99,10 +99,10 @@
 		682194B9168CAAC000B28A3E /* ExternalSlideShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExternalSlideShowViewController.m; sourceTree = "<group>"; };
 		682194BA168CAAC000B28A3E /* MainScreenSlideShowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainScreenSlideShowViewController.h; sourceTree = "<group>"; };
 		682194BB168CAAC000B28A3E /* MainScreenSlideShowViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainScreenSlideShowViewController.m; sourceTree = "<group>"; };
-		682BC4A71434DE4600286C9D /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Photo.h; sourceTree = "<group>"; };
-		682BC4A81434DE4600286C9D /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Photo.m; sourceTree = "<group>"; };
-		682BC4A91434DE4600286C9D /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _PhotoAlbum.h; sourceTree = "<group>"; };
-		682BC4AA1434DE4600286C9D /* _PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _PhotoAlbum.m; sourceTree = "<group>"; };
+		682194BE168CB72200B28A3E /* _Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _Photo.h; sourceTree = "<group>"; };
+		682194BF168CB72300B28A3E /* _Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _Photo.m; sourceTree = "<group>"; };
+		682194C1168CB72300B28A3E /* _PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _PhotoAlbum.h; sourceTree = "<group>"; };
+		682194C2168CB72300B28A3E /* _PhotoAlbum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _PhotoAlbum.m; sourceTree = "<group>"; };
 		682BC4AB1434DE4600286C9D /* Photo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Photo.h; sourceTree = "<group>"; };
 		682BC4AC1434DE4600286C9D /* Photo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Photo.m; sourceTree = "<group>"; };
 		682BC4AD1434DE4600286C9D /* PhotoAlbum.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoAlbum.h; sourceTree = "<group>"; };
@@ -230,10 +230,10 @@
 			isa = PBXGroup;
 			children = (
 				68FA6AE713EEF3BB00E046BD /* PhotoWheel.xcdatamodeld */,
-				682BC4A71434DE4600286C9D /* _Photo.h */,
-				682BC4A81434DE4600286C9D /* _Photo.m */,
-				682BC4A91434DE4600286C9D /* _PhotoAlbum.h */,
-				682BC4AA1434DE4600286C9D /* _PhotoAlbum.m */,
+				682194BE168CB72200B28A3E /* _Photo.h */,
+				682194BF168CB72300B28A3E /* _Photo.m */,
+				682194C1168CB72300B28A3E /* _PhotoAlbum.h */,
+				682194C2168CB72300B28A3E /* _PhotoAlbum.m */,
 				682BC4AB1434DE4600286C9D /* Photo.h */,
 				682BC4AC1434DE4600286C9D /* Photo.m */,
 				682BC4AD1434DE4600286C9D /* PhotoAlbum.h */,
@@ -523,8 +523,6 @@
 				689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */,
 				68F5ED6C13F6CAF30006732C /* MainViewController.m in Sources */,
 				68F5ED7013F6CB020006732C /* PhotosViewController.m in Sources */,
-				682BC4B51434DE4600286C9D /* _Photo.m in Sources */,
-				682BC4B61434DE4600286C9D /* _PhotoAlbum.m in Sources */,
 				682BC4B71434DE4600286C9D /* Photo.m in Sources */,
 				682BC4B81434DE4600286C9D /* PhotoAlbum.m in Sources */,
 				682BC4B91434DE4600286C9D /* PhotoWheelViewCell.m in Sources */,
@@ -540,6 +538,8 @@
 				682194B7168CAA6300B28A3E /* ThumbnailCell.m in Sources */,
 				682194BC168CAAC000B28A3E /* ExternalSlideShowViewController.m in Sources */,
 				682194BD168CAAC000B28A3E /* MainScreenSlideShowViewController.m in Sources */,
+				682194C0168CB72300B28A3E /* _Photo.m in Sources */,
+				682194C3168CB72300B28A3E /* _PhotoAlbum.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,9 +1,9 @@
 //
 //  _PhotoAlbum.m
-//  PhotoWheelPrototype
+//  PhotoWheel
 //
-//  Created by Kirby Turner on 9/24/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 12/27/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import "_PhotoAlbum.h"
@@ -12,8 +12,8 @@
 
 @implementation _PhotoAlbum
 
-@dynamic name;
 @dynamic dateAdded;
+@dynamic name;
 @dynamic photos;
 
 @end

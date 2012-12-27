@@ -1,9 +1,9 @@
 //
 //  _PhotoAlbum.h
-//  PhotoWheelPrototype
+//  PhotoWheel
 //
-//  Created by Kirby Turner on 9/24/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 12/27/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -13,21 +13,16 @@
 
 @interface _PhotoAlbum : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDate * dateAdded;
-@property (nonatomic, retain) NSOrderedSet *photos;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSSet *photos;
 @end
 
 @interface _PhotoAlbum (CoreDataGeneratedAccessors)
 
-- (void)insertObject:(_Photo *)value inPhotosAtIndex:(NSUInteger)idx;
-- (void)removeObjectFromPhotosAtIndex:(NSUInteger)idx;
-- (void)insertPhotos:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
-- (void)removePhotosAtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectInPhotosAtIndex:(NSUInteger)idx withObject:(_Photo *)value;
-- (void)replacePhotosAtIndexes:(NSIndexSet *)indexes withPhotos:(NSArray *)values;
 - (void)addPhotosObject:(_Photo *)value;
 - (void)removePhotosObject:(_Photo *)value;
-- (void)addPhotos:(NSOrderedSet *)values;
-- (void)removePhotos:(NSOrderedSet *)values;
+- (void)addPhotos:(NSSet *)values;
+- (void)removePhotos:(NSSet *)values;
+
 @end

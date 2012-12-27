@@ -138,7 +138,7 @@ NSFetchedResultsController *fetchedResultsController;
    indexPath = [NSIndexPath indexPathForRow:index inSection:0];
    NSFetchedResultsController *frc = [self fetchedResultsController];
    PhotoAlbum *photoAlbum = [frc objectAtIndexPath:indexPath];
-   Photo *photo = [[photoAlbum photos] lastObject];
+   Photo *photo = [photoAlbum keyPhoto];
    UIImage *image = [photo thumbnailImage];
    if (image == nil) {
       image = [UIImage imageNamed:@"defaultPhoto.png"];

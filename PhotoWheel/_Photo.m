@@ -1,9 +1,9 @@
 //
 //  _Photo.m
-//  PhotoWheelPrototype
+//  PhotoWheel
 //
-//  Created by Kirby Turner on 9/24/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 12/27/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import "_Photo.h"
@@ -13,10 +13,10 @@
 @implementation _Photo
 
 @dynamic dateAdded;
-@dynamic originalImageData;
-@dynamic thumbnailImageData;
 @dynamic largeImageData;
+@dynamic originalImageData;
 @dynamic smallImageData;
+@dynamic thumbnailImageData;
 @dynamic photoAlbum;
 
 @end

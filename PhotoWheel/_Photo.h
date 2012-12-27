@@ -1,9 +1,9 @@
 //
 //  _Photo.h
-//  PhotoWheelPrototype
+//  PhotoWheel
 //
-//  Created by Kirby Turner on 9/24/11.
-//  Copyright (c) 2011 White Peak Software Inc. All rights reserved.
+//  Created by Kirby Turner on 12/27/12.
+//  Copyright (c) 2012 White Peak Software Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,10 +14,10 @@
 @interface _Photo : NSManagedObject
 
 @property (nonatomic, retain) NSDate * dateAdded;
-@property (nonatomic, retain) NSData * originalImageData;
-@property (nonatomic, retain) NSData * thumbnailImageData;
 @property (nonatomic, retain) NSData * largeImageData;
+@property (nonatomic, retain) NSData * originalImageData;
 @property (nonatomic, retain) NSData * smallImageData;
+@property (nonatomic, retain) NSData * thumbnailImageData;
 @property (nonatomic, retain) _PhotoAlbum *photoAlbum;
 
 @end
