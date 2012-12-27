@@ -50,9 +50,7 @@
       ratio = largestSize / imageSize.width;
    }
    
-   CGRect rect =
-      CGRectMake(0.0, 0.0,
-                 ratio * imageSize.width, ratio * imageSize.height);
+   CGRect rect = CGRectMake(0.0, 0.0, ratio * imageSize.width, ratio * imageSize.height);
    UIGraphicsBeginImageContext(rect.size);
    [image drawInRect:rect];
    UIImage *scaledImage = UIGraphicsGetImageFromCurrentImageContext();
@@ -84,8 +82,7 @@
 {
    // Save thumbnail
    CGSize thumbnailSize = CGSizeMake(75.0, 75.0);
-   UIImage *thumbnailImage = [self image:originalImage
-                   scaleAndCropToMaxSize:thumbnailSize];
+   UIImage *thumbnailImage = [self image:originalImage scaleAndCropToMaxSize:thumbnailSize];
    NSData *thumbnailImageData = UIImageJPEGRepresentation(thumbnailImage,
                                                           0.8);
    [self setThumbnailImageData:thumbnailImageData];
