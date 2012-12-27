@@ -16,8 +16,7 @@
 #define ACTIONSHEET_TAG_DELETE 1
 #define ACTIONSHEET_TAG_ACTIONS 2
 
-#define RAND_IN_RANGE(low,high) (low + (high - low) * \
-(arc4random_uniform(RAND_MAX) / (double)RAND_MAX))
+#define RAND_IN_RANGE(low,high) (low + (high - low) * (arc4random_uniform(RAND_MAX) / (double)RAND_MAX))
 
 @interface PhotoBrowserViewController () <UIActionSheetDelegate, SendEmailControllerDelegate, UIPopoverControllerDelegate>
 @property (nonatomic, strong) SendEmailController *sendEmailController;
