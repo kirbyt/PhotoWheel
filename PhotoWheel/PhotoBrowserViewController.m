@@ -258,7 +258,7 @@
 
 - (void)unloadPage:(NSInteger)index 
 {
-   if (index < 0 || index >= [self numberOfPhotos]) {
+   if (index < 0 || index >= [[self photoViewCache] count]) {
       return;
    }
    
@@ -401,8 +401,13 @@
       [[self navigationController] popViewControllerAnimated:YES];
    } else {
       NSInteger nextIndex = indexToDelete;
-      if (indexToDelete == count) {
+      if (nextIndex == count - 1) {
+         // Last photo was deleted. Move back one photo.
          nextIndex -= 1;
+      } else if (nextIndex == count - 2) {
+         // Next to last photo was deleted. Clear the next photo view
+         // cache slot.
+         [self unloadPage:nextIndex + 1];
       }
       [self setCurrentIndex:nextIndex];
       [self setScrollViewContentSize];
