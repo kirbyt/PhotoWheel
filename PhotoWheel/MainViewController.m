@@ -63,8 +63,7 @@
       UIApplication *app = [UIApplication sharedApplication];
       AppDelegate *appDelegate = (AppDelegate *)[app delegate];
 
-      NSManagedObjectContext *context;
-      context = [appDelegate managedObjectContext];
+      NSManagedObjectContext *context = [appDelegate managedObjectContext];
 
       [destinationVC setManagedObjectContext:context];
       
@@ -85,20 +84,17 @@
 - (void)updateViewConstraints
 {
    [super updateViewConstraints];
-   [self updateViewConstraintsForInterfaceOrientation:
-    [self interfaceOrientation]];
+   [self updateViewConstraintsForInterfaceOrientation:[self interfaceOrientation]];
 }
 
-- (void)updateViewConstraintsForInterfaceOrientation:
-(UIInterfaceOrientation)interfaceOrientation
+- (void)updateViewConstraintsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
    UIView *parentView = [self view];
    UIView *albumsView = [self albumsView];
    UIView *photosView = [self photosView];
    UIImageView *backgroundImageView = [self backgroundImageView];
    UIButton *infoButton = [self infoButton];
-   NSDictionary *views = NSDictionaryOfVariableBindings(
-                                                        photosView, albumsView, backgroundImageView, infoButton);
+   NSDictionary *views = NSDictionaryOfVariableBindings(photosView, albumsView, backgroundImageView, infoButton);
    
    [parentView removeConstraints:[parentView constraints]];
    
@@ -142,8 +138,7 @@
    }
 }
 
-- (void)rotateToInterfaceOrientation:
-(UIInterfaceOrientation)toInterfaceOrientation
+- (void)rotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
    [self updateViewConstraintsForInterfaceOrientation:toInterfaceOrientation];
    
@@ -156,12 +151,9 @@
    [[self backgroundImageView] setImage:image];
 }
 
-- (void)willRotateToInterfaceOrientation:
-(UIInterfaceOrientation)toInterfaceOrientation
-                                duration:(NSTimeInterval)duration
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-   [super willRotateToInterfaceOrientation:toInterfaceOrientation
-                                  duration:duration];
+   [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
    [self rotateToInterfaceOrientation:toInterfaceOrientation];
 }
 

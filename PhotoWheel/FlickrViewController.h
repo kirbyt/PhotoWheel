@@ -10,9 +10,7 @@
 
 @class PhotoAlbum;
 
-@interface FlickrViewController : UIViewController <
-UICollectionViewDataSource, UICollectionViewDelegate,
-UISearchBarDelegate>
+@interface FlickrViewController : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) IBOutlet UICollectionView *collectionView;
 @property (nonatomic, strong) IBOutlet UIView *overlayView;

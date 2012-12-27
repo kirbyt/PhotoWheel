@@ -178,32 +178,18 @@
 - (void)addButtonsToNavigationBar
 {
    UIBarButtonItem *trashButton = nil;
-   trashButton = [[UIBarButtonItem alloc]
-                  initWithBarButtonSystemItem:UIBarButtonSystemItemTrash
-                  target:self
-                  action:@selector(deletePhoto:)];
+   trashButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(deletePhoto:)];
    [trashButton setStyle:UIBarButtonItemStyleBordered];
    
    UIBarButtonItem *actionButton = nil;
-   actionButton = [[UIBarButtonItem alloc]
-                   initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                   target:self
-                   action:@selector(showActionMenu:)];
+   actionButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(showActionMenu:)];
    [actionButton setStyle:UIBarButtonItemStyleBordered];
    [self setActionButton:actionButton];
    
    UIBarButtonItem *slideshowButton = nil;
-   slideshowButton = [[UIBarButtonItem alloc]
-                      initWithTitle:@"Slideshow"
-                      style:UIBarButtonItemStyleBordered
-                      target:self
-                      action:@selector(slideshow:)];
+   slideshowButton = [[UIBarButtonItem alloc] initWithTitle:@"Slideshow" style:UIBarButtonItemStyleBordered target:self action:@selector(slideshow:)];
    
-   UIBarButtonItem *filterButton = [[UIBarButtonItem alloc]
-                                    initWithTitle:@"Edit"
-                                    style:UIBarButtonItemStyleBordered
-                                    target:self
-                                    action:@selector(showFilters:)];
+   UIBarButtonItem *filterButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style:UIBarButtonItemStyleBordered target:self action:@selector(showFilters:)];
    
    NSArray *buttons = @[filterButton, slideshowButton, actionButton, trashButton];
    [[self navigationItem] setRightBarButtonItems:buttons];
@@ -242,8 +228,7 @@
    if ([currentView isKindOfClass:[PhotoBrowserPhotoView class]]==NO) {
       // Load the photo view.
       CGRect frame = [self frameForPageAtIndex:index];
-      PhotoBrowserPhotoView *newView = [[PhotoBrowserPhotoView alloc] 
-                                        initWithFrame:frame];
+      PhotoBrowserPhotoView *newView = [[PhotoBrowserPhotoView alloc]  initWithFrame:frame];
       [newView setBackgroundColor:[UIColor clearColor]];
       [newView setImage:[self imageAtIndex:index]];
       [newView setPhotoBrowserViewController:self];
@@ -351,11 +336,7 @@
 {
    [self cancelChromeDisplayTimer];
    NSTimer *timer = nil;
-   timer = [NSTimer scheduledTimerWithTimeInterval:5.0
-                                            target:self
-                                          selector:@selector(hideChrome)
-                                          userInfo:nil
-                                           repeats:NO];
+   timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(hideChrome) userInfo:nil repeats:NO];
    [self setChromeHideTimer:timer];
 }
 
@@ -391,9 +372,7 @@
    NSDictionary *userInfo = nil;
    userInfo = @{@"index":[NSNumber numberWithInteger:indexToDelete]};
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc postNotificationName:kPhotoWheelDidDeletePhotoAtIndex
-                     object:nil
-                   userInfo:userInfo];
+   [nc postNotificationName:kPhotoWheelDidDeletePhotoAtIndex object:nil userInfo:userInfo];
    
    if (count == 1) {
       // The one and only photo was deleted. Pop back to
@@ -418,11 +397,7 @@
 {
    [self cancelChromeDisplayTimer];
    UIActionSheet *actionSheet = nil;
-   actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                             delegate:self
-                                    cancelButtonTitle:nil
-                               destructiveButtonTitle:@"Delete Photo"
-                                    otherButtonTitles:nil, nil];
+   actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:@"Delete Photo" otherButtonTitles:nil, nil];
    [actionSheet setTag:ACTIONSHEET_TAG_DELETE];
    [actionSheet showFromBarButtonItem:sender animated:YES];
 }
@@ -439,17 +414,12 @@
       UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
       NSArray *activityItems = @[@"Share me", currentPhoto];
       UIActivityViewController *activityVC = nil;
-      activityVC = [[UIActivityViewController alloc]
-                    initWithActivityItems:activityItems
-                    applicationActivities:nil];
+      activityVC = [[UIActivityViewController alloc] initWithActivityItems:activityItems applicationActivities:nil];
       
       UIPopoverController *popover = nil;
-      popover = [[UIPopoverController alloc]
-                 initWithContentViewController:activityVC];
+      popover = [[UIPopoverController alloc] initWithContentViewController:activityVC];
       [popover setDelegate:self];
-      [popover presentPopoverFromBarButtonItem:sender
-                      permittedArrowDirections:UIPopoverArrowDirectionAny
-                                      animated:YES];
+      [popover presentPopoverFromBarButtonItem:sender permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
       [self setActivityPopover:popover];
    }
 }
@@ -481,7 +451,7 @@
    UIPrintInteractionController *controller =
    [UIPrintInteractionController sharedPrintController];
    if(!controller){
-      NSLog(@"Couldn't get shared UIPrintInteractionController!");
+      DLog(@"Couldn't get shared UIPrintInteractionController!");
       return;
    }
    
@@ -491,27 +461,22 @@
    {
       [self startChromeDisplayTimer];
       if(completed && error)
-         NSLog(@"FAILED! due to error in domain %@ with error code %u",
-               error.domain, error.code);
+         DLog(@"FAILED! due to error in domain %@ with error code %u", error.domain, error.code);
    };
    
    UIPrintInfo *printInfo = [UIPrintInfo printInfo];
    [printInfo setOutputType:UIPrintInfoOutputPhoto];
-   [printInfo setJobName:[NSString stringWithFormat:@"photo-%i",
-                          [self currentIndex]]];
+   [printInfo setJobName:[NSString stringWithFormat:@"photo-%i", [self currentIndex]]];
    
    [controller setPrintInfo:printInfo];
    [controller setPrintingItem:currentPhoto];
    
-   [controller presentFromBarButtonItem:[self actionButton]
-                               animated:YES
-                      completionHandler:completionHandler];
+   [controller presentFromBarButtonItem:[self actionButton] animated:YES completionHandler:completionHandler];
 }
 
 #pragma mark - UIActionSheetDelegate methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet 
-clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    [self startChromeDisplayTimer];
    
@@ -589,8 +554,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    UIImage *currentPhoto = [self imageAtIndex:[self currentIndex]];
    NSSet *photos = [NSSet setWithObject:currentPhoto];
    
-   SendEmailController *controller = [[SendEmailController alloc]
-                                      initWithViewController:self];
+   SendEmailController *controller = [[SendEmailController alloc] initWithViewController:self];
    [controller setPhotos:photos];
    [controller sendEmail];
    
@@ -670,15 +634,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 - (CIFilter *)affineTileFilter
 {
    CGFloat scaleFactor = RAND_IN_RANGE(0.2, 0.8);
-   CGAffineTransform transform = CGAffineTransformMakeScale(scaleFactor,
-                                                            scaleFactor);
-   transform = CGAffineTransformRotate(transform,
-                                       RAND_IN_RANGE(0.2, M_PI/2));
+   CGAffineTransform transform = CGAffineTransformMakeScale(scaleFactor, scaleFactor);
+   transform = CGAffineTransformRotate(transform, RAND_IN_RANGE(0.2, M_PI/2));
    
    CIFilter *filter = [CIFilter filterWithName:@"CIAffineTile"];
-   [filter setValue:[NSValue valueWithBytes:&transform
-                                   objCType:@encode(CGAffineTransform)]
-             forKey:@"inputTransform"];
+   [filter setValue:[NSValue valueWithBytes:&transform objCType:@encode(CGAffineTransform)] forKey:@"inputTransform"];
    return filter;
 }
 
@@ -707,8 +667,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 - (CIFilter *)circleSplashDistortionFilter
 {
-   CIFilter *filter = [CIFilter
-                       filterWithName:@"CICircleSplashDistortion"];
+   CIFilter *filter = [CIFilter filterWithName:@"CICircleSplashDistortion"];
    return filter;
 }
 - (void)randomizeFilters
@@ -745,8 +704,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    [self circleSplashDistortionFilter];
    [[self imageFilters] addObject:circleSplashDistortionFilter];
    
-   CIImage *thumbnailCIImage = [CIImage imageWithCGImage:
-                                [[self filteredThumbnailImage] CGImage]];
+   CIImage *thumbnailCIImage = [CIImage imageWithCGImage:[[self filteredThumbnailImage] CGImage]];
    CGRect extents = [thumbnailCIImage extent];
    
    [self setFilterCenterFactor:RAND_IN_RANGE(0.1, 0.9)];
@@ -772,17 +730,14 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
       }
       CIImage *filterResult = [filter outputImage];
       
-      CGImageRef filteredCGImage = [[self ciContext]
-                                    createCGImage:filterResult
-                                    fromRect:[thumbnailCIImage extent]];
+      CGImageRef filteredCGImage = [[self ciContext] createCGImage:filterResult fromRect:[thumbnailCIImage extent]];
       UIImage *filteredImage = [UIImage imageWithCGImage:filteredCGImage];
       CFRelease(filteredCGImage);
       
       [[self filteredThumbnailPreviewImages] addObject:filteredImage];
       
       UIButton *filterButton = [[self filterButtons] objectAtIndex:i];
-      [filterButton setImage:filteredImage
-                    forState:UIControlStateNormal];
+      [filterButton setImage:filteredImage forState:UIControlStateNormal];
    }
 }
 - (void)applySpecifiedFilter:(CIFilter *)filter
@@ -801,8 +756,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
       fCenter.x = (inputExtents.size.width * [self filterCenterFactor]);
       fCenter.y = (inputExtents.size.height * [self filterCenterFactor]);
       
-      CIVector *inputCenter = [CIVector vectorWithX:fCenter.x
-                                                  Y:fCenter.y];
+      CIVector *inputCenter = [CIVector vectorWithX:fCenter.x Y:fCenter.y];
       [filter setValue:inputCenter forKey:@"inputCenter"];
    }
    
@@ -815,14 +769,11 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
    } else {
       cgImageRect = inputExtents;
    }
-   CGImageRef filteredLargeCGImage = [[self ciContext]
-                                      createCGImage:filteredLargeImage
-                                      fromRect:cgImageRect];
+   CGImageRef filteredLargeCGImage = [[self ciContext] createCGImage:filteredLargeImage fromRect:cgImageRect];
    
    // Convert the result to a UIImage, display it, and save it for later.
    UIImage *filteredImage = [UIImage imageWithCGImage:filteredLargeCGImage];
-   [[[self photoViewCache] objectAtIndex:[self currentIndex]]
-    setImage:filteredImage];
+   [[[self photoViewCache] objectAtIndex:[self currentIndex]] setImage:filteredImage];
    [self setFilteredLargeImage:filteredImage];
    CFRelease(filteredLargeCGImage);
 }
@@ -830,19 +781,16 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 - (IBAction)applyFilter:(id)sender
 {
    CIFilter *filter = [[self imageFilters] objectAtIndex:[sender tag]];
-   CIImage *inputCIImage = [CIImage imageWithCGImage:
-                            [[self filteredLargeImage] CGImage]];
+   CIImage *inputCIImage = [CIImage imageWithCGImage:[[self filteredLargeImage] CGImage]];
    [filter setValue:inputCIImage forKey:@"inputImage"];
    
    [self applySpecifiedFilter:filter];
-   [self setFilteredThumbnailImage:
-    [[self filteredThumbnailPreviewImages] objectAtIndex:[sender tag]]];
+   [self setFilteredThumbnailImage:[[self filteredThumbnailPreviewImages] objectAtIndex:[sender tag]]];
    [self randomizeFilters];
 }
 
 - (IBAction)enhanceImage:(id)sender {
-   CIImage *largeCIImage = [CIImage imageWithCGImage:
-                            [[self filteredLargeImage] CGImage]];
+   CIImage *largeCIImage = [CIImage imageWithCGImage:[[self filteredLargeImage] CGImage]];
    NSArray *autoAdjustmentFilters = [largeCIImage autoAdjustmentFilters];
    CIImage *enhancedImage = largeCIImage;
    for (CIFilter *filter in autoAdjustmentFilters) {
@@ -853,12 +801,8 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 }
 
 - (IBAction)zoomToFaces:(id)sender {
-   NSDictionary *detectorOptions =
-   @{CIDetectorAccuracy : CIDetectorAccuracyLow};
-   CIDetector *faceDetector = [CIDetector
-                               detectorOfType:CIDetectorTypeFace
-                               context:nil
-                               options:detectorOptions];
+   NSDictionary *detectorOptions = @{CIDetectorAccuracy : CIDetectorAccuracyLow};
+   CIDetector *faceDetector = [CIDetector detectorOfType:CIDetectorTypeFace context:nil options:detectorOptions];
    
    CIImage *largeCIImage = [CIImage imageWithCGImage:[[self filteredLargeImage] CGImage]];
    NSArray *faces = [faceDetector featuresInImage:largeCIImage options:nil];
@@ -882,12 +826,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
       
       [self applySpecifiedFilter:cropFilter];
    } else {
-      UIAlertView *noFacesAlert = [[UIAlertView alloc]
-                                   initWithTitle:@"No Faces"
-                                   message:@"Sorry, I couldn't find any faces in this picture."
-                                   delegate:nil
-                                   cancelButtonTitle:@"OK"
-                                   otherButtonTitles:nil];
+      UIAlertView *noFacesAlert = [[UIAlertView alloc] initWithTitle:@"No Faces" message:@"Sorry, I couldn't find any faces in this picture." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
       [noFacesAlert show];
    }
 }

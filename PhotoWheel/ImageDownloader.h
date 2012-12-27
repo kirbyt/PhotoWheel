@@ -8,14 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-typedef void(^ImageDownloaderCompletionBlock)(UIImage *image,
-NSError *);                                                             // 1
+typedef void(^ImageDownloaderCompletionBlock)(UIImage *image, NSError *);
 
 @interface ImageDownloader : NSObject
 
-@property (nonatomic, strong, readonly) UIImage *image;                 // 2
+@property (nonatomic, strong, readonly) UIImage *image;
 
-- (void)downloadImageAtURL:(NSURL *)URL
-                completion:(ImageDownloaderCompletionBlock)completion;  // 3
+- (void)downloadImageAtURL:(NSURL *)URL completion:(ImageDownloaderCompletionBlock)completion;
 
 @end

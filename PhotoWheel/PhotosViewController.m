@@ -13,10 +13,8 @@
 #import "SendEmailController.h"
 #import "FlickrViewController.h"
 
-@interface PhotosViewController () <UIActionSheetDelegate,
-UIImagePickerControllerDelegate, UINavigationControllerDelegate,
-UICollectionViewDataSource, UICollectionViewDelegate,
-NSFetchedResultsControllerDelegate, SendEmailControllerDelegate>
+@interface PhotosViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, SendEmailControllerDelegate>
+
 @property (nonatomic, strong) SendEmailController *sendEmailController;
 @property (nonatomic, strong) PhotoAlbum *photoAlbum;
 @property (nonatomic, weak) IBOutlet UIToolbar *toolbar;
@@ -29,10 +27,8 @@ NSFetchedResultsControllerDelegate, SendEmailControllerDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
 @property (nonatomic, weak) IBOutlet UIImageView *backgroundImageView;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint
-*toolbarWidthConstraint;
-@property (nonatomic, weak) IBOutlet NSLayoutConstraint
-*collectionViewVerticalSpacingConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *toolbarWidthConstraint;
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *collectionViewVerticalSpacingConstraint;
 
 @property (nonatomic, assign, readwrite) NSInteger selectedPhotoIndex;
 @property (nonatomic, assign, readwrite) CGRect selectedPhotoFrame;
@@ -55,25 +51,14 @@ NSFetchedResultsControllerDelegate, SendEmailControllerDelegate>
 {
    [super viewDidLoad];
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-   [nc addObserver:self
-          selector:@selector(didSelectAlbum:)
-              name:kPhotoWheelDidSelectAlbum
-            object:nil];
+   [nc addObserver:self selector:@selector(didSelectAlbum:) name:kPhotoWheelDidSelectAlbum object:nil];
 
-   [nc addObserver:self
-          selector:@selector(didDeletePhotoAtIndex:)
-              name:kPhotoWheelDidDeletePhotoAtIndex
-            object:nil];
+   [nc addObserver:self selector:@selector(didDeletePhotoAtIndex:) name:kPhotoWheelDidDeletePhotoAtIndex object:nil];
    
-   [nc addObserver:self
-          selector:@selector(handleCloudUpdate:)
-              name:kRefetchAllDataNotification
-            object:[[UIApplication sharedApplication] delegate]];
+   [nc addObserver:self selector:@selector(handleCloudUpdate:) name:kRefetchAllDataNotification object:[[UIApplication sharedApplication] delegate]];
 
    UIImage *image = [UIImage imageNamed:@"1x1-transparent"];
-   [[self toolbar] setBackgroundImage:image
-                   forToolbarPosition:UIToolbarPositionAny
-                           barMetrics:UIBarMetricsDefault];
+   [[self toolbar] setBackgroundImage:image forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -132,13 +117,7 @@ NSFetchedResultsControllerDelegate, SendEmailControllerDelegate>
    PhotoAlbum *album = [self photoAlbum];
    NSManagedObjectContext *context = [album managedObjectContext];
    NSError *error = nil;
-   if (![context save:&error])
-   {
-      // Replace this implementation with code to handle the
-      // error appropriately.
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-      abort();
-   }
+   ZAssert([context save:&error], @"Unresolved error %@, %@", error, [error userInfo]);
 }
 
 - (UIImagePickerController *)imagePickerController
@@ -147,8 +126,7 @@ NSFetchedResultsControllerDelegate, SendEmailControllerDelegate>
       return _imagePickerController;
    }
 
-   UIImagePickerController *imagePickerController =  nil;
-   imagePickerController = [[UIImagePickerController alloc] init];
+   UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
    [imagePickerController setDelegate:self];
    [self setImagePickerController:imagePickerController];
    
@@ -210,25 +188,17 @@ NSFetchedResultsControllerDelegate, SendEmailControllerDelegate>
    NSString *message;
    NSString *name = [[self photoAlbum] name];
    if ([name length] > 0) {
-      message = [NSString stringWithFormat:
-                 @"Delete the photo album \"%@\". This action cannot be undone.",
-                 name];
+      message = [NSString stringWithFormat: @"Delete the photo album \"%@\". This action cannot be undone.", name];
    } else {
       message = @"Delete this photo album? This action cannot be undone.";
    }
-   UIAlertView *alertView = [[UIAlertView alloc]
-                             initWithTitle:@"Delete Photo Album"
-                             message:message
-                             delegate:self
-                             cancelButtonTitle:@"Cancel"
-                             otherButtonTitles:@"OK", nil];
+   UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Delete Photo Album" message:message delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
    [alertView show];
 }
 
 #pragma mark - UIAlertViewDelegate methods
 
-- (void)alertView:(UIAlertView *)alertView
-clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    if (buttonIndex == 1) {
       PhotoAlbum *album = [self photoAlbum];
@@ -242,8 +212,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 #pragma mark - UIActionSheetDelegate methods
 
-- (void)actionSheet:(UIActionSheet *)actionSheet
-clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
    // Do nothing if the user taps outside the action
    // sheet (thus closing the popover containing the
@@ -330,8 +299,7 @@ clickedButtonAtIndex:(NSInteger)buttonIndex
 
 #pragma mark - UIImagePickerControllerDelegate methods
 
-- (void)imagePickerController:(UIImagePickerController *)picker
-didFinishPickingMediaWithInfo:(NSDictionary *)info
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
    // If the popover controller is available,
    // assume the photo is selected from the library
@@ -374,39 +342,23 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
       return nil;
    }
    
-   NSString *cacheName = [NSString stringWithFormat:@"%@-%@",
-                          [self.photoAlbum name], [self.photoAlbum dateAdded]];
+   NSString *cacheName = [NSString stringWithFormat:@"%@-%@", [self.photoAlbum name], [self.photoAlbum dateAdded]];
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-   NSEntityDescription *entityDescription =
-   [NSEntityDescription entityForName:@"Photo"
-               inManagedObjectContext:context];
+   NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:context];
    [fetchRequest setEntity:entityDescription];
    
-   NSSortDescriptor *sortDescriptor =
-   [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES];
-   [fetchRequest setSortDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+   NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateAdded" ascending:YES];
+   [fetchRequest setSortDescriptors:@[sortDescriptor]];
 
-   NSPredicate *predicate = nil;
-   predicate = [NSPredicate predicateWithFormat:@"photoAlbum = %@", [self photoAlbum]];
+   NSPredicate *predicate = [NSPredicate predicateWithFormat:@"photoAlbum = %@", [self photoAlbum]];
    [fetchRequest setPredicate:predicate];
    
-   NSFetchedResultsController *newFetchedResultsController =
-   [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                       managedObjectContext:context
-                                         sectionNameKeyPath:nil
-                                                  cacheName:cacheName];
+   NSFetchedResultsController *newFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:cacheName];
    [newFetchedResultsController setDelegate:self];
    [self setFetchedResultsController:newFetchedResultsController];
    
    NSError *error = nil;
-   if (![[self fetchedResultsController] performFetch:&error])
-   {
-      // Replace this implementation with code to handle the
-      // error appropriately.
-      
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-      abort();
-   }
+   ZAssert([[self fetchedResultsController] performFetch:&error], @"Unresolved error %@, %@", error, [error userInfo]);
    
    return _fetchedResultsController;
 }
@@ -418,20 +370,16 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
 
 #pragma mark - UICollectionViewDataSource and UICollectionViewDelegate
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView
-     numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
    NSFetchedResultsController *frc = [self fetchedResultsController];
    NSInteger count = [[[frc sections] objectAtIndex:section] numberOfObjects];
    return count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-                  cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   ThumbnailCell *cell =
-   [collectionView dequeueReusableCellWithReuseIdentifier:@"ThumbnailCell"
-                                             forIndexPath:indexPath];
+   ThumbnailCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ThumbnailCell" forIndexPath:indexPath];
 
    NSFetchedResultsController *frc = [self fetchedResultsController];
    Photo *photo = [frc objectAtIndexPath:indexPath];
@@ -440,8 +388,7 @@ didFinishPickingMediaWithInfo:(NSDictionary *)info
    return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView
-didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
    [self setSelectedPhotoIndex:[indexPath item]];
    
@@ -479,8 +426,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
    [self updateViewConstraintsForInterfaceOrientation:[self interfaceOrientation]];
 }
 
-- (void)updateViewConstraintsForInterfaceOrientation:
-(UIInterfaceOrientation)interfaceOrientation
+- (void)updateViewConstraintsForInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
    UICollectionView *collectionView = [self collectionView];
    [collectionView removeConstraints:[collectionView constraints]];
@@ -500,15 +446,12 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
    }
 }
 
-- (void)willRotateToInterfaceOrientation:
-(UIInterfaceOrientation)toInterfaceOrientation
-                                duration:(NSTimeInterval)duration
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
    [self rotateToInterfaceOrientation:toInterfaceOrientation];
 }
 
-- (void)rotateToInterfaceOrientation:
-(UIInterfaceOrientation)toInterfaceOrientation
+- (void)rotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
 {
    [self updateViewConstraintsForInterfaceOrientation:toInterfaceOrientation];
    
@@ -528,8 +471,7 @@ didSelectItemAtIndexPath:(NSIndexPath *)indexPath
    PhotoAlbum *album = [self photoAlbum];
    NSSet *photos = [album photos];
    
-   SendEmailController *controller = [[SendEmailController alloc]
-                                      initWithViewController:self];
+   SendEmailController *controller = [[SendEmailController alloc] initWithViewController:self];
    [controller setPhotos:photos];
    [controller sendEmail];
    

@@ -89,12 +89,6 @@
    _currentIndex = currentIndex;
 }
 
-//- (void)viewWillAppear:(BOOL)animated
-//{
-//   [super viewWillAppear:animated];
-//   [self setCurrentIndex:[self startIndex]];
-//}
-
 - (BOOL)shouldAutorotate
 {
    return NO;

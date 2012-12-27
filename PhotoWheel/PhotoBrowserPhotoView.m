@@ -25,18 +25,13 @@
       [self setShowsVerticalScrollIndicator:NO];
       [self loadSubviewsWithFrame:frame];
       [self setBackgroundColor:[UIColor clearColor]];
-      [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-       UIViewAutoresizingFlexibleHeight];
+      [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight];
       
-      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc]
-                                           initWithTarget:self
-                                           action:@selector(doubleTapped:)];
+      UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTapped:)];
       [doubleTap setNumberOfTapsRequired:2];
       [self addGestureRecognizer:doubleTap];
       
-      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                     initWithTarget:self
-                                     action:@selector(tapped:)];
+      UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapped:)];
       [tap requireGestureRecognizerToFail:doubleTap];
       [self addGestureRecognizer:tap];
    }
@@ -47,8 +42,7 @@
 {
    frame.origin = CGPointMake(0, 0);
    UIImageView *newImageView = [[UIImageView alloc] initWithFrame:frame];
-   [newImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|
-    UIViewAutoresizingFlexibleHeight];
+   [newImageView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
    [newImageView setContentMode:UIViewContentModeScaleAspectFit];
    [self addSubview:newImageView];
    

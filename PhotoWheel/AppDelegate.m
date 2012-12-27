@@ -21,9 +21,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-   [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:HOCKEYKIT_BETA_APPKEY
-                                                        liveIdentifier:HOCKEYKIT_LIVE_APPKEY
-                                                              delegate:self];
+   [[BITHockeyManager sharedHockeyManager] configureWithBetaIdentifier:HOCKEYKIT_BETA_APPKEY liveIdentifier:HOCKEYKIT_LIVE_APPKEY delegate:self];
    [[BITHockeyManager sharedHockeyManager] startManager];
    
    [self.window makeKeyAndVisible];

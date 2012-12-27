@@ -27,9 +27,7 @@
    [self setFlickrPhotos:[NSArray array]];
    [[self overlayView] setAlpha:0.0];
    
-   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                  initWithTarget:self
-                                  action:@selector(overlayViewTapped:)];
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(overlayViewTapped:)];
    [[self overlayView] addGestureRecognizer:tap];
    
    [[self collectionView] setAlwaysBounceVertical:YES];
@@ -48,14 +46,7 @@
    PhotoAlbum *photoAlbum = [self photoAlbum];
    NSManagedObjectContext *context = [photoAlbum managedObjectContext];
    NSError *error = nil;
-   if (![context save:&error])
-   {
-      // Replace this implementation with code to handle
-      // the error appropriately.
-      NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-      abort();
-   }
-
+   ZAssert([context save:&error], @"Unresolved error %@, %@", error, [error userInfo]);
    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -185,8 +176,7 @@
       SimpleFlickrAPI *flickr = [[SimpleFlickrAPI alloc] init];
       NSArray *photos = [flickr photosWithSearchString:searchString];
       
-      NSMutableArray *downloaders = [[NSMutableArray alloc]
-                                     initWithCapacity:[photos count]];
+      NSMutableArray *downloaders = [[NSMutableArray alloc] initWithCapacity:[photos count]];
       for (NSInteger index = 0; index < [photos count]; index++) {
          ImageDownloader *downloader = [[ImageDownloader alloc] init];
          [downloaders addObject:downloader];
@@ -232,19 +222,15 @@
 
 #pragma mark - UICollectionViewDataSource and UICollectionViewDelegate
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView
-numberOfItemsInSection:(NSInteger)section
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
    NSInteger count = [[self flickrPhotos] count];
    return count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
-cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   UICollectionViewCell *cell = [collectionView
-      dequeueReusableCellWithReuseIdentifier:@"PhotoCell"
-      forIndexPath:indexPath];
+   UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
 
    UIImageView *photoImageView = (UIImageView *)[cell viewWithTag:1];
    UIImageView *selectedImageView = (UIImageView *)[cell viewWithTag:2];
@@ -278,20 +264,16 @@ cellForItemAtIndexPath:(NSIndexPath *)indexPath
    return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView
-didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   UICollectionViewCell *cell = nil;
-   cell = [collectionView cellForItemAtIndexPath:indexPath];
+   UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
    UIImageView *selectedImageView = (UIImageView *)[cell viewWithTag:2];
    [selectedImageView setHidden:NO];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView
-didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-   UICollectionViewCell *cell = nil;
-   cell = [collectionView cellForItemAtIndexPath:indexPath];
+   UICollectionViewCell *cell = [collectionView cellForItemAtIndexPath:indexPath];
    UIImageView *selectedImageView = (UIImageView *)[cell viewWithTag:2];
    [selectedImageView setHidden:YES];
 }

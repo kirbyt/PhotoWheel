@@ -29,8 +29,7 @@
    // Offset the sourceImageView frame by the height of the status bar.
    // This prevents the image from dropping down after the view controller
    // is popped from the stack.
-   UIInterfaceOrientation orientation;
-   orientation = [sourceViewController interfaceOrientation];
+   UIInterfaceOrientation orientation = [sourceViewController interfaceOrientation];
    BOOL isLandscape = UIInterfaceOrientationIsLandscape(orientation);
 
    UIApplication *app = [UIApplication sharedApplication];
@@ -41,21 +40,17 @@
    } else {
       statusBarHeight = statusBarFrame.size.height;
    }
-   CGRect newFrame;
-   newFrame = CGRectOffset([sourceImageView frame], 0, -statusBarHeight);
+   CGRect newFrame = CGRectOffset([sourceImageView frame], 0, -statusBarHeight);
    [sourceImageView setFrame:newFrame];
-   
    
    NSArray *viewControllers = [self viewControllers];
    NSInteger count = [viewControllers count];
    NSInteger index = count - 2;
    
-   id destinationViewController = nil;
-   destinationViewController = [viewControllers objectAtIndex:index];
+   id destinationViewController = [viewControllers objectAtIndex:index];
    UIView *destinationView = [destinationViewController view];
    UIImage *destinationViewImage = [destinationView pw_imageSnapshot];
-   UIImageView *destinationImageView = nil;
-   destinationImageView = [[UIImageView alloc] initWithImage:destinationViewImage];
+   UIImageView *destinationImageView = [[UIImageView alloc] initWithImage:destinationViewImage];
    
    [super popViewControllerAnimated:NO];
    
@@ -63,12 +58,10 @@
    [destinationView addSubview:sourceImageView];
    
    CGRect selectedPhotoFrame = [destinationViewController selectedPhotoFrame];
-   CGPoint shrinkToPoint = CGPointMake(CGRectGetMidX(selectedPhotoFrame),
-                                       CGRectGetMidY(selectedPhotoFrame));
+   CGPoint shrinkToPoint = CGPointMake(CGRectGetMidX(selectedPhotoFrame), CGRectGetMidY(selectedPhotoFrame));
    
    void (^animations)(void) = ^ {
-      [sourceImageView setFrame:CGRectMake(shrinkToPoint.x, shrinkToPoint.y,
-                                           0, 0)];
+      [sourceImageView setFrame:CGRectMake(shrinkToPoint.x, shrinkToPoint.y, 0, 0)];
       [sourceImageView setAlpha:0.0];
       
       // Animate the nav bar too.
@@ -86,11 +79,7 @@
       [destinationImageView removeFromSuperview];
    };
    
-   [UIView transitionWithView:destinationView
-                     duration:0.3
-                      options:UIViewAnimationOptionTransitionNone
-                   animations:animations
-                   completion:completion];
+   [UIView transitionWithView:destinationView duration:0.3 options:UIViewAnimationOptionTransitionNone animations:animations completion:completion];
    
    return sourceViewController;
 }

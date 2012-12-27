@@ -37,8 +37,7 @@ typedef enum  {
 - (NSInteger)wheelViewNumberOfCells:(WheelView *)wheelView;
 - (WheelViewCell *)wheelView:(WheelView *)wheelView cellAtIndex:(NSInteger)index;
 @optional
-- (void)wheelView:(WheelView *)wheelView
-didSelectCellAtIndex:(NSInteger)index;
+- (void)wheelView:(WheelView *)wheelView didSelectCellAtIndex:(NSInteger)index;
 @end
 
 @protocol WheelViewDelegate <NSObject>

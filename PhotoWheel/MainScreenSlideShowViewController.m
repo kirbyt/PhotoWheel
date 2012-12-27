@@ -13,8 +13,7 @@
 @property (nonatomic, strong) NSTimer *slideAdvanceTimer;
 @property (nonatomic, assign, getter = isChromeHidden) BOOL chromeHidden;
 @property (nonatomic, strong) NSTimer *chromeHideTimer;
-@property (nonatomic, strong) ExternalSlideShowViewController
-                                    *externalDisplaySlideshowController;
+@property (nonatomic, strong) ExternalSlideShowViewController *externalDisplaySlideshowController;
 @property (nonatomic, strong) UIWindow *externalScreenWindow;
 @end
 
@@ -47,27 +46,16 @@
     
     // Add observers for screen connect/disconnect
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self
-           selector:@selector(screenDidConnect:)
-               name:UIScreenDidConnectNotification
-             object:nil];
-    [nc addObserver:self
-           selector:@selector(screenDidDisconnect:)
-               name:UIScreenDidDisconnectNotification
-             object:nil];
+    [nc addObserver:self selector:@selector(screenDidConnect:) name:UIScreenDidConnectNotification object:nil];
+    [nc addObserver:self selector:@selector(screenDidDisconnect:) name:UIScreenDidDisconnectNotification object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0
-                                          target:self
-                                        selector:@selector(advanceSlide:)
-                                        userInfo:nil
-                                         repeats:YES];
+    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(advanceSlide:) userInfo:nil repeats:YES];
     [self setSlideAdvanceTimer:timer];
-    
     [self startChromeDisplayTimer];
 }
 
@@ -89,57 +77,36 @@
 - (void)dealloc
 {
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc removeObserver:self
-                  name:UIScreenDidConnectNotification
-                object:nil];
-    [nc removeObserver:self
-                  name:UIScreenDidDisconnectNotification
-                object:nil];
+    [nc removeObserver:self name:UIScreenDidConnectNotification object:nil];
+    [nc removeObserver:self name:UIScreenDidDisconnectNotification object:nil];
 }
 
 - (void)setCurrentIndex:(NSInteger)currentIndex
 {
     [super setCurrentIndex:currentIndex];
-    [[self externalDisplaySlideshowController]
-            setCurrentIndex:currentIndex];
-    
+    [[self externalDisplaySlideshowController] setCurrentIndex:currentIndex];
+   
     [[self currentPhotoView] setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *photoTapRecognizer =
-    [[UITapGestureRecognizer alloc]
-     initWithTarget:self
-     action:@selector(photoTapped:)];
+    UITapGestureRecognizer *photoTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(photoTapped:)];
     [[self currentPhotoView] addGestureRecognizer:photoTapRecognizer];
 }
 
 - (void)updateNavBarButtonsForPlayingState:(BOOL)playing
 {
-    UIBarButtonItem *rewindButton = [[UIBarButtonItem alloc]
-                 initWithBarButtonSystemItem:UIBarButtonSystemItemRewind
-                 target:self
-                 action:@selector(backOnePhoto:)];
+    UIBarButtonItem *rewindButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRewind target:self action:@selector(backOnePhoto:)];
     [rewindButton setStyle:UIBarButtonItemStyleBordered];
     UIBarButtonItem *playPauseButton;
     if (playing) {
-        playPauseButton = [[UIBarButtonItem alloc]
-                   initWithBarButtonSystemItem:UIBarButtonSystemItemPause
-                   target:self
-                   action:@selector(pause:)];
+        playPauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pause:)];
     } else {
-        playPauseButton = [[UIBarButtonItem alloc]
-                   initWithBarButtonSystemItem:UIBarButtonSystemItemPlay
-                   target:self
-                   action:@selector(resume:)];
+        playPauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resume:)];
     }
     [playPauseButton setStyle:UIBarButtonItemStyleBordered];
-    UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc]
-              initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward
-              target:self
-              action:@selector(forwardOnePhoto:)];
+    UIBarButtonItem *forwardButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFastForward target:self action:@selector(forwardOnePhoto:)];
     [forwardButton setStyle:UIBarButtonItemStyleBordered];
     
-    NSArray *slideShowControls = @[forwardButton, playPauseButton,
-                                    rewindButton];
-    
+    NSArray *slideShowControls = @[forwardButton, playPauseButton, rewindButton];
+   
     [[self navigationItem] setRightBarButtonItems:slideShowControls];
 }
 
@@ -210,30 +177,25 @@
     [self setExternalScreenWindow:nil];
     
     // Create a new window and move it to the external screen
-    [self setExternalScreenWindow:[[UIWindow alloc]
-                       initWithFrame:[externalScreen applicationFrame]]];
+    [self setExternalScreenWindow:[[UIWindow alloc] initWithFrame:[externalScreen applicationFrame]]];
     [[self externalScreenWindow] setScreen:externalScreen];
     
     // Create a ExternalSlideShowViewController to handle slides on the
     // external screen
-    ExternalSlideShowViewController *externalSlideController =
-            [[ExternalSlideShowViewController alloc] init];
+    ExternalSlideShowViewController *externalSlideController = [[ExternalSlideShowViewController alloc] init];
     [self setExternalDisplaySlideshowController:externalSlideController];
     [externalSlideController setPhotos:[self photos]];
     [externalSlideController setCurrentIndex:[self currentIndex]];
     
     // Add the external slideshow view to the external window and
     // resize it to fit
-    [[self externalScreenWindow] addSubview:
-            [externalSlideController view]];
-    [[externalSlideController view]
-            setFrame:[[self externalScreenWindow] frame]];
-    
+    [[self externalScreenWindow] addSubview:[externalSlideController view]];
+    [[externalSlideController view] setFrame:[[self externalScreenWindow] frame]];
+   
     // Set the external screen view's background color to match the
     // one configured in the storyboard
-    [[externalSlideController view]
-     setBackgroundColor:[[self view] backgroundColor]];
-    
+    [[externalSlideController view] setBackgroundColor:[[self view] backgroundColor]];
+   
     // Show the window
     [[self externalScreenWindow] makeKeyAndVisible];
 }
@@ -283,11 +245,7 @@
 {
    [self cancelChromeDisplayTimer];
    NSTimer *timer = nil;
-   timer = [NSTimer scheduledTimerWithTimeInterval:5.0
-                                            target:self
-                                          selector:@selector(hideChrome)
-                                          userInfo:nil
-                                           repeats:NO];
+   timer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(hideChrome) userInfo:nil repeats:NO];
    [self setChromeHideTimer:timer];
 }
 
