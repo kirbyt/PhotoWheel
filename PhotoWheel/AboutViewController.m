@@ -43,11 +43,11 @@
 - (IBAction)visitWebsite:(id)sender
 {
    NSArray *websites = [NSArray arrayWithObjects:
-                        [NSURL URLWithString:@"http://learnipadprogramming.com/"],
-                        [NSURL URLWithString:@"http://kirbyturner.com/"],
+                        [NSURL URLWithString:@"http://www.learningipadprogramming.com/"],
+                        [NSURL URLWithString:@"http://www.kirbyturner.com/"],
                         [NSURL URLWithString:@"http://www.atomicbird.com/"],
                         [NSURL URLWithString:@"http://www.elucidata.net/"],
-                        [NSURL URLWithString:@"http://learnipadprogramming.com/source-code/"],
+                        [NSURL URLWithString:@"http://www.learningipadprogramming.com/source-code/"],
                         nil];
 
    NSURL *URL;
