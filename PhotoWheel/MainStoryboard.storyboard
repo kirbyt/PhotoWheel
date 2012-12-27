@@ -563,7 +563,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="yFS-EO-7iG"/>
                     <connections>
-                        <outlet property="filterViewContainer" destination="RaZ-P2-aEM" id="lF7-0n-HkU"/>
+                        <outlet property="filterViewContainer" destination="RaZ-P2-aEM" id="pFV-or-K5G"/>
                         <outlet property="scrollView" destination="5HU-Rz-knx" id="IE3-VD-9K1"/>
                         <outletCollection property="filterButtons" destination="bOc-FB-RJP" id="e3C-xh-8SZ"/>
                         <outletCollection property="filterButtons" destination="xsL-go-7zH" id="zLa-Nv-Xfz"/>

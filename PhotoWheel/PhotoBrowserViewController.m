@@ -84,6 +84,7 @@
 - (void)viewWillAppear:(BOOL)animated 
 {
    [super viewWillAppear:animated];
+   [[self filterViewContainer] setAlpha:0.0];
    [self setScrollViewContentSize];
    
    if ([self slideShowController] == nil) {
@@ -97,7 +98,6 @@
        
    [self setTitleWithCurrentIndex];
    [self startChromeDisplayTimer];
-   [[self filterViewContainer] setAlpha:0.0];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
