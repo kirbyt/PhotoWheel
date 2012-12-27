@@ -22,6 +22,9 @@
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="oSY-Qo-nLV" kind="modal" identifier="AboutSceneSegue" modalPresentationStyle="formSheet" id="zSY-bj-UiD"/>
+                                </connections>
                             </button>
                             <containerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N6F-Om-ngM">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -59,7 +62,6 @@
                         <outlet property="infoButton" destination="HTP-Dd-cwR" id="ma9-0Y-28T"/>
                         <outlet property="photosView" destination="nGS-5N-r9u" id="aX1-fE-COe"/>
                         <segue destination="LnP-Yu-328" kind="custom" identifier="PushPhotoBrowser" customClass="CustomPushSegue" id="3wU-s1-abI"/>
-                        <segue destination="oSY-Qo-nLV" kind="modal" identifier="AboutSceneSegue" modalPresentationStyle="formSheet" id="3mY-tZ-phB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYF-XV-cvs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -608,7 +610,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="5oA-f2-WMY"/>
                                     <barButtonItem systemItem="done" id="0WW-Ha-yeL">
                                         <connections>
-                                            <action selector="done:" destination="oSY-Qo-nLV" id="YHt-Q5-k3Q"/>
+                                            <action selector="done:" destination="oSY-Qo-nLV" id="EZr-8t-2Z4"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>
@@ -839,7 +841,6 @@
         <class className="MainViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/MainViewController.h"/>
             <relationships>
-                <relationship kind="action" name="dismissAbout:"/>
                 <relationship kind="action" name="pushPhotoBrowser:"/>
                 <relationship kind="outlet" name="albumsView" candidateClass="UIView"/>
                 <relationship kind="outlet" name="backgroundImageView" candidateClass="UIImageView"/>

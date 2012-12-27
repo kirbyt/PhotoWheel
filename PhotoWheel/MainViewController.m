@@ -19,8 +19,6 @@
 @property (nonatomic, weak) IBOutlet UIButton *infoButton;
 @property (nonatomic, assign, readwrite) CGRect selectedPhotoFrame;
 @property (nonatomic, strong, readwrite) UIImage *selectedPhotoImage;
-//- (IBAction)dismissAbout:(UIStoryboardSegue *)segue;
-- (IBAction)dismissAbout:(id)sender;
 - (IBAction)pushPhotoBrowser:(id)sender;
 @end
 
@@ -51,14 +49,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-// The unwind action has been replaced with a standard action
-// as a workaround for a particular unwind segue bug.
-// - (IBAction)dismissAbout:(UIStoryboardSegue *)segue
-- (IBAction)dismissAbout:(id)sender
-{
-   [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)pushPhotoBrowser:(id)sender
