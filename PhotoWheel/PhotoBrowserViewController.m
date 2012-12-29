@@ -408,6 +408,9 @@
          // cache slot.
          [self unloadPage:nextIndex + 1];
       }
+      // Reset the photo view cache. Don't want stale photos to display
+      // after the delete.
+      [self initPhotoViewCache];
       [self setCurrentIndex:nextIndex];
       [self setScrollViewContentSize];
    }
