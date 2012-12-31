@@ -520,7 +520,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="56m-Zd-lvD" firstAttribute="leading" secondItem="RaZ-P2-aEM" secondAttribute="leading" type="default" id="174-SJ-aoR"/>
                                     <constraint firstItem="xcG-2L-HPX" firstAttribute="top" secondItem="FRR-3W-tcA" secondAttribute="top" type="default" id="4yp-Pl-imo"/>
@@ -893,9 +893,6 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
-        </class>
-        <class className="UICollectionViewLayout" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
         <class className="WheelView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WheelView.h"/>
