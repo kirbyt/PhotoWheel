@@ -398,7 +398,6 @@
       return nil;
    }
    
-   NSString *cacheName = [NSString stringWithFormat:@"%@-%@", [self.photoAlbum name], [self.photoAlbum dateAdded]];
    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Photo" inManagedObjectContext:context];
    [fetchRequest setEntity:entityDescription];
@@ -409,7 +408,7 @@
    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"photoAlbum = %@", [self photoAlbum]];
    [fetchRequest setPredicate:predicate];
    
-   NSFetchedResultsController *newFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:cacheName];
+   NSFetchedResultsController *newFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:context sectionNameKeyPath:nil cacheName:nil];
    [newFetchedResultsController setDelegate:self];
    [self setFetchedResultsController:newFetchedResultsController];
    
