@@ -320,6 +320,10 @@
 
 - (void)toggleChrome:(BOOL)hide 
 {
+   if (hide == NO && [self isEditing]) {
+      return;
+   }
+   
    [self setChromeHidden:hide];
    if (hide) {
       [UIView beginAnimations:nil context:nil];
@@ -550,7 +554,9 @@
 
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-   [[self scrollView] setScrollEnabled:YES];
+   if (![self isEditing]) {
+      [[self scrollView] setScrollEnabled:YES];
+   }
 }
 
 - (void)alignScrollViewSubviews
@@ -608,6 +614,8 @@
 
 - (void)showFilters:(id)sender
 {
+   [[self scrollView] setScrollEnabled:NO];
+   
    if ([self imageFilters] == nil) {
       [self setImageFilters:[NSMutableArray arrayWithCapacity:[[self filterButtons] count]]];
       
@@ -625,15 +633,22 @@
    
    [[self view] bringSubviewToFront:[self filterViewContainer]];
    [UIView animateWithDuration:0.3 animations:^(void) {
+      [self toggleChrome:YES];
       [[self filterViewContainer] setAlpha:1.0];
+   } completion:^(BOOL finished) {
+      [self setEditing:YES];
    }];
 }
 
 - (void)hideFilters
 {
    // Hide filter container
-   [UIView animateWithDuration:0.3 animations:^(void) {
+   [self setEditing:NO];
+   [UIView animateWithDuration:0.3 animations:^{
       [[self filterViewContainer] setAlpha:0.0];
+      [self toggleChrome:NO];
+   } completion:^(BOOL finished) {
+      [[self scrollView] setScrollEnabled:YES];
    }];
 }
 
