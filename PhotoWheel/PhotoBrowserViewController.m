@@ -323,7 +323,9 @@
    if (hide == NO && [self isEditing]) {
       return;
    }
-   
+
+   [self repositionNavigationBar];
+
    [self setChromeHidden:hide];
    if (hide) {
       [UIView beginAnimations:nil context:nil];
