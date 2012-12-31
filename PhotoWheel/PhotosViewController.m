@@ -12,6 +12,7 @@
 #import "ThumbnailCell.h"
 #import "SendEmailController.h"
 #import "FlickrViewController.h"
+#import "SVProgressHUD.h"
 
 @interface PhotosViewController () <UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UICollectionViewDataSource, UICollectionViewDelegate, NSFetchedResultsControllerDelegate, SendEmailControllerDelegate>
 
@@ -362,6 +363,7 @@
    // Retrieve and display the image.
    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
 
+   [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
    NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
    [context setParentContext:[self managedObjectContext]];
    [context performBlock:^{
@@ -377,6 +379,7 @@
          NSManagedObjectContext *parentContext = [context parentContext];
          [parentContext performBlockAndWait:^{
             (void)[self saveChangesWithManagedObjectContext:parentContext];
+            [SVProgressHUD dismiss];
          }];
       }
    }];
