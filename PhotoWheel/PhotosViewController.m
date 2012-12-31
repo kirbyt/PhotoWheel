@@ -55,13 +55,12 @@
    [super viewDidLoad];
    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
    [nc addObserver:self selector:@selector(didSelectAlbum:) name:kPhotoWheelDidSelectAlbum object:nil];
-
    [nc addObserver:self selector:@selector(didDeletePhotoAtIndex:) name:kPhotoWheelDidDeletePhotoAtIndex object:nil];
-   
    [nc addObserver:self selector:@selector(handleCloudUpdate:) name:kRefetchAllDataNotification object:[[UIApplication sharedApplication] delegate]];
 
    UIImage *image = [UIImage imageNamed:@"1x1-transparent"];
    [[self toolbar] setBackgroundImage:image forToolbarPosition:UIToolbarPositionAny barMetrics:UIBarMetricsDefault];
+   [self reloadData];
 }
 
 - (void)viewWillAppear:(BOOL)animated
