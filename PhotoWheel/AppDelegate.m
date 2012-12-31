@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <HockeySDK/HockeySDK.h>
+#import "SVProgressHUD.h"
 
 @interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate>
 @property (nonatomic, strong) NSMutableArray *iCloudNotificationQueue;
@@ -139,6 +140,7 @@
    }
    
    [self setPersistentStoreReady:NO];
+   [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
    
@@ -172,6 +174,7 @@
       dispatch_async(dispatch_get_main_queue(), ^{
          DLog(@"Asynchronously added persistent store!");
          [[NSNotificationCenter defaultCenter] postNotificationName:kRefetchAllDataNotification object:self userInfo:nil];
+         [SVProgressHUD dismiss];
       });
    });
    

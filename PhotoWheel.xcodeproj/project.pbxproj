@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		681DB3D614533BEC00DF0849 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681DB3D514533BEC00DF0849 /* MediaPlayer.framework */; };
 		681DB410145374D400DF0849 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 681DB40F145374D400DF0849 /* CoreImage.framework */; };
+		68216B43169119D400DD7690 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 68216B3F169119D400DD7690 /* SVProgressHUD.bundle */; };
+		68216B44169119D400DD7690 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 68216B41169119D400DD7690 /* SVProgressHUD.m */; };
 		682194AE168CA43100B28A3E /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 682194AD168CA43100B28A3E /* MainStoryboard.storyboard */; };
 		682194B7168CAA6300B28A3E /* ThumbnailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 682194B6168CAA6300B28A3E /* ThumbnailCell.m */; };
 		682194BC168CAAC000B28A3E /* ExternalSlideShowViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 682194B9168CAAC000B28A3E /* ExternalSlideShowViewController.m */; };
@@ -93,6 +95,9 @@
 		681DB3BC145314CE00DF0849 /* PhotoWheel.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PhotoWheel.entitlements; sourceTree = "<group>"; };
 		681DB3D514533BEC00DF0849 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		681DB40F145374D400DF0849 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		68216B3F169119D400DD7690 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
+		68216B40169119D400DD7690 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		68216B41169119D400DD7690 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		682194AD168CA43100B28A3E /* MainStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboard.storyboard; sourceTree = "<group>"; };
 		682194B5168CAA6300B28A3E /* ThumbnailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThumbnailCell.h; sourceTree = "<group>"; };
 		682194B6168CAA6300B28A3E /* ThumbnailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThumbnailCell.m; sourceTree = "<group>"; };
@@ -228,6 +233,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		68216B3D169119D400DD7690 /* SVProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				68216B3F169119D400DD7690 /* SVProgressHUD.bundle */,
+				68216B40169119D400DD7690 /* SVProgressHUD.h */,
+				68216B41169119D400DD7690 /* SVProgressHUD.m */,
+			);
+			path = SVProgressHUD;
+			sourceTree = "<group>";
+		};
 		682194AF168CA56800B28A3E /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +322,7 @@
 			children = (
 				684F03A4152B9E42000CB64A /* Acknowledgements.txt */,
 				68550D9E161A0DDB00679153 /* HockeySDK-iOS */,
+				68216B3D169119D400DD7690 /* SVProgressHUD */,
 			);
 			path = AdditionalLibraries;
 			sourceTree = "<group>";
@@ -508,6 +524,7 @@
 				68550DA4161A0DDB00679153 /* HockeySDKResources.bundle in Resources */,
 				682194AE168CA43100B28A3E /* MainStoryboard.storyboard in Resources */,
 				682194CA168CDEC700B28A3E /* 1x1-transparent.png in Resources */,
+				68216B43169119D400DD7690 /* SVProgressHUD.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,6 +561,7 @@
 				682194BD168CAAC000B28A3E /* MainScreenSlideShowViewController.m in Sources */,
 				682194C0168CB72300B28A3E /* _Photo.m in Sources */,
 				682194C3168CB72300B28A3E /* _PhotoAlbum.m in Sources */,
+				68216B44169119D400DD7690 /* SVProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
