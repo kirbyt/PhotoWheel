@@ -114,12 +114,24 @@
    [[self collectionView] reloadData];
 }
 
-- (void)saveChanges
+- (BOOL)saveChanges
+{
+   return [self saveChangesWithManagedObjectContext:[self managedObjectContext]];
+}
+
+- (BOOL)saveChangesWithManagedObjectContext:(NSManagedObjectContext *)context
+{
+   NSError *error = nil;
+   BOOL success = [context save:&error];
+   ZAssert(success, @"Unresolved error %@, %@", error, [error userInfo]);
+   return success;
+}
+
+- (NSManagedObjectContext *)managedObjectContext
 {
    PhotoAlbum *album = [self photoAlbum];
    NSManagedObjectContext *context = [album managedObjectContext];
-   NSError *error = nil;
-   ZAssert([context save:&error], @"Unresolved error %@, %@", error, [error userInfo]);
+   return context;
 }
 
 - (UIImagePickerController *)imagePickerController
@@ -232,7 +244,7 @@
 {
    if (buttonIndex == 1) {
       PhotoAlbum *album = [self photoAlbum];
-      NSManagedObjectContext *context = [album managedObjectContext];
+      NSManagedObjectContext *context = [self managedObjectContext];
       [context deleteObject:album];
       [self saveChanges];
       [self setPhotoAlbum:nil];
@@ -350,16 +362,24 @@
    // Retrieve and display the image.
    UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
 
-   PhotoAlbum *album = [self photoAlbum];
-   NSManagedObjectContext *context = [album managedObjectContext];
-   Photo *newPhoto =
-   [NSEntityDescription insertNewObjectForEntityForName:@"Photo"
-                                 inManagedObjectContext:context];
-   [newPhoto setDateAdded:[NSDate date]];
-   [newPhoto saveImage:image];
-   [newPhoto setPhotoAlbum:[self photoAlbum]];
-   
-   [self saveChanges];
+   NSManagedObjectContext *context = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+   [context setParentContext:[self managedObjectContext]];
+   [context performBlock:^{
+      Photo *newPhoto = [NSEntityDescription insertNewObjectForEntityForName:@"Photo" inManagedObjectContext:context];
+      [newPhoto setDateAdded:[NSDate date]];
+      [newPhoto saveImage:image];
+      
+      // Grab the photo album using the child context.
+      PhotoAlbum *photoAlbum = (PhotoAlbum *)[context objectWithID:[[self photoAlbum] objectID]];
+      [newPhoto setPhotoAlbum:photoAlbum];
+
+      if ([self saveChangesWithManagedObjectContext:context]) {
+         NSManagedObjectContext *parentContext = [context parentContext];
+         [parentContext performBlockAndWait:^{
+            (void)[self saveChangesWithManagedObjectContext:parentContext];
+         }];
+      }
+   }];
 }
 
 #pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate
@@ -370,8 +390,7 @@
       return _fetchedResultsController;
    }
    
-   PhotoAlbum *album = [self photoAlbum];
-   NSManagedObjectContext *context = [album managedObjectContext];
+   NSManagedObjectContext *context = [self managedObjectContext];
    if (!context) {
       return nil;
    }
