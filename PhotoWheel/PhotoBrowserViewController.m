@@ -403,14 +403,12 @@
       if (nextIndex == count - 1) {
          // Last photo was deleted. Move back one photo.
          nextIndex -= 1;
-      } else if (nextIndex == count - 2) {
-         // Next to last photo was deleted. Clear the next photo view
-         // cache slot.
-         [self unloadPage:nextIndex + 1];
       }
       // Reset the photo view cache. Don't want stale photos to display
       // after the delete.
+      [self unloadPage:nextIndex + 1];
       [self initPhotoViewCache];
+      
       [self setCurrentIndex:nextIndex];
       [self setScrollViewContentSize];
    }
