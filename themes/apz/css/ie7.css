@@ -1,0 +1,10 @@
+.nav li a {_height: 0;zoom: 1;} /* IE7 Fix */
+.button, .button:visited {  padding:7px 6px; margin:0; }
+.section .content.blog li a:hover  { border-top: 1px solid #ccc; background-color: #dcdcdc; }
+#feature .controls li a  { overflow: visible; height: 11px; font-size: 0px; }
+.section .heading h2  {  padding-top: 8px; }
+.nav-entries, .wp-pagenavi, .post-entries, #comments * {zoom:1;}
+#comments .comment-head   {zoom:0;}
+#comments .comment-head .name  { zoom: normal; padding: 3px 0; }
+#comments  .avatar  { margin-bottom: -30px; }
+.section .content.blog li a  { float: left; }

@@ -1,0 +1,20 @@
+.nav .sf-sub-indicator { display:none; }
+.nav li a:hover { text-decoration:none; }
+.nav li a.sf-with-ul { padding-right:10px; }
+.button, .button:visited { margin:0; color:#555 !important; font-weight:normal; } .reply a {  color:#555 !important; }
+.section .content.blog li a:hover  { border-top: 1px solid #ccc; background-color: #dcdcdc; }
+.section .content.blog li a  { border-bottom: none; }
+.section .heading h2  {  padding-top: 8px; }
+#wrapper .button  { color: #fff!important; } 
+#sidebar  { overflow: hidden; }
+#innerpage .col-left.with-sidebar  { overflow: hidden; } 
+.nav-entries, .wp-pagenavi, .post-entries, #comments * {zoom:1;}
+#comments .comment-head   {zoom:0;}
+#comments .comment-head .name  { zoom: normal; padding: 3px 0; }
+#comments  .avatar  { margin-bottom: -45px; }
+#comments .comment .comment-container  {padding: 0 20px 20px;}
+#feature .info li , #feature .info li  a { border: none!important; }
+#feature .info li  { background: none; list-style-type: disc!important; list-style-position: inside;  padding: 3px 0;} 
+#feature .info ul  { padding: 0 0 0 15px; }
+.iphone-horizontal  { overflow: hidden; }
+.section .content.blog li a  { border: none!important; }

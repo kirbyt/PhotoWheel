@@ -1,0 +1,2 @@
+.button, .button:visited {  padding:10px 15px; margin:0; }
+.section .content.blog li a:hover  { border-top: 1px solid #ccc; background-color: #dcdcdc; }
