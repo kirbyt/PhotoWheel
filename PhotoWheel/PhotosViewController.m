@@ -37,6 +37,8 @@
 @property (nonatomic, assign, readwrite) NSInteger selectedPhotoIndex;
 @property (nonatomic, assign, readwrite) CGRect selectedPhotoFrame;
 
+@property (nonatomic, strong) NSTimer *timer;
+
 - (IBAction)showActionMenu:(id)sender;
 - (IBAction)addPhoto:(id)sender;
 @end
@@ -84,6 +86,20 @@
       photoAlbum = userInfo[@"PhotoAlbum"];
    }
    [self setPhotoAlbum:photoAlbum];
+   
+   // Delay the reload in case the user is still spinning the wheel.
+   if ([self timer]) {
+      [[self timer] setFireDate:[NSDate dateWithTimeIntervalSinceNow:0.5]];
+   } else {
+      [self setTimer:[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(performReloadData:) userInfo:nil repeats:NO]];
+   }
+}
+
+- (void)performReloadData:(NSTimer*)theTimer
+{
+   [theTimer invalidate];
+   [self setTimer:nil];
+   
    [self reloadData];
 }
 
