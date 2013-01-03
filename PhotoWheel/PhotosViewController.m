@@ -274,8 +274,7 @@
       
    } else {
       [self setAddPhotoActionSheet:nil];
-      BOOL hasCamera = [UIImagePickerController
-                        isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+      BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
       if (hasCamera) [names addObject:@"presentCamera"];
       [names addObject:@"presentPhotoLibrary"];
       [names addObject:@"presentFlickr"];
@@ -321,8 +320,7 @@
 {
    UIActionSheet *actionSheet = [[UIActionSheet alloc] init];
    [actionSheet setDelegate:self];
-   BOOL hasCamera = [UIImagePickerController
-                     isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
+   BOOL hasCamera = [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera];
    if (hasCamera) {
       [actionSheet addButtonWithTitle:@"Take Photo"];
    }
@@ -383,6 +381,10 @@
          }];
       }
    }];
+   
+   if (picker == [self imagePickerController]) {
+      [self setImagePickerController:nil];
+   }
 }
 
 #pragma mark - NSFetchedResultsController and NSFetchedResultsControllerDelegate
