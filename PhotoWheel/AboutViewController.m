@@ -9,6 +9,7 @@
 #import "AboutViewController.h"
 
 @interface AboutViewController ()
+@property (nonatomic, weak) IBOutlet UILabel *copyright;
 @property (nonatomic, weak) IBOutlet UILabel *version;
 @property (nonatomic, weak) IBOutletCollection(UIButton) NSArray *buttons;
 
@@ -32,6 +33,13 @@
    NSString *build = [infoDictionary objectForKey:@"CFBundleVersion"];
    NSString *fullVersion = [NSString stringWithFormat:@"Version %@ (build %@)", version, build];
    [[self version] setText:fullVersion];
+   
+   // Setup a gesture to test crash reporting.
+   UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(crashTestDummies:)];
+   [tap setNumberOfTapsRequired:5];
+   [tap setNumberOfTouchesRequired:2];
+   [[self copyright] addGestureRecognizer:tap];
+   [[self copyright] setUserInteractionEnabled:YES];
 }
 
 - (void)viewDidUnload 
@@ -59,6 +67,11 @@
    }
    
    [[UIApplication sharedApplication] openURL:URL];
+}
+
+- (void)crashTestDummies:(id)sender
+{
+   [NSException raise:@"Crash Test Dummy" format:@"Crash test dummy."];
 }
 
 @end

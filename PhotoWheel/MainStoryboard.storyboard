@@ -778,6 +778,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="copyright" destination="YFn-3V-KNy" id="lUT-KT-xcL"/>
                         <outlet property="version" destination="PfI-wD-7Cz" id="b0X-01-cW3"/>
                         <outletCollection property="buttons" destination="MuU-RO-nAJ" id="A7l-is-qMX"/>
                         <outletCollection property="buttons" destination="M2q-oP-Ykb" id="u2A-DW-bNS"/>
@@ -807,6 +808,7 @@
             <relationships>
                 <relationship kind="action" name="done:"/>
                 <relationship kind="action" name="visitWebsite:"/>
+                <relationship kind="outlet" name="copyright" candidateClass="UILabel"/>
                 <relationship kind="outlet" name="version" candidateClass="UILabel"/>
                 <relationship kind="outletCollection" name="buttons" candidateClass="UIButton"/>
             </relationships>
@@ -893,6 +895,9 @@
         </class>
         <class className="UICollectionViewFlowLayout" superclassName="UICollectionViewLayout">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewFlowLayout.h"/>
+        </class>
+        <class className="UICollectionViewLayout" superclassName="NSObject">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/UICollectionViewLayout.h"/>
         </class>
         <class className="WheelView" superclassName="UIView">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/WheelView.h"/>
