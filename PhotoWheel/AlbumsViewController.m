@@ -10,6 +10,7 @@
 #import "PhotoWheelViewCell.h"                                          
 #import "PhotoAlbum.h"
 #import "Photo.h"
+#import "AppDelegate.h"
 
 @interface AlbumsViewController ()
 @property (nonatomic, strong)
@@ -60,6 +61,11 @@ NSFetchedResultsController *fetchedResultsController;
 - (NSFetchedResultsController *)fetchedResultsController
 {
    if (_fetchedResultsController) {                                     
+      return _fetchedResultsController;
+   }
+   
+   AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+   if (![appDelegate isPersistentStoreReady]) {
       return _fetchedResultsController;
    }
    

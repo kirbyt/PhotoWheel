@@ -12,7 +12,7 @@
 
 @interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate>
 @property (nonatomic, strong) NSMutableArray *iCloudNotificationQueue;
-@property (nonatomic, assign, getter=isPersistentStoreReady) BOOL persistentStoreReady;
+@property (nonatomic, assign, readwrite, getter=isPersistentStoreReady) BOOL persistentStoreReady;
 @end
 
 @implementation AppDelegate
