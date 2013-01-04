@@ -16,7 +16,7 @@
 
 @interface SendEmailController : NSObject <MFMailComposeViewControllerDelegate>
 
-@property (nonatomic, strong) UIViewController<SendEmailControllerDelegate> *viewController;
+@property (nonatomic, weak) UIViewController<SendEmailControllerDelegate> *viewController;
 @property (nonatomic, strong) NSSet *photos;
 
 
