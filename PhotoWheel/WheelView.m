@@ -314,9 +314,9 @@
    if (_style != newStyle) {
       _style = newStyle;
       
-      [UIView beginAnimations:@"WheelViewStyleChange" context:nil];
-      [self setAngle:[self currentAngle]];
-      [UIView commitAnimations];
+      [UIView animateWithDuration:0.3 animations:^{
+         [self setAngle:[self currentAngle]];
+      }];
    }
 }
 
