@@ -47,6 +47,8 @@
    [self addGestureRecognizer:spin];
    
    [self setReusableCells:[NSMutableSet set]];
+   
+   [self removeConstraints:[self constraints]];
 }
 
 - (id)init
@@ -169,8 +171,7 @@
 - (NSSet*)cellIndexesToDisplay
 {
    NSInteger numberOfVisibleCells = [self numberOfVisibleCells];
-   NSMutableSet *cellIndexes =
-   [[NSMutableSet alloc] initWithCapacity:numberOfVisibleCells];
+   NSMutableSet *cellIndexes = [[NSMutableSet alloc] initWithCapacity:numberOfVisibleCells];
    for (NSInteger index = 0; index < numberOfVisibleCells; index++)
    {
       NSInteger cellIndex = [self cellIndexForIndex:index];
@@ -266,8 +267,7 @@
       }
       
       // Set the selected index if it has changed.
-      if (cellIndex != [self selectedIndex] &&
-          [self isSelectedItemForAngle:angle])
+      if (cellIndex != [self selectedIndex] && [self isSelectedItemForAngle:angle])
       {
          [self setSelectedIndex:cellIndex];
          if ([[self dataSource]
@@ -353,7 +353,7 @@
 - (void)reloadData
 {
    [self queueReusableCells];
-   [self layoutSubviews];
+   [self setNeedsLayout];
 }
 
 - (WheelViewCell *)cellAtIndex:(NSInteger)index
