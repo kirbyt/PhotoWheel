@@ -47,7 +47,9 @@
    [self setReceivedData:nil];
    
    ImageDownloaderCompletionBlock completion = [self completion];
-   completion([self image], nil);
+   if (completion) {
+      completion([self image], nil);
+   }
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
@@ -55,7 +57,9 @@
    [self setReceivedData:nil];
    
    ImageDownloaderCompletionBlock completion = [self completion];
-   completion(nil, error);
+   if (completion) {
+      completion(nil, error);
+   }
 }
 
 @end
