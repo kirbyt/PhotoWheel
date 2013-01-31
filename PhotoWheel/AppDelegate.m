@@ -9,8 +9,13 @@
 #import "AppDelegate.h"
 #import <HockeySDK/HockeySDK.h>
 #import "SVProgressHUD.h"
+#import "WPSAlertView.h"
 
-@interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate>
+#import <MessageUI/MessageUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
+
+
+@interface AppDelegate () <BITHockeyManagerDelegate, BITUpdateManagerDelegate, BITCrashManagerDelegate, MFMailComposeViewControllerDelegate>
 @property (nonatomic, strong) NSMutableArray *iCloudNotificationQueue;
 @property (nonatomic, assign, readwrite, getter=isPersistentStoreReady) BOOL persistentStoreReady;
 @end
@@ -164,21 +169,61 @@
       
       NSError *error = nil;
       [_persistentStoreCoordinator lock];
-      if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error])
+      NSPersistentStore *newStore = [_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error];
+      if (!newStore)
       {
          ZAssert(NO, @"Unresolved error %@\n%@", [error localizedDescription], [error userInfo]);
       }
       [_persistentStoreCoordinator unlock];
-      [self setPersistentStoreReady:YES];
+      [self setPersistentStoreReady:(newStore != nil)];
       
       dispatch_async(dispatch_get_main_queue(), ^{
-         DLog(@"Asynchronously added persistent store!");
-         [[NSNotificationCenter defaultCenter] postNotificationName:kRefetchAllDataNotification object:self userInfo:nil];
+         if (newStore) {
+            DLog(@"Asynchronously added persistent store!");
+            [[NSNotificationCenter defaultCenter] postNotificationName:kRefetchAllDataNotification object:self userInfo:nil];
+         } else {
+            [self alertUserAboutError:error];
+         }
+         [self alertUserAboutError:error];
          [SVProgressHUD dismiss];
       });
    });
    
    return _persistentStoreCoordinator;
+}
+
+#pragma mark - Report iCloud Error 
+
+- (void)alertUserAboutError:(NSError *)error
+{
+   NSString *message = [NSString stringWithFormat:@"I really want to see what this error message is. Tap OK to email it to me. ('%@')", [error localizedDescription]];
+   WPSAlertView *alert = [[WPSAlertView alloc] initWithTitle:@"Error" message:message completion:^(WPSAlertView *alertView, NSInteger buttonIndex) {
+      
+      if (buttonIndex == 1) {
+         
+         NSString *messageBody = [NSString stringWithFormat:@"Let's see what this bad boy is reporting.\n\n\n%i %@\n\n%@\n\n%@\n\n%@", [error code], [error domain],[error localizedDescription], [error userInfo], [error localizedFailureReason]];
+         
+         MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
+         [mailer setMailComposeDelegate:self];
+         [mailer setSubject:@"PhotoWheel error"];
+         [mailer setMessageBody:messageBody isHTML:NO];
+         [mailer setToRecipients:@[@"support@whitepeaksoftware.com"]];
+         
+         [[[self window] rootViewController] presentViewController:mailer animated:YES completion:nil];
+      }
+      
+   } cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+   
+   [alert show];
+}
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+   if (result == MFMailComposeResultSent) {
+      WPSAlertView *alert = [[WPSAlertView alloc] initWithTitle:@"Thanks" message:@"Thank you for your help." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+      [alert show];
+   }
+   [[[self window] rootViewController] dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - iCloud Sync

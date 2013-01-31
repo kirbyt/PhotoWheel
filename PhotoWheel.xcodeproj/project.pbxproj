@@ -74,6 +74,7 @@
 		689199B013F5B6530037CBAC /* UIView+PWCategory.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199AF13F5B6530037CBAC /* UIView+PWCategory.m */; };
 		689199B213F5BFFA0037CBAC /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 689199B113F5BFFA0037CBAC /* CoreGraphics.framework */; };
 		689199B513F5C8320037CBAC /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 689199B413F5C8320037CBAC /* CustomNavigationController.m */; };
+		68B519AC16BB035100ED4B5E /* WPSAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 68B5199616BB035100ED4B5E /* WPSAlertView.m */; };
 		68B7C445156975AD009371AB /* defaultPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B7C444156975AD009371AB /* defaultPhoto@2x.png */; };
 		68B7C448156975B6009371AB /* addphoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B7C447156975B6009371AB /* addphoto@2x.png */; };
 		68B7C44A15697808009371AB /* PhotoWheelAboutIcon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68B7C44915697806009371AB /* PhotoWheelAboutIcon@2x.png */; };
@@ -185,6 +186,8 @@
 		689199B113F5BFFA0037CBAC /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		689199B313F5C8320037CBAC /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
 		689199B413F5C8320037CBAC /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		68B5199516BB035100ED4B5E /* WPSAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPSAlertView.h; sourceTree = "<group>"; };
+		68B5199616BB035100ED4B5E /* WPSAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPSAlertView.m; sourceTree = "<group>"; };
 		68B7C444156975AD009371AB /* defaultPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "defaultPhoto@2x.png"; sourceTree = "<group>"; };
 		68B7C447156975B6009371AB /* addphoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "addphoto@2x.png"; sourceTree = "<group>"; };
 		68B7C44915697806009371AB /* PhotoWheelAboutIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PhotoWheelAboutIcon@2x.png"; sourceTree = "<group>"; };
@@ -323,8 +326,26 @@
 				684F03A4152B9E42000CB64A /* Acknowledgements.txt */,
 				68550D9E161A0DDB00679153 /* HockeySDK-iOS */,
 				68216B3D169119D400DD7690 /* SVProgressHUD */,
+				68B5196D16BB035100ED4B5E /* WPSKit */,
 			);
 			path = AdditionalLibraries;
+			sourceTree = "<group>";
+		};
+		68B5196D16BB035100ED4B5E /* WPSKit */ = {
+			isa = PBXGroup;
+			children = (
+				68B5198A16BB035100ED4B5E /* UIKit */,
+			);
+			path = WPSKit;
+			sourceTree = "<group>";
+		};
+		68B5198A16BB035100ED4B5E /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				68B5199516BB035100ED4B5E /* WPSAlertView.h */,
+				68B5199616BB035100ED4B5E /* WPSAlertView.m */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 		68FA6AC613EEF3BA00E046BD = {
@@ -562,6 +583,7 @@
 				682194C0168CB72300B28A3E /* _Photo.m in Sources */,
 				682194C3168CB72300B28A3E /* _PhotoAlbum.m in Sources */,
 				68216B44169119D400DD7690 /* SVProgressHUD.m in Sources */,
+				68B519AC16BB035100ED4B5E /* WPSAlertView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -685,7 +707,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -700,6 +722,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				"PROVISIONING_PROFILE[sdk=*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
@@ -732,6 +755,7 @@
 				BUNDLE_DISPLAY_NAME = "PhotoWheel Debug";
 				BUNDLE_IDENTIFIER = com.whitepeaksoftware.PhotoWheel.debug;
 				CODE_SIGN_ENTITLEMENTS = PhotoWheel/PhotoWheel.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer: Kirby Turner (MYZ7FW8C92)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/PhotoWheel/AdditionalLibraries/HockeySDK-iOS\"",
@@ -749,6 +773,7 @@
 					"-all_load",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"PROVISIONING_PROFILE[sdk=*]" = "FA038779-6D9E-4D4B-B1BB-8EB5DB1FFE16";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
