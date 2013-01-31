@@ -184,7 +184,6 @@
          } else {
             [self alertUserAboutError:error];
          }
-         [self alertUserAboutError:error];
          [SVProgressHUD dismiss];
       });
    });
