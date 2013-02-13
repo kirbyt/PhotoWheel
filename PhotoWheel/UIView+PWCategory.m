@@ -13,7 +13,7 @@
 
 - (UIImage *)pw_imageSnapshot
 {
-   UIGraphicsBeginImageContext([self bounds].size);
+   UIGraphicsBeginImageContextWithOptions([self bounds].size, YES, 0.0f);
    [[self layer] renderInContext:UIGraphicsGetCurrentContext()];
    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
    UIGraphicsEndImageContext();
