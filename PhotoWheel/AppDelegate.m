@@ -195,23 +195,23 @@
 
 - (void)alertUserAboutError:(NSError *)error
 {
-   NSString *message = [NSString stringWithFormat:@"I really want to see what this error message is. Tap OK to email it to me. ('%@')", [error localizedDescription]];
+   NSString *message = [NSString stringWithFormat:@"Uh oh. Something failed with iCloud syncing. Please email this error to me, Kirby Turner. ('%@')", [error localizedDescription]];
    WPSAlertView *alert = [[WPSAlertView alloc] initWithTitle:@"Sync Error" message:message completion:^(WPSAlertView *alertView, NSInteger buttonIndex) {
       
       if (buttonIndex == 1) {
          
-         NSString *messageBody = [NSString stringWithFormat:@"Let's see what this bad boy is reporting.\n\n\n%i %@\n\n%@\n\n%@\n\n%@", [error code], [error domain],[error localizedDescription], [error userInfo], [error localizedFailureReason]];
+         NSString *messageBody = [NSString stringWithFormat:@"Something failed with iCloud syncing. Here's the error:\n\n\n%i %@\n\n%@\n\n%@\n\n%@", [error code], [error domain],[error localizedDescription], [error userInfo], [error localizedFailureReason]];
          
          MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
          [mailer setMailComposeDelegate:self];
-         [mailer setSubject:@"PhotoWheel error"];
+         [mailer setSubject:@"PhotoWheel sync error"];
          [mailer setMessageBody:messageBody isHTML:NO];
          [mailer setToRecipients:@[@"support@whitepeaksoftware.com"]];
          
          [[[self window] rootViewController] presentViewController:mailer animated:YES completion:nil];
       }
       
-   } cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+   } cancelButtonTitle:@"Cancel" otherButtonTitles:@"Send Email", nil];
    
    [alert show];
 }
