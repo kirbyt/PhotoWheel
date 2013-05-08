@@ -145,7 +145,7 @@
    }
    
    [self setPersistentStoreReady:NO];
-   [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+   [SVProgressHUD showWithStatus:@"Syncing with iCloud" maskType:SVProgressHUDMaskTypeClear];
    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"PhotoWheel.sqlite"];
    
@@ -196,7 +196,7 @@
 - (void)alertUserAboutError:(NSError *)error
 {
    NSString *message = [NSString stringWithFormat:@"I really want to see what this error message is. Tap OK to email it to me. ('%@')", [error localizedDescription]];
-   WPSAlertView *alert = [[WPSAlertView alloc] initWithTitle:@"Error" message:message completion:^(WPSAlertView *alertView, NSInteger buttonIndex) {
+   WPSAlertView *alert = [[WPSAlertView alloc] initWithTitle:@"Sync Error" message:message completion:^(WPSAlertView *alertView, NSInteger buttonIndex) {
       
       if (buttonIndex == 1) {
          
