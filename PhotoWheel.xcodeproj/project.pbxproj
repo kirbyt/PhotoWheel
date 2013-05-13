@@ -24,6 +24,7 @@
 		682BC4BA1434DE4600286C9D /* SpinGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4B21434DE4600286C9D /* SpinGestureRecognizer.m */; };
 		682BC4BB1434DE4600286C9D /* WheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 682BC4B41434DE4600286C9D /* WheelView.m */; };
 		682BC4C91434F28200286C9D /* PhotoWheelViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 682BC4C81434F28100286C9D /* PhotoWheelViewCell.xib */; };
+		682D39B61740FAF8006369FA /* PhotoWheel-v1to2-MappingModel.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 682D39B51740FAF8006369FA /* PhotoWheel-v1to2-MappingModel.xcmappingmodel */; };
 		68305967153E608B00CE7799 /* addphoto.png in Resources */ = {isa = PBXBuildFile; fileRef = 6830593B153E608B00CE7799 /* addphoto.png */; };
 		6830596B153E608B00CE7799 /* background-landscape-right-grooved.png in Resources */ = {isa = PBXBuildFile; fileRef = 6830593F153E608B00CE7799 /* background-landscape-right-grooved.png */; };
 		6830596C153E608B00CE7799 /* background-landscape-right-grooved@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 68305940153E608B00CE7799 /* background-landscape-right-grooved@2x.png */; };
@@ -123,6 +124,7 @@
 		682BC4B41434DE4600286C9D /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
 		682BC4C81434F28100286C9D /* PhotoWheelViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWheelViewCell.xib; sourceTree = "<group>"; };
 		682D39B41740EDDF006369FA /* PhotoWheel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PhotoWheel 2.xcdatamodel"; sourceTree = "<group>"; };
+		682D39B51740FAF8006369FA /* PhotoWheel-v1to2-MappingModel.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "PhotoWheel-v1to2-MappingModel.xcmappingmodel"; sourceTree = "<group>"; };
 		6830593B153E608B00CE7799 /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
 		6830593F153E608B00CE7799 /* background-landscape-right-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-landscape-right-grooved.png"; sourceTree = "<group>"; };
 		68305940153E608B00CE7799 /* background-landscape-right-grooved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-landscape-right-grooved@2x.png"; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				68FA6AE713EEF3BB00E046BD /* PhotoWheel.xcdatamodeld */,
+				682D39B51740FAF8006369FA /* PhotoWheel-v1to2-MappingModel.xcmappingmodel */,
 				682194BE168CB72200B28A3E /* _Photo.h */,
 				682194BF168CB72300B28A3E /* _Photo.m */,
 				682194C1168CB72300B28A3E /* _PhotoAlbum.h */,
@@ -585,6 +588,7 @@
 				682194C3168CB72300B28A3E /* _PhotoAlbum.m in Sources */,
 				68216B44169119D400DD7690 /* SVProgressHUD.m in Sources */,
 				68B519AC16BB035100ED4B5E /* WPSAlertView.m in Sources */,
+				682D39B61740FAF8006369FA /* PhotoWheel-v1to2-MappingModel.xcmappingmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
