@@ -122,6 +122,7 @@
 		682BC4B31434DE4600286C9D /* WheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WheelView.h; sourceTree = "<group>"; };
 		682BC4B41434DE4600286C9D /* WheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WheelView.m; sourceTree = "<group>"; };
 		682BC4C81434F28100286C9D /* PhotoWheelViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoWheelViewCell.xib; sourceTree = "<group>"; };
+		682D39B41740EDDF006369FA /* PhotoWheel 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = file; path = "PhotoWheel 2.xcdatamodel"; sourceTree = "<group>"; };
 		6830593B153E608B00CE7799 /* addphoto.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = addphoto.png; sourceTree = "<group>"; };
 		6830593F153E608B00CE7799 /* background-landscape-right-grooved.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-landscape-right-grooved.png"; sourceTree = "<group>"; };
 		68305940153E608B00CE7799 /* background-landscape-right-grooved@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "background-landscape-right-grooved@2x.png"; sourceTree = "<group>"; };
@@ -833,9 +834,10 @@
 		68FA6AE713EEF3BB00E046BD /* PhotoWheel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				682D39B41740EDDF006369FA /* PhotoWheel 2.xcdatamodel */,
 				68FA6AE813EEF3BB00E046BD /* PhotoWheel.xcdatamodel */,
 			);
-			currentVersion = 68FA6AE813EEF3BB00E046BD /* PhotoWheel.xcdatamodel */;
+			currentVersion = 682D39B41740EDDF006369FA /* PhotoWheel 2.xcdatamodel */;
 			path = PhotoWheel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
